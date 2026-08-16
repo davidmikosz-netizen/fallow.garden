@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fallow.garden — Restoring Directed Attention</title>
+  <title>fallow.garden — A tool to help restore your focus</title>
   <meta name="description" content="Rebuild deep focus through circadian pacing, Attention Restoration Theory, and zero-input micro-breaks." />
   
   <!-- Typography -->
@@ -85,15 +85,23 @@
 
     /* Header */
     header {
-      padding: 44px 0 24px;
+      padding: 44px 0 28px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
       border-bottom: 1px solid var(--border);
       margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
-    .brand {
+    .brand-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-top {
       display: flex;
       align-items: baseline;
       gap: 12px;
@@ -103,10 +111,11 @@
 
     .brand-title {
       font-family: var(--font-serif);
-      font-size: 2.3rem;
+      font-size: 2.5rem;
       font-weight: 400;
       letter-spacing: -0.02em;
       color: var(--accent);
+      line-height: 1;
     }
 
     .brand-tag {
@@ -114,21 +123,28 @@
       font-family: var(--font-mono);
       background: var(--accent-soft);
       color: var(--accent);
-      padding: 4px 10px;
+      padding: 3px 10px;
       border-radius: 6px;
       font-weight: 500;
       border: 1px solid rgba(33, 78, 56, 0.15);
     }
 
+    .brand-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
     .nav-links {
       display: flex;
-      gap: 24px;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     .nav-link {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 500;
       transition: color 0.2s ease;
     }
@@ -150,7 +166,7 @@
       color: var(--text-muted);
       font-size: 1.05rem;
       margin-bottom: 28px;
-      max-width: 740px;
+      max-width: 760px;
     }
 
     /* Presentation Viewport */
@@ -161,7 +177,6 @@
       box-shadow: var(--shadow-md);
       overflow: hidden;
       margin-bottom: 64px;
-      position: relative;
     }
 
     .deck-toolbar {
@@ -178,8 +193,9 @@
     .slide-indicator {
       font-family: var(--font-mono);
       font-size: 0.85rem;
-      color: var(--accent-light);
-      font-weight: 500;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.04em;
     }
 
     .deck-controls {
@@ -236,7 +252,7 @@
     }
 
     .deck-slide {
-      min-height: 480px;
+      min-height: 460px;
       padding: 48px;
       display: flex;
       flex-direction: column;
@@ -275,37 +291,6 @@
       font-weight: 600;
     }
 
-    .slide-card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 16px;
-      margin-top: 24px;
-    }
-
-    .slide-subcard {
-      background: #ffffff;
-      border: 1px solid var(--border-soft);
-      border-left: 4px solid var(--accent-light);
-      padding: 16px 20px;
-      border-radius: var(--radius-sm);
-      font-size: 0.95rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .slide-subcard.clay-accent {
-      border-left-color: var(--clay);
-    }
-
-    .slide-subcard.amber-accent {
-      border-left-color: var(--amber);
-    }
-
-    .slide-subcard h4 {
-      color: var(--accent);
-      margin-bottom: 6px;
-      font-size: 1.05rem;
-    }
-
     .slide-footer-note {
       margin-top: 32px;
       padding-top: 16px;
@@ -315,9 +300,60 @@
       color: var(--text-light);
     }
 
-    /* Protocols Section */
-    .protocols-section {
+    /* SECTION: WHEN TO DEPLOY A PROTOCOL */
+    .deploy-section {
+      margin-bottom: 64px;
+    }
+
+    .deploy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
       margin-top: 24px;
+    }
+
+    .deploy-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 24px 26px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .deploy-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-light);
+    }
+
+    .deploy-trigger {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--clay);
+    }
+
+    .deploy-title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--accent);
+      line-height: 1.25;
+    }
+
+    .deploy-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* SECTION: PROTOCOLS */
+    .protocols-section {
+      margin-bottom: 64px;
     }
 
     .protocol-grid {
@@ -345,7 +381,6 @@
       box-shadow: var(--shadow-md);
     }
 
-    /* Distinct Card Theme Accents */
     .card-sage {
       background: linear-gradient(180deg, #f9fcf9 0%, #f1f7f2 100%);
       border-top: 5px solid var(--accent-light);
@@ -404,7 +439,6 @@
       min-height: 48px;
     }
 
-    /* Timers and Interactive Orbs */
     .timer-display {
       font-family: var(--font-mono);
       font-size: 3.2rem;
@@ -415,13 +449,8 @@
       letter-spacing: -0.02em;
     }
 
-    .timer-clay {
-      color: var(--clay);
-    }
-
-    .timer-sky {
-      color: var(--sky);
-    }
+    .timer-clay { color: var(--clay); }
+    .timer-sky { color: var(--sky); }
 
     .pulse-container {
       height: 140px;
@@ -473,7 +502,6 @@
       justify-content: center;
     }
 
-    /* Soundscape toggle */
     .sound-toggle {
       margin-top: 16px;
       display: flex;
@@ -493,9 +521,9 @@
       cursor: pointer;
     }
 
-    /* Open Loop Thought Catcher */
+    /* SECTION: OPEN LOOP CATCHER */
     .thought-catcher-section {
-      margin-top: 64px;
+      margin-bottom: 64px;
       background: linear-gradient(180deg, #f9fbf9 0%, #edf4ee 100%);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
@@ -562,8 +590,66 @@
       color: var(--clay);
     }
 
+    /* SECTION: ABOUT & SUPPORT */
+    .about-section {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 38px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-top: 20px;
+    }
+
+    .about-block h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .about-block p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .support-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .support-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .support-pill:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
     footer {
-      margin-top: 80px;
       padding-top: 36px;
       border-top: 1px solid var(--border);
       text-align: center;
@@ -572,15 +658,16 @@
     }
 
     @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
       .deck-slide {
         padding: 26px;
         min-height: 440px;
       }
       .slide-heading {
         font-size: 1.9rem;
-      }
-      .slide-card-grid {
-        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -589,14 +676,19 @@
 
   <div class="container">
     <header>
-      <a href="#" class="brand">
-        <span class="brand-title">fallow.garden</span>
-        <span class="brand-tag">v1.1</span>
-      </a>
+      <div class="brand-group">
+        <div class="brand-top">
+          <h1 class="brand-title">fallow.garden</h1>
+          <span class="brand-tag">v1.2</span>
+        </div>
+        <p class="brand-subtitle">A tool to help restore your focus</p>
+      </div>
       <nav class="nav-links">
         <a href="#deck-section" class="nav-link">The Science</a>
+        <a href="#deploy-section" class="nav-link">When to Deploy</a>
         <a href="#protocols-section" class="nav-link">Recovery Protocols</a>
         <a href="#thought-catcher" class="nav-link">Open Loops</a>
+        <a href="#about-section" class="nav-link">About & Support</a>
       </nav>
     </header>
 
@@ -604,7 +696,7 @@
     <section id="deck-section">
       <div class="deck-container">
         <div class="deck-toolbar">
-          <div class="slide-indicator" id="slide-counter">Slide 1 of 12</div>
+          <div class="slide-indicator" id="slide-counter">The research behind this app</div>
           <div class="deck-controls">
             <button class="btn" id="btn-prev">← Previous</button>
             <button class="btn" id="btn-next">Next →</button>
@@ -617,7 +709,53 @@
       </div>
     </section>
 
-    <!-- SECTION 2: INTERACTIVE RECOVERY PROTOCOLS -->
+    <!-- SECTION 2: WHEN TO DEPLOY A PROTOCOL -->
+    <section id="deploy-section" class="deploy-section">
+      <h2 class="section-title">When to Deploy a Protocol</h2>
+      <p class="section-desc">
+        Attention fatigue rarely announces itself loudly—it shows up as micro-frictions, compulsive tab opening, and phantom urges. Step away for a protocol the moment you observe these behavioral signals:
+      </p>
+
+      <div class="deploy-grid">
+        <div class="deploy-card">
+          <div class="deploy-trigger">Symptom 01 / Optical</div>
+          <h3 class="deploy-title">The Glaze & Loop</h3>
+          <p class="deploy-desc">You catch yourself reading the exact same paragraph or email three times without retaining a single concept.</p>
+        </div>
+
+        <div class="deploy-card">
+          <div class="deploy-trigger">Symptom 02 / Habitual</div>
+          <h3 class="deploy-title">The Phantom Check</h3>
+          <p class="deploy-desc">Your hand reaches for your phone or opens a social/news tab without any conscious decision or intent.</p>
+        </div>
+
+        <div class="deploy-card">
+          <div class="deploy-trigger">Symptom 03 / Latency</div>
+          <h3 class="deploy-title">The Micro-Tab Spree</h3>
+          <p class="deploy-desc">You open two or three secondary tabs simply because a primary page takes more than two seconds to load.</p>
+        </div>
+
+        <div class="deploy-card">
+          <div class="deploy-trigger">Symptom 04 / Cognitive</div>
+          <h3 class="deploy-title">Friction Avoidance</h3>
+          <p class="deploy-desc">A complex task becomes momentarily difficult or ambiguous, and you immediately flee into shallow administrative inbox checks.</p>
+        </div>
+
+        <div class="deploy-card">
+          <div class="deploy-trigger">Symptom 05 / Bandwidth</div>
+          <h3 class="deploy-title">Attention Thrashing</h3>
+          <p class="deploy-desc">Bouncing between chat, email, spreadsheets, and drafts while completing zero meaningful, coherent units of work.</p>
+        </div>
+
+        <div class="deploy-card">
+          <div class="deploy-trigger">Symptom 06 / Circadian</div>
+          <h3 class="deploy-title">The Midday Energy Dip</h3>
+          <p class="deploy-desc">Your natural post-lunch circadian trough hits, leaving your directed attention depleted and reactive.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: INTERACTIVE RECOVERY PROTOCOLS -->
     <section id="protocols-section" class="protocols-section">
       <h2 class="section-title">Recovery Protocols</h2>
       <p class="section-desc">
@@ -626,7 +764,7 @@
 
       <div class="protocol-grid">
         
-        <!-- TOOL 1: 3-Min Optical Reset (Sage/Botanical Theme) -->
+        <!-- TOOL 1: 3-Min Optical Reset -->
         <div class="protocol-card card-sage">
           <span class="protocol-badge badge-sage">3 Minutes</span>
           <div>
@@ -650,7 +788,7 @@
           </div>
         </div>
 
-        <!-- TOOL 2: 5-Min Zero Input (Clay/Terracotta Theme) -->
+        <!-- TOOL 2: 5-Min Zero Input -->
         <div class="protocol-card card-clay">
           <span class="protocol-badge badge-clay">5 Minutes</span>
           <div>
@@ -675,7 +813,7 @@
           </div>
         </div>
 
-        <!-- TOOL 3: 15-Min Nature Step (Sky/Slate Theme) -->
+        <!-- TOOL 3: 15-Min Nature Step -->
         <div class="protocol-card card-sky">
           <span class="protocol-badge badge-sky">15 Minutes</span>
           <div>
@@ -699,11 +837,11 @@
       </div>
     </section>
 
-    <!-- SECTION 3: STRAY THOUGHT CATCHER -->
+    <!-- SECTION 4: OPEN LOOP CATCHER -->
     <section id="thought-catcher" class="thought-catcher-section">
       <h2 class="section-title">The Open Loop Catcher</h2>
       <p class="section-desc">
-        Never let an impulse break your deep focus. Offload stray thoughts to clear working memory, then review them after your fallow rest.
+        Use this each time you open Fallow Garden. Never let an impulse break your deep focus. Offload stray thoughts to clear working memory, then review them after your fallow rest. This will reset every time you use the app.
       </p>
       
       <div class="thought-input-group">
@@ -712,8 +850,36 @@
       </div>
 
       <ul class="thought-list" id="thought-list">
-        <!-- LocalStorage Persistent Thoughts -->
+        <!-- Session-based Thoughts -->
       </ul>
+    </section>
+
+    <!-- SECTION 5: ABOUT & SUPPORT -->
+    <section id="about-section" class="about-section">
+      <h2 class="section-title">About & Support</h2>
+      <div class="about-grid">
+        <div class="about-block">
+          <h3>Why Fallow Garden?</h3>
+          <p>
+            In agriculture, leaving land fallow is how soil naturally regenerates essential nutrients. In human cognition, intentional zero-input rest is how the prefrontal cortex recovers from directed attention fatigue.
+          </p>
+          <p>
+            <strong>fallow.garden</strong> is a free, privacy-first, zero-tracking web tool designed to counteract algorithmically induced cognitive fragmentation using peer-reviewed Attention Restoration Theory (ART).
+          </p>
+        </div>
+
+        <div class="about-block">
+          <h3>Support & Feedback</h3>
+          <p>
+            Have ideas for new restoration protocols, soundscapes, or research citations? Found a bug or want to share feedback on how it helps your daily focus?
+          </p>
+          <div class="support-links">
+            <a href="mailto:hello@fallow.garden" class="support-pill">✉ Send Feedback</a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="support-pill">★ GitHub Project</a>
+            <a href="https://buymeacoffee.com" target="_blank" rel="noopener noreferrer" class="support-pill">☕ Buy Me a Coffee</a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer>
@@ -722,7 +888,7 @@
   </div>
 
   <script>
-    /* 1. SLIDE DATA & ENGINE */
+    /* 1. SLIDE DATA & ENGINE (Without former Slide 10 which is now its own section) */
     const slidesData = [
       {
         meta: "01 / The Premise",
@@ -770,27 +936,7 @@
         content: `When you give the brain true <em>zero-input downtime</em>, the Default Mode Network takes over. The DMN synthesizes disparate memories, connects creative insights, and processes emotional states. Scrolling during a break disables the DMN and prolongs mental fatigue.`
       },
       {
-        meta: "10 / Application",
-        heading: "When to Use the Fallow Garden Protocols",
-        content: `Adopt the 80/20 cognitive cycle: 80% deep, single-task cultivation followed by 20% intentional, restorative fallow rest.<br><br><strong>Deploy a protocol when:</strong>
-        <div class="slide-card-grid">
-          <div class="slide-subcard"><h4>Tab Spree</h4>You open 3 new tabs while waiting for a page to load.</div>
-          <div class="slide-subcard clay-accent"><h4>Glaze & Fog</h4>You read the same paragraph 3 times with zero recall.</div>
-          <div class="slide-subcard amber-accent"><h4>Phantom Urges</h4>You pick up your phone without any conscious intention.</div>
-        </div>`
-      },
-      {
-        meta: "11 / The Protocols",
-        heading: "The Three Restoration Protocols",
-        content: `We have built three interactive resets directly below this deck:
-        <div class="slide-card-grid">
-          <div class="slide-subcard"><h4>3-Min Optical Reset</h4>Panoramic vision expansion to release optic nerve & ciliary strain.</div>
-          <div class="slide-subcard clay-accent"><h4>5-Min Zero-Input</h4>Pure prefrontal rest with synthesized acoustic masking.</div>
-          <div class="slide-subcard amber-accent"><h4>15-Min Nature Step</h4>Guided soft-fascination prompts for outdoor walking resets.</div>
-        </div>`
-      },
-      {
-        meta: "12 / Further Resources",
+        meta: "10 / Further Resources",
         heading: "Essential Reading & References",
         content: `
         <ul style="margin-left: 20px; font-size: 0.95rem; line-height: 1.8;">
@@ -806,7 +952,6 @@
 
     let currentSlideIdx = 0;
     const slideViewport = document.getElementById('slide-viewport');
-    const slideCounter = document.getElementById('slide-counter');
     const btnPrev = document.getElementById('btn-prev');
     const btnNext = document.getElementById('btn-next');
     const btnShuffle = document.getElementById('btn-shuffle');
@@ -820,7 +965,6 @@
           <div class="slide-content">${slide.content}</div>
         </div>
       `;
-      slideCounter.textContent = `Slide ${index + 1} of ${slidesData.length}`;
       btnPrev.disabled = index === 0;
       btnNext.disabled = index === slidesData.length - 1;
     }
@@ -840,7 +984,7 @@
     });
 
     btnShuffle.addEventListener('click', () => {
-      const randomIdx = Math.floor(Math.random() * (slidesData.length - 2)) + 1;
+      const randomIdx = Math.floor(Math.random() * (slidesData.length - 1)) + 1;
       currentSlideIdx = randomIdx;
       renderSlide(currentSlideIdx);
     });
@@ -1088,13 +1232,13 @@
       document.getElementById('btn-start-15').textContent = 'Start 15m Walk';
     });
 
-    /* 4. PERSISTENT OPEN LOOPS (LocalStorage) */
+    /* 4. SESSION-ONLY OPEN LOOPS (Clears every time user closes/opens the app) */
     const thoughtInput = document.getElementById('thought-input');
     const thoughtList = document.getElementById('thought-list');
     const btnAddThought = document.getElementById('btn-add-thought');
 
     function loadThoughts() {
-      const thoughts = JSON.parse(localStorage.getItem('fallow_thoughts') || '[]');
+      const thoughts = JSON.parse(sessionStorage.getItem('fallow_session_thoughts') || '[]');
       thoughtList.innerHTML = '';
       thoughts.forEach((item, index) => {
         const li = document.createElement('li');
@@ -1110,17 +1254,17 @@
     function addThought() {
       const text = thoughtInput.value.trim();
       if (!text) return;
-      const thoughts = JSON.parse(localStorage.getItem('fallow_thoughts') || '[]');
+      const thoughts = JSON.parse(sessionStorage.getItem('fallow_session_thoughts') || '[]');
       thoughts.unshift(text);
-      localStorage.setItem('fallow_thoughts', JSON.stringify(thoughts));
+      sessionStorage.setItem('fallow_session_thoughts', JSON.stringify(thoughts));
       thoughtInput.value = '';
       loadThoughts();
     }
 
     window.removeThought = function(index) {
-      const thoughts = JSON.parse(localStorage.getItem('fallow_thoughts') || '[]');
+      const thoughts = JSON.parse(sessionStorage.getItem('fallow_session_thoughts') || '[]');
       thoughts.splice(index, 1);
-      localStorage.setItem('fallow_thoughts', JSON.stringify(thoughts));
+      sessionStorage.setItem('fallow_session_thoughts', JSON.stringify(thoughts));
       loadThoughts();
     };
 
