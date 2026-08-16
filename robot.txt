@@ -1,0 +1,6 @@
+# robots.txt for fallow.garden
+User-agent: *
+Allow: /
+
+# Sitemap (optional, update if you generate a sitemap.xml)
+# Sitemap: https://fallow.garden/sitemap.xml
