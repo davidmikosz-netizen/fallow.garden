@@ -13,21 +13,48 @@
 
   <style>
     :root {
-      --bg: #f5f6f4;
-      --bg-surface: #ffffff;
-      --bg-subtle: #e9ece8;
-      --text: #1d2520;
-      --text-muted: #5e6c63;
-      --accent: #2e4d3d;
-      --accent-light: #3f6853;
-      --accent-soft: #d8e4dc;
-      --border: #dce2dc;
-      --border-focus: #2e4d3d;
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
-      --radius-sm: 8px;
-      --radius-md: 16px;
+      /* Botanical & Earth Tone Palette */
+      --bg: #eef3ee;
+      --bg-gradient: linear-gradient(180deg, #edf3ee 0%, #f4f6f0 50%, #eaece4 100%);
+      --bg-surface: #fafcfa;
+      --bg-surface-elevated: #ffffff;
+      --bg-subtle: #dbe7dc;
+      --bg-deck: #f6f9f5;
+      
+      /* Typography */
+      --text: #162b20;
+      --text-muted: #4a6353;
+      --text-light: #6e8576;
+      
+      /* Primary Greens */
+      --accent: #214e38;
+      --accent-light: #356b4f;
+      --accent-soft: #cee3d3;
+      --accent-tint: #eaf3ed;
+      
+      /* Warm Calming Accents (Clay, Terracotta, Sunlight) */
+      --clay: #c16e49;
+      --clay-light: #db8b67;
+      --clay-soft: #f8ebe4;
+      --amber: #cb8934;
+      --amber-soft: #fbf2e3;
+      --sky: #4f7285;
+      --sky-soft: #e7eff3;
+      
+      /* Structural Elements */
+      --border: #c9d8cc;
+      --border-soft: #dae5dc;
+      --border-focus: #214e38;
+      
+      /* Shadows & Radii */
+      --shadow-sm: 0 4px 14px rgba(22, 43, 32, 0.05);
+      --shadow-md: 0 12px 32px rgba(22, 43, 32, 0.08);
+      --shadow-glow: 0 0 28px rgba(53, 107, 79, 0.2);
+      --radius-sm: 10px;
+      --radius-md: 18px;
       --radius-lg: 24px;
+      
+      /* Fonts */
       --font-serif: 'Instrument Serif', Georgia, serif;
       --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -40,29 +67,30 @@
     }
 
     body {
-      background-color: var(--bg);
+      background: var(--bg-gradient);
+      background-attachment: fixed;
       color: var(--text);
       font-family: var(--font-sans);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 80px;
+      padding-bottom: 90px;
+      min-height: 100vh;
     }
 
-    /* Container */
     .container {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
     /* Header */
     header {
-      padding: 40px 0 24px;
+      padding: 44px 0 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 36px;
+      margin-bottom: 40px;
     }
 
     .brand {
@@ -75,24 +103,26 @@
 
     .brand-title {
       font-family: var(--font-serif);
-      font-size: 2.2rem;
+      font-size: 2.3rem;
       font-weight: 400;
       letter-spacing: -0.02em;
       color: var(--accent);
     }
 
     .brand-tag {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-family: var(--font-mono);
       background: var(--accent-soft);
       color: var(--accent);
-      padding: 3px 8px;
-      border-radius: 4px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 500;
+      border: 1px solid rgba(33, 78, 56, 0.15);
     }
 
     .nav-links {
       display: flex;
-      gap: 20px;
+      gap: 24px;
     }
 
     .nav-link {
@@ -100,17 +130,17 @@
       text-decoration: none;
       font-size: 0.95rem;
       font-weight: 500;
-      transition: color 0.2s;
+      transition: color 0.2s ease;
     }
 
     .nav-link:hover {
-      color: var(--accent);
+      color: var(--clay);
     }
 
-    /* Section Headers */
+    /* Section Headings */
     .section-title {
       font-family: var(--font-serif);
-      font-size: 2.1rem;
+      font-size: 2.3rem;
       font-weight: 400;
       color: var(--accent);
       margin-bottom: 8px;
@@ -119,8 +149,8 @@
     .section-desc {
       color: var(--text-muted);
       font-size: 1.05rem;
-      margin-bottom: 24px;
-      max-width: 720px;
+      margin-bottom: 28px;
+      max-width: 740px;
     }
 
     /* Presentation Viewport */
@@ -131,11 +161,12 @@
       box-shadow: var(--shadow-md);
       overflow: hidden;
       margin-bottom: 64px;
+      position: relative;
     }
 
     .deck-toolbar {
-      padding: 16px 24px;
-      background: #fafbfa;
+      padding: 16px 28px;
+      background: linear-gradient(90deg, #f2f7f3 0%, #edf4ef 100%);
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
@@ -147,7 +178,8 @@
     .slide-indicator {
       font-family: var(--font-mono);
       font-size: 0.85rem;
-      color: var(--text-muted);
+      color: var(--accent-light);
+      font-weight: 500;
     }
 
     .deck-controls {
@@ -156,11 +188,12 @@
       gap: 8px;
     }
 
+    /* Buttons */
     .btn {
-      background: var(--bg-surface);
+      background: var(--bg-surface-elevated);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 8px 16px;
+      padding: 9px 18px;
       border-radius: var(--radius-sm);
       font-family: var(--font-sans);
       font-size: 0.9rem;
@@ -169,23 +202,37 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .btn:hover {
       background: var(--bg-subtle);
-      border-color: var(--text-muted);
+      border-color: var(--accent-light);
+      transform: translateY(-1px);
     }
 
     .btn-primary {
       background: var(--accent);
-      color: #fff;
+      color: #ffffff;
       border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(33, 78, 56, 0.2);
     }
 
     .btn-primary:hover {
       background: var(--accent-light);
       border-color: var(--accent-light);
+    }
+
+    .btn-clay {
+      background: var(--clay);
+      color: #ffffff;
+      border-color: var(--clay);
+      box-shadow: 0 4px 12px rgba(193, 110, 73, 0.2);
+    }
+
+    .btn-clay:hover {
+      background: var(--clay-light);
+      border-color: var(--clay-light);
     }
 
     .deck-slide {
@@ -194,50 +241,63 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      background: var(--bg-deck);
     }
 
     .slide-meta {
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--accent-light);
+      color: var(--clay);
+      font-weight: 600;
       margin-bottom: 12px;
     }
 
     .slide-heading {
       font-family: var(--font-serif);
-      font-size: 2.4rem;
+      font-size: 2.5rem;
       line-height: 1.15;
-      color: var(--text);
+      color: var(--accent);
       margin-bottom: 20px;
-      max-width: 800px;
+      max-width: 840px;
     }
 
     .slide-content {
       font-size: 1.15rem;
-      line-height: 1.7;
+      line-height: 1.75;
       color: var(--text-muted);
-      max-width: 840px;
+      max-width: 860px;
     }
 
     .slide-content strong {
       color: var(--text);
+      font-weight: 600;
     }
 
     .slide-card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 16px;
       margin-top: 24px;
     }
 
     .slide-subcard {
-      background: var(--bg);
-      border: 1px solid var(--border);
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      border-left: 4px solid var(--accent-light);
       padding: 16px 20px;
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-sm);
       font-size: 0.95rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .slide-subcard.clay-accent {
+      border-left-color: var(--clay);
+    }
+
+    .slide-subcard.amber-accent {
+      border-left-color: var(--amber);
     }
 
     .slide-subcard h4 {
@@ -252,18 +312,18 @@
       border-top: 1px dashed var(--border);
       font-size: 0.85rem;
       font-family: var(--font-mono);
-      color: var(--text-muted);
+      color: var(--text-light);
     }
 
     /* Protocols Section */
     .protocols-section {
-      margin-top: 20px;
+      margin-top: 24px;
     }
 
     .protocol-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
+      gap: 28px;
       margin-top: 24px;
     }
 
@@ -271,12 +331,34 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 32px;
+      padding: 34px;
       box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .protocol-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Distinct Card Theme Accents */
+    .card-sage {
+      background: linear-gradient(180deg, #f9fcf9 0%, #f1f7f2 100%);
+      border-top: 5px solid var(--accent-light);
+    }
+
+    .card-clay {
+      background: linear-gradient(180deg, #fdfbfa 0%, #fbf4f0 100%);
+      border-top: 5px solid var(--clay);
+    }
+
+    .card-sky {
+      background: linear-gradient(180deg, #f9fbfe 0%, #f0f5f8 100%);
+      border-top: 5px solid var(--sky);
     }
 
     .protocol-badge {
@@ -285,16 +367,32 @@
       right: 24px;
       font-family: var(--font-mono);
       font-size: 0.8rem;
-      background: var(--bg-subtle);
-      color: var(--accent);
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 20px;
-      font-weight: 500;
+      font-weight: 600;
+    }
+
+    .badge-sage {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(33, 78, 56, 0.15);
+    }
+
+    .badge-clay {
+      background: var(--clay-soft);
+      color: var(--clay);
+      border: 1px solid rgba(193, 110, 73, 0.2);
+    }
+
+    .badge-sky {
+      background: var(--sky-soft);
+      color: var(--sky);
+      border: 1px solid rgba(79, 114, 133, 0.2);
     }
 
     .protocol-title {
       font-family: var(--font-serif);
-      font-size: 1.7rem;
+      font-size: 1.85rem;
       color: var(--accent);
       margin-bottom: 8px;
     }
@@ -306,15 +404,23 @@
       min-height: 48px;
     }
 
-    /* Interactive Visual / Timer UI */
+    /* Timers and Interactive Orbs */
     .timer-display {
       font-family: var(--font-mono);
-      font-size: 3rem;
+      font-size: 3.2rem;
       font-weight: 600;
-      color: var(--text);
+      color: var(--accent);
       text-align: center;
       margin: 16px 0;
       letter-spacing: -0.02em;
+    }
+
+    .timer-clay {
+      color: var(--clay);
+    }
+
+    .timer-sky {
+      color: var(--sky);
     }
 
     .pulse-container {
@@ -326,44 +432,48 @@
     }
 
     .pulse-orb {
-      width: 70px;
-      height: 70px;
+      width: 74px;
+      height: 74px;
       border-radius: 50%;
-      background: radial-gradient(circle, var(--accent-soft) 0%, rgba(46, 77, 61, 0.15) 70%);
+      background: radial-gradient(circle, rgba(203, 137, 52, 0.4) 0%, rgba(53, 107, 79, 0.3) 50%, rgba(33, 78, 56, 0.1) 85%);
       border: 2px solid var(--accent-light);
+      box-shadow: var(--shadow-glow);
       transition: transform 4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .pulse-orb.expanding {
-      transform: scale(1.7);
+      transform: scale(1.75);
+      box-shadow: 0 0 40px rgba(203, 137, 52, 0.35);
     }
 
     .pulse-orb.contracting {
       transform: scale(0.9);
+      box-shadow: 0 0 16px rgba(53, 107, 79, 0.2);
     }
 
     .prompt-box {
-      background: var(--bg);
-      border: 1px solid var(--border);
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
       border-radius: var(--radius-sm);
-      padding: 14px;
-      font-size: 0.9rem;
+      padding: 14px 18px;
+      font-size: 0.92rem;
       color: var(--text);
-      margin-bottom: 16px;
-      min-height: 60px;
+      margin-bottom: 20px;
+      min-height: 64px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
+      box-shadow: var(--shadow-sm);
     }
 
     .tool-actions {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       justify-content: center;
     }
 
-    /* Soundscape bar */
+    /* Soundscape toggle */
     .sound-toggle {
       margin-top: 16px;
       display: flex;
@@ -372,86 +482,102 @@
       gap: 8px;
       font-size: 0.85rem;
       color: var(--text-muted);
+      background: var(--clay-soft);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(193, 110, 73, 0.15);
     }
 
-    /* Stray Thought Catcher */
+    .sound-toggle input {
+      accent-color: var(--clay);
+      cursor: pointer;
+    }
+
+    /* Open Loop Thought Catcher */
     .thought-catcher-section {
       margin-top: 64px;
-      background: #fcfdfc;
+      background: linear-gradient(180deg, #f9fbf9 0%, #edf4ee 100%);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 36px;
+      padding: 38px;
+      box-shadow: var(--shadow-sm);
     }
 
     .thought-input-group {
       display: flex;
       gap: 12px;
-      margin-top: 16px;
+      margin-top: 18px;
     }
 
     .thought-input {
       flex: 1;
-      padding: 12px 16px;
+      padding: 13px 18px;
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       font-family: var(--font-sans);
       font-size: 0.95rem;
       outline: none;
-      transition: border-color 0.2s;
+      background: #ffffff;
+      color: var(--text);
+      transition: all 0.2s ease;
     }
 
     .thought-input:focus {
-      border-color: var(--border-focus);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-tint);
     }
 
     .thought-list {
-      margin-top: 20px;
+      margin-top: 22px;
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .thought-item {
-      background: #fff;
-      border: 1px solid var(--border);
-      padding: 10px 14px;
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      padding: 12px 18px;
       border-radius: var(--radius-sm);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
+      border-left: 3px solid var(--amber);
+      box-shadow: var(--shadow-sm);
     }
 
     .thought-item button {
       background: none;
       border: none;
-      color: #999;
+      color: var(--text-light);
       cursor: pointer;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      padding: 0 4px;
+      transition: color 0.2s;
     }
 
     .thought-item button:hover {
-      color: #d9534f;
+      color: var(--clay);
     }
 
-    /* Footer */
     footer {
       margin-top: 80px;
-      padding-top: 32px;
+      padding-top: 36px;
       border-top: 1px solid var(--border);
       text-align: center;
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.92rem;
     }
 
     @media (max-width: 768px) {
       .deck-slide {
-        padding: 24px;
-        min-height: 420px;
+        padding: 26px;
+        min-height: 440px;
       }
       .slide-heading {
-        font-size: 1.8rem;
+        font-size: 1.9rem;
       }
       .slide-card-grid {
         grid-template-columns: 1fr;
@@ -465,7 +591,7 @@
     <header>
       <a href="#" class="brand">
         <span class="brand-title">fallow.garden</span>
-        <span class="brand-tag">v1.0</span>
+        <span class="brand-tag">v1.1</span>
       </a>
       <nav class="nav-links">
         <a href="#deck-section" class="nav-link">The Science</a>
@@ -482,7 +608,7 @@
           <div class="deck-controls">
             <button class="btn" id="btn-prev">← Previous</button>
             <button class="btn" id="btn-next">Next →</button>
-            <button class="btn" id="btn-shuffle" title="Shuffle intro deck sequence">⟳ Randomize Deck</button>
+            <button class="btn" id="btn-shuffle" title="Shuffle intro deck sequence">⟳ Randomize Insight</button>
           </div>
         </div>
         <div class="deck-slide" id="slide-viewport">
@@ -500,12 +626,12 @@
 
       <div class="protocol-grid">
         
-        <!-- TOOL 1: 3-Min Optical Reset -->
-        <div class="protocol-card">
-          <span class="protocol-badge">3 Minutes</span>
+        <!-- TOOL 1: 3-Min Optical Reset (Sage/Botanical Theme) -->
+        <div class="protocol-card card-sage">
+          <span class="protocol-badge badge-sage">3 Minutes</span>
           <div>
             <h3 class="protocol-title">Optical Soft Reset</h3>
-            <p class="protocol-desc">Relax ciliary eye muscles and panoramic vision by following the expansion rhythm.</p>
+            <p class="protocol-desc">Relax ciliary eye muscles and engage panoramic vision with the expanding rhythm.</p>
           </div>
 
           <div class="pulse-container">
@@ -515,7 +641,7 @@
           <div class="timer-display" id="timer-3min">03:00</div>
           
           <div class="prompt-box" id="optical-prompt">
-            Gaze past your display. Follow the gentle pulse and let your peripheral vision expand.
+            Gaze past your display. Follow the gentle pulse and let your peripheral vision soften and expand.
           </div>
 
           <div class="tool-actions">
@@ -524,18 +650,18 @@
           </div>
         </div>
 
-        <!-- TOOL 2: 5-Min Zero Input -->
-        <div class="protocol-card">
-          <span class="protocol-badge">5 Minutes</span>
+        <!-- TOOL 2: 5-Min Zero Input (Clay/Terracotta Theme) -->
+        <div class="protocol-card card-clay">
+          <span class="protocol-badge badge-clay">5 Minutes</span>
           <div>
             <h3 class="protocol-title">Zero-Input Rest</h3>
-            <p class="protocol-desc">Activate the Default Mode Network (DMN). No inputs, no reading, no scrolling.</p>
+            <p class="protocol-desc">Activate the Default Mode Network (DMN). No reading, scrolling, or incoming stimuli.</p>
           </div>
 
-          <div class="timer-display" id="timer-5min" style="margin: 32px 0;">05:00</div>
+          <div class="timer-display timer-clay" id="timer-5min" style="margin: 32px 0;">05:00</div>
           
           <div class="prompt-box" id="zero-prompt">
-            Step away or close your eyes. Allow random thoughts to drift through without catching them.
+            Step back or close your eyes. Allow fleeting thoughts to drift through like clouds without catching them.
           </div>
 
           <div class="sound-toggle">
@@ -544,20 +670,20 @@
           </div>
 
           <div class="tool-actions" style="margin-top: 16px;">
-            <button class="btn btn-primary" id="btn-start-5">Begin Rest</button>
+            <button class="btn btn-clay" id="btn-start-5">Begin Rest</button>
             <button class="btn" id="btn-reset-5">Reset</button>
           </div>
         </div>
 
-        <!-- TOOL 3: 15-Min Nature Step -->
-        <div class="protocol-card">
-          <span class="protocol-badge">15 Minutes</span>
+        <!-- TOOL 3: 15-Min Nature Step (Sky/Slate Theme) -->
+        <div class="protocol-card card-sky">
+          <span class="protocol-badge badge-sky">15 Minutes</span>
           <div>
             <h3 class="protocol-title">Nature Walk & ART</h3>
-            <p class="protocol-desc">Attention Restoration via effortless observation of natural movement.</p>
+            <p class="protocol-desc">Attention Restoration via effortless observation of natural movement and depth.</p>
           </div>
 
-          <div class="timer-display" id="timer-15min" style="margin: 20px 0;">15:00</div>
+          <div class="timer-display timer-sky" id="timer-15min" style="margin: 20px 0;">15:00</div>
           
           <div class="prompt-box" id="nature-prompt">
             "Observe the motion of tree branches or clouds against the sky."
@@ -565,7 +691,7 @@
 
           <div class="tool-actions">
             <button class="btn" id="btn-new-prompt">New Prompt</button>
-            <button class="btn btn-primary" id="btn-start-15">Start 15m Walk</button>
+            <button class="btn btn-primary" id="btn-start-15" style="background: var(--sky); border-color: var(--sky);">Start 15m Walk</button>
             <button class="btn" id="btn-reset-15">Reset</button>
           </div>
         </div>
@@ -577,16 +703,16 @@
     <section id="thought-catcher" class="thought-catcher-section">
       <h2 class="section-title">The Open Loop Catcher</h2>
       <p class="section-desc">
-        Never let a random task break your deep focus block. Offload it here to clear working memory, then review it after your fallow rest.
+        Never let an impulse break your deep focus. Offload stray thoughts to clear working memory, then review them after your fallow rest.
       </p>
       
       <div class="thought-input-group">
-        <input type="text" id="thought-input" class="thought-input" placeholder="Capture a fleeting idea, errand, or tab to check later..." />
+        <input type="text" id="thought-input" class="thought-input" placeholder="Capture a fleeting idea, task, or search urge to check later..." />
         <button class="btn btn-primary" id="btn-add-thought">Offload Thought</button>
       </div>
 
       <ul class="thought-list" id="thought-list">
-        <!-- Persistent Thoughts -->
+        <!-- LocalStorage Persistent Thoughts -->
       </ul>
     </section>
 
@@ -595,16 +721,13 @@
     </footer>
   </div>
 
-  <!-- SCRIPT LOGIC -->
   <script>
-    /* =========================================================
-       1. PRESENTATION SLIDES DATA & ENGINE
-       ========================================================= */
+    /* 1. SLIDE DATA & ENGINE */
     const slidesData = [
       {
         meta: "01 / The Premise",
         heading: "Your attention span isn't broken. Your environment is over-engineered.",
-        content: `Popular media claims human focus has dropped below that of a goldfish. But cognitive neuroscience proves your biological hardware is intact. What has changed is our constant exposure to <strong>engineered novelty, frictionless task-switching, and continuous partial attention</strong>.`
+        content: `Popular headlines claim focus has dropped below that of a goldfish. But cognitive neuroscience proves your biological hardware is intact. What has changed is our constant immersion in <strong>engineered novelty, frictionless task-switching, and continuous partial attention</strong>.`
       },
       {
         meta: "02 / The Reality",
@@ -652,8 +775,8 @@
         content: `Adopt the 80/20 cognitive cycle: 80% deep, single-task cultivation followed by 20% intentional, restorative fallow rest.<br><br><strong>Deploy a protocol when:</strong>
         <div class="slide-card-grid">
           <div class="slide-subcard"><h4>Tab Spree</h4>You open 3 new tabs while waiting for a page to load.</div>
-          <div class="slide-subcard"><h4>Glaze & Fog</h4>You read the same paragraph 3 times with zero recall.</div>
-          <div class="slide-subcard"><h4>Phantom Urges</h4>You pick up your phone without any conscious intention.</div>
+          <div class="slide-subcard clay-accent"><h4>Glaze & Fog</h4>You read the same paragraph 3 times with zero recall.</div>
+          <div class="slide-subcard amber-accent"><h4>Phantom Urges</h4>You pick up your phone without any conscious intention.</div>
         </div>`
       },
       {
@@ -662,8 +785,8 @@
         content: `We have built three interactive resets directly below this deck:
         <div class="slide-card-grid">
           <div class="slide-subcard"><h4>3-Min Optical Reset</h4>Panoramic vision expansion to release optic nerve & ciliary strain.</div>
-          <div class="slide-subcard"><h4>5-Min Zero-Input</h4>Pure prefrontal rest with synthesized acoustic masking.</div>
-          <div class="slide-subcard"><h4>15-Min Nature Step</h4>Guided soft-fascination prompts for outdoor walking resets.</div>
+          <div class="slide-subcard clay-accent"><h4>5-Min Zero-Input</h4>Pure prefrontal rest with synthesized acoustic masking.</div>
+          <div class="slide-subcard amber-accent"><h4>15-Min Nature Step</h4>Guided soft-fascination prompts for outdoor walking resets.</div>
         </div>`
       },
       {
@@ -717,7 +840,6 @@
     });
 
     btnShuffle.addEventListener('click', () => {
-      // Pick a random slide from the middle set (excluding slide 1 and references)
       const randomIdx = Math.floor(Math.random() * (slidesData.length - 2)) + 1;
       currentSlideIdx = randomIdx;
       renderSlide(currentSlideIdx);
@@ -725,9 +847,7 @@
 
     renderSlide(0);
 
-    /* =========================================================
-       2. WEB AUDIO SYNTHESIS (Chimes & Ambient Masking)
-       ========================================================= */
+    /* 2. AUDIO SYNTHESIS */
     let audioCtx = null;
 
     function getAudioContext() {
@@ -740,17 +860,16 @@
       return audioCtx;
     }
 
-    // Synthesize a calm Tibetan singing bowl / chime
     function playChime() {
       const ctx = getAudioContext();
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
 
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(432, ctx.currentTime); // 432 Hz warm harmonic
+      osc.frequency.setValueAtTime(432, ctx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(216, ctx.currentTime + 3.0);
 
-      gain.gain.setValueAtTime(0.4, ctx.currentTime);
+      gain.gain.setValueAtTime(0.35, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3.5);
 
       osc.connect(gain);
@@ -760,7 +879,6 @@
       osc.stop(ctx.currentTime + 3.5);
     }
 
-    // Synthesize Brown Noise for Soft Fascination Masking
     let noiseNode = null;
     function startBrownNoise() {
       const ctx = getAudioContext();
@@ -773,7 +891,7 @@
         const white = Math.random() * 2 - 1;
         output[i] = (lastOut + (0.02 * white)) / 1.02;
         lastOut = output[i];
-        output[i] *= 3.5; // Gain adjustment
+        output[i] *= 3.5;
       }
 
       noiseNode = ctx.createBufferSource();
@@ -782,10 +900,10 @@
 
       const filter = ctx.createBiquadFilter();
       filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(400, ctx.currentTime);
+      filter.frequency.setValueAtTime(380, ctx.currentTime);
 
       const gain = ctx.createGain();
-      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.setValueAtTime(0.18, ctx.currentTime);
 
       noiseNode.connect(filter);
       filter.connect(gain);
@@ -812,16 +930,14 @@
       }
     });
 
-    /* =========================================================
-       3. PROTOCOL TIMERS & INTERACTIONS
-       ========================================================= */
+    /* 3. PROTOCOL TIMERS */
     function formatTime(seconds) {
       const m = Math.floor(seconds / 60).toString().padStart(2, '0');
       const s = (seconds % 60).toString().padStart(2, '0');
       return `${m}:${s}`;
     }
 
-    // 3-Minute Optical Timer & Breathing Orb
+    // 3-Minute Optical Timer
     let timer3 = null;
     let time3Sec = 180;
     const orb = document.getElementById('optical-orb');
@@ -923,10 +1039,10 @@
       document.getElementById('ambient-sound-toggle').checked = false;
     });
 
-    // 15-Minute Nature Walk & Prompt Shuffler
+    // 15-Minute Nature Walk
     const naturePrompts = [
-      "Find 3 distinct shades of green in nearby foliage or vegetation.",
-      "Observe the movement of tree branches or clouds against the sky.",
+      "Find 3 distinct shades of green in nearby foliage or outdoor vegetation.",
+      "Observe the gentle motion of tree branches or clouds against the open sky.",
       "Listen for the most distant natural sound you can isolate.",
       "Notice the texture of bark, stone, or soil beneath your feet.",
       "Track the flight path of a single bird or pollinator without interrupting it."
@@ -972,9 +1088,7 @@
       document.getElementById('btn-start-15').textContent = 'Start 15m Walk';
     });
 
-    /* =========================================================
-       4. PERSISTENT THOUGHT CATCHER (LocalStorage)
-       ========================================================= */
+    /* 4. PERSISTENT OPEN LOOPS (LocalStorage) */
     const thoughtInput = document.getElementById('thought-input');
     const thoughtList = document.getElementById('thought-list');
     const btnAddThought = document.getElementById('btn-add-thought');
