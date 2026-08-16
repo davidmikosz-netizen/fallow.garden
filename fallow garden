@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fallow.garden — Restoring Directed Attention</title>
+  <meta name="description" content="Rebuild deep focus through circadian pacing, Attention Restoration Theory, and zero-input micro-breaks." />
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f5f6f4;
+      --bg-surface: #ffffff;
+      --bg-subtle: #e9ece8;
+      --text: #1d2520;
+      --text-muted: #5e6c63;
+      --accent: #2e4d3d;
+      --accent-light: #3f6853;
+      --accent-soft: #d8e4dc;
+      --border: #dce2dc;
+      --border-focus: #2e4d3d;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 40px 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+
+    .brand-tag {
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--accent);
+    }
+
+    /* Section Headers */
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      font-weight: 400;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+      max-width: 720px;
+    }
+
+    /* Presentation Viewport */
+    .deck-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      margin-bottom: 64px;
+    }
+
+    .deck-toolbar {
+      padding: 16px 24px;
+      background: #fafbfa;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .slide-indicator {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .deck-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--bg-subtle);
+      border-color: var(--text-muted);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-light);
+      border-color: var(--accent-light);
+    }
+
+    .deck-slide {
+      min-height: 480px;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .slide-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-light);
+      margin-bottom: 12px;
+    }
+
+    .slide-heading {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 20px;
+      max-width: 800px;
+    }
+
+    .slide-content {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 840px;
+    }
+
+    .slide-content strong {
+      color: var(--text);
+    }
+
+    .slide-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .slide-subcard {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+    }
+
+    .slide-subcard h4 {
+      color: var(--accent);
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+    }
+
+    .slide-footer-note {
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border);
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    /* Protocols Section */
+    .protocols-section {
+      margin-top: 20px;
+    }
+
+    .protocol-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .protocol-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .protocol-badge {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      background: var(--bg-subtle);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .protocol-title {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .protocol-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      min-height: 48px;
+    }
+
+    /* Interactive Visual / Timer UI */
+    .timer-display {
+      font-family: var(--font-mono);
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--text);
+      text-align: center;
+      margin: 16px 0;
+      letter-spacing: -0.02em;
+    }
+
+    .pulse-container {
+      height: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .pulse-orb {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-soft) 0%, rgba(46, 77, 61, 0.15) 70%);
+      border: 2px solid var(--accent-light);
+      transition: transform 4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .pulse-orb.expanding {
+      transform: scale(1.7);
+    }
+
+    .pulse-orb.contracting {
+      transform: scale(0.9);
+    }
+
+    .prompt-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 16px;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .tool-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    /* Soundscape bar */
+    .sound-toggle {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Stray Thought Catcher */
+    .thought-catcher-section {
+      margin-top: 64px;
+      background: #fcfdfc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+    }
+
+    .thought-input-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .thought-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .thought-input:focus {
+      border-color: var(--border-focus);
+    }
+
+    .thought-list {
+      margin-top: 20px;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .thought-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .thought-item button {
+      background: none;
+      border: none;
+      color: #999;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .thought-item button:hover {
+      color: #d9534f;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 80px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .deck-slide {
+        padding: 24px;
+        min-height: 420px;
+      }
+      .slide-heading {
+        font-size: 1.8rem;
+      }
+      .slide-card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <a href="#" class="brand">
+        <span class="brand-title">fallow.garden</span>
+        <span class="brand-tag">v1.0</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#deck-section" class="nav-link">The Science</a>
+        <a href="#protocols-section" class="nav-link">Recovery Protocols</a>
+        <a href="#thought-catcher" class="nav-link">Open Loops</a>
+      </nav>
+    </header>
+
+    <!-- SECTION 1: THE PRESENTATION DECK -->
+    <section id="deck-section">
+      <div class="deck-container">
+        <div class="deck-toolbar">
+          <div class="slide-indicator" id="slide-counter">Slide 1 of 12</div>
+          <div class="deck-controls">
+            <button class="btn" id="btn-prev">← Previous</button>
+            <button class="btn" id="btn-next">Next →</button>
+            <button class="btn" id="btn-shuffle" title="Shuffle intro deck sequence">⟳ Randomize Deck</button>
+          </div>
+        </div>
+        <div class="deck-slide" id="slide-viewport">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: INTERACTIVE RECOVERY PROTOCOLS -->
+    <section id="protocols-section" class="protocols-section">
+      <h2 class="section-title">Recovery Protocols</h2>
+      <p class="section-desc">
+        Active tools designed to disengage Directed Attention and induce Soft Fascination without digital friction.
+      </p>
+
+      <div class="protocol-grid">
+        
+        <!-- TOOL 1: 3-Min Optical Reset -->
+        <div class="protocol-card">
+          <span class="protocol-badge">3 Minutes</span>
+          <div>
+            <h3 class="protocol-title">Optical Soft Reset</h3>
+            <p class="protocol-desc">Relax ciliary eye muscles and panoramic vision by following the expansion rhythm.</p>
+          </div>
+
+          <div class="pulse-container">
+            <div class="pulse-orb" id="optical-orb"></div>
+          </div>
+
+          <div class="timer-display" id="timer-3min">03:00</div>
+          
+          <div class="prompt-box" id="optical-prompt">
+            Gaze past your display. Follow the gentle pulse and let your peripheral vision expand.
+          </div>
+
+          <div class="tool-actions">
+            <button class="btn btn-primary" id="btn-start-3">Start Reset</button>
+            <button class="btn" id="btn-reset-3">Reset</button>
+          </div>
+        </div>
+
+        <!-- TOOL 2: 5-Min Zero Input -->
+        <div class="protocol-card">
+          <span class="protocol-badge">5 Minutes</span>
+          <div>
+            <h3 class="protocol-title">Zero-Input Rest</h3>
+            <p class="protocol-desc">Activate the Default Mode Network (DMN). No inputs, no reading, no scrolling.</p>
+          </div>
+
+          <div class="timer-display" id="timer-5min" style="margin: 32px 0;">05:00</div>
+          
+          <div class="prompt-box" id="zero-prompt">
+            Step away or close your eyes. Allow random thoughts to drift through without catching them.
+          </div>
+
+          <div class="sound-toggle">
+            <input type="checkbox" id="ambient-sound-toggle" />
+            <label for="ambient-sound-toggle">Synthesize Soft Wind (Brown Noise)</label>
+          </div>
+
+          <div class="tool-actions" style="margin-top: 16px;">
+            <button class="btn btn-primary" id="btn-start-5">Begin Rest</button>
+            <button class="btn" id="btn-reset-5">Reset</button>
+          </div>
+        </div>
+
+        <!-- TOOL 3: 15-Min Nature Step -->
+        <div class="protocol-card">
+          <span class="protocol-badge">15 Minutes</span>
+          <div>
+            <h3 class="protocol-title">Nature Walk & ART</h3>
+            <p class="protocol-desc">Attention Restoration via effortless observation of natural movement.</p>
+          </div>
+
+          <div class="timer-display" id="timer-15min" style="margin: 20px 0;">15:00</div>
+          
+          <div class="prompt-box" id="nature-prompt">
+            "Observe the motion of tree branches or clouds against the sky."
+          </div>
+
+          <div class="tool-actions">
+            <button class="btn" id="btn-new-prompt">New Prompt</button>
+            <button class="btn btn-primary" id="btn-start-15">Start 15m Walk</button>
+            <button class="btn" id="btn-reset-15">Reset</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: STRAY THOUGHT CATCHER -->
+    <section id="thought-catcher" class="thought-catcher-section">
+      <h2 class="section-title">The Open Loop Catcher</h2>
+      <p class="section-desc">
+        Never let a random task break your deep focus block. Offload it here to clear working memory, then review it after your fallow rest.
+      </p>
+      
+      <div class="thought-input-group">
+        <input type="text" id="thought-input" class="thought-input" placeholder="Capture a fleeting idea, errand, or tab to check later..." />
+        <button class="btn btn-primary" id="btn-add-thought">Offload Thought</button>
+      </div>
+
+      <ul class="thought-list" id="thought-list">
+        <!-- Persistent Thoughts -->
+      </ul>
+    </section>
+
+    <footer>
+      <p><strong>fallow.garden</strong> — Attention is an ecosystem to cultivate, not a machine to extract from.</p>
+    </footer>
+  </div>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    /* =========================================================
+       1. PRESENTATION SLIDES DATA & ENGINE
+       ========================================================= */
+    const slidesData = [
+      {
+        meta: "01 / The Premise",
+        heading: "Your attention span isn't broken. Your environment is over-engineered.",
+        content: `Popular media claims human focus has dropped below that of a goldfish. But cognitive neuroscience proves your biological hardware is intact. What has changed is our constant exposure to <strong>engineered novelty, frictionless task-switching, and continuous partial attention</strong>.`
+      },
+      {
+        meta: "02 / The Reality",
+        heading: "The 47-Second Attention Collapse",
+        content: `In 2004, Dr. Gloria Mark (UC Irvine) tracked average workplace focus on any single screen at <strong>2.5 minutes</strong>. By 2012, it had dropped to 75 seconds. Today, the average person switches focus every <strong>47 seconds</strong>.<br><br>We are no longer sustaining thought long enough to construct complex mental models.`
+      },
+      {
+        meta: "03 / The Mechanism",
+        heading: "Variable Rewards: The Slot Machine in Your Pocket",
+        content: `Every notification, refresh, and infinite scroll operates on a <strong>variable ratio schedule</strong> of dopamine reinforcement. When the brain anticipates unpredictable novelty, it resets its boredom threshold, making quiet, low-stimulation analytical work feel physically unbearable.`
+      },
+      {
+        meta: "04 / Frictionless Escapes",
+        heading: "The Vanishing Tolerance for Discomfort",
+        content: `Deep problem-solving naturally produces cognitive friction—a momentary feeling of stuckness or boredom. In the past, you worked through it. Today, relief is one pixel away. The moment friction appears, we escape into a new tab, aborting the deep cognitive cycle before breakthrough occurs.`
+      },
+      {
+        meta: "05 / The Cognitive Tax",
+        heading: "Attention Residue: Why Multitasking is an Illusion",
+        content: `Dr. Sophie Leroy coined the term <strong>Attention Residue</strong>: when you switch from Task A to Task B, your attention does not cleanly follow. A portion of your prefrontal bandwidth remains stuck processing Task A.<br><br>Rapidly bouncing across 5 tabs leaves you with virtually zero working memory for complex reasoning.`
+      },
+      {
+        meta: "06 / Reading Circuits",
+        heading: "Skimming Networks vs. Deep Inferential Reading",
+        content: `Cognitive neuroscientist Dr. Maryanne Wolf demonstrates that screens encourage <strong>F-shaped visual scanning</strong> for rapid keyword extraction. When overused, this skimming circuit actively degrades our capacity for critical analysis, analogical reasoning, and empathy.`
+      },
+      {
+        meta: "07 / Biological Strain",
+        heading: "Directed Attention Fatigue",
+        content: `Your prefrontal cortex relies on <strong>Directed Attention</strong> to suppress distractions, analyze data, and resist impulses. Because it is energy-intensive, directed attention drains rapidly under uninterrupted input, leaving you feeling mentally frazzled, reactive, and irritable by early afternoon.`
+      },
+      {
+        meta: "08 / The Solution",
+        heading: "Attention Restoration Theory (ART)",
+        content: `Developed by psychologists Stephen and Rachel Kaplan, ART proves that directed attention can only regenerate when we engage in <strong>Soft Fascination</strong>—effortless observation of non-demanding natural stimuli like moving clouds, swaying trees, or rustling leaves. Nature lets the prefrontal cortex go offline.`
+      },
+      {
+        meta: "09 / The Neurological Reset",
+        heading: "Activating the Default Mode Network (DMN)",
+        content: `When you give the brain true <em>zero-input downtime</em>, the Default Mode Network takes over. The DMN synthesizes disparate memories, connects creative insights, and processes emotional states. Scrolling during a break disables the DMN and prolongs mental fatigue.`
+      },
+      {
+        meta: "10 / Application",
+        heading: "When to Use the Fallow Garden Protocols",
+        content: `Adopt the 80/20 cognitive cycle: 80% deep, single-task cultivation followed by 20% intentional, restorative fallow rest.<br><br><strong>Deploy a protocol when:</strong>
+        <div class="slide-card-grid">
+          <div class="slide-subcard"><h4>Tab Spree</h4>You open 3 new tabs while waiting for a page to load.</div>
+          <div class="slide-subcard"><h4>Glaze & Fog</h4>You read the same paragraph 3 times with zero recall.</div>
+          <div class="slide-subcard"><h4>Phantom Urges</h4>You pick up your phone without any conscious intention.</div>
+        </div>`
+      },
+      {
+        meta: "11 / The Protocols",
+        heading: "The Three Restoration Protocols",
+        content: `We have built three interactive resets directly below this deck:
+        <div class="slide-card-grid">
+          <div class="slide-subcard"><h4>3-Min Optical Reset</h4>Panoramic vision expansion to release optic nerve & ciliary strain.</div>
+          <div class="slide-subcard"><h4>5-Min Zero-Input</h4>Pure prefrontal rest with synthesized acoustic masking.</div>
+          <div class="slide-subcard"><h4>15-Min Nature Step</h4>Guided soft-fascination prompts for outdoor walking resets.</div>
+        </div>`
+      },
+      {
+        meta: "12 / Further Resources",
+        heading: "Essential Reading & References",
+        content: `
+        <ul style="margin-left: 20px; font-size: 0.95rem; line-height: 1.8;">
+          <li><strong>Dr. Gloria Mark</strong> — <em>Attention Span: A Groundbreaking Way to Restore Balance, Happiness and Productivity</em> (2023).</li>
+          <li><strong>Dr. Sophie Leroy</strong> — <em>Why Is It So Hard to Do My Work? The Challenge of Attention Residue</em> (2009).</li>
+          <li><strong>Dr. Maryanne Wolf</strong> — <em>Reader, Come Home: The Reading Brain in a Digital World</em> (2018).</li>
+          <li><strong>Stephen & Rachel Kaplan</strong> — <em>The Experience of Nature: A Psychological Perspective</em> (Attention Restoration Theory).</li>
+          <li><strong>Matthew B. Crawford</strong> — <em>The World Beyond Your Head: On Becoming an Individual in an Age of Distraction</em> (2015).</li>
+        </ul>
+        <div class="slide-footer-note">All protocols modeled on empirical cognitive restoration benchmarks.</div>`
+      }
+    ];
+
+    let currentSlideIdx = 0;
+    const slideViewport = document.getElementById('slide-viewport');
+    const slideCounter = document.getElementById('slide-counter');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const btnShuffle = document.getElementById('btn-shuffle');
+
+    function renderSlide(index) {
+      const slide = slidesData[index];
+      slideViewport.innerHTML = `
+        <div>
+          <div class="slide-meta">${slide.meta}</div>
+          <h2 class="slide-heading">${slide.heading}</h2>
+          <div class="slide-content">${slide.content}</div>
+        </div>
+      `;
+      slideCounter.textContent = `Slide ${index + 1} of ${slidesData.length}`;
+      btnPrev.disabled = index === 0;
+      btnNext.disabled = index === slidesData.length - 1;
+    }
+
+    btnPrev.addEventListener('click', () => {
+      if (currentSlideIdx > 0) {
+        currentSlideIdx--;
+        renderSlide(currentSlideIdx);
+      }
+    });
+
+    btnNext.addEventListener('click', () => {
+      if (currentSlideIdx < slidesData.length - 1) {
+        currentSlideIdx++;
+        renderSlide(currentSlideIdx);
+      }
+    });
+
+    btnShuffle.addEventListener('click', () => {
+      // Pick a random slide from the middle set (excluding slide 1 and references)
+      const randomIdx = Math.floor(Math.random() * (slidesData.length - 2)) + 1;
+      currentSlideIdx = randomIdx;
+      renderSlide(currentSlideIdx);
+    });
+
+    renderSlide(0);
+
+    /* =========================================================
+       2. WEB AUDIO SYNTHESIS (Chimes & Ambient Masking)
+       ========================================================= */
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // Synthesize a calm Tibetan singing bowl / chime
+    function playChime() {
+      const ctx = getAudioContext();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(432, ctx.currentTime); // 432 Hz warm harmonic
+      osc.frequency.exponentialRampToValueAtTime(216, ctx.currentTime + 3.0);
+
+      gain.gain.setValueAtTime(0.4, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3.5);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 3.5);
+    }
+
+    // Synthesize Brown Noise for Soft Fascination Masking
+    let noiseNode = null;
+    function startBrownNoise() {
+      const ctx = getAudioContext();
+      const bufferSize = ctx.sampleRate * 2;
+      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      let lastOut = 0.0;
+
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        output[i] = (lastOut + (0.02 * white)) / 1.02;
+        lastOut = output[i];
+        output[i] *= 3.5; // Gain adjustment
+      }
+
+      noiseNode = ctx.createBufferSource();
+      noiseNode.buffer = noiseBuffer;
+      noiseNode.loop = true;
+
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(400, ctx.currentTime);
+
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+
+      noiseNode.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+
+      noiseNode.start();
+    }
+
+    function stopBrownNoise() {
+      if (noiseNode) {
+        try {
+          noiseNode.stop();
+          noiseNode.disconnect();
+        } catch (e) {}
+        noiseNode = null;
+      }
+    }
+
+    document.getElementById('ambient-sound-toggle').addEventListener('change', (e) => {
+      if (e.target.checked) {
+        startBrownNoise();
+      } else {
+        stopBrownNoise();
+      }
+    });
+
+    /* =========================================================
+       3. PROTOCOL TIMERS & INTERACTIONS
+       ========================================================= */
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+      const s = (seconds % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    // 3-Minute Optical Timer & Breathing Orb
+    let timer3 = null;
+    let time3Sec = 180;
+    const orb = document.getElementById('optical-orb');
+    let orbInterval = null;
+
+    function startOrbAnimation() {
+      let expand = true;
+      orb.classList.add('expanding');
+      orbInterval = setInterval(() => {
+        expand = !expand;
+        if (expand) {
+          orb.classList.remove('contracting');
+          orb.classList.add('expanding');
+        } else {
+          orb.classList.remove('expanding');
+          orb.classList.add('contracting');
+        }
+      }, 4000);
+    }
+
+    function stopOrbAnimation() {
+      clearInterval(orbInterval);
+      orb.classList.remove('expanding', 'contracting');
+    }
+
+    document.getElementById('btn-start-3').addEventListener('click', function() {
+      if (timer3) {
+        clearInterval(timer3);
+        stopOrbAnimation();
+        timer3 = null;
+        this.textContent = 'Resume';
+      } else {
+        getAudioContext();
+        startOrbAnimation();
+        this.textContent = 'Pause';
+        timer3 = setInterval(() => {
+          if (time3Sec > 0) {
+            time3Sec--;
+            document.getElementById('timer-3min').textContent = formatTime(time3Sec);
+          } else {
+            clearInterval(timer3);
+            stopOrbAnimation();
+            playChime();
+            alert('3-Minute Optical Reset Complete. Your ciliary muscles are relaxed.');
+            time3Sec = 180;
+            document.getElementById('timer-3min').textContent = '03:00';
+            document.getElementById('btn-start-3').textContent = 'Start Reset';
+          }
+        }, 1000);
+      }
+    });
+
+    document.getElementById('btn-reset-3').addEventListener('click', () => {
+      clearInterval(timer3);
+      stopOrbAnimation();
+      timer3 = null;
+      time3Sec = 180;
+      document.getElementById('timer-3min').textContent = '03:00';
+      document.getElementById('btn-start-3').textContent = 'Start Reset';
+    });
+
+    // 5-Minute Zero-Input Timer
+    let timer5 = null;
+    let time5Sec = 300;
+
+    document.getElementById('btn-start-5').addEventListener('click', function() {
+      if (timer5) {
+        clearInterval(timer5);
+        timer5 = null;
+        this.textContent = 'Resume';
+      } else {
+        getAudioContext();
+        this.textContent = 'Pause';
+        timer5 = setInterval(() => {
+          if (time5Sec > 0) {
+            time5Sec--;
+            document.getElementById('timer-5min').textContent = formatTime(time5Sec);
+          } else {
+            clearInterval(timer5);
+            playChime();
+            stopBrownNoise();
+            document.getElementById('ambient-sound-toggle').checked = false;
+            alert('5-Minute Zero-Input Rest Complete. Default Mode Network restored.');
+            time5Sec = 300;
+            document.getElementById('timer-5min').textContent = '05:00';
+            document.getElementById('btn-start-5').textContent = 'Begin Rest';
+          }
+        }, 1000);
+      }
+    });
+
+    document.getElementById('btn-reset-5').addEventListener('click', () => {
+      clearInterval(timer5);
+      timer5 = null;
+      time5Sec = 300;
+      document.getElementById('timer-5min').textContent = '05:00';
+      document.getElementById('btn-start-5').textContent = 'Begin Rest';
+      stopBrownNoise();
+      document.getElementById('ambient-sound-toggle').checked = false;
+    });
+
+    // 15-Minute Nature Walk & Prompt Shuffler
+    const naturePrompts = [
+      "Find 3 distinct shades of green in nearby foliage or vegetation.",
+      "Observe the movement of tree branches or clouds against the sky.",
+      "Listen for the most distant natural sound you can isolate.",
+      "Notice the texture of bark, stone, or soil beneath your feet.",
+      "Track the flight path of a single bird or pollinator without interrupting it."
+    ];
+
+    document.getElementById('btn-new-prompt').addEventListener('click', () => {
+      const p = naturePrompts[Math.floor(Math.random() * naturePrompts.length)];
+      document.getElementById('nature-prompt').textContent = `"${p}"`;
+    });
+
+    let timer15 = null;
+    let time15Sec = 900;
+
+    document.getElementById('btn-start-15').addEventListener('click', function() {
+      if (timer15) {
+        clearInterval(timer15);
+        timer15 = null;
+        this.textContent = 'Resume';
+      } else {
+        getAudioContext();
+        this.textContent = 'Pause';
+        timer15 = setInterval(() => {
+          if (time15Sec > 0) {
+            time15Sec--;
+            document.getElementById('timer-15min').textContent = formatTime(time15Sec);
+          } else {
+            clearInterval(timer15);
+            playChime();
+            alert('15-Minute Nature Reset Complete. Directed Attention fully restored.');
+            time15Sec = 900;
+            document.getElementById('timer-15min').textContent = '15:00';
+            document.getElementById('btn-start-15').textContent = 'Start 15m Walk';
+          }
+        }, 1000);
+      }
+    });
+
+    document.getElementById('btn-reset-15').addEventListener('click', () => {
+      clearInterval(timer15);
+      timer15 = null;
+      time15Sec = 900;
+      document.getElementById('timer-15min').textContent = '15:00';
+      document.getElementById('btn-start-15').textContent = 'Start 15m Walk';
+    });
+
+    /* =========================================================
+       4. PERSISTENT THOUGHT CATCHER (LocalStorage)
+       ========================================================= */
+    const thoughtInput = document.getElementById('thought-input');
+    const thoughtList = document.getElementById('thought-list');
+    const btnAddThought = document.getElementById('btn-add-thought');
+
+    function loadThoughts() {
+      const thoughts = JSON.parse(localStorage.getItem('fallow_thoughts') || '[]');
+      thoughtList.innerHTML = '';
+      thoughts.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.className = 'thought-item';
+        li.innerHTML = `
+          <span>${escapeHtml(item)}</span>
+          <button onclick="removeThought(${index})" title="Dismiss thought">×</button>
+        `;
+        thoughtList.appendChild(li);
+      });
+    }
+
+    function addThought() {
+      const text = thoughtInput.value.trim();
+      if (!text) return;
+      const thoughts = JSON.parse(localStorage.getItem('fallow_thoughts') || '[]');
+      thoughts.unshift(text);
+      localStorage.setItem('fallow_thoughts', JSON.stringify(thoughts));
+      thoughtInput.value = '';
+      loadThoughts();
+    }
+
+    window.removeThought = function(index) {
+      const thoughts = JSON.parse(localStorage.getItem('fallow_thoughts') || '[]');
+      thoughts.splice(index, 1);
+      localStorage.setItem('fallow_thoughts', JSON.stringify(thoughts));
+      loadThoughts();
+    };
+
+    function escapeHtml(string) {
+      return String(string).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    btnAddThought.addEventListener('click', addThought);
+    thoughtInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') addThought();
+    });
+
+    loadThoughts();
+  </script>
+</body>
+</html>
