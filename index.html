@@ -1,10 +1,315 @@
-<!-- Episode 1 -->
-<a href="./episodes/garden/" class="episode-card">
-  <div class="episode-meta">
-    <span class="episode-tag">Episode 01</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fallow Garden — Cognitive Restoration & Micro-Apps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f2eb;
+      --surface: #ffffff;
+      --surface-warm: #ede8dc;
+      --text-main: #1c261e;
+      --text-muted: #536256;
+      --forest: #24422e;
+      --moss: #3a6346;
+      --sprout: #6b9e78;
+      --clay: #b86b4b;
+      --clay-soft: #f4e8e1;
+      --border: #dcd5c5;
+      --border-subtle: #e9e3d5;
+      --radius-lg: 18px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 2px 8px rgba(28, 38, 30, 0.04);
+      --shadow-md: 0 12px 30px rgba(28, 38, 30, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(ellipse at 85% -10%, rgba(107, 158, 120, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 15% 110%, rgba(184, 107, 75, 0.08) 0%, transparent 60%);
+      color: var(--text-main);
+      line-height: 1.65;
+      min-height: 100vh;
+      padding: 3.5rem 1.25rem;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Botanical Top Emblem */
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--surface-warm);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: var(--forest);
+    }
+
+    .brand-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--moss);
+    }
+
+    header {
+      margin-bottom: 3.5rem;
+    }
+
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 2.75rem;
+      font-weight: 600;
+      color: var(--forest);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+
+    .manifesto {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      border-left: 2px solid var(--sprout);
+      padding-left: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .manifesto p + p {
+      margin-top: 0.85rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .episode-count {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--moss);
+      background: var(--surface-warm);
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+    }
+
+    .episode-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Episode Card */
+    .episode-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--shadow-sm);
+      display: block;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .episode-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--forest);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .episode-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--sprout);
+    }
+
+    .episode-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+    }
+
+    .badge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .episode-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--forest);
+      background: rgba(58, 99, 70, 0.1);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .status-pill {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--clay);
+      background: var(--clay-soft);
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .arrow-icon {
+      color: var(--text-muted);
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .episode-card:hover .arrow-icon {
+      transform: translateX(4px);
+      color: var(--forest);
+    }
+
+    .episode-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--forest);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .episode-desc {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--forest);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="brand-mark">
+      <div class="brand-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22v-9"/>
+          <path d="M9 9a3 3 0 0 1 6 0c0 4-3 6-3 6"/>
+          <path d="M17.5 15.5c2 0 3.5-1.5 3.5-3.5 0-3-4-5-9-5"/>
+          <path d="M6.5 15.5C4.5 15.5 3 14 3 12c0-3 4-5 9-5"/>
+        </svg>
+      </div>
+      <span class="brand-label">Fallow Garden Anthology</span>
+    </div>
+
+    <header>
+      <h1>Restorative digital utilities.</h1>
+      <div class="manifesto">
+        <p>
+          In agriculture, leaving land fallow allows depleted soil to naturally regenerate. In modern life, our minds need the same intentional stillness to recover from cognitive fatigue.
+        </p>
+        <p>
+          This site is an ongoing collection of focused micro-tools published as self-contained episodes. Each tool is built to solve one specific problem cleanly, run entirely in your browser, and step aside.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <div class="section-header">
+        <span class="section-title">Published Episodes</span>
+        <span class="episode-count">1 Installment</span>
+      </div>
+      
+      <div class="episode-list">
+        <!-- Episode 1 -->
+        <a href="./episodes/garden/" class="episode-card">
+          <div class="card-top">
+            <div class="badge-wrap">
+              <span class="episode-tag">Episode 01</span>
+              <span class="status-pill">Interactive</span>
+            </div>
+            <div class="arrow-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="episode-title">Attention Restoration &amp; Focus</div>
+          <div class="episode-desc">
+            A tactile series of guided micro-tools designed to counter attention collapse, ease cognitive friction, and gently rebuild sustained, deliberate focus.
+          </div>
+        </a>
+      </div>
+    </main>
+
+    <footer>
+      <span>fallow.garden</span>
+      <span>Single-purpose tools • Zero tracking</span>
+    </footer>
   </div>
-  <div class="episode-title">Attention Restoration &amp; Focus</div>
-  <div class="episode-desc">
-    A series of guided, tactile micro-tools designed to counter attention collapse, quiet cognitive friction, and gently rebuild sustained focus.
-  </div>
-</a>
+
+</body>
+</html>
