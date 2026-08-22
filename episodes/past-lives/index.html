@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fallow.garden: Historical Past Lives Dossier</title>
-  <meta name="description" content="A gentle, absurd karmic diagnostic. Uncover your plausible, unglamorous past life across historical epochs." />
+  <title>fallow.garden: Historical & Future Past Lives Dossier</title>
+  <meta name="description" content="A gentle karmic diagnostic. Uncover your plausible, unglamorous past (or future) life across historical and deep-space epochs." />
 
   <!-- Mobile & PWA Configuration -->
   <meta name="mobile-web-app-capable" content="yes" />
@@ -36,6 +36,7 @@
       --amber-soft: #fbf2e3;
       --sky: #3b6b88;
       --sky-soft: #eaf1f5;
+      --void: #1a1b26;
 
       --border: #dcd5c5;
       --border-subtle: #e9e3d5;
@@ -66,7 +67,7 @@
     }
 
     .container {
-      max-width: 760px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
@@ -152,22 +153,25 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Step 1: Era Selector Grid */
+    /* Step 1: Era Selector Grid (4 Epochs) */
     .era-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1.75rem;
     }
 
     .era-card {
       background: var(--surface-warm);
       border: 2px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 1.25rem;
+      padding: 1.1rem;
       cursor: pointer;
       transition: all 0.2s ease;
       text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .era-card:hover {
@@ -183,7 +187,7 @@
 
     .era-badge {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 600;
       color: var(--clay);
       text-transform: uppercase;
@@ -192,18 +196,19 @@
 
     .era-name {
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--forest);
       margin-bottom: 0.35rem;
+      line-height: 1.3;
     }
 
     .era-desc {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
       line-height: 1.4;
     }
 
-    /* Step 2: Diagnostic Questions */
+    /* Diagnostic Questions */
     .question-box {
       margin-bottom: 1.75rem;
       padding-bottom: 1.5rem;
@@ -226,7 +231,7 @@
     }
 
     .question-text {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 600;
       color: var(--text-main);
       margin-bottom: 0.85rem;
@@ -235,7 +240,7 @@
     .options-grid {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.55rem;
     }
 
     .option-btn {
@@ -245,10 +250,11 @@
       padding: 0.75rem 1rem;
       text-align: left;
       font-family: inherit;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-main);
       cursor: pointer;
       transition: all 0.15s ease;
+      line-height: 1.45;
     }
 
     .option-btn:hover {
@@ -267,7 +273,7 @@
       background: var(--forest);
       color: #ffffff;
       border: none;
-      padding: 12px 28px;
+      padding: 13px 28px;
       border-radius: var(--radius-sm);
       font-weight: 600;
       font-size: 1rem;
@@ -282,13 +288,6 @@
     .btn-submit:hover {
       background: var(--moss);
       transform: translateY(-1px);
-    }
-
-    .btn-submit:disabled {
-      background: var(--border);
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
     }
 
     /* Dossier Output Frame */
@@ -343,7 +342,7 @@
     .dossier-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.25rem;
+      gap: 1rem;
       margin-bottom: 1.75rem;
     }
 
@@ -364,13 +363,13 @@
     }
 
     .dossier-val {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 600;
       color: var(--forest);
     }
 
     .dossier-narrative {
-      font-size: 1rem;
+      font-size: 0.98rem;
       color: var(--text-muted);
       line-height: 1.7;
       margin-bottom: 1.5rem;
@@ -428,7 +427,7 @@
           <h1 class="brand-title">fallow.garden</h1>
           <span class="brand-tag">Episode 05</span>
         </a>
-        <p class="brand-subtitle">Historical Past Lives Dossier</p>
+        <p class="brand-subtitle">Historical &amp; Future Past Lives Dossier</p>
       </div>
 
       <div class="privacy-badge">
@@ -441,30 +440,44 @@
 
     <!-- Quiz Intake Form -->
     <div class="card" id="quiz-card">
-      <h2 class="card-title">Karmic Diagnostic Intake</h2>
+      <h2 class="card-title">Chronological Diagnostic Intake</h2>
       <p class="card-desc">
-        Select a historical epoch and answer a few diagnostic questions regarding your temperament, sensory tolerances, and administrative endurance.
+        Select a target epoch and complete the diagnostic battery regarding your temperament, sensory tolerances, and operational endurance.
       </p>
 
       <!-- Step 1: Epoch Selection -->
       <label>1. Select Your Target Epoch</label>
       <div class="era-grid" style="margin-top: 0.5rem;">
         <div class="era-card selected" data-era="ancient">
-          <div class="era-badge">Epoch I</div>
-          <div class="era-name">The Classical &amp; Ancient World</div>
-          <div class="era-desc">Bronze Age trade routes, Roman mortar inspections, Mesopotamian clay tablets.</div>
+          <div>
+            <div class="era-badge">Epoch I</div>
+            <div class="era-name">Classical &amp; Ancient</div>
+          </div>
+          <div class="era-desc">Cuneiform tablets, volcanic pozzolana mortar, delta reeds.</div>
         </div>
 
         <div class="era-card" data-era="medieval">
-          <div class="era-badge">Epoch II</div>
-          <div class="era-name">The Medieval &amp; Silk Road Era</div>
-          <div class="era-desc">Cold monastic scriptoriums, Hanseatic salt monopolies, camel logistics.</div>
+          <div>
+            <div class="era-badge">Epoch II</div>
+            <div class="era-name">Medieval &amp; Silk Road</div>
+          </div>
+          <div class="era-desc">Scriptorium snails, Baltic herring casks, oasis rations.</div>
         </div>
 
         <div class="era-card" data-era="industrial">
-          <div class="era-badge">Epoch III</div>
-          <div class="era-name">The 19th-Century Gilded Epoch</div>
-          <div class="era-desc">Gaslamp soot, transatlantic telegraph lines, obsessive botanical expeditions.</div>
+          <div>
+            <div class="era-badge">Epoch III</div>
+            <div class="era-name">19th-Century Gilded</div>
+          </div>
+          <div class="era-desc">Telegraph galvanometers, trig pillars, Victorian fern fever.</div>
+        </div>
+
+        <div class="era-card" data-era="future">
+          <div>
+            <div class="era-badge">Epoch IV</div>
+            <div class="era-name">Deep Space Frontier</div>
+          </div>
+          <div class="era-desc">Orbital algae vats, Oort thermal tiles, silent void beacons.</div>
         </div>
       </div>
 
@@ -475,7 +488,7 @@
 
       <div style="margin-top: 2rem;">
         <button class="btn-submit" id="btn-generate">
-          <span>Consult the Historical Ledger</span>
+          <span>Consult the Chronological Ledger</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
@@ -491,7 +504,7 @@
           <h2 class="dossier-title" id="d-title">---</h2>
           <div class="dossier-era-tag" id="d-epoch">---</div>
         </div>
-        <div class="dossier-stamp">Verified Historical Ledger</div>
+        <div class="dossier-stamp">Verified Operational Record</div>
       </div>
 
       <div class="dossier-grid">
@@ -504,7 +517,7 @@
           <div class="dossier-val" id="d-lifespan">---</div>
         </div>
         <div class="dossier-field">
-          <div class="dossier-label">Primary Daily Grievance</div>
+          <div class="dossier-label">Primary Operational Grievance</div>
           <div class="dossier-val" id="d-grievance">---</div>
         </div>
       </div>
@@ -523,12 +536,12 @@
 
     <footer>
       <span>fallow.garden • Episode 05</span>
-      <span>No kings or emperors generated. Only essential administrative &amp; artisanal labour.</span>
+      <span>No kings, emperors, or star admirals. Only essential administrative &amp; technical labour.</span>
     </footer>
   </div>
 
   <script>
-    // 1. Diagnostic Questions Data
+    // 1. Eight Expanded Diagnostic Inquiries
     const questions = [
       {
         text: "When a colleague delivers an ambiguous or poorly constructed task, your instinct is to:",
@@ -536,48 +549,83 @@
           { text: "Rewrite the specification yourself in meticulous detail so no one speaks to you for 3 days.", score: "scribe" },
           { text: "Fix the physical broken part quietly, ignoring the bureaucracy entirely.", score: "maker" },
           { text: "Step outside to observe birds or cloud formations until the crisis blows over.", score: "nature" },
-          { text: "Issue an official, highly passive-aggressive memorandum citing historical precedent.", score: "admin" }
+          { text: "Issue an official, highly passive-aggressive memorandum citing precedent.", score: "admin" },
+          { text: "Retreat to the perimeter observation post where human speech cannot reach you.", score: "signal" }
         ]
       },
       {
-        text: "Your ideal daily working environment consists of:",
+        text: "Your ideal working environment consists of:",
         options: [
-          { text: "A quiet room smelling of aged paper, linseed oil, and low-wattage sunlight.", score: "scribe" },
-          { text: "A tactile workshop with heavy iron tools, dried herbs, and zero incoming notifications.", score: "maker" },
-          { text: "A windswept perimeter wall or high mountain terrace with panoramic visibility.", score: "nature" },
-          { text: "A high wooden desk where you possess the sole authority to stamp documents 'REJECTED'.", score: "admin" }
+          { text: "A quiet room smelling of aged paper, low-wattage lighting, and archival glue.", score: "scribe" },
+          { text: "A tactile workshop with heavy iron tools, timber shavings, and zero incoming pings.", score: "maker" },
+          { text: "A humid botanical enclosure, damp soil, and the sound of rustling foliage.", score: "nature" },
+          { text: "A high wooden desk where you possess the sole authority to stamp documents 'REJECTED'.", score: "admin" },
+          { text: "A solitary mountaintop or orbital cupola with 360-degree silent visibility.", score: "signal" }
         ]
       },
       {
         text: "What sensory nuisance causes you the most immediate visceral friction?",
         options: [
-          { text: "Poorly sharpened writing implements or smudged margins.", score: "scribe" },
-          { text: "Flimsy, modern synthetic materials masquerading as solid timber or stone.", score: "maker" },
-          { text: "Stagnant indoor air and people who refuse to look out the window.", score: "nature" },
-          { text: "Unnecessary procedural meetings that could have been handled on a clay tablet.", score: "admin" }
+          { text: "Poorly sharpened writing implements or inconsistent typographical margins.", score: "scribe" },
+          { text: "Flimsy, synthetic materials masquerading as solid load-bearing structural timber.", score: "maker" },
+          { text: "Stagnant indoor HVAC air and people who refuse to look out the window.", score: "nature" },
+          { text: "Unnecessary procedural meetings that could have been handled on a clay tablet.", score: "admin" },
+          { text: "Constant, erratic radio chatter interrupting a perfectly calibrated quiet baseline.", score: "signal" }
         ]
       },
       {
-        text: "Pick your preferred restorative carbohydrate:",
+        text: "Pick your preferred restorative fuel / carbohydrate:",
         options: [
-          { text: "Cold salted porridge eaten while reading footnotes.", score: "scribe" },
+          { text: "Cold salted porridge eaten while reading obscure technical footnotes.", score: "scribe" },
           { text: "Dense, wood-fired rye bread with pickled root vegetables.", score: "maker" },
-          { text: "A handful of dried figs, wild mint tea, and toasted barley.", score: "nature" },
-          { text: "Strong black tea and hard biscuits taken exactly at 3:15 PM.", score: "admin" }
+          { text: "A handful of dried figs, wild mint infusion, and toasted barley.", score: "nature" },
+          { text: "Strong black tea and hard biscuits taken precisely at 3:15 PM.", score: "admin" },
+          { text: "Concentrated nutrient broth sipped slowly from an insulated metal flask.", score: "signal" }
+        ]
+      },
+      {
+        text: "How do you respond when an emergency siren or chaotic alarm sounds nearby?",
+        options: [
+          { text: "Ensure all open logs and ledgers are securely closed and filed before moving.", score: "scribe" },
+          { text: "Grab the nearest heavy wrench and physically inspect the main pressure relief valve.", score: "maker" },
+          { text: "Check if the local animals and plants look distressed or completely unbothered.", score: "nature" },
+          { text: "Verify whether the emergency drill permit was authorized by the proper committee.", score: "admin" },
+          { text: "Remain at your listening station—someone has to maintain visual tracking.", score: "signal" }
+        ]
+      },
+      {
+        text: "What is your philosophical relationship with time and punctuality?",
+        options: [
+          { text: "Time is an archival record that exists only after it has been properly transcribed.", score: "scribe" },
+          { text: "Time is measured by how long a well-built oak joint or weld survives under load.", score: "maker" },
+          { text: "Time belongs to the seasons, solar angles, and soil moisture levels.", score: "nature" },
+          { text: "Being 45 seconds ahead of schedule is a moral virtue; 15 seconds late is ruin.", score: "admin" },
+          { text: "Time is just the quiet gap between the pulse sent and the echo received.", score: "signal" }
+        ]
+      },
+      {
+        text: "What physical artifact would you leave behind for future archaeologists?",
+        options: [
+          { text: "An extensively annotated index of books that no longer exist.", score: "scribe" },
+          { text: "A hand-carved stone mortar block that stubbornly refuses to weather away.", score: "maker" },
+          { text: "A seed jar containing five extinct, deeply fragrant pollinator-friendly perennials.", score: "nature" },
+          { text: "An intact official wax stamp bearing a severe, unyielding bureaucratic crest.", score: "admin" },
+          { text: "A brass directional theodolite aimed permanently at an obscure star cluster.", score: "signal" }
         ]
       },
       {
         text: "If you had to retire tomorrow, where would we find you?",
         options: [
           { text: "Alphabetizing an archive of unread regional trade gazettes.", score: "scribe" },
-          { text: "Mending dry-stone boundary walls on a neglected acreage.", score: "maker" },
-          { text: "Tracking pollinator flight paths across a native wildflower meadow.", score: "nature" },
-          { text: "Placing official-looking 'PRIVATE: DO NOT ENTER' signs along your perimeter.", score: "admin" }
+          { text: "Mending dry-stone boundary walls on a neglected, rain-swept acreage.", score: "maker" },
+          { text: "Cultivating native pollinator meadows and dividing mountain mint clumps.", score: "nature" },
+          { text: "Placing official-looking 'PRIVATE: DO NOT ENTER' placards along your fence line.", score: "admin" },
+          { text: "Sitting alone on a coastal headland or high ridge with a pair of brass binoculars.", score: "signal" }
         ]
       }
     ];
 
-    // 2. Past Life Personas Library
+    // 2. Twenty Detailed Personas Across 4 Epochs
     const personas = {
       ancient: {
         scribe: {
@@ -608,13 +656,22 @@
           residue: "An innate peace when standing near wetlands and an instinctive preference for high-weight cotton paper."
         },
         admin: {
-          title: "Han Dynasty Imperial Grain Granary Assayer",
+          title: "Han Dynasty Imperial Granary Assayer",
           epoch: "Western Han Dynasty • Chang'an (c. 85 BCE)",
           station: "Ministry of Agricultural Revenue",
           lifespan: "Age 60 • Retired with an official bronze seal",
           grievance: "Millet moisture levels exceeding the 14% statutory ceiling",
           narrative: "Armed with a long bamboo sampling probe and a set of balanced bronze weights, you inspected every ox-cart of grain entering the capital. You were completely incorruptible because you found bureaucratic perfection far more satisfying than bribes.",
-          residue: "Extreme irritation when food storage containers are not labeled, airtight, and systematically rotated."
+          residue: "Extreme irritation when pantry storage containers are not labeled, airtight, and systematically rotated."
+        },
+        signal: {
+          title: "Minoan Coastal Beacon Tender",
+          epoch: "Bronze Age • Southern Crete (c. 1450 BCE)",
+          station: "Cape Lithino High Watchpost",
+          lifespan: "Age 55 • Quietly on a stone terrace facing Libya",
+          grievance: "Olive oil fuel rations arriving two weeks late from Knossos",
+          narrative: "You tended the hilltop olive-oil signal fires that warned the island of southern squalls and foreign merchant fleets. You went several months without speaking aloud, maintaining that smoke plumes communicated everything worth saying.",
+          residue: "An instinctive habit of scanning coastal horizons and a preference for silent, elevated perches."
         }
       },
       medieval: {
@@ -634,7 +691,7 @@
           lifespan: "Age 62 • Quietly in a dry oak storage shed",
           grievance: "Danish stave wood cut against the natural grain",
           narrative: "You built oak barrels so watertight that pickled herrings could survive an eight-month voyage across the North Sea without losing brine. You communicated primarily through disapproving grunts and a very heavy wooden mallet.",
-          residue: "A profound respect for airtight joinery and a visceral hatred of leaky beverage tumblers."
+          residue: "A profound respect for airtight joinery and a visceral hatred of leaky travel mugs."
         },
         nature: {
           title: "Samarkand Caravan Oatmeal Logistics Officer",
@@ -643,7 +700,7 @@
           lifespan: "Age 55 • Resting under a white mulberry canopy",
           grievance: "Merchants rushing pack camels through midday heat",
           narrative: "You calculated exact grain rations, pack-saddle weight distribution, and desert travel intervals across 400 miles of arid steppes. You were renowned for enforcing mandatory two-hour afternoon shade breaks for both humans and beasts.",
-          residue: "A strict refusal to rush through airports and an obsession with carrying adequate snacks on minor day trips."
+          residue: "A strict refusal to rush through transit hubs and an obsession with carrying adequate snacks on minor errands."
         },
         admin: {
           title: "Venetian Ducal Salt Toll Collector",
@@ -653,6 +710,15 @@
           grievance: "Foreign gondolas attempting to bypass the Grand Canal boom gate",
           narrative: "You sat in a small marble booth on the water, checking manifests and collecting the Republic's statutory salt monopoly tariff down to the exact copper ducat. No shipment entered the lagoon without your counter-signed wax stamp.",
           residue: "A deep personal satisfaction derived from paying exact change and receiving itemized receipts."
+        },
+        signal: {
+          title: "Byzantine Mountain Semaphore Sentry",
+          epoch: "Middle Byzantine Era • Taurus Mountains (c. 840 CE)",
+          station: "Loulon Fortress Signal Tower",
+          lifespan: "Age 49 • Alpine cold and dried mutton longevity",
+          grievance: "Low-lying valley fog obscuring the next relay bonfire for three straight days",
+          narrative: "Positioned on an isolated limestone crag, you maintained the optical fire-beacon chain that could transmit an invasion alert from the Cilician Gates all the way to the Emperor's palace in Constantinople in under an hour.",
+          residue: "An obsession with clear lines of sight and an instinct to build signal fires whenever outdoors."
         }
       },
       industrial: {
@@ -663,10 +729,10 @@
           lifespan: "Age 53 • Chronic telegrapher's wrist & salt fog",
           grievance: "London brokers demanding 60 words per minute during Atlantic gales",
           narrative: "Isolated on a rocky Atlantic headland, you spent 10-hour shifts with brass headphones clamped to your ears, translating weak electric galvanic twitches across 2,000 miles of ocean floor into financial cables. You could identify the operator in Newfoundland purely by the rhythm of their hand.",
-          residue: "An uncanny ability to detect subtle grammatical tones in text messages and an aversion to unnecessary voice calls."
+          residue: "An uncanny ability to detect subtle grammatical tones in text messages and an aversion to unnecessary phone calls."
         },
         maker: {
-          title: "Ordnance Survey Trig Pillar Mason",
+          title: "Ordnance Survey Mountain Trig Pillar Mason",
           epoch: "Victorian Era • Scottish Highlands (c. 1886)",
           station: "Her Majesty's Cartographic Service",
           lifespan: "Age 61 • Mountain air & heavy tweed durability",
@@ -675,7 +741,7 @@
           residue: "An insatiable desire to climb hills solely to inspect the view and critique the quality of nearby stone walls."
         },
         nature: {
-          title: "Kew Gardens Pteridomania (Fern) Scribe",
+          title: "Kew Gardens Pteridomania (Fern) Cryptogamist",
           epoch: "Victorian Era • Surrey Glasshouses (c. 1865)",
           station: "Department of Cryptogamic Botany",
           lifespan: "Age 59 • Humid greenhouse contentment",
@@ -691,13 +757,68 @@
           grievance: "Express freight trains arriving 45 seconds ahead of schedule",
           narrative: "You managed the master galvanic clocks that synchronized every station chime between Aachen and Königsberg. You believed that an unscheduled 90-second delay was the first symptom of complete civilizational collapse.",
           residue: "Arriving at airport departure gates 2.5 hours early and silently calculating boarding-group efficiency."
+        },
+        signal: {
+          title: "Hebrides Isolated Lighthouse Foghorn Calibrator",
+          epoch: "Victorian Era • Outer Hebrides, Scotland (c. 1891)",
+          station: "Flannan Isles Marine Light",
+          lifespan: "Age 58 • Salt air, pipe tobacco, and gale resilience",
+          grievance: "Compressed-air pneumatic valves jamming during a 4-day Atlantic squall",
+          narrative: "You lived on a wind-blasted basalt stack, winding clockwork rotating lenses and adjusting the acoustic pitch of giant steam fog sirens so passing coal tramps didn't shatter on the rocks.",
+          residue: "A deep appreciation for rhythmic mechanical hums, heavy wool blankets, and storm watching."
+        }
+      },
+      future: {
+        scribe: {
+          title: "Kuiper Belt Derelict Ship Registry Archivist",
+          epoch: "Deep Space Era • Station 88-Persephone (c. 2410 CE)",
+          station: "Outer Rim Salvage & Title Directorate",
+          lifespan: "Age 74 • Low-gravity archival retirement",
+          grievance: "Rogue scavengers submitting salvage manifests in obsolete 21st-century JSON schemas",
+          narrative: "Working in a hollowed-out nickel-iron asteroid past the orbit of Neptune, you maintained the master ledger of decommissioned hydrogen freighters, lost colonial probes, and abandoned mining rigs. You took immense pride in never losing a single cargo serial number.",
+          residue: "An instinct to meticulously organize folders and a suspicion that cloud storage will eventually lose everything."
+        },
+        maker: {
+          title: "Oort Cloud Habitat Thermal Tile Riveter",
+          epoch: "Megastructure Era • Lagrange Ring 4 (c. 2590 CE)",
+          station: "Hull Integrity Division 09",
+          lifespan: "Age 68 • Repaired pressure suit longevity",
+          grievance: "Zero-G magnetic torque wrenches losing calibration every 400 hours",
+          narrative: "Tethered to the exterior skin of a 12-kilometer rotating cylinder, you replaced ablative ceramic heat tiles while staring into the absolute black void between stars. You found the hiss of your own oxygen recycler much more relaxing than crew quarters gossip.",
+          residue: "An instinct to inspect door seals and an irrational satisfaction from tightening loose screws."
+        },
+        nature: {
+          title: "Orbital Mycelium & Algae Scrubbing Technician",
+          epoch: "Sub-Surface Biosphere Era • Europa Station (c. 2640 CE)",
+          station: "Closed-Loop Hydroponics Core C",
+          lifespan: "Age 71 • Humid bio-dome contentment",
+          grievance: "Off-shift maintenance crew smuggling illicit citrus peels that spike the vat acidity",
+          narrative: "You tended the massive three-story vertical bioreactors of bio-luminescent fungi and chlorella algae that kept 40,000 miners breathing clean oxygen under the Jovian ice crust. You could tell if the nitrogen balance was off purely by smelling the air intake.",
+          residue: "A natural talent for keeping houseplants alive and an instinctive awareness of room humidity."
+        },
+        admin: {
+          title: "Asteroid Ice Cargo Manifest Clearance Inspector",
+          epoch: "Solar System Logistics Era • Ceres Port Authority (c. 2385 CE)",
+          station: "Inner-Ring Water Toll Gate 3",
+          lifespan: "Age 65 • Standard bureaucratic pension credit",
+          grievance: "Independent ice haulers attempting to forge purity certificates on dirty comet chunks",
+          narrative: "You sat in a pressurized customs module above Ceres, scanning mass-spectrometry readouts of 100,000-ton ice blocks bound for Mars terraforming colonies. You never allowed a single gram of uncertified methane slag past your orbital scanner.",
+          residue: "Refusing to accept informal agreements without a written paper trail and date stamp."
+        },
+        signal: {
+          title: "Deep Void Cosmic Background Listening Sentry",
+          epoch: "Post-Solar Epoch • Outer Heliopause Relay (c. 2820 CE)",
+          station: "Array Array-Omega (45 AU Solar Distance)",
+          lifespan: "Age 82 • Peaceful silence at the edge of the system",
+          grievance: "Errant coronal mass ejections creating static in an otherwise pristine 9-month silence",
+          narrative: "Stationed on a solitary automated dish array four times farther out than Pluto, your sole job was to confirm that the deep interstellar sensor grid was receiving only the faint 2.7 Kelvin whisper of the Big Bang. You loved the job because nobody ever visited.",
+          residue: "A profound capacity for prolonged solitude, noise-canceling headphones, and stargazing."
         }
       }
     };
 
     // 3. UI Flow Engine
     let selectedEra = 'ancient';
-    const userScores = { scribe: 0, maker: 0, nature: 0, admin: 0 };
 
     // Era Click Handlers
     document.querySelectorAll('.era-card').forEach(card => {
@@ -714,7 +835,7 @@
       const qBox = document.createElement('div');
       qBox.className = 'question-box';
       qBox.innerHTML = `
-        <div class="question-num">Diagnostic Inquiry ${qIdx + 1} of ${questions.length}</div>
+        <div class="question-num">Inquiry ${qIdx + 1} of ${questions.length}</div>
         <div class="question-text">${q.text}</div>
         <div class="options-grid">
           ${q.options.map((opt, oIdx) => `
@@ -741,12 +862,12 @@
     // Generate Dossier
     document.getElementById('btn-generate').addEventListener('click', () => {
       if (Object.keys(selections).length < questions.length) {
-        alert('Please answer all 5 diagnostic inquiries before consulting the ledger.');
+        alert(`Please complete all ${questions.length} inquiries before consulting the ledger.`);
         return;
       }
 
-      // Calculate Scores
-      const counts = { scribe: 0, maker: 0, nature: 0, admin: 0 };
+      // Calculate Scores across 5 traits
+      const counts = { scribe: 0, maker: 0, nature: 0, admin: 0, signal: 0 };
       Object.values(selections).forEach(trait => counts[trait]++);
 
       // Find Dominant Trait
