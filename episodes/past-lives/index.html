@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fallow.garden: Historical Past Lives Dossier</title>
+  <meta name="description" content="A gentle, absurd karmic diagnostic. Uncover your plausible, unglamorous past life across historical epochs." />
+
+  <!-- Mobile & PWA Configuration -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Past Lives" />
+  <meta name="theme-color" content="#24422e" />
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f5f2eb;
+      --surface: #ffffff;
+      --surface-warm: #ede8dc;
+      --text-main: #1c261e;
+      --text-muted: #536256;
+      --text-light: #728275;
+
+      --forest: #24422e;
+      --moss: #3a6346;
+      --sprout: #6b9e78;
+      --clay: #b86b4b;
+      --clay-soft: #f8ebe4;
+      --amber: #cb8934;
+      --amber-soft: #fbf2e3;
+      --sky: #3b6b88;
+      --sky-soft: #eaf1f5;
+
+      --border: #dcd5c5;
+      --border-subtle: #e9e3d5;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+
+      --shadow-sm: 0 2px 8px rgba(28, 38, 30, 0.04);
+      --shadow-md: 0 10px 25px rgba(28, 38, 30, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(ellipse at 85% -10%, rgba(107, 158, 120, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 15% 110%, rgba(184, 107, 75, 0.08) 0%, transparent 60%);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 3rem 1.25rem 5rem;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand-top {
+      text-decoration: none;
+      color: inherit;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+
+    .brand-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--forest);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .brand-tag {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(59, 107, 136, 0.12);
+      color: var(--sky);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    .privacy-badge {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--surface-warm);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Card Frames */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+
+    .card-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.5rem;
+      color: var(--forest);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Step 1: Era Selector Grid */
+    .era-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .era-card {
+      background: var(--surface-warm);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .era-card:hover {
+      border-color: var(--moss);
+      transform: translateY(-2px);
+    }
+
+    .era-card.selected {
+      background: #ffffff;
+      border-color: var(--forest);
+      box-shadow: 0 0 0 3px rgba(36, 66, 46, 0.1);
+    }
+
+    .era-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--clay);
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .era-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--forest);
+      margin-bottom: 0.35rem;
+    }
+
+    .era-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Step 2: Diagnostic Questions */
+    .question-box {
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .question-box:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .question-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--moss);
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.85rem;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .option-btn {
+      background: var(--surface-warm);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .option-btn:hover {
+      background: #ffffff;
+      border-color: var(--forest);
+    }
+
+    .option-btn.selected {
+      background: var(--forest);
+      color: #ffffff;
+      border-color: var(--forest);
+    }
+
+    /* Actions */
+    .btn-submit {
+      background: var(--forest);
+      color: #ffffff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(36, 66, 46, 0.2);
+    }
+
+    .btn-submit:hover {
+      background: var(--moss);
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:disabled {
+      background: var(--border);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Dossier Output Frame */
+    .dossier-card {
+      display: none;
+      background: #ffffff;
+      border: 2px solid var(--forest);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .dossier-header {
+      border-bottom: 2px solid var(--forest);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .dossier-stamp {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      border: 1.5px solid var(--clay);
+      color: var(--clay);
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+
+    .dossier-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 2rem;
+      color: var(--forest);
+      line-height: 1.15;
+      margin-bottom: 0.25rem;
+    }
+
+    .dossier-era-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .dossier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .dossier-field {
+      background: var(--bg);
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .dossier-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-light);
+      margin-bottom: 0.2rem;
+    }
+
+    .dossier-val {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--forest);
+    }
+
+    .dossier-narrative {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .dossier-narrative strong {
+      color: var(--text-main);
+    }
+
+    .karmic-residue-box {
+      background: var(--amber-soft);
+      border-left: 4px solid var(--amber);
+      padding: 1rem 1.25rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      margin-bottom: 1.75rem;
+    }
+
+    .btn-reconsult {
+      background: var(--surface-warm);
+      border: 1px solid var(--border);
+      color: var(--forest);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-reconsult:hover {
+      background: var(--bg-subtle);
+      border-color: var(--forest);
+    }
+
+    footer {
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div>
+        <a href="/" class="brand-top" title="Return to Fallow Garden">
+          <h1 class="brand-title">fallow.garden</h1>
+          <span class="brand-tag">Episode 05</span>
+        </a>
+        <p class="brand-subtitle">Historical Past Lives Dossier</p>
+      </div>
+
+      <div class="privacy-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        Akashic Records Client-Side Only
+      </div>
+    </header>
+
+    <!-- Quiz Intake Form -->
+    <div class="card" id="quiz-card">
+      <h2 class="card-title">Karmic Diagnostic Intake</h2>
+      <p class="card-desc">
+        Select a historical epoch and answer a few diagnostic questions regarding your temperament, sensory tolerances, and administrative endurance.
+      </p>
+
+      <!-- Step 1: Epoch Selection -->
+      <label>1. Select Your Target Epoch</label>
+      <div class="era-grid" style="margin-top: 0.5rem;">
+        <div class="era-card selected" data-era="ancient">
+          <div class="era-badge">Epoch I</div>
+          <div class="era-name">The Classical &amp; Ancient World</div>
+          <div class="era-desc">Bronze Age trade routes, Roman mortar inspections, Mesopotamian clay tablets.</div>
+        </div>
+
+        <div class="era-card" data-era="medieval">
+          <div class="era-badge">Epoch II</div>
+          <div class="era-name">The Medieval &amp; Silk Road Era</div>
+          <div class="era-desc">Cold monastic scriptoriums, Hanseatic salt monopolies, camel logistics.</div>
+        </div>
+
+        <div class="era-card" data-era="industrial">
+          <div class="era-badge">Epoch III</div>
+          <div class="era-name">The 19th-Century Gilded Epoch</div>
+          <div class="era-desc">Gaslamp soot, transatlantic telegraph lines, obsessive botanical expeditions.</div>
+        </div>
+      </div>
+
+      <!-- Step 2: Diagnostic Questions -->
+      <div id="questions-container" style="margin-top: 2rem;">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div style="margin-top: 2rem;">
+        <button class="btn-submit" id="btn-generate">
+          <span>Consult the Historical Ledger</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Output Dossier -->
+    <div class="dossier-card" id="dossier-card">
+      <div class="dossier-header">
+        <div>
+          <h2 class="dossier-title" id="d-title">---</h2>
+          <div class="dossier-era-tag" id="d-epoch">---</div>
+        </div>
+        <div class="dossier-stamp">Verified Historical Ledger</div>
+      </div>
+
+      <div class="dossier-grid">
+        <div class="dossier-field">
+          <div class="dossier-label">Primary Duty Station</div>
+          <div class="dossier-val" id="d-station">---</div>
+        </div>
+        <div class="dossier-field">
+          <div class="dossier-label">Lifespan &amp; Exit</div>
+          <div class="dossier-val" id="d-lifespan">---</div>
+        </div>
+        <div class="dossier-field">
+          <div class="dossier-label">Primary Daily Grievance</div>
+          <div class="dossier-val" id="d-grievance">---</div>
+        </div>
+      </div>
+
+      <div class="dossier-narrative" id="d-narrative">
+        <!-- Story output -->
+      </div>
+
+      <div class="karmic-residue-box">
+        <strong>Residual Karmic Carryover:</strong>
+        <span id="d-residue">---</span>
+      </div>
+
+      <button class="btn-reconsult" id="btn-reset">↺ Consult for Another Lifetime</button>
+    </div>
+
+    <footer>
+      <span>fallow.garden • Episode 05</span>
+      <span>No kings or emperors generated. Only essential administrative &amp; artisanal labour.</span>
+    </footer>
+  </div>
+
+  <script>
+    // 1. Diagnostic Questions Data
+    const questions = [
+      {
+        text: "When a colleague delivers an ambiguous or poorly constructed task, your instinct is to:",
+        options: [
+          { text: "Rewrite the specification yourself in meticulous detail so no one speaks to you for 3 days.", score: "scribe" },
+          { text: "Fix the physical broken part quietly, ignoring the bureaucracy entirely.", score: "maker" },
+          { text: "Step outside to observe birds or cloud formations until the crisis blows over.", score: "nature" },
+          { text: "Issue an official, highly passive-aggressive memorandum citing historical precedent.", score: "admin" }
+        ]
+      },
+      {
+        text: "Your ideal daily working environment consists of:",
+        options: [
+          { text: "A quiet room smelling of aged paper, linseed oil, and low-wattage sunlight.", score: "scribe" },
+          { text: "A tactile workshop with heavy iron tools, dried herbs, and zero incoming notifications.", score: "maker" },
+          { text: "A windswept perimeter wall or high mountain terrace with panoramic visibility.", score: "nature" },
+          { text: "A high wooden desk where you possess the sole authority to stamp documents 'REJECTED'.", score: "admin" }
+        ]
+      },
+      {
+        text: "What sensory nuisance causes you the most immediate visceral friction?",
+        options: [
+          { text: "Poorly sharpened writing implements or smudged margins.", score: "scribe" },
+          { text: "Flimsy, modern synthetic materials masquerading as solid timber or stone.", score: "maker" },
+          { text: "Stagnant indoor air and people who refuse to look out the window.", score: "nature" },
+          { text: "Unnecessary procedural meetings that could have been handled on a clay tablet.", score: "admin" }
+        ]
+      },
+      {
+        text: "Pick your preferred restorative carbohydrate:",
+        options: [
+          { text: "Cold salted porridge eaten while reading footnotes.", score: "scribe" },
+          { text: "Dense, wood-fired rye bread with pickled root vegetables.", score: "maker" },
+          { text: "A handful of dried figs, wild mint tea, and toasted barley.", score: "nature" },
+          { text: "Strong black tea and hard biscuits taken exactly at 3:15 PM.", score: "admin" }
+        ]
+      },
+      {
+        text: "If you had to retire tomorrow, where would we find you?",
+        options: [
+          { text: "Alphabetizing an archive of unread regional trade gazettes.", score: "scribe" },
+          { text: "Mending dry-stone boundary walls on a neglected acreage.", score: "maker" },
+          { text: "Tracking pollinator flight paths across a native wildflower meadow.", score: "nature" },
+          { text: "Placing official-looking 'PRIVATE: DO NOT ENTER' signs along your perimeter.", score: "admin" }
+        ]
+      }
+    ];
+
+    // 2. Past Life Personas Library
+    const personas = {
+      ancient: {
+        scribe: {
+          title: "Sumerian Cuneiform Complaint Scribe",
+          epoch: "Bronze Age • Ur (c. 1750 BCE)",
+          station: "Royal Copper Depot Registry",
+          lifespan: "Age 51 • Peacefully during a clay kiln firing",
+          grievance: "Substandard copper ingots shipped by merchant Ea-nasir",
+          narrative: "You spent three decades pressing wet reeds into moist clay tablets, translating the boiling fury of civic buyers into stylized wedge characters. You were universally respected for your crisp grammatical syntax and your refusal to accept verbal excuses for late timber deliveries.",
+          residue: "A lingering compulsion to document petty consumer grievances in permanent, unalterable written formats."
+        },
+        maker: {
+          title: "Roman Volcanic Pozzolana Mortar Tester",
+          epoch: "Classical Era • Ostia Antica (c. 118 CE)",
+          station: "Imperial Harbour Works Directorate",
+          lifespan: "Age 64 • Retired with a small olive parcel",
+          grievance: "Contractors attempting to dilute lime with ordinary river silt",
+          narrative: "You possessed an uncanny tactile ability to rub wet volcanic ash between your thumb and forefinger and immediately detect if a cement batch would cure underwater for 2,000 years. You refused to sign off on three separate aqueducts because the aggregate was 'lacking moral density.'",
+          residue: "An irresistible urge to tap structural walls and express deep skepticism about modern drywall."
+        },
+        nature: {
+          title: "Alexandrian Papyrus Reed Cultivator",
+          epoch: "Hellenistic Egypt • Nile Delta (c. 240 BCE)",
+          station: "Lower Delta Wetland Conservacy",
+          lifespan: "Age 58 • Natural decline watching the annual flood",
+          grievance: "Ibis birds trampling delicate harvest shoots",
+          narrative: "You spent your best daylight wading knee-deep in delta silt, selecting long, fibrous reed stems for the Great Library's roll production. You never visited Alexandria itself because you found urban philosophers excessively loud and mechanically unproductive.",
+          residue: "An innate peace when standing near wetlands and an instinctive preference for high-weight cotton paper."
+        },
+        admin: {
+          title: "Han Dynasty Imperial Grain Granary Assayer",
+          epoch: "Western Han Dynasty • Chang'an (c. 85 BCE)",
+          station: "Ministry of Agricultural Revenue",
+          lifespan: "Age 60 • Retired with an official bronze seal",
+          grievance: "Millet moisture levels exceeding the 14% statutory ceiling",
+          narrative: "Armed with a long bamboo sampling probe and a set of balanced bronze weights, you inspected every ox-cart of grain entering the capital. You were completely incorruptible because you found bureaucratic perfection far more satisfying than bribes.",
+          residue: "Extreme irritation when food storage containers are not labeled, airtight, and systematically rotated."
+        }
+      },
+      medieval: {
+        scribe: {
+          title: "Scriptorium Marginalia Snail Illustrator",
+          epoch: "Medieval Era • Northumbria (c. 1312 CE)",
+          station: "St. Cuthbert Benedictine Abbey",
+          lifespan: "Age 47 • Candle soot inhalation & severe myopia",
+          grievance: "The Novice Master asking why knights were fighting snails",
+          narrative: "While your brethren copied Latin Gospels with trembling hands, you devoted your deepest cognitive energy to drawing hyper-detailed armored snails battling longsword-wielding rabbits in the margins of ecclesiastical tax rolls. You considered this the only honest theological commentary of the 14th century.",
+          residue: "A habit of doodling absurd geometric animals in the margins of serious spreadsheets and briefing memos."
+        },
+        maker: {
+          title: "Hanseatic League Salt-Herring Cask Cooper",
+          epoch: "Hanseatic Period • Lübeck (c. 1420 CE)",
+          station: "Baltic Fish Quay No. 4",
+          lifespan: "Age 62 • Quietly in a dry oak storage shed",
+          grievance: "Danish stave wood cut against the natural grain",
+          narrative: "You built oak barrels so watertight that pickled herrings could survive an eight-month voyage across the North Sea without losing brine. You communicated primarily through disapproving grunts and a very heavy wooden mallet.",
+          residue: "A profound respect for airtight joinery and a visceral hatred of leaky beverage tumblers."
+        },
+        nature: {
+          title: "Samarkand Caravan Oatmeal Logistics Officer",
+          epoch: "Silk Road Era • Sogdiana (c. 1260 CE)",
+          station: "Oasis Staging Post 12",
+          lifespan: "Age 55 • Resting under a white mulberry canopy",
+          grievance: "Merchants rushing pack camels through midday heat",
+          narrative: "You calculated exact grain rations, pack-saddle weight distribution, and desert travel intervals across 400 miles of arid steppes. You were renowned for enforcing mandatory two-hour afternoon shade breaks for both humans and beasts.",
+          residue: "A strict refusal to rush through airports and an obsession with carrying adequate snacks on minor day trips."
+        },
+        admin: {
+          title: "Venetian Ducal Salt Toll Collector",
+          epoch: "Republic of Venice • Rialto (c. 1495 CE)",
+          station: "Magistrato al Sal",
+          lifespan: "Age 68 • Comfortable retirement overlooking the lagoon",
+          grievance: "Foreign gondolas attempting to bypass the Grand Canal boom gate",
+          narrative: "You sat in a small marble booth on the water, checking manifests and collecting the Republic's statutory salt monopoly tariff down to the exact copper ducat. No shipment entered the lagoon without your counter-signed wax stamp.",
+          residue: "A deep personal satisfaction derived from paying exact change and receiving itemized receipts."
+        }
+      },
+      industrial: {
+        scribe: {
+          title: "Transatlantic Cable Morse Telegrapher",
+          epoch: "Victorian Era • Valentia Island, Ireland (c. 1878)",
+          station: "Anglo-American Telegraph Station",
+          lifespan: "Age 53 • Chronic telegrapher's wrist & salt fog",
+          grievance: "London brokers demanding 60 words per minute during Atlantic gales",
+          narrative: "Isolated on a rocky Atlantic headland, you spent 10-hour shifts with brass headphones clamped to your ears, translating weak electric galvanic twitches across 2,000 miles of ocean floor into financial cables. You could identify the operator in Newfoundland purely by the rhythm of their hand.",
+          residue: "An uncanny ability to detect subtle grammatical tones in text messages and an aversion to unnecessary voice calls."
+        },
+        maker: {
+          title: "Ordnance Survey Trig Pillar Mason",
+          epoch: "Victorian Era • Scottish Highlands (c. 1886)",
+          station: "Her Majesty's Cartographic Service",
+          lifespan: "Age 61 • Mountain air & heavy tweed durability",
+          grievance: "Misty cloud cover rolling in the moment the theodolite was leveled",
+          narrative: "You hauled granite blocks, brass plumblines, and lime mortar up desolate Munros to construct the triangulation pillars that mapped the British Isles. You spoke perhaps twelve words a week, all of them about wind direction.",
+          residue: "An insatiable desire to climb hills solely to inspect the view and critique the quality of nearby stone walls."
+        },
+        nature: {
+          title: "Kew Gardens Pteridomania (Fern) Scribe",
+          epoch: "Victorian Era • Surrey Glasshouses (c. 1865)",
+          station: "Department of Cryptogamic Botany",
+          lifespan: "Age 59 • Humid greenhouse contentment",
+          grievance: "Amateur collectors mislabeling Asplenium scolopendrium",
+          narrative: "During the height of Victorian 'Fern Fever,' you cataloged, pressed, and indexed thousands of damp woodland spore fronds sent back from cloudy temperate rainforests. You found flowering plants loud, vulgar, and unnecessarily showy.",
+          residue: "A deliberate preference for shady native foliage, mossy stones, and quiet woodland garden borders."
+        },
+        admin: {
+          title: "Prussian Railway Timetable Synchronizer",
+          epoch: "Imperial German Era • Berlin Central Station (c. 1898)",
+          station: "Königliche Eisenbahn-Direktion",
+          lifespan: "Age 67 • Gold pocket watch pension retirement",
+          grievance: "Express freight trains arriving 45 seconds ahead of schedule",
+          narrative: "You managed the master galvanic clocks that synchronized every station chime between Aachen and Königsberg. You believed that an unscheduled 90-second delay was the first symptom of complete civilizational collapse.",
+          residue: "Arriving at airport departure gates 2.5 hours early and silently calculating boarding-group efficiency."
+        }
+      }
+    };
+
+    // 3. UI Flow Engine
+    let selectedEra = 'ancient';
+    const userScores = { scribe: 0, maker: 0, nature: 0, admin: 0 };
+
+    // Era Click Handlers
+    document.querySelectorAll('.era-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.era-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedEra = card.dataset.era;
+      });
+    });
+
+    // Render Questions
+    const questionsContainer = document.getElementById('questions-container');
+    questions.forEach((q, qIdx) => {
+      const qBox = document.createElement('div');
+      qBox.className = 'question-box';
+      qBox.innerHTML = `
+        <div class="question-num">Diagnostic Inquiry ${qIdx + 1} of ${questions.length}</div>
+        <div class="question-text">${q.text}</div>
+        <div class="options-grid">
+          ${q.options.map((opt, oIdx) => `
+            <button type="button" class="option-btn" data-q="${qIdx}" data-score="${opt.score}" data-idx="${oIdx}">
+              ${opt.text}
+            </button>
+          `).join('')}
+        </div>
+      `;
+      questionsContainer.appendChild(qBox);
+    });
+
+    // Option Selection Handlers
+    const selections = {};
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const qIdx = this.dataset.q;
+        document.querySelectorAll(`.option-btn[data-q="${qIdx}"]`).forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        selections[qIdx] = this.dataset.score;
+      });
+    });
+
+    // Generate Dossier
+    document.getElementById('btn-generate').addEventListener('click', () => {
+      if (Object.keys(selections).length < questions.length) {
+        alert('Please answer all 5 diagnostic inquiries before consulting the ledger.');
+        return;
+      }
+
+      // Calculate Scores
+      const counts = { scribe: 0, maker: 0, nature: 0, admin: 0 };
+      Object.values(selections).forEach(trait => counts[trait]++);
+
+      // Find Dominant Trait
+      let dominant = 'scribe';
+      let maxVal = -1;
+      for (const [trait, val] of Object.entries(counts)) {
+        if (val > maxVal) {
+          maxVal = val;
+          dominant = trait;
+        }
+      }
+
+      const result = personas[selectedEra][dominant];
+
+      // Populate Dossier
+      document.getElementById('d-title').textContent = result.title;
+      document.getElementById('d-epoch').textContent = result.epoch;
+      document.getElementById('d-station').textContent = result.station;
+      document.getElementById('d-lifespan').textContent = result.lifespan;
+      document.getElementById('d-grievance').textContent = result.grievance;
+      document.getElementById('d-narrative').innerHTML = result.narrative;
+      document.getElementById('d-residue').textContent = result.residue;
+
+      // Switch Screens
+      document.getElementById('quiz-card').style.display = 'none';
+      const dossierCard = document.getElementById('dossier-card');
+      dossierCard.style.display = 'block';
+      dossierCard.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Reset Engine
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      document.getElementById('dossier-card').style.display = 'none';
+      document.getElementById('quiz-card').style.display = 'block';
+      document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+      for (const k in selections) delete selections[k];
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
