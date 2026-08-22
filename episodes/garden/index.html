@@ -13,7 +13,7 @@
   <meta name="apple-mobile-web-app-title" content="Attention Restore" />
   <meta name="theme-color" content="#214e38" />
 
-  <!-- Inline Web App Manifest (Data URI for Single-File Installation) -->
+  <!-- Inline Web App Manifest -->
   <link rel="manifest" href="data:application/manifest+json;utf-8,%7B%22name%22%3A%22fallow.garden%3A%20Attention%20Restore%22%2C%22short_name%22%3A%22AttentionRestore%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23eef3ee%22%2C%22theme_color%22%3A%22%23214e38%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20512%20512%27%3E%3Crect%20width%3D%27512%27%20height%3D%27512%27%20rx%3D%27100%27%20fill%3D%27%23214e38%27%2F%3E%3Cpath%20d%3D%27M256%20420V240M200%20180a60%2060%200%200%201%20112%200c0%2060-60%2090-60%2090M340%20310c30%200%2050-20%2050-50%200-45-60-75-134-75M172%20310c-30%200-50-20-50-50%200-45%2060-75%20134-75%27%20fill%3D%27none%27%20stroke%3D%27%23f6f9f5%27%20stroke-width%3D%2728%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D" />
   
   <!-- Typography -->
@@ -117,6 +117,11 @@
       gap: 12px;
       text-decoration: none;
       color: var(--text);
+      transition: opacity 0.2s ease;
+    }
+
+    .brand-top:hover {
+      opacity: 0.85;
     }
 
     .brand-title {
@@ -716,10 +721,10 @@
   <div class="container">
     <header>
       <div class="brand-group">
-        <div class="brand-top">
+        <a href="/" class="brand-top" title="Return to Fallow Garden Anthology">
           <h1 class="brand-title">fallow.garden</h1>
           <span class="brand-tag">Episode 01</span>
-        </div>
+        </a>
         <p class="brand-subtitle">fallow.garden: Attention Restore: a tool to help restore your focus</p>
       </div>
 
@@ -737,7 +742,7 @@
           <a href="#deck-section" class="nav-link">The Science</a>
           <a href="#deploy-section" class="nav-link">When to Deploy</a>
           <a href="#protocols-section" class="nav-link">Recovery Protocols</a>
-          <a href="#support-section" class="nav-link">About & Support</a>
+          <a href="#support-section" class="nav-link">About &amp; Support</a>
         </nav>
       </div>
     </header>
@@ -954,7 +959,6 @@
         }
         deferredPrompt = null;
       } else {
-        // Fallback guidance for iOS Safari or browsers without automatic install prompt
         alert('To add this app to your phone:\n\n• iOS Safari: Tap the Share button (square with up arrow) and select "Add to Home Screen".\n• Android Chrome: Tap the three dots (⋮) and choose "Install app" or "Add to Home screen".');
       }
     });
