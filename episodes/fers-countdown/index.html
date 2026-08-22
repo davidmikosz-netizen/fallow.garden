@@ -129,7 +129,7 @@
       gap: 6px;
     }
 
-    /* Form Layout */
+    /* Cards */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -149,6 +149,103 @@
       justify-content: space-between;
     }
 
+    /* Accordion / Three Pillars Section */
+    .pillars-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+
+    .pillars-subtitle {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: -0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .accordion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    details.pillar-item {
+      background: var(--surface-warm);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    details.pillar-item[open] {
+      background: #ffffff;
+      border-color: var(--forest);
+      box-shadow: var(--shadow-sm);
+    }
+
+    summary.pillar-summary {
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--forest);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      user-select: none;
+    }
+
+    summary.pillar-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .summary-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .badge-fehb { background: var(--sky-soft); color: var(--sky); }
+    .badge-fers { background: rgba(58, 99, 70, 0.12); color: var(--forest); }
+    .badge-tsp { background: var(--amber-soft); color: var(--amber); }
+
+    .summary-chevron {
+      color: var(--text-light);
+      transition: transform 0.2s ease;
+      font-size: 0.85rem;
+    }
+
+    details[open] .summary-chevron {
+      transform: rotate(180deg);
+      color: var(--forest);
+    }
+
+    .pillar-content {
+      padding: 0.25rem 1.25rem 1.25rem;
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .pillar-content p + p {
+      margin-top: 0.65rem;
+    }
+
+    /* Form Layout */
     .form-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -311,7 +408,7 @@
       font-size: 0.95rem;
     }
 
-    /* Emergency Brake / Postponed Annuity Callout */
+    /* Emergency Option: Postponed Annuity & FEHB Preservation */
     .emergency-card {
       background: #faf8f5;
       border: 1px solid #ebdccc;
@@ -341,8 +438,36 @@
       margin-top: 0.6rem;
     }
 
+    /* Disclaimer Card */
+    .disclaimer-card {
+      background: #fbfbfa;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .disclaimer-icon {
+      color: var(--clay);
+      font-size: 1.2rem;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .disclaimer-text {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .disclaimer-text strong {
+      color: var(--text-main);
+    }
+
     footer {
-      margin-top: 3.5rem;
       padding-top: 1.75rem;
       border-top: 1px solid var(--border-subtle);
       font-size: 0.82rem;
@@ -363,7 +488,7 @@
           <h1 class="brand-title">fallow.garden</h1>
           <span class="brand-tag">Episode 03</span>
         </a>
-        <p class="brand-subtitle">Federal Working-Day &amp; FERS Retirement Horizon</p>
+        <p class="brand-subtitle">Federal Retirement &amp; Working Day Horizon</p>
       </div>
 
       <div class="privacy-badge">
@@ -373,6 +498,71 @@
         Zero Telemetry • Runs 100% In-Browser
       </div>
     </header>
+
+    <!-- The Three Pillars of Federal Retirement -->
+    <div class="pillars-card">
+      <div class="card-title">The Three Pillars of Federal Retirement</div>
+      <p class="pillars-subtitle">Understanding the foundation that makes federal service uniquely restorative in retirement.</p>
+      
+      <div class="accordion-list">
+        <!-- Pillar 1: FEHB -->
+        <details class="pillar-item">
+          <summary class="pillar-summary">
+            <div class="summary-left">
+              <span class="summary-badge badge-fehb">Pillar 1</span>
+              <span>Federal Employees Health Benefits (FEHB) for Life</span>
+            </div>
+            <span class="summary-chevron">▼</span>
+          </summary>
+          <div class="pillar-content">
+            <p>
+              <strong>The Most Valuable Benefit in Public Service:</strong> Unlike private-sector retirees who must purchase costly individual marketplace plans or wait until Medicare at age 65, eligible federal retirees carry their FEHB health coverage directly into retirement. 
+            </p>
+            <p>
+              The federal government continues to pay the exact same <strong>~70% to 75% of your health insurance premium</strong> for the rest of your life. It also covers your spouse and family, protecting against catastrophic medical costs and bridging the pre-Medicare gap completely.
+            </p>
+          </div>
+        </details>
+
+        <!-- Pillar 2: FERS Defined-Benefit Pension -->
+        <details class="pillar-item">
+          <summary class="pillar-summary">
+            <div class="summary-left">
+              <span class="summary-badge badge-fers">Pillar 2</span>
+              <span>The FERS Basic Annuity (Guaranteed Lifetime Pension)</span>
+            </div>
+            <span class="summary-chevron">▼</span>
+          </summary>
+          <div class="pillar-content">
+            <p>
+              <strong>A Guaranteed, Inflation-Protected Foundation:</strong> The FERS defined-benefit pension is paid monthly for life, backed fully by the U.S. Government. 
+            </p>
+            <p>
+              Receiving a guaranteed $30,000 to $50,000 annual FERS pension is mathematically equivalent to holding a <strong>$750,000 to $1.25M+ private commercial annuity or fixed bond portfolio</strong>—providing an unshakeable income floor regardless of market volatility. (At age 62 with 20+ years of service, your multiplier jumps by 10% to 1.1% per year of service).
+            </p>
+          </div>
+        </details>
+
+        <!-- Pillar 3: TSP -->
+        <details class="pillar-item">
+          <summary class="pillar-summary">
+            <div class="summary-left">
+              <span class="summary-badge badge-tsp">Pillar 3</span>
+              <span>The Thrift Savings Plan (TSP &amp; 5% Match)</span>
+            </div>
+            <span class="summary-chevron">▼</span>
+          </summary>
+          <div class="pillar-content">
+            <p>
+              <strong>Your Personal Wealth Engine:</strong> The TSP is a low-fee defined-contribution plan featuring an automatic 1% government contribution and a dollar-for-dollar 4% agency match (5% total).
+            </p>
+            <p>
+              In retirement, your TSP account provides flexible liquidity. You can set up scheduled monthly installment distributions, execute strategic Roth conversions, make ad-hoc withdrawals for major life goals, or purchase an additional annuity—giving you full control over your discretionary lifestyle spending.
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
 
     <!-- Inputs -->
     <div class="card">
@@ -501,6 +691,14 @@
         <p>
           <strong>Health Benefits (FEHB) Preservation:</strong> By choosing a <em>Postponed Annuity</em> (rather than a deferred pension), you preserve the right to reinstate your FEHB coverage for life when your pension begins—provided you were covered under FEHB for the 5 continuous years immediately before separating.
         </p>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer-card">
+      <div class="disclaimer-icon">⚠️</div>
+      <div class="disclaimer-text">
+        <strong>Disclaimer &amp; Verification Notice:</strong> This application is an independent exploratory tool and does not constitute official legal, financial, tax, or retirement advice. Calculations are estimates based on standard OPM guidelines and do not account for non-deduction service, uncredited military time, part-time schedules, or administrative adjustments. Always confirm official eligibility, Service Computation Dates (SCD), and benefit estimates directly with your agency Human Resources office or the Office of Personnel Management (OPM).
       </div>
     </div>
 
