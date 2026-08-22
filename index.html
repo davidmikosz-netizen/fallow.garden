@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fallow Garden</title>
+  <style>
+    :root {
+      --bg: #faf9f6;
+      --card-bg: #ffffff;
+      --text: #2d3748;
+      --muted: #718096;
+      --accent: #2e6f40;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 3rem 1.5rem;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #1a202c;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .manifesto {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .manifesto p + p {
+      margin-top: 0.75rem;
+    }
+
+    .section-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      font-weight: 600;
+    }
+
+    .episode-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .episode-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      display: block;
+    }
+
+    .episode-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+      border-color: var(--accent);
+    }
+
+    .episode-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .episode-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+
+    .episode-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1a202c;
+      margin-bottom: 0.35rem;
+    }
+
+    .episode-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Fallow Garden</h1>
+      <div class="manifesto">
+        <p>
+          In agriculture, letting a field lie fallow is a deliberate act of renewal. In digital life, it is about stepping back from endless feeds and monolithic platforms.
+        </p>
+        <p>
+          This is an anthology of small, single-purpose interactive tools and experiments—published as standalone episodes. Each tool is built to solve one specific problem cleanly, run directly in your browser, and step aside.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <div class="section-title">Published Episodes</div>
+      
+      <div class="episode-list">
+        <!-- Episode 1 -->
+        <a href="./episodes/garden/" class="episode-card">
+          <div class="episode-meta">
+            <span class="episode-tag">Episode 01</span>
+          </div>
+          <div class="episode-title">Garden Planner &amp; Cultivation</div>
+          <div class="episode-desc">
+            An interactive tool for mapping plots, tracking seasonal rotations, and planning intentional growth.
+          </div>
+        </a>
+
+        <!-- Additional episodes can be pasted here as you build them -->
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>
