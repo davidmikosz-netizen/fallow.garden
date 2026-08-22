@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fallow.garden: Federal Retirement & Working Day Horizon</title>
+  <meta name="description" content="Calculate working days, weeks, leave accrual, holidays, and MRA milestones toward FERS retirement." />
+
+  <!-- Mobile & PWA Configuration -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Fallow Horizon" />
+  <meta name="theme-color" content="#214e38" />
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f5f2eb;
+      --surface: #ffffff;
+      --surface-warm: #ede8dc;
+      --text-main: #1c261e;
+      --text-muted: #536256;
+      --text-light: #728275;
+      
+      --forest: #24422e;
+      --moss: #3a6346;
+      --sprout: #6b9e78;
+      --clay: #b86b4b;
+      --clay-soft: #f8ebe4;
+      --amber: #cb8934;
+      --amber-soft: #fbf2e3;
+      --sky: #3b6b88;
+      --sky-soft: #eaf1f5;
+
+      --border: #dcd5c5;
+      --border-subtle: #e9e3d5;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+
+      --shadow-sm: 0 2px 8px rgba(28, 38, 30, 0.04);
+      --shadow-md: 0 10px 25px rgba(28, 38, 30, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(ellipse at 85% -10%, rgba(107, 158, 120, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 15% 110%, rgba(184, 107, 75, 0.08) 0%, transparent 60%);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 3rem 1.25rem 5rem;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand-top {
+      text-decoration: none;
+      color: inherit;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+
+    .brand-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--forest);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .brand-tag {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(58, 99, 70, 0.1);
+      color: var(--forest);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    .privacy-badge {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--surface-warm);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Form Layout */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+
+    .card-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.4rem;
+      color: var(--forest);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--forest);
+    }
+
+    .helper-text {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    input, select {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: #fafaf8;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.15s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--forest);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(36, 66, 46, 0.08);
+    }
+
+    /* Highlight Banner: Big Number Countdown */
+    .hero-counter {
+      background: linear-gradient(180deg, #ffffff 0%, #f7faf7 100%);
+      border: 2px solid var(--sprout);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .hero-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--moss);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 3.8rem;
+      font-weight: 700;
+      color: var(--forest);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* Breakdown Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .metric-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--forest);
+      margin-top: 0.35rem;
+    }
+
+    .metric-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    .metric-caption {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-top: 0.4rem;
+    }
+
+    /* Milestones Timeline */
+    .milestones-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .milestone-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      background: var(--surface-warm);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .milestone-item.active-target {
+      background: #ffffff;
+      border-color: var(--forest);
+      border-left: 4px solid var(--forest);
+    }
+
+    .milestone-name {
+      font-weight: 600;
+      color: var(--forest);
+      font-size: 0.95rem;
+    }
+
+    .milestone-details {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .milestone-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      color: var(--forest);
+      font-size: 0.95rem;
+    }
+
+    /* Emergency Brake / Postponed Annuity Callout */
+    .emergency-card {
+      background: #faf8f5;
+      border: 1px solid #ebdccc;
+      border-left: 4px solid var(--clay);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .emergency-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.25rem;
+      color: var(--clay);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .emergency-text {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .emergency-text p + p {
+      margin-top: 0.6rem;
+    }
+
+    footer {
+      margin-top: 3.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div>
+        <a href="/" class="brand-top" title="Return to Fallow Garden">
+          <h1 class="brand-title">fallow.garden</h1>
+          <span class="brand-tag">Episode 03</span>
+        </a>
+        <p class="brand-subtitle">Federal Working-Day &amp; FERS Retirement Horizon</p>
+      </div>
+
+      <div class="privacy-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        Zero Telemetry • Runs 100% In-Browser
+      </div>
+    </header>
+
+    <!-- Inputs -->
+    <div class="card">
+      <div class="card-title">
+        <span>Your Service Parameters</span>
+      </div>
+
+      <div class="form-grid">
+        <div class="input-group">
+          <label for="birthdate">Date of Birth</label>
+          <input type="date" id="birthdate" value="1973-06-15" />
+          <span class="helper-text">Used to determine your MRA (57) and age thresholds</span>
+        </div>
+
+        <div class="input-group">
+          <label for="scd">Service Computation Date (SCD)</label>
+          <input type="date" id="scd" value="2008-03-10" />
+          <span class="helper-text">Found on your SF-50 (Block 31)</span>
+        </div>
+
+        <div class="input-group">
+          <label for="target-type">Target Horizon Milestone</label>
+          <select id="target-type">
+            <option value="mra">MRA + 10 (Age 57 with 10+ yrs)</option>
+            <option value="age60">Age 60 with 20+ yrs (Unreduced)</option>
+            <option value="age62" selected>Age 62 (Unreduced + 1.1% Multiplier)</option>
+            <option value="custom">Custom Specified Retirement Date</option>
+          </select>
+          <span class="helper-text">Select a benchmark or set a custom day</span>
+        </div>
+
+        <div class="input-group" id="custom-date-group" style="display: none;">
+          <label for="custom-date">Specific Planned Retirement Date</label>
+          <input type="date" id="custom-date" value="2030-01-06" />
+          <span class="helper-text">Your chosen exit date</span>
+        </div>
+
+        <div class="input-group">
+          <label for="annual-leave-balance">Current Annual Leave (Hours)</label>
+          <input type="number" id="annual-leave-balance" value="120" min="0" max="240" />
+          <span class="helper-text">Available hours to use prior to retirement</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Primary Result: Actual Days You Have to Show Up -->
+    <div class="hero-counter">
+      <div class="hero-label">Net Working Days Remaining</div>
+      <div class="hero-number" id="net-working-days">---</div>
+      <div class="hero-sub" id="hero-summary-text">
+        Calculating remaining work shifts until target retirement...
+      </div>
+    </div>
+
+    <!-- Detailed Granular Breakdown -->
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-title">Calendar Days</div>
+        <div class="metric-value" id="val-calendar-days">---</div>
+        <div class="metric-caption">Total elapsed days to target</div>
+      </div>
+
+      <div class="metric-box">
+        <div class="metric-title">Working Weeks</div>
+        <div class="metric-value" id="val-working-weeks">---</div>
+        <div class="metric-caption">5-day business cycles</div>
+      </div>
+
+      <div class="metric-box">
+        <div class="metric-title">Federal Holidays</div>
+        <div class="metric-value" id="val-federal-holidays">---</div>
+        <div class="metric-caption">Paid non-working weekdays</div>
+      </div>
+
+      <div class="metric-box">
+        <div class="metric-title">Leave Accrual</div>
+        <div class="metric-value" id="val-projected-leave">---</div>
+        <div class="metric-caption" id="leave-tier-label">Projected off-days</div>
+      </div>
+    </div>
+
+    <!-- FERS Milestone Dates -->
+    <div class="card">
+      <div class="card-title">FERS Milestone Thresholds</div>
+      <div class="milestones-list">
+        <div class="milestone-item" id="row-mra">
+          <div>
+            <div class="milestone-name">Minimum Retirement Age (MRA + 10)</div>
+            <div class="milestone-details">Age 57 with 10+ yrs creditable service • Eligible for Postponed Annuity</div>
+          </div>
+          <div class="milestone-date" id="date-mra">---</div>
+        </div>
+
+        <div class="milestone-item" id="row-age60">
+          <div>
+            <div class="milestone-name">Age 60 + 20 Years Service</div>
+            <div class="milestone-details">Full unreduced immediate annuity + full FEHB coverage retention</div>
+          </div>
+          <div class="milestone-date" id="date-age60">---</div>
+        </div>
+
+        <div class="milestone-item" id="row-age62">
+          <div>
+            <div class="milestone-name">Age 62 Milestone (FERS Boost)</div>
+            <div class="milestone-details">Full unreduced annuity; multiplier increases to 1.1% per year with 20+ yrs</div>
+          </div>
+          <div class="milestone-date" id="date-age62">---</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emergency Option: Postponed Annuity & FEHB Preservation -->
+    <div class="emergency-card">
+      <div class="emergency-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        The "Emergency Brake": MRA+10 Postponed Retirement
+      </div>
+      <div class="emergency-text">
+        <p>
+          <strong>You do not have to endure severe burnout until age 62.</strong> Under FERS MRA+10 rules, if you reach your Minimum Retirement Age (57) and have at least 10 years of service, you can separate immediately and <em>postpone</em> your pension until age 60 (with 20+ years) or age 62 (with 10–19 years).
+        </p>
+        <p>
+          <strong>Health Benefits (FEHB) Preservation:</strong> By choosing a <em>Postponed Annuity</em> (rather than a deferred pension), you preserve the right to reinstate your FEHB coverage for life when your pension begins—provided you were covered under FEHB for the 5 continuous years immediately before separating.
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <span>fallow.garden • Episode 03</span>
+      <span>Calculations modeled on OPM FERS Eligibility &amp; Title 5 U.S.C. Chapter 84.</span>
+    </footer>
+  </div>
+
+  <script>
+    // 1. Core State & Elements
+    const inputBirthdate = document.getElementById('birthdate');
+    const inputSCD = document.getElementById('scd');
+    const selectTarget = document.getElementById('target-type');
+    const customGroup = document.getElementById('custom-date-group');
+    const inputCustom = document.getElementById('custom-date');
+    const inputLeave = document.getElementById('annual-leave-balance');
+
+    selectTarget.addEventListener('change', () => {
+      customGroup.style.display = selectTarget.value === 'custom' ? 'flex' : 'none';
+      recalculate();
+    });
+
+    [inputBirthdate, inputSCD, inputCustom, inputLeave].forEach(el => {
+      el.addEventListener('input', recalculate);
+    });
+
+    // 2. Federal Holiday Calculation (11 Federal Holidays)
+    function getFederalHolidays(year) {
+      const holidays = [];
+
+      // Helper for Nth weekday in month
+      function nthWeekday(n, weekday, month) {
+        const d = new Date(year, month, 1);
+        let count = 0;
+        while (d.getMonth() === month) {
+          if (d.getDay() === weekday) {
+            count++;
+            if (count === n) return new Date(d);
+          }
+          d.setDate(d.getDate() + 1);
+        }
+      }
+
+      // Helper for last weekday in month
+      function lastWeekday(weekday, month) {
+        const d = new Date(year, month + 1, 0);
+        while (d.getDay() !== weekday) {
+          d.setDate(d.getDate() - 1);
+        }
+        return d;
+      }
+
+      // Helper for fixed holidays with observed weekend rules
+      function fixedHoliday(month, day) {
+        const d = new Date(year, month, day);
+        if (d.getDay() === 6) return new Date(year, month, day - 1); // Sat -> Fri
+        if (d.getDay() === 0) return new Date(year, month, day + 1); // Sun -> Mon
+        return d;
+      }
+
+      holidays.push(fixedHoliday(0, 1));   // New Year's Day (Jan 1)
+      holidays.push(nthWeekday(3, 1, 0));  // MLK Jr. Day (3rd Mon Jan)
+      holidays.push(nthWeekday(3, 1, 1));  // Washington's Birthday (3rd Mon Feb)
+      holidays.push(lastWeekday(1, 4));    // Memorial Day (Last Mon May)
+      holidays.push(fixedHoliday(5, 19));  // Juneteenth (June 19)
+      holidays.push(fixedHoliday(6, 4));   // Independence Day (July 4)
+      holidays.push(nthWeekday(1, 1, 8));  // Labor Day (1st Mon Sept)
+      holidays.push(nthWeekday(2, 1, 9));  // Columbus Day (2nd Mon Oct)
+      holidays.push(fixedHoliday(10, 11)); // Veterans Day (Nov 11)
+      holidays.push(nthWeekday(4, 4, 10)); // Thanksgiving (4th Thu Nov)
+      holidays.push(fixedHoliday(11, 25)); // Christmas Day (Dec 25)
+
+      return holidays;
+    }
+
+    function isFederalHoliday(date, holidaysByYear) {
+      const year = date.getFullYear();
+      if (!holidaysByYear[year]) {
+        holidaysByYear[year] = getFederalHolidays(year);
+      }
+      const dateStr = date.toDateString();
+      return holidaysByYear[year].some(h => h && h.toDateString() === dateStr);
+    }
+
+    // 3. Core Calculation Engine
+    function recalculate() {
+      const birthVal = inputBirthdate.value;
+      const scdVal = inputSCD.value;
+      if (!birthVal || !scdVal) return;
+
+      const birthDate = new Date(birthVal + 'T00:00:00');
+      const scdDate = new Date(scdVal + 'T00:00:00');
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      // Milestone 1: MRA (Age 57 for born >= 1970)
+      const mraDate = new Date(birthDate);
+      mraDate.setFullYear(mraDate.getFullYear() + 57);
+
+      // Milestone 2: Age 60
+      const age60Date = new Date(birthDate);
+      age60Date.setFullYear(age60Date.getFullYear() + 60);
+
+      // Milestone 3: Age 62
+      const age62Date = new Date(birthDate);
+      age62Date.setFullYear(age62Date.getFullYear() + 62);
+
+      // Format milestone labels
+      const fmt = { year: 'numeric', month: 'short', day: 'numeric' };
+      document.getElementById('date-mra').textContent = mraDate.toLocaleDateString(undefined, fmt);
+      document.getElementById('date-age60').textContent = age60Date.toLocaleDateString(undefined, fmt);
+      document.getElementById('date-age62').textContent = age62Date.toLocaleDateString(undefined, fmt);
+
+      // Determine Target Date
+      let targetDate = new Date();
+      const choice = selectTarget.value;
+
+      if (choice === 'mra') targetDate = mraDate;
+      else if (choice === 'age60') targetDate = age60Date;
+      else if (choice === 'age62') targetDate = age62Date;
+      else if (choice === 'custom') {
+        const cVal = inputCustom.value;
+        if (cVal) targetDate = new Date(cVal + 'T00:00:00');
+      }
+
+      // Check active milestone highlight
+      document.getElementById('row-mra').classList.toggle('active-target', choice === 'mra');
+      document.getElementById('row-age60').classList.toggle('active-target', choice === 'age60');
+      document.getElementById('row-age62').classList.toggle('active-target', choice === 'age62');
+
+      if (targetDate <= today) {
+        document.getElementById('net-working-days').textContent = '0';
+        document.getElementById('hero-summary-text').textContent = 'Target retirement date has arrived!';
+        document.getElementById('val-calendar-days').textContent = '0';
+        document.getElementById('val-working-weeks').textContent = '0';
+        document.getElementById('val-federal-holidays').textContent = '0';
+        document.getElementById('val-projected-leave').textContent = '0';
+        return;
+      }
+
+      // Count Days, Weeks, Holidays, Business Days
+      let calendarDays = 0;
+      let businessDays = 0;
+      let holidayCount = 0;
+      const holidaysByYear = {};
+
+      const current = new Date(today);
+      while (current < targetDate) {
+        calendarDays++;
+        const dayOfWeek = current.getDay();
+        const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+
+        if (!isWeekend) {
+          if (isFederalHoliday(current, holidaysByYear)) {
+            holidayCount++;
+          } else {
+            businessDays++;
+          }
+        }
+        current.setDate(current.getDate() + 1);
+      }
+
+      // Pay Periods Remaining (Approx 14 days per pay period)
+      const payPeriodsRemaining = Math.floor(calendarDays / 14);
+
+      // Accrual Rate based on service length (at 15+ years = 8 hrs / PP = 1 day off per PP)
+      const serviceYearsNow = (today - scdDate) / (1000 * 60 * 60 * 24 * 365.25);
+      let hoursPerPP = 4;
+      if (serviceYearsNow >= 15) {
+        hoursPerPP = 8;
+      } else if (serviceYearsNow >= 3) {
+        hoursPerPP = 6;
+      }
+
+      const currentLeaveHours = Math.max(0, parseInt(inputLeave.value, 10) || 0);
+      const futureLeaveHours = payPeriodsRemaining * hoursPerPP;
+      const totalLeaveDays = Math.floor((currentLeaveHours + futureLeaveHours) / 8);
+
+      // Net In-Office / Duty Days Remaining
+      const netWorkingDays = Math.max(0, businessDays - totalLeaveDays);
+      const workingWeeks = (calendarDays / 7).toFixed(1);
+
+      // Update View
+      document.getElementById('net-working-days').textContent = netWorkingDays.toLocaleString();
+      document.getElementById('hero-summary-text').textContent = 
+        `Across ${calendarDays.toLocaleString()} calendar days until ${targetDate.toLocaleDateString(undefined, fmt)}, factoring in holidays and planned leave offload.`;
+
+      document.getElementById('val-calendar-days').textContent = calendarDays.toLocaleString();
+      document.getElementById('val-working-weeks').textContent = workingWeeks;
+      document.getElementById('val-federal-holidays').textContent = holidayCount;
+      document.getElementById('val-projected-leave').textContent = `${totalLeaveDays} Days`;
+      document.getElementById('leave-tier-label').textContent = `${hoursPerPP} hrs/PP tier (${serviceYearsNow.toFixed(1)} yrs svc)`;
+    }
+
+    recalculate();
+  </script>
+</body>
+</html>
