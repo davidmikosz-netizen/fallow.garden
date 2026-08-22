@@ -36,7 +36,8 @@
       --amber-soft: #fbf2e3;
       --sky: #3b6b88;
       --sky-soft: #eaf1f5;
-      --void: #1a1b26;
+      --purple: #69527a;
+      --purple-soft: #f2edf7;
 
       --border: #dcd5c5;
       --border-subtle: #e9e3d5;
@@ -67,13 +68,13 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 820px;
       margin: 0 auto;
     }
 
     /* Header */
     header {
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       border-bottom: 1px solid var(--border);
       padding-bottom: 1.75rem;
       display: flex;
@@ -130,82 +131,57 @@
       gap: 6px;
     }
 
+    /* Explanatory Framing Notice */
+    .intro-notice-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--moss);
+      border-radius: var(--radius-md);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .intro-notice-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.25rem;
+      color: var(--forest);
+      margin-bottom: 0.5rem;
+    }
+
+    .intro-notice-text {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
     /* Card Frames */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 2rem;
+      padding: 2.25rem;
       box-shadow: var(--shadow-sm);
       margin-bottom: 2rem;
     }
 
-    .card-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.5rem;
-      color: var(--forest);
-      margin-bottom: 0.5rem;
+    .section-divider {
+      margin: 2.5rem 0 1.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px dashed var(--border);
     }
 
-    .card-desc {
-      font-size: 0.95rem;
+    .section-headline {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--forest);
+      margin-bottom: 0.35rem;
+    }
+
+    .section-caption {
+      font-size: 0.88rem;
       color: var(--text-muted);
       margin-bottom: 1.5rem;
-    }
-
-    /* Step 1: Era Selector Grid (4 Epochs) */
-    .era-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 0.85rem;
-      margin-bottom: 1.75rem;
-    }
-
-    .era-card {
-      background: var(--surface-warm);
-      border: 2px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1.1rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .era-card:hover {
-      border-color: var(--moss);
-      transform: translateY(-2px);
-    }
-
-    .era-card.selected {
-      background: #ffffff;
-      border-color: var(--forest);
-      box-shadow: 0 0 0 3px rgba(36, 66, 46, 0.1);
-    }
-
-    .era-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--clay);
-      text-transform: uppercase;
-      margin-bottom: 0.35rem;
-    }
-
-    .era-name {
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--forest);
-      margin-bottom: 0.35rem;
-      line-height: 1.3;
-    }
-
-    .era-desc {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      line-height: 1.4;
     }
 
     /* Diagnostic Questions */
@@ -268,20 +244,56 @@
       border-color: var(--forest);
     }
 
-    /* Actions */
+    /* Red Herring Scale Grid */
+    .scale-container {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 0.85rem;
+    }
+
+    .scale-btn {
+      flex: 1;
+      min-width: 48px;
+      background: var(--surface-warm);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--forest);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+
+    .scale-btn:hover {
+      background: #ffffff;
+      border-color: var(--clay);
+      color: var(--clay);
+    }
+
+    .scale-btn.selected {
+      background: var(--clay);
+      color: #ffffff;
+      border-color: var(--clay);
+    }
+
+    /* Submit Button */
     .btn-submit {
       background: var(--forest);
       color: #ffffff;
       border: none;
-      padding: 13px 28px;
+      padding: 14px 32px;
       border-radius: var(--radius-sm);
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 1.05rem;
       cursor: pointer;
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       box-shadow: 0 4px 14px rgba(36, 66, 46, 0.2);
     }
 
@@ -296,7 +308,7 @@
       background: #ffffff;
       border: 2px solid var(--forest);
       border-radius: var(--radius-lg);
-      padding: 2.25rem;
+      padding: 2.5rem;
       box-shadow: var(--shadow-md);
       margin-bottom: 2rem;
       position: relative;
@@ -304,13 +316,13 @@
 
     .dossier-header {
       border-bottom: 2px solid var(--forest);
-      padding-bottom: 1rem;
+      padding-bottom: 1.25rem;
       margin-bottom: 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
     .dossier-stamp {
@@ -318,7 +330,7 @@
       font-size: 0.75rem;
       border: 1.5px solid var(--clay);
       color: var(--clay);
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 4px;
       text-transform: uppercase;
       font-weight: 700;
@@ -327,16 +339,17 @@
 
     .dossier-title {
       font-family: 'Fraunces', Georgia, serif;
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--forest);
       line-height: 1.15;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.35rem;
     }
 
     .dossier-era-tag {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
+      font-weight: 500;
     }
 
     .dossier-grid {
@@ -369,24 +382,82 @@
     }
 
     .dossier-narrative {
-      font-size: 0.98rem;
+      font-size: 1rem;
       color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
+      line-height: 1.75;
+      margin-bottom: 1.75rem;
     }
 
     .dossier-narrative strong {
       color: var(--text-main);
     }
 
-    .karmic-residue-box {
+    /* Callback Boxes */
+    .callback-box {
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .box-amber {
       background: var(--amber-soft);
       border-left: 4px solid var(--amber);
-      padding: 1rem 1.25rem;
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      font-size: 0.92rem;
       color: var(--text-main);
-      margin-bottom: 1.75rem;
+    }
+
+    .box-purple {
+      background: var(--purple-soft);
+      border-left: 4px solid var(--purple);
+      color: #3b2849;
+    }
+
+    /* Epoch Switcher (Hybrid Explorer) */
+    .epoch-switch-container {
+      margin-top: 2rem;
+      padding-top: 1.75rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .epoch-switch-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--forest);
+      margin-bottom: 0.75rem;
+    }
+
+    .epoch-nav-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .epoch-tab-btn {
+      background: var(--surface-warm);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .epoch-tab-btn:hover {
+      border-color: var(--forest);
+      color: var(--forest);
+    }
+
+    .epoch-tab-btn.active {
+      background: var(--forest);
+      color: #ffffff;
+      border-color: var(--forest);
     }
 
     .btn-reconsult {
@@ -402,7 +473,7 @@
     }
 
     .btn-reconsult:hover {
-      background: var(--bg-subtle);
+      background: #ffffff;
       border-color: var(--forest);
     }
 
@@ -438,58 +509,63 @@
       </div>
     </header>
 
-    <!-- Quiz Intake Form -->
-    <div class="card" id="quiz-card">
-      <h2 class="card-title">Chronological Diagnostic Intake</h2>
-      <p class="card-desc">
-        Select a target epoch and complete the diagnostic battery regarding your temperament, sensory tolerances, and operational endurance.
+    <!-- Framing Context -->
+    <div class="intro-notice-card">
+      <h2 class="intro-notice-title">Why investigate past and future incarnations?</h2>
+      <p class="intro-notice-text">
+        Modern attention fatigue often stems from the illusion that our current cultural moment—with its instant pings, endless metrics, and synthetic urgency—is the only way humans have ever existed. Answering these diagnostic inquiries helps triangulate your karmic baseline across deep time: from ancient bronze registries to cold-space orbital vats. Whether looking backward or forward, the ledger reveals that you have always preferred quiet competence over chaos.
       </p>
+    </div>
 
-      <!-- Step 1: Epoch Selection -->
-      <label>1. Select Your Target Epoch</label>
-      <div class="era-grid" style="margin-top: 0.5rem;">
-        <div class="era-card selected" data-era="ancient">
-          <div>
-            <div class="era-badge">Epoch I</div>
-            <div class="era-name">Classical &amp; Ancient</div>
-          </div>
-          <div class="era-desc">Cuneiform tablets, volcanic pozzolana mortar, delta reeds.</div>
-        </div>
-
-        <div class="era-card" data-era="medieval">
-          <div>
-            <div class="era-badge">Epoch II</div>
-            <div class="era-name">Medieval &amp; Silk Road</div>
-          </div>
-          <div class="era-desc">Scriptorium snails, Baltic herring casks, oasis rations.</div>
-        </div>
-
-        <div class="era-card" data-era="industrial">
-          <div>
-            <div class="era-badge">Epoch III</div>
-            <div class="era-name">19th-Century Gilded</div>
-          </div>
-          <div class="era-desc">Telegraph galvanometers, trig pillars, Victorian fern fever.</div>
-        </div>
-
-        <div class="era-card" data-era="future">
-          <div>
-            <div class="era-badge">Epoch IV</div>
-            <div class="era-name">Deep Space Frontier</div>
-          </div>
-          <div class="era-desc">Orbital algae vats, Oort thermal tiles, silent void beacons.</div>
-        </div>
-      </div>
-
-      <!-- Step 2: Diagnostic Questions -->
-      <div id="questions-container" style="margin-top: 2rem;">
+    <!-- Quiz Form -->
+    <div class="card" id="quiz-card">
+      
+      <!-- Section 1: Archetype Trait Battery -->
+      <h3 class="section-headline">Section I: Temperament &amp; Operational Friction</h3>
+      <p class="section-caption">Eight inquiries to evaluate your structural role, sensory tolerances, and cognitive defense mechanisms.</p>
+      
+      <div id="trait-questions-container">
         <!-- Injected via JavaScript -->
       </div>
 
-      <div style="margin-top: 2rem;">
+      <!-- Section 2: Chronological Resonance -->
+      <div class="section-divider">
+        <h3 class="section-headline">Section II: Chronological Resonance</h3>
+        <p class="section-caption">Three atmospheric inquiries to align your physiological nervous system with its native historical epoch.</p>
+      </div>
+
+      <div id="epoch-questions-container">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- Section 3: Red Herring Self-Audit -->
+      <div class="section-divider">
+        <div class="question-num" style="color: var(--clay);">Section III: Mandatory Operational Self-Evaluation (Crucial)</div>
+        <div class="question-text" style="font-size: 1.1rem; margin-top: 0.25rem;">
+          On a strict scale of 1 to 10, please provide an unvarnished audit of your overall performance, focus, and utility during your CURRENT incarnation:
+        </div>
+        <p class="helper-text" style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.5rem;">
+          Celestial auditors weigh this metric with extreme regulatory scrutiny.
+        </p>
+
+        <div class="scale-container" id="scale-buttons">
+          <button type="button" class="scale-btn" data-val="1">1</button>
+          <button type="button" class="scale-btn" data-val="2">2</button>
+          <button type="button" class="scale-btn" data-val="3">3</button>
+          <button type="button" class="scale-btn" data-val="4">4</button>
+          <button type="button" class="scale-btn" data-val="5">5</button>
+          <button type="button" class="scale-btn" data-val="6">6</button>
+          <button type="button" class="scale-btn" data-val="7">7</button>
+          <button type="button" class="scale-btn" data-val="8">8</button>
+          <button type="button" class="scale-btn" data-val="9">9</button>
+          <button type="button" class="scale-btn" data-val="10">10</button>
+        </div>
+      </div>
+
+      <div style="margin-top: 2.5rem;">
         <button class="btn-submit" id="btn-generate">
           <span>Consult the Chronological Ledger</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
@@ -526,12 +602,26 @@
         <!-- Story output -->
       </div>
 
-      <div class="karmic-residue-box">
+      <div class="callback-box box-amber">
         <strong>Residual Karmic Carryover:</strong>
         <span id="d-residue">---</span>
       </div>
 
-      <button class="btn-reconsult" id="btn-reset">↺ Consult for Another Lifetime</button>
+      <div class="callback-box box-purple" id="d-audit-box">
+        <!-- Self audit response -->
+      </div>
+
+      <!-- Timeline Explorer Switcher -->
+      <div class="epoch-switch-container">
+        <div class="epoch-switch-title">Inspect Alternate Timeline Counterparts</div>
+        <div class="epoch-nav-tabs">
+          <button type="button" class="epoch-tab-btn" data-era="ancient">🏛️ Classical Epoch</button>
+          <button type="button" class="epoch-tab-btn" data-era="medieval">🏰 Medieval Epoch</button>
+          <button type="button" class="epoch-tab-btn" data-era="industrial">🚂 Industrial Epoch</button>
+          <button type="button" class="epoch-tab-btn" data-era="future">🚀 Deep Space Epoch</button>
+        </div>
+        <button class="btn-reconsult" id="btn-reset">↺ Retake Complete Diagnostic</button>
+      </div>
     </div>
 
     <footer>
@@ -541,8 +631,8 @@
   </div>
 
   <script>
-    // 1. Eight Expanded Diagnostic Inquiries
-    const questions = [
+    // 1. Trait Questions Data (8 Archetype Inquiries)
+    const traitQuestions = [
       {
         text: "When a colleague delivers an ambiguous or poorly constructed task, your instinct is to:",
         options: [
@@ -625,12 +715,43 @@
       }
     ];
 
-    // 2. Twenty Detailed Personas Across 4 Epochs
+    // 2. Epoch Inquiries (3 Era Calibration Questions)
+    const epochQuestions = [
+      {
+        text: "Which ambient atmospheric baseline sounds most physically tolerable to your nervous system?",
+        options: [
+          { text: "Direct, dry Mediterranean sunlight, limestone dust, and cedar woodsmoke.", score: "ancient" },
+          { text: "Flickering beeswax candles, damp vaulted stone arches, and persistent autumn rain.", score: "medieval" },
+          { text: "Hazy amber gaslight, coal smoke, clacking iron wheels, and heavy tweed against ocean fog.", score: "industrial" },
+          { text: "Low-lux amber instrument panels, clean scrubbed oxygen, and the silent black void.", score: "future" }
+        ]
+      },
+      {
+        text: "Which family of structural materials inspires your deepest instinctive trust?",
+        options: [
+          { text: "Sun-dried clay bricks, unhewn cedar beams, and volcanic lime mortar.", score: "ancient" },
+          { text: "Split heartwood oak, hand-forged wrought iron nails, and scraped calfskin vellum.", score: "medieval" },
+          { text: "Riveted cast iron, cold machined brass fittings, and Welsh roofing slate.", score: "industrial" },
+          { text: "Sintered titanium honeycomb, aerogel insulation, and closed-loop silicone gaskets.", score: "future" }
+        ]
+      },
+      {
+        text: "What scale of civilizational noise can you tolerate before needing to flee into a fallow field?",
+        options: [
+          { text: "A walkable walled city-state within smell of nearby threshing floors and barley fields.", score: "ancient" },
+          { text: "A fortified river trading post separated from the next settlement by three days of dense forest.", score: "medieval" },
+          { text: "A dense, humming rail terminus connected to distant capitals by humming copper wires.", score: "industrial" },
+          { text: "An isolated orbital research habitat separated from Earth by 45 light-minutes.", score: "future" }
+        ]
+      }
+    ];
+
+    // 3. Twenty Personas (4 Epochs × 5 Archetypes)
     const personas = {
       ancient: {
         scribe: {
           title: "Sumerian Cuneiform Complaint Scribe",
-          epoch: "Bronze Age • Ur (c. 1750 BCE)",
+          epoch: "Classical & Ancient • Ur (c. 1750 BCE)",
           station: "Royal Copper Depot Registry",
           lifespan: "Age 51 • Peacefully during a clay kiln firing",
           grievance: "Substandard copper ingots shipped by merchant Ea-nasir",
@@ -639,7 +760,7 @@
         },
         maker: {
           title: "Roman Volcanic Pozzolana Mortar Tester",
-          epoch: "Classical Era • Ostia Antica (c. 118 CE)",
+          epoch: "Classical & Ancient • Ostia Antica (c. 118 CE)",
           station: "Imperial Harbour Works Directorate",
           lifespan: "Age 64 • Retired with a small olive parcel",
           grievance: "Contractors attempting to dilute lime with ordinary river silt",
@@ -648,7 +769,7 @@
         },
         nature: {
           title: "Alexandrian Papyrus Reed Cultivator",
-          epoch: "Hellenistic Egypt • Nile Delta (c. 240 BCE)",
+          epoch: "Classical & Ancient • Nile Delta (c. 240 BCE)",
           station: "Lower Delta Wetland Conservacy",
           lifespan: "Age 58 • Natural decline watching the annual flood",
           grievance: "Ibis birds trampling delicate harvest shoots",
@@ -657,7 +778,7 @@
         },
         admin: {
           title: "Han Dynasty Imperial Granary Assayer",
-          epoch: "Western Han Dynasty • Chang'an (c. 85 BCE)",
+          epoch: "Classical & Ancient • Chang'an (c. 85 BCE)",
           station: "Ministry of Agricultural Revenue",
           lifespan: "Age 60 • Retired with an official bronze seal",
           grievance: "Millet moisture levels exceeding the 14% statutory ceiling",
@@ -666,7 +787,7 @@
         },
         signal: {
           title: "Minoan Coastal Beacon Tender",
-          epoch: "Bronze Age • Southern Crete (c. 1450 BCE)",
+          epoch: "Classical & Ancient • Southern Crete (c. 1450 BCE)",
           station: "Cape Lithino High Watchpost",
           lifespan: "Age 55 • Quietly on a stone terrace facing Libya",
           grievance: "Olive oil fuel rations arriving two weeks late from Knossos",
@@ -677,7 +798,7 @@
       medieval: {
         scribe: {
           title: "Scriptorium Marginalia Snail Illustrator",
-          epoch: "Medieval Era • Northumbria (c. 1312 CE)",
+          epoch: "Medieval & Silk Road • Northumbria (c. 1312 CE)",
           station: "St. Cuthbert Benedictine Abbey",
           lifespan: "Age 47 • Candle soot inhalation & severe myopia",
           grievance: "The Novice Master asking why knights were fighting snails",
@@ -686,7 +807,7 @@
         },
         maker: {
           title: "Hanseatic League Salt-Herring Cask Cooper",
-          epoch: "Hanseatic Period • Lübeck (c. 1420 CE)",
+          epoch: "Medieval & Silk Road • Lübeck (c. 1420 CE)",
           station: "Baltic Fish Quay No. 4",
           lifespan: "Age 62 • Quietly in a dry oak storage shed",
           grievance: "Danish stave wood cut against the natural grain",
@@ -695,7 +816,7 @@
         },
         nature: {
           title: "Samarkand Caravan Oatmeal Logistics Officer",
-          epoch: "Silk Road Era • Sogdiana (c. 1260 CE)",
+          epoch: "Medieval & Silk Road • Sogdiana (c. 1260 CE)",
           station: "Oasis Staging Post 12",
           lifespan: "Age 55 • Resting under a white mulberry canopy",
           grievance: "Merchants rushing pack camels through midday heat",
@@ -704,7 +825,7 @@
         },
         admin: {
           title: "Venetian Ducal Salt Toll Collector",
-          epoch: "Republic of Venice • Rialto (c. 1495 CE)",
+          epoch: "Medieval & Silk Road • Rialto (c. 1495 CE)",
           station: "Magistrato al Sal",
           lifespan: "Age 68 • Comfortable retirement overlooking the lagoon",
           grievance: "Foreign gondolas attempting to bypass the Grand Canal boom gate",
@@ -713,7 +834,7 @@
         },
         signal: {
           title: "Byzantine Mountain Semaphore Sentry",
-          epoch: "Middle Byzantine Era • Taurus Mountains (c. 840 CE)",
+          epoch: "Medieval & Silk Road • Taurus Mountains (c. 840 CE)",
           station: "Loulon Fortress Signal Tower",
           lifespan: "Age 49 • Alpine cold and dried mutton longevity",
           grievance: "Low-lying valley fog obscuring the next relay bonfire for three straight days",
@@ -724,7 +845,7 @@
       industrial: {
         scribe: {
           title: "Transatlantic Cable Morse Telegrapher",
-          epoch: "Victorian Era • Valentia Island, Ireland (c. 1878)",
+          epoch: "19th-Century Gilded • Valentia Island, Ireland (c. 1878)",
           station: "Anglo-American Telegraph Station",
           lifespan: "Age 53 • Chronic telegrapher's wrist & salt fog",
           grievance: "London brokers demanding 60 words per minute during Atlantic gales",
@@ -733,7 +854,7 @@
         },
         maker: {
           title: "Ordnance Survey Mountain Trig Pillar Mason",
-          epoch: "Victorian Era • Scottish Highlands (c. 1886)",
+          epoch: "19th-Century Gilded • Scottish Highlands (c. 1886)",
           station: "Her Majesty's Cartographic Service",
           lifespan: "Age 61 • Mountain air & heavy tweed durability",
           grievance: "Misty cloud cover rolling in the moment the theodolite was leveled",
@@ -742,7 +863,7 @@
         },
         nature: {
           title: "Kew Gardens Pteridomania (Fern) Cryptogamist",
-          epoch: "Victorian Era • Surrey Glasshouses (c. 1865)",
+          epoch: "19th-Century Gilded • Surrey Glasshouses (c. 1865)",
           station: "Department of Cryptogamic Botany",
           lifespan: "Age 59 • Humid greenhouse contentment",
           grievance: "Amateur collectors mislabeling Asplenium scolopendrium",
@@ -751,7 +872,7 @@
         },
         admin: {
           title: "Prussian Railway Timetable Synchronizer",
-          epoch: "Imperial German Era • Berlin Central Station (c. 1898)",
+          epoch: "19th-Century Gilded • Berlin Central Station (c. 1898)",
           station: "Königliche Eisenbahn-Direktion",
           lifespan: "Age 67 • Gold pocket watch pension retirement",
           grievance: "Express freight trains arriving 45 seconds ahead of schedule",
@@ -760,7 +881,7 @@
         },
         signal: {
           title: "Hebrides Isolated Lighthouse Foghorn Calibrator",
-          epoch: "Victorian Era • Outer Hebrides, Scotland (c. 1891)",
+          epoch: "19th-Century Gilded • Outer Hebrides, Scotland (c. 1891)",
           station: "Flannan Isles Marine Light",
           lifespan: "Age 58 • Salt air, pipe tobacco, and gale resilience",
           grievance: "Compressed-air pneumatic valves jamming during a 4-day Atlantic squall",
@@ -771,7 +892,7 @@
       future: {
         scribe: {
           title: "Kuiper Belt Derelict Ship Registry Archivist",
-          epoch: "Deep Space Era • Station 88-Persephone (c. 2410 CE)",
+          epoch: "Deep Space Frontier • Station 88-Persephone (c. 2410 CE)",
           station: "Outer Rim Salvage & Title Directorate",
           lifespan: "Age 74 • Low-gravity archival retirement",
           grievance: "Rogue scavengers submitting salvage manifests in obsolete 21st-century JSON schemas",
@@ -780,7 +901,7 @@
         },
         maker: {
           title: "Oort Cloud Habitat Thermal Tile Riveter",
-          epoch: "Megastructure Era • Lagrange Ring 4 (c. 2590 CE)",
+          epoch: "Deep Space Frontier • Lagrange Ring 4 (c. 2590 CE)",
           station: "Hull Integrity Division 09",
           lifespan: "Age 68 • Repaired pressure suit longevity",
           grievance: "Zero-G magnetic torque wrenches losing calibration every 400 hours",
@@ -789,7 +910,7 @@
         },
         nature: {
           title: "Orbital Mycelium & Algae Scrubbing Technician",
-          epoch: "Sub-Surface Biosphere Era • Europa Station (c. 2640 CE)",
+          epoch: "Deep Space Frontier • Europa Station (c. 2640 CE)",
           station: "Closed-Loop Hydroponics Core C",
           lifespan: "Age 71 • Humid bio-dome contentment",
           grievance: "Off-shift maintenance crew smuggling illicit citrus peels that spike the vat acidity",
@@ -798,7 +919,7 @@
         },
         admin: {
           title: "Asteroid Ice Cargo Manifest Clearance Inspector",
-          epoch: "Solar System Logistics Era • Ceres Port Authority (c. 2385 CE)",
+          epoch: "Deep Space Frontier • Ceres Port Authority (c. 2385 CE)",
           station: "Inner-Ring Water Toll Gate 3",
           lifespan: "Age 65 • Standard bureaucratic pension credit",
           grievance: "Independent ice haulers attempting to forge purity certificates on dirty comet chunks",
@@ -807,7 +928,7 @@
         },
         signal: {
           title: "Deep Void Cosmic Background Listening Sentry",
-          epoch: "Post-Solar Epoch • Outer Heliopause Relay (c. 2820 CE)",
+          epoch: "Deep Space Frontier • Outer Heliopause Relay (c. 2820 CE)",
           station: "Array Array-Omega (45 AU Solar Distance)",
           lifespan: "Age 82 • Peaceful silence at the edge of the system",
           grievance: "Errant coronal mass ejections creating static in an otherwise pristine 9-month silence",
@@ -817,72 +938,82 @@
       }
     };
 
-    // 3. UI Flow Engine
-    let selectedEra = 'ancient';
+    // 4. Render Quiz Elements
+    const traitContainer = document.getElementById('trait-questions-container');
+    const epochContainer = document.getElementById('epoch-questions-container');
+    const traitSelections = {};
+    const epochSelections = {};
+    let selfAuditScore = null;
 
-    // Era Click Handlers
-    document.querySelectorAll('.era-card').forEach(card => {
-      card.addEventListener('click', () => {
-        document.querySelectorAll('.era-card').forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        selectedEra = card.dataset.era;
-      });
-    });
-
-    // Render Questions
-    const questionsContainer = document.getElementById('questions-container');
-    questions.forEach((q, qIdx) => {
+    // Render Trait Questions
+    traitQuestions.forEach((q, qIdx) => {
       const qBox = document.createElement('div');
       qBox.className = 'question-box';
       qBox.innerHTML = `
-        <div class="question-num">Inquiry ${qIdx + 1} of ${questions.length}</div>
+        <div class="question-num">Trait Inquiry ${qIdx + 1} of ${traitQuestions.length}</div>
         <div class="question-text">${q.text}</div>
         <div class="options-grid">
           ${q.options.map((opt, oIdx) => `
-            <button type="button" class="option-btn" data-q="${qIdx}" data-score="${opt.score}" data-idx="${oIdx}">
+            <button type="button" class="option-btn" data-type="trait" data-q="${qIdx}" data-score="${opt.score}" data-idx="${oIdx}">
               ${opt.text}
             </button>
           `).join('')}
         </div>
       `;
-      questionsContainer.appendChild(qBox);
+      traitContainer.appendChild(qBox);
     });
 
-    // Option Selection Handlers
-    const selections = {};
+    // Render Epoch Questions
+    epochQuestions.forEach((q, qIdx) => {
+      const qBox = document.createElement('div');
+      qBox.className = 'question-box';
+      qBox.innerHTML = `
+        <div class="question-num">Chronological Inquiry ${qIdx + 1} of ${epochQuestions.length}</div>
+        <div class="question-text">${q.text}</div>
+        <div class="options-grid">
+          ${q.options.map((opt, oIdx) => `
+            <button type="button" class="option-btn" data-type="epoch" data-q="${qIdx}" data-score="${opt.score}" data-idx="${oIdx}">
+              ${opt.text}
+            </button>
+          `).join('')}
+        </div>
+      `;
+      epochContainer.appendChild(qBox);
+    });
+
+    // Option Click Handlers
     document.querySelectorAll('.option-btn').forEach(btn => {
       btn.addEventListener('click', function() {
+        const qType = this.dataset.type;
         const qIdx = this.dataset.q;
-        document.querySelectorAll(`.option-btn[data-q="${qIdx}"]`).forEach(b => b.classList.remove('selected'));
+        const score = this.dataset.score;
+
+        document.querySelectorAll(`.option-btn[data-type="${qType}"][data-q="${qIdx}"]`).forEach(b => b.classList.remove('selected'));
         this.classList.add('selected');
-        selections[qIdx] = this.dataset.score;
+
+        if (qType === 'trait') {
+          traitSelections[qIdx] = score;
+        } else {
+          epochSelections[qIdx] = score;
+        }
       });
     });
 
-    // Generate Dossier
-    document.getElementById('btn-generate').addEventListener('click', () => {
-      if (Object.keys(selections).length < questions.length) {
-        alert(`Please complete all ${questions.length} inquiries before consulting the ledger.`);
-        return;
-      }
+    // Red Herring Scale Button Handlers
+    document.querySelectorAll('.scale-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        selfAuditScore = parseInt(this.dataset.val, 10);
+      });
+    });
 
-      // Calculate Scores across 5 traits
-      const counts = { scribe: 0, maker: 0, nature: 0, admin: 0, signal: 0 };
-      Object.values(selections).forEach(trait => counts[trait]++);
+    // Active Display State for Hybrid Switching
+    let currentArchetype = 'scribe';
+    let currentActiveEra = 'ancient';
 
-      // Find Dominant Trait
-      let dominant = 'scribe';
-      let maxVal = -1;
-      for (const [trait, val] of Object.entries(counts)) {
-        if (val > maxVal) {
-          maxVal = val;
-          dominant = trait;
-        }
-      }
-
-      const result = personas[selectedEra][dominant];
-
-      // Populate Dossier
+    function displayDossier(era, trait) {
+      const result = personas[era][trait];
       document.getElementById('d-title').textContent = result.title;
       document.getElementById('d-epoch').textContent = result.epoch;
       document.getElementById('d-station').textContent = result.station;
@@ -891,11 +1022,73 @@
       document.getElementById('d-narrative').innerHTML = result.narrative;
       document.getElementById('d-residue').textContent = result.residue;
 
-      // Switch Screens
+      // Update Active Epoch Tab
+      document.querySelectorAll('.epoch-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.era === era);
+      });
+    }
+
+    // Generate Dossier
+    document.getElementById('btn-generate').addEventListener('click', () => {
+      if (Object.keys(traitSelections).length < traitQuestions.length) {
+        alert(`Please complete all ${traitQuestions.length} temperament inquiries in Section I.`);
+        return;
+      }
+      if (Object.keys(epochSelections).length < epochQuestions.length) {
+        alert(`Please answer all ${epochQuestions.length} atmospheric inquiries in Section II.`);
+        return;
+      }
+      if (selfAuditScore === null) {
+        alert('Please complete the mandatory operational self-evaluation rating (1-10) in Section III.');
+        return;
+      }
+
+      // 1. Calculate Dominant Trait
+      const traitCounts = { scribe: 0, maker: 0, nature: 0, admin: 0, signal: 0 };
+      Object.values(traitSelections).forEach(t => traitCounts[t]++);
+      let topTrait = 'scribe';
+      let maxT = -1;
+      for (const [t, v] of Object.entries(traitCounts)) {
+        if (v > maxT) { maxT = v; topTrait = t; }
+      }
+
+      // 2. Calculate Diagnosed Epoch
+      const epochCounts = { ancient: 0, medieval: 0, industrial: 0, future: 0 };
+      Object.values(epochSelections).forEach(e => epochCounts[e]++);
+      let topEpoch = 'ancient';
+      let maxE = -1;
+      for (const [e, v] of Object.entries(epochCounts)) {
+        if (v > maxE) { maxE = v; topEpoch = e; }
+      }
+
+      currentArchetype = topTrait;
+      currentActiveEra = topEpoch;
+
+      // 3. Render Audit Callback Text
+      const auditBox = document.getElementById('d-audit-box');
+      if (selfAuditScore <= 4) {
+        auditBox.innerHTML = `<strong>Self-Audit Review (Score: ${selfAuditScore}/10):</strong> The celestial ledger finds this evaluation unduly harsh. Navigating the modern algorithmic attention trap with your nervous system even partially intact is rated an automatic <strong>8.5/10</strong> by celestial auditors. Give yourself some grace.`;
+      } else if (selfAuditScore <= 7) {
+        auditBox.innerHTML = `<strong>Self-Audit Review (Score: ${selfAuditScore}/10):</strong> A statistically grounded appraisal. You are meeting baseline terrestrial expectations for a moderately stressed, competent biped. Proceed with your standard duties.`;
+      } else {
+        auditBox.innerHTML = `<strong>Self-Audit Review (Score: ${selfAuditScore}/10):</strong> Impressive confidence! Coincidentally, that is the exact flattering rating your most frequently used AI assistant hallucinates about you too.`;
+      }
+
+      // 4. Populate and Switch UI
+      displayDossier(currentActiveEra, currentArchetype);
       document.getElementById('quiz-card').style.display = 'none';
       const dossierCard = document.getElementById('dossier-card');
       dossierCard.style.display = 'block';
       dossierCard.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Epoch Tab Switcher Handlers
+    document.querySelectorAll('.epoch-tab-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const era = this.dataset.era;
+        currentActiveEra = era;
+        displayDossier(currentActiveEra, currentArchetype);
+      });
     });
 
     // Reset Engine
@@ -903,7 +1096,10 @@
       document.getElementById('dossier-card').style.display = 'none';
       document.getElementById('quiz-card').style.display = 'block';
       document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-      for (const k in selections) delete selections[k];
+      document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+      for (const k in traitSelections) delete traitSelections[k];
+      for (const k in epochSelections) delete epochSelections[k];
+      selfAuditScore = null;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
