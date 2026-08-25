@@ -1,23 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fallow.garden: The Digital Thought Composter</title>
-  <meta name="description" content="Decompose cognitive friction, anxious loops, and administrative sludge into nutrient-dense digital loam." />
-
-  <!-- Mobile & PWA Configuration -->
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Thought Composter" />
-  <meta name="theme-color" content="#24422e" />
-
-  <!-- Typography -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fallow Garden — An Anthology of Small, Restorative Utilities</title>
+  <meta name="description" content="An anthology of small, restorative utilities organized across body, mind, environment, personal finance, and restorative play." />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
+  
   <style>
     :root {
       --bg: #f5f2eb;
@@ -26,26 +18,26 @@
       --text-main: #1c261e;
       --text-muted: #536256;
       --text-light: #728275;
-
+      
       --forest: #24422e;
       --moss: #3a6346;
       --sprout: #6b9e78;
       --clay: #b86b4b;
-      --clay-soft: #f8ebe4;
+      --clay-soft: #f4e8e1;
+      --sky: #3b6b88;
+      --sky-soft: #eaf1f5;
       --amber: #cb8934;
       --amber-soft: #fbf2e3;
-      --soil-dark: #2c1a0e;
-      --soil-mid: #4a2f1a;
-      --soil-light: #734d2c;
+      --purple: #69527a;
+      --purple-soft: #f2edf7;
 
       --border: #dcd5c5;
       --border-subtle: #e9e3d5;
       --radius-lg: 18px;
       --radius-md: 12px;
       --radius-sm: 8px;
-
       --shadow-sm: 0 2px 8px rgba(28, 38, 30, 0.04);
-      --shadow-md: 0 10px 25px rgba(28, 38, 30, 0.07);
+      --shadow-md: 0 12px 30px rgba(28, 38, 30, 0.08);
     }
 
     * {
@@ -55,588 +47,463 @@
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg);
       background-image: 
         radial-gradient(ellipse at 85% -10%, rgba(107, 158, 120, 0.12) 0%, transparent 60%),
         radial-gradient(ellipse at 15% 110%, rgba(184, 107, 75, 0.08) 0%, transparent 60%);
       color: var(--text-main);
-      line-height: 1.6;
+      line-height: 1.65;
       min-height: 100vh;
-      padding: 3rem 1.25rem 5rem;
+      padding: 3.5rem 1.25rem 5rem;
     }
 
     .container {
-      max-width: 760px;
+      max-width: 720px;
       margin: 0 auto;
     }
 
-    /* Header */
-    header {
-      margin-bottom: 2.5rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1.75rem;
+    /* Botanical Brand Mark */
+    .brand-mark {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .brand-top {
-      text-decoration: none;
-      color: inherit;
-      display: inline-flex;
-      align-items: baseline;
-      gap: 0.6rem;
-    }
-
-    .brand-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 2.2rem;
-      font-weight: 600;
-      color: var(--forest);
-      letter-spacing: -0.02em;
-      line-height: 1;
-    }
-
-    .brand-tag {
-      font-size: 0.75rem;
-      font-family: 'JetBrains Mono', monospace;
-      background: rgba(184, 107, 75, 0.15);
-      color: var(--clay);
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .brand-subtitle {
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      margin-top: 0.35rem;
-    }
-
-    .privacy-badge {
-      font-size: 0.75rem;
-      font-family: 'JetBrains Mono', monospace;
-      background: var(--surface-warm);
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      padding: 6px 12px;
-      border-radius: 20px;
-      display: inline-flex;
       align-items: center;
-      gap: 6px;
-    }
-
-    /* Composter Bin Frame */
-    .bin-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      box-shadow: var(--shadow-sm);
+      gap: 0.75rem;
       margin-bottom: 2rem;
     }
 
-    .bin-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.5rem;
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--surface-warm);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
       color: var(--forest);
-      margin-bottom: 0.5rem;
     }
 
-    .bin-desc {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-
-    .feedstock-select-group {
-      margin-bottom: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    label {
+    .brand-label {
       font-size: 0.82rem;
       font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--moss);
+    }
+
+    header {
+      margin-bottom: 3.5rem;
+    }
+
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--forest);
+      letter-spacing: -0.025em;
+      line-height: 1.18;
+      margin-bottom: 1.25rem;
+    }
+
+    .manifesto {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      border-left: 2px solid var(--sprout);
+      padding-left: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .manifesto p + p {
+      margin-top: 0.85rem;
+    }
+
+    /* Section Category Headings */
+    .category-section {
+      margin-bottom: 3rem;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .category-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .category-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--forest);
+      letter-spacing: -0.01em;
+    }
+
+    .category-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .tag-body { background: var(--clay-soft); color: var(--clay); }
+    .tag-mind { background: rgba(58, 99, 70, 0.12); color: var(--forest); }
+    .tag-environment { background: var(--amber-soft); color: var(--amber); }
+    .tag-finance { background: var(--sky-soft); color: var(--sky); }
+    .tag-fun { background: var(--purple-soft); color: var(--purple); }
+
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* Episode Cards */
+    .episode-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem 1.75rem;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--shadow-sm);
+      display: block;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .episode-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--forest);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .episode-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--sprout);
+    }
+
+    .episode-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .episode-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--forest);
+      background: rgba(58, 99, 70, 0.1);
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .status-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--clay);
+      background: var(--clay-soft);
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .status-pill.pill-game {
+      color: var(--purple);
+      background: var(--purple-soft);
+    }
+
+    .status-pill.pill-external {
+      color: var(--sky);
+      background: var(--sky-soft);
+    }
+
+    .arrow-icon {
+      color: var(--text-muted);
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .episode-card:hover .arrow-icon {
+      transform: translateX(4px);
       color: var(--forest);
     }
 
-    select, textarea {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.98rem;
-      padding: 0.85rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: #fafaf8;
-      color: var(--text-main);
-      outline: none;
-      transition: all 0.2s ease;
-      width: 100%;
+    .episode-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--forest);
+      margin-bottom: 0.45rem;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
     }
 
-    textarea {
-      min-height: 140px;
-      resize: vertical;
+    .episode-desc {
+      font-size: 0.94rem;
+      color: var(--text-muted);
       line-height: 1.6;
     }
 
-    textarea:focus, select:focus {
-      border-color: var(--forest);
-      background: #ffffff;
-      box-shadow: 0 0 0 3px rgba(36, 66, 46, 0.08);
-    }
-
-    .bin-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 1.25rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .sound-opt {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .sound-opt input {
-      accent-color: var(--clay);
-      cursor: pointer;
-    }
-
-    .btn-compost {
-      background: var(--forest);
-      color: #ffffff;
-      border: 1px solid var(--forest);
-      padding: 12px 24px;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 14px rgba(36, 66, 46, 0.2);
-    }
-
-    .btn-compost:hover {
-      background: var(--moss);
-      transform: translateY(-1px);
-    }
-
-    .btn-compost:disabled {
-      background: var(--border);
-      border-color: var(--border);
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    /* Decomposition Chamber (Active Pile) */
-    .pile-viewport {
-      display: none;
-      background: #1e130c;
-      border-radius: var(--radius-lg);
-      padding: 2.25rem;
-      color: #dfd2c4;
-      margin-bottom: 2rem;
-      border: 2px solid var(--soil-light);
-      position: relative;
-      overflow: hidden;
-      box-shadow: inset 0 4px 20px rgba(0,0,0,0.5);
-    }
-
-    .pile-status-bar {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--amber);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .decay-text-display {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1rem;
-      line-height: 1.7;
-      min-height: 120px;
-      word-break: break-word;
-      transition: color 1s ease;
-    }
-
-    .sprout-card {
-      display: none;
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px dashed rgba(223, 210, 196, 0.25);
-      text-align: center;
-      animation: fadeIn 1s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .sprout-art {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.4rem;
-      color: var(--sprout);
-      margin-bottom: 0.5rem;
-      white-space: pre;
-      line-height: 1.2;
-    }
-
-    .sprout-botanical-name {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.35rem;
-      color: #ffffff;
-      margin-bottom: 0.25rem;
-    }
-
-    .sprout-caption {
-      font-size: 0.9rem;
-      color: #a89f91;
-      max-width: 520px;
-      margin: 0 auto 1.25rem;
-    }
-
-    .btn-reset {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #ffffff;
-      padding: 8px 16px;
-      border-radius: var(--radius-sm);
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-reset:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Soil Telemetry Grid */
-    .telemetry-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .telemetry-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1.25rem;
-    }
-
-    .telemetry-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-muted);
-    }
-
-    .telemetry-val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--forest);
-      margin-top: 0.25rem;
-    }
-
-    .telemetry-caption {
-      font-size: 0.72rem;
-      color: var(--text-light);
-      margin-top: 0.25rem;
-    }
-
     footer {
-      padding-top: 1.75rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
       border-top: 1px solid var(--border-subtle);
-      font-size: 0.82rem;
-      color: var(--text-muted);
       display: flex;
       justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--text-muted);
       flex-wrap: wrap;
       gap: 1rem;
+    }
+
+    footer a {
+      color: var(--forest);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <header>
-      <div>
-        <a href="/" class="brand-top" title="Return to Fallow Garden">
-          <h1 class="brand-title">fallow.garden</h1>
-          <span class="brand-tag">Episode 04</span>
-        </a>
-        <p class="brand-subtitle">The Digital Thought Composter</p>
-      </div>
-
-      <div class="privacy-badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    <div class="brand-mark">
+      <div class="brand-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22v-9"/>
+          <path d="M9 9a3 3 0 0 1 6 0c0 4-3 6-3 6"/>
+          <path d="M17.5 15.5c2 0 3.5-1.5 3.5-3.5 0-3-4-5-9-5"/>
+          <path d="M6.5 15.5C4.5 15.5 3 14 3 12c0-3 4-5 9-5"/>
         </svg>
-        Destroyed Locally • Zero Slag Retained
+      </div>
+      <span class="brand-label">Fallow Garden</span>
+    </div>
+
+    <header>
+      <h1>An anthology of small, restorative utilities.</h1>
+      <div class="manifesto">
+        <p>
+          In agriculture, leaving land fallow is not neglect—it is a deliberate pause that allows depleted soil to naturally replenish itself. Our minds, bodies, habitats, and plans require the same unhurried care.
+        </p>
+        <p>
+          Each utility is published as a focused, self-contained micro-tool designed around one specific problem. No algorithmic tracking, zero data harvesting, and no ads—open and run them directly in your web browser, or install them to your device as lightweight web apps.
+        </p>
       </div>
     </header>
 
-    <!-- The Feedstock Bin (Input) -->
-    <div class="bin-card" id="bin-input-card">
-      <h2 class="bin-title">Deposit Cognitive Biomass</h2>
-      <p class="bin-desc">
-        Load the pile with an irritating email, looping administrative dread, an impossible chore, or a 3:00 AM existential worry. The microbes will handle the rest.
-      </p>
+    <main>
 
-      <div class="feedstock-select-group">
-        <label for="feedstock-type">Biomass Feedstock Classification</label>
-        <select id="feedstock-type">
-          <option value="email">Passive-Aggressive Email Thread (High Acidity)</option>
-          <option value="dread">Looping Anticipatory Dread (High Carbon / Woody)</option>
-          <option value="chore">Friction-Laden Administrative Chore (Dense Nitrogen)</option>
-          <option value="rumination">3:00 AM Brain Chatter (Raw Organic Sludge)</option>
-          <option value="inbox">Unread Inbox Guilt (Volatile Organic Material)</option>
-        </select>
-      </div>
-
-      <div class="feedstock-select-group">
-        <label for="thought-text">Raw Thought Material</label>
-        <textarea id="thought-text" placeholder="Paste or type the text you wish to dissolve into topsoil..."></textarea>
-      </div>
-
-      <div class="bin-actions">
-        <label class="sound-opt">
-          <input type="checkbox" id="toggle-audio" checked />
-          <span>Synthesize Soil Rustle (Brown Mulch Audio)</span>
-        </label>
-
-        <button class="btn-compost" id="btn-compost">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M7 11v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-6"/>
-            <path d="M21 11V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4"/>
-            <path d="M12 2v3"/>
-          </svg>
-          Turn into Humus
-        </button>
-      </div>
-    </div>
-
-    <!-- The Active Decomposition Pile (Animation Screen) -->
-    <div class="pile-viewport" id="pile-viewport">
-      <div class="pile-status-bar" id="pile-status">
-        <span>● Thermophilic Stage: Heat Rising (135°F)</span>
-      </div>
-
-      <div class="decay-text-display" id="decay-display">
-        <!-- Multistage decaying characters appear here -->
-      </div>
-
-      <div class="sprout-card" id="sprout-card">
-        <div class="sprout-art" id="sprout-glyph">  🌱  </div>
-        <div class="sprout-botanical-name" id="sprout-name">Clustered Mountain Mint</div>
-        <div class="sprout-caption" id="sprout-desc">
-          Your cognitive friction has been fully broken down into rich organic humus. The soil is cool, fertile, and clear.
+      <!-- Section 1: The Body -->
+      <section class="category-section">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <h2 class="category-title">The Body</h2>
+          </div>
+          <span class="category-tag tag-body">Physiological Recovery</span>
         </div>
-        <button class="btn-reset" id="btn-add-more">Feed Another Thought to the Pile</button>
-      </div>
-    </div>
+        <div class="card-list">
+          <a href="https://getrepoopulate.com" target="_blank" rel="noopener noreferrer" class="episode-card">
+            <div class="card-top">
+              <div class="badge-wrap">
+                <span class="episode-tag">Episode 02</span>
+                <span class="status-pill pill-external">External App</span>
+              </div>
+              <div class="arrow-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="episode-title">Fixing Your Gut Biome After Adverse Events</div>
+            <div class="episode-desc">
+              A colonoscopy, a round of antibiotics, or an acute stomach illness can severely disrupt your microbiome. Evidence-backed dietary strategies and fiber sequencing to help your digestive flora regenerate.
+            </div>
+          </a>
+        </div>
+      </section>
 
-    <!-- Soil Chemistry Telemetry Grid -->
-    <div class="telemetry-grid">
-      <div class="telemetry-box">
-        <div class="telemetry-title">Topsoil Generated</div>
-        <div class="telemetry-val" id="val-soil-mass">0.00 kg</div>
-        <div class="telemetry-caption">Nutrient-dense humus</div>
-      </div>
+      <!-- Section 2: The Mind -->
+      <section class="category-section">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <h2 class="category-title">The Mind</h2>
+          </div>
+          <span class="category-tag tag-mind">Cognitive Restoration</span>
+        </div>
+        <div class="card-list">
+          <a href="/episodes/garden/" class="episode-card">
+            <div class="card-top">
+              <div class="badge-wrap">
+                <span class="episode-tag">Episode 01</span>
+                <span class="status-pill">Interactive App</span>
+              </div>
+              <div class="arrow-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="episode-title">Attention Restore: Pacing &amp; Optical Resets</div>
+            <div class="episode-desc">
+              Tactile micro-tools, pacing timers, and synthesized brown noise modeled on Attention Restoration Theory (ART) and Default Mode Network activation to quiet cognitive friction and gently rebuild focus.
+            </div>
+          </a>
+        </div>
+      </section>
 
-      <div class="telemetry-box">
-        <div class="telemetry-title">Carbon : Nitrogen</div>
-        <div class="telemetry-val" id="val-cn-ratio">30 : 1</div>
-        <div class="telemetry-caption">Optimal microbial balance</div>
-      </div>
+      <!-- Section 3: The Environment -->
+      <section class="category-section">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <h2 class="category-title">The Environment</h2>
+          </div>
+          <span class="category-tag tag-environment">Habitat &amp; Ecology</span>
+        </div>
+        <div class="card-list">
+          <a href="https://betterfly.garden" target="_blank" rel="noopener noreferrer" class="episode-card">
+            <div class="card-top">
+              <div class="badge-wrap">
+                <span class="episode-tag">Ecology Hub</span>
+                <span class="status-pill pill-external">External App</span>
+              </div>
+              <div class="arrow-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="episode-title">Better-Fly: Native Habitat &amp; Garden Planner</div>
+            <div class="episode-desc">
+              Design thriving native plant sanctuaries and pollinator waystations. Curate Mid-Atlantic species, plan bloom successions, and cultivate ecological resilience right in your backyard.
+            </div>
+          </a>
+        </div>
+      </section>
 
-      <div class="telemetry-box">
-        <div class="telemetry-title">Microbial Activity</div>
-        <div class="telemetry-val" id="val-microbes">0 CFU</div>
-        <div class="telemetry-caption">Hyphae &amp; actinobacteria</div>
-      </div>
+      <!-- Section 4: Personal Finance -->
+      <section class="category-section">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <h2 class="category-title">Personal Finance</h2>
+          </div>
+          <span class="category-tag tag-finance">Long Horizon Planning</span>
+        </div>
+        <div class="card-list">
+          <a href="/episodes/fers-countdown/" class="episode-card">
+            <div class="card-top">
+              <div class="badge-wrap">
+                <span class="episode-tag">Episode 03</span>
+                <span class="status-pill">Interactive Tool</span>
+              </div>
+              <div class="arrow-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="episode-title">Federal Retirement &amp; Working Day Horizon</div>
+            <div class="episode-desc">
+              An unhurried countdown for civil servants. Calculates exact remaining duty shifts to MRA, Age 60, and Age 62—factoring in federal holidays, leave accumulation, FEHB lifetime retention, and the MRA+10 postponed annuity exit.
+            </div>
+          </a>
+        </div>
+      </section>
 
-      <div class="telemetry-box">
-        <div class="telemetry-title">Internal Pile Temp</div>
-        <div class="telemetry-val" id="val-temp">68°F</div>
-        <div class="telemetry-caption">Cooled &amp; stabilized</div>
-      </div>
-    </div>
+      <!-- Section 5: Fun Stuff -->
+      <section class="category-section">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <h2 class="category-title">Fun Stuff</h2>
+          </div>
+          <span class="category-tag tag-fun">Restorative Play &amp; Absurdity</span>
+        </div>
+        <div class="card-list">
+          <a href="/episodes/composter/" class="episode-card">
+            <div class="card-top">
+              <div class="badge-wrap">
+                <span class="episode-tag">Episode 04</span>
+                <span class="status-pill pill-game">5-Day Game</span>
+              </div>
+              <div class="arrow-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="episode-title">The 5-Day Thought Composter &amp; Weekly Meadow</div>
+            <div class="episode-desc">
+              A weekly restorative game. Bury daily friction and administrative sludge into fertile topsoil, nourish the seed with good thoughts and sunbeams, and cultivate a 5-flower native pollinator bed Monday through Friday.
+            </div>
+          </a>
+
+          <a href="/episodes/past-lives/" class="episode-card">
+            <div class="card-top">
+              <div class="badge-wrap">
+                <span class="episode-tag">Episode 05</span>
+                <span class="status-pill">Interactive Tool</span>
+              </div>
+              <div class="arrow-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="episode-title">Historical &amp; Future Past Lives Dossier</div>
+            <div class="episode-desc">
+              A diagnostic intake for modern fatigue. Uncover your plausible, unglamorous past (or deep-space future) life across classical, medieval, industrial, and frontier epochs—complete with daily grievances and alternate timeline inspection.
+            </div>
+          </a>
+        </div>
+      </section>
+
+    </main>
 
     <footer>
-      <span>fallow.garden • Episode 04</span>
-      <span>Matter cannot be created or destroyed—only composted.</span>
+      <span>fallow.garden</span>
+      <span>Single-purpose tools • Zero tracking</span>
     </footer>
   </div>
 
-  <script>
-    const thoughtInput = document.getElementById('thought-text');
-    const btnCompost = document.getElementById('btn-compost');
-    const binCard = document.getElementById('bin-input-card');
-    const pileViewport = document.getElementById('pile-viewport');
-    const decayDisplay = document.getElementById('decay-display');
-    const pileStatus = document.getElementById('pile-status');
-    const sproutCard = document.getElementById('sprout-card');
-    const btnAddMore = document.getElementById('btn-add-more');
-    const toggleAudio = document.getElementById('toggle-audio');
-
-    // Telemetry DOM
-    const valSoil = document.getElementById('val-soil-mass');
-    const valCN = document.getElementById('val-cn-ratio');
-    const valMicrobes = document.getElementById('val-microbes');
-    const valTemp = document.getElementById('val-temp');
-
-    // Botanical Sprouts Library
-    const sprouts = [
-      { name: "Clustered Mountain Mint (Pycnanthemum muticum)", glyph: "  🌿  \n \\ | / \n──────", desc: "A robust pollinator anchor. High aromatic oils repel mental pests." },
-      { name: "Cardinal Flower (Lobelia cardinalis)", glyph: "  🌺  \n  \\|/  \n──────", desc: "Thrives in moist soil. Feeds hummingbirds and restores vibrant color." },
-      { name: "Wild Bergamot (Monarda fistulosa)", glyph: "  🌸  \n   |   \n──────", desc: "Deeply soothing. Known for resilient roots and tranquil fragrance." },
-      { name: "Sweet Goldenrod (Solidago odora)", glyph: "  🌾  \n  /|\\  \n──────", desc: "Late-season nectar source. Converts heavy tension into brilliant late-summer gold." },
-      { name: "Purple Coneflower (Echinacea purpurea)", glyph: "  🌻  \n   |   \n──────", desc: "Sturdy and grounded. Sustains local life through long winter freezes." }
-    ];
-
-    // Mulch particles
-    const mulchChars = ['~', '·', '°', '.', ':', ';', ',', '░', '▒', '▓', '*', '⁕', '`', '\''];
-
-    /* Audio Synthesis (Brown Noise Soil Rustle) */
-    let audioCtx = null;
-    let noiseSource = null;
-
-    function playRustle() {
-      if (!toggleAudio.checked) return;
-      try {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const bufferSize = audioCtx.sampleRate * 4;
-        const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-        const output = noiseBuffer.getChannelData(0);
-        let lastOut = 0.0;
-
-        for (let i = 0; i < bufferSize; i++) {
-          const white = Math.random() * 2 - 1;
-          output[i] = (lastOut + (0.02 * white)) / 1.02;
-          lastOut = output[i];
-          output[i] *= 2.5;
-        }
-
-        noiseSource = audioCtx.createBufferSource();
-        noiseSource.buffer = noiseBuffer;
-
-        const filter = audioCtx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(320, audioCtx.currentTime);
-        filter.frequency.exponentialRampToValueAtTime(140, audioCtx.currentTime + 3.5);
-
-        const gain = audioCtx.createGain();
-        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 3.8);
-
-        noiseSource.connect(filter);
-        filter.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        noiseSource.start();
-      } catch(e) {}
-    }
-
-    btnCompost.addEventListener('click', () => {
-      const text = thoughtInput.value.trim();
-      if (!text) {
-        alert('Deposit some text into the pile first.');
-        return;
-      }
-
-      playRustle();
-
-      // UI Switch
-      binCard.style.display = 'none';
-      pileViewport.style.display = 'block';
-      sproutCard.style.display = 'none';
-      decayDisplay.textContent = text;
-      decayDisplay.style.color = '#e0b284';
-
-      // Telemetry Calculations
-      const chars = text.length;
-      const soilKg = (chars * 0.018).toFixed(2);
-      const vowels = (text.match(/[aeiou]/gi) || []).length;
-      const cnRatio = Math.max(15, Math.min(45, Math.floor((vowels / (chars || 1)) * 90)));
-      const microbialCount = `${(chars * 1.4).toFixed(1)}B`;
-
-      valSoil.textContent = `${soilKg} kg`;
-      valCN.textContent = `${cnRatio} : 1`;
-      valMicrobes.textContent = microbialCount;
-      valTemp.textContent = '142°F';
-
-      // Stage 1: Heat & Bacterial Softening (0s - 1.2s)
-      pileStatus.innerHTML = `<span>🔥 Thermophilic Stage: Microbes generating heat (142°F)...</span>`;
-      
-      setTimeout(() => {
-        // Stage 2: Mulching & Disintegration (1.2s - 2.8s)
-        pileStatus.innerHTML = `<span>🍂 Actinobacteria breakdown: Cellular structure collapsing into mulch...</span>`;
-        decayDisplay.style.color = '#8b5a2b';
-        
-        let currentArray = text.split('');
-        const interval = setInterval(() => {
-          for (let i = 0; i < Math.max(4, Math.floor(currentArray.length / 8)); i++) {
-            const randIdx = Math.floor(Math.random() * currentArray.length);
-            currentArray[randIdx] = mulchChars[Math.floor(Math.random() * mulchChars.length)];
-          }
-          decayDisplay.textContent = currentArray.join('');
-        }, 120);
-
-        setTimeout(() => {
-          clearInterval(interval);
-
-          // Stage 3: Humification & Soil Cooling (2.8s - 4.2s)
-          pileStatus.innerHTML = `<span>🌱 Mesophilic maturation: Soil cooled to 72°F. Humus stabilized.</span>`;
-          valTemp.textContent = '72°F';
-          decayDisplay.style.color = '#4a2f1a';
-          decayDisplay.textContent = Array.from({length: Math.min(180, chars)}, () => mulchChars[Math.floor(Math.random() * mulchChars.length)]).join(' ');
-
-          // Stage 4: Sprouting (4.2s)
-          setTimeout(() => {
-            const picked = sprouts[Math.floor(Math.random() * sprouts.length)];
-            document.getElementById('sprout-glyph').textContent = picked.glyph;
-            document.getElementById('sprout-name').textContent = picked.name;
-            document.getElementById('sprout-desc').textContent = `${picked.desc} Generated ${soilKg} kg of rich organic humus.`;
-            sproutCard.style.display = 'block';
-            thoughtInput.value = '';
-          }, 1000);
-
-        }, 1800);
-
-      }, 1200);
-    });
-
-    btnAddMore.addEventListener('click', () => {
-      pileViewport.style.display = 'none';
-      binCard.style.display = 'block';
-      valTemp.textContent = '68°F';
-    });
-  </script>
 </body>
 </html>
