@@ -262,7 +262,7 @@
       line-height: 1.2;
     }
 
-    /* Cultivation Chamber */
+    /* Cultivation Card */
     .cultivation-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -308,75 +308,6 @@
       font-size: 0.94rem;
       color: var(--text-muted);
       margin-bottom: 1.25rem;
-    }
-
-    /* Micro-Animations for Steps */
-    .mini-anim-box {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-    }
-
-    .soil-anim-box {
-      background: var(--clay-soft);
-      border: 1px solid rgba(184, 107, 75, 0.25);
-    }
-
-    .steam-wisp {
-      animation: steamFloat 2.4s ease-in-out infinite alternate;
-      transform-origin: bottom center;
-    }
-
-    .steam-wisp-2 {
-      animation: steamFloat 2.8s ease-in-out 0.6s infinite alternate;
-      transform-origin: bottom center;
-    }
-
-    @keyframes steamFloat {
-      0% { transform: translateY(0) scale(0.95); opacity: 0.4; }
-      100% { transform: translateY(-4px) scale(1.1); opacity: 0.9; }
-    }
-
-    .crumb-bounce {
-      animation: crumbPulse 1.8s ease-in-out infinite alternate;
-      transform-origin: center;
-    }
-
-    @keyframes crumbPulse {
-      0% { transform: scale(0.9); }
-      100% { transform: scale(1.12); }
-    }
-
-    .sun-anim-box {
-      background: var(--amber-soft);
-      border: 1px solid rgba(203, 137, 52, 0.25);
-    }
-
-    .mini-sun-rays {
-      animation: rotateRays 9s linear infinite;
-      transform-origin: 16px 16px;
-    }
-
-    @keyframes rotateRays {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .mini-raindrop-1 {
-      animation: miniDrop 1.2s ease-in infinite;
-    }
-
-    .mini-raindrop-2 {
-      animation: miniDrop 1.2s ease-in 0.6s infinite;
-    }
-
-    @keyframes miniDrop {
-      0% { transform: translateY(-3px); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateY(6px); opacity: 0; }
     }
 
     textarea {
@@ -430,29 +361,99 @@
       background: #936018;
     }
 
-    /* Animation Viewports */
-    .animation-screen {
+    /* ========================================================
+       LARGE THEATER ANIMATION STAGE
+       ======================================================== */
+    .animation-theater {
       display: none;
-      background: var(--soil);
+      background: #1e2820;
       border-radius: var(--radius-md);
-      padding: 2.25rem;
-      color: #dfd2c4;
-      text-align: center;
-      margin-top: 1rem;
+      overflow: hidden;
+      margin-top: 0.5rem;
       position: relative;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.4);
+    }
+
+    .theater-header-bar {
+      padding: 1rem 1.25rem 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      z-index: 5;
+    }
+
+    .theater-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #e0b284;
+      font-weight: 600;
+    }
+
+    .theater-stage-box {
+      width: 100%;
+      height: 280px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      background: linear-gradient(180deg, #2b3e32 0%, #1c2720 60%, #151d18 100%);
+    }
+
+    .sky-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 180px;
+      pointer-events: none;
       overflow: hidden;
     }
 
-    .decay-stream {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1rem;
-      min-height: 70px;
-      color: #e0b284;
-      word-break: break-word;
-      line-height: 1.6;
+    /* Big Glowing Sun */
+    .big-sun-wrapper {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      width: 90px;
+      height: 90px;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .nature-effects-canvas {
+    .big-sun-wrapper.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .big-sun-core {
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, #ffe680 20%, #f5a623 80%);
+      border-radius: 50%;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      box-shadow: 0 0 35px rgba(255, 215, 0, 0.8);
+    }
+
+    .big-sun-rays {
+      width: 90px;
+      height: 90px;
+      position: absolute;
+      animation: rotateSunRays 12s linear infinite;
+    }
+
+    @keyframes rotateSunRays {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Big Rain Shower Canvas */
+    #theater-rain-canvas {
       position: absolute;
       top: 0;
       left: 0;
@@ -461,23 +462,120 @@
       pointer-events: none;
     }
 
-    .sun-glow {
+    /* Earth & Soil Bed Section */
+    .soil-ground-bed {
+      width: 100%;
+      height: 105px;
+      background: linear-gradient(180deg, #442a1c 0%, #2e1b10 100%);
+      border-top: 4px solid #5a3825;
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
+    }
+
+    .soil-particles {
       position: absolute;
-      top: -40px;
-      right: -40px;
-      width: 140px;
-      height: 140px;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .crumb-dot {
+      position: absolute;
+      background: #734932;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 223, 128, 0.8) 0%, rgba(255, 180, 50, 0) 70%);
-      animation: pulseSun 2s infinite alternate ease-in-out;
+      opacity: 0.6;
     }
 
-    @keyframes pulseSun {
-      from { transform: scale(0.9); opacity: 0.7; }
-      to { transform: scale(1.15); opacity: 1; }
+    /* Seed In Soil */
+    .seed-pod {
+      width: 16px;
+      height: 22px;
+      background: #8b5a2b;
+      border: 2px solid #523315;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      position: absolute;
+      top: 25px;
+      transform: translateY(-80px) scale(0.2);
+      opacity: 0;
+      transition: all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
-    /* Weekly Harvest Summary */
+    .seed-pod.dropped {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    /* Sprouting Plant Structure (Interactive SVG Plant) */
+    .botanical-growth-rig {
+      position: absolute;
+      bottom: 100px;
+      width: 140px;
+      height: 170px;
+      z-index: 4;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      pointer-events: none;
+    }
+
+    .plant-stem-path {
+      stroke: #6b9e78;
+      stroke-width: 6;
+      stroke-linecap: round;
+      fill: none;
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      transition: stroke-dashoffset 1.4s ease-out;
+    }
+
+    .plant-stem-path.grown {
+      stroke-dashoffset: 0;
+    }
+
+    .plant-leaf-left, .plant-leaf-right {
+      fill: #4b7d58;
+      transform-origin: 70px 100px;
+      transform: scale(0);
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.8s;
+    }
+
+    .plant-leaf-left.open, .plant-leaf-right.open {
+      transform: scale(1);
+    }
+
+    /* Bloom Flowerhead */
+    .flowerhead-group {
+      transform-origin: 70px 30px;
+      transform: scale(0);
+      transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.4) 1.3s;
+    }
+
+    .flowerhead-group.bloomed {
+      transform: scale(1);
+    }
+
+    /* Scrambling Text Particles (Mulch Stream) */
+    .mulch-particle-stream {
+      position: absolute;
+      top: 30px;
+      width: 80%;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      color: #dfb284;
+      text-align: center;
+      line-height: 1.5;
+      word-break: break-word;
+      transition: all 0.4s ease;
+      z-index: 4;
+    }
+
+    /* Harvest Banner */
     .harvest-banner {
       display: none;
       background: #ffffff;
@@ -602,7 +700,7 @@
       <button class="btn-turn-soil" id="btn-reset-week">↺ Turn the Soil for a New Week</button>
     </div>
 
-    <!-- Active Cultivation Chamber (2-Step Loop) -->
+    <!-- Active Cultivation Chamber -->
     <div class="cultivation-card" id="cultivation-chamber">
       
       <!-- Step 1: Deposit Friction / Compost -->
@@ -611,17 +709,6 @@
           <div>
             <span class="stage-indicator stage-soil">Step 1: Deposit Biomass</span>
             <h3 class="cultivation-title" id="soil-prompt-title">Bury Today's Friction into Topsoil</h3>
-          </div>
-
-          <!-- Micro Animation: Steaming Soil & Crumb -->
-          <div class="mini-anim-box soil-anim-box" title="Thermophilic soil breakdown">
-            <svg width="34" height="34" viewBox="0 0 32 32" fill="none">
-              <path d="M4 25C7 19 12 17 16 17C20 17 25 19 28 25H4Z" fill="#b86b4b" opacity="0.85"/>
-              <circle cx="11" cy="22" r="1.5" fill="#5c2c16" class="crumb-bounce"/>
-              <circle cx="21" cy="22" r="1.5" fill="#5c2c16" class="crumb-bounce"/>
-              <path class="steam-wisp" d="M12 14C11 11 13 9 12 6" stroke="#b86b4b" stroke-width="1.8" stroke-linecap="round"/>
-              <path class="steam-wisp-2" d="M17 13C16 10 18 8 17 5" stroke="#cb8934" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
           </div>
         </div>
 
@@ -648,21 +735,6 @@
             <span class="stage-indicator stage-sun">Step 2: Channel Rain &amp; Sunlight</span>
             <h3 class="cultivation-title">Nourish Today's Seedling</h3>
           </div>
-
-          <!-- Micro Animation: Rotating Sunbeam & Raindrops -->
-          <div class="mini-anim-box sun-anim-box" title="Rain and sunbeam nourishment">
-            <svg width="34" height="34" viewBox="0 0 32 32" fill="none">
-              <g class="mini-sun-rays">
-                <circle cx="16" cy="16" r="5" fill="#cb8934"/>
-                <line x1="16" y1="6" x2="16" y2="8" stroke="#cb8934" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="16" y1="24" x2="16" y2="26" stroke="#cb8934" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="6" y1="16" x2="8" y2="16" stroke="#cb8934" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="24" y1="16" x2="26" y2="16" stroke="#cb8934" stroke-width="1.5" stroke-linecap="round"/>
-              </g>
-              <line class="mini-raindrop-1" x1="12" y1="22" x2="12" y2="25" stroke="#3b6b88" stroke-width="1.5" stroke-linecap="round"/>
-              <line class="mini-raindrop-2" x1="20" y1="22" x2="20" y2="25" stroke="#3b6b88" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
         </div>
 
         <p class="cultivation-desc">
@@ -676,14 +748,61 @@
         </div>
       </div>
 
-      <!-- Live Animation Viewport -->
-      <div class="animation-screen" id="anim-screen">
-        <div class="sun-glow" id="sun-glow" style="display: none;"></div>
-        <canvas class="nature-effects-canvas" id="canvas-rain"></canvas>
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--amber); margin-bottom: 0.75rem;" id="anim-status">
-          Thermophilic decomposition in progress...
+      <!-- Large Interactive Botanical Theater Screen -->
+      <div class="animation-theater" id="anim-theater">
+        <div class="theater-header-bar">
+          <span class="theater-status" id="theater-status">Decomposing Biomass...</span>
         </div>
-        <div class="decay-stream" id="anim-stream"></div>
+
+        <div class="theater-stage-box">
+          
+          <!-- Sky Elements (Sun, Rain Canvas) -->
+          <div class="sky-elements">
+            <div class="big-sun-wrapper" id="big-sun">
+              <svg class="big-sun-rays" viewBox="0 0 90 90" fill="none">
+                <circle cx="45" cy="45" r="38" stroke="#ffe680" stroke-width="2" stroke-dasharray="6 6"/>
+                <line x1="45" y1="4" x2="45" y2="12" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+                <line x1="45" y1="78" x2="45" y2="86" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+                <line x1="4" y1="45" x2="12" y2="45" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+                <line x1="78" y1="45" x2="86" y2="45" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+              <div class="big-sun-core"></div>
+            </div>
+            <canvas id="theater-rain-canvas"></canvas>
+          </div>
+
+          <!-- Mulch Stream Text Overlay -->
+          <div class="mulch-particle-stream" id="mulch-text"></div>
+
+          <!-- Botanical Growth Rig (SVG Plant) -->
+          <div class="botanical-growth-rig" id="growth-rig">
+            <svg width="140" height="170" viewBox="0 0 140 170" fill="none">
+              <!-- Stem -->
+              <path class="plant-stem-path" id="rig-stem" d="M70 170 Q66 100 70 30" />
+              
+              <!-- Leaves -->
+              <path class="plant-leaf-left" id="rig-leaf-l" d="M70 110 C50 110 40 90 40 80 C55 80 68 95 70 110 Z" />
+              <path class="plant-leaf-right" id="rig-leaf-r" d="M70 95 C90 95 100 75 100 65 C85 65 72 80 70 95 Z" />
+              
+              <!-- Dynamic Flowerheads -->
+              <g class="flowerhead-group" id="rig-flowerhead">
+                <!-- Injected via JavaScript with plant-specific colors -->
+              </g>
+            </svg>
+          </div>
+
+          <!-- Soil Ground Bed Cross Section -->
+          <div class="soil-ground-bed">
+            <div class="soil-particles">
+              <div class="crumb-dot" style="top:20px; left:15%; width:6px; height:6px;"></div>
+              <div class="crumb-dot" style="top:50px; left:40%; width:8px; height:8px;"></div>
+              <div class="crumb-dot" style="top:30px; left:75%; width:5px; height:5px;"></div>
+              <div class="crumb-dot" style="top:70px; left:85%; width:7px; height:7px;"></div>
+            </div>
+            <div class="seed-pod" id="rig-seed"></div>
+          </div>
+
+        </div>
       </div>
 
     </div>
@@ -695,13 +814,69 @@
   </div>
 
   <script>
-    // 1. Botanical Encyclopedia for the 5-Day Plot
+    // 1. Botanical Encyclopedia
     const weekPlants = [
-      { name: "Clustered Mountain Mint", icon: "🌿", bloom: "🌸", desc: "A robust pollinator anchor. High aromatic oils repel mental pests." },
-      { name: "Cardinal Flower", icon: "🌱", bloom: "🌺", desc: "Thrives in deep, moist soil. Defiantly vibrant hummingbird nectar." },
-      { name: "Wild Bergamot", icon: "🌱", bloom: "🪻", desc: "Deeply tranquil root stabilizer known for aromatic calm." },
-      { name: "Sweet Goldenrod", icon: "🌿", bloom: "🌾", desc: "Converts late-week tension into brilliant late-summer gold." },
-      { name: "New England Aster", icon: "🌿", bloom: "🌻", desc: "Celebratory weekend pollinator buffet. Sturdy and resilient." }
+      { 
+        name: "Clustered Mountain Mint", 
+        icon: "🌿", 
+        bloom: "🌸", 
+        desc: "A robust pollinator anchor. High aromatic oils repel mental pests.",
+        flowerSvg: `
+          <circle cx="70" cy="30" r="14" fill="#e8f3ec" stroke="#6b9e78" stroke-width="2"/>
+          <circle cx="70" cy="30" r="8" fill="#d0e5d8"/>
+          <circle cx="67" cy="27" r="1.5" fill="#7a5491"/>
+          <circle cx="73" cy="28" r="1.5" fill="#7a5491"/>
+          <circle cx="70" cy="33" r="1.5" fill="#7a5491"/>
+        `
+      },
+      { 
+        name: "Cardinal Flower", 
+        icon: "🌱", 
+        bloom: "🌺", 
+        desc: "Thrives in deep, moist soil. Defiantly vibrant hummingbird nectar.",
+        flowerSvg: `
+          <path d="M70 30 C58 10 52 5 70 -5 C88 5 82 10 70 30 Z" fill="#d63031"/>
+          <path d="M70 30 C50 25 40 35 45 42 C58 40 65 35 70 30 Z" fill="#c0392b"/>
+          <path d="M70 30 C90 25 100 35 95 42 C82 40 75 35 70 30 Z" fill="#c0392b"/>
+        `
+      },
+      { 
+        name: "Wild Bergamot", 
+        icon: "🌱", 
+        bloom: "🪻", 
+        desc: "Deeply tranquil root stabilizer known for aromatic calm.",
+        flowerSvg: `
+          <circle cx="70" cy="30" r="10" fill="#9b59b6"/>
+          <path d="M70 20 L70 5 M62 23 L52 10 M78 23 L88 10 M58 30 L45 28 M82 30 L95 28" stroke="#be90d4" stroke-width="3" stroke-linecap="round"/>
+        `
+      },
+      { 
+        name: "Sweet Goldenrod", 
+        icon: "🌿", 
+        bloom: "🌾", 
+        desc: "Converts late-week tension into brilliant late-summer gold.",
+        flowerSvg: `
+          <path d="M70 30 Q65 15 55 5 Q75 18 70 30 Q75 15 85 5 Q65 18 70 30" fill="#f1c40f"/>
+          <circle cx="68" cy="18" r="5" fill="#f39c12"/>
+          <circle cx="73" cy="12" r="4" fill="#f1c40f"/>
+          <circle cx="70" cy="6" r="3" fill="#ffeaa7"/>
+        `
+      },
+      { 
+        name: "New England Aster", 
+        icon: "🌿", 
+        bloom: "🌻", 
+        desc: "Celebratory weekend pollinator buffet. Sturdy and resilient.",
+        flowerSvg: `
+          <g stroke="#8e44ad" stroke-width="3" stroke-linecap="round">
+            <line x1="70" y1="12" x2="70" y2="48"/>
+            <line x1="52" y1="30" x2="88" y2="30"/>
+            <line x1="57" y1="17" x2="83" y2="43"/>
+            <line x1="57" y1="43" x2="83" y2="17"/>
+          </g>
+          <circle cx="70" cy="30" r="7" fill="#f39c12"/>
+        `
+      }
     ];
 
     const mulchChars = ['~', '·', '°', '.', ':', ';', ',', '░', '▒', '▓', '*', '⁕', '`', '\''];
@@ -728,7 +903,7 @@
       localStorage.setItem('fallow_composter_week_v2', JSON.stringify(gardenState));
     }
 
-    // 3. Audio Synthesizer (Rustle & Chime)
+    // 3. Audio Synthesizer
     let audioCtx = null;
     function playTone(type) {
       try {
@@ -773,35 +948,35 @@
       } catch(e) {}
     }
 
-    // 4. Canvas Rain System
-    const canvas = document.getElementById('canvas-rain');
-    const ctx = canvas.getContext('2d');
+    // 4. Theater Rain Simulation
+    const rainCanvas = document.getElementById('theater-rain-canvas');
+    const rainCtx = rainCanvas.getContext('2d');
     let raindrops = [];
     let rainAnimId = null;
 
-    function startRain() {
-      canvas.width = canvas.parentElement.clientWidth;
-      canvas.height = canvas.parentElement.clientHeight;
-      raindrops = Array.from({ length: 45 }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        len: Math.random() * 12 + 8,
-        speed: Math.random() * 4 + 6
+    function startTheaterRain() {
+      rainCanvas.width = rainCanvas.parentElement.clientWidth;
+      rainCanvas.height = rainCanvas.parentElement.clientHeight;
+      raindrops = Array.from({ length: 50 }, () => ({
+        x: Math.random() * rainCanvas.width,
+        y: Math.random() * rainCanvas.height,
+        len: Math.random() * 14 + 10,
+        speed: Math.random() * 5 + 7
       }));
 
       function render() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = 'rgba(173, 216, 230, 0.7)';
-        ctx.lineWidth = 1.5;
+        rainCtx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+        rainCtx.strokeStyle = 'rgba(173, 216, 230, 0.75)';
+        rainCtx.lineWidth = 1.6;
         raindrops.forEach(r => {
-          ctx.beginPath();
-          ctx.moveTo(r.x, r.y);
-          ctx.lineTo(r.x, r.y + r.len);
-          ctx.stroke();
+          rainCtx.beginPath();
+          rainCtx.moveTo(r.x, r.y);
+          rainCtx.lineTo(r.x, r.y + r.len);
+          rainCtx.stroke();
           r.y += r.speed;
-          if (r.y > canvas.height) {
+          if (r.y > rainCanvas.height) {
             r.y = -r.len;
-            r.x = Math.random() * canvas.width;
+            r.x = Math.random() * rainCanvas.width;
           }
         });
         rainAnimId = requestAnimationFrame(render);
@@ -809,12 +984,12 @@
       render();
     }
 
-    function stopRain() {
+    function stopTheaterRain() {
       if (rainAnimId) cancelAnimationFrame(rainAnimId);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      rainCtx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
     }
 
-    // 5. Render Bed Slots
+    // 5. Update Weekly Bed Slots
     function updateBedUI() {
       const bloomedCount = gardenState.entries.length;
       document.getElementById('bed-progress-label').textContent = `${bloomedCount} of 5 Days Cultivated`;
@@ -849,10 +1024,10 @@
       }
     }
 
-    // 6. Interaction Logic
+    // 6. Action Sequences
     let currentBadThought = '';
 
-    // Step 1: Mulching
+    // Step 1: Mulch into Soil Animation
     document.getElementById('btn-mulch').addEventListener('click', () => {
       const text = document.getElementById('input-bad').value.trim();
       if (!text) {
@@ -862,40 +1037,51 @@
       currentBadThought = text;
       playTone('rustle');
 
-      const animScreen = document.getElementById('anim-screen');
-      const animStream = document.getElementById('anim-stream');
-      const animStatus = document.getElementById('anim-status');
-      
+      // Switch to Big Theater View
       document.getElementById('step-compost').style.display = 'none';
-      animScreen.style.display = 'block';
-      document.getElementById('sun-glow').style.display = 'none';
-      stopRain();
+      const theater = document.getElementById('anim-theater');
+      theater.style.display = 'block';
 
-      animStatus.textContent = '🔥 Thermophilic decomposition: Turning friction into rich humus...';
+      // Reset rig states
+      document.getElementById('big-sun').classList.remove('active');
+      document.getElementById('rig-stem').classList.remove('grown');
+      document.getElementById('rig-leaf-l').classList.remove('open');
+      document.getElementById('rig-leaf-r').classList.remove('open');
+      document.getElementById('rig-flowerhead').classList.remove('bloomed');
+      document.getElementById('rig-seed').classList.remove('dropped');
+      stopTheaterRain();
+
+      const status = document.getElementById('theater-status');
+      const mulchDisplay = document.getElementById('mulch-text');
+      status.textContent = '🔥 Mulching friction into dark organic topsoil...';
+
       let currentArray = text.split('');
-
       const interval = setInterval(() => {
-        for (let i = 0; i < Math.max(3, Math.floor(currentArray.length / 6)); i++) {
+        for (let i = 0; i < Math.max(3, Math.floor(currentArray.length / 5)); i++) {
           const randIdx = Math.floor(Math.random() * currentArray.length);
           currentArray[randIdx] = mulchChars[Math.floor(Math.random() * mulchChars.length)];
         }
-        animStream.textContent = currentArray.join('');
-      }, 100);
+        mulchDisplay.textContent = currentArray.join('');
+      }, 90);
 
+      // Drop seed after 1.4s
       setTimeout(() => {
         clearInterval(interval);
-        animStatus.textContent = '🌱 Seed planted in cool loam. Awaiting sunlight and rain...';
-        animStream.textContent = '🌰 [ Seed resting in fertile humus ]';
+        mulchDisplay.style.opacity = '0';
+        status.textContent = '🌰 Seed planted firmly in nutrient-dense loam.';
+        document.getElementById('rig-seed').classList.add('dropped');
 
         setTimeout(() => {
-          animScreen.style.display = 'none';
+          theater.style.display = 'none';
+          mulchDisplay.style.opacity = '1';
+          mulchDisplay.textContent = '';
           document.getElementById('step-nourish').style.display = 'block';
-        }, 1200);
+        }, 1500);
 
-      }, 1600);
+      }, 1800);
     });
 
-    // Step 2: Nourishing with Good Thought
+    // Step 2: Sunshine, Rain & Blooming Animation
     document.getElementById('btn-bloom').addEventListener('click', () => {
       const goodText = document.getElementById('input-good').value.trim();
       if (!goodText) {
@@ -905,30 +1091,39 @@
 
       playTone('chime');
 
-      const animScreen = document.getElementById('anim-screen');
-      const animStream = document.getElementById('anim-stream');
-      const animStatus = document.getElementById('anim-status');
-
       document.getElementById('step-nourish').style.display = 'none';
-      animScreen.style.display = 'block';
-      document.getElementById('sun-glow').style.display = 'block';
-      startRain();
-
-      animStatus.textContent = '☀️ Golden sunbeams & rain showers descending...';
-      animStream.textContent = '🌱 Sprout drinking deeply...';
+      const theater = document.getElementById('anim-theater');
+      theater.style.display = 'block';
 
       const activeIdx = gardenState.entries.length;
       const plant = weekPlants[activeIdx];
 
-      setTimeout(() => {
-        animStream.textContent = `🌿 Stem rising and unfurling leaves...`;
-      }, 1000);
+      // Setup Plant Visual
+      document.getElementById('rig-flowerhead').innerHTML = plant.flowerSvg;
+      const status = document.getElementById('theater-status');
+      status.textContent = '☀️ Rain & golden sunbeams descending...';
 
-      setTimeout(() => {
-        stopRain();
-        animStatus.textContent = `🌸 Complete! ${plant.name} is in full bloom!`;
-        animStream.innerHTML = `<div style="font-size: 2.5rem; margin-bottom: 0.35rem;">${plant.bloom}</div><strong>${plant.name}</strong><br><span style="font-size: 0.85rem; color: #dfd2c4;">${plant.desc}</span>`;
+      // 1. Start Rain & Sun
+      document.getElementById('big-sun').classList.add('active');
+      startTheaterRain();
 
+      // 2. Grow Stem & Leaves
+      setTimeout(() => {
+        status.textContent = `🌿 ${plant.name} is sending up a strong stem...`;
+        document.getElementById('rig-stem').classList.add('grown');
+        document.getElementById('rig-leaf-l').classList.add('open');
+        document.getElementById('rig-leaf-r').classList.add('open');
+      }, 500);
+
+      // 3. Blossom Flower
+      setTimeout(() => {
+        stopTheaterRain();
+        status.textContent = `🌸 ${plant.name} has blossomed in full splendor!`;
+        document.getElementById('rig-flowerhead').classList.add('bloomed');
+      }, 1600);
+
+      // 4. Save and return to bed
+      setTimeout(() => {
         gardenState.entries.push({
           dayIdx: activeIdx,
           bad: currentBadThought,
@@ -938,30 +1133,29 @@
         saveState();
 
         setTimeout(() => {
-          animScreen.style.display = 'none';
+          theater.style.display = 'none';
           document.getElementById('input-bad').value = '';
           document.getElementById('input-good').value = '';
           document.getElementById('step-compost').style.display = 'block';
           updateBedUI();
-        }, 2200);
+        }, 2000);
 
-      }, 2400);
+      }, 3000);
     });
 
-    // Reset Function
+    // Reset Engine
     function performReset() {
       gardenState.entries = [];
       saveState();
       document.getElementById('input-bad').value = '';
       document.getElementById('input-good').value = '';
       document.getElementById('step-nourish').style.display = 'none';
-      document.getElementById('anim-screen').style.display = 'none';
+      document.getElementById('anim-theater').style.display = 'none';
       document.getElementById('step-compost').style.display = 'block';
-      stopRain();
+      stopTheaterRain();
       updateBedUI();
     }
 
-    // Reset Buttons (Header quick-reset & End-of-week harvest banner)
     document.getElementById('btn-quick-reset').addEventListener('click', () => {
       if (confirm('Turn the soil now and start fresh from Day 1 (Monday)?')) {
         performReset();
