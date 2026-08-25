@@ -247,16 +247,24 @@
       overflow: hidden;
     }
 
+    .step-header-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
     .stage-indicator {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      margin-bottom: 0.75rem;
       display: inline-block;
       padding: 3px 8px;
       border-radius: 4px;
+      margin-bottom: 0.4rem;
     }
 
     .stage-soil { background: var(--clay-soft); color: var(--clay); }
@@ -273,6 +281,77 @@
       font-size: 0.94rem;
       color: var(--text-muted);
       margin-bottom: 1.25rem;
+    }
+
+    /* --- Micro-Animations for Steps --- */
+    .mini-anim-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    /* Soil Micro Animation */
+    .soil-anim-box {
+      background: var(--clay-soft);
+      border: 1px solid rgba(184, 107, 75, 0.25);
+    }
+
+    .steam-wisp {
+      animation: steamFloat 2.4s ease-in-out infinite alternate;
+      transform-origin: bottom center;
+    }
+
+    .steam-wisp-2 {
+      animation: steamFloat 2.8s ease-in-out 0.6s infinite alternate;
+      transform-origin: bottom center;
+    }
+
+    @keyframes steamFloat {
+      0% { transform: translateY(0) scale(0.95); opacity: 0.4; }
+      100% { transform: translateY(-4px) scale(1.1); opacity: 0.9; }
+    }
+
+    .crumb-bounce {
+      animation: crumbPulse 1.8s ease-in-out infinite alternate;
+      transform-origin: center;
+    }
+
+    @keyframes crumbPulse {
+      0% { transform: scale(0.9); }
+      100% { transform: scale(1.12); }
+    }
+
+    /* Sun & Rain Micro Animation */
+    .sun-anim-box {
+      background: var(--amber-soft);
+      border: 1px solid rgba(203, 137, 52, 0.25);
+    }
+
+    .mini-sun-rays {
+      animation: rotateRays 9s linear infinite;
+      transform-origin: 16px 16px;
+    }
+
+    @keyframes rotateRays {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .mini-raindrop-1 {
+      animation: miniDrop 1.2s ease-in infinite;
+    }
+
+    .mini-raindrop-2 {
+      animation: miniDrop 1.2s ease-in 0.6s infinite;
+    }
+
+    @keyframes miniDrop {
+      0% { transform: translateY(-3px); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(6px); opacity: 0; }
     }
 
     textarea {
@@ -498,8 +577,26 @@
       
       <!-- Step 1: Deposit Friction / Compost -->
       <div id="step-compost">
-        <span class="stage-indicator stage-soil">Step 1: Deposit Biomass</span>
-        <h3 class="cultivation-title" id="soil-prompt-title">Bury Today's Friction into Topsoil</h3>
+        <div class="step-header-wrap">
+          <div>
+            <span class="stage-indicator stage-soil">Step 1: Deposit Biomass</span>
+            <h3 class="cultivation-title" id="soil-prompt-title">Bury Today's Friction into Topsoil</h3>
+          </div>
+
+          <!-- Micro Animation: Steaming Soil & Crumb -->
+          <div class="mini-anim-box soil-anim-box" title="Thermophilic soil breakdown">
+            <svg width="34" height="34" viewBox="0 0 32 32" fill="none">
+              <!-- Soil Mound -->
+              <path d="M4 25C7 19 12 17 16 17C20 17 25 19 28 25H4Z" fill="#b86b4b" opacity="0.85"/>
+              <circle cx="11" cy="22" r="1.5" fill="#5c2c16" class="crumb-bounce"/>
+              <circle cx="21" cy="22" r="1.5" fill="#5c2c16" class="crumb-bounce"/>
+              <!-- Steam Wisps -->
+              <path class="steam-wisp" d="M12 14C11 11 13 9 12 6" stroke="#b86b4b" stroke-width="1.8" stroke-linecap="round"/>
+              <path class="steam-wisp-2" d="M17 13C16 10 18 8 17 5" stroke="#cb8934" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
         <p class="cultivation-desc">
           Deposit an irritating email, administrative sludge, looping chore dread, or 3:00 AM chatter to generate the seed and soil bed.
         </p>
@@ -518,8 +615,30 @@
 
       <!-- Step 2: Channel Light & Rain / Nourishment -->
       <div id="step-nourish" style="display: none;">
-        <span class="stage-indicator stage-sun">Step 2: Channel Rain &amp; Sunlight</span>
-        <h3 class="cultivation-title">Nourish Today's Seedling</h3>
+        <div class="step-header-wrap">
+          <div>
+            <span class="stage-indicator stage-sun">Step 2: Channel Rain &amp; Sunlight</span>
+            <h3 class="cultivation-title">Nourish Today's Seedling</h3>
+          </div>
+
+          <!-- Micro Animation: Rotating Sunbeam & Raindrops -->
+          <div class="mini-anim-box sun-anim-box" title="Rain and sunbeam nourishment">
+            <svg width="34" height="34" viewBox="0 0 32 32" fill="none">
+              <!-- Sun Center & Rays -->
+              <g class="mini-sun-rays">
+                <circle cx="16" cy="16" r="5" fill="#cb8934"/>
+                <line x1="16" y1="6" x2="16" y2="8" stroke="#cb8934" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="16" y1="24" x2="16" y2="26" stroke="#cb8934" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="6" y1="16" x2="8" y2="16" stroke="#cb8934" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="24" y1="16" x2="26" y2="16" stroke="#cb8934" stroke-width="1.5" stroke-linecap="round"/>
+              </g>
+              <!-- Raindrops -->
+              <line class="mini-raindrop-1" x1="12" y1="22" x2="12" y2="25" stroke="#3b6b88" stroke-width="1.5" stroke-linecap="round"/>
+              <line class="mini-raindrop-2" x1="20" y1="22" x2="20" y2="25" stroke="#3b6b88" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
         <p class="cultivation-desc">
           Enter a small win, a moment of unhurried calm, a restorative cup of coffee, or a gentle thought to bring down the rain and sunshine.
         </p>
@@ -564,7 +683,7 @@
     // 2. State & Storage Engine
     let gardenState = JSON.parse(localStorage.getItem('fallow_composter_week_v2')) || {
       weekId: getWeekIdentifier(),
-      entries: [] // Array of { dayIdx, badThought, goodThought, plantName }
+      entries: []
     };
 
     function getWeekIdentifier() {
@@ -574,7 +693,6 @@
       return `${now.getFullYear()}-W${week}`;
     }
 
-    // Check if new week has rolled around
     if (gardenState.weekId !== getWeekIdentifier()) {
       gardenState = { weekId: getWeekIdentifier(), entries: [] };
       saveState();
@@ -694,7 +812,6 @@
         }
       }
 
-      // Check if complete
       if (bloomedCount >= 5) {
         document.getElementById('cultivation-chamber').style.display = 'none';
         document.getElementById('harvest-banner').style.display = 'block';
@@ -719,7 +836,6 @@
       currentBadThought = text;
       playTone('rustle');
 
-      // Show Animation Viewport
       const animScreen = document.getElementById('anim-screen');
       const animStream = document.getElementById('anim-stream');
       const animStatus = document.getElementById('anim-status');
@@ -763,7 +879,6 @@
 
       playTone('chime');
 
-      // Animation
       const animScreen = document.getElementById('anim-screen');
       const animStream = document.getElementById('anim-stream');
       const animStatus = document.getElementById('anim-status');
@@ -788,7 +903,6 @@
         animStatus.textContent = `🌸 Complete! ${plant.name} is in full bloom!`;
         animStream.innerHTML = `<div style="font-size: 2.5rem; margin-bottom: 0.35rem;">${plant.bloom}</div><strong>${plant.name}</strong><br><span style="font-size: 0.85rem; color: #dfd2c4;">${plant.desc}</span>`;
 
-        // Save Entry
         gardenState.entries.push({
           dayIdx: activeIdx,
           bad: currentBadThought,
