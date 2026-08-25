@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fallow.garden: The Digital Thought Composter</title>
-  <meta name="description" content="Decompose cognitive friction, anxious loops, and administrative sludge into nutrient-dense digital loam." />
+  <title>fallow.garden: The 5-Day Thought Composter &amp; Meadow</title>
+  <meta name="description" content="A weekly restorative game. Convert daily friction into soil, nurture with sunlight, and cultivate a 5-day native meadow." />
 
   <!-- Mobile & PWA Configuration -->
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Thought Composter" />
+  <meta name="apple-mobile-web-app-title" content="Composter Game" />
   <meta name="theme-color" content="#24422e" />
 
   <!-- Typography -->
@@ -34,9 +34,9 @@
       --clay-soft: #f8ebe4;
       --amber: #cb8934;
       --amber-soft: #fbf2e3;
-      --soil-dark: #2c1a0e;
-      --soil-mid: #4a2f1a;
-      --soil-light: #734d2c;
+      --sky: #3b6b88;
+      --sky-soft: #eaf1f5;
+      --soil: #382012;
 
       --border: #dcd5c5;
       --border-subtle: #e9e3d5;
@@ -67,13 +67,13 @@
     }
 
     .container {
-      max-width: 760px;
+      max-width: 820px;
       margin: 0 auto;
     }
 
     /* Header */
     header {
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       border-bottom: 1px solid var(--border);
       padding-bottom: 1.75rem;
       display: flex;
@@ -130,45 +130,154 @@
       gap: 6px;
     }
 
-    /* Composter Bin Frame */
-    .bin-card {
+    /* 5-Day Weekly Garden Plot Grid */
+    .garden-bed-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 2rem;
+      padding: 1.75rem;
       box-shadow: var(--shadow-sm);
       margin-bottom: 2rem;
     }
 
-    .bin-title {
+    .bed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .bed-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.35rem;
+      color: var(--forest);
+    }
+
+    .bed-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--moss);
+      background: var(--surface-warm);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .plots-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 640px) {
+      .plots-grid {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      }
+    }
+
+    .plot-slot {
+      background: var(--surface-warm);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 0.6rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 140px;
+      transition: all 0.2s ease;
+      cursor: default;
+    }
+
+    .plot-slot.active-target {
+      border-color: var(--sprout);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(107, 158, 120, 0.2);
+    }
+
+    .plot-slot.bloomed {
+      border-style: solid;
+      border-color: var(--forest);
+      background: #ffffff;
+    }
+
+    .plot-day {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .plot-visual {
+      font-size: 2.2rem;
+      line-height: 1;
+      margin: 0.5rem 0;
+      transition: transform 0.3s ease;
+    }
+
+    .plot-slot.bloomed .plot-visual {
+      animation: gentleSway 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes gentleSway {
+      0% { transform: rotate(-3deg); }
+      100% { transform: rotate(3deg); }
+    }
+
+    .plot-plant-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--forest);
+      line-height: 1.2;
+    }
+
+    /* Cultivation Chamber */
+    .cultivation-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stage-indicator {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .stage-soil { background: var(--clay-soft); color: var(--clay); }
+    .stage-sun { background: var(--amber-soft); color: var(--amber); }
+
+    .cultivation-title {
       font-family: 'Fraunces', Georgia, serif;
       font-size: 1.5rem;
       color: var(--forest);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
-    .bin-desc {
-      font-size: 0.95rem;
+    .cultivation-desc {
+      font-size: 0.94rem;
       color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-
-    .feedstock-select-group {
       margin-bottom: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
     }
 
-    label {
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--forest);
-    }
-
-    select, textarea {
+    textarea {
+      width: 100%;
+      min-height: 110px;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 0.98rem;
       padding: 0.85rem 1rem;
@@ -178,195 +287,133 @@
       color: var(--text-main);
       outline: none;
       transition: all 0.2s ease;
-      width: 100%;
-    }
-
-    textarea {
-      min-height: 140px;
+      margin-bottom: 1.25rem;
       resize: vertical;
-      line-height: 1.6;
     }
 
-    textarea:focus, select:focus {
+    textarea:focus {
       border-color: var(--forest);
       background: #ffffff;
       box-shadow: 0 0 0 3px rgba(36, 66, 46, 0.08);
     }
 
-    .bin-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 1.25rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .sound-opt {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .sound-opt input {
-      accent-color: var(--clay);
-      cursor: pointer;
-    }
-
-    .btn-compost {
+    .btn-action {
       background: var(--forest);
       color: #ffffff;
-      border: 1px solid var(--forest);
+      border: none;
       padding: 12px 24px;
       border-radius: var(--radius-sm);
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.98rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.2s ease;
       box-shadow: 0 4px 14px rgba(36, 66, 46, 0.2);
     }
 
-    .btn-compost:hover {
+    .btn-action:hover {
       background: var(--moss);
       transform: translateY(-1px);
     }
 
-    .btn-compost:disabled {
-      background: var(--border);
-      border-color: var(--border);
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
+    .btn-gold {
+      background: #b07521;
     }
 
-    /* Decomposition Chamber (Active Pile) */
-    .pile-viewport {
+    .btn-gold:hover {
+      background: #936018;
+    }
+
+    /* Animation Viewports */
+    .animation-screen {
       display: none;
-      background: #1e130c;
-      border-radius: var(--radius-lg);
+      background: var(--soil);
+      border-radius: var(--radius-md);
       padding: 2.25rem;
       color: #dfd2c4;
-      margin-bottom: 2rem;
-      border: 2px solid var(--soil-light);
+      text-align: center;
+      margin-top: 1rem;
       position: relative;
       overflow: hidden;
-      box-shadow: inset 0 4px 20px rgba(0,0,0,0.5);
     }
 
-    .pile-status-bar {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--amber);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .decay-text-display {
+    .decay-stream {
       font-family: 'JetBrains Mono', monospace;
       font-size: 1rem;
-      line-height: 1.7;
-      min-height: 120px;
+      min-height: 70px;
+      color: #e0b284;
       word-break: break-word;
-      transition: color 1s ease;
+      line-height: 1.6;
     }
 
-    .sprout-card {
+    .nature-effects-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .sun-glow {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 223, 128, 0.8) 0%, rgba(255, 180, 50, 0) 70%);
+      animation: pulseSun 2s infinite alternate ease-in-out;
+    }
+
+    @keyframes pulseSun {
+      from { transform: scale(0.9); opacity: 0.7; }
+      to { transform: scale(1.15); opacity: 1; }
+    }
+
+    /* Weekly Harvest Summary */
+    .harvest-banner {
       display: none;
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px dashed rgba(223, 210, 196, 0.25);
+      background: #ffffff;
+      border: 2px solid var(--forest);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
       text-align: center;
-      animation: fadeIn 1s ease;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .sprout-art {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.4rem;
-      color: var(--sprout);
-      margin-bottom: 0.5rem;
-      white-space: pre;
-      line-height: 1.2;
-    }
-
-    .sprout-botanical-name {
+    .harvest-title {
       font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.35rem;
-      color: #ffffff;
-      margin-bottom: 0.25rem;
-    }
-
-    .sprout-caption {
-      font-size: 0.9rem;
-      color: #a89f91;
-      max-width: 520px;
-      margin: 0 auto 1.25rem;
-    }
-
-    .btn-reset {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #ffffff;
-      padding: 8px 16px;
-      border-radius: var(--radius-sm);
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-reset:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Soil Telemetry Grid */
-    .telemetry-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .telemetry-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1.25rem;
-    }
-
-    .telemetry-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-muted);
-    }
-
-    .telemetry-val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.6rem;
-      font-weight: 600;
+      font-size: 1.8rem;
       color: var(--forest);
-      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
     }
 
-    .telemetry-caption {
-      font-size: 0.72rem;
-      color: var(--text-light);
-      margin-top: 0.25rem;
+    .harvest-desc {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .btn-turn-soil {
+      background: var(--surface-warm);
+      border: 1px solid var(--border);
+      color: var(--forest);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-turn-soil:hover {
+      background: #ffffff;
+      border-color: var(--forest);
     }
 
     footer {
@@ -390,253 +437,388 @@
           <h1 class="brand-title">fallow.garden</h1>
           <span class="brand-tag">Episode 04</span>
         </a>
-        <p class="brand-subtitle">The Digital Thought Composter</p>
+        <p class="brand-subtitle">The 5-Day Thought Composter &amp; Weekly Meadow</p>
       </div>
 
       <div class="privacy-badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </svg>
-        Destroyed Locally • Zero Slag Retained
+        Garden Saved Locally • Zero Telemetry
       </div>
     </header>
 
-    <!-- The Feedstock Bin (Input) -->
-    <div class="bin-card" id="bin-input-card">
-      <h2 class="bin-title">Deposit Cognitive Biomass</h2>
-      <p class="bin-desc">
-        Load the pile with an irritating email, looping administrative dread, an impossible chore, or a 3:00 AM existential worry. The microbes will handle the rest.
-      </p>
-
-      <div class="feedstock-select-group">
-        <label for="feedstock-type">Biomass Feedstock Classification</label>
-        <select id="feedstock-type">
-          <option value="email">Passive-Aggressive Email Thread (High Acidity)</option>
-          <option value="dread">Looping Anticipatory Dread (High Carbon / Woody)</option>
-          <option value="chore">Friction-Laden Administrative Chore (Dense Nitrogen)</option>
-          <option value="rumination">3:00 AM Brain Chatter (Raw Organic Sludge)</option>
-          <option value="inbox">Unread Inbox Guilt (Volatile Organic Material)</option>
-        </select>
+    <!-- The 5-Day Weekly Bed View -->
+    <div class="garden-bed-card">
+      <div class="bed-header">
+        <h2 class="bed-title">This Week's Fallow Bed</h2>
+        <span class="bed-counter" id="bed-progress-label">0 of 5 Days Cultivated</span>
       </div>
 
-      <div class="feedstock-select-group">
-        <label for="thought-text">Raw Thought Material</label>
-        <textarea id="thought-text" placeholder="Paste or type the text you wish to dissolve into topsoil..."></textarea>
-      </div>
-
-      <div class="bin-actions">
-        <label class="sound-opt">
-          <input type="checkbox" id="toggle-audio" checked />
-          <span>Synthesize Soil Rustle (Brown Mulch Audio)</span>
-        </label>
-
-        <button class="btn-compost" id="btn-compost">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M7 11v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-6"/>
-            <path d="M21 11V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4"/>
-            <path d="M12 2v3"/>
-          </svg>
-          Turn into Humus
-        </button>
-      </div>
-    </div>
-
-    <!-- The Active Decomposition Pile (Animation Screen) -->
-    <div class="pile-viewport" id="pile-viewport">
-      <div class="pile-status-bar" id="pile-status">
-        <span>● Thermophilic Stage: Heat Rising (135°F)</span>
-      </div>
-
-      <div class="decay-text-display" id="decay-display">
-        <!-- Multistage decaying characters appear here -->
-      </div>
-
-      <div class="sprout-card" id="sprout-card">
-        <div class="sprout-art" id="sprout-glyph">  🌱  </div>
-        <div class="sprout-botanical-name" id="sprout-name">Clustered Mountain Mint</div>
-        <div class="sprout-caption" id="sprout-desc">
-          Your cognitive friction has been fully broken down into rich organic humus. The soil is cool, fertile, and clear.
+      <div class="plots-grid">
+        <div class="plot-slot" id="slot-0">
+          <span class="plot-day">Mon</span>
+          <div class="plot-visual">🌱</div>
+          <span class="plot-plant-name">Mountain Mint</span>
         </div>
-        <button class="btn-reset" id="btn-add-more">Feed Another Thought to the Pile</button>
+        <div class="plot-slot" id="slot-1">
+          <span class="plot-day">Tue</span>
+          <div class="plot-visual">🌱</div>
+          <span class="plot-plant-name">Cardinal Flower</span>
+        </div>
+        <div class="plot-slot" id="slot-2">
+          <span class="plot-day">Wed</span>
+          <div class="plot-visual">🌱</div>
+          <span class="plot-plant-name">Wild Bergamot</span>
+        </div>
+        <div class="plot-slot" id="slot-3">
+          <span class="plot-day">Thu</span>
+          <div class="plot-visual">🌱</div>
+          <span class="plot-plant-name">Sweet Goldenrod</span>
+        </div>
+        <div class="plot-slot" id="slot-4">
+          <span class="plot-day">Fri</span>
+          <div class="plot-visual">🌱</div>
+          <span class="plot-plant-name">New England Aster</span>
+        </div>
       </div>
     </div>
 
-    <!-- Soil Chemistry Telemetry Grid -->
-    <div class="telemetry-grid">
-      <div class="telemetry-box">
-        <div class="telemetry-title">Topsoil Generated</div>
-        <div class="telemetry-val" id="val-soil-mass">0.00 kg</div>
-        <div class="telemetry-caption">Nutrient-dense humus</div>
+    <!-- Weekly Harvest Banner (Shown when 5/5 complete) -->
+    <div class="harvest-banner" id="harvest-banner">
+      <h2 class="harvest-title">Weekly Meadow in Full Bloom 🌸</h2>
+      <p class="harvest-desc" id="harvest-summary-text">
+        You converted 5 days of friction and administrative sludge into a fertile pollinator oasis. The soil is rich, rested, and clean.
+      </p>
+      <button class="btn-turn-soil" id="btn-reset-week">↺ Turn the Soil for a New Week</button>
+    </div>
+
+    <!-- Active Cultivation Chamber (2-Step Loop) -->
+    <div class="cultivation-card" id="cultivation-chamber">
+      
+      <!-- Step 1: Deposit Friction / Compost -->
+      <div id="step-compost">
+        <span class="stage-indicator stage-soil">Step 1: Deposit Biomass</span>
+        <h3 class="cultivation-title" id="soil-prompt-title">Bury Today's Friction into Topsoil</h3>
+        <p class="cultivation-desc">
+          Deposit an irritating email, administrative sludge, looping chore dread, or 3:00 AM chatter to generate the seed and soil bed.
+        </p>
+        <textarea id="input-bad" placeholder="Paste or type the friction you are surrendering to the soil..."></textarea>
+        <div>
+          <button class="btn-action" id="btn-mulch">
+            <span>Decompose into Soil &amp; Plant Seed</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 11v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-6"/>
+              <path d="M21 11V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4"/>
+              <path d="M12 2v3"/>
+            </svg>
+          </button>
+        </div>
       </div>
 
-      <div class="telemetry-box">
-        <div class="telemetry-title">Carbon : Nitrogen</div>
-        <div class="telemetry-val" id="val-cn-ratio">30 : 1</div>
-        <div class="telemetry-caption">Optimal microbial balance</div>
+      <!-- Step 2: Channel Light & Rain / Nourishment -->
+      <div id="step-nourish" style="display: none;">
+        <span class="stage-indicator stage-sun">Step 2: Channel Rain &amp; Sunlight</span>
+        <h3 class="cultivation-title">Nourish Today's Seedling</h3>
+        <p class="cultivation-desc">
+          Enter a small win, a moment of unhurried calm, a restorative cup of coffee, or a gentle thought to bring down the rain and sunshine.
+        </p>
+        <textarea id="input-good" placeholder="Type a small restorative thought or relief to nurture the blossom..."></textarea>
+        <div>
+          <button class="btn-action btn-gold" id="btn-bloom">
+            <span>Send Rain, Sunbeams &amp; Blossom ☀️</span>
+          </button>
+        </div>
       </div>
 
-      <div class="telemetry-box">
-        <div class="telemetry-title">Microbial Activity</div>
-        <div class="telemetry-val" id="val-microbes">0 CFU</div>
-        <div class="telemetry-caption">Hyphae &amp; actinobacteria</div>
+      <!-- Live Animation Viewport -->
+      <div class="animation-screen" id="anim-screen">
+        <div class="sun-glow" id="sun-glow" style="display: none;"></div>
+        <canvas class="nature-effects-canvas" id="canvas-rain"></canvas>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--amber); margin-bottom: 0.75rem;" id="anim-status">
+          Thermophilic decomposition in progress...
+        </div>
+        <div class="decay-stream" id="anim-stream"></div>
       </div>
 
-      <div class="telemetry-box">
-        <div class="telemetry-title">Internal Pile Temp</div>
-        <div class="telemetry-val" id="val-temp">68°F</div>
-        <div class="telemetry-caption">Cooled &amp; stabilized</div>
-      </div>
     </div>
 
     <footer>
       <span>fallow.garden • Episode 04</span>
-      <span>Matter cannot be created or destroyed—only composted.</span>
+      <span>Matter cannot be created or destroyed—only composted into flowers.</span>
     </footer>
   </div>
 
   <script>
-    const thoughtInput = document.getElementById('thought-text');
-    const btnCompost = document.getElementById('btn-compost');
-    const binCard = document.getElementById('bin-input-card');
-    const pileViewport = document.getElementById('pile-viewport');
-    const decayDisplay = document.getElementById('decay-display');
-    const pileStatus = document.getElementById('pile-status');
-    const sproutCard = document.getElementById('sprout-card');
-    const btnAddMore = document.getElementById('btn-add-more');
-    const toggleAudio = document.getElementById('toggle-audio');
-
-    // Telemetry DOM
-    const valSoil = document.getElementById('val-soil-mass');
-    const valCN = document.getElementById('val-cn-ratio');
-    const valMicrobes = document.getElementById('val-microbes');
-    const valTemp = document.getElementById('val-temp');
-
-    // Botanical Sprouts Library
-    const sprouts = [
-      { name: "Clustered Mountain Mint (Pycnanthemum muticum)", glyph: "  🌿  \n \\ | / \n──────", desc: "A robust pollinator anchor. High aromatic oils repel mental pests." },
-      { name: "Cardinal Flower (Lobelia cardinalis)", glyph: "  🌺  \n  \\|/  \n──────", desc: "Thrives in moist soil. Feeds hummingbirds and restores vibrant color." },
-      { name: "Wild Bergamot (Monarda fistulosa)", glyph: "  🌸  \n   |   \n──────", desc: "Deeply soothing. Known for resilient roots and tranquil fragrance." },
-      { name: "Sweet Goldenrod (Solidago odora)", glyph: "  🌾  \n  /|\\  \n──────", desc: "Late-season nectar source. Converts heavy tension into brilliant late-summer gold." },
-      { name: "Purple Coneflower (Echinacea purpurea)", glyph: "  🌻  \n   |   \n──────", desc: "Sturdy and grounded. Sustains local life through long winter freezes." }
+    // 1. Botanical Encyclopedia for the 5-Day Plot
+    const weekPlants = [
+      { name: "Clustered Mountain Mint", icon: "🌿", bloom: "🌸", desc: "A robust pollinator anchor. High aromatic oils repel mental pests." },
+      { name: "Cardinal Flower", icon: "🌱", bloom: "🌺", desc: "Thrives in deep, moist soil. Defiantly vibrant hummingbird nectar." },
+      { name: "Wild Bergamot", icon: "🌱", bloom: "🪻", desc: "Deeply tranquil root stabilizer known for aromatic calm." },
+      { name: "Sweet Goldenrod", icon: "🌿", bloom: "🌾", desc: "Converts late-week tension into brilliant late-summer gold." },
+      { name: "New England Aster", icon: "🌿", bloom: "🌻", desc: "Celebratory weekend pollinator buffet. Sturdy and resilient." }
     ];
 
-    // Mulch particles
     const mulchChars = ['~', '·', '°', '.', ':', ';', ',', '░', '▒', '▓', '*', '⁕', '`', '\''];
 
-    /* Audio Synthesis (Brown Noise Soil Rustle) */
-    let audioCtx = null;
-    let noiseSource = null;
+    // 2. State & Storage Engine
+    let gardenState = JSON.parse(localStorage.getItem('fallow_composter_week_v2')) || {
+      weekId: getWeekIdentifier(),
+      entries: [] // Array of { dayIdx, badThought, goodThought, plantName }
+    };
 
-    function playRustle() {
-      if (!toggleAudio.checked) return;
+    function getWeekIdentifier() {
+      const now = new Date();
+      const onejan = new Date(now.getFullYear(), 0, 1);
+      const week = Math.ceil((((now - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+      return `${now.getFullYear()}-W${week}`;
+    }
+
+    // Check if new week has rolled around
+    if (gardenState.weekId !== getWeekIdentifier()) {
+      gardenState = { weekId: getWeekIdentifier(), entries: [] };
+      saveState();
+    }
+
+    function saveState() {
+      localStorage.setItem('fallow_composter_week_v2', JSON.stringify(gardenState));
+    }
+
+    // 3. Audio Synthesizer (Rustle & Chime)
+    let audioCtx = null;
+    function playTone(type) {
       try {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const bufferSize = audioCtx.sampleRate * 4;
-        const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-        const output = noiseBuffer.getChannelData(0);
-        let lastOut = 0.0;
-
-        for (let i = 0; i < bufferSize; i++) {
-          const white = Math.random() * 2 - 1;
-          output[i] = (lastOut + (0.02 * white)) / 1.02;
-          lastOut = output[i];
-          output[i] *= 2.5;
+        if (type === 'rustle') {
+          const bufferSize = audioCtx.sampleRate * 2.5;
+          const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const output = noiseBuffer.getChannelData(0);
+          let lastOut = 0.0;
+          for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            output[i] = (lastOut + (0.02 * white)) / 1.02;
+            lastOut = output[i];
+          }
+          const src = audioCtx.createBufferSource();
+          src.buffer = noiseBuffer;
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(320, audioCtx.currentTime);
+          filter.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + 2.2);
+          const gain = audioCtx.createGain();
+          gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 2.4);
+          src.connect(filter);
+          filter.connect(gain);
+          gain.connect(audioCtx.destination);
+          src.start();
+        } else if (type === 'chime') {
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (i * 0.12));
+            gain.gain.setValueAtTime(0.08, audioCtx.currentTime + (i * 0.12));
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + (i * 0.12) + 1.5);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(audioCtx.currentTime + (i * 0.12));
+            osc.stop(audioCtx.currentTime + (i * 0.12) + 1.6);
+          });
         }
-
-        noiseSource = audioCtx.createBufferSource();
-        noiseSource.buffer = noiseBuffer;
-
-        const filter = audioCtx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(320, audioCtx.currentTime);
-        filter.frequency.exponentialRampToValueAtTime(140, audioCtx.currentTime + 3.5);
-
-        const gain = audioCtx.createGain();
-        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 3.8);
-
-        noiseSource.connect(filter);
-        filter.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        noiseSource.start();
       } catch(e) {}
     }
 
-    btnCompost.addEventListener('click', () => {
-      const text = thoughtInput.value.trim();
+    // 4. Canvas Rain System
+    const canvas = document.getElementById('canvas-rain');
+    const ctx = canvas.getContext('2d');
+    let raindrops = [];
+    let rainAnimId = null;
+
+    function startRain() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+      raindrops = Array.from({ length: 45 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        len: Math.random() * 12 + 8,
+        speed: Math.random() * 4 + 6
+      }));
+
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = 'rgba(173, 216, 230, 0.7)';
+        ctx.lineWidth = 1.5;
+        raindrops.forEach(r => {
+          ctx.beginPath();
+          ctx.moveTo(r.x, r.y);
+          ctx.lineTo(r.x, r.y + r.len);
+          ctx.stroke();
+          r.y += r.speed;
+          if (r.y > canvas.height) {
+            r.y = -r.len;
+            r.x = Math.random() * canvas.width;
+          }
+        });
+        rainAnimId = requestAnimationFrame(render);
+      }
+      render();
+    }
+
+    function stopRain() {
+      if (rainAnimId) cancelAnimationFrame(rainAnimId);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // 5. Render Bed Slots
+    function updateBedUI() {
+      const bloomedCount = gardenState.entries.length;
+      document.getElementById('bed-progress-label').textContent = `${bloomedCount} of 5 Days Cultivated`;
+
+      for (let i = 0; i < 5; i++) {
+        const slot = document.getElementById(`slot-${i}`);
+        const entry = gardenState.entries[i];
+
+        if (entry) {
+          slot.className = 'plot-slot bloomed';
+          slot.querySelector('.plot-visual').textContent = weekPlants[i].bloom;
+          slot.querySelector('.plot-plant-name').textContent = weekPlants[i].name;
+        } else if (i === bloomedCount) {
+          slot.className = 'plot-slot active-target';
+          slot.querySelector('.plot-visual').textContent = '🟤';
+          slot.querySelector('.plot-plant-name').textContent = `Ready for ${['Mon','Tue','Wed','Thu','Fri'][i]}`;
+        } else {
+          slot.className = 'plot-slot';
+          slot.querySelector('.plot-visual').textContent = '🌱';
+          slot.querySelector('.plot-plant-name').textContent = weekPlants[i].name;
+        }
+      }
+
+      // Check if complete
+      if (bloomedCount >= 5) {
+        document.getElementById('cultivation-chamber').style.display = 'none';
+        document.getElementById('harvest-banner').style.display = 'block';
+      } else {
+        document.getElementById('cultivation-chamber').style.display = 'block';
+        document.getElementById('harvest-banner').style.display = 'none';
+        document.getElementById('soil-prompt-title').textContent = 
+          `Bury ${['Monday','Tuesday','Wednesday','Thursday','Friday'][bloomedCount]}'s Friction into Topsoil`;
+      }
+    }
+
+    // 6. Interaction Logic
+    let currentBadThought = '';
+
+    // Step 1: Mulching
+    document.getElementById('btn-mulch').addEventListener('click', () => {
+      const text = document.getElementById('input-bad').value.trim();
       if (!text) {
-        alert('Deposit some text into the pile first.');
+        alert('Please enter a friction or thought to mulch.');
+        return;
+      }
+      currentBadThought = text;
+      playTone('rustle');
+
+      // Show Animation Viewport
+      const animScreen = document.getElementById('anim-screen');
+      const animStream = document.getElementById('anim-stream');
+      const animStatus = document.getElementById('anim-status');
+      
+      document.getElementById('step-compost').style.display = 'none';
+      animScreen.style.display = 'block';
+      document.getElementById('sun-glow').style.display = 'none';
+      stopRain();
+
+      animStatus.textContent = '🔥 Thermophilic decomposition: Turning friction into rich humus...';
+      let currentArray = text.split('');
+
+      const interval = setInterval(() => {
+        for (let i = 0; i < Math.max(3, Math.floor(currentArray.length / 6)); i++) {
+          const randIdx = Math.floor(Math.random() * currentArray.length);
+          currentArray[randIdx] = mulchChars[Math.floor(Math.random() * mulchChars.length)];
+        }
+        animStream.textContent = currentArray.join('');
+      }, 100);
+
+      setTimeout(() => {
+        clearInterval(interval);
+        animStatus.textContent = '🌱 Seed planted in cool loam. Awaiting sunlight and rain...';
+        animStream.textContent = '🌰 [ Seed resting in fertile humus ]';
+
+        setTimeout(() => {
+          animScreen.style.display = 'none';
+          document.getElementById('step-nourish').style.display = 'block';
+        }, 1200);
+
+      }, 1600);
+    });
+
+    // Step 2: Nourishing with Good Thought
+    document.getElementById('btn-bloom').addEventListener('click', () => {
+      const goodText = document.getElementById('input-good').value.trim();
+      if (!goodText) {
+        alert('Please enter a small win or restorative moment to nourish the seedling.');
         return;
       }
 
-      playRustle();
+      playTone('chime');
 
-      // UI Switch
-      binCard.style.display = 'none';
-      pileViewport.style.display = 'block';
-      sproutCard.style.display = 'none';
-      decayDisplay.textContent = text;
-      decayDisplay.style.color = '#e0b284';
+      // Animation
+      const animScreen = document.getElementById('anim-screen');
+      const animStream = document.getElementById('anim-stream');
+      const animStatus = document.getElementById('anim-status');
 
-      // Telemetry Calculations
-      const chars = text.length;
-      const soilKg = (chars * 0.018).toFixed(2);
-      const vowels = (text.match(/[aeiou]/gi) || []).length;
-      const cnRatio = Math.max(15, Math.min(45, Math.floor((vowels / (chars || 1)) * 90)));
-      const microbialCount = `${(chars * 1.4).toFixed(1)}B`;
+      document.getElementById('step-nourish').style.display = 'none';
+      animScreen.style.display = 'block';
+      document.getElementById('sun-glow').style.display = 'block';
+      startRain();
 
-      valSoil.textContent = `${soilKg} kg`;
-      valCN.textContent = `${cnRatio} : 1`;
-      valMicrobes.textContent = microbialCount;
-      valTemp.textContent = '142°F';
+      animStatus.textContent = '☀️ Golden sunbeams & rain showers descending...';
+      animStream.textContent = '🌱 Sprout drinking deeply...';
 
-      // Stage 1: Heat & Bacterial Softening (0s - 1.2s)
-      pileStatus.innerHTML = `<span>🔥 Thermophilic Stage: Microbes generating heat (142°F)...</span>`;
-      
+      const activeIdx = gardenState.entries.length;
+      const plant = weekPlants[activeIdx];
+
       setTimeout(() => {
-        // Stage 2: Mulching & Disintegration (1.2s - 2.8s)
-        pileStatus.innerHTML = `<span>🍂 Actinobacteria breakdown: Cellular structure collapsing into mulch...</span>`;
-        decayDisplay.style.color = '#8b5a2b';
-        
-        let currentArray = text.split('');
-        const interval = setInterval(() => {
-          for (let i = 0; i < Math.max(4, Math.floor(currentArray.length / 8)); i++) {
-            const randIdx = Math.floor(Math.random() * currentArray.length);
-            currentArray[randIdx] = mulchChars[Math.floor(Math.random() * mulchChars.length)];
-          }
-          decayDisplay.textContent = currentArray.join('');
-        }, 120);
+        animStream.textContent = `🌿 Stem rising and unfurling leaves...`;
+      }, 1000);
+
+      setTimeout(() => {
+        stopRain();
+        animStatus.textContent = `🌸 Complete! ${plant.name} is in full bloom!`;
+        animStream.innerHTML = `<div style="font-size: 2.5rem; margin-bottom: 0.35rem;">${plant.bloom}</div><strong>${plant.name}</strong><br><span style="font-size: 0.85rem; color: #dfd2c4;">${plant.desc}</span>`;
+
+        // Save Entry
+        gardenState.entries.push({
+          dayIdx: activeIdx,
+          bad: currentBadThought,
+          good: goodText,
+          plant: plant.name
+        });
+        saveState();
 
         setTimeout(() => {
-          clearInterval(interval);
+          animScreen.style.display = 'none';
+          document.getElementById('input-bad').value = '';
+          document.getElementById('input-good').value = '';
+          document.getElementById('step-compost').style.display = 'block';
+          updateBedUI();
+        }, 2200);
 
-          // Stage 3: Humification & Soil Cooling (2.8s - 4.2s)
-          pileStatus.innerHTML = `<span>🌱 Mesophilic maturation: Soil cooled to 72°F. Humus stabilized.</span>`;
-          valTemp.textContent = '72°F';
-          decayDisplay.style.color = '#4a2f1a';
-          decayDisplay.textContent = Array.from({length: Math.min(180, chars)}, () => mulchChars[Math.floor(Math.random() * mulchChars.length)]).join(' ');
-
-          // Stage 4: Sprouting (4.2s)
-          setTimeout(() => {
-            const picked = sprouts[Math.floor(Math.random() * sprouts.length)];
-            document.getElementById('sprout-glyph').textContent = picked.glyph;
-            document.getElementById('sprout-name').textContent = picked.name;
-            document.getElementById('sprout-desc').textContent = `${picked.desc} Generated ${soilKg} kg of rich organic humus.`;
-            sproutCard.style.display = 'block';
-            thoughtInput.value = '';
-          }, 1000);
-
-        }, 1800);
-
-      }, 1200);
+      }, 2400);
     });
 
-    btnAddMore.addEventListener('click', () => {
-      pileViewport.style.display = 'none';
-      binCard.style.display = 'block';
-      valTemp.textContent = '68°F';
+    // Reset / Turn Soil
+    document.getElementById('btn-reset-week').addEventListener('click', () => {
+      if (confirm('Turn the soil to begin a fresh 5-day cultivation week?')) {
+        gardenState.entries = [];
+        saveState();
+        updateBedUI();
+      }
     });
+
+    // Initial Mount
+    updateBedUI();
   </script>
 </body>
 </html>
