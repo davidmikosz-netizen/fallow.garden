@@ -4,9 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fallow Garden — An Anthology of Small, Restorative Utilities</title>
+  <meta name="description" content="An anthology of small, restorative utilities organized across body, mind, environment, personal finance, and restorative play." />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --bg: #f5f2eb;
@@ -14,14 +17,24 @@
       --surface-warm: #ede8dc;
       --text-main: #1c261e;
       --text-muted: #536256;
+      --text-light: #728275;
+      
       --forest: #24422e;
       --moss: #3a6346;
       --sprout: #6b9e78;
       --clay: #b86b4b;
       --clay-soft: #f4e8e1;
+      --sky: #3b6b88;
+      --sky-soft: #eaf1f5;
+      --amber: #cb8934;
+      --amber-soft: #fbf2e3;
+      --purple: #69527a;
+      --purple-soft: #f2edf7;
+
       --border: #dcd5c5;
       --border-subtle: #e9e3d5;
       --radius-lg: 18px;
+      --radius-md: 12px;
       --radius-sm: 8px;
       --shadow-sm: 0 2px 8px rgba(28, 38, 30, 0.04);
       --shadow-md: 0 12px 30px rgba(28, 38, 30, 0.08);
@@ -42,15 +55,15 @@
       color: var(--text-main);
       line-height: 1.65;
       min-height: 100vh;
-      padding: 3.5rem 1.25rem;
+      padding: 3.5rem 1.25rem 5rem;
     }
 
     .container {
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto;
     }
 
-    /* Botanical Top Emblem */
+    /* Botanical Brand Mark */
     .brand-mark {
       display: flex;
       align-items: center;
@@ -92,7 +105,7 @@
     }
 
     .manifesto {
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       color: var(--text-muted);
       border-left: 2px solid var(--sprout);
       padding-left: 1.25rem;
@@ -103,42 +116,62 @@
       margin-top: 0.85rem;
     }
 
-    .section-header {
+    /* Section Category Headings */
+    .category-section {
+      margin-bottom: 3rem;
+    }
+
+    .category-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    .section-title {
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
+    .category-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
     }
 
-    .episode-count {
-      font-size: 0.75rem;
+    .category-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.4rem;
       font-weight: 600;
-      color: var(--moss);
-      background: var(--surface-warm);
-      padding: 0.2rem 0.6rem;
-      border-radius: 20px;
+      color: var(--forest);
+      letter-spacing: -0.01em;
     }
 
-    .episode-list {
+    .category-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .tag-body { background: var(--clay-soft); color: var(--clay); }
+    .tag-mind { background: rgba(58, 99, 70, 0.12); color: var(--forest); }
+    .tag-environment { background: var(--amber-soft); color: var(--amber); }
+    .tag-finance { background: var(--sky-soft); color: var(--sky); }
+    .tag-fun { background: var(--purple-soft); color: var(--purple); }
+
+    .card-list {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
 
-    /* Episode Card */
+    /* Episode Cards */
     .episode-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 1.75rem;
+      padding: 1.6rem 1.75rem;
       text-decoration: none;
       color: inherit;
       box-shadow: var(--shadow-sm);
@@ -174,7 +207,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.75rem;
     }
 
     .badge-wrap {
@@ -184,23 +217,30 @@
     }
 
     .episode-tag {
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--forest);
       background: rgba(58, 99, 70, 0.1);
-      padding: 0.25rem 0.65rem;
+      padding: 0.2rem 0.55rem;
       border-radius: var(--radius-sm);
     }
 
     .status-pill {
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
       font-weight: 600;
       color: var(--clay);
       background: var(--clay-soft);
-      padding: 0.25rem 0.6rem;
+      padding: 0.2rem 0.55rem;
       border-radius: var(--radius-sm);
+    }
+
+    .status-pill.pill-external {
+      color: var(--sky);
+      background: var(--sky-soft);
     }
 
     .arrow-icon {
@@ -215,15 +255,16 @@
 
     .episode-title {
       font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.45rem;
+      font-size: 1.35rem;
       font-weight: 600;
       color: var(--forest);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
       letter-spacing: -0.01em;
+      line-height: 1.3;
     }
 
     .episode-desc {
-      font-size: 0.98rem;
+      font-size: 0.94rem;
       color: var(--text-muted);
       line-height: 1.6;
     }
@@ -236,6 +277,8 @@
       justify-content: space-between;
       font-size: 0.82rem;
       color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     footer a {
@@ -268,122 +311,187 @@
       <h1>An anthology of small, restorative utilities.</h1>
       <div class="manifesto">
         <p>
-          In agriculture, leaving land fallow is not neglect—it is a deliberate pause that allows depleted soil to naturally replenish itself. Our minds and bodies need the same unhurried rest. This space offers a collection of tools for different dimensions of recovery and regeneration.
+          In agriculture, leaving land fallow is not neglect—it is a deliberate pause that allows depleted soil to naturally replenish itself. Our minds, bodies, habitats, and plans require the same unhurried care.
         </p>
         <p>
-          Each tool is published as a self-contained episode designed around one specific need. The episodes require no setup and contain no distractions: open and run them directly in your web browser, or install them to your device as lightweight, focused apps.
+          Each utility is published as a focused, self-contained micro-tool designed around one specific problem. No algorithmic tracking, zero data harvesting, and no ads—open and run them directly in your web browser, or install them to your device as lightweight web apps.
         </p>
       </div>
     </header>
 
     <main>
-      <div class="section-header">
-        <span class="section-title">Published Episodes</span>
-        <span class="episode-count">5 Installments</span>
-      </div>
-      
-      <div class="episode-list">
-        <!-- Episode 01 -->
-        <a href="./episodes/garden/" class="episode-card">
-          <div class="card-top">
-            <div class="badge-wrap">
-              <span class="episode-tag">Episode 01</span>
-              <span class="status-pill">Interactive App</span>
-            </div>
-            <div class="arrow-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </div>
-          </div>
-          <div class="episode-title">Attention Restore: A Tool to Help Restore Your Focus</div>
-          <div class="episode-desc">
-            A guided series of tactile micro-tools and pacing timers designed to counter attention collapse, quiet cognitive friction, and gently rebuild sustained focus.
-          </div>
-        </a>
 
-        <!-- Episode 02 -->
-        <a href="https://getrepoopulate.com" target="_blank" rel="noopener noreferrer" class="episode-card">
-          <div class="card-top">
-            <div class="badge-wrap">
-              <span class="episode-tag">Episode 02</span>
-              <span class="status-pill">Live App</span>
-            </div>
-            <div class="arrow-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </div>
+      <!-- Section 1: The Body -->
+      <section class="category-section">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <h2 class="category-title">The Body</h2>
           </div>
-          <div class="episode-title">Fixing Your Gut Biome After Adverse Events</div>
-          <div class="episode-desc">
-            A colonoscopy, a round of antibiotics, or a stomach bug can disrupt your microbiome. This tool offers evidence-backed dietary strategies to help your digestive flora regenerate.
-          </div>
-        </a>
+          <span class="category-tag tag-body">Physiological Recovery</span>
+        </div>
+        <div class="card-list">
+          <a href="https://getrepoopulate.com" target="_blank" rel="noopener noreferrer" class="episode-card">
+            <div class="card-top">
+              <div class="badge-wrap">
+                <span class="episode-tag">Episode 02</span>
+                <span class="status-pill pill-external">External App</span>
+              </div>
+              <div class="arrow-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="episode-title">Fixing Your Gut Biome After Adverse Events</div>
+            <div class="episode-desc">
+              A colonoscopy, a round of antibiotics, or an acute stomach illness can severely disrupt your microbiome. Evidence-backed dietary strategies and fiber sequencing to help your digestive flora regenerate.
+            </div>
+          </a>
+        </div>
+      </section>
 
-        <!-- Episode 03 -->
-        <a href="./episodes/fers-countdown/" class="episode-card">
-          <div class="card-top">
-            <div class="badge-wrap">
-              <span class="episode-tag">Episode 03</span>
-              <span class="status-pill">Interactive Tool</span>
-            </div>
-            <div class="arrow-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </div>
+      <!-- Section 2: The Mind -->
+      <section class="category-section">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <h2 class="category-title">The Mind</h2>
           </div>
-          <div class="episode-title">Federal Retirement &amp; Working Day Horizon</div>
-          <div class="episode-desc">
-            An unhurried countdown for civil servants. Calculates exact remaining duty shifts to MRA, Age 60, and Age 62—accounting for federal holidays, leave accumulation, and the MRA+10 postponed annuity exit.
-          </div>
-        </a>
+          <span class="category-tag tag-mind">Cognitive Restoration</span>
+        </div>
+        <div class="card-list">
+          <a href="/episodes/garden/" class="episode-card">
+            <div class="card-top">
+              <div class="badge-wrap">
+                <span class="episode-tag">Episode 01</span>
+                <span class="status-pill">Interactive App</span>
+              </div>
+              <div class="arrow-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="episode-title">Attention Restore: Pacing &amp; Optical Resets</div>
+            <div class="episode-desc">
+              Tactile micro-tools, pacing timers, and synthesized brown noise modeled on Attention Restoration Theory (ART) and Default Mode Network activation to quiet cognitive friction and gently rebuild focus.
+            </div>
+          </a>
+        </div>
+      </section>
 
-        <!-- Episode 04 -->
-        <a href="./episodes/composter/" class="episode-card">
-          <div class="card-top">
-            <div class="badge-wrap">
-              <span class="episode-tag">Episode 04</span>
-              <span class="status-pill">Interactive Tool</span>
-            </div>
-            <div class="arrow-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </div>
+      <!-- Section 3: The Environment -->
+      <section class="category-section">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <h2 class="category-title">The Environment</h2>
           </div>
-          <div class="episode-title">The Digital Thought Composter</div>
-          <div class="episode-desc">
-            A cathartic text-disposal engine. Feed looping dread, unread inbox guilt, or administrative sludge to simulated soil microbes and watch it break down into nutrient-rich digital loam.
-          </div>
-        </a>
+          <span class="category-tag tag-environment">Habitat &amp; Ecology</span>
+        </div>
+        <div class="card-list">
+          <a href="https://betterfly.garden" target="_blank" rel="noopener noreferrer" class="episode-card">
+            <div class="card-top">
+              <div class="badge-wrap">
+                <span class="episode-tag">Ecology Hub</span>
+                <span class="status-pill pill-external">External App</span>
+              </div>
+              <div class="arrow-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="episode-title">Better-Fly: Native Habitat &amp; Garden Planner</div>
+            <div class="episode-desc">
+              Design thriving native plant sanctuaries and pollinator waystations. Curate Mid-Atlantic species, plan bloom successions, and cultivate ecological resilience right in your backyard.
+            </div>
+          </a>
+        </div>
+      </section>
 
-        <!-- Episode 05 -->
-        <a href="./episodes/past-lives/" class="episode-card">
-          <div class="card-top">
-            <div class="badge-wrap">
-              <span class="episode-tag">Episode 05</span>
-              <span class="status-pill">Interactive Tool</span>
-            </div>
-            <div class="arrow-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </div>
+      <!-- Section 4: Personal Finance -->
+      <section class="category-section">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <h2 class="category-title">Personal Finance</h2>
           </div>
-          <div class="episode-title">Historical Past Lives Dossier</div>
-          <div class="episode-desc">
-            A diagnostic intake for modern fatigue. Uncover your plausible, unglamorous past life across classical, medieval, and industrial epochs—complete with daily grievances and karmic carryover.
+          <span class="category-tag tag-finance">Long Horizon Planning</span>
+        </div>
+        <div class="card-list">
+          <a href="/episodes/fers-countdown/" class="episode-card">
+            <div class="card-top">
+              <div class="badge-wrap">
+                <span class="episode-tag">Episode 03</span>
+                <span class="status-pill">Interactive Tool</span>
+              </div>
+              <div class="arrow-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="episode-title">Federal Retirement &amp; Working Day Horizon</div>
+            <div class="episode-desc">
+              An unhurried countdown for civil servants. Calculates exact remaining duty shifts to MRA, Age 60, and Age 62—factoring in federal holidays, leave accumulation, FEHB lifetime retention, and the MRA+10 postponed annuity exit.
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Section 5: Fun Stuff -->
+      <section class="category-section">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <h2 class="category-title">Fun Stuff</h2>
           </div>
-        </a>
-      </div>
+          <span class="category-tag tag-fun">Restorative Play &amp; Absurdity</span>
+        </div>
+        <div class="card-list">
+          <a href="/episodes/composter/" class="episode-card">
+            <div class="card-top">
+              <div class="badge-wrap">
+                <span class="episode-tag">Episode 04</span>
+                <span class="status-pill">Interactive Tool</span>
+              </div>
+              <div class="arrow-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="episode-title">The Digital Thought Composter</div>
+            <div class="episode-desc">
+              A cathartic text-disposal engine. Feed looping dread, unread inbox guilt, or administrative sludge to simulated soil microbes and watch it break down into nutrient-rich digital loam.
+            </div>
+          </a>
+
+          <a href="/episodes/past-lives/" class="episode-card">
+            <div class="card-top">
+              <div class="badge-wrap">
+                <span class="episode-tag">Episode 05</span>
+                <span class="status-pill">Interactive Tool</span>
+              </div>
+              <div class="arrow-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="episode-title">Historical &amp; Future Past Lives Dossier</div>
+            <div class="episode-desc">
+              A diagnostic intake for modern fatigue. Uncover your plausible, unglamorous past (or deep-space future) life across classical, medieval, industrial, and frontier epochs—complete with daily grievances and alternate timeline inspection.
+            </div>
+          </a>
+        </div>
+      </section>
+
     </main>
 
     <footer>
