@@ -1,43 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fallow Garden — An Anthology of Small, Restorative Utilities</title>
-  <meta name="description" content="An anthology of small, restorative utilities organized across body, mind, environment, personal finance, and restorative play." />
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fallow.garden | An Anthology of Restorative Micro-Apps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #f5f2eb;
-      --surface: #ffffff;
-      --surface-warm: #ede8dc;
-      --text-main: #1c261e;
-      --text-muted: #536256;
-      --text-light: #728275;
-      
-      --forest: #24422e;
-      --moss: #3a6346;
-      --sprout: #6b9e78;
-      --clay: #b86b4b;
-      --clay-soft: #f4e8e1;
-      --sky: #3b6b88;
-      --sky-soft: #eaf1f5;
-      --amber: #cb8934;
-      --amber-soft: #fbf2e3;
-      --purple: #69527a;
-      --purple-soft: #f2edf7;
-
-      --border: #dcd5c5;
-      --border-subtle: #e9e3d5;
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --radius-sm: 8px;
-      --shadow-sm: 0 2px 8px rgba(28, 38, 30, 0.04);
-      --shadow-md: 0 12px 30px rgba(28, 38, 30, 0.08);
+      --bg: #111413;
+      --surface: #181d1b;
+      --surface-border: #28322e;
+      --surface-hover: #222926;
+      --accent-sage: #8fa89b;
+      --accent-clay: #c88d72;
+      --accent-gold: #d4af37;
+      --text-main: #e6ebe8;
+      --text-muted: #8d9c94;
+      --text-dim: #5c6963;
+      --font-serif: 'Lora', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     }
 
     * {
@@ -47,463 +30,370 @@
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg);
-      background-image: 
-        radial-gradient(ellipse at 85% -10%, rgba(107, 158, 120, 0.12) 0%, transparent 60%),
-        radial-gradient(ellipse at 15% 110%, rgba(184, 107, 75, 0.08) 0%, transparent 60%);
       color: var(--text-main);
-      line-height: 1.65;
-      min-height: 100vh;
-      padding: 3.5rem 1.25rem 5rem;
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 3rem 1.25rem 5rem;
+      display: flex;
+      justify-content: center;
     }
 
     .container {
-      max-width: 720px;
-      margin: 0 auto;
+      width: 100%;
+      max-width: 860px;
     }
 
-    /* Botanical Brand Mark */
-    .brand-mark {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
-    }
-
-    .brand-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--surface-warm);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      color: var(--forest);
-    }
-
-    .brand-label {
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--moss);
-    }
-
+    /* Hero / Manifesto */
     header {
       margin-bottom: 3.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--surface-border);
+      padding-bottom: 2.5rem;
+    }
+
+    .site-tag {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-sage);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
     }
 
     h1 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: var(--forest);
-      letter-spacing: -0.025em;
-      line-height: 1.18;
-      margin-bottom: 1.25rem;
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      margin-bottom: 0.75rem;
     }
 
-    .manifesto {
-      font-size: 1.05rem;
+    .hero-manifesto {
       color: var(--text-muted);
-      border-left: 2px solid var(--sprout);
-      padding-left: 1.25rem;
-      margin-top: 1.25rem;
+      font-size: 1.05rem;
+      max-width: 580px;
+      margin: 0 auto;
+      font-style: italic;
+      font-family: var(--font-serif);
+      line-height: 1.7;
     }
 
-    .manifesto p + p {
-      margin-top: 0.85rem;
-    }
-
-    /* Section Category Headings */
-    .category-section {
-      margin-bottom: 3rem;
-    }
-
-    .category-header {
+    /* Filters / Nav */
+    .filter-bar {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    .category-title-wrap {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
+    .filter-btn {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      color: var(--text-muted);
+      border-radius: 20px;
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: all 0.2s ease;
     }
 
-    .category-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--forest);
-      letter-spacing: -0.01em;
+    .filter-btn:hover {
+      border-color: var(--accent-sage);
+      color: var(--text-main);
     }
 
-    .category-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding: 2px 8px;
-      border-radius: 4px;
+    .filter-btn.active {
+      background: var(--surface-hover);
+      border-color: var(--accent-sage);
+      color: var(--text-main);
+      font-weight: 500;
     }
 
-    .tag-body { background: var(--clay-soft); color: var(--clay); }
-    .tag-mind { background: rgba(58, 99, 70, 0.12); color: var(--forest); }
-    .tag-environment { background: var(--amber-soft); color: var(--amber); }
-    .tag-finance { background: var(--sky-soft); color: var(--sky); }
-    .tag-fun { background: var(--purple-soft); color: var(--purple); }
+    /* App Grid */
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
 
-    .card-list {
+    .app-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 1.75rem;
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    /* Episode Cards */
-    .episode-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.6rem 1.75rem;
+      justify-content: space-between;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
       text-decoration: none;
       color: inherit;
-      box-shadow: var(--shadow-sm);
-      display: block;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .episode-card::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: var(--forest);
-      opacity: 0;
-      transition: opacity 0.2s ease;
+    .app-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-sage);
     }
 
-    .episode-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--sprout);
-    }
-
-    .episode-card:hover::before {
-      opacity: 1;
+    .app-card.featured {
+      border-left: 3px solid var(--accent-clay);
     }
 
     .card-top {
+      margin-bottom: 1.5rem;
+    }
+
+    .card-meta {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 0.75rem;
     }
 
-    .badge-wrap {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .episode-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 600;
+    .badge-tag {
+      font-size: 0.7rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--forest);
-      background: rgba(58, 99, 70, 0.1);
-      padding: 0.2rem 0.55rem;
-      border-radius: var(--radius-sm);
+      color: var(--accent-clay);
+      font-weight: 600;
     }
 
-    .status-pill {
-      font-family: 'JetBrains Mono', monospace;
+    .status-badge {
       font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--clay);
-      background: var(--clay-soft);
-      padding: 0.2rem 0.55rem;
-      border-radius: var(--radius-sm);
-    }
-
-    .status-pill.pill-game {
-      color: var(--purple);
-      background: var(--purple-soft);
-    }
-
-    .status-pill.pill-external {
-      color: var(--sky);
-      background: var(--sky-soft);
-    }
-
-    .arrow-icon {
-      color: var(--text-muted);
-      transition: transform 0.2s ease, color 0.2s ease;
-    }
-
-    .episode-card:hover .arrow-icon {
-      transform: translateX(4px);
-      color: var(--forest);
-    }
-
-    .episode-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: var(--forest);
-      margin-bottom: 0.45rem;
-      letter-spacing: -0.01em;
-      line-height: 1.3;
-    }
-
-    .episode-desc {
-      font-size: 0.94rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    footer {
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border-subtle);
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    footer a {
-      color: var(--forest);
-      text-decoration: none;
+      padding: 0.2rem 0.5rem;
+      background: rgba(143, 168, 155, 0.12);
+      color: var(--accent-sage);
+      border-radius: 4px;
       font-weight: 500;
     }
 
+    .app-title {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .app-summary {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--surface-border);
+      padding-top: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .card-indicators {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .action-link {
+      font-size: 0.85rem;
+      color: var(--accent-sage);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Contemplation Box */
+    .field-notes {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .field-notes h3 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: var(--accent-sage);
+      margin-bottom: 0.5rem;
+    }
+
+    .field-notes p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      border-top: 1px solid var(--surface-border);
+      padding-top: 2rem;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
     footer a:hover {
-      text-decoration: underline;
+      color: var(--accent-sage);
+    }
+
+    @media (max-width: 650px) {
+      .app-grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 2.15rem;
+      }
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <div class="brand-mark">
-      <div class="brand-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22v-9"/>
-          <path d="M9 9a3 3 0 0 1 6 0c0 4-3 6-3 6"/>
-          <path d="M17.5 15.5c2 0 3.5-1.5 3.5-3.5 0-3-4-5-9-5"/>
-          <path d="M6.5 15.5C4.5 15.5 3 14 3 12c0-3 4-5 9-5"/>
-        </svg>
-      </div>
-      <span class="brand-label">Fallow Garden</span>
-    </div>
-
     <header>
-      <h1>An anthology of small, restorative utilities.</h1>
-      <div class="manifesto">
-        <p>
-          In agriculture, leaving land fallow is not neglect—it is a deliberate pause that allows depleted soil to naturally replenish itself. Our minds, bodies, habitats, and plans require the same unhurried care.
-        </p>
-        <p>
-          Each utility is published as a focused, self-contained micro-tool designed around one specific problem. No algorithmic tracking, zero data harvesting, and no ads—open and run them directly in your web browser, or install them to your device as lightweight web apps.
-        </p>
-      </div>
+      <div class="site-tag">fallow.garden</div>
+      <h1>Quiet Tools for Finite Days</h1>
+      <p class="hero-manifesto">
+        "To let land lie fallow is not to neglect it, but to give it time to gather what it needs."
+      </p>
     </header>
 
-    <main>
+    <!-- Category Filter -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All Restorative Tools</button>
+      <button class="filter-btn" data-filter="mind">Mind & Presence</button>
+      <button class="filter-btn" data-filter="ecology">Ecological Habitats</button>
+      <button class="filter-btn" data-filter="rest">Intentional Rest</button>
+    </div>
 
-      <!-- Section 1: The Body -->
-      <section class="category-section">
-        <div class="category-header">
-          <div class="category-title-wrap">
-            <h2 class="category-title">The Body</h2>
+    <!-- App Anthology Grid -->
+    <main class="app-grid" id="appGrid">
+      
+      <!-- New App 1: The Garden of Finite Days -->
+      <a href="/finite-days/" class="app-card featured" data-category="mind">
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="badge-tag">Actuarial Mindfulness</span>
+            <span class="status-badge">New</span>
           </div>
-          <span class="category-tag tag-body">Physiological Recovery</span>
+          <h2 class="app-title">The Garden of Finite Days</h2>
+          <p class="app-summary">
+            A contemplative life-horizon visualizer using conditional survival tables, 8 peer-reviewed lifestyle levers, and the loom of finite weeks.
+          </p>
         </div>
-        <div class="card-list">
-          <a href="https://getrepoopulate.com" target="_blank" rel="noopener noreferrer" class="episode-card">
-            <div class="card-top">
-              <div class="badge-wrap">
-                <span class="episode-tag">Episode 02</span>
-                <span class="status-pill pill-external">External App</span>
-              </div>
-              <div class="arrow-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-              </div>
-            </div>
-            <div class="episode-title">Fixing Your Gut Biome After Adverse Events</div>
-            <div class="episode-desc">
-              A colonoscopy, a round of antibiotics, or an acute stomach illness can severely disrupt your microbiome. Evidence-backed dietary strategies and fiber sequencing to help your digestive flora regenerate.
-            </div>
-          </a>
+        <div class="card-footer">
+          <span class="card-indicators">Memento Mori &bull; SSA Tables</span>
+          <span class="action-link">Open Horizon &rarr;</span>
         </div>
-      </section>
+      </a>
 
-      <!-- Section 2: The Mind -->
-      <section class="category-section">
-        <div class="category-header">
-          <div class="category-title-wrap">
-            <h2 class="category-title">The Mind</h2>
+      <!-- New App 2: Digital Thought Composter -->
+      <a href="/composter/" class="app-card featured" data-category="rest">
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="badge-tag">Cognitive Restoration</span>
+            <span class="status-badge">New</span>
           </div>
-          <span class="category-tag tag-mind">Cognitive Restoration</span>
+          <h2 class="app-title">Digital Thought Composter</h2>
+          <p class="app-summary">
+            Decompose lingering anxieties and mental clutter into nutrient-rich substrate to quietly cultivate a 5-day wildflower meadow.
+          </p>
         </div>
-        <div class="card-list">
-          <a href="/episodes/garden/" class="episode-card">
-            <div class="card-top">
-              <div class="badge-wrap">
-                <span class="episode-tag">Episode 01</span>
-                <span class="status-pill">Interactive App</span>
-              </div>
-              <div class="arrow-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </div>
-            </div>
-            <div class="episode-title">Attention Restore: Pacing &amp; Optical Resets</div>
-            <div class="episode-desc">
-              Tactile micro-tools, pacing timers, and synthesized brown noise modeled on Attention Restoration Theory (ART) and Default Mode Network activation to quiet cognitive friction and gently rebuild focus.
-            </div>
-          </a>
+        <div class="card-footer">
+          <span class="card-indicators">Attention Restoration &bull; Zen</span>
+          <span class="action-link">Begin Composting &rarr;</span>
         </div>
-      </section>
+      </a>
 
-      <!-- Section 3: The Environment -->
-      <section class="category-section">
-        <div class="category-header">
-          <div class="category-title-wrap">
-            <h2 class="category-title">The Environment</h2>
+      <!-- Ecosystem App 3: Better-Fly Habitat Planner -->
+      <a href="https://betterfly.garden" class="app-card" data-category="ecology" target="_blank" rel="noopener">
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="badge-tag">Habitat Design</span>
+            <span class="status-badge">Companion</span>
           </div>
-          <span class="category-tag tag-environment">Habitat &amp; Ecology</span>
+          <h2 class="app-title">Better-Fly Planner</h2>
+          <p class="app-summary">
+            Design regenerative native plant corridors, track pollinator bloom calendars, and engineer deer-resistant Mid-Atlantic habitats.
+          </p>
         </div>
-        <div class="card-list">
-          <a href="https://betterfly.garden" target="_blank" rel="noopener noreferrer" class="episode-card">
-            <div class="card-top">
-              <div class="badge-wrap">
-                <span class="episode-tag">Ecology Hub</span>
-                <span class="status-pill pill-external">External App</span>
-              </div>
-              <div class="arrow-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-              </div>
-            </div>
-            <div class="episode-title">Better-Fly: Native Habitat &amp; Garden Planner</div>
-            <div class="episode-desc">
-              Design thriving native plant sanctuaries and pollinator waystations. Curate Mid-Atlantic species, plan bloom successions, and cultivate ecological resilience right in your backyard.
-            </div>
-          </a>
+        <div class="card-footer">
+          <span class="card-indicators">Native Flora &bull; Pollinators</span>
+          <span class="action-link">Visit Garden ↗</span>
         </div>
-      </section>
+      </a>
 
-      <!-- Section 4: Personal Finance -->
-      <section class="category-section">
-        <div class="category-header">
-          <div class="category-title-wrap">
-            <h2 class="category-title">Personal Finance</h2>
+      <!-- Restorative Tool 4: Fallow Breathing & Rest Intervals -->
+      <a href="/fallow-rest/" class="app-card" data-category="mind">
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="badge-tag">Circadian Rhythm</span>
+            <span class="status-badge">Utility</span>
           </div>
-          <span class="category-tag tag-finance">Long Horizon Planning</span>
+          <h2 class="app-title">The Resting Ground</h2>
+          <p class="app-summary">
+            Minimalist pacing intervals and gentle visual breath pacers calibrated to down-regulate the nervous system between focused work cycles.
+          </p>
         </div>
-        <div class="card-list">
-          <a href="/episodes/fers-countdown/" class="episode-card">
-            <div class="card-top">
-              <div class="badge-wrap">
-                <span class="episode-tag">Episode 03</span>
-                <span class="status-pill">Interactive Tool</span>
-              </div>
-              <div class="arrow-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </div>
-            </div>
-            <div class="episode-title">Federal Retirement &amp; Working Day Horizon</div>
-            <div class="episode-desc">
-              An unhurried countdown for civil servants. Calculates exact remaining duty shifts to MRA, Age 60, and Age 62—factoring in federal holidays, leave accumulation, FEHB lifetime retention, and the MRA+10 postponed annuity exit.
-            </div>
-          </a>
+        <div class="card-footer">
+          <span class="card-indicators">Heart Rate Variability</span>
+          <span class="action-link">Enter Stillness &rarr;</span>
         </div>
-      </section>
-
-      <!-- Section 5: Fun Stuff -->
-      <section class="category-section">
-        <div class="category-header">
-          <div class="category-title-wrap">
-            <h2 class="category-title">Fun Stuff</h2>
-          </div>
-          <span class="category-tag tag-fun">Restorative Play &amp; Absurdity</span>
-        </div>
-        <div class="card-list">
-          <a href="/episodes/composter/" class="episode-card">
-            <div class="card-top">
-              <div class="badge-wrap">
-                <span class="episode-tag">Episode 04</span>
-                <span class="status-pill pill-game">5-Day Game</span>
-              </div>
-              <div class="arrow-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </div>
-            </div>
-            <div class="episode-title">The 5-Day Thought Composter &amp; Weekly Meadow</div>
-            <div class="episode-desc">
-              A weekly restorative game. Bury daily friction and administrative sludge into fertile topsoil, nourish the seed with good thoughts and sunbeams, and cultivate a 5-flower native pollinator bed Monday through Friday.
-            </div>
-          </a>
-
-          <a href="/episodes/past-lives/" class="episode-card">
-            <div class="card-top">
-              <div class="badge-wrap">
-                <span class="episode-tag">Episode 05</span>
-                <span class="status-pill">Interactive Tool</span>
-              </div>
-              <div class="arrow-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </div>
-            </div>
-            <div class="episode-title">Historical &amp; Future Past Lives Dossier</div>
-            <div class="episode-desc">
-              A diagnostic intake for modern fatigue. Uncover your plausible, unglamorous past (or deep-space future) life across classical, medieval, industrial, and frontier epochs—complete with daily grievances and alternate timeline inspection.
-            </div>
-          </a>
-        </div>
-      </section>
+      </a>
 
     </main>
 
+    <!-- Field Philosophy Note -->
+    <section class="field-notes">
+      <h3>The Soil Principle</h3>
+      <p>
+        Every utility here is single-purpose, privacy-first, and zero-tracking. Built to be used intentionally, closed without guilt, and returned to when quiet ground is needed.
+      </p>
+    </section>
+
     <footer>
-      <span>fallow.garden</span>
-      <span>Single-purpose tools • Zero tracking</span>
+      <p>fallow.garden &bull; Rooted in ecological cultivation and intentional living.</p>
     </footer>
   </div>
 
+  <script>
+    // Interactive Category Filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const appCards = document.querySelectorAll('.app-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+
+        appCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
