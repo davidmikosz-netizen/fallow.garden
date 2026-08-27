@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Inner Meadow — Gut Biome Upgrade Kit</title>
+  <style>
+    :root {
+      --parchment: #f4f1ea;
+      --parchment-deep: #eae4d6;
+      --card-bg: #fcfbfa;
+      --loam-dark: #2a221b;
+      --loam-mid: #4a3c31;
+      --loam-light: #736357;
+      --moss-deep: #2d3b27;
+      --moss-mid: #485c3f;
+      --moss-light: #7b946d;
+      --moss-pale: #d6e2cf;
+      --terracotta: #b85d3b;
+      --terracotta-pale: #f2dfd5;
+      --ochre: #c98838;
+      --ochre-pale: #f7ebd9;
+      --border-subtle: #dcd4c5;
+      --border-focus: #485c3f;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --font-serif: "Iowan Old Style", "Apple Garamond", "Baskerville", "Times New Roman", "Droid Serif", Georgia, serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--parchment);
+      color: var(--loam-dark);
+      font-family: var(--font-serif);
+      line-height: 1.55;
+      padding: 1.5rem 1rem 4rem;
+      display: flex;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 820px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 1rem 0 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--moss-mid);
+      background: var(--moss-pale);
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--loam-light);
+      margin-top: 0.35rem;
+      font-style: italic;
+    }
+
+    .header-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.25rem;
+      margin-top: 0.85rem;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+    }
+
+    .btn-text {
+      background: none;
+      border: none;
+      color: var(--loam-light);
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 0.8rem;
+      font-family: var(--font-sans);
+    }
+    .btn-text:hover {
+      color: var(--terracotta);
+    }
+
+    /* Meadow Canvas Box */
+    .meadow-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: 0 4px 20px rgba(42, 34, 27, 0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .meadow-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 0.75rem;
+    }
+
+    .meadow-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--loam-dark);
+    }
+
+    .species-tally {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--moss-deep);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .species-tally span {
+      font-size: 1.2rem;
+      color: var(--terracotta);
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(180deg, #f9fbf8 0%, #edf2ea 75%, #e1d8cb 100%);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Keystone Biomarkers / Substrate Gauges */
+    .gauges-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .gauge-pill {
+      background: var(--parchment-deep);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.75rem;
+      font-family: var(--font-sans);
+    }
+
+    .gauge-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--loam-mid);
+      margin-bottom: 0.35rem;
+    }
+
+    .gauge-target {
+      font-size: 0.7rem;
+      color: var(--loam-light);
+      font-weight: normal;
+    }
+
+    .gauge-track {
+      height: 6px;
+      background: rgba(0, 0, 0, 0.07);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .gauge-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.4s ease-out;
+      background-color: var(--moss-mid);
+    }
+    .gauge-fill.terracotta { background-color: var(--terracotta); }
+    .gauge-fill.ochre { background-color: var(--ochre); }
+
+    /* Section Cards */
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1rem;
+      border-bottom: 1px dashed var(--border-subtle);
+      padding-bottom: 0.5rem;
+    }
+
+    .section-head h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--loam-dark);
+    }
+
+    .section-desc {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--loam-light);
+    }
+
+    /* Plant Categories & Tags */
+    .category-block {
+      margin-bottom: 1.15rem;
+    }
+
+    .category-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .category-label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--moss-deep);
+      margin-bottom: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .tags-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .plant-tag {
+      appearance: none;
+      background: var(--parchment);
+      border: 1px solid var(--border-subtle);
+      color: var(--loam-mid);
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      padding: 0.32rem 0.65rem;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .plant-tag:hover {
+      border-color: var(--moss-mid);
+      background: var(--parchment-deep);
+    }
+
+    .plant-tag.active {
+      background: var(--moss-deep);
+      border-color: var(--moss-deep);
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .plant-tag.active .check {
+      display: inline;
+    }
+
+    .plant-tag .check {
+      display: none;
+      font-size: 0.75rem;
+    }
+
+    /* Custom Plant Form */
+    .add-custom-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px dotted var(--border-subtle);
+    }
+
+    .input-text {
+      flex: 1;
+      padding: 0.45rem 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      background: var(--parchment);
+      color: var(--loam-dark);
+    }
+    .input-text:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      background: #fff;
+    }
+
+    .select-category {
+      padding: 0.45rem 0.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      background: var(--parchment);
+      color: var(--loam-dark);
+    }
+
+    .btn-secondary {
+      background: var(--moss-mid);
+      color: #fff;
+      border: none;
+      padding: 0.45rem 0.85rem;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-secondary:hover {
+      background: var(--moss-deep);
+    }
+
+    /* Ferment Matrix */
+    .ferment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .ferment-card {
+      background: var(--parchment);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .ferment-card:hover {
+      border-color: var(--ochre);
+    }
+
+    .ferment-card.active {
+      background: var(--ochre-pale);
+      border-color: var(--ochre);
+    }
+
+    .ferment-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.25rem;
+    }
+
+    .ferment-icon {
+      font-size: 1.2rem;
+    }
+
+    .ferment-name {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--loam-dark);
+    }
+
+    .ferment-examples {
+      font-size: 0.72rem;
+      color: var(--loam-light);
+      font-family: var(--font-sans);
+      line-height: 1.3;
+      margin-top: 0.25rem;
+    }
+
+    /* Fasting / Mucosal Rest Slider */
+    .rest-slider-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hours-display {
+      font-family: var(--font-sans);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--terracotta);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--terracotta);
+      cursor: pointer;
+    }
+
+    .rest-status-card {
+      background: var(--terracotta-pale);
+      border-left: 3px solid var(--terracotta);
+      padding: 0.6rem 0.85rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--loam-dark);
+    }
+
+    .rest-status-title {
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+      color: var(--terracotta);
+    }
+
+    /* Ecological Advice / Substrate Feedback */
+    .insight-card {
+      background: #fdfaf3;
+      border: 1px solid #e8dec7;
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+    }
+
+    .insight-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      color: var(--moss-mid);
+    }
+
+    .insight-content {
+      font-size: 0.88rem;
+      color: var(--loam-mid);
+    }
+
+    .insight-content strong {
+      color: var(--loam-dark);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--loam-light);
+      font-family: var(--font-sans);
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem 0.5rem 3rem;
+      }
+      h1 {
+        font-size: 1.75rem;
+      }
+      .gauges-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .ferment-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <header>
+      <div class="badge">Microbiome Stewardship Module</div>
+      <h1>The Inner Meadow</h1>
+      <p class="subtitle">Weekly microbial diversity, targeted substrate enrichment & mucosal rest</p>
+      
+      <div class="header-actions">
+        <span id="currentWeekRange">Week of Cultivation</span>
+        <span>•</span>
+        <button class="btn-text" id="resetWeekBtn" title="Archive & begin a new week">Reset New Week</button>
+      </div>
+    </header>
+
+    <!-- Generative Meadow & Vitality Dashboard -->
+    <section class="meadow-card">
+      <div class="meadow-header">
+        <div>
+          <div class="meadow-title">Meadow Flora Index</div>
+          <div class="section-desc">Procedural growth driven by your weekly botanical diversity</div>
+        </div>
+        <div class="species-tally">
+          <span id="totalPlantCount">0</span> / 30 Species
+        </div>
+      </div>
+
+      <div class="canvas-container">
+        <canvas id="meadowCanvas"></canvas>
+      </div>
+
+      <!-- Substrate Biomarkers -->
+      <div class="gauges-grid">
+        <div class="gauge-pill">
+          <div class="gauge-label-row">
+            <span>Butyrate Fuel</span>
+            <span id="butyrateScore">0%</span>
+          </div>
+          <div class="gauge-track">
+            <div class="gauge-fill" id="butyrateBar" style="width: 0%"></div>
+          </div>
+          <div class="gauge-target">Resistant starch & fibers</div>
+        </div>
+
+        <div class="gauge-pill">
+          <div class="gauge-label-row">
+            <span>Mucosal Barrier</span>
+            <span id="mucinScore">0%</span>
+          </div>
+          <div class="gauge-track">
+            <div class="gauge-fill terracotta" id="mucinBar" style="width: 0%"></div>
+          </div>
+          <div class="gauge-target">Rest + Polyphenols</div>
+        </div>
+
+        <div class="gauge-pill">
+          <div class="gauge-label-row">
+            <span>Bifido Substrates</span>
+            <span id="inulinScore">0%</span>
+          </div>
+          <div class="gauge-track">
+            <div class="gauge-fill ochre" id="inulinBar" style="width: 0%"></div>
+          </div>
+          <div class="gauge-target">Inulin & Alliums</div>
+        </div>
+
+        <div class="gauge-pill">
+          <div class="gauge-label-row">
+            <span>Living Ferments</span>
+            <span id="fermentScore">0/4</span>
+          </div>
+          <div class="gauge-track">
+            <div class="gauge-fill" id="fermentBar" style="width: 0%"></div>
+          </div>
+          <div class="gauge-target">Microbial rotations</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Substrate Feedback -->
+    <div class="insight-card" id="insightBox">
+      <div class="insight-icon">🌿</div>
+      <div class="insight-content" id="insightText">
+        Welcome to your inner garden. Log this week's unique botanical varieties, living ferments, and digestive rest hours below to cultivate your ecosystem.
+      </div>
+    </div>
+
+    <!-- Section 1: Weekly 30-Plant Ledger -->
+    <section class="section-card">
+      <div class="section-head">
+        <h2>1. The 30-Plant Species Ledger</h2>
+        <div class="section-desc">American Gut Project threshold: ≥ 30 unique species/week</div>
+      </div>
+
+      <div id="plantCategoriesContainer">
+        <!-- Dynamically rendered plant categories and buttons -->
+      </div>
+
+      <!-- Add Custom Plant -->
+      <form class="add-custom-row" id="customPlantForm">
+        <input type="text" class="input-text" id="customPlantInput" placeholder="Add custom botanical (e.g. Dandelion greens, Sorghum)..." required />
+        <select class="select-category" id="customPlantCategory">
+          <option value="greens">Greens & Brassicas</option>
+          <option value="alliums">Alliums & Roots</option>
+          <option value="grains">Grains & Seeds</option>
+          <option value="legumes">Legumes & Pulses</option>
+          <option value="polyphenols">Polyphenols & Herbs</option>
+        </select>
+        <button type="submit" class="btn-secondary">+ Add</button>
+      </form>
+    </section>
+
+    <!-- Section 2: Ferment Rotation Matrix -->
+    <section class="section-card">
+      <div class="section-head">
+        <h2>2. Living Ferment Rotation</h2>
+        <div class="section-desc">Rotate living cultures across diverse microbial clades</div>
+      </div>
+
+      <div class="ferment-grid" id="fermentGrid">
+        <!-- Ferment cards rendered via JS -->
+      </div>
+    </section>
+
+    <!-- Section 3: Mucosal Renewal Window -->
+    <section class="section-card">
+      <div class="section-head">
+        <h2>3. Mucosal Renewal Window (Rest Rhythm)</h2>
+        <div class="section-desc">Fasting allows <em>Akkermansia</em> to feed on mucosal glycans, strengthening the barrier</div>
+      </div>
+
+      <div class="rest-slider-box">
+        <div class="slider-header">
+          <span style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--loam-mid);">Daily Digestive Rest Window:</span>
+          <span class="hours-display" id="restHoursDisplay">14 Hours</span>
+        </div>
+        <input type="range" id="restRange" min="10" max="22" step="1" value="14" />
+        
+        <div class="rest-status-card" id="restStatusCard">
+          <div class="rest-status-title" id="restStatusTitle">14-Hour Baseline Rest</div>
+          <div id="restStatusDesc">Migrating Motor Complex (MMC) completes digestive sweeps; triggers initial mucosal clearance and bacterial rest.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      fallow.garden — restorative micro-utilities for mind, soil, and human vitality. Zero telemetry. Stored entirely on your device.
+    </footer>
+
+  </div>
+
+  <script>
+    /* =========================================================================
+       DATA STRUCTURES & DEFAULT CATALOG
+       ========================================================================= */
+    const DEFAULT_PLANT_DATA = {
+      alliums: {
+        title: "Alliums, Roots & Inulin",
+        icon: "🧅",
+        items: ["Garlic", "Leeks", "Yellow Onions", "Shallots", "Jerusalem Artichokes (Sunchokes)", "Dandelion Root", "Parsnips", "Burdock Root"]
+      },
+      greens: {
+        title: "Greens, Brassicas & Sulforaphane",
+        icon: "🥬",
+        items: ["Bok Choy", "Tuscan Kale", "Wild Arugula", "Broccoli Sprouts", "Watercress", "Red Cabbage", "Swiss Chard", "Collard Greens"]
+      },
+      grains: {
+        title: "Grains, Pseudocereals & Resistant Starch",
+        icon: "🌾",
+        items: ["Buckwheat Groats", "Steel-Cut Oats (Cooled)", "Tri-Color Quinoa", "Hull-less Barley", "Farro", "Wild Rice", "Millet", "Teff"]
+      },
+      legumes: {
+        title: "Legumes, Pulses & Seeds",
+        icon: "🫘",
+        items: ["French Green Lentils", "Black Beans", "Chickpeas", "Golden Flaxseed", "Chia Seeds", "Raw Pumpkin Seeds", "Hemp Hearts", "Edamame"]
+      },
+      polyphenols: {
+        title: "Polyphenol Berries, Herbs & Aromatics",
+        icon: "🫐",
+        items: ["Wild Blueberries", "Pomegranate Arils", "100% Dark Cacao", "Matcha / Green Tea", "Fresh Thyme", "Rosemary", "Spearmint / Peppermint", "Ginger Root"]
+      }
+    };
+
+    const FERMENT_FAMILIES = [
+      {
+        id: "lactic",
+        icon: "🥬",
+        name: "Lactic Acid Vegetables",
+        examples: "Raw sauerkraut, kimchi, sour pickles, fermented carrots"
+      },
+      {
+        id: "dairy_yeast",
+        icon: "🥛",
+        name: "Dairy / Yeast Cultures",
+        examples: "Traditional milk kefir, water kefir, raw aged unpasteurized cheeses"
+      },
+      {
+        id: "soy_grain",
+        icon: "🥢",
+        name: "Koji, Soy & Grain",
+        examples: "Authentic aged miso, tempeh, natto, fermented sourdough"
+      },
+      {
+        id: "wild_tonics",
+        icon: "🏺",
+        name: "Wild Liquid Tonics",
+        examples: "Beet kvass, unfiltered raw apple cider vinegar, kombucha"
+      }
+    ];
+
+    const REST_TIERS = {
+      10: { title: "10-11 Hours: Minimal Rest", desc: "Basic digestion concludes; limited mucosal barrier rest." },
+      12: { title: "12-13 Hours: Overnight Fast", desc: "Migrating Motor Complex (MMC) sweeps intestinal debris." },
+      14: { title: "14-15 Hours: Mucosal Cleansing Window", desc: "Akkermansia muciniphila begins feeding on old mucin, prompting goblet cells to refresh the barrier lining." },
+      16: { title: "16-17 Hours: Cellular Renewal & Autophagy", desc: "Heightened cellular repair, reduced systemic gut endotoxemia, deep metabolic rest." },
+      18: { title: "18+ Hours: Deep Microbiome Reset", desc: "Intense shift to fat oxidation and full mucosal epithelial turnover." }
+    };
+
+    /* =========================================================================
+       STATE MANAGEMENT (LOCALSTORAGE)
+       ========================================================================= */
+    const STORAGE_KEY = "fallow_inner_meadow_v1";
+
+    let state = {
+      selectedPlants: [],
+      customPlants: { alliums: [], greens: [], grains: [], legumes: [], polyphenols: [] },
+      selectedFerments: [],
+      restHours: 14,
+      weekStartDate: new Date().toISOString()
+    };
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          state = Object.assign(state, JSON.parse(saved));
+        }
+      } catch (e) {
+        console.warn("Could not load state from localStorage", e);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.warn("Could not save state to localStorage", e);
+      }
+    }
+
+    /* =========================================================================
+       CANVAS PROCEDURAL BOTANICAL ENGINE
+       ========================================================================= */
+    const canvas = document.getElementById("meadowCanvas");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      renderMeadow();
+    }
+
+    // Deterministic pseudo-random based on string hash
+    function hashString(str) {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0;
+      }
+      return Math.abs(hash);
+    }
+
+    function renderMeadow() {
+      const width = canvas.width / (window.devicePixelRatio || 1);
+      const height = canvas.height / (window.devicePixelRatio || 1);
+
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw Topsoil Baseline
+      const soilHeight = 22;
+      const groundY = height - soilHeight;
+
+      // Soil Gradient
+      const soilGrad = ctx.createLinearGradient(0, groundY, 0, height);
+      soilGrad.addColorStop(0, "#4a3c31");
+      soilGrad.addColorStop(1, "#2a221b");
+      ctx.fillStyle = soilGrad;
+      ctx.fillRect(0, groundY, width, soilHeight);
+
+      // Soil Grass roots/specks
+      ctx.fillStyle = "#736357";
+      for (let i = 10; i < width; i += 18) {
+        ctx.fillRect(i, groundY + 4, 3, 2);
+        ctx.fillRect(i + 7, groundY + 11, 2, 2);
+      }
+
+      const plantCount = state.selectedPlants.length;
+
+      // If bare soil
+      if (plantCount === 0) {
+        ctx.fillStyle = "#8a7a6e";
+        ctx.font = 'italic 13px "Iowan Old Style", Georgia, serif';
+        ctx.textAlign = "center";
+        ctx.fillText("Soil is fallow and awaiting seeds. Select botanical varieties below.", width / 2, groundY - 40);
+        return;
+      }
+
+      // Draw each selected plant as a procedural botanical stalk/flower
+      const spacing = width / (plantCount + 1);
+
+      state.selectedPlants.forEach((plantName, index) => {
+        const hash = hashString(plantName);
+        const x = spacing * (index + 1) + ((hash % 15) - 7);
+        const stalkHeight = 45 + (hash % 65);
+        const curve = ((hash % 20) - 10);
+        const flowerType = hash % 5; // 0: Wildflower daisy, 1: Wheat spike, 2: Fern/Bokchoy frond, 3: Clover ball, 4: Berry cluster
+
+        // Stem color variation
+        const stemHue = 95 + (hash % 30);
+        ctx.strokeStyle = `hsl(${stemHue}, 28%, 34%)`;
+        ctx.lineWidth = 1.8;
+        ctx.lineCap = "round";
+
+        ctx.beginPath();
+        ctx.moveTo(x, groundY);
+        const cpX = x + curve;
+        const cpY = groundY - stalkHeight * 0.5;
+        const topX = x + curve * 1.5;
+        const topY = groundY - stalkHeight;
+        ctx.quadraticCurveTo(cpX, cpY, topX, topY);
+        ctx.stroke();
+
+        // Small leaf on stem
+        ctx.fillStyle = `hsl(${stemHue + 5}, 35%, 40%)`;
+        ctx.beginPath();
+        ctx.ellipse(cpX - 2, cpY, 6, 2.5, (curve * Math.PI) / 180, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Floral head rendering
+        if (flowerType === 0) {
+          // Daisy / Aster
+          const petalColor = hash % 2 === 0 ? "#b85d3b" : "#c98838";
+          ctx.fillStyle = petalColor;
+          for (let p = 0; p < 6; p++) {
+            const angle = (p * Math.PI) / 3;
+            ctx.beginPath();
+            ctx.arc(topX + Math.cos(angle) * 6, topY + Math.sin(angle) * 6, 3, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.fillStyle = "#f4f1ea";
+          ctx.beginPath();
+          ctx.arc(topX, topY, 3.5, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (flowerType === 1) {
+          // Grain spike (Wheat / Oats)
+          ctx.fillStyle = "#d4a373";
+          for (let g = 0; g < 4; g++) {
+            ctx.beginPath();
+            ctx.ellipse(topX - 3, topY + (g * 5), 4, 2, -0.4, 0, Math.PI * 2);
+            ctx.ellipse(topX + 3, topY + (g * 5), 4, 2, 0.4, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        } else if (flowerType === 2) {
+          // Leafy Frond / Brassica
+          ctx.fillStyle = "#586f4d";
+          ctx.beginPath();
+          ctx.ellipse(topX, topY, 9, 5, (curve * 0.05), 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "#788f68";
+          ctx.beginPath();
+          ctx.ellipse(topX - 3, topY - 2, 6, 3.5, -0.3, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (flowerType === 3) {
+          // Clover head
+          ctx.fillStyle = "#9d4edd";
+          ctx.fillStyle = (hash % 2 === 0) ? "#b85d3b" : "#e29578";
+          ctx.beginPath();
+          ctx.arc(topX, topY, 6.5, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          // Berry cluster (Polyphenol dark berries)
+          ctx.fillStyle = "#4a2840";
+          ctx.beginPath();
+          ctx.arc(topX - 3, topY, 3, 0, Math.PI * 2);
+          ctx.arc(topX + 3, topY - 2, 3, 0, Math.PI * 2);
+          ctx.arc(topX, topY + 3, 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+    }
+
+    /* =========================================================================
+       DOM RENDERING & METRICS COMPUTATION
+       ========================================================================= */
+    const plantCategoriesContainer = document.getElementById("plantCategoriesContainer");
+    const fermentGrid = document.getElementById("fermentGrid");
+    const totalPlantCountEl = document.getElementById("totalPlantCount");
+    const butyrateBar = document.getElementById("butyrateBar");
+    const butyrateScore = document.getElementById("butyrateScore");
+    const mucinBar = document.getElementById("mucinBar");
+    const mucinScore = document.getElementById("mucinScore");
+    const inulinBar = document.getElementById("inulinBar");
+    const inulinScore = document.getElementById("inulinScore");
+    const fermentBar = document.getElementById("fermentBar");
+    const fermentScore = document.getElementById("fermentScore");
+    const restRange = document.getElementById("restRange");
+    const restHoursDisplay = document.getElementById("restHoursDisplay");
+    const restStatusTitle = document.getElementById("restStatusTitle");
+    const restStatusDesc = document.getElementById("restStatusDesc");
+    const insightText = document.getElementById("insightText");
+    const currentWeekRangeEl = document.getElementById("currentWeekRange");
+
+    function renderPlantLedger() {
+      plantCategoriesContainer.innerHTML = "";
+
+      Object.keys(DEFAULT_PLANT_DATA).forEach(catKey => {
+        const cat = DEFAULT_PLANT_DATA[catKey];
+        const customItems = state.customPlants[catKey] || [];
+        const allItems = [...cat.items, ...customItems];
+
+        const catBlock = document.createElement("div");
+        catBlock.className = "category-block";
+
+        const label = document.createElement("div");
+        label.className = "category-label";
+        label.innerHTML = `<span>${cat.icon}</span> <span>${cat.title}</span>`;
+        catBlock.appendChild(label);
+
+        const tagsFlex = document.createElement("div");
+        tagsFlex.className = "tags-flex";
+
+        allItems.forEach(plant => {
+          const btn = document.createElement("button");
+          const isActive = state.selectedPlants.includes(plant);
+          btn.className = `plant-tag ${isActive ? "active" : ""}`;
+          btn.innerHTML = `<span class="check">✓</span><span>${plant}</span>`;
+          
+          btn.addEventListener("click", () => {
+            togglePlant(plant);
+          });
+
+          tagsFlex.appendChild(btn);
+        });
+
+        catBlock.appendChild(tagsFlex);
+        plantCategoriesContainer.appendChild(catBlock);
+      });
+    }
+
+    function renderFermentMatrix() {
+      fermentGrid.innerHTML = "";
+
+      FERMENT_FAMILIES.forEach(fam => {
+        const isActive = state.selectedFerments.includes(fam.id);
+        const card = document.createElement("div");
+        card.className = `ferment-card ${isActive ? "active" : ""}`;
+        
+        card.innerHTML = `
+          <div>
+            <div class="ferment-top">
+              <span class="ferment-name">${fam.name}</span>
+              <span class="ferment-icon">${fam.icon}</span>
+            </div>
+            <div class="ferment-examples">${fam.examples}</div>
+          </div>
+          <div style="font-family: var(--font-sans); font-size: 0.7rem; color: ${isActive ? 'var(--ochre)' : 'var(--loam-light)'}; font-weight: 600; margin-top: 0.5rem;">
+            ${isActive ? "✓ In Rotation This Week" : "+ Tap to Log"}
+          </div>
+        `;
+
+        card.addEventListener("click", () => {
+          toggleFerment(fam.id);
+        });
+
+        fermentGrid.appendChild(card);
+      });
+    }
+
+    function updateFastingUI() {
+      const hours = parseInt(state.restHours, 10);
+      restRange.value = hours;
+      restHoursDisplay.textContent = `${hours} Hours`;
+
+      let tierKey = 10;
+      if (hours >= 18) tierKey = 18;
+      else if (hours >= 16) tierKey = 16;
+      else if (hours >= 14) tierKey = 14;
+      else if (hours >= 12) tierKey = 12;
+
+      const tier = REST_TIERS[tierKey];
+      restStatusTitle.textContent = tier.title;
+      restStatusDesc.textContent = tier.desc;
+    }
+
+    function updateMetrics() {
+      const totalPlants = state.selectedPlants.length;
+      totalPlantCountEl.textContent = totalPlants;
+
+      // 1. Inulin / Allium Score (Substrates for Bifido)
+      const alliumCount = state.selectedPlants.filter(p => isInCategory(p, "alliums")).length;
+      const inulinPct = Math.min(Math.round((alliumCount / 5) * 100), 100);
+      inulinBar.style.width = `${inulinPct}%`;
+      inulinScore.textContent = `${inulinPct}%`;
+
+      // 2. Butyrate / Resistant Starch Score
+      const grainLegumeCount = state.selectedPlants.filter(p => isInCategory(p, "grains") || isInCategory(p, "legumes")).length;
+      const butyratePct = Math.min(Math.round((grainLegumeCount / 8) * 100), 100);
+      butyrateBar.style.width = `${butyratePct}%`;
+      butyrateScore.textContent = `${butyratePct}%`;
+
+      // 3. Mucin Integrity (Polyphenols + Fasting hours synergy)
+      const polyphenolCount = state.selectedPlants.filter(p => isInCategory(p, "polyphenols")).length;
+      const fastBonus = Math.max(0, (state.restHours - 12) * 8); // Up to 64% from fasting
+      const polyBonus = Math.min(36, polyphenolCount * 9);
+      const mucinPct = Math.min(100, Math.round(fastBonus + polyBonus));
+      mucinBar.style.width = `${mucinPct}%`;
+      mucinScore.textContent = `${mucinPct}%`;
+
+      // 4. Ferment Rotation
+      const fermentCount = state.selectedFerments.length;
+      fermentBar.style.width = `${(fermentCount / 4) * 100}%`;
+      fermentScore.textContent = `${fermentCount}/4`;
+
+      // Dynamic Botanical Guidance Insight
+      generateInsight(totalPlants, alliumCount, grainLegumeCount, polyphenolCount, fermentCount, state.restHours);
+    }
+
+    function isInCategory(plantName, catKey) {
+      const defaults = DEFAULT_PLANT_DATA[catKey]?.items || [];
+      const customs = state.customPlants[catKey] || [];
+      return defaults.includes(plantName) || customs.includes(plantName);
+    }
+
+    function generateInsight(total, alliums, starches, polyphenols, ferments, rest) {
+      if (total >= 30) {
+        insightText.innerHTML = `<strong>Magnificent meadow diversity!</strong> You've reached the 30-species milestone, establishing exceptional resilience and varied metabolic substrates for your keystone microbes.`;
+        return;
+      }
+      
+      let tips = [];
+      if (alliums < 3) {
+        tips.push("adding alliums (leeks, sunchokes, garlic) to foster <em>Bifidobacteria</em>");
+      }
+      if (polyphenols < 3) {
+        tips.push("incorporating dark berries, green tea, or fresh rosemary for <em>Akkermansia</em> support");
+      }
+      if (starches < 4) {
+        tips.push("adding cooled oats, lentils, or buckwheat to boost butyrate-producing <em>F. prausnitzii</em>");
+      }
+      if (ferments < 2) {
+        tips.push("introducing a second ferment family (like raw kraut or kefir)");
+      }
+      if (rest < 14) {
+        tips.push("extending overnight fasting to 14+ hours to allow mucosal lining turnover");
+      }
+
+      if (tips.length > 0) {
+        insightText.innerHTML = `<strong>Meadow Guidance:</strong> You are currently at <strong>${total}/30</strong> species. Consider ${tips.slice(0, 2).join(" and ")} to balance your substrates.`;
+      } else {
+        insightText.innerHTML = `<strong>Balanced cultivation:</strong> Your substrate ratios are steady across all categories. Continue weaving in unique botanical varieties toward the 30-species target.`;
+      }
+    }
+
+    function updateWeekDisplay() {
+      const start = new Date(state.weekStartDate || Date.now());
+      const end = new Date(start);
+      end.setDate(start.getDate() + 6);
+      
+      const options = { month: "short", day: "numeric" };
+      currentWeekRangeEl.textContent = `Week: ${start.toLocaleDateString(undefined, options)} – ${end.toLocaleDateString(undefined, options)}`;
+    }
+
+    /* =========================================================================
+       EVENT HANDLERS & INTERACTIONS
+       ========================================================================= */
+    function togglePlant(plantName) {
+      const idx = state.selectedPlants.indexOf(plantName);
+      if (idx > -1) {
+        state.selectedPlants.splice(idx, 1);
+      } else {
+        state.selectedPlants.push(plantName);
+      }
+      saveState();
+      renderPlantLedger();
+      updateMetrics();
+      renderMeadow();
+    }
+
+    function toggleFerment(fermentId) {
+      const idx = state.selectedFerments.indexOf(fermentId);
+      if (idx > -1) {
+        state.selectedFerments.splice(idx, 1);
+      } else {
+        state.selectedFerments.push(fermentId);
+      }
+      saveState();
+      renderFermentMatrix();
+      updateMetrics();
+    }
+
+    // Custom Plant Submission
+    document.getElementById("customPlantForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const input = document.getElementById("customPlantInput");
+      const categorySelect = document.getElementById("customPlantCategory");
+      const name = input.value.trim();
+      const category = categorySelect.value;
+
+      if (!name) return;
+
+      if (!state.customPlants[category]) {
+        state.customPlants[category] = [];
+      }
+
+      if (!state.customPlants[category].includes(name)) {
+        state.customPlants[category].push(name);
+      }
+
+      if (!state.selectedPlants.includes(name)) {
+        state.selectedPlants.push(name);
+      }
+
+      input.value = "";
+      saveState();
+      renderPlantLedger();
+      updateMetrics();
+      renderMeadow();
+    });
+
+    // Fasting Slider
+    restRange.addEventListener("input", (e) => {
+      state.restHours = parseInt(e.target.value, 10);
+      updateFastingUI();
+      updateMetrics();
+      saveState();
+    });
+
+    // Reset Week / New Cycle
+    document.getElementById("resetWeekBtn").addEventListener("click", () => {
+      const confirmed = confirm("Archive current week and start a fresh meadow cycle? (Custom botanicals will be preserved in your catalog)");
+      if (confirmed) {
+        state.selectedPlants = [];
+        state.selectedFerments = [];
+        state.weekStartDate = new Date().toISOString();
+        saveState();
+        renderPlantLedger();
+        renderFermentMatrix();
+        updateFastingUI();
+        updateMetrics();
+        updateWeekDisplay();
+        renderMeadow();
+      }
+    });
+
+    /* =========================================================================
+       INITIALIZATION
+       ========================================================================= */
+    window.addEventListener("DOMContentLoaded", () => {
+      loadState();
+      renderPlantLedger();
+      renderFermentMatrix();
+      updateFastingUI();
+      updateMetrics();
+      updateWeekDisplay();
+      
+      // Canvas rendering on load and resize
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+    });
+  </script>
+</body>
+</html>
