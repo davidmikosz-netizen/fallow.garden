@@ -270,7 +270,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* Section Cards for Detailed Calibration */
+    /* Simplified Everyday Habits & Levers Section */
     .section-card {
       background: var(--parchment-card);
       border: 1px solid var(--sand-border);
@@ -353,7 +353,6 @@
       cursor: pointer;
     }
 
-    /* Segmented Toggle for Sex */
     .segmented-control {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -382,7 +381,7 @@
 
     .control-desc {
       font-family: var(--font-sans);
-      font-size: 0.71rem;
+      font-size: 0.72rem;
       color: var(--loam-light);
       line-height: 1.35;
     }
@@ -696,156 +695,138 @@
       </div>
     </section>
 
-    <!-- Granular Levers Calibration Section -->
+    <!-- Simplified Everyday Levers Section -->
     <section class="section-card">
       <div class="section-head">
-        <h2>Detailed Physiological &amp; Cognitive Calibration</h2>
-        <div class="section-desc">Fine-tune biometrics, movement doses, and cognitive reserve levers</div>
+        <h2>Everyday Habits &amp; Vitality Levers</h2>
+        <div class="section-desc">Adjust your baseline and daily routines in plain language</div>
       </div>
 
-      <!-- Category A: Baseline Cohort & Cardiovascular Armor -->
-      <div class="category-title">🫀 1. Actuarial Baseline &amp; Cardiovascular Armor</div>
+      <!-- Category 1: Baseline & Movement -->
+      <div class="category-title">🚶 1. Baseline &amp; Physical Activity</div>
       <div class="levers-grid">
         
         <div class="control-group">
           <div class="control-label-row">
-            <span>Biological Sex Cohort:</span>
+            <span>Biological Sex:</span>
             <span class="control-val" id="valSex">Male</span>
           </div>
           <div class="segmented-control">
             <button class="segment-btn active" id="btnSexM" type="button">Male (SSA Cohort)</button>
             <button class="segment-btn" id="btnSexF" type="button">Female (SSA Cohort)</button>
           </div>
-          <div class="control-desc">Calibrates conditional mortality baseline (~2.8 yr demographic variance).</div>
+          <div class="control-desc">Calibrates demographic life tables (~2.8 year baseline variance).</div>
         </div>
 
         <div class="control-group">
           <div class="control-label-row">
-            <span>Chronological Age:</span>
+            <span>Current Age:</span>
             <span class="control-val" id="valAge">56</span>
           </div>
           <input type="range" id="inputAge" min="30" max="85" value="56" />
-          <div class="control-desc">Calculates conditional life expectancy, eliminating early-life mortality skew.</div>
+          <div class="control-desc">Calculates your conditional horizon, removing early-life mortality skew.</div>
         </div>
 
         <div class="control-group">
           <div class="control-label-row">
-            <span>Cardiorespiratory ($VO_2\text{ Max}$ / Zone 2):</span>
-            <span class="control-val" id="valCardio">High (Top 25%)</span>
+            <span>Cardio Exercise &amp; Stamina:</span>
+            <span class="control-val" id="valCardio">High (Brisk walks/jogs)</span>
           </div>
           <input type="range" id="inputCardio" min="0" max="3" value="2" />
-          <div class="control-desc">Cleveland Clinic data: 4–5x all-cause mortality buffer from low to elite.</div>
+          <div class="control-desc">Regular aerobic activity that gets your heart pumping and builds stamina.</div>
         </div>
 
         <div class="control-group">
           <div class="control-label-row">
-            <span>Blood Pressure &amp; Endothelial Load:</span>
-            <span class="control-val" id="valBP">Optimal (&lt;120/80)</span>
-          </div>
-          <input type="range" id="inputBP" min="0" max="3" value="3" />
-          <div class="control-desc">Reduces lifetime cumulative vascular shear (atherosclerosis AUC).</div>
-        </div>
-
-        <div class="control-group">
-          <div class="control-label-row">
-            <span>Resting Heart Rate &amp; Autonomic Tone:</span>
-            <span class="control-val" id="valRHR">Athletic (50-64 bpm)</span>
-          </div>
-          <input type="range" id="inputRHR" min="0" max="3" value="2" />
-          <div class="control-desc">Direct marker of vagal nerve tone and parasympathetic recovery efficiency.</div>
-        </div>
-
-        <div class="control-group">
-          <div class="control-label-row">
-            <span>Daily Movement Baseline (Steps):</span>
-            <span class="control-val" id="valSteps">8k-10k+ Daily</span>
-          </div>
-          <input type="range" id="inputSteps" min="0" max="3" value="2" />
-          <div class="control-desc">Non-exercise activity thermogenesis (NEAT) and lymphatic circulation.</div>
-        </div>
-
-      </div>
-
-      <!-- Category B: Musculoskeletal & Metabolic Armor -->
-      <div class="category-title">💪 2. Musculoskeletal Armor &amp; Metabolic Stewardship</div>
-      <div class="levers-grid">
-        
-        <div class="control-group">
-          <div class="control-label-row">
-            <span>Strength, Grip &amp; Fall Armor:</span>
-            <span class="control-val" id="valStrength">Robust (2-3x/wk)</span>
+            <span>Strength &amp; Muscle Tone:</span>
+            <span class="control-val" id="valStrength">Regular (2-3x/week)</span>
           </div>
           <input type="range" id="inputStrength" min="0" max="3" value="2" />
-          <div class="control-desc">Buffers against sarcopenia, fragility fractures, and catastrophic falls.</div>
+          <div class="control-desc">Resistance training and bodyweight exercises that protect balance and prevent falls.</div>
         </div>
 
         <div class="control-group">
           <div class="control-label-row">
-            <span>Metabolic &amp; Mucosal Fasting Window:</span>
-            <span class="control-val" id="valFasting">Consistent (14-16h)</span>
+            <span>Daily Walking &amp; Moving:</span>
+            <span class="control-val" id="valSteps">8,000+ Steps Daily</span>
           </div>
-          <input type="range" id="inputFasting" min="0" max="3" value="2" />
-          <div class="control-desc">MMC intestinal sweeps, insulin sensitivity reset, and *Akkermansia* renewal.</div>
+          <input type="range" id="inputSteps" min="0" max="3" value="2" />
+          <div class="control-desc">Everyday movement—walking dogs, gardening, chores, and avoiding long sitting.</div>
         </div>
 
         <div class="control-group">
           <div class="control-label-row">
-            <span>Botanical Diversity (AGP Index):</span>
-            <span class="control-val" id="valPlants">25-30+ Species/Wk</span>
+            <span>Resting Heart &amp; Blood Pressure:</span>
+            <span class="control-val" id="valCardioHealth">Optimal / Healthy</span>
           </div>
-          <input type="range" id="inputPlants" min="0" max="3" value="3" />
-          <div class="control-desc">Microbiome complexity, short-chain fatty acids (butyrate), anti-inflammation.</div>
-        </div>
-
-        <div class="control-group">
-          <div class="control-label-row">
-            <span>Metabolic Health / Glycemic Stability:</span>
-            <span class="control-val" id="valMetabolic">Optimal (Low-Glycemic)</span>
-          </div>
-          <input type="range" id="inputMetabolic" min="0" max="3" value="2" />
-          <div class="control-desc">Protects microvascular capillary beds, kidneys, and retina from glycation.</div>
+          <input type="range" id="inputCardioHealth" min="0" max="3" value="2" />
+          <div class="control-desc">Keeps cardiovascular wear low and maintains strong circulation.</div>
         </div>
 
       </div>
 
-      <!-- Category C: Cognitive Reserve & Psycho-Social Stewardship -->
-      <div class="category-title">🧠 3. Cognitive Reserve &amp; Social Cohesion</div>
+      <!-- Category 2: Food & Digestion -->
+      <div class="category-title">🥗 2. Food, Plants &amp; Digestive Rest</div>
       <div class="levers-grid">
         
         <div class="control-group">
           <div class="control-label-row">
-            <span>Cognitive Complexity &amp; Creative Craft:</span>
-            <span class="control-val" id="valCognitive">Deep Scholarly / Project Work</span>
+            <span>Plant Variety &amp; Fiber:</span>
+            <span class="control-val" id="valDiet">Rich (25+ plants/week)</span>
+          </div>
+          <input type="range" id="inputDiet" min="0" max="3" value="2" />
+          <div class="control-desc">Eating a wide variety of colorful vegetables, greens, beans, berries, and grains.</div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Overnight Digestive Rest:</span>
+            <span class="control-val" id="valFasting">Consistent (14-16 Hours)</span>
+          </div>
+          <input type="range" id="inputFasting" min="0" max="3" value="2" />
+          <div class="control-desc">Giving your gut a daily break to clear residual food and refresh its inner lining.</div>
+        </div>
+
+      </div>
+
+      <!-- Category 3: Mind, Sleep & Community -->
+      <div class="category-title">🧠 3. Mind, Sleep &amp; Connection</div>
+      <div class="levers-grid">
+        
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Creative Projects &amp; Mental Work:</span>
+            <span class="control-val" id="valCognitive">Daily Creative / Deep Craft</span>
           </div>
           <input type="range" id="inputCognitive" min="0" max="3" value="3" />
-          <div class="control-desc">Builds dense synaptic reserve; buffers against retirement-shock deceleration.</div>
+          <div class="control-desc">Reading, writing, researching, and tackling challenging self-directed projects.</div>
         </div>
 
         <div class="control-group">
           <div class="control-label-row">
-            <span>Sleep Architecture &amp; Glymphatic Wash:</span>
-            <span class="control-val" id="valSleep">7.5-8.5h Consistent</span>
+            <span>Sleep Quality &amp; Rhythm:</span>
+            <span class="control-val" id="valSleep">7.5-8.5 Hours Consistent</span>
           </div>
           <input type="range" id="inputSleep" min="0" max="3" value="2" />
-          <div class="control-desc">Clears neurotoxic metabolic waste (amyloid-beta) and consolidates memory.</div>
+          <div class="control-desc">Regular restful sleep allowing brain and metabolic repair every night.</div>
         </div>
 
         <div class="control-group">
           <div class="control-label-row">
-            <span>Social Density &amp; Shared Connection:</span>
+            <span>Friends, Family &amp; Community:</span>
             <span class="control-val" id="valSocial">Strong Cohesive Ties</span>
           </div>
           <input type="range" id="inputSocial" min="0" max="3" value="2" />
-          <div class="control-desc">Holt-Lunstad meta-analysis: connection matches non-smoking mortality benefits.</div>
+          <div class="control-desc">Regular conversations, trusted relationships, and shared time with people you care about.</div>
         </div>
 
         <div class="control-group">
           <div class="control-label-row">
-            <span>Stress Cadence &amp; Ambient Peace:</span>
-            <span class="control-val" id="valStress">Low Chronic Friction</span>
+            <span>Peace of Mind &amp; Low Stress:</span>
+            <span class="control-val" id="valStress">Calm &amp; Grounded</span>
           </div>
           <input type="range" id="inputStress" min="0" max="3" value="2" />
-          <div class="control-desc">Suppresses persistent cortisol and neuroendocrine wear.</div>
+          <div class="control-desc">Keeping daily friction low, staying centered, and enjoying unhurried pacing.</div>
         </div>
 
       </div>
@@ -855,17 +836,17 @@
     <!-- Section: Real-Time Actuarial Impact Ledger -->
     <section class="section-card">
       <div class="section-head">
-        <h2>Actuarial Contribution Ledger</h2>
-        <div class="section-desc">Itemized impact breakdown relative to standard conditional cohort</div>
+        <h2>Impact Breakdown</h2>
+        <div class="section-desc">How each everyday habit contributes to your horizon</div>
       </div>
 
       <table class="ledger-table">
         <thead>
           <tr>
-            <th>Domain / Intervention</th>
-            <th>Your Calibrated Level</th>
-            <th>Lifespan Delta</th>
-            <th>Vitality Compression</th>
+            <th>Habit / Focus Area</th>
+            <th>Your Current Level</th>
+            <th>Estimated Years</th>
+            <th>Vitality Benefit</th>
           </tr>
         </thead>
         <tbody id="ledgerBody">
@@ -885,7 +866,7 @@
           <strong>The Garden of Finite Days</strong> is part of the <em>fallow.garden</em> anthology—a collection of restorative, single-purpose digital micro-tools designed to counter algorithmic exhaustion, clarify life horizons, and cultivate personal vitality.
         </p>
         <p style="margin-top: 0.6rem;">
-          Have ideas for additional actuarial levers, questions about the mortality methodology, or suggestions for new modules? Feedback and ideas are always welcome.
+          Have ideas for additional levers, questions about the mortality math, or suggestions for new tools? Feedback and ideas are always welcome.
         </p>
       </div>
 
@@ -926,12 +907,12 @@
       <div class="faq-item">
         <div class="faq-q">1. Why is the remaining day count surprisingly large?</div>
         <div class="faq-a">
-          Standard life expectancy at birth (~77–79 years) includes infant, adolescent, and early-adulthood hazards. Once you reach your 50s, you have already bypassed those statistical risks. Actuaries calculate <strong>conditional life expectancy</strong>: an average 56-year-old today has an actuarial baseline life expectancy of ~84–86 years (~11,000+ days), with healthy cohorts reaching 88–92.
+          Standard life expectancy at birth (~77–79 years) includes infant, childhood, and early-adult hazards. Once you reach your 50s, you have already bypassed those statistical risks. Actuaries calculate <strong>conditional life expectancy</strong>: an average 56-year-old today has an actuarial baseline life expectancy of ~84–86 years (~11,000+ days), with healthy habits extending into the late 80s or 90s.
         </div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">2. What about sudden accidental risks (car crashes, slips, freak events)?</div>
+        <div class="faq-q">2. What about sudden accidental risks (car crashes, falls, freak events)?</div>
         <div class="faq-a">
           In actuarial science (the Gompertz-Makeham law), mortality is divided into the biological aging curve and the <strong>Makeham constant</strong>—the baseline probability of pure external bad luck (car crashes, falls, acute poisoning). Cumulative lifetime accidental death odds total ~3–5% in standard populations. Because actuarial tables measure real populations, <strong>these accidental hazards are already baked into your baseline</strong>.
         </div>
@@ -940,14 +921,14 @@
       <div class="faq-item">
         <div class="faq-q">3. What are the highest-impact levers most calculators miss?</div>
         <div class="faq-a">
-          Epidemiological literature demonstrates that <strong>Cardiorespiratory Fitness ($VO_2\text{ Max}$)</strong> yields up to a 5-fold mortality risk reduction from lowest to highest quartile. <strong>Muscle Mass &amp; Power</strong> buffers against fatal falls (a leading cascade of late-life decline). <strong>Cognitive Reserve &amp; Complex Projects</strong> protect against post-retirement mental and physical shock.
+          Epidemiological literature demonstrates that <strong>Cardiorespiratory Stamina</strong> yields up to a 5-fold mortality risk reduction from lowest to highest quartile. <strong>Muscle Strength</strong> buffers against fatal falls (a leading cascade of late-life decline). <strong>Deep Cognitive Projects</strong> protect against post-retirement mental and physical deceleration.
         </div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q">4. What does "Compression of Morbidity" mean?</div>
         <div class="faq-a">
-          Coined by James Fries, compression of morbidity means squaring the life curve: living at near-100% cognitive and physical vitality throughout your 60s, 70s, and 80s, so that decline is compressed into a rapid, painless descent at the very end rather than decades of frailty.
+          Coined by James Fries, compression of morbidity means squaring the life curve: living at near-100% vitality and independence throughout your 60s, 70s, and 80s, so that decline is compressed into a rapid, painless final chapter rather than decades of frailty.
         </div>
       </div>
     </div>
@@ -955,24 +936,21 @@
 
   <script>
     /* =========================================================================
-       ACTUARIAL ENGINE & DETAILED METRICS
+       EVERYDAY ACTUARIAL ENGINE
        ========================================================================= */
     const LABELS = {
-      cardio: ["Low / Sedentary", "Moderate (1-2x/wk)", "High (Top 25%)", "Elite (Top 2.5%)"],
-      bp: ["Stage 2 (140+)", "Stage 1 (130-139)", "Normal (120-129)", "Optimal (<120/80)"],
-      rhr: ["Elevated (75+ bpm)", "Average (65-74 bpm)", "Athletic (50-64 bpm)", "Elite (<50 bpm)"],
-      strength: ["Minimal", "Basic (1x/wk)", "Robust (2-3x/wk)", "Exceptional Armor"],
-      fasting: ["Standard (<12h)", "Overnight Fast (12-13h)", "Consistent (14-16h)", "Advanced Rhythm (16-18h+)"],
-      plants: ["Low (<10/wk)", "Standard (10-18/wk)", "Diverse (19-24/wk)", "25-30+ Species/Wk"],
-      steps: ["Sedentary (<5k)", "Moderate (5k-7k)", "8k-10k+ Daily", "Active (12k+ Daily)"],
-      metabolic: ["Standard Diet", "Whole Food Focus", "Optimal (Low-Glycemic)", "Metabolically Optimized"],
-      cognitive: ["Passive Routine", "Active Reader", "Daily Craft/Writing", "Deep Scholarly / Project Work"],
-      sleep: ["Poor / Irregular", "Fair (6-7h)", "7.5-8.5h Consistent", "Deep Restorative Rhythm"],
-      social: ["Isolated", "Modest Ties", "Strong Cohesive Ties", "Rich Intergenerational Hub"],
-      stress: ["High Chronic Strain", "Moderate Friction", "Low Chronic Friction", "Restorative Equanimity"]
+      cardio: ["Rarely / Sedentary", "Light (1-2x/week)", "High (Brisk walks/jogs)", "Elite Endurance"],
+      strength: ["Minimal", "Occasional", "Regular (2-3x/week)", "Strong & Dedicated"],
+      steps: ["Mostly Sitting (<5k)", "Moderate (5k-7k)", "8,000+ Steps Daily", "Active on Feet (12k+)"],
+      cardioHealth: ["Elevated Strain", "Average", "Optimal / Healthy", "Exceptional"],
+      diet: ["Standard Diet", "Whole Foods Focus", "Rich (25+ plants/week)", "Abundant Variety & Fiber"],
+      fasting: ["All-Day Grazing (<12h)", "Overnight Rest (12h)", "Consistent (14-16 Hours)", "Extended (16-18h+)"],
+      cognitive: ["Passive Routine", "Active Reader", "Daily Creative / Deep Craft", "Scholarly / Lifelong Projects"],
+      sleep: ["Irregular / Broken", "6-7 Hours", "7.5-8.5 Hours Consistent", "Deep & Restorative"],
+      social: ["Mostly Solo", "A Few Regular Ties", "Strong Cohesive Ties", "Rich Community Hub"],
+      stress: ["High Daily Strain", "Moderate Friction", "Calm & Grounded", "Peaceful & Restorative"]
     };
 
-    // Social Security Administration (SSA) Conditional Life Expectancies
     const SSA_BASELINE_MALE = {
       30: 79.4, 40: 80.2, 50: 81.8, 56: 83.4, 60: 84.6, 70: 87.2, 80: 90.6, 85: 93.1
     };
@@ -1006,13 +984,11 @@
 
       inputAge: document.getElementById("inputAge"),
       inputCardio: document.getElementById("inputCardio"),
-      inputBP: document.getElementById("inputBP"),
-      inputRHR: document.getElementById("inputRHR"),
       inputStrength: document.getElementById("inputStrength"),
-      inputFasting: document.getElementById("inputFasting"),
-      inputPlants: document.getElementById("inputPlants"),
       inputSteps: document.getElementById("inputSteps"),
-      inputMetabolic: document.getElementById("inputMetabolic"),
+      inputCardioHealth: document.getElementById("inputCardioHealth"),
+      inputDiet: document.getElementById("inputDiet"),
+      inputFasting: document.getElementById("inputFasting"),
       inputCognitive: document.getElementById("inputCognitive"),
       inputSleep: document.getElementById("inputSleep"),
       inputSocial: document.getElementById("inputSocial"),
@@ -1020,13 +996,11 @@
 
       valAge: document.getElementById("valAge"),
       valCardio: document.getElementById("valCardio"),
-      valBP: document.getElementById("valBP"),
-      valRHR: document.getElementById("valRHR"),
       valStrength: document.getElementById("valStrength"),
-      valFasting: document.getElementById("valFasting"),
-      valPlants: document.getElementById("valPlants"),
       valSteps: document.getElementById("valSteps"),
-      valMetabolic: document.getElementById("valMetabolic"),
+      valCardioHealth: document.getElementById("valCardioHealth"),
+      valDiet: document.getElementById("valDiet"),
+      valFasting: document.getElementById("valFasting"),
       valCognitive: document.getElementById("valCognitive"),
       valSleep: document.getElementById("valSleep"),
       valSocial: document.getElementById("valSocial"),
@@ -1056,29 +1030,25 @@
     function recalculate() {
       const age = parseFloat(els.inputAge.value);
       const cardio = parseInt(els.inputCardio.value, 10);
-      const bp = parseInt(els.inputBP.value, 10);
-      const rhr = parseInt(els.inputRHR.value, 10);
       const strength = parseInt(els.inputStrength.value, 10);
-      const fasting = parseInt(els.inputFasting.value, 10);
-      const plants = parseInt(els.inputPlants.value, 10);
       const steps = parseInt(els.inputSteps.value, 10);
-      const metabolic = parseInt(els.inputMetabolic.value, 10);
+      const cardioHealth = parseInt(els.inputCardioHealth.value, 10);
+      const diet = parseInt(els.inputDiet.value, 10);
+      const fasting = parseInt(els.inputFasting.value, 10);
       const cognitive = parseInt(els.inputCognitive.value, 10);
       const sleep = parseInt(els.inputSleep.value, 10);
       const social = parseInt(els.inputSocial.value, 10);
       const stress = parseInt(els.inputStress.value, 10);
 
-      // Sync labels
+      // Sync display labels
       els.valSex.textContent = selectedSex === "F" ? "Female" : "Male";
       els.valAge.textContent = age;
       els.valCardio.textContent = LABELS.cardio[cardio];
-      els.valBP.textContent = LABELS.bp[bp];
-      els.valRHR.textContent = LABELS.rhr[rhr];
       els.valStrength.textContent = LABELS.strength[strength];
-      els.valFasting.textContent = LABELS.fasting[fasting];
-      els.valPlants.textContent = LABELS.plants[plants];
       els.valSteps.textContent = LABELS.steps[steps];
-      els.valMetabolic.textContent = LABELS.metabolic[metabolic];
+      els.valCardioHealth.textContent = LABELS.cardioHealth[cardioHealth];
+      els.valDiet.textContent = LABELS.diet[diet];
+      els.valFasting.textContent = LABELS.fasting[fasting];
       els.valCognitive.textContent = LABELS.cognitive[cognitive];
       els.valSleep.textContent = LABELS.sleep[sleep];
       els.valSocial.textContent = LABELS.social[social];
@@ -1086,20 +1056,18 @@
 
       const baselineAge = getInterpolatedBaseline(age, selectedSex);
 
-      // Itemized impact modifiers (Actuarially calibrated)
+      // Simplified, clean itemized modifiers
       const items = [
-        { name: "Aerobic Capacity (VO₂ Max)", level: LABELS.cardio[cardio], delta: (cardio - 1.5) * 1.5, vital: "+3.2% vitality retention" },
-        { name: "Endothelial & Blood Pressure", level: LABELS.bp[bp], delta: (bp - 1.5) * 0.9, vital: "Cardiovascular preservation" },
-        { name: "Resting Heart Rate & Tone", level: LABELS.rhr[rhr], delta: (rhr - 1.5) * 0.5, vital: "Autonomic recovery stability" },
-        { name: "Strength & Fall Armor", level: LABELS.strength[strength], delta: (strength - 1.5) * 1.1, vital: "+4.5% fall/hip fracture buffer" },
-        { name: "Metabolic & Mucosal Fasting", level: LABELS.fasting[fasting], delta: (fasting - 1.5) * 0.7, vital: "Mucin renewal & insulin reset" },
-        { name: "Botanical Diversity (30 Species)", level: LABELS.plants[plants], delta: (plants - 1.5) * 0.6, vital: "Butyrate & microbiome resilience" },
-        { name: "Daily Step Cadence", level: LABELS.steps[steps], delta: (steps - 1.5) * 0.6, vital: "Circulatory & glucose clearance" },
-        { name: "Metabolic / Glycemic Stability", level: LABELS.metabolic[metabolic], delta: (metabolic - 1.5) * 0.6, vital: "Microvascular defense" },
-        { name: "Cognitive Complexity & Craft", level: LABELS.cognitive[cognitive], delta: (cognitive - 1.5) * 0.8, vital: "+5.0% synaptic reserve retention" },
-        { name: "Sleep & Glymphatic Wash", level: LABELS.sleep[sleep], delta: (sleep - 1.5) * 0.8, vital: "Neural waste clearance" },
-        { name: "Social Density & Community", level: LABELS.social[social], delta: (social - 1.5) * 0.8, vital: "Neuroendocrine & anti-isolation buffer" },
-        { name: "Stress & Friction Management", level: LABELS.stress[stress], delta: (stress - 1.5) * 0.6, vital: "Cortisol & vascular defense" }
+        { name: "Cardio & Aerobic Stamina", level: LABELS.cardio[cardio], delta: (cardio - 1.5) * 1.5, vital: "Cardiovascular endurance" },
+        { name: "Strength & Muscle Tone", level: LABELS.strength[strength], delta: (strength - 1.5) * 1.1, vital: "Balance & fall protection" },
+        { name: "Daily Steps & Movement", level: LABELS.steps[steps], delta: (steps - 1.5) * 0.6, vital: "Daily circulation & energy" },
+        { name: "Heart & Vascular Health", level: LABELS.cardioHealth[cardioHealth], delta: (cardioHealth - 1.5) * 0.8, vital: "Vascular preservation" },
+        { name: "Plant Variety & Whole Foods", level: LABELS.diet[diet], delta: (diet - 1.5) * 0.8, vital: "Microbiome & gut resilience" },
+        { name: "Overnight Digestive Rest", level: LABELS.fasting[fasting], delta: (fasting - 1.5) * 0.6, vital: "Gut lining recovery" },
+        { name: "Creative Projects & Mind", level: LABELS.cognitive[cognitive], delta: (cognitive - 1.5) * 0.9, vital: "Sharp cognitive reserve" },
+        { name: "Restful & Consistent Sleep", level: LABELS.sleep[sleep], delta: (sleep - 1.5) * 0.8, vital: "Brain & body overnight repair" },
+        { name: "Friends & Community Ties", level: LABELS.social[social], delta: (social - 1.5) * 0.8, vital: "Emotional health & connection" },
+        { name: "Calm & Low Daily Stress", level: LABELS.stress[stress], delta: (stress - 1.5) * 0.6, vital: "Restorative daily peace" }
       ];
 
       const totalDelta = items.reduce((sum, item) => sum + item.delta, 0);
@@ -1109,15 +1077,15 @@
       const remainingYears = Math.max(0.5, projectedLife - age);
       const remainingDays = Math.round(remainingYears * 365.25);
 
-      // Biological Age model
+      // Bio Age estimate
       const bioAge = Math.max(25, (age - (totalDelta * 0.82)));
 
-      // Vitality / Morbidity Compression (Square curve fraction)
-      const vitalityScore = (cardio + strength + cognitive + sleep + fasting + plants + metabolic) / 21;
-      const vitalFraction = 0.78 + (vitalityScore * 0.16);
+      // Vitality / Morbidity fraction
+      const habitScore = (cardio + strength + steps + diet + fasting + cognitive + sleep) / 21;
+      const vitalFraction = 0.78 + (habitScore * 0.16);
       const vitalDays = Math.round(remainingDays * vitalFraction);
 
-      // Granular units
+      // Granular time units
       const weekends = Math.round(remainingYears * 52.17);
       const seasons = Math.round(remainingYears * 4);
       const wakingHours = Math.round(remainingDays * 16);
@@ -1131,7 +1099,7 @@
       els.dispVitalDays.textContent = vitalDays.toLocaleString();
       els.dispMorbidityBuffer.textContent = `Square Curve: ${Math.round(vitalFraction * 100)}%`;
       els.dispTotalAge.textContent = projectedLife.toFixed(1);
-      
+
       const deltaSign = totalDelta >= 0 ? `+${totalDelta.toFixed(1)}` : `${totalDelta.toFixed(1)}`;
       els.dispBaselineSub.textContent = `Baseline (${baselineAge.toFixed(1)}): ${deltaSign} yrs`;
 
@@ -1140,7 +1108,7 @@
       els.dispWakingHours.textContent = wakingHours.toLocaleString();
       els.dispOlympiads.textContent = olympiads;
 
-      // Update Ledger Table
+      // Render Ledger Table
       els.ledgerBody.innerHTML = "";
       items.forEach(item => {
         const tr = document.createElement("tr");
@@ -1223,9 +1191,9 @@
 
     // Slider listeners
     [
-      els.inputAge, els.inputCardio, els.inputBP, els.inputRHR,
-      els.inputStrength, els.inputFasting, els.inputPlants, els.inputSteps,
-      els.inputMetabolic, els.inputCognitive, els.inputSleep, els.inputSocial, els.inputStress
+      els.inputAge, els.inputCardio, els.inputStrength, els.inputSteps,
+      els.inputCardioHealth, els.inputDiet, els.inputFasting,
+      els.inputCognitive, els.inputSleep, els.inputSocial, els.inputStress
     ].forEach(input => input.addEventListener("input", recalculate));
 
     window.addEventListener("resize", recalculate);
