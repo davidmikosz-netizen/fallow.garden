@@ -25,9 +25,9 @@
       --border-soft: #ebe3d5;
       --shadow-sm: 0 2px 8px rgba(44, 34, 26, 0.04);
       --shadow-md: 0 6px 24px rgba(44, 34, 26, 0.07);
-      --radius-sm: 6px;
-      --radius-md: 12px;
-      --radius-lg: 18px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
       --font-serif: "Iowan Old Style", "Apple Garamond", "Baskerville", "Times New Roman", Georgia, serif;
       --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
@@ -306,7 +306,7 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--moss-deep);
-      margin: 1rem 0 0.6rem;
+      margin: 1.25rem 0 0.6rem;
       display: flex;
       align-items: center;
       gap: 0.4rem;
@@ -353,6 +353,33 @@
       cursor: pointer;
     }
 
+    /* Segmented Toggle for Sex */
+    .segmented-control {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.35rem;
+      margin-top: 0.25rem;
+    }
+
+    .segment-btn {
+      background: var(--parchment-warm);
+      border: 1px solid var(--sand-border);
+      color: var(--loam-mid);
+      padding: 0.35rem;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .segment-btn.active {
+      background: var(--moss-deep);
+      color: #fff;
+      border-color: var(--moss-deep);
+    }
+
     .control-desc {
       font-family: var(--font-sans);
       font-size: 0.71rem;
@@ -394,6 +421,82 @@
     .impact-pos { color: var(--moss-mid); }
     .impact-neutral { color: var(--loam-light); }
     .impact-neg { color: var(--terracotta); }
+
+    /* About & Support Card (Betterfly Style) */
+    .about-card {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .about-head {
+      border-bottom: 1px solid var(--sand-border);
+      padding-bottom: 0.75rem;
+    }
+
+    .about-head h2 {
+      font-size: 1.2rem;
+      color: var(--loam-dark);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .about-content {
+      font-size: 0.9rem;
+      color: var(--loam-mid);
+      line-height: 1.6;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .support-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: 0.84rem;
+      font-weight: 600;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .support-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-bmac {
+      background: #ffdd00;
+      color: #000000;
+    }
+
+    .btn-venmo {
+      background: #008cff;
+      color: #ffffff;
+    }
+
+    .btn-email {
+      background: var(--parchment-warm);
+      color: var(--loam-dark);
+      border-color: var(--sand-border);
+    }
+    .btn-email:hover {
+      background: var(--sand-border);
+    }
 
     /* Modal Styles */
     .modal-overlay {
@@ -554,7 +657,7 @@
       <div class="stat-box">
         <div class="stat-label">Projected Lifespan</div>
         <div class="stat-val moss" id="dispTotalAge">88.2</div>
-        <div class="stat-sub">Baseline: +3.6 yrs buffer</div>
+        <div class="stat-sub" id="dispBaselineSub">Baseline: +3.6 yrs buffer</div>
       </div>
     </section>
 
@@ -597,20 +700,32 @@
     <section class="section-card">
       <div class="section-head">
         <h2>Detailed Physiological &amp; Cognitive Calibration</h2>
-        <div class="section-desc">Adjust granular biometrics, movement doses, and cognitive reserve levers</div>
+        <div class="section-desc">Fine-tune biometrics, movement doses, and cognitive reserve levers</div>
       </div>
 
-      <!-- Category A: Baseline & Cardiovascular Armor -->
-      <div class="category-title">🫀 1. Cardiovascular &amp; Endothelial Baseline</div>
+      <!-- Category A: Baseline Cohort & Cardiovascular Armor -->
+      <div class="category-title">🫀 1. Actuarial Baseline &amp; Cardiovascular Armor</div>
       <div class="levers-grid">
         
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Biological Sex Cohort:</span>
+            <span class="control-val" id="valSex">Male</span>
+          </div>
+          <div class="segmented-control">
+            <button class="segment-btn active" id="btnSexM" type="button">Male (SSA Cohort)</button>
+            <button class="segment-btn" id="btnSexF" type="button">Female (SSA Cohort)</button>
+          </div>
+          <div class="control-desc">Calibrates conditional mortality baseline (~2.8 yr demographic variance).</div>
+        </div>
+
         <div class="control-group">
           <div class="control-label-row">
             <span>Chronological Age:</span>
             <span class="control-val" id="valAge">56</span>
           </div>
           <input type="range" id="inputAge" min="30" max="85" value="56" />
-          <div class="control-desc">Anchors conditional actuarial tables (eliminates youth mortality skew).</div>
+          <div class="control-desc">Calculates conditional life expectancy, eliminating early-life mortality skew.</div>
         </div>
 
         <div class="control-group">
@@ -628,22 +743,31 @@
             <span class="control-val" id="valBP">Optimal (&lt;120/80)</span>
           </div>
           <input type="range" id="inputBP" min="0" max="3" value="3" />
-          <div class="control-desc">Cumulative vascular wear over decades (atherosclerosis AUC).</div>
+          <div class="control-desc">Reduces lifetime cumulative vascular shear (atherosclerosis AUC).</div>
         </div>
 
         <div class="control-group">
           <div class="control-label-row">
             <span>Resting Heart Rate &amp; Autonomic Tone:</span>
-            <span class="control-val" id="valRHR">Athletic (50-59 bpm)</span>
+            <span class="control-val" id="valRHR">Athletic (50-64 bpm)</span>
           </div>
           <input type="range" id="inputRHR" min="0" max="3" value="2" />
-          <div class="control-desc">Key indicator of vagal tone and parasympathetic recovery reserve.</div>
+          <div class="control-desc">Direct marker of vagal nerve tone and parasympathetic recovery efficiency.</div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Daily Movement Baseline (Steps):</span>
+            <span class="control-val" id="valSteps">8k-10k+ Daily</span>
+          </div>
+          <input type="range" id="inputSteps" min="0" max="3" value="2" />
+          <div class="control-desc">Non-exercise activity thermogenesis (NEAT) and lymphatic circulation.</div>
         </div>
 
       </div>
 
       <!-- Category B: Musculoskeletal & Metabolic Armor -->
-      <div class="category-title">💪 2. Musculoskeletal Armor &amp; Metabolic Fasting</div>
+      <div class="category-title">💪 2. Musculoskeletal Armor &amp; Metabolic Stewardship</div>
       <div class="levers-grid">
         
         <div class="control-group">
@@ -661,7 +785,7 @@
             <span class="control-val" id="valFasting">Consistent (14-16h)</span>
           </div>
           <input type="range" id="inputFasting" min="0" max="3" value="2" />
-          <div class="control-desc">Triggers MMC intestinal sweeps, insulin reset, and *Akkermansia* barrier renewal.</div>
+          <div class="control-desc">MMC intestinal sweeps, insulin sensitivity reset, and *Akkermansia* renewal.</div>
         </div>
 
         <div class="control-group">
@@ -670,16 +794,16 @@
             <span class="control-val" id="valPlants">25-30+ Species/Wk</span>
           </div>
           <input type="range" id="inputPlants" min="0" max="3" value="3" />
-          <div class="control-desc">Microbial diversity, short-chain fatty acids (butyrate), systemic anti-inflammation.</div>
+          <div class="control-desc">Microbiome complexity, short-chain fatty acids (butyrate), anti-inflammation.</div>
         </div>
 
         <div class="control-group">
           <div class="control-label-row">
-            <span>Daily Movement Baseline (Steps):</span>
-            <span class="control-val" id="valSteps">8k-10k+ Daily</span>
+            <span>Metabolic Health / Glycemic Stability:</span>
+            <span class="control-val" id="valMetabolic">Optimal (Low-Glycemic)</span>
           </div>
-          <input type="range" id="inputSteps" min="0" max="3" value="2" />
-          <div class="control-desc">Non-exercise activity thermogenesis (NEAT) and lymphatic circulation.</div>
+          <input type="range" id="inputMetabolic" min="0" max="3" value="2" />
+          <div class="control-desc">Protects microvascular capillary beds, kidneys, and retina from glycation.</div>
         </div>
 
       </div>
@@ -721,7 +845,7 @@
             <span class="control-val" id="valStress">Low Chronic Friction</span>
           </div>
           <input type="range" id="inputStress" min="0" max="3" value="2" />
-          <div class="control-desc">Suppresses persistent cortisol and systemic neuroinflammation.</div>
+          <div class="control-desc">Suppresses persistent cortisol and neuroendocrine wear.</div>
         </div>
 
       </div>
@@ -732,7 +856,7 @@
     <section class="section-card">
       <div class="section-head">
         <h2>Actuarial Contribution Ledger</h2>
-        <div class="section-desc">Itemized impact breakdown relative to standard actuarial cohort</div>
+        <div class="section-desc">Itemized impact breakdown relative to standard conditional cohort</div>
       </div>
 
       <table class="ledger-table">
@@ -748,6 +872,39 @@
           <!-- Populated in real-time via JS -->
         </tbody>
       </table>
+    </section>
+
+    <!-- About & Support Section (Betterfly Style) -->
+    <section class="about-card">
+      <div class="about-head">
+        <h2><span>🌿</span> About fallow.garden &amp; Feedback</h2>
+      </div>
+      
+      <div class="about-content">
+        <p>
+          <strong>The Garden of Finite Days</strong> is part of the <em>fallow.garden</em> anthology—a collection of restorative, single-purpose digital micro-tools designed to counter algorithmic exhaustion, clarify life horizons, and cultivate personal vitality.
+        </p>
+        <p style="margin-top: 0.6rem;">
+          Have ideas for additional actuarial levers, questions about the mortality methodology, or suggestions for new modules? Feedback and ideas are always welcome.
+        </p>
+      </div>
+
+      <div class="support-grid">
+        <a href="https://buymeacoffee.com/davidmikosz" target="_blank" rel="noopener noreferrer" class="support-btn btn-bmac">
+          <span>☕</span>
+          <span>Buy Me a Coffee</span>
+        </a>
+
+        <a href="https://venmo.com/David-Mikosz" target="_blank" rel="noopener noreferrer" class="support-btn btn-venmo">
+          <span>💙</span>
+          <span>Tip via Venmo</span>
+        </a>
+
+        <a href="mailto:david.mikosz@gmail.com?subject=fallow.garden%20Feedback%20-%20Garden%20of%20Finite%20Days" class="support-btn btn-email">
+          <span>✉️</span>
+          <span>Send Feedback</span>
+        </a>
+      </div>
     </section>
 
     <!-- Footer -->
@@ -808,33 +965,45 @@
       fasting: ["Standard (<12h)", "Overnight Fast (12-13h)", "Consistent (14-16h)", "Advanced Rhythm (16-18h+)"],
       plants: ["Low (<10/wk)", "Standard (10-18/wk)", "Diverse (19-24/wk)", "25-30+ Species/Wk"],
       steps: ["Sedentary (<5k)", "Moderate (5k-7k)", "8k-10k+ Daily", "Active (12k+ Daily)"],
+      metabolic: ["Standard Diet", "Whole Food Focus", "Optimal (Low-Glycemic)", "Metabolically Optimized"],
       cognitive: ["Passive Routine", "Active Reader", "Daily Craft/Writing", "Deep Scholarly / Project Work"],
       sleep: ["Poor / Irregular", "Fair (6-7h)", "7.5-8.5h Consistent", "Deep Restorative Rhythm"],
       social: ["Isolated", "Modest Ties", "Strong Cohesive Ties", "Rich Intergenerational Hub"],
       stress: ["High Chronic Strain", "Moderate Friction", "Low Chronic Friction", "Restorative Equanimity"]
     };
 
-    const BASELINE_CONDITIONAL_AGES = {
-      30: 80.5, 40: 81.5, 50: 83.2, 56: 84.6, 60: 85.5, 70: 87.8, 80: 91.0, 85: 93.5
+    // Social Security Administration (SSA) Conditional Life Expectancies
+    const SSA_BASELINE_MALE = {
+      30: 79.4, 40: 80.2, 50: 81.8, 56: 83.4, 60: 84.6, 70: 87.2, 80: 90.6, 85: 93.1
+    };
+    const SSA_BASELINE_FEMALE = {
+      30: 83.6, 40: 84.3, 50: 85.5, 56: 86.8, 60: 87.8, 70: 89.9, 80: 92.6, 85: 94.7
     };
 
-    function getInterpolatedBaseline(age) {
-      const keys = Object.keys(BASELINE_CONDITIONAL_AGES).map(Number);
-      if (age <= keys[0]) return BASELINE_CONDITIONAL_AGES[keys[0]];
-      if (age >= keys[keys.length - 1]) return BASELINE_CONDITIONAL_AGES[keys[keys.length - 1]];
+    let selectedSex = "M";
+
+    function getInterpolatedBaseline(age, sex) {
+      const table = sex === "F" ? SSA_BASELINE_FEMALE : SSA_BASELINE_MALE;
+      const keys = Object.keys(table).map(Number);
+      if (age <= keys[0]) return table[keys[0]];
+      if (age >= keys[keys.length - 1]) return table[keys[keys.length - 1]];
 
       for (let i = 0; i < keys.length - 1; i++) {
         const k1 = keys[i];
         const k2 = keys[i + 1];
         if (age >= k1 && age <= k2) {
           const ratio = (age - k1) / (k2 - k1);
-          return BASELINE_CONDITIONAL_AGES[k1] + ratio * (BASELINE_CONDITIONAL_AGES[k2] - BASELINE_CONDITIONAL_AGES[k1]);
+          return table[k1] + ratio * (table[k2] - table[k1]);
         }
       }
-      return 84.6;
+      return sex === "F" ? 86.8 : 83.4;
     }
 
     const els = {
+      btnSexM: document.getElementById("btnSexM"),
+      btnSexF: document.getElementById("btnSexF"),
+      valSex: document.getElementById("valSex"),
+
       inputAge: document.getElementById("inputAge"),
       inputCardio: document.getElementById("inputCardio"),
       inputBP: document.getElementById("inputBP"),
@@ -843,6 +1012,7 @@
       inputFasting: document.getElementById("inputFasting"),
       inputPlants: document.getElementById("inputPlants"),
       inputSteps: document.getElementById("inputSteps"),
+      inputMetabolic: document.getElementById("inputMetabolic"),
       inputCognitive: document.getElementById("inputCognitive"),
       inputSleep: document.getElementById("inputSleep"),
       inputSocial: document.getElementById("inputSocial"),
@@ -856,6 +1026,7 @@
       valFasting: document.getElementById("valFasting"),
       valPlants: document.getElementById("valPlants"),
       valSteps: document.getElementById("valSteps"),
+      valMetabolic: document.getElementById("valMetabolic"),
       valCognitive: document.getElementById("valCognitive"),
       valSleep: document.getElementById("valSleep"),
       valSocial: document.getElementById("valSocial"),
@@ -868,6 +1039,7 @@
       dispVitalDays: document.getElementById("dispVitalDays"),
       dispMorbidityBuffer: document.getElementById("dispMorbidityBuffer"),
       dispTotalAge: document.getElementById("dispTotalAge"),
+      dispBaselineSub: document.getElementById("dispBaselineSub"),
 
       dispWeekends: document.getElementById("dispWeekends"),
       dispSeasons: document.getElementById("dispSeasons"),
@@ -890,12 +1062,14 @@
       const fasting = parseInt(els.inputFasting.value, 10);
       const plants = parseInt(els.inputPlants.value, 10);
       const steps = parseInt(els.inputSteps.value, 10);
+      const metabolic = parseInt(els.inputMetabolic.value, 10);
       const cognitive = parseInt(els.inputCognitive.value, 10);
       const sleep = parseInt(els.inputSleep.value, 10);
       const social = parseInt(els.inputSocial.value, 10);
       const stress = parseInt(els.inputStress.value, 10);
 
-      // Label sync
+      // Sync labels
+      els.valSex.textContent = selectedSex === "F" ? "Female" : "Male";
       els.valAge.textContent = age;
       els.valCardio.textContent = LABELS.cardio[cardio];
       els.valBP.textContent = LABELS.bp[bp];
@@ -904,22 +1078,24 @@
       els.valFasting.textContent = LABELS.fasting[fasting];
       els.valPlants.textContent = LABELS.plants[plants];
       els.valSteps.textContent = LABELS.steps[steps];
+      els.valMetabolic.textContent = LABELS.metabolic[metabolic];
       els.valCognitive.textContent = LABELS.cognitive[cognitive];
       els.valSleep.textContent = LABELS.sleep[sleep];
       els.valSocial.textContent = LABELS.social[social];
       els.valStress.textContent = LABELS.stress[stress];
 
-      const baselineAge = getInterpolatedBaseline(age);
+      const baselineAge = getInterpolatedBaseline(age, selectedSex);
 
       // Itemized impact modifiers (Actuarially calibrated)
       const items = [
         { name: "Aerobic Capacity (VO₂ Max)", level: LABELS.cardio[cardio], delta: (cardio - 1.5) * 1.5, vital: "+3.2% vitality retention" },
         { name: "Endothelial & Blood Pressure", level: LABELS.bp[bp], delta: (bp - 1.5) * 0.9, vital: "Cardiovascular preservation" },
-        { name: "Resting Heart Rate & Tone", level: LABELS.rhr[rhr], delta: (rhr - 1.5) * 0.5, vital: "Autonomic stability" },
+        { name: "Resting Heart Rate & Tone", level: LABELS.rhr[rhr], delta: (rhr - 1.5) * 0.5, vital: "Autonomic recovery stability" },
         { name: "Strength & Fall Armor", level: LABELS.strength[strength], delta: (strength - 1.5) * 1.1, vital: "+4.5% fall/hip fracture buffer" },
         { name: "Metabolic & Mucosal Fasting", level: LABELS.fasting[fasting], delta: (fasting - 1.5) * 0.7, vital: "Mucin renewal & insulin reset" },
         { name: "Botanical Diversity (30 Species)", level: LABELS.plants[plants], delta: (plants - 1.5) * 0.6, vital: "Butyrate & microbiome resilience" },
         { name: "Daily Step Cadence", level: LABELS.steps[steps], delta: (steps - 1.5) * 0.6, vital: "Circulatory & glucose clearance" },
+        { name: "Metabolic / Glycemic Stability", level: LABELS.metabolic[metabolic], delta: (metabolic - 1.5) * 0.6, vital: "Microvascular defense" },
         { name: "Cognitive Complexity & Craft", level: LABELS.cognitive[cognitive], delta: (cognitive - 1.5) * 0.8, vital: "+5.0% synaptic reserve retention" },
         { name: "Sleep & Glymphatic Wash", level: LABELS.sleep[sleep], delta: (sleep - 1.5) * 0.8, vital: "Neural waste clearance" },
         { name: "Social Density & Community", level: LABELS.social[social], delta: (social - 1.5) * 0.8, vital: "Neuroendocrine & anti-isolation buffer" },
@@ -934,11 +1110,11 @@
       const remainingDays = Math.round(remainingYears * 365.25);
 
       // Biological Age model
-      const bioAge = Math.max(25, (age - (totalDelta * 0.85)));
+      const bioAge = Math.max(25, (age - (totalDelta * 0.82)));
 
       // Vitality / Morbidity Compression (Square curve fraction)
-      const vitalityScore = (cardio + strength + cognitive + sleep + fasting + plants) / 18;
-      const vitalFraction = 0.78 + (vitalityScore * 0.16); // 78% to 94% of remaining days in prime vitality
+      const vitalityScore = (cardio + strength + cognitive + sleep + fasting + plants + metabolic) / 21;
+      const vitalFraction = 0.78 + (vitalityScore * 0.16);
       const vitalDays = Math.round(remainingDays * vitalFraction);
 
       // Granular units
@@ -955,6 +1131,9 @@
       els.dispVitalDays.textContent = vitalDays.toLocaleString();
       els.dispMorbidityBuffer.textContent = `Square Curve: ${Math.round(vitalFraction * 100)}%`;
       els.dispTotalAge.textContent = projectedLife.toFixed(1);
+      
+      const deltaSign = totalDelta >= 0 ? `+${totalDelta.toFixed(1)}` : `${totalDelta.toFixed(1)}`;
+      els.dispBaselineSub.textContent = `Baseline (${baselineAge.toFixed(1)}): ${deltaSign} yrs`;
 
       els.dispWeekends.textContent = weekends.toLocaleString();
       els.dispSeasons.textContent = seasons.toLocaleString();
@@ -1000,7 +1179,7 @@
       const remainingMonths = totalMonths - livedMonths;
       const vitalMonthsRemaining = Math.round(remainingMonths * vitalFraction);
 
-      const cols = 48; // 4 years per row
+      const cols = 48;
       const rows = Math.ceil(totalMonths / cols);
       const dotSize = Math.min((width - 36) / cols, (height - 18) / rows);
       const startX = (width - (cols * dotSize)) / 2;
@@ -1027,11 +1206,26 @@
       }
     }
 
-    // Attach listeners
+    // Sex toggle listeners
+    els.btnSexM.addEventListener("click", () => {
+      selectedSex = "M";
+      els.btnSexM.classList.add("active");
+      els.btnSexF.classList.remove("active");
+      recalculate();
+    });
+
+    els.btnSexF.addEventListener("click", () => {
+      selectedSex = "F";
+      els.btnSexF.classList.add("active");
+      els.btnSexM.classList.remove("active");
+      recalculate();
+    });
+
+    // Slider listeners
     [
       els.inputAge, els.inputCardio, els.inputBP, els.inputRHR,
       els.inputStrength, els.inputFasting, els.inputPlants, els.inputSteps,
-      els.inputCognitive, els.inputSleep, els.inputSocial, els.inputStress
+      els.inputMetabolic, els.inputCognitive, els.inputSleep, els.inputSocial, els.inputStress
     ].forEach(input => input.addEventListener("input", recalculate));
 
     window.addEventListener("resize", recalculate);
