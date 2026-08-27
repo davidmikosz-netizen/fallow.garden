@@ -3,25 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Garden of Finite Days | fallow.garden</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <title>The Garden of Finite Days — fallow.garden</title>
   <style>
     :root {
-      --bg: #f8f6f0;
-      --surface: #ffffff;
-      --surface-border: #e3ded4;
-      --surface-hover: #f1ede4;
-      --accent-sage: #3e5e4e;
-      --accent-sage-light: #eaf1ec;
-      --accent-clay: #b55a36;
-      --accent-gold: #b27b18;
-      --text-main: #1f2723;
-      --text-muted: #596961;
-      --text-dim: #8b9992;
-      --font-serif: 'Lora', Georgia, serif;
-      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --parchment: #faf6ee;
+      --parchment-warm: #f4ecdf;
+      --parchment-card: #fffdfa;
+      --loam-dark: #2c221a;
+      --loam-mid: #4d3d30;
+      --loam-light: #7c6857;
+      --terracotta: #ba5536;
+      --terracotta-soft: #d96f4e;
+      --terracotta-pale: #faede6;
+      --honey-ochre: #c9732b;
+      --ochre-pale: #fbf2e3;
+      --moss-deep: #3b4e34;
+      --moss-mid: #556e4c;
+      --moss-pale: #e3ebe0;
+      --sand-border: #ded3c1;
+      --border-soft: #ebe3d5;
+      --shadow-sm: 0 2px 8px rgba(44, 34, 26, 0.04);
+      --shadow-md: 0 6px 24px rgba(44, 34, 26, 0.07);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-serif: "Iowan Old Style", "Apple Garamond", "Baskerville", "Times New Roman", Georgia, serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     * {
@@ -31,1015 +38,755 @@
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      font-family: var(--font-sans);
+      background-color: var(--parchment);
+      color: var(--loam-dark);
+      font-family: var(--font-serif);
       line-height: 1.6;
-      padding: 2rem 1.25rem 5rem;
+      padding: 1.5rem 1rem 4.5rem;
       display: flex;
       justify-content: center;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .app-container {
+    .container {
       width: 100%;
-      max-width: 820px;
+      max-width: 860px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
     }
 
-    /* Top Navigation */
-    nav.top-nav {
-      margin-bottom: 2rem;
+    /* Top Nav Bar */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--sand-border);
     }
 
-    .back-link {
+    .brand-link {
+      color: var(--moss-deep);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      color: var(--accent-sage);
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: transform 0.15s ease, color 0.15s ease;
+      gap: 0.35rem;
+      transition: color 0.15s ease;
     }
 
-    .back-link:hover {
-      color: var(--text-main);
-      transform: translateX(-3px);
+    .brand-link:hover {
+      color: var(--terracotta);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn-link {
+      background: none;
+      border: none;
+      color: var(--loam-light);
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      text-decoration: underline;
+      transition: color 0.15s ease;
+    }
+    .btn-link:hover {
+      color: var(--terracotta);
     }
 
     /* Header */
     header {
       text-align: center;
-      margin-bottom: 2.5rem;
-      border-bottom: 1px solid var(--surface-border);
-      padding-bottom: 2rem;
+      padding: 0.5rem 0 0.5rem;
     }
 
-    .site-tag {
-      font-size: 0.8rem;
-      letter-spacing: 0.18em;
+    .badge {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: var(--accent-sage);
-      margin-bottom: 0.5rem;
+      color: var(--terracotta);
+      background: var(--terracotta-pale);
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
       font-weight: 600;
+      margin-bottom: 0.6rem;
     }
 
     h1 {
-      font-family: var(--font-serif);
-      font-size: 2.4rem;
+      font-size: 2.25rem;
       font-weight: 500;
+      color: var(--loam-dark);
       letter-spacing: -0.02em;
-      margin-bottom: 0.85rem;
-      color: var(--text-main);
+      line-height: 1.15;
     }
 
     .subtitle {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      max-width: 640px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    /* Quote Card */
-    .wisdom-card {
-      background: var(--surface);
-      border: 1px solid var(--surface-border);
-      border-left: 4px solid var(--accent-sage);
-      border-radius: 8px;
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 2.5rem;
-      position: relative;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-    }
-
-    .wisdom-text {
-      font-family: var(--font-serif);
+      font-size: 0.98rem;
+      color: var(--loam-light);
+      margin-top: 0.35rem;
       font-style: italic;
-      color: var(--text-main);
-      font-size: 1.05rem;
-      margin-bottom: 0.5rem;
-      padding-right: 3.5rem;
     }
 
-    .wisdom-author {
-      font-size: 0.85rem;
-      color: var(--accent-clay);
-      text-align: right;
-      font-weight: 500;
-    }
-
-    .btn-refresh-quote {
-      background: none;
-      border: none;
-      color: var(--text-dim);
-      cursor: pointer;
-      font-size: 0.78rem;
-      position: absolute;
-      top: 1.1rem;
-      right: 1.2rem;
-      transition: color 0.2s;
-    }
-    .btn-refresh-quote:hover {
-      color: var(--accent-sage);
-    }
-
-    /* Section Headers */
-    .section-title {
-      font-family: var(--font-serif);
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .section-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 1.25rem;
-    }
-
-    /* Privacy Banner */
-    .privacy-notice {
-      background: var(--accent-sage-light);
-      border: 1px solid rgba(62, 94, 78, 0.2);
-      border-radius: 8px;
-      padding: 0.85rem 1.15rem;
-      margin-bottom: 1.25rem;
-      font-size: 0.82rem;
-      color: var(--accent-sage);
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      line-height: 1.5;
-    }
-
-    .privacy-notice strong {
-      font-weight: 600;
-    }
-
-    /* Demographic Grid */
-    .demographics-grid {
+    /* Horizon Stats Hero */
+    .horizon-hero {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-      background: var(--surface);
-      padding: 1.25rem;
-      border-radius: 8px;
-      border: 1px solid var(--surface-border);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-    }
-
-    .input-group label {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
-      font-weight: 500;
-    }
-
-    .input-group select,
-    .input-group input {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--surface-border);
-      border-radius: 6px;
-      color: var(--text-main);
-      padding: 0.65rem 0.85rem;
-      font-size: 0.95rem;
-      font-family: var(--font-sans);
-    }
-
-    /* Cards & Levers */
-    .levers-container {
-      display: grid;
-      gap: 0.85rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .lever-card {
-      background: var(--surface);
-      border: 1px solid var(--surface-border);
-      border-radius: 8px;
-      padding: 1rem 1.25rem;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
-    }
-
-    .lever-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-
-    .lever-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .btn-evidence {
-      background: none;
-      border: none;
-      color: var(--accent-sage);
-      font-size: 0.75rem;
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      font-weight: 500;
-    }
-    .btn-evidence:hover {
-      color: var(--text-main);
-    }
-
-    .pill-group {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .pill-btn {
-      background: var(--bg);
-      border: 1px solid var(--surface-border);
-      color: var(--text-muted);
-      border-radius: 20px;
-      padding: 0.45rem 0.95rem;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      font-family: var(--font-sans);
-    }
-
-    .pill-btn:hover {
-      background: var(--surface-hover);
-      color: var(--text-main);
-    }
-
-    .pill-btn.active {
-      background: var(--accent-sage-light);
-      border-color: var(--accent-sage);
-      color: var(--accent-sage);
-      font-weight: 600;
-    }
-
-    /* Results Dashboard */
-    .results-panel {
-      background: var(--surface);
-      border: 1px solid var(--surface-border);
-      border-radius: 12px;
-      padding: 2.25rem 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.25rem;
       text-align: center;
-      margin-bottom: 2.5rem;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
     }
 
-    .results-hero {
-      font-family: var(--font-serif);
-      font-size: 3.25rem;
-      color: var(--accent-sage);
-      line-height: 1;
-      margin-bottom: 0.35rem;
+    .stat-box {
+      padding: 0.5rem;
+    }
+
+    .stat-label {
+      font-family: var(--font-sans);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--loam-light);
       font-weight: 600;
+      margin-bottom: 0.25rem;
     }
 
-    .results-hero-label {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-    }
-
-    .seasons-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      border-top: 1px solid var(--surface-border);
-      padding-top: 1.5rem;
-    }
-
-    .season-item h4 {
+    .stat-val {
       font-family: var(--font-serif);
-      font-size: 1.75rem;
+      font-size: 2.3rem;
       font-weight: 600;
-      color: var(--accent-clay);
-      margin-bottom: 0.2rem;
+      color: var(--loam-dark);
+      line-height: 1.1;
     }
 
-    .season-item p {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.4;
+    .stat-val.highlight {
+      color: var(--terracotta);
+    }
+    .stat-val.ochre {
+      color: var(--honey-ochre);
     }
 
-    /* Visual Grid Section */
-    .grid-section {
-      background: var(--surface);
-      border: 1px solid var(--surface-border);
-      border-radius: 12px;
-      padding: 1.75rem;
-      margin-bottom: 2.5rem;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+    .stat-sub {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: var(--moss-mid);
+      margin-top: 0.2rem;
+      font-weight: 500;
     }
 
-    .grid-header {
+    /* Life Horizon Canvas */
+    .canvas-card {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .canvas-head {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 0.75rem;
+      align-items: center;
+      margin-bottom: 0.85rem;
+      font-family: var(--font-sans);
     }
 
-    .grid-legend {
+    .canvas-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--loam-dark);
+    }
+
+    .legend-row {
       display: flex;
-      gap: 1rem;
+      gap: 0.85rem;
       font-size: 0.75rem;
-      color: var(--text-muted);
+      color: var(--loam-light);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
     }
 
     .legend-dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      margin-right: 4px;
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
     }
+    .dot-lived { background: var(--loam-light); opacity: 0.45; }
+    .dot-vital { background: var(--moss-mid); }
+    .dot-harvest { background: var(--terracotta-soft); }
 
-    .canvas-wrapper {
-      display: flex;
-      justify-content: center;
-      overflow-x: auto;
-      padding: 0.5rem 0;
+    .matrix-wrapper {
+      width: 100%;
+      height: 150px;
+      background: var(--parchment-warm);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      position: relative;
     }
 
     canvas {
-      image-rendering: pixelated;
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
-    /* Evidence Modal */
-    .modal-backdrop {
+    /* Levers & Calibration Section */
+    .section-card {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px dashed var(--sand-border);
+      padding-bottom: 0.5rem;
+    }
+
+    .section-head h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--loam-dark);
+    }
+
+    .section-desc {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--loam-light);
+    }
+
+    .levers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.15rem;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .control-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--loam-mid);
+    }
+
+    .control-val {
+      color: var(--terracotta);
+      font-weight: 700;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--terracotta);
+      cursor: pointer;
+    }
+
+    .control-desc {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      color: var(--loam-light);
+      line-height: 1.3;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
       position: fixed;
-      inset: 0;
-      background: rgba(31, 39, 35, 0.5);
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(44, 34, 26, 0.55);
       backdrop-filter: blur(4px);
       display: none;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      z-index: 1000;
       padding: 1rem;
-      z-index: 100;
     }
 
-    .modal-backdrop.open {
+    .modal-overlay.active {
       display: flex;
     }
 
     .modal-card {
-      background: var(--surface);
-      border: 1px solid var(--surface-border);
-      border-radius: 12px;
-      max-width: 580px;
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg);
+      max-width: 680px;
       width: 100%;
-      padding: 1.75rem;
-      position: relative;
       max-height: 85vh;
       overflow-y: auto;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
     }
 
-    .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1.25rem;
-      background: none;
-      border: none;
-      color: var(--text-dim);
-      font-size: 1.4rem;
-      cursor: pointer;
-    }
-    .modal-close:hover {
-      color: var(--text-main);
-    }
-
-    .modal-title {
-      font-family: var(--font-serif);
-      font-size: 1.3rem;
-      margin-bottom: 0.4rem;
-      color: var(--accent-sage);
-      font-weight: 600;
-    }
-
-    .modal-desc {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 1.25rem;
-      border-bottom: 1px solid var(--surface-border);
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--sand-border);
       padding-bottom: 0.75rem;
     }
 
-    .citation-list {
-      list-style: none;
-      display: grid;
-      gap: 0.85rem;
+    .modal-head h3 {
+      font-size: 1.3rem;
+      color: var(--loam-dark);
+      font-weight: 600;
     }
 
-    .citation-item {
-      font-size: 0.85rem;
-      color: var(--text-main);
-      background: var(--bg);
-      padding: 0.85rem;
-      border-radius: 6px;
-      border-left: 3px solid var(--accent-clay);
+    .btn-close {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--loam-light);
+      cursor: pointer;
+      line-height: 1;
+    }
+    .btn-close:hover {
+      color: var(--terracotta);
     }
 
-    .citation-journal {
-      color: var(--text-muted);
-      font-style: italic;
-      font-size: 0.8rem;
-      margin-top: 0.25rem;
+    .faq-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .faq-q {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--loam-dark);
+    }
+
+    .faq-a {
+      font-size: 0.88rem;
+      color: var(--loam-mid);
+      line-height: 1.55;
     }
 
     /* Footer */
     footer {
       text-align: center;
-      color: var(--text-dim);
-      font-size: 0.8rem;
-      margin-top: 2rem;
+      font-size: 0.82rem;
+      color: var(--loam-light);
+      font-family: var(--font-sans);
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--sand-border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      align-items: center;
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding: 1.25rem 0.75rem 3.5rem;
-      }
-      .demographics-grid {
+    .footer-link {
+      color: var(--moss-deep);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .footer-link:hover {
+      color: var(--terracotta);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .levers-grid {
         grid-template-columns: 1fr;
       }
-      .seasons-grid {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
+      .horizon-hero {
+        grid-template-columns: 1fr 1fr;
       }
-      .results-hero {
-        font-size: 2.75rem;
+      h1 {
+        font-size: 1.85rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <main class="app-container">
+  <div class="container">
+    
+    <!-- Top Navigation -->
     <nav class="top-nav">
-      <a href="/" class="back-link">&larr; Return to fallow.garden</a>
+      <a href="/" class="brand-link">
+        <span>🌱</span>
+        <span>fallow.garden</span>
+      </a>
+      <div class="nav-actions">
+        <button class="btn-link" id="openFaqBtn">Actuarial Notes &amp; FAQ</button>
+      </div>
     </nav>
 
+    <!-- Header -->
     <header>
-      <div class="site-tag">fallow.garden &bull; episode</div>
+      <div class="badge">Actuarial Horizon &amp; Vitality Matrix</div>
       <h1>The Garden of Finite Days</h1>
-      <p class="subtitle">
-        An actuarial reflection on conditional time. This utility couples Social Security Administration cohort survival curves with peer-reviewed metabolic and behavioral research to project your statistical horizon—framing finite days into tangible seasons, moons, and mornings.
-      </p>
+      <p class="subtitle">A tactile map of remaining days, conditional longevity &amp; compression of morbidity</p>
     </header>
 
-    <div class="wisdom-card">
-      <button class="btn-refresh-quote" id="btnRefreshQuote" title="Reflect on another passage">&#8635; Next</button>
-      <div class="wisdom-text" id="wisdomText">"The trouble is, you think you have time."</div>
-      <div class="wisdom-author" id="wisdomAuthor">&mdash; Jack Kornfield</div>
-    </div>
-
-    <section>
-      <div class="section-title">I. Actuarial Baseline</div>
-      <p class="section-desc">
-        Life expectancy is dynamic: surviving each decade eliminates past hazards and shifts your median life horizon onward.
-      </p>
-      <div class="demographics-grid">
-        <div class="input-group">
-          <label for="currentAge">Current Age</label>
-          <input type="number" id="currentAge" min="18" max="99" value="56" />
-        </div>
-        <div class="input-group">
-          <label for="sexSelect">Biological Cohort Table</label>
-          <select id="sexSelect">
-            <option value="male" selected>Male (SSA Cohort Baseline)</option>
-            <option value="female">Female (SSA Cohort Baseline)</option>
-          </select>
-        </div>
+    <!-- Hero Stats -->
+    <section class="horizon-hero">
+      <div class="stat-box">
+        <div class="stat-label">Current Age</div>
+        <div class="stat-val" id="dispCurrentAge">56</div>
+        <div class="stat-sub">Baseline Anchored</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Remaining Days</div>
+        <div class="stat-val highlight" id="dispRemainingDays">11,322</div>
+        <div class="stat-sub" id="dispRemainingYears">~31.0 Years</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">High-Vitality Days</div>
+        <div class="stat-val ochre" id="dispVitalDays">9,620</div>
+        <div class="stat-sub">Square Curve Target</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Projected Lifespan</div>
+        <div class="stat-val" id="dispTotalAge">87.0</div>
+        <div class="stat-sub">Actuarial Conditional</div>
       </div>
     </section>
 
-    <section>
-      <div class="section-title">II. Clinical & Metabolic Markers</div>
-      <p class="section-desc">
-        Underlying metabolic and cardiovascular biomarkers that shape vascular and cellular health.
-      </p>
-
-      <div class="privacy-notice">
-        <span>&#128274;</span>
-        <div>
-          <strong>Strictly Private & Client-Side:</strong> None of your medical, biometric, or lifestyle inputs are ever saved, tracked, or transmitted. All calculations occur transiently in your local browser memory.
+    <!-- Visual Canvas -->
+    <section class="canvas-card">
+      <div class="canvas-head">
+        <div class="canvas-title">Lifespan Tapestry (Each dot = 1 Month of Life)</div>
+        <div class="legend-row">
+          <div class="legend-item"><span class="legend-dot dot-lived"></span> Lived</div>
+          <div class="legend-item"><span class="legend-dot dot-vital"></span> Prime Vitality</div>
+          <div class="legend-item"><span class="legend-dot dot-harvest"></span> Elder Horizon</div>
         </div>
       </div>
-
-      <div class="levers-container" id="clinicalContainer">
-        </div>
-    </section>
-
-    <section>
-      <div class="section-title">III. Living Habits & Modifiers</div>
-      <p class="section-desc">
-        Modifiable daily practices that modulate systemic inflammation, telomere integrity, and cognitive resilience.
-      </p>
-      <div class="levers-container" id="lifestyleContainer">
-        </div>
-    </section>
-
-    <section class="results-panel">
-      <div class="results-hero" id="statHorizonAge">--</div>
-      <div class="results-hero-label">Estimated Actuarial Horizon (Age)</div>
-      
-      <div class="seasons-grid">
-        <div class="season-item">
-          <h4 id="statSprings">--</h4>
-          <p>Springs to Plant & Cultivate</p>
-        </div>
-        <div class="season-item">
-          <h4 id="statMoons">--</h4>
-          <p>Full Moons to Witness</p>
-        </div>
-        <div class="season-item">
-          <h4 id="statWeekends">--</h4>
-          <p>Resting Weekends Remaining</p>
-        </div>
+      <div class="matrix-wrapper">
+        <canvas id="tapestryCanvas"></canvas>
       </div>
     </section>
 
-    <section class="grid-section">
-      <div class="grid-header">
-        <div class="section-title" style="margin-bottom:0;">The Loom of Weeks</div>
-        <div class="grid-legend">
-          <span><span class="legend-dot" style="background:var(--accent-clay);"></span>Lived</span>
-          <span><span class="legend-dot" style="background:var(--accent-gold);"></span>Current</span>
-          <span><span class="legend-dot" style="background:var(--accent-sage-light); border:1px solid var(--accent-sage);"></span>Unwritten</span>
-        </div>
+    <!-- Interactive Levers -->
+    <section class="section-card">
+      <div class="section-head">
+        <h2>Actuarial Levers &amp; Morbidity Levers</h2>
+        <div class="section-desc">Calibrate high-impact physiological &amp; cognitive parameters</div>
       </div>
-      <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1.25rem;">
-        Each dot represents one week (52 weeks per row). Every complete row is a year returned to the earth.
-      </p>
-      <div class="canvas-wrapper">
-        <canvas id="lifeCanvas" width="624" height="900"></canvas>
+
+      <div class="levers-grid">
+        
+        <!-- Age Input -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Current Age:</span>
+            <span class="control-val" id="valAge">56</span>
+          </div>
+          <input type="range" id="inputAge" min="30" max="85" value="56" />
+          <div class="control-desc">Calculates conditional survival odds, bypassing early-life hazards.</div>
+        </div>
+
+        <!-- Aerobic Fitness -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Aerobic Capacity (VO₂ Max):</span>
+            <span class="control-val" id="valCardio">High (Top 25%)</span>
+          </div>
+          <input type="range" id="inputCardio" min="0" max="3" value="2" />
+          <div class="control-desc">Cleveland Clinic data: 4–5x all-cause mortality buffer from bottom to top tier.</div>
+        </div>
+
+        <!-- Muscle & Strength -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Strength &amp; Fall Armor:</span>
+            <span class="control-val" id="valStrength">Robust</span>
+          </div>
+          <input type="range" id="inputStrength" min="0" max="3" value="2" />
+          <div class="control-desc">Protects against sarcopenia, fragility fractures, and hospital cascades.</div>
+        </div>
+
+        <!-- Cognitive Engagement -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Cognitive Projects &amp; Purpose:</span>
+            <span class="control-val" id="valCognitive">Daily Creative Work</span>
+          </div>
+          <input type="range" id="inputCognitive" min="0" max="3" value="3" />
+          <div class="control-desc">Buffers against retirement-shock deceleration and neurodegenerative onset.</div>
+        </div>
+
+        <!-- Metabolic Health -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Metabolic &amp; Fasting Rhythm:</span>
+            <span class="control-val" id="valMetabolic">Consistent (14-16h)</span>
+          </div>
+          <input type="range" id="inputMetabolic" min="0" max="3" value="2" />
+          <div class="control-desc">Supports insulin sensitivity, lipid clearance, and mucosal lining repair.</div>
+        </div>
+
+        <!-- Social Connection -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Social Density &amp; Ties:</span>
+            <span class="control-val" id="valSocial">Strong Community</span>
+          </div>
+          <input type="range" id="inputSocial" min="0" max="3" value="2" />
+          <div class="control-desc">Holt-Lunstad meta-analysis: connection buffers inflammation like non-smoking.</div>
+        </div>
+
       </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-      <p>fallow.garden &bull; Grounded in empirical actuarial tables and radical presence.</p>
+      <div>Part of the <a href="/" class="footer-link">fallow.garden</a> anthology — restorative digital micro-tools.</div>
+      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.2rem;">All actuarial projections are computed locally on your device. Zero telemetry.</div>
     </footer>
-  </main>
 
-  <div class="modal-backdrop" id="evidenceModal">
+  </div>
+
+  <!-- FAQ Modal -->
+  <div class="modal-overlay" id="faqModal">
     <div class="modal-card">
-      <button class="modal-close" id="modalCloseBtn">&times;</button>
-      <h3 class="modal-title" id="modalTitle">Evidence & Meta-Analyses</h3>
-      <p class="modal-desc" id="modalDesc"></p>
-      <ul class="citation-list" id="modalCitations"></ul>
+      <div class="modal-head">
+        <h3>Actuarial Reference &amp; FAQ</h3>
+        <button class="btn-close" id="closeFaqBtn">&times;</button>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">1. Why is the remaining day count surprisingly large?</div>
+        <div class="faq-a">
+          Standard life expectancy at birth (~77–79 years) includes infant, adolescent, and early-adulthood hazards. Once you reach your 50s, you have already bypassed those statistical risks. Actuaries calculate <strong>conditional life expectancy</strong>: an average 56-year-old today has a baseline life expectancy of ~84–86 years (~11,000 days), with healthy cohorts reaching 88–92.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">2. What about sudden accidental risks (car crashes, slips, freak events)?</div>
+        <div class="faq-a">
+          In actuarial science (the Gompertz-Makeham law), mortality is divided into the biological aging curve and the <strong>Makeham constant</strong>—the baseline probability of pure external bad luck (car crashes, falls, acute poisoning). Cumulative lifetime accidental death odds total ~3–5% in standard populations. Because actuarial tables measure real populations, <strong>these accidental hazards are already baked into your baseline</strong>.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">3. What are the highest-impact levers most calculators miss?</div>
+        <div class="faq-a">
+          Epidemiological literature demonstrates that <strong>Cardiorespiratory Fitness ($VO_2\text{ Max}$)</strong> yields up to a 5-fold mortality risk reduction from lowest to highest quartile. <strong>Muscle Mass &amp; Power</strong> buffers against fatal falls (a leading cascade of late-life decline). <strong>Cognitive Reserve &amp; Complex Projects</strong> protect against post-retirement mental and physical shock.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">4. What does "Compression of Morbidity" mean?</div>
+        <div class="faq-a">
+          Coined by James Fries, compression of morbidity means squaring the life curve: living at near-100% cognitive and physical vitality throughout your 60s, 70s, and 80s, so that decline is compressed into a rapid, painless descent at the very end rather than decades of frailty.
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
-    // --- 1. Wisdom Engine ---
-    const wisdomQuotes = [
-      { text: "The trouble is, you think you have time.", author: "Jack Kornfield" },
-      { text: "Radical acceptance begins with saying yes to the present moment as it is, finite and fleeting.", author: "Tara Brach" },
-      { text: "The only time you ever have to live or learn or see or feel or express anything is this moment.", author: "Jon Kabat-Zinn" },
-      { text: "Impermanence is the nature of all things. When we embrace it, every ordinary morning becomes sacred.", author: "Pema Chödrön" },
-      { text: "You don't look at the musician and say the point of the symphony was the finale. The point of the dance is the dancing.", author: "Alan Watts" },
-      { text: "When we let go of our expectations of the future, we find peace in the soil right beneath our feet.", author: "Jack Kornfield" },
-      { text: "Imperfections and endings are not departures from the sacred; they are the very ground of it.", author: "Tara Brach" },
-      { text: "To be fully alive, fully human, and completely awake is to be continually willing to step into the unknown.", author: "Pema Chödrön" },
-      { text: "Muddy water is best cleared by leaving it alone.", author: "Alan Watts" },
-      { text: "You cannot stop the waves of time, but you can learn to surf.", author: "Jon Kabat-Zinn" },
-      { text: "You could leave life right now. Let that determine what you do and say and think.", author: "Marcus Aurelius" },
-      { text: "It is not that we have a short time to live, but that we waste a lot of it.", author: "Seneca" },
-      { text: "When you arise in the morning, think of what a precious privilege it is to be alive—to breathe, to think, to enjoy, to love.", author: "Marcus Aurelius" },
-      { text: "Time itself is being, and all being is time. An inch of time is an inch of jade.", author: "Eihei Dōgen" },
-      { text: "Smile, breathe, and go slowly. There is no need to hurry. We have nowhere else to go.", author: "Thich Nhat Hanh" }
-    ];
+    /* Actuarial Calculation Engine */
+    const CARDIO_LABELS = ["Low / Sedentary", "Moderate", "High (Top 25%)", "Elite (Top 2.5%)"];
+    const STRENGTH_LABELS = ["Minimal", "Moderate", "Robust", "Exceptional"];
+    const COGNITIVE_LABELS = ["Passive Routine", "Active Reader", "Daily Creative Work", "Deep Scholarly / Project Work"];
+    const METABOLIC_LABELS = ["Standard Modern", "Balanced Whole Food", "Consistent (14-16h Fasting)", "Metabolically Optimized"];
+    const SOCIAL_LABELS = ["Isolated", "Modest Ties", "Strong Community", "Rich Intergenerational Ties"];
 
-    let currentQuoteIdx = 0;
-    function cycleQuote() {
-      currentQuoteIdx = (currentQuoteIdx + 1) % wisdomQuotes.length;
-      document.getElementById('wisdomText').textContent = `"${wisdomQuotes[currentQuoteIdx].text}"`;
-      document.getElementById('wisdomAuthor').textContent = `— ${wisdomQuotes[currentQuoteIdx].author}`;
-    }
-
-    // --- 2. SSA Actuarial Table ---
-    const ssaExpectancy = {
-      male: [
-        { age: 0, rem: 74.8 }, { age: 20, rem: 55.8 }, { age: 30, rem: 46.5 },
-        { age: 40, rem: 37.3 }, { age: 50, rem: 28.5 }, { age: 60, rem: 20.6 },
-        { age: 70, rem: 13.7 }, { age: 80, rem: 8.0 }, { age: 90, rem: 4.1 }, { age: 100, rem: 2.1 }
-      ],
-      female: [
-        { age: 0, rem: 80.2 }, { age: 20, rem: 61.0 }, { age: 30, rem: 51.4 },
-        { age: 40, rem: 41.9 }, { age: 50, rem: 32.7 }, { age: 60, rem: 24.1 },
-        { age: 70, rem: 16.3 }, { age: 80, rem: 9.7 }, { age: 90, rem: 4.9 }, { age: 100, rem: 2.4 }
-      ]
+    const BASELINE_CONDITIONAL_AGES = {
+      30: 80.5, 40: 81.5, 50: 83.2, 56: 84.6, 60: 85.5, 70: 87.8, 80: 91.0, 85: 93.5
     };
 
-    function getBaselineRemaining(age, sex) {
-      const table = ssaExpectancy[sex] || ssaExpectancy.male;
-      if (age <= table[0].age) return table[0].rem;
-      if (age >= table[table.length - 1].age) return Math.max(1, table[table.length - 1].rem - (age - 100) * 0.3);
+    function getInterpolatedBaseline(age) {
+      const keys = Object.keys(BASELINE_CONDITIONAL_AGES).map(Number);
+      if (age <= keys[0]) return BASELINE_CONDITIONAL_AGES[keys[0]];
+      if (age >= keys[keys.length - 1]) return BASELINE_CONDITIONAL_AGES[keys[keys.length - 1]];
 
-      for (let i = 0; i < table.length - 1; i++) {
-        if (age >= table[i].age && age <= table[i + 1].age) {
-          const t = (age - table[i].age) / (table[i + 1].age - table[i].age);
-          return table[i].rem + t * (table[i + 1].rem - table[i].rem);
+      for (let i = 0; i < keys.length - 1; i++) {
+        const k1 = keys[i];
+        const k2 = keys[i + 1];
+        if (age >= k1 && age <= k2) {
+          const ratio = (age - k1) / (k2 - k1);
+          return BASELINE_CONDITIONAL_AGES[k1] + ratio * (BASELINE_CONDITIONAL_AGES[k2] - BASELINE_CONDITIONAL_AGES[k1]);
         }
       }
-      return 15;
+      return 84.6;
     }
 
-    // --- 3. Clinical & Metabolic Factors ---
-    const clinicalData = [
-      {
-        id: 'bmi',
-        title: 'Body Mass Index & Adiposity',
-        desc: 'Metabolic reserve and all-cause hazard ratios associated with body composition.',
-        options: [
-          { label: 'Normal (18.5 – 24.9)', delta: 0.5, default: true },
-          { label: 'Overweight (25.0 – 29.9)', delta: -0.5 },
-          { label: 'Obesity Class I/II (30+)', delta: -2.8 },
-          { label: 'Underweight (<18.5)', delta: -2.0 }
-        ],
-        citations: [
-          {
-            title: "Body-mass index and all-cause mortality: individual-participant-data meta-analysis of 239 prospective studies in four continents.",
-            authors: "The Global BMI Mortality Collaboration",
-            journal: "The Lancet, 2016; 388(10046): 776–786."
-          }
-        ]
-      },
-      {
-        id: 'bp',
-        title: 'Blood Pressure Status',
-        desc: 'Systolic and diastolic pressures modulating cerebrovascular and arterial health.',
-        options: [
-          { label: 'Optimal (<120 / <80 mmHg)', delta: 1.0, default: true },
-          { label: 'Elevated (120-139 / 80-89)', delta: -0.8 },
-          { label: 'Hypertension (≥140 / ≥90)', delta: -2.5 }
-        ],
-        citations: [
-          {
-            title: "Age-specific relevance of usual blood pressure to vascular mortality: a meta-analysis of individual data for one million adults.",
-            authors: "Lewington, S., Clarke, R., Qizilbash, N., et al.",
-            journal: "The Lancet, 2002; 360(9349): 1903–1913."
-          }
-        ]
-      },
-      {
-        id: 'glucose',
-        title: 'Blood Glucose & Glycemic Profile',
-        desc: 'Insulin sensitivity and microvascular health across the diabetic spectrum.',
-        options: [
-          { label: 'Normal Glycemia (HbA1c <5.7%)', delta: 0.5, default: true },
-          { label: 'Pre-Diabetes (5.7 – 6.4%)', delta: -0.8 },
-          { label: 'Type 2 Diabetes (Managed)', delta: -3.5 },
-          { label: 'Type 2 Diabetes (Uncontrolled)', delta: -5.5 }
-        ],
-        citations: [
-          {
-            title: "Diabetes mellitus, fasting glucose, and risk of cause-specific death.",
-            authors: "The Emerging Risk Factors Collaboration",
-            journal: "New England Journal of Medicine, 2011; 364(9): 829–841."
-          }
-        ]
-      },
-      {
-        id: 'cvd',
-        title: 'Cardiovascular History & Lipids',
-        desc: 'Known arterial plaque burden, lipid panels, or prior cardiac events.',
-        options: [
-          { label: 'No Prior Events / Optimal Lipids', delta: 0.5, default: true },
-          { label: 'Elevated Lipids / Family History', delta: -0.8 },
-          { label: 'Prior Event (Heart Attack / Stroke)', delta: -3.8 }
-        ],
-        citations: [
-          {
-            title: "Effect of potentially modifiable risk factors associated with myocardial infarction in 52 countries (the INTERHEART study).",
-            authors: "Yusuf, S., Hawken, S., Ôunpuu, S., et al.",
-            journal: "The Lancet, 2004; 364(9438): 937–952."
-          }
-        ]
-      }
-    ];
-
-    // --- 4. Lifestyle Levers ---
-    const lifestyleData = [
-      {
-        id: 'movement',
-        title: 'Daily Aerobic Movement',
-        desc: 'Consistent physical activity and daily step cadence.',
-        options: [
-          { label: 'Sedentary (<4k steps)', delta: -1.5 },
-          { label: 'Moderate (150m/wk or 7k+ steps)', delta: 2.8, default: true },
-          { label: 'Active (300m/wk+)', delta: 4.2 }
-        ],
-        citations: [
-          {
-            title: "Leisure time physical activity of moderate to vigorous intensity and mortality: a large pooled cohort analysis.",
-            authors: "Moore, S. C., Patel, A. V., Matthews, C. E., et al.",
-            journal: "PLOS Medicine, 2012; 9(11): e1001335."
-          }
-        ]
-      },
-      {
-        id: 'tobacco',
-        title: 'Tobacco & Smoking Status',
-        desc: 'Impact of active combustion inhalation and vascular recovery.',
-        options: [
-          { label: 'Current Smoker', delta: -7.0 },
-          { label: 'Quit within 10y', delta: -1.0 },
-          { label: 'Quit >10y ago', delta: 1.5 },
-          { label: 'Never Smoked', delta: 3.0, default: true }
-        ],
-        citations: [
-          {
-            title: "21st-century hazards of smoking and benefits of cessation in the United States.",
-            authors: "Jha, P., Ramasundarahettige, C., Landsman, V., et al.",
-            journal: "NEJM, 2013; 368(4): 341–350."
-          }
-        ]
-      },
-      {
-        id: 'diet',
-        title: 'Nutritional Pattern',
-        desc: 'Emphasis on whole garden foods, legumes, and minimal ultra-processing.',
-        options: [
-          { label: 'Ultra-Processed / Standard', delta: -1.5 },
-          { label: 'Balanced / Mixed', delta: 0.5, default: true },
-          { label: 'Whole Food / Plant-Rich', delta: 3.5 }
-        ],
-        citations: [
-          {
-            title: "Estimating impact of food choices on life expectancy: A modeling study.",
-            authors: "Fadnes, L. T., Celis-Morales, C., et al.",
-            journal: "PLOS Medicine, 2022; 19(2): e1003889."
-          }
-        ]
-      },
-      {
-        id: 'social',
-        title: 'Social Ties & Community',
-        desc: 'Interpersonal depth, strong friendships, and shared community life.',
-        options: [
-          { label: 'Isolated / Low Contact', delta: -2.5 },
-          { label: 'Moderate Social Circle', delta: 0.5, default: true },
-          { label: 'Deeply Integrated', delta: 2.5 }
-        ],
-        citations: [
-          {
-            title: "Social relationships and mortality risk: A meta-analytic review.",
-            authors: "Holt-Lunstad, J., Smith, T. B., & Layton, J. B.",
-            journal: "PLoS Medicine, 2010; 7(7): e1000316."
-          }
-        ]
-      },
-      {
-        id: 'sleep',
-        title: 'Sleep Restoration & Regularity',
-        desc: '7–8 hours of consistent, restorative sleep across circadian cycles.',
-        options: [
-          { label: 'Chronic Deprivation (<6h)', delta: -2.0 },
-          { label: 'Variable / 6-7h', delta: 0.0, default: true },
-          { label: 'Restorative 7-8h Regular', delta: 2.2 }
-        ],
-        citations: [
-          {
-            title: "Sleep duration and all-cause mortality: A systematic review and meta-analysis.",
-            authors: "Cappuccio, F. P., D'Elia, L., et al.",
-            journal: "Sleep, 2010; 33(5): 585–592."
-          }
-        ]
-      },
-      {
-        id: 'alcohol',
-        title: 'Alcohol Intake',
-        desc: 'Weekly intake volumes and cardiovascular/oncological risk thresholds.',
-        options: [
-          { label: 'Heavy (>14 drinks/wk)', delta: -3.5 },
-          { label: 'Moderate (4-10 drinks/wk)', delta: -0.8 },
-          { label: 'Minimal / Non-Drinker', delta: 1.0, default: true }
-        ],
-        citations: [
-          {
-            title: "Risk thresholds for alcohol consumption: individual-participant data for 599,912 drinkers.",
-            authors: "Wood, A. M., Kaptoge, S., et al.",
-            journal: "The Lancet, 2018; 391(10129): 1513–1523."
-          }
-        ]
-      },
-      {
-        id: 'strength',
-        title: 'Functional Strength & Resistance',
-        desc: 'Preserving lean muscle mass, grip strength, and functional autonomy.',
-        options: [
-          { label: 'Low / No Resistance Training', delta: -1.0 },
-          { label: '1-2 Days / Functional Work', delta: 1.5, default: true },
-          { label: 'Regular Progressive Training', delta: 2.2 }
-        ],
-        citations: [
-          {
-            title: "Prognostic value of grip strength: findings from the PURE study.",
-            authors: "Leong, D. P., Teo, K. K., et al.",
-            journal: "The Lancet, 2015; 386(9990): 266–273."
-          }
-        ]
-      },
-      {
-        id: 'purpose',
-        title: 'Purpose & Psychological Grounding',
-        desc: 'Mindfulness practice, daily agency, and intentional presence.',
-        options: [
-          { label: 'Uncertain / Low Agency', delta: -1.5 },
-          { label: 'Grounded / Moderate Purpose', delta: 0.5, default: true },
-          { label: 'Deep Meaning & Daily Focus', delta: 2.4 }
-        ],
-        citations: [
-          {
-            title: "Association between life purpose and mortality among US adults older than 50 years.",
-            authors: "Alimujiang, A., Wiensch, A., et al.",
-            journal: "JAMA Network Open, 2019; 2(5): e194270."
-          }
-        ]
-      }
-    ];
-
-    // State
-    const userSelections = {};
-
-    function renderGroup(items, containerId) {
-      const container = document.getElementById(containerId);
-      container.innerHTML = '';
-
-      items.forEach(item => {
-        const defaultOpt = item.options.find(o => o.default) || item.options[0];
-        userSelections[item.id] = defaultOpt.delta;
-
-        const card = document.createElement('div');
-        card.className = 'lever-card';
-        card.innerHTML = `
-          <div class="lever-header">
-            <span class="lever-title">${item.title}</span>
-            <button class="btn-evidence" data-id="${item.id}">View Evidence &#8599;</button>
-          </div>
-          <div class="pill-group">
-            ${item.options.map(opt => `
-              <button class="pill-btn ${opt.default ? 'active' : ''}" data-lever="${item.id}" data-delta="${opt.delta}">
-                ${opt.label}
-              </button>
-            `).join('')}
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function initAllLevers() {
-      renderGroup(clinicalData, 'clinicalContainer');
-      renderGroup(lifestyleData, 'lifestyleContainer');
-
-      const handlePillClick = (e) => {
-        if (e.target.classList.contains('pill-btn')) {
-          const leverId = e.target.getAttribute('data-lever');
-          const delta = parseFloat(e.target.getAttribute('data-delta'));
-          userSelections[leverId] = delta;
-
-          const siblings = e.target.parentElement.querySelectorAll('.pill-btn');
-          siblings.forEach(b => b.classList.remove('active'));
-          e.target.classList.add('active');
-
-          recalculate();
-        } else if (e.target.classList.contains('btn-evidence')) {
-          const leverId = e.target.getAttribute('data-id');
-          openEvidence(leverId);
-        }
-      };
-
-      document.getElementById('clinicalContainer').addEventListener('click', handlePillClick);
-      document.getElementById('lifestyleContainer').addEventListener('click', handlePillClick);
-    }
-
-    // --- 5. Calculation & Canvas Rendering ---
-    function recalculate() {
-      const age = parseInt(document.getElementById('currentAge').value, 10) || 50;
-      const sex = document.getElementById('sexSelect').value;
-
-      const baselineRemaining = getBaselineRemaining(age, sex);
+    const elements = {
+      inputAge: document.getElementById("inputAge"),
+      inputCardio: document.getElementById("inputCardio"),
+      inputStrength: document.getElementById("inputStrength"),
+      inputCognitive: document.getElementById("inputCognitive"),
+      inputMetabolic: document.getElementById("inputMetabolic"),
+      inputSocial: document.getElementById("inputSocial"),
       
-      // Sum clinical and lifestyle deltas with realistic dampening
-      let totalDelta = Object.values(userSelections).reduce((acc, d) => acc + d, 0);
-      totalDelta = Math.max(-16, Math.min(14, totalDelta));
+      valAge: document.getElementById("valAge"),
+      valCardio: document.getElementById("valCardio"),
+      valStrength: document.getElementById("valStrength"),
+      valCognitive: document.getElementById("valCognitive"),
+      valMetabolic: document.getElementById("valMetabolic"),
+      valSocial: document.getElementById("valSocial"),
 
-      const adjustedRemaining = Math.max(0.5, baselineRemaining + totalDelta);
-      const projectedHorizon = age + adjustedRemaining;
+      dispCurrentAge: document.getElementById("dispCurrentAge"),
+      dispRemainingDays: document.getElementById("dispRemainingDays"),
+      dispRemainingYears: document.getElementById("dispRemainingYears"),
+      dispVitalDays: document.getElementById("dispVitalDays"),
+      dispTotalAge: document.getElementById("dispTotalAge"),
 
-      // Update Numerical Outputs
-      document.getElementById('statHorizonAge').textContent = projectedHorizon.toFixed(1);
-      document.getElementById('statSprings').textContent = `~${Math.round(adjustedRemaining)}`;
-      document.getElementById('statMoons').textContent = `~${Math.round(adjustedRemaining * 12.37).toLocaleString()}`;
-      document.getElementById('statWeekends').textContent = `~${Math.round(adjustedRemaining * 52.14).toLocaleString()}`;
+      canvas: document.getElementById("tapestryCanvas"),
+      modal: document.getElementById("faqModal"),
+      openFaqBtn: document.getElementById("openFaqBtn"),
+      closeFaqBtn: document.getElementById("closeFaqBtn")
+    };
 
-      drawLifeGrid(age, projectedHorizon);
+    function calculateHorizon() {
+      const age = parseFloat(elements.inputAge.value);
+      const cardio = parseInt(elements.inputCardio.value, 10);
+      const strength = parseInt(elements.inputStrength.value, 10);
+      const cognitive = parseInt(elements.inputCognitive.value, 10);
+      const metabolic = parseInt(elements.inputMetabolic.value, 10);
+      const social = parseInt(elements.inputSocial.value, 10);
+
+      // Text labels
+      elements.valAge.textContent = age;
+      elements.valCardio.textContent = CARDIO_LABELS[cardio];
+      elements.valStrength.textContent = STRENGTH_LABELS[strength];
+      elements.valCognitive.textContent = COGNITIVE_LABELS[cognitive];
+      elements.valMetabolic.textContent = METABOLIC_LABELS[metabolic];
+      elements.valSocial.textContent = SOCIAL_LABELS[social];
+
+      const baseline = getInterpolatedBaseline(age);
+
+      // Lever adjustments (actuarially damped)
+      const cardioMod = (cardio - 1.5) * 1.8; // -2.7 to +2.7 yrs
+      const strengthMod = (strength - 1.5) * 1.2; // -1.8 to +1.8 yrs
+      const cognitiveMod = (cognitive - 1.5) * 0.9;
+      const metabolicMod = (metabolic - 1.5) * 1.1;
+      const socialMod = (social - 1.5) * 0.9;
+
+      let projectedLife = baseline + cardioMod + strengthMod + cognitiveMod + metabolicMod + socialMod;
+      if (projectedLife <= age + 1) projectedLife = age + 1.5;
+
+      const remainingYears = Math.max(0.5, projectedLife - age);
+      const remainingDays = Math.round(remainingYears * 365.25);
+      
+      // Morbidity compression: vital days represent ~85% of high vitality horizon
+      const vitalFraction = 0.82 + (strength * 0.03) + (cardio * 0.03);
+      const vitalDays = Math.round(remainingDays * Math.min(0.94, vitalFraction));
+
+      // Update Displays
+      elements.dispCurrentAge.textContent = age;
+      elements.dispRemainingDays.textContent = remainingDays.toLocaleString();
+      elements.dispRemainingYears.textContent = `~${remainingYears.toFixed(1)} Years`;
+      elements.dispVitalDays.textContent = vitalDays.toLocaleString();
+      elements.dispTotalAge.textContent = projectedLife.toFixed(1);
+
+      drawTapestry(age, projectedLife, vitalFraction);
     }
 
-    function drawLifeGrid(currentAge, horizonAge) {
-      const canvas = document.getElementById('lifeCanvas');
-      const ctx = canvas.getContext('2d');
-      const totalYears = Math.max(90, Math.ceil(horizonAge + 5));
-      
-      const weeksPerRow = 52;
-      const dotRadius = 2.5;
-      const spacing = 11.5;
-      const paddingX = 15;
-      const paddingY = 20;
+    /* Tapestry Canvas Renderer (Months of Life Matrix) */
+    function drawTapestry(currentAge, projectedAge, vitalFraction) {
+      const cvs = elements.canvas;
+      const ctx = cvs.getContext("2d");
+      const dpr = window.devicePixelRatio || 1;
+      const rect = cvs.parentElement.getBoundingClientRect();
 
-      canvas.width = paddingX * 2 + (weeksPerRow - 1) * spacing;
-      canvas.height = paddingY * 2 + (totalYears - 1) * spacing;
+      cvs.width = rect.width * dpr;
+      cvs.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const width = rect.width;
+      const height = rect.height;
+      ctx.clearRect(0, 0, width, height);
 
-      const totalWeeksLived = Math.floor(currentAge * 52);
-      const totalWeeksHorizon = Math.floor(horizonAge * 52);
+      const totalMonths = Math.round(projectedAge * 12);
+      const livedMonths = Math.round(currentAge * 12);
+      const remainingMonths = totalMonths - livedMonths;
+      const vitalMonthsRemaining = Math.round(remainingMonths * vitalFraction);
 
-      for (let y = 0; y < totalYears; y++) {
-        for (let w = 0; w < weeksPerRow; w++) {
-          const weekIndex = y * 52 + w;
-          const cx = paddingX + w * spacing;
-          const cy = paddingY + y * spacing;
+      const cols = 48; // 4 years per row
+      const rows = Math.ceil(totalMonths / cols);
+      const dotSize = Math.min((width - 40) / cols, (height - 20) / rows);
+      const startX = (width - (cols * dotSize)) / 2;
+      const startY = (height - (rows * dotSize)) / 2;
 
-          ctx.beginPath();
-          ctx.arc(cx, cy, dotRadius, 0, Math.PI * 2);
+      for (let i = 0; i < totalMonths; i++) {
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const x = startX + col * dotSize + dotSize * 0.2;
+        const y = startY + row * dotSize + dotSize * 0.2;
+        const radius = dotSize * 0.32;
 
-          if (weekIndex < totalWeeksLived) {
-            // Passed weeks (Warm Terracotta)
-            ctx.fillStyle = 'rgba(181, 90, 54, 0.65)';
-            ctx.fill();
-          } else if (weekIndex === totalWeeksLived) {
-            // Present moment (Gold dot)
-            ctx.fillStyle = '#b27b18';
-            ctx.fill();
-            ctx.lineWidth = 1.5;
-            ctx.strokeStyle = '#1f2723';
-            ctx.stroke();
-          } else if (weekIndex <= totalWeeksHorizon) {
-            // Estimated Future Weeks (Botanical Sage ring)
-            ctx.fillStyle = '#eaf1ec';
-            ctx.fill();
-            ctx.strokeStyle = '#3e5e4e';
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          } else {
-            // Distant Horizon (Soft neutral tint)
-            ctx.fillStyle = '#e3ded4';
-            ctx.fill();
-          }
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+
+        if (i < livedMonths) {
+          ctx.fillStyle = "rgba(124, 104, 87, 0.4)"; // Lived
+        } else if (i < livedMonths + vitalMonthsRemaining) {
+          ctx.fillStyle = "#556e4c"; // High Vitality
+        } else {
+          ctx.fillStyle = "#ba5536"; // Elder Harvest
         }
+        ctx.fill();
       }
     }
 
-    // --- 6. Evidence Modal ---
-    const modal = document.getElementById('evidenceModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalCitations = document.getElementById('modalCitations');
+    // Event Listeners
+    [
+      elements.inputAge,
+      elements.inputCardio,
+      elements.inputStrength,
+      elements.inputCognitive,
+      elements.inputMetabolic,
+      elements.inputSocial
+    ].forEach(input => input.addEventListener("input", calculateHorizon));
 
-    function openEvidence(id) {
-      const allItems = [...clinicalData, ...lifestyleData];
-      const data = allItems.find(l => l.id === id);
-      if (!data) return;
-
-      modalTitle.textContent = data.title;
-      modalDesc.textContent = data.desc;
-      modalCitations.innerHTML = data.citations.map(c => `
-        <li class="citation-item">
-          <strong>${c.title}</strong>
-          <div style="font-size:0.8rem; margin-top:3px; color:var(--text-muted);">${c.authors}</div>
-          <div class="citation-journal">${c.journal}</div>
-        </li>
-      `).join('');
-
-      modal.classList.add('open');
-    }
-
-    document.getElementById('modalCloseBtn').addEventListener('click', () => modal.classList.remove('open'));
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.remove('open');
+    window.addEventListener("resize", () => {
+      calculateHorizon();
     });
 
-    // --- 7. Event Listeners ---
-    document.getElementById('currentAge').addEventListener('input', recalculate);
-    document.getElementById('sexSelect').addEventListener('change', recalculate);
-    document.getElementById('btnRefreshQuote').addEventListener('click', cycleQuote);
+    // FAQ Modal handlers
+    elements.openFaqBtn.addEventListener("click", () => {
+      elements.modal.classList.add("active");
+    });
+    elements.closeFaqBtn.addEventListener("click", () => {
+      elements.modal.classList.remove("active");
+    });
+    elements.modal.addEventListener("click", (e) => {
+      if (e.target === elements.modal) elements.modal.classList.remove("active");
+    });
 
-    // Initial run
-    initAllLevers();
-    recalculate();
+    // Init
+    window.addEventListener("DOMContentLoaded", calculateHorizon);
   </script>
 </body>
 </html>
