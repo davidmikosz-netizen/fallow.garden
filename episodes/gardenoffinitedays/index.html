@@ -19,14 +19,15 @@
       --ochre-pale: #fbf2e3;
       --moss-deep: #3b4e34;
       --moss-mid: #556e4c;
+      --moss-light: #7a9470;
       --moss-pale: #e3ebe0;
       --sand-border: #ded3c1;
       --border-soft: #ebe3d5;
       --shadow-sm: 0 2px 8px rgba(44, 34, 26, 0.04);
       --shadow-md: 0 6px 24px rgba(44, 34, 26, 0.07);
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
       --font-serif: "Iowan Old Style", "Apple Garamond", "Baskerville", "Times New Roman", Georgia, serif;
       --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
@@ -41,7 +42,7 @@
       background-color: var(--parchment);
       color: var(--loam-dark);
       font-family: var(--font-serif);
-      line-height: 1.6;
+      line-height: 1.55;
       padding: 1.5rem 1rem 4.5rem;
       display: flex;
       justify-content: center;
@@ -50,13 +51,13 @@
 
     .container {
       width: 100%;
-      max-width: 860px;
+      max-width: 880px;
       display: flex;
       flex-direction: column;
       gap: 1.75rem;
     }
 
-    /* Top Nav Bar */
+    /* Top Nav */
     .top-nav {
       display: flex;
       justify-content: space-between;
@@ -77,15 +78,8 @@
       gap: 0.35rem;
       transition: color 0.15s ease;
     }
-
     .brand-link:hover {
       color: var(--terracotta);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
     }
 
     .btn-link {
@@ -105,7 +99,7 @@
     /* Header */
     header {
       text-align: center;
-      padding: 0.5rem 0 0.5rem;
+      padding: 0.5rem 0 0.25rem;
     }
 
     .badge {
@@ -119,7 +113,7 @@
       padding: 0.28rem 0.75rem;
       border-radius: 999px;
       font-weight: 600;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
 
     h1 {
@@ -137,7 +131,7 @@
       font-style: italic;
     }
 
-    /* Horizon Stats Hero */
+    /* Hero Box 1: Horizon Overview */
     .horizon-hero {
       background: var(--parchment-card);
       border: 1px solid var(--sand-border);
@@ -172,12 +166,9 @@
       line-height: 1.1;
     }
 
-    .stat-val.highlight {
-      color: var(--terracotta);
-    }
-    .stat-val.ochre {
-      color: var(--honey-ochre);
-    }
+    .stat-val.highlight { color: var(--terracotta); }
+    .stat-val.ochre { color: var(--honey-ochre); }
+    .stat-val.moss { color: var(--moss-deep); }
 
     .stat-sub {
       font-family: var(--font-sans);
@@ -187,7 +178,7 @@
       font-weight: 500;
     }
 
-    /* Life Horizon Canvas */
+    /* Hero Box 2: Lifespan Tapestry Canvas */
     .canvas-card {
       background: var(--parchment-card);
       border: 1px solid var(--sand-border);
@@ -234,7 +225,7 @@
 
     .matrix-wrapper {
       width: 100%;
-      height: 150px;
+      height: 160px;
       background: var(--parchment-warm);
       border-radius: var(--radius-md);
       overflow: hidden;
@@ -248,7 +239,38 @@
       display: block;
     }
 
-    /* Levers & Calibration Section */
+    /* Granular Units Breakdown Strip */
+    .units-strip {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    .unit-item {
+      border-left: 2px solid var(--sand-border);
+      padding-left: 0.75rem;
+      font-family: var(--font-sans);
+    }
+
+    .unit-val {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--loam-dark);
+      font-family: var(--font-serif);
+    }
+
+    .unit-label {
+      font-size: 0.74rem;
+      color: var(--loam-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Section Cards for Detailed Calibration */
     .section-card {
       background: var(--parchment-card);
       border: 1px solid var(--sand-border);
@@ -277,6 +299,22 @@
       color: var(--loam-light);
     }
 
+    .category-title {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--moss-deep);
+      margin: 1rem 0 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .category-title:first-of-type {
+      margin-top: 0;
+    }
+
     .levers-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -284,6 +322,10 @@
     }
 
     .control-group {
+      background: var(--parchment);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.85rem;
       display: flex;
       flex-direction: column;
       gap: 0.35rem;
@@ -294,7 +336,7 @@
       justify-content: space-between;
       align-items: center;
       font-family: var(--font-sans);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: var(--loam-mid);
     }
@@ -302,6 +344,7 @@
     .control-val {
       color: var(--terracotta);
       font-weight: 700;
+      font-size: 0.82rem;
     }
 
     input[type="range"] {
@@ -312,10 +355,45 @@
 
     .control-desc {
       font-family: var(--font-sans);
-      font-size: 0.72rem;
+      font-size: 0.71rem;
       color: var(--loam-light);
-      line-height: 1.3;
+      line-height: 1.35;
     }
+
+    /* Actuarial Ledger Table */
+    .ledger-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      margin-top: 0.75rem;
+    }
+
+    .ledger-table th {
+      text-align: left;
+      padding: 0.5rem 0.6rem;
+      border-bottom: 2px solid var(--sand-border);
+      color: var(--loam-dark);
+      font-weight: 600;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ledger-table td {
+      padding: 0.55rem 0.6rem;
+      border-bottom: 1px solid var(--border-soft);
+      color: var(--loam-mid);
+    }
+
+    .ledger-impact {
+      font-weight: 700;
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+    }
+    .impact-pos { color: var(--moss-mid); }
+    .impact-neutral { color: var(--loam-light); }
+    .impact-neg { color: var(--terracotta); }
 
     /* Modal Styles */
     .modal-overlay {
@@ -456,31 +534,31 @@
       <p class="subtitle">A tactile map of remaining days, conditional longevity &amp; compression of morbidity</p>
     </header>
 
-    <!-- Hero Stats -->
+    <!-- Hero Box 1: Horizon Overview -->
     <section class="horizon-hero">
       <div class="stat-box">
         <div class="stat-label">Current Age</div>
         <div class="stat-val" id="dispCurrentAge">56</div>
-        <div class="stat-sub">Baseline Anchored</div>
+        <div class="stat-sub" id="dispBioAge">Bio Age: ~51.2</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Remaining Days</div>
-        <div class="stat-val highlight" id="dispRemainingDays">11,322</div>
-        <div class="stat-sub" id="dispRemainingYears">~31.0 Years</div>
+        <div class="stat-val highlight" id="dispRemainingDays">11,760</div>
+        <div class="stat-sub" id="dispRemainingYears">~32.2 Years</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">High-Vitality Days</div>
-        <div class="stat-val ochre" id="dispVitalDays">9,620</div>
-        <div class="stat-sub">Square Curve Target</div>
+        <div class="stat-val ochre" id="dispVitalDays">10,230</div>
+        <div class="stat-sub" id="dispMorbidityBuffer">Square Curve: 87%</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Projected Lifespan</div>
-        <div class="stat-val" id="dispTotalAge">87.0</div>
-        <div class="stat-sub">Actuarial Conditional</div>
+        <div class="stat-val moss" id="dispTotalAge">88.2</div>
+        <div class="stat-sub">Baseline: +3.6 yrs buffer</div>
       </div>
     </section>
 
-    <!-- Visual Canvas -->
+    <!-- Hero Box 2: Lifespan Tapestry Canvas -->
     <section class="canvas-card">
       <div class="canvas-head">
         <div class="canvas-title">Lifespan Tapestry (Each dot = 1 Month of Life)</div>
@@ -495,82 +573,187 @@
       </div>
     </section>
 
-    <!-- Interactive Levers -->
+    <!-- Granular Units Breakdown Strip -->
+    <section class="units-strip">
+      <div class="unit-item">
+        <div class="unit-val" id="dispWeekends">1,680</div>
+        <div class="unit-label">Remaining Weekends</div>
+      </div>
+      <div class="unit-item">
+        <div class="unit-val" id="dispSeasons">128</div>
+        <div class="unit-label">Solar Seasons (Springs/Autumns)</div>
+      </div>
+      <div class="unit-item">
+        <div class="unit-val" id="dispWakingHours">188,160</div>
+        <div class="unit-label">Conscious Waking Hours</div>
+      </div>
+      <div class="unit-item">
+        <div class="unit-val" id="dispOlympiads">8.0</div>
+        <div class="unit-label">Olympiad Cycles</div>
+      </div>
+    </section>
+
+    <!-- Granular Levers Calibration Section -->
     <section class="section-card">
       <div class="section-head">
-        <h2>Actuarial Levers &amp; Morbidity Levers</h2>
-        <div class="section-desc">Calibrate high-impact physiological &amp; cognitive parameters</div>
+        <h2>Detailed Physiological &amp; Cognitive Calibration</h2>
+        <div class="section-desc">Adjust granular biometrics, movement doses, and cognitive reserve levers</div>
       </div>
 
+      <!-- Category A: Baseline & Cardiovascular Armor -->
+      <div class="category-title">🫀 1. Cardiovascular &amp; Endothelial Baseline</div>
       <div class="levers-grid">
         
-        <!-- Age Input -->
         <div class="control-group">
           <div class="control-label-row">
-            <span>Current Age:</span>
+            <span>Chronological Age:</span>
             <span class="control-val" id="valAge">56</span>
           </div>
           <input type="range" id="inputAge" min="30" max="85" value="56" />
-          <div class="control-desc">Calculates conditional survival odds, bypassing early-life hazards.</div>
+          <div class="control-desc">Anchors conditional actuarial tables (eliminates youth mortality skew).</div>
         </div>
 
-        <!-- Aerobic Fitness -->
         <div class="control-group">
           <div class="control-label-row">
-            <span>Aerobic Capacity (VO₂ Max):</span>
+            <span>Cardiorespiratory ($VO_2\text{ Max}$ / Zone 2):</span>
             <span class="control-val" id="valCardio">High (Top 25%)</span>
           </div>
           <input type="range" id="inputCardio" min="0" max="3" value="2" />
-          <div class="control-desc">Cleveland Clinic data: 4–5x all-cause mortality buffer from bottom to top tier.</div>
+          <div class="control-desc">Cleveland Clinic data: 4–5x all-cause mortality buffer from low to elite.</div>
         </div>
 
-        <!-- Muscle & Strength -->
         <div class="control-group">
           <div class="control-label-row">
-            <span>Strength &amp; Fall Armor:</span>
-            <span class="control-val" id="valStrength">Robust</span>
+            <span>Blood Pressure &amp; Endothelial Load:</span>
+            <span class="control-val" id="valBP">Optimal (&lt;120/80)</span>
           </div>
-          <input type="range" id="inputStrength" min="0" max="3" value="2" />
-          <div class="control-desc">Protects against sarcopenia, fragility fractures, and hospital cascades.</div>
+          <input type="range" id="inputBP" min="0" max="3" value="3" />
+          <div class="control-desc">Cumulative vascular wear over decades (atherosclerosis AUC).</div>
         </div>
 
-        <!-- Cognitive Engagement -->
         <div class="control-group">
           <div class="control-label-row">
-            <span>Cognitive Projects &amp; Purpose:</span>
-            <span class="control-val" id="valCognitive">Daily Creative Work</span>
+            <span>Resting Heart Rate &amp; Autonomic Tone:</span>
+            <span class="control-val" id="valRHR">Athletic (50-59 bpm)</span>
           </div>
-          <input type="range" id="inputCognitive" min="0" max="3" value="3" />
-          <div class="control-desc">Buffers against retirement-shock deceleration and neurodegenerative onset.</div>
-        </div>
-
-        <!-- Metabolic Health -->
-        <div class="control-group">
-          <div class="control-label-row">
-            <span>Metabolic &amp; Fasting Rhythm:</span>
-            <span class="control-val" id="valMetabolic">Consistent (14-16h)</span>
-          </div>
-          <input type="range" id="inputMetabolic" min="0" max="3" value="2" />
-          <div class="control-desc">Supports insulin sensitivity, lipid clearance, and mucosal lining repair.</div>
-        </div>
-
-        <!-- Social Connection -->
-        <div class="control-group">
-          <div class="control-label-row">
-            <span>Social Density &amp; Ties:</span>
-            <span class="control-val" id="valSocial">Strong Community</span>
-          </div>
-          <input type="range" id="inputSocial" min="0" max="3" value="2" />
-          <div class="control-desc">Holt-Lunstad meta-analysis: connection buffers inflammation like non-smoking.</div>
+          <input type="range" id="inputRHR" min="0" max="3" value="2" />
+          <div class="control-desc">Key indicator of vagal tone and parasympathetic recovery reserve.</div>
         </div>
 
       </div>
+
+      <!-- Category B: Musculoskeletal & Metabolic Armor -->
+      <div class="category-title">💪 2. Musculoskeletal Armor &amp; Metabolic Fasting</div>
+      <div class="levers-grid">
+        
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Strength, Grip &amp; Fall Armor:</span>
+            <span class="control-val" id="valStrength">Robust (2-3x/wk)</span>
+          </div>
+          <input type="range" id="inputStrength" min="0" max="3" value="2" />
+          <div class="control-desc">Buffers against sarcopenia, fragility fractures, and catastrophic falls.</div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Metabolic &amp; Mucosal Fasting Window:</span>
+            <span class="control-val" id="valFasting">Consistent (14-16h)</span>
+          </div>
+          <input type="range" id="inputFasting" min="0" max="3" value="2" />
+          <div class="control-desc">Triggers MMC intestinal sweeps, insulin reset, and *Akkermansia* barrier renewal.</div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Botanical Diversity (AGP Index):</span>
+            <span class="control-val" id="valPlants">25-30+ Species/Wk</span>
+          </div>
+          <input type="range" id="inputPlants" min="0" max="3" value="3" />
+          <div class="control-desc">Microbial diversity, short-chain fatty acids (butyrate), systemic anti-inflammation.</div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Daily Movement Baseline (Steps):</span>
+            <span class="control-val" id="valSteps">8k-10k+ Daily</span>
+          </div>
+          <input type="range" id="inputSteps" min="0" max="3" value="2" />
+          <div class="control-desc">Non-exercise activity thermogenesis (NEAT) and lymphatic circulation.</div>
+        </div>
+
+      </div>
+
+      <!-- Category C: Cognitive Reserve & Psycho-Social Stewardship -->
+      <div class="category-title">🧠 3. Cognitive Reserve &amp; Social Cohesion</div>
+      <div class="levers-grid">
+        
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Cognitive Complexity &amp; Creative Craft:</span>
+            <span class="control-val" id="valCognitive">Deep Scholarly / Project Work</span>
+          </div>
+          <input type="range" id="inputCognitive" min="0" max="3" value="3" />
+          <div class="control-desc">Builds dense synaptic reserve; buffers against retirement-shock deceleration.</div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Sleep Architecture &amp; Glymphatic Wash:</span>
+            <span class="control-val" id="valSleep">7.5-8.5h Consistent</span>
+          </div>
+          <input type="range" id="inputSleep" min="0" max="3" value="2" />
+          <div class="control-desc">Clears neurotoxic metabolic waste (amyloid-beta) and consolidates memory.</div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Social Density &amp; Shared Connection:</span>
+            <span class="control-val" id="valSocial">Strong Cohesive Ties</span>
+          </div>
+          <input type="range" id="inputSocial" min="0" max="3" value="2" />
+          <div class="control-desc">Holt-Lunstad meta-analysis: connection matches non-smoking mortality benefits.</div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label-row">
+            <span>Stress Cadence &amp; Ambient Peace:</span>
+            <span class="control-val" id="valStress">Low Chronic Friction</span>
+          </div>
+          <input type="range" id="inputStress" min="0" max="3" value="2" />
+          <div class="control-desc">Suppresses persistent cortisol and systemic neuroinflammation.</div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Section: Real-Time Actuarial Impact Ledger -->
+    <section class="section-card">
+      <div class="section-head">
+        <h2>Actuarial Contribution Ledger</h2>
+        <div class="section-desc">Itemized impact breakdown relative to standard actuarial cohort</div>
+      </div>
+
+      <table class="ledger-table">
+        <thead>
+          <tr>
+            <th>Domain / Intervention</th>
+            <th>Your Calibrated Level</th>
+            <th>Lifespan Delta</th>
+            <th>Vitality Compression</th>
+          </tr>
+        </thead>
+        <tbody id="ledgerBody">
+          <!-- Populated in real-time via JS -->
+        </tbody>
+      </table>
     </section>
 
     <!-- Footer -->
     <footer>
       <div>Part of the <a href="/" class="footer-link">fallow.garden</a> anthology — restorative digital micro-tools.</div>
-      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.2rem;">All actuarial projections are computed locally on your device. Zero telemetry.</div>
+      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.2rem;">All actuarial calculations are performed locally on your device. Zero telemetry.</div>
     </footer>
 
   </div>
@@ -586,7 +769,7 @@
       <div class="faq-item">
         <div class="faq-q">1. Why is the remaining day count surprisingly large?</div>
         <div class="faq-a">
-          Standard life expectancy at birth (~77–79 years) includes infant, adolescent, and early-adulthood hazards. Once you reach your 50s, you have already bypassed those statistical risks. Actuaries calculate <strong>conditional life expectancy</strong>: an average 56-year-old today has a baseline life expectancy of ~84–86 years (~11,000 days), with healthy cohorts reaching 88–92.
+          Standard life expectancy at birth (~77–79 years) includes infant, adolescent, and early-adulthood hazards. Once you reach your 50s, you have already bypassed those statistical risks. Actuaries calculate <strong>conditional life expectancy</strong>: an average 56-year-old today has an actuarial baseline life expectancy of ~84–86 years (~11,000+ days), with healthy cohorts reaching 88–92.
         </div>
       </div>
 
@@ -614,12 +797,22 @@
   </div>
 
   <script>
-    /* Actuarial Calculation Engine */
-    const CARDIO_LABELS = ["Low / Sedentary", "Moderate", "High (Top 25%)", "Elite (Top 2.5%)"];
-    const STRENGTH_LABELS = ["Minimal", "Moderate", "Robust", "Exceptional"];
-    const COGNITIVE_LABELS = ["Passive Routine", "Active Reader", "Daily Creative Work", "Deep Scholarly / Project Work"];
-    const METABOLIC_LABELS = ["Standard Modern", "Balanced Whole Food", "Consistent (14-16h Fasting)", "Metabolically Optimized"];
-    const SOCIAL_LABELS = ["Isolated", "Modest Ties", "Strong Community", "Rich Intergenerational Ties"];
+    /* =========================================================================
+       ACTUARIAL ENGINE & DETAILED METRICS
+       ========================================================================= */
+    const LABELS = {
+      cardio: ["Low / Sedentary", "Moderate (1-2x/wk)", "High (Top 25%)", "Elite (Top 2.5%)"],
+      bp: ["Stage 2 (140+)", "Stage 1 (130-139)", "Normal (120-129)", "Optimal (<120/80)"],
+      rhr: ["Elevated (75+ bpm)", "Average (65-74 bpm)", "Athletic (50-64 bpm)", "Elite (<50 bpm)"],
+      strength: ["Minimal", "Basic (1x/wk)", "Robust (2-3x/wk)", "Exceptional Armor"],
+      fasting: ["Standard (<12h)", "Overnight Fast (12-13h)", "Consistent (14-16h)", "Advanced Rhythm (16-18h+)"],
+      plants: ["Low (<10/wk)", "Standard (10-18/wk)", "Diverse (19-24/wk)", "25-30+ Species/Wk"],
+      steps: ["Sedentary (<5k)", "Moderate (5k-7k)", "8k-10k+ Daily", "Active (12k+ Daily)"],
+      cognitive: ["Passive Routine", "Active Reader", "Daily Craft/Writing", "Deep Scholarly / Project Work"],
+      sleep: ["Poor / Irregular", "Fair (6-7h)", "7.5-8.5h Consistent", "Deep Restorative Rhythm"],
+      social: ["Isolated", "Modest Ties", "Strong Cohesive Ties", "Rich Intergenerational Hub"],
+      stress: ["High Chronic Strain", "Moderate Friction", "Low Chronic Friction", "Restorative Equanimity"]
+    };
 
     const BASELINE_CONDITIONAL_AGES = {
       30: 80.5, 40: 81.5, 50: 83.2, 56: 84.6, 60: 85.5, 70: 87.8, 80: 91.0, 85: 93.5
@@ -641,81 +834,155 @@
       return 84.6;
     }
 
-    const elements = {
+    const els = {
       inputAge: document.getElementById("inputAge"),
       inputCardio: document.getElementById("inputCardio"),
+      inputBP: document.getElementById("inputBP"),
+      inputRHR: document.getElementById("inputRHR"),
       inputStrength: document.getElementById("inputStrength"),
+      inputFasting: document.getElementById("inputFasting"),
+      inputPlants: document.getElementById("inputPlants"),
+      inputSteps: document.getElementById("inputSteps"),
       inputCognitive: document.getElementById("inputCognitive"),
-      inputMetabolic: document.getElementById("inputMetabolic"),
+      inputSleep: document.getElementById("inputSleep"),
       inputSocial: document.getElementById("inputSocial"),
-      
+      inputStress: document.getElementById("inputStress"),
+
       valAge: document.getElementById("valAge"),
       valCardio: document.getElementById("valCardio"),
+      valBP: document.getElementById("valBP"),
+      valRHR: document.getElementById("valRHR"),
       valStrength: document.getElementById("valStrength"),
+      valFasting: document.getElementById("valFasting"),
+      valPlants: document.getElementById("valPlants"),
+      valSteps: document.getElementById("valSteps"),
       valCognitive: document.getElementById("valCognitive"),
-      valMetabolic: document.getElementById("valMetabolic"),
+      valSleep: document.getElementById("valSleep"),
       valSocial: document.getElementById("valSocial"),
+      valStress: document.getElementById("valStress"),
 
       dispCurrentAge: document.getElementById("dispCurrentAge"),
+      dispBioAge: document.getElementById("dispBioAge"),
       dispRemainingDays: document.getElementById("dispRemainingDays"),
       dispRemainingYears: document.getElementById("dispRemainingYears"),
       dispVitalDays: document.getElementById("dispVitalDays"),
+      dispMorbidityBuffer: document.getElementById("dispMorbidityBuffer"),
       dispTotalAge: document.getElementById("dispTotalAge"),
 
+      dispWeekends: document.getElementById("dispWeekends"),
+      dispSeasons: document.getElementById("dispSeasons"),
+      dispWakingHours: document.getElementById("dispWakingHours"),
+      dispOlympiads: document.getElementById("dispOlympiads"),
+
+      ledgerBody: document.getElementById("ledgerBody"),
       canvas: document.getElementById("tapestryCanvas"),
       modal: document.getElementById("faqModal"),
       openFaqBtn: document.getElementById("openFaqBtn"),
       closeFaqBtn: document.getElementById("closeFaqBtn")
     };
 
-    function calculateHorizon() {
-      const age = parseFloat(elements.inputAge.value);
-      const cardio = parseInt(elements.inputCardio.value, 10);
-      const strength = parseInt(elements.inputStrength.value, 10);
-      const cognitive = parseInt(elements.inputCognitive.value, 10);
-      const metabolic = parseInt(elements.inputMetabolic.value, 10);
-      const social = parseInt(elements.inputSocial.value, 10);
+    function recalculate() {
+      const age = parseFloat(els.inputAge.value);
+      const cardio = parseInt(els.inputCardio.value, 10);
+      const bp = parseInt(els.inputBP.value, 10);
+      const rhr = parseInt(els.inputRHR.value, 10);
+      const strength = parseInt(els.inputStrength.value, 10);
+      const fasting = parseInt(els.inputFasting.value, 10);
+      const plants = parseInt(els.inputPlants.value, 10);
+      const steps = parseInt(els.inputSteps.value, 10);
+      const cognitive = parseInt(els.inputCognitive.value, 10);
+      const sleep = parseInt(els.inputSleep.value, 10);
+      const social = parseInt(els.inputSocial.value, 10);
+      const stress = parseInt(els.inputStress.value, 10);
 
-      // Text labels
-      elements.valAge.textContent = age;
-      elements.valCardio.textContent = CARDIO_LABELS[cardio];
-      elements.valStrength.textContent = STRENGTH_LABELS[strength];
-      elements.valCognitive.textContent = COGNITIVE_LABELS[cognitive];
-      elements.valMetabolic.textContent = METABOLIC_LABELS[metabolic];
-      elements.valSocial.textContent = SOCIAL_LABELS[social];
+      // Label sync
+      els.valAge.textContent = age;
+      els.valCardio.textContent = LABELS.cardio[cardio];
+      els.valBP.textContent = LABELS.bp[bp];
+      els.valRHR.textContent = LABELS.rhr[rhr];
+      els.valStrength.textContent = LABELS.strength[strength];
+      els.valFasting.textContent = LABELS.fasting[fasting];
+      els.valPlants.textContent = LABELS.plants[plants];
+      els.valSteps.textContent = LABELS.steps[steps];
+      els.valCognitive.textContent = LABELS.cognitive[cognitive];
+      els.valSleep.textContent = LABELS.sleep[sleep];
+      els.valSocial.textContent = LABELS.social[social];
+      els.valStress.textContent = LABELS.stress[stress];
 
-      const baseline = getInterpolatedBaseline(age);
+      const baselineAge = getInterpolatedBaseline(age);
 
-      // Lever adjustments (actuarially damped)
-      const cardioMod = (cardio - 1.5) * 1.8; // -2.7 to +2.7 yrs
-      const strengthMod = (strength - 1.5) * 1.2; // -1.8 to +1.8 yrs
-      const cognitiveMod = (cognitive - 1.5) * 0.9;
-      const metabolicMod = (metabolic - 1.5) * 1.1;
-      const socialMod = (social - 1.5) * 0.9;
+      // Itemized impact modifiers (Actuarially calibrated)
+      const items = [
+        { name: "Aerobic Capacity (VO₂ Max)", level: LABELS.cardio[cardio], delta: (cardio - 1.5) * 1.5, vital: "+3.2% vitality retention" },
+        { name: "Endothelial & Blood Pressure", level: LABELS.bp[bp], delta: (bp - 1.5) * 0.9, vital: "Cardiovascular preservation" },
+        { name: "Resting Heart Rate & Tone", level: LABELS.rhr[rhr], delta: (rhr - 1.5) * 0.5, vital: "Autonomic stability" },
+        { name: "Strength & Fall Armor", level: LABELS.strength[strength], delta: (strength - 1.5) * 1.1, vital: "+4.5% fall/hip fracture buffer" },
+        { name: "Metabolic & Mucosal Fasting", level: LABELS.fasting[fasting], delta: (fasting - 1.5) * 0.7, vital: "Mucin renewal & insulin reset" },
+        { name: "Botanical Diversity (30 Species)", level: LABELS.plants[plants], delta: (plants - 1.5) * 0.6, vital: "Butyrate & microbiome resilience" },
+        { name: "Daily Step Cadence", level: LABELS.steps[steps], delta: (steps - 1.5) * 0.6, vital: "Circulatory & glucose clearance" },
+        { name: "Cognitive Complexity & Craft", level: LABELS.cognitive[cognitive], delta: (cognitive - 1.5) * 0.8, vital: "+5.0% synaptic reserve retention" },
+        { name: "Sleep & Glymphatic Wash", level: LABELS.sleep[sleep], delta: (sleep - 1.5) * 0.8, vital: "Neural waste clearance" },
+        { name: "Social Density & Community", level: LABELS.social[social], delta: (social - 1.5) * 0.8, vital: "Neuroendocrine & anti-isolation buffer" },
+        { name: "Stress & Friction Management", level: LABELS.stress[stress], delta: (stress - 1.5) * 0.6, vital: "Cortisol & vascular defense" }
+      ];
 
-      let projectedLife = baseline + cardioMod + strengthMod + cognitiveMod + metabolicMod + socialMod;
+      const totalDelta = items.reduce((sum, item) => sum + item.delta, 0);
+      let projectedLife = baselineAge + totalDelta;
       if (projectedLife <= age + 1) projectedLife = age + 1.5;
 
       const remainingYears = Math.max(0.5, projectedLife - age);
       const remainingDays = Math.round(remainingYears * 365.25);
-      
-      // Morbidity compression: vital days represent ~85% of high vitality horizon
-      const vitalFraction = 0.82 + (strength * 0.03) + (cardio * 0.03);
-      const vitalDays = Math.round(remainingDays * Math.min(0.94, vitalFraction));
 
-      // Update Displays
-      elements.dispCurrentAge.textContent = age;
-      elements.dispRemainingDays.textContent = remainingDays.toLocaleString();
-      elements.dispRemainingYears.textContent = `~${remainingYears.toFixed(1)} Years`;
-      elements.dispVitalDays.textContent = vitalDays.toLocaleString();
-      elements.dispTotalAge.textContent = projectedLife.toFixed(1);
+      // Biological Age model
+      const bioAge = Math.max(25, (age - (totalDelta * 0.85)));
+
+      // Vitality / Morbidity Compression (Square curve fraction)
+      const vitalityScore = (cardio + strength + cognitive + sleep + fasting + plants) / 18;
+      const vitalFraction = 0.78 + (vitalityScore * 0.16); // 78% to 94% of remaining days in prime vitality
+      const vitalDays = Math.round(remainingDays * vitalFraction);
+
+      // Granular units
+      const weekends = Math.round(remainingYears * 52.17);
+      const seasons = Math.round(remainingYears * 4);
+      const wakingHours = Math.round(remainingDays * 16);
+      const olympiads = (remainingYears / 4).toFixed(1);
+
+      // DOM Updates
+      els.dispCurrentAge.textContent = age;
+      els.dispBioAge.textContent = `Bio Age: ~${bioAge.toFixed(1)}`;
+      els.dispRemainingDays.textContent = remainingDays.toLocaleString();
+      els.dispRemainingYears.textContent = `~${remainingYears.toFixed(1)} Years`;
+      els.dispVitalDays.textContent = vitalDays.toLocaleString();
+      els.dispMorbidityBuffer.textContent = `Square Curve: ${Math.round(vitalFraction * 100)}%`;
+      els.dispTotalAge.textContent = projectedLife.toFixed(1);
+
+      els.dispWeekends.textContent = weekends.toLocaleString();
+      els.dispSeasons.textContent = seasons.toLocaleString();
+      els.dispWakingHours.textContent = wakingHours.toLocaleString();
+      els.dispOlympiads.textContent = olympiads;
+
+      // Update Ledger Table
+      els.ledgerBody.innerHTML = "";
+      items.forEach(item => {
+        const tr = document.createElement("tr");
+        const formattedDelta = item.delta > 0 ? `+${item.delta.toFixed(1)}y` : `${item.delta.toFixed(1)}y`;
+        const cls = item.delta > 0.05 ? "impact-pos" : (item.delta < -0.05 ? "impact-neg" : "impact-neutral");
+
+        tr.innerHTML = `
+          <td style="font-weight: 600; color: var(--loam-dark);">${item.name}</td>
+          <td>${item.level}</td>
+          <td class="ledger-impact ${cls}">${formattedDelta}</td>
+          <td style="font-size: 0.76rem; color: var(--loam-light);">${item.vital}</td>
+        `;
+        els.ledgerBody.appendChild(tr);
+      });
 
       drawTapestry(age, projectedLife, vitalFraction);
     }
 
-    /* Tapestry Canvas Renderer (Months of Life Matrix) */
+    /* Tapestry Matrix Canvas */
     function drawTapestry(currentAge, projectedAge, vitalFraction) {
-      const cvs = elements.canvas;
+      const cvs = els.canvas;
       const ctx = cvs.getContext("2d");
       const dpr = window.devicePixelRatio || 1;
       const rect = cvs.parentElement.getBoundingClientRect();
@@ -735,7 +1002,7 @@
 
       const cols = 48; // 4 years per row
       const rows = Math.ceil(totalMonths / cols);
-      const dotSize = Math.min((width - 40) / cols, (height - 20) / rows);
+      const dotSize = Math.min((width - 36) / cols, (height - 18) / rows);
       const startX = (width - (cols * dotSize)) / 2;
       const startY = (height - (rows * dotSize)) / 2;
 
@@ -752,7 +1019,7 @@
         if (i < livedMonths) {
           ctx.fillStyle = "rgba(124, 104, 87, 0.4)"; // Lived
         } else if (i < livedMonths + vitalMonthsRemaining) {
-          ctx.fillStyle = "#556e4c"; // High Vitality
+          ctx.fillStyle = "#556e4c"; // Prime Vitality
         } else {
           ctx.fillStyle = "#ba5536"; // Elder Harvest
         }
@@ -760,33 +1027,23 @@
       }
     }
 
-    // Event Listeners
+    // Attach listeners
     [
-      elements.inputAge,
-      elements.inputCardio,
-      elements.inputStrength,
-      elements.inputCognitive,
-      elements.inputMetabolic,
-      elements.inputSocial
-    ].forEach(input => input.addEventListener("input", calculateHorizon));
+      els.inputAge, els.inputCardio, els.inputBP, els.inputRHR,
+      els.inputStrength, els.inputFasting, els.inputPlants, els.inputSteps,
+      els.inputCognitive, els.inputSleep, els.inputSocial, els.inputStress
+    ].forEach(input => input.addEventListener("input", recalculate));
 
-    window.addEventListener("resize", () => {
-      calculateHorizon();
-    });
+    window.addEventListener("resize", recalculate);
 
-    // FAQ Modal handlers
-    elements.openFaqBtn.addEventListener("click", () => {
-      elements.modal.classList.add("active");
-    });
-    elements.closeFaqBtn.addEventListener("click", () => {
-      elements.modal.classList.remove("active");
-    });
-    elements.modal.addEventListener("click", (e) => {
-      if (e.target === elements.modal) elements.modal.classList.remove("active");
+    // Modal Events
+    els.openFaqBtn.addEventListener("click", () => els.modal.classList.add("active"));
+    els.closeFaqBtn.addEventListener("click", () => els.modal.classList.remove("active"));
+    els.modal.addEventListener("click", (e) => {
+      if (e.target === els.modal) els.modal.classList.remove("active");
     });
 
-    // Init
-    window.addEventListener("DOMContentLoaded", calculateHorizon);
+    window.addEventListener("DOMContentLoaded", recalculate);
   </script>
 </body>
 </html>
