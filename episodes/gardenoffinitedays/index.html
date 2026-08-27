@@ -242,7 +242,7 @@
 
     .matrix-wrapper {
       width: 100%;
-      height: 200px;
+      height: 170px;
       background: var(--parchment-warm);
       border-radius: var(--radius-md);
       overflow: hidden;
@@ -256,7 +256,7 @@
       display: block;
     }
 
-    /* Granular Units Breakdown Strip */
+    /* Granular Units Breakdown Strip (3-Column Layout) */
     .units-strip {
       background: var(--parchment-card);
       border: 1px solid var(--sand-border);
@@ -1156,7 +1156,7 @@
       drawTapestry(age, projectedLife, vitalFraction);
     }
 
-    /* Tapestry Matrix Canvas (Full-Bleed, High-Density Dot Grid) */
+    /* Tapestry Matrix Canvas (Balanced, Centered with Breathing Room) */
     function drawTapestry(currentAge, projectedAge, vitalFraction) {
       const cvs = els.canvas;
       const ctx = cvs.getContext("2d");
@@ -1176,30 +1176,35 @@
       const remainingMonths = totalMonths - livedMonths;
       const vitalMonthsRemaining = Math.round(remainingMonths * vitalFraction);
 
-      // 36 months (3 years) per row provides optimal horizontal spread
-      const cols = 36;
+      // 42 columns (~3.5 years per row) gives a wide canvas with balanced breathing room
+      const cols = 42;
       const rows = Math.ceil(totalMonths / cols);
 
-      // Calculate cell dimensions to fill available width and height evenly
-      const paddingX = 20;
-      const paddingY = 16;
-      const stepX = (width - paddingX * 2) / (cols - 1);
-      const stepY = (height - paddingY * 2) / (rows - 1);
+      const marginX = 40;
+      const marginY = 16;
+      const availWidth = width - (marginX * 2);
+      const availHeight = height - (marginY * 2);
 
-      // Tactile, larger dot radius
-      const radius = Math.min(stepX, stepY) * 0.40;
+      const dotSize = Math.min(availWidth / cols, availHeight / Math.max(rows, 24));
+      const gridWidth = cols * dotSize;
+      const gridHeight = rows * dotSize;
+
+      // Perfectly center the matrix with generous margins
+      const startX = (width - gridWidth) / 2;
+      const startY = (height - gridHeight) / 2;
+      const radius = dotSize * 0.33;
 
       for (let i = 0; i < totalMonths; i++) {
         const col = i % cols;
         const row = Math.floor(i / cols);
-        const x = paddingX + col * stepX;
-        const y = paddingY + row * stepY;
+        const x = startX + col * dotSize + dotSize * 0.5;
+        const y = startY + row * dotSize + dotSize * 0.5;
 
         ctx.beginPath();
         ctx.arc(x, y, radius, 0, Math.PI * 2);
 
         if (i < livedMonths) {
-          ctx.fillStyle = "rgba(124, 104, 87, 0.42)"; // Lived
+          ctx.fillStyle = "rgba(124, 104, 87, 0.4)"; // Lived
         } else if (i < livedMonths + vitalMonthsRemaining) {
           ctx.fillStyle = "#556e4c"; // Prime Vitality
         } else {
