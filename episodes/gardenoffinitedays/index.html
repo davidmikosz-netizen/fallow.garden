@@ -256,6 +256,61 @@
       display: block;
     }
 
+    /* Ephemeral Reflection Ribbon */
+    .reflection-ribbon {
+      text-align: center;
+      padding: 1.15rem 1.5rem;
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      position: relative;
+    }
+
+    .reflection-quote {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--loam-dark);
+      line-height: 1.5;
+      max-width: 660px;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .reflection-author {
+      font-family: var(--font-sans);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--moss-deep);
+      font-weight: 600;
+      transition: opacity 0.25s ease;
+    }
+
+    .btn-cycle-quote {
+      background: none;
+      border: none;
+      color: var(--loam-light);
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      cursor: pointer;
+      margin-top: 0.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      transition: all 0.15s ease;
+    }
+    .btn-cycle-quote:hover {
+      color: var(--terracotta);
+      background: var(--parchment-warm);
+    }
+
     /* Granular Units Breakdown Strip (3-Column Layout) */
     .units-strip {
       background: var(--parchment-card);
@@ -707,6 +762,16 @@
       </div>
     </section>
 
+    <!-- Ephemeral Reflection Ribbon -->
+    <section class="reflection-ribbon">
+      <div class="reflection-quote" id="reflectionQuote">“Time itself is being, and all being is time. Do not pass days and nights in vain.”</div>
+      <div class="reflection-author" id="reflectionAuthor">— Eihei Dōgen</div>
+      <button class="btn-cycle-quote" id="btnCycleQuote" type="button">
+        <span>✦</span>
+        <span>New reflection</span>
+      </button>
+    </section>
+
     <!-- Granular Units Breakdown Strip (3-Column Layout) -->
     <section class="units-strip">
       <div class="unit-item">
@@ -965,8 +1030,37 @@
 
   <script>
     /* =========================================================================
-       EVERYDAY ACTUARIAL ENGINE
+       EVERYDAY ACTUARIAL ENGINE & REFLECTIONS
        ========================================================================= */
+    const REFLECTIONS = [
+      { quote: "“Time itself is being, and all being is time. Do not pass days and nights in vain.”", author: "— Eihei Dōgen" },
+      { quote: "“Impermanence means that everything changes, nothing remains the same. Because of impermanence, anything is possible.”", author: "— Thich Nhat Hanh" },
+      { quote: "“Imperfection is not our personal problem—it is a natural part of existing. Letting go of perfection gives us back our days.”", author: "— Tara Brach" },
+      { quote: "“You can't stop the waves, but you can learn to surf. The only moment you ever have to live is this one.”", author: "— Jon Kabat-Zinn" },
+      { quote: "“It is not that we have a short time to live, but that we waste a lot of it. Life is long if you know how to use it.”", author: "— Seneca" },
+      { quote: "“The garden is not made of plants alone, but of the unhurried space between them.”", author: "— Zen Reflection (Ma)" },
+      { quote: "“When you realize how fleeting everything is, each ordinary moment becomes luminous.”", author: "— Jack Kornfield" },
+      { quote: "“Tend the soil of today. Tomorrow’s harvest will look after itself.”", author: "— Contemplative Proverb" }
+    ];
+
+    let currentReflectionIndex = 0;
+
+    function cycleReflection() {
+      const quoteEl = document.getElementById("reflectionQuote");
+      const authorEl = document.getElementById("reflectionAuthor");
+      
+      quoteEl.style.opacity = "0";
+      authorEl.style.opacity = "0";
+      
+      setTimeout(() => {
+        currentReflectionIndex = (currentReflectionIndex + 1) % REFLECTIONS.length;
+        quoteEl.textContent = REFLECTIONS[currentReflectionIndex].quote;
+        authorEl.textContent = REFLECTIONS[currentReflectionIndex].author;
+        quoteEl.style.opacity = "1";
+        authorEl.style.opacity = "1";
+      }, 200);
+    }
+
     const LABELS = {
       cardio: ["Rarely / Sedentary", "Light (1-2x/week)", "High (Brisk walks/jogs)", "Elite Endurance"],
       strength: ["Minimal", "Occasional", "Regular (2-3x/week)", "Strong & Dedicated"],
@@ -1055,7 +1149,8 @@
       faqMorbidityItem: document.getElementById("faqMorbidityItem"),
       openFaqBtn: document.getElementById("openFaqBtn"),
       closeFaqBtn: document.getElementById("closeFaqBtn"),
-      linkMorbidity: document.getElementById("linkMorbidity")
+      linkMorbidity: document.getElementById("linkMorbidity"),
+      btnCycleQuote: document.getElementById("btnCycleQuote")
     };
 
     function recalculate() {
@@ -1238,6 +1333,9 @@
 
     window.addEventListener("resize", recalculate);
 
+    // Reflection button
+    els.btnCycleQuote.addEventListener("click", cycleReflection);
+
     // Modal Events & Direct Morbidity Link
     function openModal(highlightMorbidity = false) {
       els.modal.classList.add("active");
@@ -1258,7 +1356,13 @@
       if (e.target === els.modal) els.modal.classList.remove("active");
     });
 
-    window.addEventListener("DOMContentLoaded", recalculate);
+    window.addEventListener("DOMContentLoaded", () => {
+      // Pick a random starting reflection on load
+      currentReflectionIndex = Math.floor(Math.random() * REFLECTIONS.length);
+      document.getElementById("reflectionQuote").textContent = REFLECTIONS[currentReflectionIndex].quote;
+      document.getElementById("reflectionAuthor").textContent = REFLECTIONS[currentReflectionIndex].author;
+      recalculate();
+    });
   </script>
 </body>
 </html>
