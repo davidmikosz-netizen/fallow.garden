@@ -39,7 +39,7 @@
       background-color: var(--parchment);
       color: var(--loam-dark);
       font-family: var(--font-serif);
-      line-height: 1.55;
+      line-height: 1.6;
       padding: 1.5rem 1rem 4rem;
       display: flex;
       justify-content: center;
@@ -112,6 +112,56 @@
     }
     .btn-text:hover {
       color: var(--terracotta);
+    }
+
+    /* Primer / Biological Architecture Card */
+    .primer-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 2px 10px rgba(42, 34, 27, 0.02);
+    }
+
+    .primer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .primer-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--moss-deep);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .primer-toggle {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--loam-light);
+      text-decoration: underline;
+    }
+
+    .primer-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.95rem;
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-subtle);
+      font-size: 0.9rem;
+      color: var(--loam-mid);
+      line-height: 1.6;
+    }
+
+    .primer-body p strong {
+      color: var(--loam-dark);
+      font-weight: 600;
     }
 
     /* Meadow Canvas Box */
@@ -526,6 +576,29 @@
         <button class="btn-text" id="resetWeekBtn" title="Archive & begin a new week">Reset New Week</button>
       </div>
     </header>
+
+    <!-- 3-Paragraph Ecological Primer Card -->
+    <section class="primer-card">
+      <div class="primer-head" id="primerToggleHead">
+        <div class="primer-title">
+          <span>🌱</span>
+          <span>Field Notes: The Three Biological Levers</span>
+        </div>
+        <span class="primer-toggle" id="primerToggleBtn">Hide Notes</span>
+      </div>
+
+      <div class="primer-body" id="primerContent">
+        <p>
+          <strong>1. Substrate Specialization (The 30-Plant Target):</strong> The human microbiome thrives on substrate diversity rather than raw food volume. Data from the American Gut Project demonstrated that consuming 30 or more unique botanical varieties each week builds significantly richer microbial diversity, metabolic resilience, and lower antibiotic resistance compared to diets with fewer than 10. Distinct plant families supply specific complex fibers, resistant starches, and prebiotics that nourish vital keystone strains—such as <em>Faecalibacterium prausnitzii</em> fermenting grains and pulses into gut-healing butyrate, and <em>Bifidobacteria</em> flourishing on allium and root inulins.
+        </p>
+        <p>
+          <strong>2. Living Ferments as Transient Stewards:</strong> While plant fibers provide the soil and nourishment, living ferments act as ecological stewards. Rotating through varied cultures—raw lactic acid vegetables, kefir and aged raw cheeses, koji-miso, and wild liquid tonics—delivers diverse clades of living bacteria and beneficial yeasts along with pre-formed organic acids and bioactive peptides. These microbes do not need to permanently colonize the colon to help; as they transit the tract, they optimize luminal pH, displace opportunistic pathogens, and signal resident commensals to process dietary fiber more effectively.
+        </p>
+        <p>
+          <strong>3. The Mucosal Renewal Window:</strong> Constant digestion keeps the gastrointestinal tract in continuous metabolic work and immune alertness. An intentional daily digestive rest window (14–18 hours) allows the Migrating Motor Complex (MMC) to complete its electrical sweeping cycles through the small intestine, clearing cellular and food debris. During this fasting phase, the keystone bacterium <em>Akkermansia muciniphila</em> feeds on outer mucosal glycans—a natural pruning process that prompts goblet cells to synthesize fresh, resilient mucus, reinforcing the epithelial lining against systemic inflammation.
+        </p>
+      </div>
+    </section>
 
     <!-- Generative Meadow & Vitality Dashboard -->
     <section class="meadow-card">
@@ -1220,6 +1293,17 @@
         updateWeekDisplay();
         renderMeadow();
       }
+    });
+
+    // Primer Card Toggle
+    const primerToggleHead = document.getElementById("primerToggleHead");
+    const primerContent = document.getElementById("primerContent");
+    const primerToggleBtn = document.getElementById("primerToggleBtn");
+
+    primerToggleHead.addEventListener("click", () => {
+      const isHidden = primerContent.style.display === "none";
+      primerContent.style.display = isHidden ? "flex" : "none";
+      primerToggleBtn.textContent = isHidden ? "Hide Notes" : "Show Notes";
     });
 
     /* =========================================================================
