@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Garden of Finite Days | fallow.garden</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #111413;
+      --surface: #181d1b;
+      --surface-border: #28322e;
+      --surface-hover: #222926;
+      --accent-sage: #8fa89b;
+      --accent-clay: #c88d72;
+      --accent-gold: #d4af37;
+      --text-main: #e6ebe8;
+      --text-muted: #8d9c94;
+      --text-dim: #5c6963;
+      --font-serif: 'Lora', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 2rem 1rem 4rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 820px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--surface-border);
+      padding-bottom: 2rem;
+    }
+
+    .site-tag {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-sage);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 2.25rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* Quote Card */
+    .wisdom-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-left: 3px solid var(--accent-sage);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .wisdom-text {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--text-main);
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+      padding-right: 3.5rem;
+    }
+
+    .wisdom-author {
+      font-size: 0.85rem;
+      color: var(--accent-clay);
+      text-align: right;
+      font-weight: 500;
+    }
+
+    .btn-refresh-quote {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.75rem;
+      position: absolute;
+      top: 1.1rem;
+      right: 1.2rem;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .btn-refresh-quote:hover {
+      color: var(--accent-sage);
+    }
+
+    /* Demographic Baseline */
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .demographics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      background: var(--surface);
+      padding: 1.25rem;
+      border-radius: 8px;
+      border: 1px solid var(--surface-border);
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .input-group select,
+    .input-group input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--surface-border);
+      border-radius: 6px;
+      color: var(--text-main);
+      padding: 0.6rem 0.8rem;
+      font-size: 0.95rem;
+      font-family: var(--font-sans);
+    }
+
+    /* Levers List */
+    .levers-container {
+      display: grid;
+      gap: 0.85rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .lever-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+    }
+
+    .lever-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .lever-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .btn-evidence {
+      background: none;
+      border: none;
+      color: var(--accent-sage);
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .pill-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .pill-btn {
+      background: var(--bg);
+      border: 1px solid var(--surface-border);
+      color: var(--text-muted);
+      border-radius: 20px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pill-btn.active {
+      background: var(--surface-hover);
+      border-color: var(--accent-sage);
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* Results Dashboard */
+    .results-panel {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .results-hero {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      color: var(--accent-sage);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .results-hero-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .seasons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      border-top: 1px solid var(--surface-border);
+      padding-top: 1.5rem;
+    }
+
+    .season-item h4 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--accent-clay);
+      margin-bottom: 0.2rem;
+    }
+
+    .season-item p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    /* Grid Canvas / Visualizer */
+    .grid-section {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .grid-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1rem;
+    }
+
+    .grid-legend {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+
+    .canvas-wrapper {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+    }
+
+    canvas {
+      image-rendering: pixelated;
+    }
+
+    /* Evidence Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 100;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      max-width: 580px;
+      width: 100%;
+      padding: 1.75rem;
+      position: relative;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    .modal-close:hover {
+      color: var(--text-main);
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent-sage);
+    }
+
+    .modal-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--surface-border);
+      padding-bottom: 0.75rem;
+    }
+
+    .citation-list {
+      list-style: none;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .citation-item {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      background: var(--bg);
+      padding: 0.85rem;
+      border-radius: 6px;
+      border-left: 2px solid var(--accent-clay);
+    }
+
+    .citation-journal {
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      .demographics-grid {
+        grid-template-columns: 1fr;
+      }
+      .seasons-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .results-hero {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="app-container">
+    <header>
+      <div class="site-tag">fallow.garden</div>
+      <h1>The Garden of Finite Days</h1>
+      <p class="subtitle">An actuarial contemplation on conditional time, impermanence, and the gift of this present morning.</p>
+    </header>
+
+    <!-- Wisdom Engine Card -->
+    <div class="wisdom-card">
+      <button class="btn-refresh-quote" id="btnRefreshQuote" title="Reflect on another passage">↻ Next</button>
+      <div class="wisdom-text" id="wisdomText">"The trouble is, you think you have time."</div>
+      <div class="wisdom-author" id="wisdomAuthor">— Jack Kornfield</div>
+    </div>
+
+    <!-- Demographics / Actuarial Baseline -->
+    <section>
+      <div class="section-title">Actuarial Baseline</div>
+      <div class="demographics-grid">
+        <div class="input-group">
+          <label for="currentAge">Current Age</label>
+          <input type="number" id="currentAge" min="18" max="99" value="56" />
+        </div>
+        <div class="input-group">
+          <label for="sexSelect">Biological Sex (Cohort Baseline)</label>
+          <select id="sexSelect">
+            <option value="male" selected>Male (SSA Table Baseline)</option>
+            <option value="female">Female (SSA Table Baseline)</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lifestyle Levers -->
+    <section>
+      <div class="section-title">Living Levers & Modifiers</div>
+      <div class="levers-container" id="leversContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- Horizon & Seasons Remaining -->
+    <section class="results-panel">
+      <div class="results-hero" id="statHorizonAge">--</div>
+      <div class="results-hero-label">Estimated Actuarial Horizon (Age)</div>
+      
+      <div class="seasons-grid">
+        <div class="season-item">
+          <h4 id="statSprings">--</h4>
+          <p>Springs to Plant & Cultivate</p>
+        </div>
+        <div class="season-item">
+          <h4 id="statMoons">--</h4>
+          <p>Full Moons to Witness</p>
+        </div>
+        <div class="season-item">
+          <h4 id="statWeekends">--</h4>
+          <p>Resting Weekends Remaining</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Memento Mori Grid -->
+    <section class="grid-section">
+      <div class="grid-header">
+        <div class="section-title" style="margin-bottom:0;">The Loom of Weeks</div>
+        <div class="grid-legend">
+          <span><span class="legend-dot" style="background:var(--accent-clay);"></span>Lived</span>
+          <span><span class="legend-dot" style="background:var(--accent-gold);"></span>Current</span>
+          <span><span class="legend-dot" style="background:var(--surface-border); border:1px solid var(--accent-sage);"></span>Unwritten</span>
+        </div>
+      </div>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">
+        Each dot represents one week (52 weeks per row). Every passed row is a year gone fallow.
+      </p>
+      <div class="canvas-wrapper">
+        <canvas id="lifeCanvas" width="624" height="900"></canvas>
+      </div>
+    </section>
+
+    <footer>
+      <p>fallow.garden • Grounded in empirical actuarial tables and radical presence.</p>
+    </footer>
+  </main>
+
+  <!-- Evidence Modal -->
+  <div class="modal-backdrop" id="evidenceModal">
+    <div class="modal-card">
+      <button class="modal-close" id="modalCloseBtn">&times;</button>
+      <h3 class="modal-title" id="modalTitle">Evidence & Meta-Analyses</h3>
+      <p class="modal-desc" id="modalDesc"></p>
+      <ul class="citation-list" id="modalCitations"></ul>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. Wisdom Engine (Mindfulness, Zen, & Stoic Traditions) ---
+    const wisdomQuotes = [
+      // Mindfulness & Contemporary Insight
+      { text: "The trouble is, you think you have time.", author: "Jack Kornfield" },
+      { text: "Radical acceptance begins with saying yes to the present moment as it is, finite and fleeting.", author: "Tara Brach" },
+      { text: "The only time you ever have to live or learn or see or feel or express anything is this moment.", author: "Jon Kabat-Zinn" },
+      { text: "Impermanence is the nature of all things. When we embrace it, every ordinary morning becomes sacred.", author: "Pema Chödrön" },
+      { text: "You don't look at the musician and say the point of the symphony was the finale. The point of the dance is the dancing.", author: "Alan Watts" },
+      { text: "When we let go of our expectations of the future, we find peace in the soil right beneath our feet.", author: "Jack Kornfield" },
+      { text: "Imperfections and endings are not departures from the sacred; they are the very ground of it.", author: "Tara Brach" },
+      { text: "To be fully alive, fully human, and completely awake is to be continually willing to step into the unknown.", author: "Pema Chödrön" },
+      { text: "Muddy water is best cleared by leaving it alone.", author: "Alan Watts" },
+      { text: "You cannot stop the waves of time, but you can learn to surf.", author: "Jon Kabat-Zinn" },
+
+      // Stoic Reflections (Memento Mori & Agency)
+      { text: "You could leave life right now. Let that determine what you do and say and think.", author: "Marcus Aurelius" },
+      { text: "It is not that we have a short time to live, but that we waste a lot of it.", author: "Seneca" },
+      { text: "When you arise in the morning, think of what a precious privilege it is to be alive—to breathe, to think, to enjoy, to love.", author: "Marcus Aurelius" },
+      { text: "Let us prepare our minds as if we’d come to the very end of life. Let us postpone nothing.", author: "Seneca" },
+      { text: "Don't demand that things happen as you wish, but wish that they happen as they do happen, and you will go on well.", author: "Epictetus" },
+
+      // Zen Teachings & Radical Presence
+      { text: "Time itself is being, and all being is time. An inch of time is an inch of jade.", author: "Eihei Dōgen" },
+      { text: "Smile, breathe, and go slowly. There is no need to hurry. We have nowhere else to go.", author: "Thich Nhat Hanh" },
+      { text: "In the beginner's mind there are many possibilities, but in the expert's mind there are few.", author: "Shunryu Suzuki" },
+      { text: "To study the self is to forget the self. To forget the self is to be actualized by myriad things.", author: "Eihei Dōgen" },
+      { text: "Walk as if you are kissing the Earth with your feet.", author: "Thich Nhat Hanh" }
+    ];
+
+    let currentQuoteIdx = 0;
+    function cycleQuote() {
+      currentQuoteIdx = (currentQuoteIdx + 1) % wisdomQuotes.length;
+      document.getElementById('wisdomText').textContent = `"${wisdomQuotes[currentQuoteIdx].text}"`;
+      document.getElementById('wisdomAuthor').textContent = `— ${wisdomQuotes[currentQuoteIdx].author}`;
+    }
+
+    // --- 2. Actuarial Conditional Survival Data (SSA Cohort Table Approximation) ---
+    const ssaExpectancy = {
+      male: [
+        { age: 0, rem: 74.8 }, { age: 20, rem: 55.8 }, { age: 30, rem: 46.5 },
+        { age: 40, rem: 37.3 }, { age: 50, rem: 28.5 }, { age: 60, rem: 20.6 },
+        { age: 70, rem: 13.7 }, { age: 80, rem: 8.0 }, { age: 90, rem: 4.1 }, { age: 100, rem: 2.1 }
+      ],
+      female: [
+        { age: 0, rem: 80.2 }, { age: 20, rem: 61.0 }, { age: 30, rem: 51.4 },
+        { age: 40, rem: 41.9 }, { age: 50, rem: 32.7 }, { age: 60, rem: 24.1 },
+        { age: 70, rem: 16.3 }, { age: 80, rem: 9.7 }, { age: 90, rem: 4.9 }, { age: 100, rem: 2.4 }
+      ]
+    };
+
+    function getBaselineRemaining(age, sex) {
+      const table = ssaExpectancy[sex] || ssaExpectancy.male;
+      if (age <= table[0].age) return table[0].rem;
+      if (age >= table[table.length - 1].age) return Math.max(1, table[table.length - 1].rem - (age - 100) * 0.3);
+
+      for (let i = 0; i < table.length - 1; i++) {
+        if (age >= table[i].age && age <= table[i + 1].age) {
+          const t = (age - table[i].age) / (table[i + 1].age - table[i].age);
+          return table[i].rem + t * (table[i + 1].rem - table[i].rem);
+        }
+      }
+      return 15;
+    }
+
+    // --- 3. The 8 Levers & Peer-Reviewed Evidence Data ---
+    const leversData = [
+      {
+        id: 'movement',
+        title: 'Daily Aerobic Movement',
+        desc: 'Consistent moderate-to-vigorous physical activity and daily step cadence.',
+        options: [
+          { label: 'Sedentary (<4k steps)', delta: -1.5 },
+          { label: 'Moderate (150m/wk or 7k+ steps)', delta: 2.8, default: true },
+          { label: 'Active (300m/wk+)', delta: 4.2 }
+        ],
+        citations: [
+          {
+            title: "Leisure time physical activity of moderate to vigorous intensity and mortality: a large pooled cohort analysis.",
+            authors: "Moore, S. C., Patel, A. V., Matthews, C. E., et al.",
+            journal: "PLOS Medicine, 2012; 9(11): e1001335."
+          },
+          {
+            title: "Association of daily step count and step intensity with mortality among US adults.",
+            authors: "Saint-Maurice, P. F., Graubard, B. I., Troiano, R. P., et al.",
+            journal: "JAMA, 2020; 323(12): 1151–1160."
+          }
+        ]
+      },
+      {
+        id: 'tobacco',
+        title: 'Tobacco & Smoking Status',
+        desc: 'Impact of active combustion inhalation and the rapid timeline of vascular recovery.',
+        options: [
+          { label: 'Current Smoker', delta: -7.0 },
+          { label: 'Quit within 10y', delta: -1.0 },
+          { label: 'Quit >10y ago', delta: 1.5 },
+          { label: 'Never Smoked', delta: 3.0, default: true }
+        ],
+        citations: [
+          {
+            title: "21st-century hazards of smoking and benefits of cessation in the United States.",
+            authors: "Jha, P., Ramasundarahettige, C., Landsman, V., et al.",
+            journal: "New England Journal of Medicine, 2013; 368(4): 341–350."
+          },
+          {
+            title: "Mortality in relation to smoking: 50 years' observations on male British doctors.",
+            authors: "Doll, R., Peto, R., Boreham, J., & Sutherland, I.",
+            journal: "BMJ, 2004; 328(7455): 1519."
+          }
+        ]
+      },
+      {
+        id: 'diet',
+        title: 'Nutritional Pattern',
+        desc: 'Emphasis on legumes, whole grains, nuts, and minimally processed garden foods.',
+        options: [
+          { label: 'Ultra-Processed / Standard', delta: -1.5 },
+          { label: 'Balanced / Mixed', delta: 0.5, default: true },
+          { label: 'Whole Food / Plant-Rich', delta: 3.5 }
+        ],
+        citations: [
+          {
+            title: "Estimating impact of food choices on life expectancy: A modeling study.",
+            authors: "Fadnes, L. T., Celis-Morales, C., O'Flaherty, M., & Balakrishna, R.",
+            journal: "PLOS Medicine, 2022; 19(2): e1003889."
+          },
+          {
+            title: "Impact of healthy lifestyle factors on life expectancies in the US population.",
+            authors: "Li, Y., Pan, A., Wang, D. D., et al.",
+            journal: "Circulation, 2018; 138(4): 345–355."
+          }
+        ]
+      },
+      {
+        id: 'social',
+        title: 'Social Ties & Community',
+        desc: 'Interpersonal cohesion, close friendships, and shared community life.',
+        options: [
+          { label: 'Isolated / Low Contact', delta: -2.5 },
+          { label: 'Moderate Social Circle', delta: 0.5, default: true },
+          { label: 'Deeply Integrated', delta: 2.5 }
+        ],
+        citations: [
+          {
+            title: "Social relationships and mortality risk: A meta-analytic review.",
+            authors: "Holt-Lunstad, J., Smith, T. B., & Layton, J. B.",
+            journal: "PLoS Medicine, 2010; 7(7): e1000316."
+          },
+          {
+            title: "Loneliness and social isolation as risk factors for mortality.",
+            authors: "Holt-Lunstad, J., Smith, T. B., Baker, M., Harris, T., & Stephenson, D.",
+            journal: "Perspectives on Psychological Science, 2015; 10(2): 227–237."
+          }
+        ]
+      },
+      {
+        id: 'sleep',
+        title: 'Sleep Restoration & Regularity',
+        desc: '7–8 hours of consistent, restorative sleep across circadian cycles.',
+        options: [
+          { label: 'Chronic Deprivation (<6h)', delta: -2.0 },
+          { label: 'Variable / 6-7h', delta: 0.0, default: true },
+          { label: 'Restorative 7-8h Regular', delta: 2.2 }
+        ],
+        citations: [
+          {
+            title: "Sleep duration and all-cause mortality: A systematic review and meta-analysis of prospective studies.",
+            authors: "Cappuccio, F. P., D'Elia, L., Strazzullo, P., & Miller, M. A.",
+            journal: "Sleep, 2010; 33(5): 585–592."
+          },
+          {
+            title: "Low-risk sleep patterns and all-cause mortality in US adults.",
+            authors: "Qian, F., et al.",
+            journal: "American College of Cardiology (ACC.23), 2023."
+          }
+        ]
+      },
+      {
+        id: 'alcohol',
+        title: 'Alcohol Consumption',
+        desc: 'Weekly intake volumes and cardiovascular/oncological risk thresholds.',
+        options: [
+          { label: 'Heavy (>14 drinks/wk)', delta: -3.5 },
+          { label: 'Moderate (4-10 drinks/wk)', delta: -0.8 },
+          { label: 'Minimal / Non-Drinker', delta: 1.0, default: true }
+        ],
+        citations: [
+          {
+            title: "Risk thresholds for alcohol consumption: combined analysis of individual-participant data for 599,912 current drinkers.",
+            authors: "Wood, A. M., Kaptoge, S., Butterworth, A. S., et al.",
+            journal: "The Lancet, 2018; 391(10129): 1513–1523."
+          }
+        ]
+      },
+      {
+        id: 'strength',
+        title: 'Functional Strength & Resistance',
+        desc: 'Preserving lean muscle mass, grip strength, and physical autonomy.',
+        options: [
+          { label: 'Low / No Resistance Training', delta: -1.0 },
+          { label: '1-2 Days / Functional Work', delta: 1.5, default: true },
+          { label: 'Regular Progressive Training', delta: 2.2 }
+        ],
+        citations: [
+          {
+            title: "Prognostic value of grip strength: findings from the Prospective Urban Rural Epidemiology (PURE) study.",
+            authors: "Leong, D. P., Teo, K. K., Rangarajan, S., et al.",
+            journal: "The Lancet, 2015; 386(9990): 266–273."
+          },
+          {
+            title: "Does strength-promoting exercise confer unique health benefits? A pooled analysis of eleven population cohorts.",
+            authors: "Stamatakis, E., Lee, I-M., Bennie, J., et al.",
+            journal: "American Journal of Epidemiology, 2018; 187(5): 1102–1112."
+          }
+        ]
+      },
+      {
+        id: 'purpose',
+        title: 'Purpose & Psychological Grounding',
+        desc: 'Cultivating mindfulness, daily agency, and intentional presence.',
+        options: [
+          { label: 'Uncertain / Low Agency', delta: -1.5 },
+          { label: 'Grounded / Moderate Purpose', delta: 0.5, default: true },
+          { label: 'Deep Meaning & Daily Focus', delta: 2.4 }
+        ],
+        citations: [
+          {
+            title: "Association between life purpose and mortality among US adults older than 50 years.",
+            authors: "Alimujiang, A., Wiensch, A., Boss, J., et al.",
+            journal: "JAMA Network Open, 2019; 2(5): e194270."
+          }
+        ]
+      }
+    ];
+
+    // State
+    const userSelections = {};
+
+    // --- 4. Render UI ---
+    function initLevers() {
+      const container = document.getElementById('leversContainer');
+      container.innerHTML = '';
+
+      leversData.forEach(lever => {
+        const defaultOpt = lever.options.find(o => o.default) || lever.options[0];
+        userSelections[lever.id] = defaultOpt.delta;
+
+        const card = document.createElement('div');
+        card.className = 'lever-card';
+        card.innerHTML = `
+          <div class="lever-header">
+            <span class="lever-title">${lever.title}</span>
+            <button class="btn-evidence" data-id="${lever.id}">View Evidence ↗</button>
+          </div>
+          <div class="pill-group">
+            ${lever.options.map(opt => `
+              <button class="pill-btn ${opt.default ? 'active' : ''}" data-lever="${lever.id}" data-delta="${opt.delta}">
+                ${opt.label}
+              </button>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Lever clicks
+      container.addEventListener('click', (e) => {
+        if (e.target.classList.contains('pill-btn')) {
+          const leverId = e.target.getAttribute('data-lever');
+          const delta = parseFloat(e.target.getAttribute('data-delta'));
+          userSelections[leverId] = delta;
+
+          // Toggle active class
+          const siblings = e.target.parentElement.querySelectorAll('.pill-btn');
+          siblings.forEach(b => b.classList.remove('active'));
+          e.target.classList.add('active');
+
+          recalculate();
+        } else if (e.target.classList.contains('btn-evidence')) {
+          const leverId = e.target.getAttribute('data-id');
+          openEvidence(leverId);
+        }
+      });
+    }
+
+    // --- 5. Calculation & Memento Mori Canvas ---
+    function recalculate() {
+      const age = parseInt(document.getElementById('currentAge').value, 10) || 50;
+      const sex = document.getElementById('sexSelect').value;
+
+      const baselineRemaining = getBaselineRemaining(age, sex);
+      
+      // Sum lever deltas with a dampening ceiling
+      let totalDelta = Object.values(userSelections).reduce((acc, d) => acc + d, 0);
+      totalDelta = Math.max(-10, Math.min(12, totalDelta));
+
+      const adjustedRemaining = Math.max(1, baselineRemaining + totalDelta);
+      const projectedHorizon = age + adjustedRemaining;
+
+      // Update Numerical Outputs
+      document.getElementById('statHorizonAge').textContent = projectedHorizon.toFixed(1);
+      document.getElementById('statSprings').textContent = `~${Math.round(adjustedRemaining)}`;
+      document.getElementById('statMoons').textContent = `~${Math.round(adjustedRemaining * 12.37).toLocaleString()}`;
+      document.getElementById('statWeekends').textContent = `~${Math.round(adjustedRemaining * 52.14).toLocaleString()}`;
+
+      drawLifeGrid(age, projectedHorizon);
+    }
+
+    function drawLifeGrid(currentAge, horizonAge) {
+      const canvas = document.getElementById('lifeCanvas');
+      const ctx = canvas.getContext('2d');
+      const totalYears = Math.max(90, Math.ceil(horizonAge + 5));
+      
+      const weeksPerRow = 52;
+      const dotRadius = 2.5;
+      const spacing = 11.5;
+      const paddingX = 15;
+      const paddingY = 20;
+
+      canvas.width = paddingX * 2 + (weeksPerRow - 1) * spacing;
+      canvas.height = paddingY * 2 + (totalYears - 1) * spacing;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const totalWeeksLived = Math.floor(currentAge * 52);
+      const totalWeeksHorizon = Math.floor(horizonAge * 52);
+
+      for (let y = 0; y < totalYears; y++) {
+        for (let w = 0; w < weeksPerRow; w++) {
+          const weekIndex = y * 52 + w;
+          const cx = paddingX + w * spacing;
+          const cy = paddingY + y * spacing;
+
+          ctx.beginPath();
+          ctx.arc(cx, cy, dotRadius, 0, Math.PI * 2);
+
+          if (weekIndex < totalWeeksLived) {
+            // Passed weeks (Earthy Clay)
+            ctx.fillStyle = 'rgba(200, 141, 114, 0.45)';
+            ctx.fill();
+          } else if (weekIndex === totalWeeksLived) {
+            // Present moment (Pulsing Gold)
+            ctx.fillStyle = '#d4af37';
+            ctx.fill();
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = '#fff';
+            ctx.stroke();
+          } else if (weekIndex <= totalWeeksHorizon) {
+            // Estimated Future Weeks (Muted Sage Outline)
+            ctx.fillStyle = 'rgba(143, 168, 155, 0.15)';
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(143, 168, 155, 0.4)';
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          } else {
+            // Distant Horizon (Subtle Background)
+            ctx.fillStyle = 'rgba(40, 50, 46, 0.3)';
+            ctx.fill();
+          }
+        }
+      }
+    }
+
+    // --- 6. Evidence Modal Logic ---
+    const modal = document.getElementById('evidenceModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalCitations = document.getElementById('modalCitations');
+
+    function openEvidence(leverId) {
+      const data = leversData.find(l => l.id === leverId);
+      if (!data) return;
+
+      modalTitle.textContent = data.title;
+      modalDesc.textContent = data.desc;
+      modalCitations.innerHTML = data.citations.map(c => `
+        <li class="citation-item">
+          <strong>${c.title}</strong>
+          <div style="font-size:0.8rem; margin-top:3px; color:var(--text-muted);">${c.authors}</div>
+          <div class="citation-journal">${c.journal}</div>
+        </li>
+      `).join('');
+
+      modal.classList.add('open');
+    }
+
+    document.getElementById('modalCloseBtn').addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('open');
+    });
+
+    // --- 7. Init Event Listeners ---
+    document.getElementById('currentAge').addEventListener('input', recalculate);
+    document.getElementById('sexSelect').addEventListener('change', recalculate);
+    document.getElementById('btnRefreshQuote').addEventListener('click', cycleQuote);
+
+    // Initial run
+    initLevers();
+    recalculate();
+  </script>
+</body>
+</html>
