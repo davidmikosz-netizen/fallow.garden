@@ -22,6 +22,7 @@
       --ochre-pale: #f7ebd9;
       --border-subtle: #dcd4c5;
       --border-focus: #485c3f;
+      --shadow-sm: 0 2px 8px rgba(42, 34, 27, 0.04);
       --radius-sm: 6px;
       --radius-md: 12px;
       --radius-lg: 18px;
@@ -40,7 +41,7 @@
       color: var(--loam-dark);
       font-family: var(--font-serif);
       line-height: 1.6;
-      padding: 1.5rem 1rem 4rem;
+      padding: 1.5rem 1rem 4.5rem;
       display: flex;
       justify-content: center;
       -webkit-font-smoothing: antialiased;
@@ -54,11 +55,35 @@
       gap: 1.75rem;
     }
 
+    /* Top Nav */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .brand-link {
+      color: var(--moss-deep);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: color 0.15s ease;
+    }
+    .brand-link:hover {
+      color: var(--terracotta);
+    }
+
     /* Header */
     header {
       text-align: center;
-      padding: 1rem 0 0.5rem;
-      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.5rem 0 0.5rem;
       position: relative;
     }
 
@@ -534,14 +559,105 @@
       color: var(--loam-dark);
     }
 
+    /* About & Support Card */
+    .about-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .about-head {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.75rem;
+    }
+
+    .about-head h2 {
+      font-size: 1.2rem;
+      color: var(--loam-dark);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .about-content {
+      font-size: 0.9rem;
+      color: var(--loam-mid);
+      line-height: 1.6;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .support-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: 0.84rem;
+      font-weight: 600;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .support-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-bmac {
+      background: #ffdd00;
+      color: #000000;
+    }
+
+    .btn-venmo {
+      background: #008cff;
+      color: #ffffff;
+    }
+
+    .btn-email {
+      background: var(--parchment-deep);
+      color: var(--loam-dark);
+      border-color: var(--border-subtle);
+    }
+    .btn-email:hover {
+      background: var(--border-subtle);
+    }
+
     /* Footer */
     footer {
       text-align: center;
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       color: var(--loam-light);
       font-family: var(--font-sans);
-      padding-top: 1rem;
+      padding-top: 1.5rem;
       border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      align-items: center;
+    }
+
+    .footer-link {
+      color: var(--moss-deep);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .footer-link:hover {
+      color: var(--terracotta);
+      text-decoration: underline;
     }
 
     @media (max-width: 600px) {
@@ -557,6 +673,9 @@
       .ferment-grid {
         grid-template-columns: 1fr 1fr;
       }
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -564,11 +683,19 @@
 
   <div class="container">
     
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <a href="/" class="brand-link">
+        <span>🌱</span>
+        <span>fallow.garden</span>
+      </a>
+    </nav>
+    
     <!-- Header -->
     <header>
       <div class="badge">Microbiome Stewardship Module</div>
       <h1>The Inner Meadow</h1>
-      <p class="subtitle">Weekly botanical diversity, targeted substrates & mucosal renewal</p>
+      <p class="subtitle">Weekly botanical diversity, targeted substrates &amp; mucosal renewal</p>
       
       <div class="header-actions">
         <span id="currentWeekRange">Week of Cultivation</span>
@@ -626,7 +753,7 @@
           <div class="gauge-track">
             <div class="gauge-fill" id="butyrateBar" style="width: 0%"></div>
           </div>
-          <div class="gauge-target">Grains, Legumes & Fibers</div>
+          <div class="gauge-target">Grains, Legumes &amp; Fibers</div>
         </div>
 
         <div class="gauge-pill">
@@ -648,7 +775,7 @@
           <div class="gauge-track">
             <div class="gauge-fill ochre" id="inulinBar" style="width: 0%"></div>
           </div>
-          <div class="gauge-target">Alliums & Root Inulin</div>
+          <div class="gauge-target">Alliums &amp; Root Inulin</div>
         </div>
 
         <div class="gauge-pill">
@@ -687,12 +814,12 @@
       <form class="add-custom-row" id="customPlantForm">
         <input type="text" class="input-text" id="customPlantInput" placeholder="Add custom botanical (e.g. Romanesco, Sorghum, Elderberry)..." required />
         <select class="select-category" id="customPlantCategory">
-          <option value="alliums_roots">Alliums & Roots</option>
-          <option value="greens_veg">Greens & Veg</option>
+          <option value="alliums_roots">Alliums &amp; Roots</option>
+          <option value="greens_veg">Greens &amp; Veg</option>
           <option value="grains">Grains</option>
-          <option value="legumes_nuts">Legumes, Nuts & Seeds</option>
-          <option value="fruits">Fruits & Berries</option>
-          <option value="herbs_spices">Herbs, Spices & Teas</option>
+          <option value="legumes_nuts">Legumes, Nuts &amp; Seeds</option>
+          <option value="fruits">Fruits &amp; Berries</option>
+          <option value="herbs_spices">Herbs, Spices &amp; Teas</option>
         </select>
         <button type="submit" class="btn-secondary">+ Add</button>
       </form>
@@ -731,9 +858,43 @@
       </div>
     </section>
 
+    <!-- About & Support Section -->
+    <section class="about-card">
+      <div class="about-head">
+        <h2><span>🌿</span> About fallow.garden &amp; Feedback</h2>
+      </div>
+      
+      <div class="about-content">
+        <p>
+          <strong>The Inner Meadow</strong> is part of the <em>fallow.garden</em> anthology—a collection of restorative, single-purpose digital micro-tools designed to counter algorithmic exhaustion, support biological health, and cultivate personal vitality.
+        </p>
+        <p style="margin-top: 0.6rem;">
+          Have ideas for additional botanical substrates, questions about the microbiome research, or suggestions for new tools? Feedback and ideas are always welcome.
+        </p>
+      </div>
+
+      <div class="support-grid">
+        <a href="https://buymeacoffee.com/davidmikosz" target="_blank" rel="noopener noreferrer" class="support-btn btn-bmac">
+          <span>☕</span>
+          <span>Buy Me a Coffee</span>
+        </a>
+
+        <a href="https://venmo.com/David-Mikosz" target="_blank" rel="noopener noreferrer" class="support-btn btn-venmo">
+          <span>💙</span>
+          <span>Tip via Venmo</span>
+        </a>
+
+        <a href="mailto:david.mikosz@gmail.com?subject=fallow.garden%20Feedback%20-%20Inner%20Meadow" class="support-btn btn-email">
+          <span>✉️</span>
+          <span>Send Feedback</span>
+        </a>
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer>
-      fallow.garden — restorative micro-utilities for mind, soil, and human vitality. Zero telemetry. Stored entirely on your device.
+      <div>Part of the <a href="/" class="footer-link">fallow.garden</a> anthology — restorative digital micro-tools.</div>
+      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.2rem;">All botanical tracking and metrics are stored locally on your device. Zero telemetry.</div>
     </footer>
 
   </div>
