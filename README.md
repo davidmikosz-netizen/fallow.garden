@@ -1,49 +1,60 @@
 # fallow.garden
 
-> **An anthology of small, restorative digital utilities.**
+> *“To lie fallow is not to be idle.”*
 
-In agriculture, leaving land fallow is not neglect—it is a deliberate pause that allows depleted soil to naturally replenish itself. Our minds and bodies require the same unhurried rest.
+An anthology of unhurried, single-purpose digital micro-utilities designed to counter cognitive fatigue, algorithmic friction, and perpetual optimization culture. Each module serves as a quiet, tactile instrument for tending to biological health, ecological stewardship, temporal horizons, or cognitive rest.
 
-**fallow.garden** is an evolving collection of focused, single-purpose micro-tools published as self-contained "episodes." Each utility is designed to address a specific dimension of recovery—easing cognitive friction, repairing physical strain, navigating bureaucratic burnout, or offering imaginative rest—without algorithmic feeds, telemetry, or distractions.
-
----
-
-## 🌿 Published Episodes
-
-| Episode | Title | Description | Delivery |
-| :--- | :--- | :--- | :--- |
-| **01** | **Attention Restore** | Guided optical resets, pacing timers, and brown noise synthesis modeled on Attention Restoration Theory (ART) and Default Mode Network (DMN) activation. | `episodes/garden/` |
-| **02** | **Gut Biome Recovery** | Practical, evidence-backed dietary strategies to help digestive flora regenerate after antibiotics, colonoscopies, or acute illness. | [getrepoopulate.com](https://getrepoopulate.com) |
-| **03** | **Federal Retirement Horizon** | Granular countdown for civil servants calculating net remaining duty shifts to MRA, Age 60, and Age 62—accounting for federal holidays, leave accrual tiers, and the MRA+10 postponed annuity exit. | `episodes/fers-countdown/` |
-| **04** | **The Digital Thought Composter** | A cathartic text-disposal engine. Feed looping dread, unread inbox guilt, or administrative sludge to simulated microbes and watch it break down into nutrient-dense digital loam. | `episodes/composter/` |
-| **05** | **Past Lives Dossier** | A diagnostic intake for modern fatigue. Uncover your plausible, unglamorous past (or deep-space future) life across classical, medieval, industrial, and frontier epochs. | `episodes/past-lives/` |
+Hosted live at [fallow.garden](https://fallow.garden).
 
 ---
 
-## 🏛️ Core Principles & Architecture
+## The Corridors & Modules
 
-Every application in this anthology adheres to a strict design and engineering ethos:
+### Corridor I: Mind & Impermanence
+* **The Garden of Finite Days** (`/episodes/gardenoffinitedays/`)  
+  An actuarial presence visualizer. Draws on conditional survival tables from U.S. Social Security Administration cohorts, everyday vitality habits, and a woven dot-matrix tapestry to calculate remaining weekends, seasons, and high-vitality days (compression of morbidity). Includes reflective quotes on presence and impermanence.
+* **Digital Thought Composter** (`/episodes/composter/`)  
+  An attention restoration exercise. A 5-day contemplative practice that converts daily mental friction and rumination into fertile psychological soil to nurture native meadow flora.
 
-* **Zero Telemetry & Local-First:** No analytics scripts, cookies, or tracking pixels. All calculations, procedural audio, text parsing, and storage run 100% client-side in the user's browser.
-* **Single-File Portability:** Each episode is self-contained in a single `index.html` file containing its own HTML, CSS, and vanilla JavaScript—making deployment, archival, and modification effortless.
-* **Installable as Web Apps:** Configured with inline PWA manifests and mobile meta tags so users can save individual tools directly to their phone's home screen for focused, browser-free use.
-* **No Algorithmic Lock-In:** Tools are built to address a specific friction, deliver immediate value, and step aside.
+### Corridor II: Biological & Ecological Soils
+* **The Inner Meadow** (`/inner-meadow/`)  
+  A gut microbiome upgrade kit and substrate tracker. Encourages botanical diversity across 100+ common foods (targeting the American Gut Project’s 30+ species/week threshold), logs live ferment rotations across four distinct microbial clades, and tracks daily mucosal renewal fasting windows.
+* **betterfly.garden** *(Sister Hub — [betterfly.garden](https://betterfly.garden))*  
+  An ecological habitat planner for Maryland and the Mid-Atlantic. Matches native soil profiles, bloom sequences, and deer-resistant companion guilds to support local pollinators and native fauna.
+* **getrepoopulate.com** *(Sister Hub — [getrepoopulate.com](https://getrepoopulate.com))*  
+  A clinical post-shock protocol hub for microbiome reconstruction following antibiotic wipeouts, acute dysbiosis, or gastrointestinal trauma.
+
+### Corridor III: Worldly Passages & Cosmic Play
+* **FERS Retirement Countdown** (`/episodes/fers-countdown/`)  
+  A quiet milestone and runway calculator for federal civil servants transitioning toward sovereign, self-directed time.
+* **Past Life Oracle** (`/episodes/past-lives/`)  
+  A lighthearted karmic simulation exploring ancient vocations and historical wanderers to playfully dislodge modern self-importance.
 
 ---
 
-## 📁 Repository Structure
+## Technical Philosophy
+
+* **Single-File Architecture:** Each micro-utility is self-contained in a clean `index.html` file containing its own structural markup, styles, and logic.
+* **Zero Build Overhead:** No `npm`, no bundlers, no build pipelines, and no framework dependencies. Edit vanilla code, push to git, and deploy.
+* **100% Client-Side Privacy:** State is preserved strictly in the browser’s `localStorage`. No analytics, no third-party trackers, no cookies, and no accounts required.
+* **Sovereign Aesthetic:** Designed using a shared warm parchment palette (`#FAF6EE`), earthy loam tones (`#2C221A`), terracotta accents (`#BA5536`), and moss greens (`#485C3F`).
+
+---
+
+## Repository Structure
 
 ```text
 fallow.garden/
-├── index.html                      # Root catalog, manifesto, and episode index
-├── robots.txt                      # Crawler directives for domain root
-├── README.md                       # Project documentation and publishing guide
-└── episodes/
-    ├── garden/
-    │   └── index.html              # Episode 01: Attention Restore
-    ├── fers-countdown/
-    │   └── index.html              # Episode 03: Federal Retirement Horizon
-    ├── composter/
-    │   └── index.html              # Episode 04: The Digital Thought Composter
-    └── past-lives/
-        └── index.html              # Episode 05: Historical Past Lives Dossier
+├── index.html                      # Main anthology hub & corridor portal
+├── inner-meadow/
+│   └── index.html                  # The Inner Meadow gut upgrade tracker
+├── episodes/
+│   ├── gardenoffinitedays/
+│   │   └── index.html              # The Garden of Finite Days
+│   ├── composter/
+│   │   └── index.html              # Digital Thought Composter
+│   ├── fers-countdown/
+│   │   └── index.html              # FERS Horizon Countdown
+│   └── past-lives/
+│       └── index.html              # Past Life Oracle
+└── README.md
