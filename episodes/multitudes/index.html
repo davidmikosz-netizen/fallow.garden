@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>The Multitudes Within — Human Microbiome Primer &amp; Soil Simulator</title>
+
+  <!-- PWA & Mobile Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Multitudes" />
+  <meta name="theme-color" content="#faf6ee" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- Inline Web App Manifest -->
+  <link rel="manifest" href='data:application/manifest+json,{"name":"The Multitudes Within","short_name":"Multitudes","start_url":".","display":"standalone","background_color":"%23faf6ee","theme_color":"%233b4e34"}' />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --parchment: #faf6ee;
+      --parchment-warm: #f4ecdf;
+      --parchment-card: #fffdfa;
+      --loam-dark: #2c221a;
+      --loam-mid: #4d3d30;
+      --loam-light: #7c6857;
+      
+      --terracotta: #ba5536;
+      --terracotta-soft: #d96f4e;
+      --terracotta-pale: #faede6;
+      
+      --honey-ochre: #c9732b;
+      --ochre-pale: #fbf2e3;
+      
+      --moss-deep: #3b4e34;
+      --moss-mid: #556e4c;
+      --moss-light: #7a9470;
+      --moss-pale: #e3ebe0;
+      
+      --glacier-deep: #174d4b;
+      --glacier-mid: #2b7a78;
+      --glacier-pale: #e8f3f1;
+      --glacier-border: #b8ded9;
+
+      --sand-border: #ded3c1;
+      --border-soft: #ebe3d5;
+      
+      --shadow-sm: 0 2px 8px rgba(44, 34, 26, 0.04);
+      --shadow-md: 0 6px 20px rgba(44, 34, 26, 0.07);
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      
+      --font-serif: "Lora", "Iowan Old Style", Georgia, serif;
+      --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--parchment);
+      color: var(--loam-dark);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 2rem 1.25rem 5rem;
+      display: flex;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 920px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--moss-deep);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .back-link:hover {
+      color: var(--terracotta);
+    }
+
+    .meta-badge {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      background: var(--moss-pale);
+      color: var(--moss-deep);
+      border: 1px solid var(--moss-light);
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    /* Header & Epigraph */
+    header {
+      border-bottom: 1px solid var(--sand-border);
+      padding-bottom: 1.75rem;
+    }
+
+    .brand-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--moss-deep);
+      background: var(--moss-pale);
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 2.35rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--loam-dark);
+      line-height: 1.2;
+      margin-bottom: 0.65rem;
+    }
+
+    .epigraph {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--loam-mid);
+      font-size: 1rem;
+      margin-bottom: 0.65rem;
+      line-height: 1.5;
+    }
+
+    .acknowledgment {
+      font-size: 0.82rem;
+      color: var(--loam-light);
+    }
+
+    .acknowledgment a {
+      color: var(--moss-deep);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.15s ease;
+    }
+
+    .acknowledgment a:hover {
+      color: var(--terracotta);
+    }
+
+    /* Sticky Complexity Lens Controller */
+    .lens-sticky-wrap {
+      position: sticky;
+      top: 1rem;
+      z-index: 50;
+      background: rgba(250, 246, 238, 0.94);
+      backdrop-filter: blur(8px);
+      padding: 0.5rem 0;
+      border-radius: var(--radius-md);
+    }
+
+    .lens-container {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 0.4rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    @media (min-width: 680px) {
+      .lens-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .lens-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--loam-light);
+      padding-left: 0.6rem;
+    }
+
+    .lens-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+
+    .lens-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--loam-mid);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .lens-btn:hover {
+      background: var(--parchment-warm);
+      color: var(--loam-dark);
+    }
+
+    .lens-btn.active {
+      background: var(--moss-deep);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Section Cards */
+    .card {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-head {
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .section-head h2 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--loam-light);
+      text-transform: uppercase;
+    }
+
+    /* MODULE 1: Narrative Odyssey */
+    .narrative-tabs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 6px;
+      margin-bottom: 1.25rem;
+    }
+
+    .narrative-tab-btn {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--loam-mid);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+    }
+
+    .narrative-tab-btn.active {
+      background: var(--moss-pale);
+      border-color: var(--moss-mid);
+      color: var(--moss-deep);
+    }
+
+    .narrative-display {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.4rem;
+    }
+
+    .narrative-display-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--moss-deep);
+      margin-bottom: 0.5rem;
+    }
+
+    .narrative-display-body {
+      font-size: 0.92rem;
+      color: var(--loam-mid);
+      line-height: 1.65;
+    }
+
+    /* MODULE 2: Keystone Field Cards */
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .chip {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: 999px;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--loam-mid);
+      cursor: pointer;
+    }
+
+    .chip.active {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: #ffffff;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .field-card {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.75rem;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .field-card:hover {
+      border-color: var(--moss-mid);
+      transform: translateY(-2px);
+    }
+
+    .field-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .field-card-name {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+    }
+
+    .field-card-role {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--parchment-warm);
+      color: var(--terracotta);
+    }
+
+    .field-card-desc {
+      font-size: 0.84rem;
+      color: var(--loam-mid);
+      line-height: 1.5;
+    }
+
+    .field-card-meta {
+      border-top: 1px dashed var(--sand-border);
+      padding-top: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--moss-deep);
+    }
+
+    /* MODULE 3: Ecosystem Sandbox */
+    .sandbox-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 740px) {
+      .sandbox-layout {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .controls-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .control-item {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem;
+    }
+
+    .control-item-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+
+    .control-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--loam-dark);
+    }
+
+    .control-value {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--moss-deep);
+    }
+
+    .slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--sand-border);
+      outline: none;
+      accent-color: var(--moss-deep);
+      cursor: pointer;
+    }
+
+    .select-input {
+      width: 100%;
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      color: var(--loam-dark);
+      padding: 0.45rem 0.65rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      outline: none;
+    }
+
+    .results-panel {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      justify-content: center;
+    }
+
+    .metric-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .metric-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--loam-dark);
+    }
+
+    .metric-bar-bg {
+      height: 9px;
+      background: var(--parchment-warm);
+      border: 1px solid var(--sand-border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .metric-bar-fill {
+      height: 100%;
+      width: 50%;
+      border-radius: 999px;
+      background: var(--moss-mid);
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+
+    .metric-note {
+      font-size: 0.74rem;
+      color: var(--loam-light);
+      line-height: 1.35;
+    }
+
+    /* Companion Apps Corridor Links */
+    .companion-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.85rem;
+      margin-top: 0.85rem;
+    }
+
+    .companion-link {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.15rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.4rem;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .companion-link:hover {
+      border-color: var(--moss-mid);
+      transform: translateY(-2px);
+    }
+
+    .companion-title {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .companion-desc {
+      font-size: 0.78rem;
+      color: var(--loam-mid);
+      line-height: 1.4;
+    }
+
+    .companion-cta {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--moss-deep);
+      margin-top: 0.2rem;
+    }
+
+    /* About & Support */
+    .about-card {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .about-head {
+      border-bottom: 1px solid var(--sand-border);
+      padding-bottom: 0.75rem;
+    }
+
+    .about-head h2 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--loam-dark);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .about-content {
+      font-size: 0.92rem;
+      color: var(--loam-mid);
+      line-height: 1.65;
+    }
+
+    .about-content p + p {
+      margin-top: 0.65rem;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .support-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      border: 1px solid transparent;
+    }
+
+    .support-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-bmac {
+      background: #ffdd00;
+      color: #000000;
+    }
+
+    .btn-venmo {
+      background: #008cff;
+      color: #ffffff;
+    }
+
+    .btn-email {
+      background: var(--parchment-warm);
+      color: var(--loam-dark);
+      border-color: var(--sand-border);
+    }
+    .btn-email:hover {
+      background: var(--sand-border);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--sand-border);
+      padding-top: 1.75rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--loam-light);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Top Nav -->
+    <div class="top-nav">
+      <a href="/" class="back-link">← fallow.garden</a>
+      <span class="meta-badge">Corridor II • Human Biology</span>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="brand-badge">Holobiont Natural History</div>
+      <h1>The Multitudes Within</h1>
+      <p class="epigraph">
+        &ldquo;Do I contradict myself? Very well then I contradict myself, (I am large, I contain multitudes.)&rdquo;
+      </p>
+      <p class="acknowledgment">
+        Titled after <strong>Walt Whitman&rsquo;s</strong> <a href="https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version" target="_blank" rel="noopener">Song of Myself</a> and inspired by <strong>Ed Yong&rsquo;s</strong> seminal work <a href="https://edyong.me/i-contain-multitudes" target="_blank" rel="noopener">I Contain Multitudes: The Microbes Within Us and a Grander View of Life</a>.
+      </p>
+    </header>
+
+    <!-- Sticky Complexity Lens Selector -->
+    <div class="lens-sticky-wrap">
+      <div class="lens-container">
+        <span class="lens-title">Select Depth Lens:</span>
+        <div class="lens-buttons">
+          <button class="lens-btn active" onclick="setLens(1)">🌿 Level 1: Meadow</button>
+          <button class="lens-btn" onclick="setLens(2)">🧬 Level 2: Physiology</button>
+          <button class="lens-btn" onclick="setLens(3)">🔬 Level 3: Deep Taxa</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 1: Narrative Odyssey -->
+    <section class="card">
+      <div class="section-head">
+        <h2>1. The Passage: From Mouth to Mucosa</h2>
+        <span class="section-tag">Interactive Odyssey</span>
+      </div>
+
+      <div class="narrative-tabs" id="narrativeTabs">
+        <button class="narrative-tab-btn active" onclick="selectNarrative(0)">1. The Ingestion Gate</button>
+        <button class="narrative-tab-btn" onclick="selectNarrative(1)">2. Upper GI &amp; Fallow Rest</button>
+        <button class="narrative-tab-btn" onclick="selectNarrative(2)">3. Colonic Fermentation</button>
+        <button class="narrative-tab-btn" onclick="selectNarrative(3)">4. The Mucosal Fortress</button>
+      </div>
+
+      <div class="narrative-display">
+        <h3 class="narrative-display-title" id="narrativeTitle">...</h3>
+        <p class="narrative-display-body" id="narrativeBody">...</p>
+      </div>
+    </section>
+
+    <!-- MODULE 2: Keystone Species & Metabolites -->
+    <section class="card">
+      <div class="section-head">
+        <h2>2. Keystone Inhabitants &amp; Currencies</h2>
+        <span class="section-tag">Field Directory</span>
+      </div>
+
+      <div class="filter-chips" id="fieldFilterChips">
+        <button class="chip active" onclick="filterFieldCards('ALL')">All Inhabitants</button>
+        <button class="chip" onclick="filterFieldCards('Sentinel')">Sentinels</button>
+        <button class="chip" onclick="filterFieldCards('Engine')">Engines</button>
+        <button class="chip" onclick="filterFieldCards('Generalist')">Generalists</button>
+        <button class="chip" onclick="filterFieldCards('Currency')">Currencies</button>
+      </div>
+
+      <div class="field-grid" id="fieldGrid">
+        <!-- Rendered via JS based on complexity lens -->
+      </div>
+    </section>
+
+    <!-- MODULE 3: Ecosystem Sandbox -->
+    <section class="card">
+      <div class="section-head">
+        <h2>3. The Living Soil Sandbox</h2>
+        <span class="section-tag">Biophysical Simulation</span>
+      </div>
+
+      <div class="sandbox-layout">
+        <!-- Controls -->
+        <div class="controls-panel">
+          
+          <div class="control-item">
+            <div class="control-item-head">
+              <span class="control-label">Weekly Botanical Diversity</span>
+              <span class="control-value" id="valPlants">30 species</span>
+            </div>
+            <input type="range" class="slider" id="sliderPlants" min="5" max="45" value="30" oninput="updateSimulation()" />
+          </div>
+
+          <div class="control-item">
+            <div class="control-item-head">
+              <span class="control-label">Digestive Rest Window</span>
+              <span class="control-value" id="valFasting">16 hours</span>
+            </div>
+            <input type="range" class="slider" id="sliderFasting" min="8" max="22" value="16" oninput="updateSimulation()" />
+          </div>
+
+          <div class="control-item">
+            <div class="control-item-head">
+              <span class="control-label">Live Fermented Foods</span>
+              <span class="control-value" id="valFerments">1 serving / day</span>
+            </div>
+            <input type="range" class="slider" id="sliderFerments" min="0" max="3" value="1" oninput="updateSimulation()" />
+          </div>
+
+          <div class="control-item">
+            <div class="control-item-head">
+              <span class="control-label">Ecological Disturbance</span>
+            </div>
+            <select class="select-input" id="selectShock" onchange="updateSimulation()">
+              <option value="none">None (Stable Cultivation)</option>
+              <option value="stress">Ultra-Processed / High Stress</option>
+              <option value="antibiotic">Recent Broad-Spectrum Antibiotic</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Real-time Simulation Outputs -->
+        <div class="results-panel">
+          
+          <div class="metric-row">
+            <div class="metric-head">
+              <span id="labelMucus">Mucus Layer Thickness</span>
+              <span id="valMucusScore">--</span>
+            </div>
+            <div class="metric-bar-bg">
+              <div class="metric-bar-fill" id="barMucus"></div>
+            </div>
+            <p class="metric-note" id="noteMucus">...</p>
+          </div>
+
+          <div class="metric-row">
+            <div class="metric-head">
+              <span id="labelScfa">Short-Chain Fatty Acid Yield</span>
+              <span id="valScfaScore">--</span>
+            </div>
+            <div class="metric-bar-bg">
+              <div class="metric-bar-fill" id="barScfa"></div>
+            </div>
+            <p class="metric-note" id="noteScfa">...</p>
+          </div>
+
+          <div class="metric-row">
+            <div class="metric-head">
+              <span id="labelDiversity">Microbial Richness Index</span>
+              <span id="valDivScore">--</span>
+            </div>
+            <div class="metric-bar-bg">
+              <div class="metric-bar-fill" id="barDiversity"></div>
+            </div>
+            <p class="metric-note" id="noteDiversity">...</p>
+          </div>
+
+          <div class="metric-row">
+            <div class="metric-head">
+              <span id="labelLps">Endotoxin Leakage Risk (LPS)</span>
+              <span id="valLpsScore">--</span>
+            </div>
+            <div class="metric-bar-bg">
+              <div class="metric-bar-fill" id="barLps"></div>
+            </div>
+            <p class="metric-note" id="noteLps">...</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Companion Protocols in Corridor II -->
+    <section class="card" style="background: var(--parchment-warm); border-color: var(--sand-border);">
+      <div class="section-head">
+        <h2>Active Utilities in Corridor II</h2>
+        <span class="section-tag">Biological Tools</span>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--loam-mid);">
+        Apply the principles of this field guide across our companion micro-utilities:
+      </p>
+
+      <div class="companion-grid">
+        <a href="/episodes/inner-meadow/index.html" class="companion-link">
+          <div class="companion-title">
+            <span>The Inner Meadow</span>
+            <span>🌿</span>
+          </div>
+          <p class="companion-desc">Log weekly botanical intake to cultivate substrate polycultures (30+ species target).</p>
+          <span class="companion-cta">Track 30 Plants &rarr;</span>
+        </a>
+
+        <a href="/episodes/fastcounter/index.html" class="companion-link">
+          <div class="companion-title">
+            <span>Metabolic &amp; Gut Counter</span>
+            <span>⚡</span>
+          </div>
+          <p class="companion-desc">Align your fasting window with MMC Phase III sweeps and mucin barrier turnover.</p>
+          <span class="companion-cta">Track MMC Window &rarr;</span>
+        </a>
+
+        <a href="https://getrepoopulate.com" class="companion-link" target="_blank" rel="noopener">
+          <div class="companion-title">
+            <span>getrepoopulate.com</span>
+            <span>↗</span>
+          </div>
+          <p class="companion-desc">Clinical protocols for rewilding gut soil following antibiotic shocks and acute dysbiosis.</p>
+          <span class="companion-cta">Rewilding Portal ↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- About & Support Section -->
+    <section class="about-card">
+      <div class="about-head">
+        <h2><span>🌿</span> About fallow.garden &amp; Feedback</h2>
+      </div>
+      
+      <div class="about-content">
+        <p>
+          <strong>fallow.garden</strong> is an independent anthology of single-purpose micro-utilities created to counter cognitive fatigue, algorithmic noise, and relentless optimization culture. Each tool runs entirely on your device with zero tracking or account friction.
+        </p>
+        <p>
+          Have ideas for new restorative modules, suggestions for current tools, or questions about the underlying research? Feedback and contributions are always deeply appreciated.
+        </p>
+      </div>
+
+      <div class="support-grid">
+        <a href="https://buymeacoffee.com/davidmikosz" target="_blank" rel="noopener noreferrer" class="support-btn btn-bmac">
+          <span>☕</span>
+          <span>Buy Me a Coffee</span>
+        </a>
+
+        <a href="https://venmo.com/David-Mikosz" target="_blank" rel="noopener noreferrer" class="support-btn btn-venmo">
+          <span>💙</span>
+          <span>Tip via Venmo</span>
+        </a>
+
+        <a href="mailto:david.mikosz@gmail.com?subject=The%20Multitudes%20Within%20Feedback" class="support-btn btn-email">
+          <span>✉️</span>
+          <span>Send Feedback</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>fallow.garden — Restorative micro-utilities for mind, soil, and human vitality.</div>
+      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.25rem;">100% client-side. Zero telemetry. Hosted on sovereign static web infrastructure.</div>
+    </footer>
+
+  </div>
+
+  <script>
+    // --- Data Store for 3 Complexity Levels ---
+    let currentLens = 1;
+    let currentNarrativeIdx = 0;
+    let currentFieldFilter = 'ALL';
+
+    const NARRATIVE_DATA = [
+      {
+        step: 0,
+        btn: "1. The Ingestion Gate",
+        lvl1: {
+          title: "The Ingestion Gate: Food We Can't Digest",
+          body: "When you eat a crisp carrot or a bowl of oats, your own stomach and small intestine can only absorb simple sugars, fats, and proteins. Complex plant fibers pass straight through untouched. You are not eating just for yourself; you are dropping seeds and rich compost into a vast internal prairie waiting down below."
+        },
+        lvl2: {
+          title: "The Ingestion Gate: Microbiota-Accessible Carbohydrates (MACs)",
+          body: "The human genome encodes fewer than 20 enzymes capable of cleaving carbohydrate bonds, leaving complex dietary polysaccharides (pectins, inulin, resistant starch, cellulose) indigestible by host enterocytes. These MACs survive gastric acid and amylase breakdown, acting as dedicated metabolic substrates for colonic microbial guilds."
+        },
+        lvl3: {
+          title: "The Ingestion Gate: Enzymatic Deficiency & Structural Glycans",
+          body: "Humans express a minimal repertoire of glycoside hydrolases in the upper GI tract. Structural non-starch polysaccharides (such as arabinoxylans and $\\beta$-glucans) transit into the cecum with glycosidic bonds intact, preserving the carbon skeleton required to fuel anaerobic fermentation without inducing rapid upper GI glucose spikes."
+        }
+      },
+      {
+        step: 1,
+        btn: "2. Upper GI & Fallow Rest",
+        lvl1: {
+          title: "Upper GI & Motility: The Nighttime Street Sweepers",
+          body: "When you stop eating for several hours, your small intestine doesn't go dead—it turns on a cleansing wave. Think of it as a mechanical broom sweeping residual food and stray bacteria down into the colon, keeping the upper canal pristine and preventing unwanted overgrowth."
+        },
+        lvl2: {
+          title: "Upper GI Motility: The Migrating Motor Complex (MMC)",
+          body: "Approximately 90–120 minutes into the postabsorptive state, cyclic electrical contractions known as the Migrating Motor Complex (Phase III) sweep through the stomach and ileum. Ingesting even a minor calorie shuts this off; maintaining a clear fasting window allows the MMC to clear microbial debris and prevent Small Intestinal Bacterial Overgrowth (SIBO)."
+        },
+        lvl3: {
+          title: "Upper GI Motility: Interdigestive Motilin & Phase III Bioelectrics",
+          body: "MMC Phase III contractions are regulated by cyclical surges of motilin and enteric neural firing, generating 3–5 high-amplitude peristaltic sweeps per minute. This interdigestive housekeeping maintains mucosal hygiene, purges desquamated epithelial cells, and physically restricts colonic microbial retrograde migration across the ileocecal valve."
+        }
+      },
+      {
+        step: 2,
+        btn: "3. Colonic Fermentation",
+        lvl1: {
+          title: "Colonic Fermentation: The Microscopic Compost Chamber",
+          body: "In the warm, oxygen-free darkness of your large intestine, tens of trillions of organisms hold an enzymatic relay race. One bacterial guild breaks down tough fiber skins, and their neighbors convert the leftovers into Short-Chain Fatty Acids—the energetic currency that keeps your entire body calm and fueled."
+        },
+        lvl2: {
+          title: "Colonic Fermentation: Anaerobic Polysaccharide Handoffs",
+          body: "The colon functions as an anaerobic bioreactor. Primary fermenters (e.g., *Bacteroides*) deploy massive enzyme suites to shatter complex glycans into intermediate oligosaccharides and lactate, which secondary specialists (e.g., *Faecalibacterium*) ferment into butyrate, propionate, and acetate."
+        },
+        lvl3: {
+          title: "Colonic Fermentation: CAZyme Cascades & SCFA Stoichiometry",
+          body: "Carbohydrate-Active Enzyme (CAZyme) genomic clusters (such as Polysaccharide Utilization Loci / PULs) cleave branched glycans into pyruvate via the Wood-Ljungdahl and acetyl-CoA pathways, yielding Short-Chain Fatty Acids (SCFAs) in a molar ratio of roughly 60:20:20 (Acetate:Propionate:Butyrate), lowering luminal pH to suppress pathogens."
+        }
+      },
+      {
+        step: 3,
+        btn: "4. The Mucosal Fortress",
+        lvl1: {
+          title: "The Mucosal Fortress: A Single Cell Between Worlds",
+          body: "Only a single layer of living cells separates your bloodstream from trillions of bacteria. To keep peace, goblet cells produce a thick, glistening river of protective mucus. Friendly bacteria live right on the edge, grazing lightly to tell your body to produce fresh mucus, sealing the wall against leaks."
+        },
+        lvl2: {
+          title: "The Mucosal Fortress: Epithelial Tight Junctions & The Mucus Moat",
+          body: "A double-layered mucus barrier (a dense sterile inner layer and a loose outer layer) insulates enterocytes. Specialized bacteria stimulate goblet cells to secrete Muc2 glycoproteins, while tight-junction proteins (claudins, occludins) prevent toxic bacterial fragments from slipping into systemic circulation."
+        },
+        lvl3: {
+          title: "The Mucosal Fortress: Glycan Dynamics & Claudin/ZO-1 Integrity",
+          body: "Epithelial homeostasis depends on sulfated Muc2 mucin matrices and apical tight junctions regulated by zonula occludens-1 (ZO-1) and claudin-1. Host-adapted taxa (*Akkermansia*) forage sialic acids to drive epithelial renewal; loss of this barrier allows lipopolysaccharides (LPS) to bind TLR4 receptors, provoking systemic metabolic endotoxemia."
+        }
+      }
+    ];
+
+    const FIELD_DATA = [
+      {
+        id: 'akkermansia',
+        cat: 'Sentinel',
+        lvl1: {
+          name: "Akkermansia muciniphila",
+          role: "The Mucus Pruner",
+          desc: "Lives directly in the inner protective lining. By gently grazing on mucus during fasting, it prompts your cells to build a fresh, thicker protective coat.",
+          meta: "Marker of metabolic health & calm immunity"
+        },
+        lvl2: {
+          name: "Akkermansia muciniphila",
+          role: "Mucin Sentinel",
+          desc: "Specialized in degrading host mucin glycans during periods of nutrient absence, stimulating basal goblet cell turnover and preventing barrier thinning.",
+          meta: "Correlates inversely with obesity & inflammation"
+        },
+        lvl3: {
+          name: "Akkermansia muciniphila",
+          role: "Verrucomicrobiota Sentinel",
+          desc: "Forages $N$-acetylglucosamine and sialic acid residues from Muc2; signals via TLR2/Amuc_1100 to upregulate tight-junction claudin-1 expression.",
+          meta: "Enriches propionate pool; suppresses LPS leak"
+        }
+      },
+      {
+        id: 'faecalibacterium',
+        cat: 'Engine',
+        lvl1: {
+          name: "Faecalibacterium prausnitzii",
+          role: "The Peacekeeper",
+          desc: "One of the most abundant organisms in a healthy gut. It converts leftover plant fiber into rich fuel that feeds the cells lining your gut wall.",
+          meta: "Key anti-inflammatory powerhouse"
+        },
+        lvl2: {
+          name: "Faecalibacterium prausnitzii",
+          role: "Butyrate Producer",
+          desc: "An extremely oxygen-sensitive anaerobe that metabolizes resistant starches into butyrate, the primary fuel substrate powering human colonocytes.",
+          meta: "Downregulates NF-κB inflammatory cascades"
+        },
+        lvl3: {
+          name: "Faecalibacterium prausnitzii",
+          role: "Clostridial Cluster IV",
+          desc: "Ferments acetate and lactate through the butyryl-CoA:acetate CoA-transferase pathway, supplying ~70% of enterocyte ATP and inducing regulatory T cells (Tregs).",
+          meta: "Major driver of mucosal anti-inflammatory protein (MAM)"
+        }
+      },
+      {
+        id: 'bacteroides',
+        cat: 'Generalist',
+        lvl1: {
+          name: "Bacteroides thetaiotaomicron",
+          role: "The Master Lockpicker",
+          desc: "Equipped with a gigantic ring of molecular keys to unlock and chew through virtually any complex plant fiber you consume.",
+          meta: "Essential fiber-breaking workhorse"
+        },
+        lvl2: {
+          name: "Bacteroides thetaiotaomicron",
+          role: "Glycan Generalist",
+          desc: "Houses hundreds of distinct carbohydrate-cleaving genes, allowing it to adapt dynamically between dietary plant fibers and host polysaccharides.",
+          meta: "Pioneer colonizer of the human colonic niche"
+        },
+        lvl3: {
+          name: "Bacteroides thetaiotaomicron",
+          role: "PUL Gene Machine",
+          desc: "Encodes over 80 Polysaccharide Utilization Loci (PULs) with dynamic starch-utilization system (Sus) outer-membrane complexes that bind and import complex glycans.",
+          meta: "Yields acetate & propionate via succinate pathway"
+        }
+      },
+      {
+        id: 'scfas',
+        cat: 'Currency',
+        lvl1: {
+          name: "Short-Chain Fatty Acids (SCFAs)",
+          role: "Microbial Fuel & Signals",
+          desc: "Butyrate, acetate, and propionate. Tiny energy molecules made by bacteria that nourish gut cells, signal fullness to the brain, and calm inflammation.",
+          meta: "The primary reward for eating fiber"
+        },
+        lvl2: {
+          name: "Short-Chain Fatty Acids (SCFAs)",
+          role: "Signaling Metabolites",
+          desc: "Metabolic byproducts of fiber fermentation that activate G-protein coupled receptors (GPR41/43), stimulating satiety hormones (GLP-1, PYY) and regulating insulin.",
+          meta: "60:20:20 Acetate : Propionate : Butyrate"
+        },
+        lvl3: {
+          name: "Short-Chain Fatty Acids (SCFAs)",
+          role: "Epigenetic & FFAR Ligands",
+          desc: "Circulating organic acids that act as histone deacetylase (HDAC) inhibitors, promote peripheral Foxp3+ Treg differentiation, and bind FFAR2/FFAR3 receptors.",
+          meta: "Regulates hepatic gluconeogenesis & immune tone"
+        }
+      }
+    ];
+
+    // --- Controller Functions ---
+    function setLens(level) {
+      currentLens = level;
+      document.querySelectorAll('.lens-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx + 1 === level);
+      });
+      renderNarrative();
+      renderFieldCards();
+      updateSimulation();
+    }
+
+    function selectNarrative(idx) {
+      currentNarrativeIdx = idx;
+      document.querySelectorAll('.narrative-tab-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+      renderNarrative();
+    }
+
+    function renderNarrative() {
+      const data = NARRATIVE_DATA[currentNarrativeIdx];
+      const levelKey = 'lvl' + currentLens;
+      const content = data[levelKey];
+
+      document.getElementById('narrativeTitle').textContent = content.title;
+      document.getElementById('narrativeBody').textContent = content.body;
+    }
+
+    function filterFieldCards(cat) {
+      currentFieldFilter = cat;
+      document.querySelectorAll('#fieldFilterChips .chip').forEach(btn => {
+        const text = btn.textContent.trim();
+        const matches = (cat === 'ALL' && text.startsWith('All')) || text.startsWith(cat);
+        btn.classList.toggle('active', matches);
+      });
+      renderFieldCards();
+    }
+
+    function renderFieldCards() {
+      const grid = document.getElementById('fieldGrid');
+      const levelKey = 'lvl' + currentLens;
+
+      const filtered = FIELD_DATA.filter(item => {
+        return currentFieldFilter === 'ALL' || item.cat === currentFieldFilter;
+      });
+
+      grid.innerHTML = filtered.map(item => {
+        const c = item[levelKey];
+        return `
+          <div class="field-card">
+            <div>
+              <div class="field-card-header">
+                <span class="field-card-name">${c.name}</span>
+                <span class="field-card-role">${c.role}</span>
+              </div>
+              <p class="field-card-desc" style="margin-top: 0.5rem;">${c.desc}</p>
+            </div>
+            <div class="field-card-meta">${c.meta}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // --- Ecosystem Simulator Calculations ---
+    function updateSimulation() {
+      const plants = parseInt(document.getElementById('sliderPlants').value);
+      const fasting = parseInt(document.getElementById('sliderFasting').value);
+      const ferments = parseInt(document.getElementById('sliderFerments').value);
+      const shock = document.getElementById('selectShock').value;
+
+      document.getElementById('valPlants').textContent = `${plants} species`;
+      document.getElementById('valFasting').textContent = `${fasting} hours`;
+      document.getElementById('valFerments').textContent = `${ferments} serving${ferments === 1 ? '' : 's'} / day`;
+
+      // Base scoring algorithms (0 to 100)
+      let mucus = (fasting * 4.2) + (plants * 0.8) + (ferments * 4);
+      let scfa = (plants * 1.8) + (ferments * 6) + (fasting * 0.5);
+      let diversity = (plants * 2.0) + (ferments * 5);
+      let lps = 100 - ((mucus * 0.5) + (scfa * 0.4) + (fasting * 0.8));
+
+      // Shocks
+      if (shock === 'stress') {
+        mucus -= 22;
+        scfa -= 18;
+        diversity -= 20;
+        lps += 30;
+      } else if (shock === 'antibiotic') {
+        mucus -= 35;
+        scfa -= 65;
+        diversity -= 70;
+        lps += 55;
+      }
+
+      // Clamps
+      mucus = Math.min(Math.max(mucus, 8), 98);
+      scfa = Math.min(Math.max(scfa, 5), 98);
+      diversity = Math.min(Math.max(diversity, 10), 98);
+      lps = Math.min(Math.max(lps, 5), 95);
+
+      // Render Bars & Scores
+      document.getElementById('barMucus').style.width = mucus + '%';
+      document.getElementById('barScfa').style.width = scfa + '%';
+      document.getElementById('barDiversity').style.width = diversity + '%';
+      document.getElementById('barLps').style.width = lps + '%';
+
+      // Bar Colors
+      document.getElementById('barLps').style.backgroundColor = lps > 50 ? 'var(--terracotta)' : 'var(--moss-mid)';
+      
+      // Dynamic Readouts based on active complexity lens
+      if (currentLens === 1) {
+        document.getElementById('valMucusScore').textContent = mucus > 70 ? 'Thick & Glistening' : (mucus > 40 ? 'Moderate Shield' : 'Depleted');
+        document.getElementById('noteMucus').textContent = 'Fasting windows allow goblet cells to rebuild your protective inner mucus layer.';
+
+        document.getElementById('valScfaScore').textContent = scfa > 70 ? 'Abundant Yield' : (scfa > 40 ? 'Moderate Output' : 'Starving Prairie');
+        document.getElementById('noteScfa').textContent = 'High botanical diversity generates rich fuel to nourish and heal gut cells.';
+
+        document.getElementById('valDivScore').textContent = diversity > 70 ? 'Diverse Polyculture' : 'Monoculture Risk';
+        document.getElementById('noteDiversity').textContent = 'Eating 30+ plant foods per week creates a resilient polyculture.';
+
+        document.getElementById('valLpsScore').textContent = lps < 35 ? 'Secure Barrier' : 'Leaky Risk';
+        document.getElementById('noteLps').textContent = 'Intact mucosal fortress keeps unwanted particles from entering bloodstream.';
+      } else if (currentLens === 2) {
+        document.getElementById('valMucusScore').textContent = `${Math.round(mucus * 1.5)} μm Est.`;
+        document.getElementById('noteMucus').textContent = 'Akkermansia foraging stimulates basal goblet cell renewal via mucosal feedback loops.';
+
+        document.getElementById('valScfaScore').textContent = `${Math.round(scfa * 1.1)} mmol/kg`;
+        document.getElementById('noteScfa').textContent = 'Butyrate and propionate activate GPR41/43 signaling, improving GLP-1 secretion.';
+
+        document.getElementById('valDivScore').textContent = `H' = ${(diversity / 25).toFixed(2)}`;
+        document.getElementById('noteDiversity').textContent = 'Shannon diversity index scales with varied microbiota-accessible carbohydrate (MAC) intake.';
+
+        document.getElementById('valLpsScore').textContent = lps < 35 ? 'Minimal Translocation' : 'Elevated Permeability';
+        document.getElementById('noteLps').textContent = 'Claudin-1 and ZO-1 tight-junction integrity prevents endotoxin leak.';
+      } else {
+        document.getElementById('valMucusScore').textContent = `${Math.round(mucus * 1.6)} μm Muc2`;
+        document.getElementById('noteMucus').textContent = 'Sialylated oligosaccharide cleaving upregulates enterocyte TLR2 and stimulates Muc2 synthesis.';
+
+        document.getElementById('valScfaScore').textContent = `${Math.round(scfa * 1.2)} mM (60:20:20)`;
+        document.getElementById('noteScfa').textContent = 'Butyryl-CoA:acetate CoA-transferase flux supplies 70% of colonocyte ATP requirements.';
+
+        document.getElementById('valDivScore').textContent = `Shannon H' ${(diversity / 24).toFixed(2)}`;
+        document.getElementById('noteDiversity').textContent = 'PUL diversity across Bacteroidetes prevents ecological monoculture collapse.';
+
+        document.getElementById('valLpsScore').textContent = lps < 35 ? '<0.2 EU/mL (Basal)' : '>0.6 EU/mL (Endotoxemia)';
+        document.getElementById('noteLps').textContent = 'Serum LPS binding of TLR4 triggers peripheral CD14/MyD88 cascade without tight junctions.';
+      }
+    }
+
+    // --- Initialization ---
+    window.addEventListener('DOMContentLoaded', () => {
+      renderNarrative();
+      renderFieldCards();
+      updateSimulation();
+    });
+  </script>
+</body>
+</html>
