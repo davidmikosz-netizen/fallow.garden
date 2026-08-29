@@ -24,6 +24,9 @@
       --moss-mid: #556e4c;
       --moss-light: #7a9470;
       --moss-pale: #e3ebe0;
+      --glacier-deep: #174d4b;
+      --glacier-mid: #2b7a78;
+      --glacier-pale: #e8f3f1;
       --sand-border: #ded3c1;
       --border-soft: #ebe3d5;
       --shadow-sm: 0 2px 10px rgba(44, 34, 26, 0.04);
@@ -157,6 +160,10 @@
       border-left: 4px solid var(--moss-mid);
     }
 
+    .card.highlight-glacier {
+      border-left: 4px solid var(--glacier-mid);
+    }
+
     .card-top {
       margin-bottom: 1.25rem;
     }
@@ -182,6 +189,10 @@
 
     .card-type.moss {
       color: var(--moss-deep);
+    }
+
+    .card-type.glacier {
+      color: var(--glacier-deep);
     }
 
     .card-badge {
@@ -473,6 +484,24 @@
     <!-- Corridor III: Worldly Passages & Cosmic Play -->
     <div class="section-label">Corridor III: Worldly Passages &amp; Cosmic Play</div>
     <div class="app-grid">
+
+      <!-- Your Penguin Pal -->
+      <a href="/episodes/penguin-pal/index.html" class="card highlight-glacier">
+        <div class="card-top">
+          <div class="card-header">
+            <span class="card-type glacier">Domestic Cryogenics</span>
+            <span class="card-badge">Episode</span>
+          </div>
+          <h2 class="card-title">Your Penguin Pal</h2>
+          <p class="card-desc">
+            The quiet custodian of your household ice shelf. A zero-friction freezer ledger to track cold storage provisions, adjust portions with a single tap, and surface deep glacial reserves.
+          </p>
+        </div>
+        <div class="card-meta">
+          <span>Permafrost Ledger • Cold Storage</span>
+          <span class="card-link-text">Inspect Ice Shelf &rarr;</span>
+        </div>
+      </a>
 
       <a href="/episodes/fers-countdown/index.html" class="card highlight-ochre">
         <div class="card-top">
