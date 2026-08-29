@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metabolic & Gut Biome Fasting Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --bg-base: #0a0e17;
+      --bg-surface: #111827;
+      --bg-surface-elevated: #1a2234;
+      --bg-card: rgba(26, 34, 52, 0.7);
+      
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(99, 102, 241, 0.3);
+      
+      --text-main: #f3f4f6;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.25);
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+      padding: 24px 16px 48px;
+      background-image: 
+        radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 90%, rgba(56, 189, 248, 0.05) 0%, transparent 40%);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+
+    .brand-title h1 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-title p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .system-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      background: var(--bg-surface);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+    }
+
+    /* Main Grid Layout */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: 420px 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .card-header {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Timer Dial & Progress */
+    .timer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 12px 0 24px;
+      position: relative;
+    }
+
+    .dial-svg {
+      transform: rotate(-90deg);
+      width: 260px;
+      height: 260px;
+    }
+
+    .dial-bg {
+      fill: none;
+      stroke: var(--bg-surface-elevated);
+      stroke-width: 14;
+    }
+
+    .dial-progress {
+      fill: none;
+      stroke: url(#dial-gradient);
+      stroke-width: 14;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.8s ease;
+    }
+
+    .timer-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .timer-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 2px;
+    }
+
+    .timer-digits {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .timer-target-tag {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .projection-box {
+      width: 100%;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .projection-box strong {
+      color: var(--accent-emerald);
+    }
+
+    /* Buttons & Controls */
+    .btn {
+      appearance: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #4f46e5);
+      color: #fff;
+      padding: 14px 20px;
+      font-size: 1rem;
+      width: 100%;
+      box-shadow: 0 4px 20px var(--primary-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 14px;
+      font-size: 0.85rem;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-success {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn-success:hover {
+      background: rgba(16, 185, 129, 0.25);
+    }
+
+    /* Goal Selector Chips */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .goal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .goal-chip {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .goal-chip.active {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .goal-chip span {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .goal-chip small {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    /* Quick Offsets */
+    .offset-group {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+
+    .offset-btn {
+      flex: 1;
+      font-size: 0.75rem;
+      padding: 6px 8px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .offset-btn:hover {
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+    }
+
+    .custom-time-input {
+      width: 100%;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+
+    /* Right Column - Physiological Timeline */
+    .timeline-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .phase-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .phase-card.active {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.08);
+      box-shadow: 0 0 24px rgba(99, 102, 241, 0.15);
+    }
+
+    .phase-card.passed {
+      opacity: 0.7;
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .phase-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .phase-hours {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+    }
+
+    .phase-status-pill {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--bg-surface-elevated);
+      color: var(--text-dim);
+    }
+
+    .phase-card.active .phase-status-pill {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .phase-card.passed .phase-status-pill {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--accent-emerald);
+    }
+
+    .phase-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .dual-pane {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .dual-pane {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .pane-item {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      font-size: 0.82rem;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .pane-item-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+    }
+
+    .pane-item.blood .pane-item-title {
+      color: var(--accent-rose);
+    }
+
+    .pane-item.gut .pane-item-title {
+      color: var(--accent-emerald);
+    }
+
+    .pane-item p {
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Food Cards Grid */
+    .foods-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .foods-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .foods-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .food-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform 0.2s;
+    }
+
+    .food-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .food-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .food-icon {
+      font-size: 1.3rem;
+    }
+
+    .food-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .food-tag {
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan);
+      display: inline-block;
+      width: fit-content;
+      font-weight: 600;
+    }
+
+    .food-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    /* History Log Modal / Section */
+    .history-card {
+      margin-top: 20px;
+    }
+
+    .history-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 160px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+
+    .history-item {
+      font-size: 0.8rem;
+      padding: 8px 12px;
+      background: var(--bg-surface-elevated);
+      border-radius: var(--radius-sm);
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+    }
+
+    .history-item strong {
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="brand-logo">⚡</div>
+        <div class="brand-title">
+          <h1>METAGUT</h1>
+          <p>Circadian, Glycogen & Gut Biome Window Tracker</p>
+        </div>
+      </div>
+      <div class="system-status">
+        <div class="status-dot"></div>
+        <span id="liveClock">--:--:--</span>
+      </div>
+    </header>
+
+    <div class="dashboard-grid">
+      
+      <div class="left-col">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Fasting Window</span>
+            <span id="goalBadge" class="phase-status-pill">16:8 Goal</span>
+          </div>
+
+          <div class="timer-container">
+            <svg class="dial-svg" viewBox="0 0 260 260">
+              <defs>
+                <linearGradient id="dial-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#6366f1" />
+                  <stop offset="50%" stop-color="#38bdf8" />
+                  <stop offset="100%" stop-color="#10b981" />
+                </linearGradient>
+              </defs>
+              <circle class="dial-bg" cx="130" cy="130" r="110" />
+              <circle id="dialProgress" class="dial-progress" cx="130" cy="130" r="110" stroke-dasharray="691.15" stroke-dashoffset="691.15" />
+            </svg>
+            <div class="timer-center">
+              <span class="timer-label">Time Since Meal</span>
+              <div id="elapsedDisplay" class="timer-digits">00:00:00</div>
+              <span id="targetPercent" class="timer-target-tag">0% of target</span>
+            </div>
+          </div>
+
+          <div class="projection-box">
+            <span>Target Goal (<span id="targetHoursLabel">16</span>h):</span>
+            <strong id="targetEta">Calculating...</strong>
+          </div>
+
+          <button id="btnJustAte" class="btn btn-primary" onclick="setJustAte()">
+            🍽️ I Just Ate (Reset Timer)
+          </button>
+
+          <div style="margin-top: 20px;">
+            <label class="section-label">Adjust Last Meal Time</label>
+            <input type="datetime-local" id="manualStartTimeInput" class="custom-time-input" onchange="handleManualTimeChange(this.value)" />
+            
+            <div class="offset-group">
+              <button class="offset-btn" onclick="applyOffsetHours(-1)">-1 hr</button>
+              <button class="offset-btn" onclick="applyOffsetHours(-2)">-2 hrs</button>
+              <button class="offset-btn" onclick="setYesterdayDinner(20)">Yesterday 8 PM</button>
+              <button class="offset-btn" onclick="setYesterdayDinner(22)">Yesterday 10 PM</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="section-label">Select Protocol Goal</label>
+            <div class="goal-grid">
+              <div class="goal-chip" data-hours="14" onclick="selectGoal(14)">
+                <span>14:10</span>
+                <small>Circadian</small>
+              </div>
+              <div class="goal-chip active" data-hours="16" onclick="selectGoal(16)">
+                <span>16:8</span>
+                <small>Classic</small>
+              </div>
+              <div class="goal-chip" data-hours="18" onclick="selectGoal(18)">
+                <span>18:6</span>
+                <small>Warrior</small>
+              </div>
+              <div class="goal-chip" data-hours="20" onclick="selectGoal(20)">
+                <span>20:4</span>
+                <small>OMAD Prep</small>
+              </div>
+              <div class="goal-chip" data-hours="24" onclick="selectGoal(24)">
+                <span>24h</span>
+                <small>Full Day</small>
+              </div>
+              <div class="goal-chip" data-hours="36" onclick="selectGoal(36)">
+                <span>36h</span>
+                <small>Monk Fast</small>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-success" onclick="logAndEndFast()">✓ Log & Save Fast Session</button>
+
+          <div class="history-card">
+            <label class="section-label">Recent Completed Fasts</label>
+            <ul id="historyList" class="history-list">
+              </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="right-col">
+        
+        <div class="card" style="margin-bottom: 24px;">
+          <div class="card-header">
+            <span class="card-title">🔬 Metabolic & Gut Biome Parallel Progression</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Real-Time Markers</span>
+          </div>
+
+          <div class="timeline-container">
+            
+            <div class="phase-card" id="phase-1">
+              <div class="phase-badge-row">
+                <span class="phase-hours">0h — 4h</span>
+                <span class="phase-status-pill">Digesting</span>
+              </div>
+              <div class="phase-title">Phase 1: Postprandial Digestion & Insulin Influx</div>
+              <div class="dual-pane">
+                <div class="pane-item blood">
+                  <div class="pane-item-title">🩸 Blood & Metabolism</div>
+                  <p>Insulin rises to clear circulating glucose. Excess fuel is packed into hepatic and skeletal muscle glycogen stores. Lipolysis is suppressed.</p>
+                </div>
+                <div class="pane-item gut">
+                  <div class="pane-item-title">🦠 Gut & Microbiome</div>
+                  <p>Active gastric churning and upper GI nutrient assimilation. The Migrating Motor Complex (MMC) is dormant; intestinal motility is dedicated to food breakdown.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="phase-card" id="phase-2">
+              <div class="phase-badge-row">
+                <span class="phase-hours">4h — 12h</span>
+                <span class="phase-status-pill">Transition</span>
+              </div>
+              <div class="phase-title">Phase 2: Postabsorptive State & MMC Activation</div>
+              <div class="dual-pane">
+                <div class="pane-item blood">
+                  <div class="pane-item-title">🩸 Blood & Metabolism</div>
+                  <p>Insulin returns to baseline; glucagon rises. The liver utilizes its ~100g glycogen reserve (glycogenolysis) to maintain blood glucose at 80–90 mg/dL.</p>
+                </div>
+                <div class="pane-item gut">
+                  <div class="pane-item-title">🦠 Gut & Microbiome</div>
+                  <p>The small intestine clears. <strong>Phase III MMC peristaltic sweeps</strong> occur every 90–120 minutes, purging residual microbes and preventing SIBO.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="phase-card" id="phase-3">
+              <div class="phase-badge-row">
+                <span class="phase-hours">12h — 18h</span>
+                <span class="phase-status-pill">Ketosis / Mucin</span>
+              </div>
+              <div class="phase-title">Phase 3: The Metabolic Switch & Mucin Grazing</div>
+              <div class="dual-pane">
+                <div class="pane-item blood">
+                  <div class="pane-item-title">🩸 Blood & Metabolism</div>
+                  <p>Liver glycogen depletes significantly. Peripheral lipolysis accelerates; serum $\beta$-hydroxybutyrate (ketones) crosses into detectable zones (>0.3–0.5 mmol/L).</p>
+                </div>
+                <div class="pane-item gut">
+                  <div class="pane-item-title">🦠 Gut & Microbiome</div>
+                  <p>Luminal nutrients vanish. <em>Akkermansia muciniphila</em> feeds on mucin glycans, stimulating goblet cells to renew and thicken the mucosal protective barrier.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="phase-card" id="phase-4">
+              <div class="phase-badge-row">
+                <span class="phase-hours">18h — 24h+</span>
+                <span class="phase-status-pill">Deep Cleanup</span>
+              </div>
+              <div class="phase-title">Phase 4: Autophagy & Inflammatory Quenching</div>
+              <div class="dual-pane">
+                <div class="pane-item blood">
+                  <div class="pane-item-title">🩸 Blood & Metabolism</div>
+                  <p>Deep systemic ketosis. Hepatic gluconeogenesis from glycerol/amino acids stabilizes glucose. Intracellular autophagy markers (AMPK activation, mTOR downregulation) peak.</p>
+                </div>
+                <div class="pane-item gut">
+                  <div class="pane-item-title">🦠 Gut & Microbiome</div>
+                  <p>Intestinal stem cell proliferation activates. Reduced lipid transport brings circulating lipopolysaccharide (LPS) endotoxins to baseline, quenching systemic inflammation.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🥑 Optimal Foods to Break Your Fast</span>
+            <span style="font-size: 0.8rem; color: var(--accent-emerald);">Gentle Gut Barrier Inoculation</span>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">
+            After fasting, digestive enzyme production and bile secretion are in low-power mode. Break your fast gently to prevent osmotic diarrhea, insulin spikes, or gut lining irritation:
+          </p>
+
+          <div class="foods-grid">
+            
+            <div class="food-card">
+              <div class="food-header">
+                <span class="food-icon">🥣</span>
+                <div>
+                  <div class="food-name">Bone Broth / Miso</div>
+                  <span class="food-tag">Step 1: 15m Prior</span>
+                </div>
+              </div>
+              <p class="food-desc">Provides glycine, electrolytes (Na/K), and collagen to prime the mucosal layer and jumpstart digestive enzymes without glycemic shock.</p>
+            </div>
+
+            <div class="food-card">
+              <div class="food-header">
+                <span class="food-icon">🥑</span>
+                <div>
+                  <div class="food-name">Avocado & Olive Oil</div>
+                  <span class="food-tag">Monounsaturated Fats</span>
+                </div>
+              </div>
+              <p class="food-desc">Rich in oleic acid and smooth soluble fiber. Blunts post-meal glucose absorption and supplies prebiotic fiber for beneficial colon taxa.</p>
+            </div>
+
+            <div class="food-card">
+              <div class="food-header">
+                <span class="food-icon">🍳</span>
+                <div>
+                  <div class="food-name">Soft Eggs or Salmon</div>
+                  <span class="food-tag">Gentle Complete Protein</span>
+                </div>
+              </div>
+              <p class="food-desc">Easily digestible proteins rich in choline, omega-3s, and sulfur amino acids without requiring heavy hydrochloric acid breakdown like steak.</p>
+            </div>
+
+            <div class="food-card">
+              <div class="food-header">
+                <span class="food-icon">🥬</span>
+                <div>
+                  <div class="food-name">Cooked Leafy Greens</div>
+                  <span class="food-tag">Prebiotic Substrates</span>
+                </div>
+              </div>
+              <p class="food-desc">Steamed spinach or zucchini is gentle on gut tight junctions compared to fibrous raw cruciferous vegetables (raw broccoli/kale).</p>
+            </div>
+
+            <div class="food-card">
+              <div class="food-header">
+                <span class="food-icon">🫙</span>
+                <div>
+                  <div class="food-name">Fermented Veggies</div>
+                  <span class="food-tag">Probiotic Inoculant</span>
+                </div>
+              </div>
+              <p class="food-desc">A tablespoon of sauerkraut or kimchi provides live lactic acid bacteria (<em>Lactobacillus</em>) right when the gut lumen is cleanest.</p>
+            </div>
+
+            <div class="food-card">
+              <div class="food-header">
+                <span class="food-icon">🚫</span>
+                <div>
+                  <div class="food-name">Avoid at First</div>
+                  <span class="food-tag" style="background: rgba(244, 63, 94, 0.15); color: var(--accent-rose);">Avoid for 1-2h</span>
+                </div>
+              </div>
+              <p class="food-desc">Refined carbohydrates, sugary juices, fried oils, and high-lactose milk can cause rapid osmotic fluid shifts and massive glucose spikes.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // --- State Management with LocalStorage ---
+    const STORAGE_KEY = 'metagut_tracker_state_v1';
+
+    let appState = {
+      lastMealTime: Date.now() - (14.25 * 3600 * 1000), // Default to 14.25 hours ago for immediate dynamic view
+      targetHours: 16,
+      history: []
+    };
+
+    function loadState() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          appState = JSON.parse(saved);
+        } catch (e) {
+          console.error("Failed to load local storage state", e);
+        }
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+    }
+
+    // --- Time Formatting Helpers ---
+    function formatTwoDigits(num) {
+      return String(Math.floor(num)).padStart(2, '0');
+    }
+
+    function formatElapsedTime(ms) {
+      const totalSec = Math.max(0, Math.floor(ms / 1000));
+      const hours = Math.floor(totalSec / 3600);
+      const minutes = Math.floor((totalSec % 3600) / 60);
+      const seconds = totalSec % 60;
+      return `${formatTwoDigits(hours)}:${formatTwoDigits(minutes)}:${formatTwoDigits(seconds)}`;
+    }
+
+    function formatClock(date) {
+      return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+
+    function formatDatetimeLocalInput(date) {
+      const offset = date.getTimezoneOffset() * 60000;
+      const localISOTime = (new Date(date.getTime() - offset)).toISOString().slice(0, 16);
+      return localISOTime;
+    }
+
+    // --- UI Update & Heartbeat Loop ---
+    function updateUI() {
+      const now = Date.now();
+      const elapsedMs = now - appState.lastMealTime;
+      const elapsedHours = elapsedMs / (1000 * 3600);
+
+      // 1. Live Clock
+      document.getElementById('liveClock').textContent = formatClock(new Date());
+
+      // 2. Elapsed Digits
+      document.getElementById('elapsedDisplay').textContent = formatElapsedTime(elapsedMs);
+
+      // 3. Goal & Circular Dial Offset (Circumference ~ 691.15)
+      const CIRCUMFERENCE = 691.15;
+      const progressRatio = Math.min(Math.max(elapsedHours / appState.targetHours, 0), 1);
+      const strokeOffset = CIRCUMFERENCE - (progressRatio * CIRCUMFERENCE);
+      document.getElementById('dialProgress').style.strokeDashoffset = strokeOffset;
+      
+      const percentInt = Math.round((elapsedHours / appState.targetHours) * 100);
+      document.getElementById('targetPercent').textContent = `${percentInt}% of ${appState.targetHours}h goal`;
+
+      // 4. Projected Finish Time
+      const targetFinishDate = new Date(appState.lastMealTime + (appState.targetHours * 3600 * 1000));
+      const isPast = now >= targetFinishDate.getTime();
+      document.getElementById('targetHoursLabel').textContent = appState.targetHours;
+      
+      if (isPast) {
+        document.getElementById('targetEta').textContent = `Target reached at ${formatClock(targetFinishDate)}`;
+      } else {
+        document.getElementById('targetEta').textContent = `Today at ${formatClock(targetFinishDate)}`;
+      }
+
+      // 5. Update Physiological Phase Highlighting
+      updatePhaseCards(elapsedHours);
+
+      // 6. Update manual input field value if not active
+      const inputEl = document.getElementById('manualStartTimeInput');
+      if (document.activeElement !== inputEl) {
+        inputEl.value = formatDatetimeLocalInput(new Date(appState.lastMealTime));
+      }
+    }
+
+    function updatePhaseCards(elapsedHours) {
+      const phases = [
+        { id: 'phase-1', start: 0, end: 4 },
+        { id: 'phase-2', start: 4, end: 12 },
+        { id: 'phase-3', start: 12, end: 18 },
+        { id: 'phase-4', start: 18, end: Infinity }
+      ];
+
+      phases.forEach(p => {
+        const el = document.getElementById(p.id);
+        const statusPill = el.querySelector('.phase-status-pill');
+        el.classList.remove('active', 'passed');
+
+        if (elapsedHours >= p.end) {
+          el.classList.add('passed');
+          statusPill.textContent = 'Completed';
+        } else if (elapsedHours >= p.start && elapsedHours < p.end) {
+          el.classList.add('active');
+          statusPill.textContent = 'Active Now';
+        } else {
+          statusPill.textContent = 'Upcoming';
+        }
+      });
+    }
+
+    // --- User Actions ---
+    function setJustAte() {
+      appState.lastMealTime = Date.now();
+      saveState();
+      updateUI();
+    }
+
+    function selectGoal(hours) {
+      appState.targetHours = hours;
+      document.querySelectorAll('.goal-chip').forEach(chip => {
+        chip.classList.toggle('active', Number(chip.getAttribute('data-hours')) === hours);
+      });
+      document.getElementById('goalBadge').textContent = `${hours}h Goal`;
+      saveState();
+      updateUI();
+    }
+
+    function handleManualTimeChange(isoString) {
+      if (!isoString) return;
+      const selected = new Date(isoString).getTime();
+      if (!isNaN(selected) && selected <= Date.now()) {
+        appState.lastMealTime = selected;
+        saveState();
+        updateUI();
+      }
+    }
+
+    function applyOffsetHours(offset) {
+      appState.lastMealTime += (offset * 3600 * 1000);
+      if (appState.lastMealTime > Date.now()) appState.lastMealTime = Date.now();
+      saveState();
+      updateUI();
+    }
+
+    function setYesterdayDinner(targetHour24) {
+      const d = new Date();
+      d.setDate(d.getDate() - 1);
+      d.setHours(targetHour24, 0, 0, 0);
+      appState.lastMealTime = d.getTime();
+      saveState();
+      updateUI();
+    }
+
+    function logAndEndFast() {
+      const elapsedMs = Date.now() - appState.lastMealTime;
+      const elapsedHours = (elapsedMs / (1000 * 3600)).toFixed(1);
+      
+      const record = {
+        date: new Date().toLocaleDateString(),
+        hours: elapsedHours,
+        goal: appState.targetHours
+      };
+
+      if (!appState.history) appState.history = [];
+      appState.history.unshift(record);
+      if (appState.history.length > 5) appState.history.pop();
+
+      // Reset to now
+      appState.lastMealTime = Date.now();
+      saveState();
+      renderHistory();
+      updateUI();
+    }
+
+    function renderHistory() {
+      const listEl = document.getElementById('historyList');
+      listEl.innerHTML = '';
+      if (!appState.history || appState.history.length === 0) {
+        listEl.innerHTML = '<li class="history-item">No completed sessions logged yet.</li>';
+        return;
+      }
+
+      appState.history.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'history-item';
+        li.innerHTML = `<span>${item.date} (${item.goal}h Goal)</span><strong>${item.hours} hrs completed</strong>`;
+        listEl.appendChild(li);
+      });
+    }
+
+    // --- Initialization ---
+    window.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      selectGoal(appState.targetHours || 16);
+      renderHistory();
+      updateUI();
+      setInterval(updateUI, 1000);
+    });
+  </script>
+</body>
+</html>
