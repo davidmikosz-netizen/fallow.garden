@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Penguin Pal — The Domestic Permafrost Ledger</title>
+
+  <!-- PWA & Mobile Standalone Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Penguin Pal" />
+  <meta name="theme-color" content="#faf6ee" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- Inline Web App Manifest -->
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Penguin Pal Freezer Ledger","short_name":"PenguinPal","start_url":".","display":"standalone","background_color":"%23faf6ee","theme_color":"%232b7a78"}' />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --parchment: #faf6ee;
+      --parchment-warm: #f4ecdf;
+      --parchment-card: #fffdfa;
+      --loam-dark: #2c221a;
+      --loam-mid: #4d3d30;
+      --loam-light: #7c6857;
+      
+      --glacier-deep: #174d4b;
+      --glacier-mid: #2b7a78;
+      --glacier-pale: #e8f3f1;
+      --glacier-border: #b8ded9;
+      
+      --terracotta: #ba5536;
+      --terracotta-pale: #faede6;
+      
+      --honey-ochre: #c9732b;
+      --ochre-pale: #fbf2e3;
+      
+      --moss-deep: #3b4e34;
+      --moss-pale: #e3ebe0;
+      
+      --sand-border: #ded3c1;
+      --border-soft: #ebe3d5;
+      
+      --shadow-sm: 0 2px 8px rgba(44, 34, 26, 0.04);
+      --shadow-md: 0 6px 20px rgba(44, 34, 26, 0.07);
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      
+      --font-serif: "Lora", "Iowan Old Style", Georgia, serif;
+      --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--parchment);
+      color: var(--loam-dark);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 2rem 1.25rem 5rem;
+      display: flex;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 880px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    /* Top Nav & Breadcrumb */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--glacier-mid);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .back-link:hover {
+      color: var(--terracotta);
+    }
+
+    .shelf-stat-pill {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      background: var(--glacier-pale);
+      color: var(--glacier-deep);
+      border: 1px solid var(--glacier-border);
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    /* Header */
+    header {
+      border-bottom: 1px solid var(--sand-border);
+      padding-bottom: 1.5rem;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--glacier-deep);
+      background: var(--glacier-pale);
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--loam-dark);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      color: var(--loam-mid);
+      font-size: 0.96rem;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    /* Custodian Status Banner */
+    .custodian-banner {
+      background: var(--parchment-card);
+      border: 1px solid var(--glacier-border);
+      border-left: 5px solid var(--glacier-mid);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .penguin-avatar {
+      font-size: 2.2rem;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+    }
+
+    .custodian-text h3 {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--glacier-deep);
+      margin-bottom: 0.15rem;
+    }
+
+    .custodian-text p {
+      font-size: 0.84rem;
+      color: var(--loam-mid);
+    }
+
+    /* Card Box */
+    .card {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Form Inputs */
+    .add-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.85rem;
+      align-items: flex-end;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--loam-light);
+    }
+
+    .form-input, .form-select {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      color: var(--loam-dark);
+      padding: 0.55rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.86rem;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--glacier-mid);
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      transition: transform 0.15s ease, background-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-deposit {
+      background: var(--glacier-deep);
+      color: #ffffff;
+      padding: 0.62rem 1.2rem;
+      font-size: 0.88rem;
+      height: 38px;
+    }
+
+    .btn-deposit:hover {
+      background: var(--glacier-mid);
+    }
+
+    /* Filter & Search Bar */
+    .filter-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (min-width: 620px) {
+      .filter-bar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .search-box {
+      flex: 1;
+      max-width: 320px;
+    }
+
+    .category-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .chip {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      color: var(--loam-mid);
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .chip.active {
+      background: var(--glacier-deep);
+      border-color: var(--glacier-deep);
+      color: #ffffff;
+    }
+
+    /* Inventory Items List */
+    .inventory-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-top: 0.5rem;
+    }
+
+    .item-card {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.15rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .item-card:hover {
+      border-color: var(--glacier-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .item-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .item-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .item-name {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+    }
+
+    .badge-cat {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--parchment-warm);
+      color: var(--loam-light);
+    }
+
+    .badge-loc {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--glacier-pale);
+      color: var(--glacier-deep);
+    }
+
+    .item-meta {
+      font-size: 0.76rem;
+      color: var(--loam-light);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-mono);
+    }
+
+    .age-tag {
+      font-weight: 600;
+    }
+
+    .age-fresh {
+      color: var(--moss-deep);
+    }
+
+    .age-prime {
+      color: var(--honey-ochre);
+    }
+
+    .age-glacial {
+      color: var(--terracotta);
+    }
+
+    /* Quantity Controls */
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-sm);
+      padding: 3px 6px;
+    }
+
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: 4px;
+      color: var(--loam-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease;
+    }
+
+    .qty-btn:hover {
+      background: var(--glacier-pale);
+      border-color: var(--glacier-border);
+    }
+
+    .qty-display {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+      min-width: 54px;
+      text-align: center;
+      color: var(--loam-dark);
+    }
+
+    .btn-trash {
+      background: transparent;
+      border: none;
+      color: var(--loam-light);
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 4px 6px;
+      border-radius: 4px;
+      transition: color 0.15s ease;
+    }
+
+    .btn-trash:hover {
+      color: var(--terracotta);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--loam-light);
+      font-size: 0.9rem;
+    }
+
+    /* Privacy Banner */
+    .privacy-notice {
+      font-size: 0.72rem;
+      color: var(--loam-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      background: var(--parchment-warm);
+      border: 1px solid var(--sand-border);
+      padding: 0.45rem 0.75rem;
+      border-radius: var(--radius-sm);
+      margin-top: 0.5rem;
+    }
+
+    /* About & Feedback Section */
+    .about-card {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .about-head {
+      border-bottom: 1px solid var(--sand-border);
+      padding-bottom: 0.75rem;
+    }
+
+    .about-head h2 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--loam-dark);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .about-content {
+      font-size: 0.92rem;
+      color: var(--loam-mid);
+      line-height: 1.65;
+    }
+
+    .about-content p + p {
+      margin-top: 0.65rem;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .support-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      border: 1px solid transparent;
+    }
+
+    .support-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-bmac {
+      background: #ffdd00;
+      color: #000000;
+    }
+
+    .btn-venmo {
+      background: #008cff;
+      color: #ffffff;
+    }
+
+    .btn-email {
+      background: var(--parchment-warm);
+      color: var(--loam-dark);
+      border-color: var(--sand-border);
+    }
+    .btn-email:hover {
+      background: var(--sand-border);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--sand-border);
+      padding-top: 1.75rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--loam-light);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Top Nav -->
+    <div class="top-nav">
+      <a href="/" class="back-link">← fallow.garden</a>
+      <span class="shelf-stat-pill" id="headerStat">0 items in permafrost</span>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="brand-badge">🐧 Corridor III • Worldly Passages &amp; Domestic Cryogenics</div>
+      <h1>Your Penguin Pal</h1>
+      <p class="tagline">
+        The quiet custodian of your household ice shelf. Track what lies suspended in cold storage, manage portions with a tap, and surface deep glacial reserves before freezer burn sets in.
+      </p>
+    </header>
+
+    <!-- Custodian Status Banner -->
+    <div class="custodian-banner">
+      <div class="penguin-avatar">🐧</div>
+      <div class="custodian-text">
+        <h3 id="custodianHeadline">Ice Shelf Stable</h3>
+        <p id="custodianAdvice">Scanning cryogenic compartments...</p>
+      </div>
+    </div>
+
+    <!-- Deposit Form -->
+    <div class="card">
+      <div class="card-title">
+        <span>Deposit into Ice Shelf</span>
+      </div>
+      <form class="add-form" onsubmit="handleAddItem(event)">
+        <div class="form-group" style="flex: 2;">
+          <label class="form-label">Item Name</label>
+          <input type="text" id="itemName" class="form-input" placeholder="e.g., Roasted Poblano Broth" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select id="itemCat" class="form-select">
+            <option value="Prepared Meals">Prepared Meals</option>
+            <option value="Broths & Soups">Broths &amp; Soups</option>
+            <option value="Garden Harvests">Garden Harvests</option>
+            <option value="Raw Proteins">Raw Proteins</option>
+            <option value="Breads & Grains">Breads &amp; Grains</option>
+            <option value="Baking & Sweet">Baking &amp; Sweet</option>
+            <option value="Miscellaneous">Miscellaneous</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Stratum / Location</label>
+          <select id="itemLoc" class="form-select">
+            <option value="Top Drawer">Top Drawer</option>
+            <option value="Middle Shelf">Middle Shelf</option>
+            <option value="Bottom Drawer">Bottom Drawer</option>
+            <option value="Door Basket">Door Basket</option>
+            <option value="Deep Chest">Deep Chest</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="max-width: 110px;">
+          <label class="form-label">Qty &amp; Unit</label>
+          <div style="display: flex; gap: 4px;">
+            <input type="number" id="itemQty" class="form-input" value="1" min="1" max="99" style="width: 50px;" required />
+            <select id="itemUnit" class="form-select" style="padding: 0.55rem 0.4rem;">
+              <option value="pts">pts</option>
+              <option value="jars">jars</option>
+              <option value="bags">bags</option>
+              <option value="lbs">lbs</option>
+              <option value="pkts">pkts</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="max-width: 140px;">
+          <label class="form-label">Date Frozen</label>
+          <input type="date" id="itemDate" class="form-input" />
+        </div>
+
+        <button type="submit" class="btn btn-deposit">+ Freeze</button>
+      </form>
+    </div>
+
+    <!-- Inventory & Filters -->
+    <div class="card">
+      <div class="card-title">
+        <span>Permafrost Inventory</span>
+        <select id="sortSelect" class="form-select" onchange="renderInventory()" style="font-size: 0.78rem; padding: 3px 8px;">
+          <option value="oldest">Sort: Glacial Age (Thaw Next)</option>
+          <option value="newest">Sort: Recently Frozen</option>
+          <option value="alpha">Sort: Alphabetical</option>
+          <option value="qty">Sort: Quantity</option>
+        </select>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="searchInput" class="form-input search-box" placeholder="Search ice shelf..." oninput="renderInventory()" />
+        <div class="category-chips" id="catChips">
+          <button class="chip active" onclick="setCategoryFilter('ALL')">All</button>
+          <button class="chip" onclick="setCategoryFilter('Prepared Meals')">Meals</button>
+          <button class="chip" onclick="setCategoryFilter('Broths & Soups')">Broths</button>
+          <button class="chip" onclick="setCategoryFilter('Garden Harvests')">Harvests</button>
+          <button class="chip" onclick="setCategoryFilter('Raw Proteins')">Proteins</button>
+          <button class="chip" onclick="setCategoryFilter('Breads & Grains')">Breads</button>
+        </div>
+      </div>
+
+      <div class="inventory-grid" id="inventoryList">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="privacy-notice">
+        <span>🔒</span>
+        <span>100% Client-Side. Your freezer inventory is stored only in this browser's local sandbox.</span>
+      </div>
+    </div>
+
+    <!-- About & Support Section -->
+    <section class="about-card">
+      <div class="about-head">
+        <h2><span>🌿</span> About fallow.garden &amp; Feedback</h2>
+      </div>
+      
+      <div class="about-content">
+        <p>
+          <strong>fallow.garden</strong> is an independent anthology of single-purpose micro-utilities created to counter cognitive fatigue, algorithmic noise, and relentless optimization culture. Each tool runs entirely on your device with zero tracking or account friction.
+        </p>
+        <p>
+          Have ideas for new restorative modules, suggestions for current tools, or questions about the underlying research? Feedback and contributions are always deeply appreciated.
+        </p>
+      </div>
+
+      <div class="support-grid">
+        <a href="https://buymeacoffee.com/davidmikosz" target="_blank" rel="noopener noreferrer" class="support-btn btn-bmac">
+          <span>☕</span>
+          <span>Buy Me a Coffee</span>
+        </a>
+
+        <a href="https://venmo.com/David-Mikosz" target="_blank" rel="noopener noreferrer" class="support-btn btn-venmo">
+          <span>💙</span>
+          <span>Tip via Venmo</span>
+        </a>
+
+        <a href="mailto:david.mikosz@gmail.com?subject=Penguin%20Pal%20Feedback" class="support-btn btn-email">
+          <span>✉️</span>
+          <span>Send Feedback</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>fallow.garden — Restorative micro-utilities for mind, soil, and human vitality.</div>
+      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.25rem;">100% client-side. Zero telemetry. Hosted on sovereign static web infrastructure.</div>
+    </footer>
+
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'penguin_pal_inventory_v1';
+
+    // Default seed items if opening for the first time
+    const SEED_DATA = [
+      {
+        id: 'seed_1',
+        name: 'Roasted Garden Tomato & Garlic Soup',
+        category: 'Broths & Soups',
+        location: 'Top Drawer',
+        quantity: 3,
+        unit: 'jars',
+        dateFrozen: getPastDateString(45)
+      },
+      {
+        id: 'seed_2',
+        name: 'Midsummer Wild Blackberries',
+        category: 'Garden Harvests',
+        location: 'Middle Shelf',
+        quantity: 2,
+        unit: 'bags',
+        dateFrozen: getPastDateString(18)
+      },
+      {
+        id: 'seed_3',
+        name: 'Sourdough Country Boule (Halved)',
+        category: 'Breads & Grains',
+        location: 'Door Basket',
+        quantity: 1,
+        unit: 'pkts',
+        dateFrozen: getPastDateString(190) // Deep glacial
+      },
+      {
+        id: 'seed_4',
+        name: 'Simmered Vegetable Collagen Broth',
+        category: 'Broths & Soups',
+        location: 'Deep Chest',
+        quantity: 4,
+        unit: 'jars',
+        dateFrozen: getPastDateString(70)
+      }
+    ];
+
+    let items = [];
+    let activeFilter = 'ALL';
+
+    function getPastDateString(daysAgo) {
+      const d = new Date();
+      d.setDate(d.getDate() - daysAgo);
+      return d.toISOString().split('T')[0];
+    }
+
+    function loadInventory() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          items = JSON.parse(saved);
+        } catch (e) {
+          items = SEED_DATA;
+        }
+      } else {
+        items = SEED_DATA;
+        saveInventory();
+      }
+    }
+
+    function saveInventory() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    }
+
+    function calculateDaysInPermafrost(dateString) {
+      if (!dateString) return 0;
+      const frozen = new Date(dateString).getTime();
+      const now = new Date().getTime();
+      const diffMs = Math.max(0, now - frozen);
+      return Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    }
+
+    function getAgeClassAndLabel(days) {
+      if (days < 60) {
+        return { label: `Fresh Pack (${days}d)`, className: 'age-fresh' };
+      } else if (days < 180) {
+        return { label: `Prime Reserve (${days}d)`, className: 'age-prime' };
+      } else {
+        return { label: `Deep Glacial (${days}d) — Thaw Soon`, className: 'age-glacial' };
+      }
+    }
+
+    function handleAddItem(e) {
+      e.preventDefault();
+      const nameInput = document.getElementById('itemName');
+      const catInput = document.getElementById('itemCat');
+      const locInput = document.getElementById('itemLoc');
+      const qtyInput = document.getElementById('itemQty');
+      const unitInput = document.getElementById('itemUnit');
+      const dateInput = document.getElementById('itemDate');
+
+      const newItem = {
+        id: 'item_' + Date.now(),
+        name: nameInput.value.trim(),
+        category: catInput.value,
+        location: locInput.value,
+        quantity: parseInt(qtyInput.value) || 1,
+        unit: unitInput.value,
+        dateFrozen: dateInput.value || new Date().toISOString().split('T')[0]
+      };
+
+      items.unshift(newItem);
+      saveInventory();
+      nameInput.value = '';
+      qtyInput.value = '1';
+      renderInventory();
+    }
+
+    function updateQty(id, delta) {
+      const item = items.find(i => i.id === id);
+      if (!item) return;
+
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        items = items.filter(i => i.id !== id);
+      }
+      saveInventory();
+      renderInventory();
+    }
+
+    function deleteItem(id) {
+      items = items.filter(i => i.id !== id);
+      saveInventory();
+      renderInventory();
+    }
+
+    function setCategoryFilter(cat) {
+      activeFilter = cat;
+      document.querySelectorAll('#catChips .chip').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim() === cat || (cat === 'ALL' && btn.textContent.trim() === 'All'));
+      });
+      renderInventory();
+    }
+
+    function updateCustodianAdvice() {
+      const totalCount = items.reduce((acc, curr) => acc + curr.quantity, 0);
+      const deepGlacial = items.filter(i => calculateDaysInPermafrost(i.dateFrozen) >= 180);
+
+      document.getElementById('headerStat').textContent = `${totalCount} portions in permafrost`;
+
+      const headlineEl = document.getElementById('custodianHeadline');
+      const adviceEl = document.getElementById('custodianAdvice');
+
+      if (items.length === 0) {
+        headlineEl.textContent = "The Ice Shelf Lies Fallow";
+        adviceEl.textContent = "No provisions currently in cryo-suspension. Ready for fresh batch cooking.";
+        return;
+      }
+
+      if (deepGlacial.length > 0) {
+        headlineEl.textContent = `Deep Glacial Alert: ${deepGlacial.length} Item(s) Nearing Epoch`;
+        adviceEl.textContent = `Your penguin custodian advises thawing "${deepGlacial[0].name}" soon to enjoy peak flavor before crystal buildup.`;
+      } else {
+        headlineEl.textContent = `Ice Shelf Stable • ${items.length} Unique Reserves`;
+        adviceEl.textContent = `All provisions resting well within prime conservation windows. Permafrost equilibrium maintained.`;
+      }
+    }
+
+    function renderInventory() {
+      const listEl = document.getElementById('inventoryList');
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const sortMode = document.getElementById('sortSelect').value;
+
+      updateCustodianAdvice();
+
+      let filtered = items.filter(item => {
+        const matchesCategory = (activeFilter === 'ALL') || (item.category === activeFilter);
+        const matchesSearch = item.name.toLowerCase().includes(query) || 
+                              item.location.toLowerCase().includes(query) ||
+                              item.category.toLowerCase().includes(query);
+        return matchesCategory && matchesSearch;
+      });
+
+      // Sorting
+      filtered.sort((a, b) => {
+        const daysA = calculateDaysInPermafrost(a.dateFrozen);
+        const daysB = calculateDaysInPermafrost(b.dateFrozen);
+        if (sortMode === 'oldest') return daysB - daysA; // Largest days first
+        if (sortMode === 'newest') return daysA - daysB;
+        if (sortMode === 'alpha') return a.name.localeCompare(b.name);
+        if (sortMode === 'qty') return b.quantity - a.quantity;
+        return 0;
+      });
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = `
+          <div class="empty-state">
+            <p>❄️ No provisions found matching this filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = filtered.map(item => {
+        const days = calculateDaysInPermafrost(item.dateFrozen);
+        const ageMeta = getAgeClassAndLabel(days);
+
+        return `
+          <div class="item-card">
+            <div class="item-main">
+              <div class="item-header">
+                <span class="item-name">${escapeHtml(item.name)}</span>
+                <span class="badge-cat">${item.category}</span>
+                <span class="badge-loc">📍 ${item.location}</span>
+              </div>
+              <div class="item-meta">
+                <span class="age-tag ${ageMeta.className}">● ${ageMeta.label}</span>
+                <span>Frozen ${item.dateFrozen}</span>
+              </div>
+            </div>
+
+            <div class="qty-controls">
+              <button class="qty-btn" onclick="updateQty('${item.id}', -1)" title="Use one portion">−</button>
+              <span class="qty-display">${item.quantity} ${item.unit}</span>
+              <button class="qty-btn" onclick="updateQty('${item.id}', 1)" title="Add one portion">+</button>
+              <button class="btn-trash" onclick="deleteItem('${item.id}')" title="Remove item">🗑</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Pre-set today's date on form
+      document.getElementById('itemDate').value = new Date().toISOString().split('T')[0];
+      loadInventory();
+      renderInventory();
+    });
+  </script>
+</body>
+</html>
