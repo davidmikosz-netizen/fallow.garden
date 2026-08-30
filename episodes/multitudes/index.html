@@ -123,6 +123,9 @@
     header {
       border-bottom: 1px solid var(--sand-border);
       padding-bottom: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
     }
 
     .brand-badge {
@@ -135,7 +138,7 @@
       padding: 0.28rem 0.75rem;
       border-radius: 999px;
       font-weight: 700;
-      margin-bottom: 0.65rem;
+      width: fit-content;
     }
 
     h1 {
@@ -145,7 +148,6 @@
       letter-spacing: -0.02em;
       color: var(--loam-dark);
       line-height: 1.2;
-      margin-bottom: 0.65rem;
     }
 
     .epigraph {
@@ -153,8 +155,18 @@
       font-style: italic;
       color: var(--loam-mid);
       font-size: 1rem;
-      margin-bottom: 0.65rem;
       line-height: 1.5;
+    }
+
+    .header-intro {
+      font-size: 0.94rem;
+      color: var(--loam-mid);
+      line-height: 1.65;
+      background: var(--parchment-warm);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-top: 0.25rem;
     }
 
     .acknowledgment {
@@ -182,6 +194,13 @@
       backdrop-filter: blur(8px);
       padding: 0.5rem 0;
       border-radius: var(--radius-md);
+    }
+
+    .lens-intro-text {
+      font-size: 0.86rem;
+      color: var(--loam-mid);
+      margin-bottom: 0.6rem;
+      line-height: 1.5;
     }
 
     .lens-container {
@@ -688,6 +707,9 @@
       <p class="epigraph">
         &ldquo;Do I contradict myself? Very well then I contradict myself, (I am large, I contain multitudes.)&rdquo;
       </p>
+      <p class="header-intro">
+        This app contains an explanation of what is happening inside your digestive tract, followed by an interactive simulator to see how your daily choices affect your internal ecosystem. Lastly, we provide a field guide introducing all the main microbial players and metabolic currencies.
+      </p>
       <p class="acknowledgment">
         Titled after <strong>Walt Whitman&rsquo;s</strong> <a href="https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version" target="_blank" rel="noopener">Song of Myself</a> and inspired by <strong>Ed Yong&rsquo;s</strong> seminal work <a href="https://edyong.me/i-contain-multitudes" target="_blank" rel="noopener">I Contain Multitudes: The Microbes Within Us and a Grander View of Life</a>.
       </p>
@@ -695,6 +717,9 @@
 
     <!-- Sticky Complexity Lens Selector -->
     <div class="lens-sticky-wrap">
+      <p class="lens-intro-text">
+        An introduction to the science of your gut biome can sometimes feel a bit overwhelming. You can choose between three different depth levels: <strong>Level 1 (Meadow)</strong> offers an easy-to-understand intuitive introduction; <strong>Level 2 (Physiology)</strong> dives into systems physiology and cellular mechanics; and <strong>Level 3 (Deep Taxa)</strong> lets you truly geek out on the underlying scientific taxa and biochemistry.
+      </p>
       <div class="lens-container">
         <span class="lens-title">Select Depth Lens:</span>
         <div class="lens-buttons">
@@ -725,30 +750,10 @@
       </div>
     </section>
 
-    <!-- MODULE 2: Keystone Species & Metabolites -->
+    <!-- MODULE 2: Ecosystem Sandbox (Moved up for better narrative flow) -->
     <section class="card">
       <div class="section-head">
-        <h2>2. Keystone Inhabitants &amp; Currencies</h2>
-        <span class="section-tag">Field Directory</span>
-      </div>
-
-      <div class="filter-chips" id="fieldFilterChips">
-        <button class="chip active" onclick="filterFieldCards('ALL')">All Inhabitants</button>
-        <button class="chip" onclick="filterFieldCards('Sentinel')">Sentinels</button>
-        <button class="chip" onclick="filterFieldCards('Engine')">Engines</button>
-        <button class="chip" onclick="filterFieldCards('Generalist')">Generalists</button>
-        <button class="chip" onclick="filterFieldCards('Currency')">Currencies</button>
-      </div>
-
-      <div class="field-grid" id="fieldGrid">
-        <!-- Rendered via JS based on complexity lens -->
-      </div>
-    </section>
-
-    <!-- MODULE 3: Ecosystem Sandbox -->
-    <section class="card">
-      <div class="section-head">
-        <h2>3. The Living Soil Sandbox</h2>
+        <h2>2. The Living Soil Sandbox</h2>
         <span class="section-tag">Biophysical Simulation</span>
       </div>
 
@@ -841,6 +846,26 @@
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <!-- MODULE 3: Keystone Species & Metabolites (Field Director) -->
+    <section class="card">
+      <div class="section-head">
+        <h2>3. Keystone Inhabitants &amp; Currencies</h2>
+        <span class="section-tag">Field Directory</span>
+      </div>
+
+      <div class="filter-chips" id="fieldFilterChips">
+        <button class="chip active" onclick="filterFieldCards('ALL')">All Inhabitants</button>
+        <button class="chip" onclick="filterFieldCards('Sentinel')">Sentinels</button>
+        <button class="chip" onclick="filterFieldCards('Engine')">Engines</button>
+        <button class="chip" onclick="filterFieldCards('Generalist')">Generalists</button>
+        <button class="chip" onclick="filterFieldCards('Currency')">Currencies</button>
+      </div>
+
+      <div class="field-grid" id="fieldGrid">
+        <!-- Rendered via JS based on complexity lens -->
       </div>
     </section>
 
