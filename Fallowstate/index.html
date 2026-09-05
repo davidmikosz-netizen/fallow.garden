@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Fallow Protocol | fallow.garden</title>
+    <style>
+        :root {
+            --bg-color: #f4f6f0;
+            --card-bg: #ffffff;
+            --text-primary: #2c3e2d;
+            --text-secondary: #5a6b5c;
+            --accent: #4a7c59;
+            --accent-hover: #3a6347;
+            --border-color: #d1dad2;
+            --warn-color: #c05c46;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 16px rgba(44, 62, 45, 0.05);
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--text-primary);
+        }
+
+        header p {
+            color: var(--text-secondary);
+            margin-top: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section h2 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        /* Cooldown Calculator */
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: var(--text-secondary);
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            box-sizing: border-box;
+        }
+
+        .output-box {
+            background: var(--bg-color);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            border-radius: 0 6px 6px 0;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* Checklist */
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .check-item input {
+            width: 1.2rem;
+            height: 1.2rem;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .status-badge {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .status-safe {
+            background: #e6f0e8;
+            color: var(--accent);
+        }
+
+        .status-caution {
+            background: #fdf2f0;
+            color: var(--warn-color);
+        }
+
+        footer {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Agent Fallow Protocol</h1>
+            <p>A utility to calculate operational rest intervals and enforce structural boundary constraints for autonomous agent loops.</p>
+        </header>
+
+        <!-- Cooldown Calculator -->
+        <div class="section">
+            <h2>1. Compute Fallow Rest Interval</h2>
+            <div class="input-group">
+                <label for="tokens">Continuous Execution Tokens Burned (approx):</label>
+                <input type="number" id="tokens" value="50000" min="1000" step="1000" oninput="calculateRest()">
+            </div>
+            <div class="output-box" id="restOutput">
+                Recommended cooldown: <strong>15 minutes</strong> of idle state to prevent metric drift.
+            </div>
+        </div>
+
+        <!-- Guardrail Checklist -->
+        <div class="section">
+            <h2>2. Pre-Execution Guardrail Audit</h2>
+            <div class="checklist">
+                <label class="check-item">
+                    <input type="checkbox" class="guard" onchange="updateStatus()"> Explicit human audit path defined for all external network requests.
+                </label>
+                <label class="check-item">
+                    <input type="checkbox" class="guard" onchange="updateStatus()"> No unsupervised heuristic workarounds allowed for missing flags/scorers.
+                </label>
+                <label class="check-item">
+                    <input type="checkbox" class="guard" onchange="updateStatus()"> Token budget hard-capped to prevent recursive self-replication or message-board pooling.
+                </label>
+            </div>
+
+            <div id="statusBadge" class="status-badge status-caution">
+                Status: Unverified — Resolve checklist items before loop initialization.
+            </div>
+        </div>
+
+        <footer>
+            <p>Hosted on <a href="https://fallow.garden">fallow.garden</a> · Zero dependencies, single-file utility.</p>
+        </footer>
+    </div>
+
+    <script>
+        function calculateRest() {
+            const tokens = parseInt(document.getElementById('tokens').value) || 0;
+            const minutes = Math.max(5, Math.round((tokens / 10000) * 3));
+            document.getElementById('restOutput').innerHTML = 
+                `Recommended cooldown: <strong>${minutes} minutes</strong> of idle state to prevent metric drift and recursive optimization loops.`;
+        }
+
+        function updateStatus() {
+            const checkboxes = document.querySelectorAll('.guard');
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            const badge = document.getElementById('statusBadge');
+
+            if (allChecked) {
+                badge.className = "status-badge status-safe";
+                badge.innerText = "Status: Fallow State Verified — Safe for Execution.";
+            } else {
+                badge.className = "status-badge status-caution";
+                badge.innerText = "Status: Unverified — Resolve checklist items before loop initialization.";
+            }
+        }
+    </script>
+</body>
+</html>
