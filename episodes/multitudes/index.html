@@ -191,6 +191,88 @@
       color: var(--terracotta);
     }
 
+    /* Table of Contents Navigation */
+    .toc-nav {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .toc-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--loam-light);
+      margin-bottom: 0.75rem;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.65rem;
+    }
+
+    .toc-btn {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .toc-btn:hover {
+      border-color: var(--moss-mid);
+      background: var(--moss-pale);
+    }
+
+    .toc-btn.active {
+      background: var(--moss-deep);
+      border-color: var(--moss-deep);
+      color: #ffffff;
+    }
+
+    .toc-btn-number {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--loam-light);
+    }
+
+    .toc-btn.active .toc-btn-number {
+      color: var(--moss-pale);
+    }
+
+    .toc-btn-label {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+    }
+
+    .toc-btn.active .toc-btn-label {
+      color: #ffffff;
+    }
+
+    /* App Views (Chapter containers) */
+    .app-view {
+      display: none;
+    }
+
+    .app-view.active {
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+    }
+
     /* Sticky Complexity Lens Controller */
     .lens-sticky-wrap {
       position: sticky;
@@ -304,7 +386,7 @@
     /* MODULE 1: Narrative Odyssey */
     .narrative-tabs {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 6px;
       margin-bottom: 1.25rem;
     }
@@ -315,7 +397,7 @@
       border-radius: var(--radius-sm);
       padding: 0.6rem 0.75rem;
       font-family: var(--font-sans);
-      font-size: 0.8rem;
+      font-size: 0.76rem;
       font-weight: 600;
       color: var(--loam-mid);
       cursor: pointer;
@@ -714,166 +796,201 @@
         &ldquo;Do I contradict myself? Very well then I contradict myself, (I am large, I contain multitudes.)&rdquo;
       </p>
       <p class="header-intro">
-        This app contains an explanation of what is happening inside your digestive tract, followed by an interactive simulator to see how your daily choices affect your internal ecosystem. Lastly, we provide a field guide introducing all the main microbial players and metabolic currencies.
+        Your body contains more beneficial bacteria than human cells. You are the caretaker of an entire ecosystem. This app contains an explanation of what is happening inside your digestive tract, followed by an interactive simulator to see how your daily choices affect your internal ecosystem. Lastly, we provide a field guide introducing all the main microbial players and metabolic pathways.
       </p>
       <p class="acknowledgment">
-        Titled after <strong>Walt Whitman&rsquo;s</strong> <a href="https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version" target="_blank" rel="noopener">Song of Myself</a> and inspired by <strong>Ed Yong&rsquo;s</strong> seminal work <a href="https://edyong.me/i-contain-multitudes" target="_blank" rel="noopener">I Contain Multitudes: The Microbes Within Us and a Grander View of Life</a>.
+        Named after Walt Whitman&rsquo;s <a href="https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version" target="_blank" rel="noopener">Song of Myself</a> and inspired by Ed Yong&rsquo;s seminal work <a href="https://edyong.me/i-contain-multitudes" target="_blank" rel="noopener">I Contain Multitudes: The Microbes Within Us and a Grander View of Life</a>.
       </p>
     </header>
 
-    <!-- Sticky Complexity Lens Selector -->
-    <div class="lens-sticky-wrap">
-      <p class="lens-intro-text">
-        An introduction to the science of your gut biome can sometimes feel a bit overwhelming. You can choose between three different depth levels: <strong>Level 1 (Meadow)</strong> offers an easy-to-understand intuitive introduction; <strong>Level 2 (Physiology)</strong> dives into systems physiology and cellular mechanics; and <strong>Level 3 (Deep Taxa)</strong> lets you truly geek out on the underlying scientific taxa and biochemistry.
-      </p>
-      <div class="lens-container">
-        <span class="lens-title">Select Depth Lens:</span>
-        <div class="lens-buttons">
-          <button class="lens-btn active" onclick="setLens(1)">🌿 Level 1: Meadow</button>
-          <button class="lens-btn" onclick="setLens(2)">🧬 Level 2: Physiology</button>
-          <button class="lens-btn" onclick="setLens(3)">🔬 Level 3: Deep Taxa</button>
+    <!-- Table of Contents Navigation Switcher -->
+    <nav class="toc-nav">
+      <div class="toc-title">Table of Contents</div>
+      <div class="toc-grid">
+        <button class="toc-btn active" id="tocBtn1" onclick="switchView(1)">
+          <span class="toc-btn-number">Chapter I</span>
+          <span class="toc-btn-label">1. Understanding your inner world</span>
+        </button>
+        <button class="toc-btn" id="tocBtn2" onclick="switchView(2)">
+          <span class="toc-btn-number">Chapter II</span>
+          <span class="toc-btn-label">2. How your dietary choices affect your gut biome</span>
+        </button>
+        <button class="toc-btn" id="tocBtn3" onclick="switchView(3)">
+          <span class="toc-btn-number">Chapter III</span>
+          <span class="toc-btn-label">3. A field guide to really get to know your gut</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- CHAPTER 1 VIEW: Understanding your inner world -->
+    <div class="app-view active" id="view1">
+      
+      <!-- Sticky Complexity Lens Selector -->
+      <div class="lens-sticky-wrap">
+        <p class="lens-intro-text">
+          An introduction to the science of your gut biome can sometimes feel a bit overwhelming. You can choose between three different depth levels: <strong>Level 1 (Meadow)</strong> offers an easy-to-understand intuitive introduction; <strong>Level 2 (Physiology)</strong> dives into systems physiology and cellular mechanics; and <strong>Level 3 (Deep Taxa)</strong> lets you truly geek out on the underlying scientific taxa and biochemistry.
+        </p>
+        <div class="lens-container">
+          <span class="lens-title">Select Depth Lens:</span>
+          <div class="lens-buttons">
+            <button class="lens-btn active" onclick="setLens(1)">🌿 Level 1: Meadow</button>
+            <button class="lens-btn" onclick="setLens(2)">🧬 Level 2: Physiology</button>
+            <button class="lens-btn" onclick="setLens(3)">🔬 Level 3: Deep Taxa</button>
+          </div>
         </div>
       </div>
+
+      <!-- MODULE 1: Narrative Odyssey -->
+      <section class="card">
+        <div class="section-head">
+          <h2>1. The Passage: From Mouth to Mucosa</h2>
+          <span class="section-tag">Interactive Odyssey</span>
+        </div>
+
+        <div class="narrative-tabs" id="narrativeTabs">
+          <button class="narrative-tab-btn active" onclick="selectNarrative(0)">1. The Ingestion Gate</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(1)">2. Upper GI &amp; Fallow Rest</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(2)">3. Colonic Fermentation</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(3)">4. The Mucosal Fortress</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(4)">5. Brain-Gut-Fasting Axis</button>
+        </div>
+
+        <div class="narrative-display">
+          <h3 class="narrative-display-title" id="narrativeTitle">...</h3>
+          <p class="narrative-display-body" id="narrativeBody">...</p>
+        </div>
+      </section>
+
     </div>
 
-    <!-- MODULE 1: Narrative Odyssey -->
-    <section class="card">
-      <div class="section-head">
-        <h2>1. The Passage: From Mouth to Mucosa</h2>
-        <span class="section-tag">Interactive Odyssey</span>
-      </div>
-
-      <div class="narrative-tabs" id="narrativeTabs">
-        <button class="narrative-tab-btn active" onclick="selectNarrative(0)">1. The Ingestion Gate</button>
-        <button class="narrative-tab-btn" onclick="selectNarrative(1)">2. Upper GI &amp; Fallow Rest</button>
-        <button class="narrative-tab-btn" onclick="selectNarrative(2)">3. Colonic Fermentation</button>
-        <button class="narrative-tab-btn" onclick="selectNarrative(3)">4. The Mucosal Fortress</button>
-      </div>
-
-      <div class="narrative-display">
-        <h3 class="narrative-display-title" id="narrativeTitle">...</h3>
-        <p class="narrative-display-body" id="narrativeBody">...</p>
-      </div>
-    </section>
-
-    <!-- MODULE 2: Ecosystem Sandbox (Moved up for better narrative flow) -->
-    <section class="card">
-      <div class="section-head">
-        <h2>2. The Living Soil Sandbox</h2>
-        <span class="section-tag">Biophysical Simulation</span>
-      </div>
-
-      <div class="sandbox-layout">
-        <!-- Controls -->
-        <div class="controls-panel">
-          
-          <div class="control-item">
-            <div class="control-item-head">
-              <span class="control-label">Weekly Botanical Diversity</span>
-              <span class="control-value" id="valPlants">30 species</span>
-            </div>
-            <input type="range" class="slider" id="sliderPlants" min="5" max="45" value="30" oninput="updateSimulation()" />
-          </div>
-
-          <div class="control-item">
-            <div class="control-item-head">
-              <span class="control-label">Digestive Rest Window</span>
-              <span class="control-value" id="valFasting">16 hours</span>
-            </div>
-            <input type="range" class="slider" id="sliderFasting" min="8" max="22" value="16" oninput="updateSimulation()" />
-          </div>
-
-          <div class="control-item">
-            <div class="control-item-head">
-              <span class="control-label">Live Fermented Foods</span>
-              <span class="control-value" id="valFerments">1 serving / day</span>
-            </div>
-            <input type="range" class="slider" id="sliderFerments" min="0" max="3" value="1" oninput="updateSimulation()" />
-          </div>
-
-          <div class="control-item">
-            <div class="control-item-head">
-              <span class="control-label">Ecological Disturbance</span>
-            </div>
-            <select class="select-input" id="selectShock" onchange="updateSimulation()">
-              <option value="none">None (Stable Cultivation)</option>
-              <option value="stress">Ultra-Processed / High Stress</option>
-              <option value="antibiotic">Recent Broad-Spectrum Antibiotic</option>
-            </select>
-          </div>
-
+    <!-- CHAPTER 2 VIEW: How your dietary choices affect your gut biome -->
+    <div class="app-view" id="view2">
+      
+      <!-- MODULE 2: Ecosystem Sandbox -->
+      <section class="card">
+        <div class="section-head">
+          <h2>2. The Living Soil Sandbox</h2>
+          <span class="section-tag">Biophysical Simulation</span>
         </div>
 
-        <!-- Real-time Simulation Outputs -->
-        <div class="results-panel">
-          
-          <div class="metric-row">
-            <div class="metric-head">
-              <span id="labelMucus">Mucus Layer Thickness</span>
-              <span id="valMucusScore">--</span>
+        <div class="sandbox-layout">
+          <!-- Controls -->
+          <div class="controls-panel">
+            
+            <div class="control-item">
+              <div class="control-item-head">
+                <span class="control-label">Weekly Botanical Diversity</span>
+                <span class="control-value" id="valPlants">30 species</span>
+              </div>
+              <input type="range" class="slider" id="sliderPlants" min="5" max="45" value="30" oninput="updateSimulation()" />
             </div>
-            <div class="metric-bar-bg">
-              <div class="metric-bar-fill" id="barMucus"></div>
+
+            <div class="control-item">
+              <div class="control-item-head">
+                <span class="control-label">Digestive Rest Window</span>
+                <span class="control-value" id="valFasting">16 hours</span>
+              </div>
+              <input type="range" class="slider" id="sliderFasting" min="8" max="22" value="16" oninput="updateSimulation()" />
             </div>
-            <p class="metric-note" id="noteMucus">...</p>
+
+            <div class="control-item">
+              <div class="control-item-head">
+                <span class="control-label">Live Fermented Foods</span>
+                <span class="control-value" id="valFerments">1 serving / day</span>
+              </div>
+              <input type="range" class="slider" id="sliderFerments" min="0" max="3" value="1" oninput="updateSimulation()" />
+            </div>
+
+            <div class="control-item">
+              <div class="control-item-head">
+                <span class="control-label">Ecological Disturbance</span>
+              </div>
+              <select class="select-input" id="selectShock" onchange="updateSimulation()">
+                <option value="none">None (Stable Cultivation)</option>
+                <option value="stress">Ultra-Processed / High Stress</option>
+                <option value="antibiotic">Recent Broad-Spectrum Antibiotic</option>
+              </select>
+            </div>
+
           </div>
 
-          <div class="metric-row">
-            <div class="metric-head">
-              <span id="labelScfa">Short-Chain Fatty Acid Yield</span>
-              <span id="valScfaScore">--</span>
+          <!-- Real-time Simulation Outputs -->
+          <div class="results-panel">
+            
+            <div class="metric-row">
+              <div class="metric-head">
+                <span id="labelMucus">Mucus Layer Thickness</span>
+                <span id="valMucusScore">--</span>
+              </div>
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill" id="barMucus"></div>
+              </div>
+              <p class="metric-note" id="noteMucus">...</p>
             </div>
-            <div class="metric-bar-bg">
-              <div class="metric-bar-fill" id="barScfa"></div>
-            </div>
-            <p class="metric-note" id="noteScfa">...</p>
-          </div>
 
-          <div class="metric-row">
-            <div class="metric-head">
-              <span id="labelDiversity">Microbial Richness Index</span>
-              <span id="valDivScore">--</span>
+            <div class="metric-row">
+              <div class="metric-head">
+                <span id="labelScfa">Short-Chain Fatty Acid Yield</span>
+                <span id="valScfaScore">--</span>
+              </div>
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill" id="barScfa"></div>
+              </div>
+              <p class="metric-note" id="noteScfa">...</p>
             </div>
-            <div class="metric-bar-bg">
-              <div class="metric-bar-fill" id="barDiversity"></div>
-            </div>
-            <p class="metric-note" id="noteDiversity">...</p>
-          </div>
 
-          <div class="metric-row">
-            <div class="metric-head">
-              <span id="labelLps">Endotoxin Leakage Risk (LPS)</span>
-              <span id="valLpsScore">--</span>
+            <div class="metric-row">
+              <div class="metric-head">
+                <span id="labelDiversity">Microbial Richness Index</span>
+                <span id="valDivScore">--</span>
+              </div>
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill" id="barDiversity"></div>
+              </div>
+              <p class="metric-note" id="noteDiversity">...</p>
             </div>
-            <div class="metric-bar-bg">
-              <div class="metric-bar-fill" id="barLps"></div>
-            </div>
-            <p class="metric-note" id="noteLps">...</p>
-          </div>
 
+            <div class="metric-row">
+              <div class="metric-head">
+                <span id="labelLps">Endotoxin Leakage Risk (LPS)</span>
+                <span id="valLpsScore">--</span>
+              </div>
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill" id="barLps"></div>
+              </div>
+              <p class="metric-note" id="noteLps">...</p>
+            </div>
+
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- MODULE 3: Keystone Species & Metabolites (Field Director) -->
-    <section class="card">
-      <div class="section-head">
-        <h2>3. Keystone Inhabitants &amp; Currencies</h2>
-        <span class="section-tag">Field Directory</span>
-      </div>
+    </div>
 
-      <div class="filter-chips" id="fieldFilterChips">
-        <button class="chip active" onclick="filterFieldCards('ALL')">All Inhabitants</button>
-        <button class="chip" onclick="filterFieldCards('Sentinel')">Sentinels</button>
-        <button class="chip" onclick="filterFieldCards('Engine')">Engines</button>
-        <button class="chip" onclick="filterFieldCards('Generalist')">Generalists</button>
-        <button class="chip" onclick="filterFieldCards('Currency')">Currencies</button>
-      </div>
+    <!-- CHAPTER 3 VIEW: A field guide to really get to know your gut -->
+    <div class="app-view" id="view3">
+      
+      <!-- MODULE 3: Keystone Species & Metabolites (Field Director) -->
+      <section class="card">
+        <div class="section-head">
+          <h2>3. Keystone Inhabitants &amp; Pathways</h2>
+          <span class="section-tag">Field Directory</span>
+        </div>
 
-      <div class="field-grid" id="fieldGrid">
-        <!-- Rendered via JS based on complexity lens -->
-      </div>
-    </section>
+        <div class="filter-chips" id="fieldFilterChips">
+          <button class="chip active" onclick="filterFieldCards('ALL')">All Inhabitants</button>
+          <button class="chip" onclick="filterFieldCards('Sentinel')">Sentinels</button>
+          <button class="chip" onclick="filterFieldCards('Engine')">Engines</button>
+          <button class="chip" onclick="filterFieldCards('Generalist')">Generalists</button>
+          <button class="chip" onclick="filterFieldCards('Currency')">Pathways</button>
+        </div>
+
+        <div class="field-grid" id="fieldGrid">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+
+    </div>
 
     <!-- Companion Protocols in Corridor II -->
     <section class="card" style="background: var(--parchment-warm); border-color: var(--sand-border);">
@@ -886,7 +1003,7 @@
       </p>
 
       <div class="companion-grid">
-        <a href="/episodes/inner-meadow/index.html" class="companion-link">
+        <a href="../inner-meadow/index.html" class="companion-link">
           <div class="companion-title">
             <span>The Inner Meadow</span>
             <span>🌿</span>
@@ -895,7 +1012,7 @@
           <span class="companion-cta">Track 30 Plants &rarr;</span>
         </a>
 
-        <a href="/episodes/fastcounter/index.html" class="companion-link">
+        <a href="../fastcounter/index.html" class="companion-link">
           <div class="companion-title">
             <span>Metabolic &amp; Gut Counter</span>
             <span>⚡</span>
@@ -957,10 +1074,22 @@
   </div>
 
   <script>
-    // --- Data Store for 3 Complexity Levels ---
+    // --- Data Store & State ---
     let currentLens = 1;
     let currentNarrativeIdx = 0;
     let currentFieldFilter = 'ALL';
+    let currentView = 1;
+
+    function switchView(viewNum) {
+      currentView = viewNum;
+      document.querySelectorAll('.toc-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx + 1 === viewNum);
+      });
+      document.querySelectorAll('.app-view').forEach((view, idx) => {
+        view.classList.toggle('active', idx + 1 === viewNum);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     const NARRATIVE_DATA = [
       {
@@ -1025,6 +1154,22 @@
         lvl3: {
           title: "The Mucosal Fortress: Glycan Dynamics & Claudin/ZO-1 Integrity",
           body: "Epithelial homeostasis depends on sulfated Muc2 mucin matrices and apical tight junctions regulated by zonula occludens-1 (ZO-1) and claudin-1. Host-adapted taxa (*Akkermansia*) forage sialic acids to drive epithelial renewal; loss of this barrier allows lipopolysaccharides (LPS) to bind TLR4 receptors, provoking systemic metabolic endotoxemia."
+        }
+      },
+      {
+        step: 4,
+        btn: "5. Brain-Gut-Fasting Axis",
+        lvl1: {
+          title: "The Brain-Gut-Fasting Axis: Neural Conversations",
+          body: "Your gut and brain are in constant dialogue via the vagus nerve. When you fast, your microbiome shifts its metabolic output, sending signals that lower neuroinflammation, sharpen mental clarity, and help reset your circadian clocks."
+        },
+        lvl2: {
+          title: "The Brain-Gut-Fasting Axis: Vagal Pathways & Satiety Signaling",
+          body: "Short-chain fatty acids produced by fasting-induced microbial metabolism stimulate vagal afferent nerve fibers and enteric neurons. Simultaneously, shifting ghrelin and leptin profiles communicate metabolic state directly to the hypothalamus."
+        },
+        lvl3: {
+          title: "The Brain-Gut-Fasting Axis: Enteric-Central Neurochemical Circuits",
+          body: "Fasting triggers parasympathetic tone modulation via the vagus nerve, altering neurotransmitter precursors (serotonin, GABA) synthesized by microbial fermentation. Acetate crosses the blood-brain barrier to modulate hypothalamic pro-opiomelanocortin (POMC) neuronal activity and suppress appetite signaling."
         }
       }
     ];
@@ -1103,19 +1248,19 @@
           name: "Short-Chain Fatty Acids (SCFAs)",
           role: "Microbial Fuel & Signals",
           desc: "Butyrate, acetate, and propionate. Tiny energy molecules made by bacteria that nourish gut cells, signal fullness to the brain, and calm inflammation.",
-          meta: "The primary reward for eating fiber"
+          meta: "The primary reward pathway for eating fiber"
         },
         lvl2: {
           name: "Short-Chain Fatty Acids (SCFAs)",
           role: "Signaling Metabolites",
           desc: "Metabolic byproducts of fiber fermentation that activate G-protein coupled receptors (GPR41/43), stimulating satiety hormones (GLP-1, PYY) and regulating insulin.",
-          meta: "60:20:20 Acetate : Propionate : Butyrate"
+          meta: "60:20:20 Acetate : Propionate : Butyrate pathway"
         },
         lvl3: {
           name: "Short-Chain Fatty Acids (SCFAs)",
           role: "Epigenetic & FFAR Ligands",
           desc: "Circulating organic acids that act as histone deacetylase (HDAC) inhibitors, promote peripheral Foxp3+ Treg differentiation, and bind FFAR2/FFAR3 receptors.",
-          meta: "Regulates hepatic gluconeogenesis & immune tone"
+          meta: "Regulates hepatic gluconeogenesis & immune tone pathways"
         }
       }
     ];
@@ -1194,13 +1339,11 @@
       document.getElementById('valFasting').textContent = `${fasting} hours`;
       document.getElementById('valFerments').textContent = `${ferments} serving${ferments === 1 ? '' : 's'} / day`;
 
-      // Base scoring algorithms (0 to 100)
       let mucus = (fasting * 4.2) + (plants * 0.8) + (ferments * 4);
       let scfa = (plants * 1.8) + (ferments * 6) + (fasting * 0.5);
       let diversity = (plants * 2.0) + (ferments * 5);
       let lps = 100 - ((mucus * 0.5) + (scfa * 0.4) + (fasting * 0.8));
 
-      // Shocks
       if (shock === 'stress') {
         mucus -= 22;
         scfa -= 18;
@@ -1213,22 +1356,18 @@
         lps += 55;
       }
 
-      // Clamps
       mucus = Math.min(Math.max(mucus, 8), 98);
       scfa = Math.min(Math.max(scfa, 5), 98);
       diversity = Math.min(Math.max(diversity, 10), 98);
       lps = Math.min(Math.max(lps, 5), 95);
 
-      // Render Bars & Scores
       document.getElementById('barMucus').style.width = mucus + '%';
       document.getElementById('barScfa').style.width = scfa + '%';
       document.getElementById('barDiversity').style.width = diversity + '%';
       document.getElementById('barLps').style.width = lps + '%';
 
-      // Bar Colors
       document.getElementById('barLps').style.backgroundColor = lps > 50 ? 'var(--terracotta)' : 'var(--moss-mid)';
       
-      // Dynamic Readouts based on active complexity lens
       if (currentLens === 1) {
         document.getElementById('valMucusScore').textContent = mucus > 70 ? 'Thick & Glistening' : (mucus > 40 ? 'Moderate Shield' : 'Depleted');
         document.getElementById('noteMucus').textContent = 'Fasting windows allow goblet cells to rebuild your protective inner mucus layer.';
@@ -1267,7 +1406,7 @@
         document.getElementById('noteLps').textContent = 'Serum LPS binding of TLR4 triggers peripheral CD14/MyD88 cascade without tight junctions.';
       }
     }
-
+ 
     // --- Initialization ---
     window.addEventListener('DOMContentLoaded', () => {
       renderNarrative();
