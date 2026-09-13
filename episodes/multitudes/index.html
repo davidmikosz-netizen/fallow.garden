@@ -164,6 +164,17 @@
       line-height: 1.5;
     }
 
+    .epigraph a {
+      color: var(--moss-deep);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.15s ease;
+    }
+
+    .epigraph a:hover {
+      color: var(--terracotta);
+    }
+
     .header-intro {
       font-size: 0.94rem;
       color: var(--loam-mid);
@@ -173,22 +184,6 @@
       border-radius: var(--radius-md);
       padding: 1rem 1.25rem;
       margin-top: 0.25rem;
-    }
-
-    .acknowledgment {
-      font-size: 0.82rem;
-      color: var(--loam-light);
-    }
-
-    .acknowledgment a {
-      color: var(--moss-deep);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      transition: color 0.15s ease;
-    }
-
-    .acknowledgment a:hover {
-      color: var(--terracotta);
     }
 
     /* Table of Contents Navigation */
@@ -793,13 +788,10 @@
       <div class="brand-badge">Natural History of your Gut Biome</div>
       <h1>The Multitudes Within</h1>
       <p class="epigraph">
-        &ldquo;Do I contradict myself? Very well then I contradict myself, (I am large, I contain multitudes.)&rdquo;
+        &ldquo;Do I contradict myself? Very well then I contradict myself, (I am large, I contain <a href="https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version" target="_blank" rel="noopener">multitudes</a>.)&rdquo; Inspired by Ed Yong&rsquo;s <a href="https://edyong.me/i-contain-multitudes" target="_blank" rel="noopener">I Contain Multitudes: The Microbes Within Us and a Grander View of Life</a>.
       </p>
       <p class="header-intro">
         Your body contains more beneficial bacteria than human cells. You are the caretaker of an entire ecosystem. This app contains an explanation of what is happening inside your digestive tract, followed by an interactive simulator to see how your daily choices affect your internal ecosystem. Lastly, we provide a field guide introducing all the main microbial players and metabolic pathways.
-      </p>
-      <p class="acknowledgment">
-        Named after Walt Whitman&rsquo;s <a href="https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version" target="_blank" rel="noopener">Song of Myself</a> and inspired by Ed Yong&rsquo;s seminal work <a href="https://edyong.me/i-contain-multitudes" target="_blank" rel="noopener">I Contain Multitudes: The Microbes Within Us and a Grander View of Life</a>.
       </p>
     </header>
 
@@ -813,7 +805,7 @@
         </button>
         <button class="toc-btn" id="tocBtn2" onclick="switchView(2)">
           <span class="toc-btn-number">Chapter II</span>
-          <span class="toc-btn-label">2. How your dietary choices affect your gut biome</span>
+          <span class="toc-btn-label">2. Interactive look at how your choices affect your gut biome</span>
         </button>
         <button class="toc-btn" id="tocBtn3" onclick="switchView(3)">
           <span class="toc-btn-number">Chapter III</span>
@@ -827,9 +819,6 @@
       
       <!-- Sticky Complexity Lens Selector -->
       <div class="lens-sticky-wrap">
-        <p class="lens-intro-text">
-          An introduction to the science of your gut biome can sometimes feel a bit overwhelming. You can choose between three different depth levels: <strong>Level 1 (Meadow)</strong> offers an easy-to-understand intuitive introduction; <strong>Level 2 (Physiology)</strong> dives into systems physiology and cellular mechanics; and <strong>Level 3 (Deep Taxa)</strong> lets you truly geek out on the underlying scientific taxa and biochemistry.
-        </p>
         <div class="lens-container">
           <span class="lens-title">Select Depth Lens:</span>
           <div class="lens-buttons">
@@ -846,6 +835,10 @@
           <h2>1. The Passage: From Mouth to Mucosa</h2>
           <span class="section-tag">Interactive Odyssey</span>
         </div>
+
+        <p class="lens-intro-text" style="margin-bottom: 1.25rem;">
+          An introduction to the science of your gut biome can sometimes feel a bit overwhelming. You can choose between three different depth levels: <strong>Level 1 (Meadow)</strong> offers an easy-to-understand intuitive introduction; <strong>Level 2 (Physiology)</strong> dives into systems physiology and cellular mechanics; and <strong>Level 3 (Deep Taxa)</strong> lets you truly geek out on the underlying scientific taxa and biochemistry.
+        </p>
 
         <div class="narrative-tabs" id="narrativeTabs">
           <button class="narrative-tab-btn active" onclick="selectNarrative(0)">1. The Ingestion Gate</button>
