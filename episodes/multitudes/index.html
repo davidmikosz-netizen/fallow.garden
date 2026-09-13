@@ -855,16 +855,19 @@
       </section>
 
     </div>
-
-    <!-- CHAPTER 2 VIEW: How your dietary choices affect your gut biome -->
+<!-- CHAPTER 2 VIEW: How your dietary choices affect your gut biome -->
     <div class="app-view" id="view2">
       
       <!-- MODULE 2: Ecosystem Sandbox -->
       <section class="card">
         <div class="section-head">
-          <h2>2. The Living Soil Sandbox</h2>
+          <h2>The Living Soil Sandbox: How your choices affect your biome</h2>
           <span class="section-tag">Biophysical Simulation</span>
         </div>
+
+        <p class="lens-intro-text" style="margin-bottom: 1.5rem;">
+          You can model how your choices affect your biome by making choices on the left — the results show up on the right.
+        </p>
 
         <div class="sandbox-layout">
           <!-- Controls -->
@@ -872,31 +875,43 @@
             
             <div class="control-item">
               <div class="control-item-head">
-                <span class="control-label">Weekly Botanical Diversity</span>
+                <div>
+                  <div class="control-label">Weekly Botanical Diversity</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Unique plants, herbs &amp; spices per week (target 30+)</div>
+                </div>
                 <span class="control-value" id="valPlants">30 species</span>
               </div>
-              <input type="range" class="slider" id="sliderPlants" min="5" max="45" value="30" oninput="updateSimulation()" />
+              <input type="range" class="slider" id="sliderPlants" min="5" max="45" value="30" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
             </div>
 
             <div class="control-item">
               <div class="control-item-head">
-                <span class="control-label">Digestive Rest Window</span>
+                <div>
+                  <div class="control-label">Digestive Rest Window</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily fasting hours allowing MMC cleansing waves</div>
+                </div>
                 <span class="control-value" id="valFasting">16 hours</span>
               </div>
-              <input type="range" class="slider" id="sliderFasting" min="8" max="22" value="16" oninput="updateSimulation()" />
+              <input type="range" class="slider" id="sliderFasting" min="8" max="22" value="16" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
             </div>
 
             <div class="control-item">
               <div class="control-item-head">
-                <span class="control-label">Live Fermented Foods</span>
+                <div>
+                  <div class="control-label">Live Fermented Foods</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Kefir, yogurt, kimchi, or sauerkraut servings</div>
+                </div>
                 <span class="control-value" id="valFerments">1 serving / day</span>
               </div>
-              <input type="range" class="slider" id="sliderFerments" min="0" max="3" value="1" oninput="updateSimulation()" />
+              <input type="range" class="slider" id="sliderFerments" min="0" max="3" value="1" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
             </div>
 
             <div class="control-item">
-              <div class="control-item-head">
-                <span class="control-label">Ecological Disturbance</span>
+              <div class="control-item-head" style="margin-bottom: 0.5rem;">
+                <div>
+                  <div class="control-label">Ecological Disturbance</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Dietary stress or medical disruptions</div>
+                </div>
               </div>
               <select class="select-input" id="selectShock" onchange="updateSimulation()">
                 <option value="none">None (Stable Cultivation)</option>
@@ -945,7 +960,7 @@
 
             <div class="metric-row">
               <div class="metric-head">
-                <span id="labelLps">Endotoxin Leakage Risk (LPS)</span>
+                <span id="labelLps">Gut Barrier Leakage Risk (LPS)</span>
                 <span id="valLpsScore">--</span>
               </div>
               <div class="metric-bar-bg">
@@ -959,7 +974,7 @@
       </section>
 
     </div>
-
+ 
     <!-- CHAPTER 3 VIEW: A field guide to really get to know your gut -->
     <div class="app-view" id="view3">
       
