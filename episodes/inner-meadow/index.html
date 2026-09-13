@@ -254,7 +254,7 @@
     /* Keystone Biomarkers / Substrate Gauges */
     .gauges-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 0.75rem;
       margin-top: 1rem;
     }
@@ -782,13 +782,13 @@
 
         <div class="gauge-pill">
           <div class="gauge-label-row">
-            <span>Living Ferments</span>
-            <span id="fermentScore">0/4</span>
+            <span>Vagal &amp; Mental Calm</span>
+            <span id="vagalScore">0%</span>
           </div>
           <div class="gauge-track">
-            <div class="gauge-fill" id="fermentBar" style="width: 0%"></div>
+            <div class="gauge-fill" id="vagalBar" style="background-color: var(--moss-deep); width: 0%"></div>
           </div>
-          <div class="gauge-target">Mix up your daily live cultures</div>
+          <div class="gauge-target">Ferments + Diverse Fibers</div>
         </div>
       </div>
     </section>
@@ -1199,8 +1199,8 @@
     const mucinScore = document.getElementById("mucinScore");
     const inulinBar = document.getElementById("inulinBar");
     const inulinScore = document.getElementById("inulinScore");
-    const fermentBar = document.getElementById("fermentBar");
-    const fermentScore = document.getElementById("fermentScore");
+    const vagalBar = document.getElementById("vagalBar");
+    const vagalScore = document.getElementById("vagalScore");
     const restRange = document.getElementById("restRange");
     const restHoursDisplay = document.getElementById("restHoursDisplay");
     const restStatusTitle = document.getElementById("restStatusTitle");
@@ -1314,10 +1314,11 @@
       mucinBar.style.width = `${mucinPct}%`;
       mucinScore.textContent = `${mucinPct}%`;
 
-      // 4. Ferment Rotation
+      // 4. Vagal & Mental Calm Score (Ferments + Diverse Fibers)
       const fermentCount = state.selectedFerments.length;
-      fermentBar.style.width = `${(fermentCount / 4) * 100}%`;
-      fermentScore.textContent = `${fermentCount}/4`;
+      const vagalPct = Math.min(100, Math.round((fermentCount * 25) + (totalPlants * 1.5)));
+      vagalBar.style.width = `${vagalPct}%`;
+      vagalScore.textContent = `${vagalPct}%`;
 
       // Dynamic Guidance
       generateInsight(totalPlants, alliumCount, grainLegumeCount, polyphenolCount, fermentCount, state.restHours);
