@@ -629,11 +629,6 @@
       color: #000000;
     }
 
-    .btn-venmo {
-      background: #008cff;
-      color: #ffffff;
-    }
-
     .btn-email {
       background: var(--parchment-deep);
       color: var(--loam-dark);
@@ -702,7 +697,7 @@
     <header>
       <div class="badge">Microbiome Stewardship Module</div>
       <h1>The Inner Meadow</h1>
-      <p class="subtitle">Weekly botanical diversity, targeted substrates &amp; mucosal renewal</p>
+      <p class="subtitle">Track your progress across three core levers: your weekly variety of plants (which fuel your microbes), your live ferments, and your daily digestive rest window.</p>
       
       <div class="header-actions">
         <span id="currentWeekRange">Week of Cultivation</span>
@@ -793,7 +788,7 @@
           <div class="gauge-track">
             <div class="gauge-fill" id="fermentBar" style="width: 0%"></div>
           </div>
-          <div class="gauge-target">Microbial rotations</div>
+          <div class="gauge-target">Mix up your daily live cultures</div>
         </div>
       </div>
     </section>
@@ -847,7 +842,7 @@
     <!-- Section 3: Mucosal Renewal Window -->
     <section class="section-card">
       <div class="section-head">
-        <h2>3. Refreshing your body's digesting system - the Mucosal Renewal Window (Rest Rhythm)</h2>
+        <h2>3. Refreshing your body's digesting system — the Mucosal Renewal Window (Rest Rhythm)</h2>
         <div class="section-desc">Fasting allows <em>Akkermansia</em> to feed on mucosal glycans, strengthening the barrier</div>
       </div>
 
@@ -860,7 +855,7 @@
         
         <div class="rest-status-card" id="restStatusCard">
           <div class="rest-status-title" id="restStatusTitle">14-Hour Baseline Rest</div>
-          <div id="restStatusDesc">Migrating Motor Complex (MMC) cleans your digestive sytem; triggers initial mucosal clearance and bacterial rest.</div>
+          <div id="restStatusDesc">Migrating Motor Complex (MMC) cleans your digestive system; triggers initial mucosal clearance and bacterial rest.</div>
         </div>
       </div>
     </section>
@@ -903,8 +898,8 @@
 
   <script>
     /* =========================================================================
-       EXPANDED BOTANICAL CATALOG
-       ========================================================================= */
+        EXPANDED BOTANICAL CATALOG
+        ========================================================================= */
     const DEFAULT_PLANT_DATA = {
       alliums_roots: {
         title: "Alliums, Roots & Tubers",
@@ -1013,8 +1008,8 @@
     };
 
     /* =========================================================================
-       STATE MANAGEMENT (LOCALSTORAGE)
-       ========================================================================= */
+        STATE MANAGEMENT (LOCALSTORAGE)
+        ========================================================================= */
     const STORAGE_KEY = "fallow_inner_meadow_v2";
 
     let state = {
@@ -1053,8 +1048,8 @@
     }
 
     /* =========================================================================
-       CANVAS PROCEDURAL BOTANICAL ENGINE
-       ========================================================================= */
+        CANVAS PROCEDURAL BOTANICAL ENGINE
+        ========================================================================= */
     const canvas = document.getElementById("meadowCanvas");
     const ctx = canvas.getContext("2d");
 
@@ -1193,8 +1188,8 @@
     }
 
     /* =========================================================================
-       DOM RENDERING & METRICS COMPUTATION
-       ========================================================================= */
+        DOM RENDERING & METRICS COMPUTATION
+        ========================================================================= */
     const plantCategoriesContainer = document.getElementById("plantCategoriesContainer");
     const fermentGrid = document.getElementById("fermentGrid");
     const totalPlantCountEl = document.getElementById("totalPlantCount");
@@ -1374,8 +1369,8 @@
     }
 
     /* =========================================================================
-       EVENT HANDLERS & INTERACTIONS
-       ========================================================================= */
+        EVENT HANDLERS & INTERACTIONS
+        ========================================================================= */
     function togglePlant(plantName) {
       const idx = state.selectedPlants.indexOf(plantName);
       if (idx > -1) {
@@ -1470,8 +1465,8 @@
     });
 
     /* =========================================================================
-       INITIALIZATION
-       ========================================================================= */
+        INITIALIZATION
+        ========================================================================= */
     window.addEventListener("DOMContentLoaded", () => {
       loadState();
       renderPlantLedger();
