@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     
     // Initialize the classic SDK. Vercel automatically injects GEMINI_API_KEY from your dashboard settings.
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-3.6-flash' });
 
     // Map the user's complexity lens to a strict writing style
     const lensTones = {
