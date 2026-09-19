@@ -75,6 +75,10 @@
 
     body {
       background-color: var(--parchment);
+      /* Abstract Biome Inline SVG Background */
+      background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%237a9470' stroke-width='2' fill='none' stroke-linecap='round' opacity='0.12'%3E%3Crect x='40' y='50' width='30' height='15' rx='7.5' transform='rotate(-20 40 50)'/%3E%3Crect x='110' y='140' width='45' height='18' rx='9' transform='rotate(35 110 140)'/%3E%3Ccircle cx='150' cy='50' r='14'/%3E%3Ccircle cx='165' cy='75' r='8'/%3E%3Cpath d='M 40 150 Q 70 110 90 160 T 140 130'/%3E%3Cpath d='M 70 80 Q 90 50 120 70'/%3E%3C/g%3E%3C/svg%3E");
+      background-attachment: fixed;
+      background-size: 300px;
       color: var(--loam-dark);
       font-family: var(--font-sans);
       line-height: 1.6;
@@ -90,6 +94,8 @@
       display: flex;
       flex-direction: column;
       gap: 2.25rem;
+      position: relative;
+      z-index: 1; /* Keeps content above background */
     }
 
     /* Top Navigation */
@@ -125,7 +131,7 @@
       font-weight: 700;
     }
 
-    /* Header & Epigraph */
+    /* Header */
     header {
       border-bottom: 1px solid var(--sand-border);
       padding-bottom: 1.75rem;
@@ -154,25 +160,6 @@
       letter-spacing: -0.02em;
       color: var(--loam-dark);
       line-height: 1.2;
-    }
-
-    .epigraph {
-      font-family: var(--font-serif);
-      font-style: italic;
-      color: var(--loam-mid);
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-
-    .epigraph a {
-      color: var(--moss-deep);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      transition: color 0.15s ease;
-    }
-
-    .epigraph a:hover {
-      color: var(--terracotta);
     }
 
     .header-intro {
@@ -206,7 +193,7 @@
 
     .toc-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 0.65rem;
     }
 
@@ -259,13 +246,10 @@
 
     /* App Views (Chapter containers) */
     .app-view {
-      display: none;
-    }
-
-    .app-view.active {
       display: flex;
       flex-direction: column;
       gap: 2.25rem;
+      scroll-margin-top: 2rem; /* Buffer for smooth scrolling */
     }
 
     /* Sticky Complexity Lens Controller */
@@ -568,18 +552,7 @@
       cursor: pointer;
     }
 
-    .select-input {
-      width: 100%;
-      background: var(--parchment-card);
-      border: 1px solid var(--sand-border);
-      color: var(--loam-dark);
-      padding: 0.45rem 0.65rem;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-sans);
-      font-size: 0.82rem;
-      outline: none;
-    }
-
+    /* Real-time Simulation Outputs */
     .results-panel {
       background: var(--parchment);
       border: 1px solid var(--sand-border);
@@ -714,6 +687,23 @@
       margin-top: 0.65rem;
     }
 
+    .reference-box {
+      background: var(--parchment);
+      border: 1px dashed var(--moss-light);
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .reference-box h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--moss-deep);
+      margin-bottom: 0.5rem;
+    }
+
     .support-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -787,44 +777,45 @@
     <header>
       <div class="brand-badge">Natural History of your Gut Biome</div>
       <h1>The Multitudes Within</h1>
-      <p class="epigraph">
-        &ldquo;Do I contradict myself? Very well then I contradict myself, (I am large, I contain <a href="https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version" target="_blank" rel="noopener">multitudes</a>.)&rdquo; Inspired by Ed Yong&rsquo;s <a href="https://edyong.me/i-contain-multitudes" target="_blank" rel="noopener">I Contain Multitudes: The Microbes Within Us and a Grander View of Life</a>.
-      </p>
       <p class="header-intro">
-        Your body contains more beneficial bacteria than human cells. You are the caretaker of an entire ecosystem. This app contains an explanation of what is happening inside your digestive tract, followed by an interactive simulator to see how your daily choices affect your internal ecosystem. Lastly, we provide a field guide introducing all the main microbial players and metabolic pathways.
+        Your body contains more beneficial bacteria than human cells. You are the caretaker of an entire ecosystem—and your gut is your body's most underrated, highly-sensitive organ. This app explores the mechanics of your digestive tract, provides a simulator to see how your daily choices affect your internal environment, and offers a field guide to your keystone microbial players.
       </p>
     </header>
 
-    <!-- Table of Contents Navigation Switcher -->
+    <!-- Table of Contents Navigation (Smooth Scrolling) -->
     <nav class="toc-nav">
       <div class="toc-title">Table of Contents</div>
       <div class="toc-grid">
-        <button class="toc-btn active" id="tocBtn1" onclick="switchView(1)">
-          <span class="toc-btn-number">Chapter I</span>
-          <span class="toc-btn-label">1. Understanding your inner world</span>
+        <button class="toc-btn active" id="tocBtn1" onclick="scrollToSection('chapter1', 0)">
+          <span class="toc-btn-number">Chapter 1</span>
+          <span class="toc-btn-label">Understanding your inner world</span>
         </button>
-        <button class="toc-btn" id="tocBtn2" onclick="switchView(2)">
-          <span class="toc-btn-number">Chapter II</span>
-          <span class="toc-btn-label">2. Interactive look at how your choices affect your gut biome</span>
+        <button class="toc-btn" id="tocBtn2" onclick="scrollToSection('chapter2', 1)">
+          <span class="toc-btn-number">Chapter 2</span>
+          <span class="toc-btn-label">How choices affect your biome</span>
         </button>
-        <button class="toc-btn" id="tocBtn3" onclick="switchView(3)">
-          <span class="toc-btn-number">Chapter III</span>
-          <span class="toc-btn-label">3. A field guide to really get to know your gut</span>
+        <button class="toc-btn" id="tocBtn3" onclick="scrollToSection('chapter3', 2)">
+          <span class="toc-btn-number">Chapter 3</span>
+          <span class="toc-btn-label">A field guide to your gut</span>
+        </button>
+        <button class="toc-btn" id="tocBtn4" onclick="scrollToSection('chapter4', 3)">
+          <span class="toc-btn-number">Chapter 4</span>
+          <span class="toc-btn-label">Other Active Utilities</span>
         </button>
       </div>
     </nav>
 
     <!-- CHAPTER 1 VIEW: Understanding your inner world -->
-    <div class="app-view active" id="view1">
+    <div class="app-view" id="chapter1">
       
       <!-- Sticky Complexity Lens Selector -->
       <div class="lens-sticky-wrap">
         <div class="lens-container">
-          <span class="lens-title">Select Depth Lens:</span>
+          <span class="lens-title">How detailed of an explanation?</span>
           <div class="lens-buttons">
-            <button class="lens-btn active" onclick="setLens(1)">🌿 Level 1: Meadow</button>
-            <button class="lens-btn" onclick="setLens(2)">🧬 Level 2: Physiology</button>
-            <button class="lens-btn" onclick="setLens(3)">🔬 Level 3: Deep Taxa</button>
+            <button class="lens-btn active" onclick="setLens(1)">🌿 Just the vibes</button>
+            <button class="lens-btn" onclick="setLens(2)">🧬 I know some big words</button>
+            <button class="lens-btn" onclick="setLens(3)">🔬 Maximum nerd mode</button>
           </div>
         </div>
       </div>
@@ -837,7 +828,7 @@
         </div>
 
         <p class="lens-intro-text" style="margin-bottom: 1.25rem;">
-          An introduction to the science of your gut biome can sometimes feel a bit overwhelming. You can choose between three different levels of complexity: <strong>Level 1 (Meadow)</strong> offers an easy-to-understand intuitive introduction; <strong>Level 2 (Physiology)</strong> dives into systems physiology and cellular mechanics; and <strong>Level 3 (Deep Taxa)</strong> lets you truly geek out on the underlying scientific taxa and biochemistry.
+          An introduction to the science of your gut biome can sometimes feel a bit overwhelming. Use the buttons above to choose how deep you want to go into the biology.
         </p>
 
         <div class="narrative-tabs" id="narrativeTabs">
@@ -855,18 +846,19 @@
       </section>
 
     </div>
-<!-- CHAPTER 2 VIEW: How your dietary choices affect your gut biome -->
-    <div class="app-view" id="view2">
+
+    <!-- CHAPTER 2 VIEW: How your dietary choices affect your gut biome -->
+    <div class="app-view" id="chapter2">
       
       <!-- MODULE 2: Ecosystem Sandbox -->
       <section class="card">
         <div class="section-head">
-          <h2>The Living Soil Sandbox: How your choices affect your biome</h2>
+          <h2>2. The Living Soil Sandbox</h2>
           <span class="section-tag">Biophysical Simulation</span>
         </div>
 
         <p class="lens-intro-text" style="margin-bottom: 1.5rem;">
-          You can model how your choices affect your biome by making choices on the left — the results show up on the right.
+          Model how your choices affect your biome by making adjustments on the left — the results show up on the right.
         </p>
 
         <div class="sandbox-layout">
@@ -877,7 +869,7 @@
               <div class="control-item-head">
                 <div>
                   <div class="control-label">Weekly Botanical Diversity</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Unique plants, herbs &amp; spices per week (target 30+)</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Unique plants, herbs &amp; spices per week</div>
                 </div>
                 <span class="control-value" id="valPlants">30 species</span>
               </div>
@@ -888,7 +880,7 @@
               <div class="control-item-head">
                 <div>
                   <div class="control-label">Digestive Rest Window</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily fasting hours allowing MMC cleansing waves</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily fasting hours allowing cleansing waves</div>
                 </div>
                 <span class="control-value" id="valFasting">16 hours</span>
               </div>
@@ -899,25 +891,22 @@
               <div class="control-item-head">
                 <div>
                   <div class="control-label">Live Fermented Foods</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily servings of live cultures (kefir, yogurt, kimchi, kombucha, miso, sauerkraut, etc.)</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily servings of live cultures (kefir, kimchi, etc.)</div>
                 </div>
-                <span class="control-value" id="valFerments">1 serving / day</span>
+                <span class="control-value" id="valFerments">1 serving</span>
               </div>
               <input type="range" class="slider" id="sliderFerments" min="0" max="3" value="1" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
             </div>
 
             <div class="control-item">
-              <div class="control-item-head" style="margin-bottom: 0.5rem;">
+              <div class="control-item-head">
                 <div>
-                  <div class="control-label">Ecological Disturbance</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Dietary stress or medical disruptions</div>
+                  <div class="control-label">Psychological Stress</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">High vagal stress limits blood flow and motility</div>
                 </div>
+                <span class="control-value" id="valStress">Low</span>
               </div>
-              <select class="select-input" id="selectShock" onchange="updateSimulation()">
-                <option value="none">None (Stable Cultivation)</option>
-                <option value="stress">Ultra-Processed / High Stress</option>
-                <option value="antibiotic">Recent Broad-Spectrum Antibiotic</option>
-              </select>
+              <input type="range" class="slider" id="sliderStress" min="1" max="10" value="3" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
             </div>
 
           </div>
@@ -976,9 +965,9 @@
     </div>
  
     <!-- CHAPTER 3 VIEW: A field guide to really get to know your gut -->
-    <div class="app-view" id="view3">
+    <div class="app-view" id="chapter3">
       
-      <!-- MODULE 3: Keystone Species & Metabolites (Field Director) -->
+      <!-- MODULE 3: Keystone Species & Metabolites -->
       <section class="card">
         <div class="section-head">
           <h2>3. Keystone Inhabitants &amp; Pathways</h2>
@@ -1000,45 +989,47 @@
 
     </div>
 
-    <!-- Companion Protocols in Corridor II -->
-    <section class="card" style="background: var(--parchment-warm); border-color: var(--sand-border);">
-      <div class="section-head">
-        <h2>Active Utilities in Corridor II</h2>
-        <span class="section-tag">Biological Tools</span>
-      </div>
-      <p style="font-size: 0.85rem; color: var(--loam-mid);">
-        Apply the principles of this field guide across our companion micro-utilities:
-      </p>
+    <!-- CHAPTER 4 VIEW: Companion Protocols -->
+    <div class="app-view" id="chapter4">
+      <section class="card" style="background: var(--parchment-warm); border-color: var(--sand-border);">
+        <div class="section-head">
+          <h2>Chapter 4: Other Active Utilities on Fallow.Garden</h2>
+          <span class="section-tag">Biological Tools</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--loam-mid);">
+          Apply the principles of this field guide across our companion micro-utilities:
+        </p>
 
-      <div class="companion-grid">
-        <a href="../inner-meadow/index.html" class="companion-link">
-          <div class="companion-title">
-            <span>The Inner Meadow</span>
-            <span>🌿</span>
-          </div>
-          <p class="companion-desc">Log weekly botanical intake to cultivate substrate polycultures (30+ species target).</p>
-          <span class="companion-cta">Track 30 Plants &rarr;</span>
-        </a>
+        <div class="companion-grid">
+          <a href="../inner-meadow/index.html" class="companion-link">
+            <div class="companion-title">
+              <span>The Inner Meadow</span>
+              <span>🌿</span>
+            </div>
+            <p class="companion-desc">Log weekly botanical intake to cultivate substrate polycultures (30+ species target).</p>
+            <span class="companion-cta">Track 30 Plants &rarr;</span>
+          </a>
 
-        <a href="../fastcounter/index.html" class="companion-link">
-          <div class="companion-title">
-            <span>Metabolic &amp; Gut Counter</span>
-            <span>⚡</span>
-          </div>
-          <p class="companion-desc">Align your fasting window with how your body cleans your digestive system.</p>
-          <span class="companion-cta">Track the best digestive window &rarr;</span>
-        </a>
+          <a href="../fastcounter/index.html" class="companion-link">
+            <div class="companion-title">
+              <span>Metabolic &amp; Gut Counter</span>
+              <span>⚡</span>
+            </div>
+            <p class="companion-desc">Align your fasting window with how your body cleans your digestive system.</p>
+            <span class="companion-cta">Track the best digestive window &rarr;</span>
+          </a>
 
-        <a href="https://getrepoopulate.com" class="companion-link" target="_blank" rel="noopener">
-          <div class="companion-title">
-            <span>getrepoopulate.com</span>
-            <span>↗</span>
-          </div>
-          <p class="companion-desc">Clinical protocols for rewilding gut soil following antibiotic shocks and acute dysbiosis.</p>
-          <span class="companion-cta">Rewilding Portal ↗</span>
-        </a>
-      </div>
-    </section>
+          <a href="https://getrepoopulate.com" class="companion-link" target="_blank" rel="noopener">
+            <div class="companion-title">
+              <span>getrepoopulate.com</span>
+              <span>↗</span>
+            </div>
+            <p class="companion-desc">Clinical protocols for rewilding gut soil following antibiotic shocks and acute dysbiosis.</p>
+            <span class="companion-cta">Rewilding Portal ↗</span>
+          </a>
+        </div>
+      </section>
+    </div>
 
     <!-- About & Support Section -->
     <section class="about-card">
@@ -1050,6 +1041,12 @@
         <p>
           <strong>fallow.garden</strong> is an independent anthology of single-purpose micro-utilities created to counter cognitive fatigue, algorithmic noise, and relentless optimization culture. Each tool runs entirely on your device with zero tracking or account friction.
         </p>
+        
+        <div class="reference-box">
+          <h3>Recommended Reading</h3>
+          <p style="margin: 0; color: var(--loam-mid);">The concepts in this primer are deeply indebted to Giulia Enders' <em>Gut: The Inside Story of Our Body's Most Underrated Organ</em> and Ed Yong's <em>I Contain Multitudes: The Microbes Within Us and a Grander View of Life</em>.</p>
+        </div>
+
         <p>
           Have ideas for new restorative modules, suggestions for current tools, or questions about the underlying research? Feedback and contributions are always deeply appreciated.
         </p>
@@ -1081,17 +1078,12 @@
     let currentLens = 1;
     let currentNarrativeIdx = 0;
     let currentFieldFilter = 'ALL';
-    let currentView = 1;
 
-    function switchView(viewNum) {
-      currentView = viewNum;
+    function scrollToSection(id, btnIdx) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
       document.querySelectorAll('.toc-btn').forEach((btn, idx) => {
-        btn.classList.toggle('active', idx + 1 === viewNum);
+        btn.classList.toggle('active', idx === btnIdx);
       });
-      document.querySelectorAll('.app-view').forEach((view, idx) => {
-        view.classList.toggle('active', idx + 1 === viewNum);
-      });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     const NARRATIVE_DATA = [
@@ -1115,12 +1107,12 @@
         step: 1,
         btn: "2. Upper GI & Fallow Rest",
         lvl1: {
-          title: "Upper GI & Motility: The Nighttime Street Sweepers",
-          body: "When you stop eating for several hours, your small intestine doesn't stop—it turns on a cleansing wave. Think of it as a mechanical broom sweeping residual food and stray bacteria down into the colon, keeping the upper canal pristine and preventing unwanted overgrowth."
+          title: "Upper GI & Motility: The Self-Cleaning Oven",
+          body: "When you stop eating for several hours, your stomach and small intestine act like a self-cleaning oven. A powerful muscular wave turns on, sweeping residual food and stray bacteria down into the colon, keeping the upper canal pristine and preventing unwanted overgrowth."
         },
         lvl2: {
           title: "Upper GI Motility: The Migrating Motor Complex (MMC)",
-          body: "Approximately 90–120 minutes into the postabsorptive state, cyclic electrical contractions known as the Migrating Motor Complex (Phase III) sweep through the stomach and ileum. Ingesting even a minor calorie shuts this off; maintaining a clear fasting window allows the MMC to clear microbial debris and prevent Small Intestinal Bacterial Overgrowth (SIBO)."
+          body: "Approximately 90–120 minutes into the postabsorptive state, cyclic electrical contractions known as the Migrating Motor Complex sweep through the stomach and ileum. Ingesting even a minor calorie shuts this off; maintaining a clear fasting window allows the MMC to act as the gut's internal self-cleaning mechanism, preventing Small Intestinal Bacterial Overgrowth (SIBO)."
         },
         lvl3: {
           title: "Upper GI Motility: Interdigestive Motilin & Phase III Bioelectrics",
@@ -1136,11 +1128,11 @@
         },
         lvl2: {
           title: "Colonic Fermentation: Anaerobic Polysaccharide Handoffs",
-          body: "The colon functions as an anaerobic bioreactor. Primary fermenters (e.g., *Bacteroides*) deploy massive enzyme suites to shatter complex glycans into intermediate oligosaccharides and lactate, which secondary specialists (e.g., *Faecalibacterium*) ferment into butyrate, propionate, and acetate."
+          body: "The colon functions as an anaerobic bioreactor. Primary fermenters deploy massive enzyme suites to shatter complex glycans into intermediate oligosaccharides and lactate, which secondary specialists ferment into butyrate, propionate, and acetate."
         },
         lvl3: {
           title: "Colonic Fermentation: CAZyme Cascades & SCFA Stoichiometry",
-          body: "Carbohydrate-Active Enzyme (CAZyme) genomic clusters (such as Polysaccharide Utilization Loci / PULs) cleave branched glycans into pyruvate via the Wood-Ljungdahl and acetyl-CoA pathways, yielding Short-Chain Fatty Acids (SCFAs) in a molar ratio of roughly 60:20:20 (Acetate:Propionate:Butyrate), lowering luminal pH to suppress pathogens."
+          body: "Carbohydrate-Active Enzyme (CAZyme) genomic clusters (such as Polysaccharide Utilization Loci) cleave branched glycans into pyruvate via the Wood-Ljungdahl and acetyl-CoA pathways, yielding Short-Chain Fatty Acids (SCFAs) in a molar ratio of roughly 60:20:20 (Acetate:Propionate:Butyrate), lowering luminal pH to suppress pathogens."
         }
       },
       {
@@ -1152,27 +1144,27 @@
         },
         lvl2: {
           title: "The Mucosal Fortress: Epithelial Tight Junctions & The Mucus Moat",
-          body: "A double-layered mucus barrier (a dense sterile inner layer and a loose outer layer) insulates enterocytes. Specialized bacteria stimulate goblet cells to secrete Muc2 glycoproteins, while tight-junction proteins (claudins, occludins) prevent toxic bacterial fragments from slipping into systemic circulation."
+          body: "A double-layered mucus barrier (a dense sterile inner layer and a loose outer layer) insulates enterocytes. Specialized bacteria stimulate goblet cells to secrete Muc2 glycoproteins, while tight-junction proteins prevent toxic bacterial fragments from slipping into systemic circulation."
         },
         lvl3: {
           title: "The Mucosal Fortress: Glycan Dynamics & Claudin/ZO-1 Integrity",
-          body: "Epithelial homeostasis depends on sulfated Muc2 mucin matrices and apical tight junctions regulated by zonula occludens-1 (ZO-1) and claudin-1. Host-adapted taxa (*Akkermansia*) forage sialic acids to drive epithelial renewal; loss of this barrier allows lipopolysaccharides (LPS) to bind TLR4 receptors, provoking systemic metabolic endotoxemia."
+          body: "Epithelial homeostasis depends on sulfated Muc2 mucin matrices and apical tight junctions regulated by zonula occludens-1 (ZO-1) and claudin-1. Host-adapted taxa forage sialic acids to drive epithelial renewal; loss of this barrier allows lipopolysaccharides (LPS) to bind TLR4 receptors, provoking endotoxemia."
         }
       },
       {
         step: 4,
-        btn: "5. Brain-Gut-Fasting Axis",
+        btn: "5. Brain-Gut Axis",
         lvl1: {
-          title: "The Brain-Gut-Fasting Axis: Neural Conversations",
-          body: "Your gut and brain are in constant dialogue via the vagus nerve. When you fast, your microbiome shifts its metabolic output, sending signals that lower neuroinflammation, sharpen mental clarity, and help reset your circadian clocks."
+          title: "The Brain-Gut Axis: Your Second Brain",
+          body: "Your gut isn't just a digestion tube—it's a massive sensory organ with its own independent nervous system (a 'second brain'). It communicates constantly with your actual brain via the vagus nerve. When you are stressed, your brain literally shuts down digestive blood flow. When calm, your microbes send signals that lower neuroinflammation and sharpen mental clarity."
         },
         lvl2: {
-          title: "The Brain-Gut-Fasting Axis: Vagal Pathways & Satiety Signaling",
-          body: "Short-chain fatty acids produced by fasting-induced microbial metabolism stimulate vagal afferent nerve fibers and enteric neurons. Simultaneously, shifting ghrelin and leptin profiles communicate metabolic state directly to the hypothalamus."
+          title: "The Brain-Gut-Fasting Axis: Vagal Tone & Satiety Signaling",
+          body: "High psychological stress inhibits vagal tone, reducing gastric secretions and motility. Conversely, short-chain fatty acids produced by healthy microbial metabolism stimulate vagal afferent nerve fibers and enteric neurons. Simultaneously, shifting ghrelin and leptin profiles communicate metabolic state directly to the hypothalamus."
         },
         lvl3: {
           title: "The Brain-Gut-Fasting Axis: Enteric-Central Neurochemical Circuits",
-          body: "Fasting triggers parasympathetic tone modulation via the vagus nerve, altering neurotransmitter precursors (serotonin, GABA) synthesized by microbial fermentation. Acetate crosses the blood-brain barrier to modulate hypothalamic pro-opiomelanocortin (POMC) neuronal activity and suppress appetite signaling."
+          body: "Psychological stress downregulates parasympathetic efferent signals, increasing mucosal permeability. Fasting and SCFA production trigger parasympathetic tone modulation via the vagus nerve, altering neurotransmitter precursors (serotonin, GABA) synthesized by microbial fermentation. Acetate crosses the blood-brain barrier to suppress appetite signaling."
         }
       }
     ];
@@ -1336,28 +1328,20 @@
       const plants = parseInt(document.getElementById('sliderPlants').value);
       const fasting = parseInt(document.getElementById('sliderFasting').value);
       const ferments = parseInt(document.getElementById('sliderFerments').value);
-      const shock = document.getElementById('selectShock').value;
+      const stress = parseInt(document.getElementById('sliderStress').value);
 
       document.getElementById('valPlants').textContent = `${plants} species`;
       document.getElementById('valFasting').textContent = `${fasting} hours`;
-      document.getElementById('valFerments').textContent = `${ferments} serving${ferments === 1 ? '' : 's'} / day`;
+      document.getElementById('valFerments').textContent = `${ferments} serving${ferments === 1 ? '' : 's'}`;
+      
+      const stressLabels = ["Zen", "Low", "Mild", "Moderate", "Elevated", "High", "Very High", "Overwhelmed", "Burnout", "Crisis"];
+      document.getElementById('valStress').textContent = stressLabels[stress - 1];
 
-      let mucus = (fasting * 4.2) + (plants * 0.8) + (ferments * 4);
-      let scfa = (plants * 1.8) + (ferments * 6) + (fasting * 0.5);
-      let diversity = (plants * 2.0) + (ferments * 5);
-      let lps = 100 - ((mucus * 0.5) + (scfa * 0.4) + (fasting * 0.8));
-
-      if (shock === 'stress') {
-        mucus -= 22;
-        scfa -= 18;
-        diversity -= 20;
-        lps += 30;
-      } else if (shock === 'antibiotic') {
-        mucus -= 35;
-        scfa -= 65;
-        diversity -= 70;
-        lps += 55;
-      }
+      // Math incorporates psychological stress pulling resources away from gut function
+      let mucus = (fasting * 4.2) + (plants * 0.8) + (ferments * 4) - (stress * 3.5);
+      let scfa = (plants * 1.8) + (ferments * 6) + (fasting * 0.5) - (stress * 1.5);
+      let diversity = (plants * 2.0) + (ferments * 5) - (stress * 2);
+      let lps = 100 - ((mucus * 0.5) + (scfa * 0.4) + (fasting * 0.8)) + (stress * 3);
 
       mucus = Math.min(Math.max(mucus, 8), 98);
       scfa = Math.min(Math.max(scfa, 5), 98);
@@ -1373,7 +1357,7 @@
       
       if (currentLens === 1) {
         document.getElementById('valMucusScore').textContent = mucus > 70 ? 'Thick & Glistening' : (mucus > 40 ? 'Moderate Shield' : 'Depleted');
-        document.getElementById('noteMucus').textContent = 'Fasting windows allow goblet cells to rebuild your protective inner mucus layer.';
+        document.getElementById('noteMucus').textContent = 'Fasting windows allow goblet cells to rebuild your protective inner mucus layer, but stress thins it out.';
 
         document.getElementById('valScfaScore').textContent = scfa > 70 ? 'Abundant Yield' : (scfa > 40 ? 'Moderate Output' : 'Starving Prairie');
         document.getElementById('noteScfa').textContent = 'High botanical diversity generates rich fuel to nourish and heal gut cells.';
@@ -1385,7 +1369,7 @@
         document.getElementById('noteLps').textContent = 'Intact mucosal fortress keeps unwanted particles from entering bloodstream.';
       } else if (currentLens === 2) {
         document.getElementById('valMucusScore').textContent = `${Math.round(mucus * 1.5)} μm Est.`;
-        document.getElementById('noteMucus').textContent = 'Akkermansia foraging stimulates basal goblet cell renewal via mucosal feedback loops.';
+        document.getElementById('noteMucus').textContent = 'Akkermansia foraging stimulates basal goblet cell renewal, but high cortisol inhibits mucin secretion.';
 
         document.getElementById('valScfaScore').textContent = `${Math.round(scfa * 1.1)} mmol/kg`;
         document.getElementById('noteScfa').textContent = 'Butyrate and propionate activate GPR41/43 signaling, improving GLP-1 secretion.';
@@ -1397,7 +1381,7 @@
         document.getElementById('noteLps').textContent = 'Claudin-1 and ZO-1 tight-junction integrity prevents endotoxin leak.';
       } else {
         document.getElementById('valMucusScore').textContent = `${Math.round(mucus * 1.6)} μm Muc2`;
-        document.getElementById('noteMucus').textContent = 'Sialylated oligosaccharide cleaving upregulates enterocyte TLR2 and stimulates Muc2 synthesis.';
+        document.getElementById('noteMucus').textContent = 'Sialylated oligosaccharide cleaving upregulates enterocyte TLR2; sympathetic nerve firing reduces blood flow.';
 
         document.getElementById('valScfaScore').textContent = `${Math.round(scfa * 1.2)} mM (60:20:20)`;
         document.getElementById('noteScfa').textContent = 'Butyryl-CoA:acetate CoA-transferase flux supplies 70% of colonocyte ATP requirements.';
