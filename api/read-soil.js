@@ -7,9 +7,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { plants, fasting, ferments, stress, lens } = req.body;
+    const { plants, fasting, ferments, stress, hydration, sugar, alcohol, lens } = req.body;
     
-    // Initialize the classic SDK. Vercel automatically injects GEMINI_API_KEY from your dashboard settings.
+    // Initialize the classic SDK
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: 'gemini-3.6-flash' });
 
@@ -28,6 +28,9 @@ export default async function handler(req, res) {
     - Digestive Rest Window: ${fasting} hours between meals
     - Fermented Foods: ${ferments} servings per day
     - Psychological Stress: Level ${stress}/10 (${stressLabels[stress - 1]})
+    - Daily Hydration: ${hydration} glasses of water
+    - Refined Sugar: ${sugar} grams per day
+    - Alcohol Intake: ${alcohol} drinks per week
     
     Write a highly personalized, two-paragraph narrative of what is currently happening in this person's gut environment based on these exact metrics. 
     Tone instruction: ${lensTones[lens]}
