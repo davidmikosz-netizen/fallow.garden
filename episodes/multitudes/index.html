@@ -600,6 +600,47 @@
       line-height: 1.35;
     }
 
+    /* AI Button & Output Box */
+    .btn-read-soil {
+      background: var(--moss-deep);
+      color: #ffffff;
+      border: none;
+      padding: 0.85rem;
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+      margin-top: 1rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-read-soil:hover {
+      opacity: 0.9;
+    }
+
+    .btn-read-soil:disabled {
+      background: var(--moss-light);
+      cursor: wait;
+    }
+
+    .ai-output-box {
+      display: none;
+      margin-top: 1rem;
+      background: var(--parchment-warm);
+      border: 1px solid var(--moss-light);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--loam-dark);
+      line-height: 1.6;
+    }
+
     /* Companion Apps Corridor Links */
     .companion-grid {
       display: grid;
@@ -736,16 +777,12 @@
       color: #000000;
     }
 
-    .btn-venmo {
-      background: #008cff;
-      color: #ffffff;
-    }
-
     .btn-email {
       background: var(--parchment-warm);
       color: var(--loam-dark);
       border-color: var(--sand-border);
     }
+    
     .btn-email:hover {
       background: var(--sand-border);
     }
@@ -836,7 +873,7 @@
           <button class="narrative-tab-btn" onclick="selectNarrative(1)">2. Upper GI &amp; Fallow Rest</button>
           <button class="narrative-tab-btn" onclick="selectNarrative(2)">3. Colonic Fermentation</button>
           <button class="narrative-tab-btn" onclick="selectNarrative(3)">4. The Mucosal Fortress</button>
-          <button class="narrative-tab-btn" onclick="selectNarrative(4)">5. Brain-Gut-Fasting Axis</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(4)">5. Brain-Gut Axis</button>
         </div>
 
         <div class="narrative-display">
@@ -865,28 +902,31 @@
           <!-- Controls -->
           <div class="controls-panel">
             
+            <!-- Slider 1 -->
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Weekly Botanical Diversity</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Unique plants, herbs &amp; spices per week</div>
+                  <div class="control-label">Botanical Diversity</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How many plants, herbs and spices you eat per week</div>
                 </div>
                 <span class="control-value" id="valPlants">30 species</span>
               </div>
               <input type="range" class="slider" id="sliderPlants" min="5" max="45" value="30" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
             </div>
 
+            <!-- Slider 2 -->
             <div class="control-item">
               <div class="control-item-head">
                 <div>
                   <div class="control-label">Digestive Rest Window</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily fasting hours allowing cleansing waves</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How long between meals</div>
                 </div>
                 <span class="control-value" id="valFasting">16 hours</span>
               </div>
               <input type="range" class="slider" id="sliderFasting" min="8" max="22" value="16" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
             </div>
 
+            <!-- Slider 3 -->
             <div class="control-item">
               <div class="control-item-head">
                 <div>
@@ -898,11 +938,12 @@
               <input type="range" class="slider" id="sliderFerments" min="0" max="3" value="1" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
             </div>
 
+            <!-- Slider 4 -->
             <div class="control-item">
               <div class="control-item-head">
                 <div>
                   <div class="control-label">Psychological Stress</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">High vagal stress limits blood flow and motility</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How your stress level affects your gut</div>
                 </div>
                 <span class="control-value" id="valStress">Low</span>
               </div>
@@ -960,6 +1001,13 @@
 
           </div>
         </div>
+
+        <!-- AI Dynamic Narrative Output -->
+        <button id="btnReadSoil" class="btn-read-soil" onclick="generateSynthesis()">
+          <span>✨</span> Read My Soil
+        </button>
+        <div id="aiSynthesisOutput" class="ai-output-box"></div>
+
       </section>
 
     </div>
@@ -1323,6 +1371,45 @@
       }).join('');
     }
 
+    // --- AI Integration Fetch ---
+    async function generateSynthesis() {
+      const btn = document.getElementById('btnReadSoil');
+      const output = document.getElementById('aiSynthesisOutput');
+      
+      const plants = document.getElementById('sliderPlants').value;
+      const fasting = document.getElementById('sliderFasting').value;
+      const ferments = document.getElementById('sliderFerments').value;
+      const stress = document.getElementById('sliderStress').value;
+
+      btn.innerHTML = '<span>⏳</span> Synthesizing...';
+      btn.disabled = true;
+      output.style.display = 'block';
+      output.innerHTML = '<span style="color: var(--loam-mid);">Reading ecological data...</span>';
+
+      try {
+        const response = await fetch('/api/read-soil', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ plants, fasting, ferments, stress, lens: currentLens })
+        });
+        
+        const data = await response.json();
+        
+        if (data.narrative) {
+          // Replace plain text double-newlines with paragraph tags to maintain nice spacing
+          const paragraphs = data.narrative.split('\n\n').map(p => `<p style="margin-bottom: 0.75rem;">${p}</p>`).join('');
+          output.innerHTML = paragraphs;
+        } else {
+          output.innerHTML = 'Simulation failed to synthesize. Please check the connection.';
+        }
+      } catch (err) {
+        output.innerHTML = 'An error occurred while connecting to the ecosystem model.';
+      }
+
+      btn.innerHTML = '<span>✨</span> Read My Soil (Update)';
+      btn.disabled = false;
+    }
+
     // --- Ecosystem Simulator Calculations ---
     function updateSimulation() {
       const plants = parseInt(document.getElementById('sliderPlants').value);
@@ -1337,7 +1424,6 @@
       const stressLabels = ["Zen", "Low", "Mild", "Moderate", "Elevated", "High", "Very High", "Overwhelmed", "Burnout", "Crisis"];
       document.getElementById('valStress').textContent = stressLabels[stress - 1];
 
-      // Math incorporates psychological stress pulling resources away from gut function
       let mucus = (fasting * 4.2) + (plants * 0.8) + (ferments * 4) - (stress * 3.5);
       let scfa = (plants * 1.8) + (ferments * 6) + (fasting * 0.5) - (stress * 1.5);
       let diversity = (plants * 2.0) + (ferments * 5) - (stress * 2);
