@@ -249,7 +249,7 @@
       display: flex;
       flex-direction: column;
       gap: 2.25rem;
-      scroll-margin-top: 2rem; /* Buffer for smooth scrolling */
+      scroll-margin-top: 2rem;
     }
 
     /* Sticky Complexity Lens Controller */
@@ -503,9 +503,9 @@
       gap: 1.5rem;
     }
 
-    @media (min-width: 740px) {
+    @media (min-width: 760px) {
       .sandbox-layout {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 3fr 2fr;
       }
     }
 
@@ -553,6 +553,12 @@
     }
 
     /* Real-time Simulation Outputs */
+    .results-panel-wrapper {
+      position: sticky;
+      top: 5.5rem;
+      align-self: start;
+    }
+    
     .results-panel {
       background: var(--parchment);
       border: 1px solid var(--sand-border);
@@ -902,7 +908,7 @@
           <!-- Controls -->
           <div class="controls-panel">
             
-            <!-- Slider 1 -->
+            <!-- Slider 1: Plants -->
             <div class="control-item">
               <div class="control-item-head">
                 <div>
@@ -914,7 +920,7 @@
               <input type="range" class="slider" id="sliderPlants" min="5" max="45" value="30" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
             </div>
 
-            <!-- Slider 2 -->
+            <!-- Slider 2: Fasting -->
             <div class="control-item">
               <div class="control-item-head">
                 <div>
@@ -926,7 +932,7 @@
               <input type="range" class="slider" id="sliderFasting" min="8" max="22" value="16" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
             </div>
 
-            <!-- Slider 3 -->
+            <!-- Slider 3: Ferments -->
             <div class="control-item">
               <div class="control-item-head">
                 <div>
@@ -938,7 +944,43 @@
               <input type="range" class="slider" id="sliderFerments" min="0" max="3" value="1" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
             </div>
 
-            <!-- Slider 4 -->
+            <!-- Slider 4: Hydration -->
+            <div class="control-item">
+              <div class="control-item-head">
+                <div>
+                  <div class="control-label">Daily Hydration</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Water powers the mucosal matrix and motility</div>
+                </div>
+                <span class="control-value" id="valHydration">8 glasses</span>
+              </div>
+              <input type="range" class="slider" id="sliderHydration" min="1" max="15" value="8" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
+            </div>
+
+            <!-- Slider 5: Sugar -->
+            <div class="control-item">
+              <div class="control-item-head">
+                <div>
+                  <div class="control-label">Refined Sugar</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily grams of added sugars (feeds opportunists)</div>
+                </div>
+                <span class="control-value" id="valSugar">25 g</span>
+              </div>
+              <input type="range" class="slider" id="sliderSugar" min="0" max="100" value="25" step="5" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
+            </div>
+
+            <!-- Slider 6: Alcohol -->
+            <div class="control-item">
+              <div class="control-item-head">
+                <div>
+                  <div class="control-label">Alcohol Intake</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Weekly drinks (solvent that irritates gut lining)</div>
+                </div>
+                <span class="control-value" id="valAlcohol">2 drinks</span>
+              </div>
+              <input type="range" class="slider" id="sliderAlcohol" min="0" max="15" value="2" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
+            </div>
+
+            <!-- Slider 7: Stress -->
             <div class="control-item">
               <div class="control-item-head">
                 <div>
@@ -953,61 +995,62 @@
           </div>
 
           <!-- Real-time Simulation Outputs -->
-          <div class="results-panel">
-            
-            <div class="metric-row">
-              <div class="metric-head">
-                <span id="labelMucus">Mucus Layer Thickness</span>
-                <span id="valMucusScore">--</span>
+          <div class="results-panel-wrapper">
+            <div class="results-panel">
+              
+              <div class="metric-row">
+                <div class="metric-head">
+                  <span id="labelMucus">Mucus Layer Thickness</span>
+                  <span id="valMucusScore">--</span>
+                </div>
+                <div class="metric-bar-bg">
+                  <div class="metric-bar-fill" id="barMucus"></div>
+                </div>
+                <p class="metric-note" id="noteMucus">...</p>
               </div>
-              <div class="metric-bar-bg">
-                <div class="metric-bar-fill" id="barMucus"></div>
+
+              <div class="metric-row">
+                <div class="metric-head">
+                  <span id="labelScfa">Short-Chain Fatty Acid Yield</span>
+                  <span id="valScfaScore">--</span>
+                </div>
+                <div class="metric-bar-bg">
+                  <div class="metric-bar-fill" id="barScfa"></div>
+                </div>
+                <p class="metric-note" id="noteScfa">...</p>
               </div>
-              <p class="metric-note" id="noteMucus">...</p>
+
+              <div class="metric-row">
+                <div class="metric-head">
+                  <span id="labelDiversity">Microbial Richness Index</span>
+                  <span id="valDivScore">--</span>
+                </div>
+                <div class="metric-bar-bg">
+                  <div class="metric-bar-fill" id="barDiversity"></div>
+                </div>
+                <p class="metric-note" id="noteDiversity">...</p>
+              </div>
+
+              <div class="metric-row">
+                <div class="metric-head">
+                  <span id="labelLps">Gut Barrier Leakage Risk (LPS)</span>
+                  <span id="valLpsScore">--</span>
+                </div>
+                <div class="metric-bar-bg">
+                  <div class="metric-bar-fill" id="barLps"></div>
+                </div>
+                <p class="metric-note" id="noteLps">...</p>
+              </div>
+
             </div>
 
-            <div class="metric-row">
-              <div class="metric-head">
-                <span id="labelScfa">Short-Chain Fatty Acid Yield</span>
-                <span id="valScfaScore">--</span>
-              </div>
-              <div class="metric-bar-bg">
-                <div class="metric-bar-fill" id="barScfa"></div>
-              </div>
-              <p class="metric-note" id="noteScfa">...</p>
-            </div>
-
-            <div class="metric-row">
-              <div class="metric-head">
-                <span id="labelDiversity">Microbial Richness Index</span>
-                <span id="valDivScore">--</span>
-              </div>
-              <div class="metric-bar-bg">
-                <div class="metric-bar-fill" id="barDiversity"></div>
-              </div>
-              <p class="metric-note" id="noteDiversity">...</p>
-            </div>
-
-            <div class="metric-row">
-              <div class="metric-head">
-                <span id="labelLps">Gut Barrier Leakage Risk (LPS)</span>
-                <span id="valLpsScore">--</span>
-              </div>
-              <div class="metric-bar-bg">
-                <div class="metric-bar-fill" id="barLps"></div>
-              </div>
-              <p class="metric-note" id="noteLps">...</p>
-            </div>
-
+            <!-- AI Dynamic Narrative Output -->
+            <button id="btnReadSoil" class="btn-read-soil" onclick="generateSynthesis()">
+              <span>✨</span> Read My Soil
+            </button>
+            <div id="aiSynthesisOutput" class="ai-output-box"></div>
           </div>
         </div>
-
-        <!-- AI Dynamic Narrative Output -->
-        <button id="btnReadSoil" class="btn-read-soil" onclick="generateSynthesis()">
-          <span>✨</span> Read My Soil
-        </button>
-        <div id="aiSynthesisOutput" class="ai-output-box"></div>
-
       </section>
 
     </div>
@@ -1380,6 +1423,9 @@
       const fasting = document.getElementById('sliderFasting').value;
       const ferments = document.getElementById('sliderFerments').value;
       const stress = document.getElementById('sliderStress').value;
+      const hydration = document.getElementById('sliderHydration').value;
+      const sugar = document.getElementById('sliderSugar').value;
+      const alcohol = document.getElementById('sliderAlcohol').value;
 
       btn.innerHTML = '<span>⏳</span> Synthesizing...';
       btn.disabled = true;
@@ -1390,7 +1436,7 @@
         const response = await fetch('/api/read-soil', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ plants, fasting, ferments, stress, lens: currentLens })
+          body: JSON.stringify({ plants, fasting, ferments, stress, hydration, sugar, alcohol, lens: currentLens })
         });
         
         const data = await response.json();
@@ -1416,18 +1462,25 @@
       const fasting = parseInt(document.getElementById('sliderFasting').value);
       const ferments = parseInt(document.getElementById('sliderFerments').value);
       const stress = parseInt(document.getElementById('sliderStress').value);
+      const hydration = parseInt(document.getElementById('sliderHydration').value);
+      const sugar = parseInt(document.getElementById('sliderSugar').value);
+      const alcohol = parseInt(document.getElementById('sliderAlcohol').value);
 
       document.getElementById('valPlants').textContent = `${plants} species`;
       document.getElementById('valFasting').textContent = `${fasting} hours`;
       document.getElementById('valFerments').textContent = `${ferments} serving${ferments === 1 ? '' : 's'}`;
+      document.getElementById('valHydration').textContent = `${hydration} glass${hydration === 1 ? '' : 'es'}`;
+      document.getElementById('valSugar').textContent = `${sugar} g`;
+      document.getElementById('valAlcohol').textContent = `${alcohol} drink${alcohol === 1 ? '' : 's'}`;
       
       const stressLabels = ["Zen", "Low", "Mild", "Moderate", "Elevated", "High", "Very High", "Overwhelmed", "Burnout", "Crisis"];
       document.getElementById('valStress').textContent = stressLabels[stress - 1];
 
-      let mucus = (fasting * 4.2) + (plants * 0.8) + (ferments * 4) - (stress * 3.5);
-      let scfa = (plants * 1.8) + (ferments * 6) + (fasting * 0.5) - (stress * 1.5);
-      let diversity = (plants * 2.0) + (ferments * 5) - (stress * 2);
-      let lps = 100 - ((mucus * 0.5) + (scfa * 0.4) + (fasting * 0.8)) + (stress * 3);
+      // Expanded biophysical math mapping all 7 variables
+      let mucus = (fasting * 3.5) + (plants * 0.8) + (ferments * 4) + (hydration * 3.0) - (stress * 3.5) - (alcohol * 3);
+      let scfa = (plants * 1.8) + (ferments * 6) + (fasting * 0.5) - (stress * 1.5) - (sugar * 0.3);
+      let diversity = (plants * 2.0) + (ferments * 5) - (stress * 2) - (sugar * 0.4) - (alcohol * 2);
+      let lps = 100 - ((mucus * 0.5) + (scfa * 0.4) + (fasting * 0.8)) + (stress * 3) + (alcohol * 4) + (sugar * 0.5);
 
       mucus = Math.min(Math.max(mucus, 8), 98);
       scfa = Math.min(Math.max(scfa, 5), 98);
@@ -1443,45 +1496,53 @@
       
       if (currentLens === 1) {
         document.getElementById('valMucusScore').textContent = mucus > 70 ? 'Thick & Glistening' : (mucus > 40 ? 'Moderate Shield' : 'Depleted');
-        document.getElementById('noteMucus').textContent = 'Fasting windows allow goblet cells to rebuild your protective inner mucus layer, but stress thins it out.';
+        document.getElementById('noteMucus').textContent = 'Hydration and fasting windows allow goblet cells to rebuild your protective inner mucus layer. Alcohol thins it.';
 
         document.getElementById('valScfaScore').textContent = scfa > 70 ? 'Abundant Yield' : (scfa > 40 ? 'Moderate Output' : 'Starving Prairie');
         document.getElementById('noteScfa').textContent = 'High botanical diversity generates rich fuel to nourish and heal gut cells.';
 
         document.getElementById('valDivScore').textContent = diversity > 70 ? 'Diverse Polyculture' : 'Monoculture Risk';
-        document.getElementById('noteDiversity').textContent = 'Eating 30+ plant foods per week creates a resilient polyculture.';
+        document.getElementById('noteDiversity').textContent = 'Eating 30+ plant foods creates a resilient polyculture. Refined sugars feed opportunistic weeds.';
 
         document.getElementById('valLpsScore').textContent = lps < 35 ? 'Secure Barrier' : 'Leaky Risk';
         document.getElementById('noteLps').textContent = 'Intact mucosal fortress keeps unwanted particles from entering bloodstream.';
       } else if (currentLens === 2) {
         document.getElementById('valMucusScore').textContent = `${Math.round(mucus * 1.5)} μm Est.`;
-        document.getElementById('noteMucus').textContent = 'Akkermansia foraging stimulates basal goblet cell renewal, but high cortisol inhibits mucin secretion.';
+        document.getElementById('noteMucus').textContent = 'Akkermansia foraging stimulates basal goblet cell renewal. Alcohol physically acts as a mucosal solvent.';
 
         document.getElementById('valScfaScore').textContent = `${Math.round(scfa * 1.1)} mmol/kg`;
         document.getElementById('noteScfa').textContent = 'Butyrate and propionate activate GPR41/43 signaling, improving GLP-1 secretion.';
 
         document.getElementById('valDivScore').textContent = `H' = ${(diversity / 25).toFixed(2)}`;
-        document.getElementById('noteDiversity').textContent = 'Shannon diversity index scales with varied microbiota-accessible carbohydrate (MAC) intake.';
+        document.getElementById('noteDiversity').textContent = 'Shannon diversity index scales with varied MAC intake. Sugar rapidly shifts upper GI bacterial composition.';
 
         document.getElementById('valLpsScore').textContent = lps < 35 ? 'Minimal Translocation' : 'Elevated Permeability';
-        document.getElementById('noteLps').textContent = 'Claudin-1 and ZO-1 tight-junction integrity prevents endotoxin leak.';
+        document.getElementById('noteLps').textContent = 'Claudin-1 and ZO-1 tight-junction integrity prevents endotoxin leak. Ethanol relaxes tight junctions.';
       } else {
         document.getElementById('valMucusScore').textContent = `${Math.round(mucus * 1.6)} μm Muc2`;
-        document.getElementById('noteMucus').textContent = 'Sialylated oligosaccharide cleaving upregulates enterocyte TLR2; sympathetic nerve firing reduces blood flow.';
+        document.getElementById('noteMucus').textContent = 'Sialylated oligosaccharide cleaving upregulates enterocyte TLR2; ethanol disrupts lipid rafts in epithelial membranes.';
 
         document.getElementById('valScfaScore').textContent = `${Math.round(scfa * 1.2)} mM (60:20:20)`;
         document.getElementById('noteScfa').textContent = 'Butyryl-CoA:acetate CoA-transferase flux supplies 70% of colonocyte ATP requirements.';
 
         document.getElementById('valDivScore').textContent = `Shannon H' ${(diversity / 24).toFixed(2)}`;
-        document.getElementById('noteDiversity').textContent = 'PUL diversity across Bacteroidetes prevents ecological monoculture collapse.';
+        document.getElementById('noteDiversity').textContent = 'PUL diversity across Bacteroidetes prevents ecological collapse. Fructose malabsorption triggers rapid opportunistic blooms.';
 
         document.getElementById('valLpsScore').textContent = lps < 35 ? '<0.2 EU/mL (Basal)' : '>0.6 EU/mL (Endotoxemia)';
-        document.getElementById('noteLps').textContent = 'Serum LPS binding of TLR4 triggers peripheral CD14/MyD88 cascade without tight junctions.';
+        document.getElementById('noteLps').textContent = 'Serum LPS binding of TLR4 triggers peripheral CD14/MyD88 cascade without intact occludins.';
       }
     }
  
     // --- Initialization ---
     window.addEventListener('DOMContentLoaded', () => {
+      // Create sticky behavior for results panel on desktop
+      const resultsWrapper = document.querySelector('.results-panel-wrapper');
+      const lensSticky = document.querySelector('.lens-sticky-wrap');
+      if (resultsWrapper && lensSticky) {
+        const headerHeight = lensSticky.getBoundingClientRect().height;
+        resultsWrapper.style.top = `calc(1rem + ${headerHeight}px)`;
+      }
+
       renderNarrative();
       renderFieldCards();
       updateSimulation();
