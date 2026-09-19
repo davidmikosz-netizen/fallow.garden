@@ -1,4 +1,4 @@
-import { GoogleGenAI } from '@google/genai';
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 export default async function handler(req, res) {
   // Only allow POST requests
@@ -9,8 +9,9 @@ export default async function handler(req, res) {
   try {
     const { plants, fasting, ferments, stress, lens } = req.body;
     
-    // Initialize the SDK. Vercel automatically securely injects GEMINI_API_KEY from your dashboard settings.
-    const ai = new GoogleGenAI({}); 
+    // Initialize the classic SDK. Vercel automatically injects GEMINI_API_KEY from your dashboard settings.
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     // Map the user's complexity lens to a strict writing style
     const lensTones = {
@@ -33,12 +34,10 @@ export default async function handler(req, res) {
     
     Do not include greetings, formatting, or fluff. Just return the two paragraphs of synthesized text.`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt,
-    });
-
-    return res.status(200).json({ narrative: response.text });
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    
+    return res.status(200).json({ narrative: response.text() });
     
   } catch (error) {
     console.error(error);
