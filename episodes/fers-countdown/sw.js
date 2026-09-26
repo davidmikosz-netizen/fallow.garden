@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fers-cache-v2';
+const CACHE_NAME = 'fers-cache-v3';
 
 // Only list files that actually exist in your directory
 const urlsToCache = [
