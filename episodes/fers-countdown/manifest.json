@@ -1,7 +1,7 @@
 {
   "name": "FERS Countdown",
   "short_name": "FERS",
-  "scope": "/fers/",
+  "scope": "/fers-countdown/",
   "start_url": "/fers-countdown/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
