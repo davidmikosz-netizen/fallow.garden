@@ -2,11 +2,11 @@ const CACHE_NAME = 'fers-cache-v1';
 
 // Only list files that actually exist in your directory
 const urlsToCache = [
-  '/fers-countdown/',
-  '/fers-countdown/index.html',
-  '/fers-countdown/manifest.json',
-  '/fers-countdown/icon-192x192.png',
-  '/fers-countdown/icon-512x512.png'
+  '/episodes/fers-countdown/',
+  '/episodes/fers-countdown/index.html',
+  '/episodes/fers-countdown/manifest.json',
+  '/episodes/fers-countdown/icon-192x192.png',
+  '/episodes/fers-countdown/icon-512x512.png'
 ];
 
 // Install the service worker and cache the files
