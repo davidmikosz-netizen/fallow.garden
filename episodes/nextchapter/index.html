@@ -411,7 +411,7 @@
             document.getElementById('view-step4').classList.add('hidden');
             document.getElementById('view-dashboard').classList.add('hidden');
 
-            if (stepIndex === 0) document.getElementById('view-intro').classList.add('hidden'); // handled separately or via resume
+            if (stepIndex === 0) document.getElementById('view-intro').classList.remove('hidden');
             if (stepIndex === 1) document.getElementById('view-step1').classList.remove('hidden');
             if (stepIndex === 2) document.getElementById('view-step2').classList.remove('hidden');
             if (stepIndex === 3) document.getElementById('view-step3').classList.remove('hidden');
@@ -468,7 +468,6 @@
         }
 
         function editOnboarding() {
-            // Pre-fill inputs based on userState
             document.getElementById('audit-horizon').value = userState.horizon;
             document.getElementById('audit-focus').value = userState.focus;
             goToStep(1);
@@ -634,3 +633,14 @@
                         <label class="block text-xs font-semibold uppercase tracking-wider text-fallow-700">Weekly Reflection Journal</label>
                         <textarea id="reflection-textarea" rows="4" oninput="updateReflection(this.value)" class="w-full bg-fallow-50 border border-fallow-200 rounded-xl p-3 text-sm text-fallow-900 focus:outline-none focus:border-fallow-600 leading-relaxed">${userState.reflectionJournal}</textarea>
                     </div>
+                </div>
+            `;
+        }
+
+        function updateReflection(val) {
+            userState.reflectionJournal = val;
+            saveState();
+        }
+    </script>
+</body>
+</html>
