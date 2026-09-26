@@ -275,6 +275,33 @@
       margin-top: 0.65rem;
     }
 
+    /* Estimator Box */
+    .estimator-box {
+      background: rgba(58, 99, 70, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .estimator-header {
+      font-weight: 600;
+      color: var(--forest);
+      margin-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .estimator-result {
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
     /* Form Layout */
     .form-grid {
       display: grid;
@@ -565,12 +592,12 @@
           </div>
         </details>
 
-        <!-- Pillar 2: FERS Defined-Benefit Pension -->
-        <details class="pillar-item">
+        <!-- Pillar 2: FERS Defined-Benefit Pension (WITH ESTIMATOR) -->
+        <details class="pillar-item" open>
           <summary class="pillar-summary">
             <div class="summary-left">
               <span class="summary-badge badge-fers">Pillar 2</span>
-              <span>The FERS Basic Annuity (Guaranteed Lifetime Pension)</span>
+              <span>The FERS Basic Annuity (Guaranteed Pension)</span>
             </div>
             <span class="summary-chevron">▼</span>
           </summary>
@@ -579,8 +606,27 @@
               <strong>A Guaranteed, Inflation-Protected Foundation:</strong> The FERS defined-benefit pension is paid monthly for life, backed fully by the U.S. Government. 
             </p>
             <p>
-              Receiving a guaranteed $30,000 to $50,000 annual FERS pension is mathematically equivalent to holding a <strong>$750,000 to $1.25M+ private commercial annuity or fixed bond portfolio</strong>—providing an unshakeable income floor regardless of market volatility. (At age 62 with 20+ years of service, your multiplier jumps by 10% to 1.1% per year of service).
+              Receiving a guaranteed $30,000 to $50,000 annual pension is mathematically equivalent to holding a <strong>$750,000 to $1.25M+ fixed bond portfolio</strong>. Your multiplier is 1% per year of service, jumping to 1.1% if you retire at age 62 or older with 20+ years.
             </p>
+            
+            <div class="estimator-box">
+              <div class="estimator-header">
+                <span>Pension Estimator</span>
+              </div>
+              <div class="input-group">
+                <label for="high-3">Estimated High-3 Average Salary ($)</label>
+                <input type="number" id="high-3" value="145000" min="0" step="1000" />
+                <span class="helper-text">Your highest 36 consecutive months of base pay.</span>
+              </div>
+              
+              <div class="estimator-result">
+                <span style="font-size: 0.85rem; font-weight: 600;">Est. Gross Annual Pension:</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: var(--forest);" id="pension-est-output">$0</span>
+              </div>
+              <div style="font-size: 0.75rem; color: var(--text-light); text-align: right; margin-top: 0.25rem;" id="pension-multiplier-note">
+                Based on parameters below
+              </div>
+            </div>
           </div>
         </details>
 
@@ -614,13 +660,13 @@
       <div class="form-grid">
         <div class="input-group">
           <label for="birthdate">Date of Birth</label>
-          <input type="date" id="birthdate" value="1973-06-15" />
+          <input type="date" id="birthdate" value="1970-01-05" />
           <span class="helper-text">Used to determine your MRA (57) and age thresholds</span>
         </div>
 
         <div class="input-group">
           <label for="scd">Service Computation Date (SCD)</label>
-          <input type="date" id="scd" value="2008-03-10" />
+          <input type="date" id="scd" value="2008-01-01" />
           <span class="helper-text">Found on your SF-50 (Block 31)</span>
         </div>
 
@@ -739,7 +785,7 @@
     <div class="disclaimer-card">
       <div class="disclaimer-icon">⚠️</div>
       <div class="disclaimer-text">
-        <strong>Disclaimer &amp; Verification Notice:</strong> This application is an independent exploratory tool and does not constitute official legal, financial, tax, or retirement advice. Calculations are estimates based on standard OPM guidelines and do not account for non-deduction service, uncredited military time, part-time schedules, or administrative adjustments. Always confirm official eligibility, Service Computation Dates (SCD), and benefit estimates directly with your agency Human Resources office or the Office of Personnel Management (OPM).
+        <strong>Disclaimer &amp; Verification Notice:</strong> This application is an independent exploratory tool and does not constitute official legal, financial, tax, or retirement advice. Calculations are estimates based on standard OPM guidelines and do not account for non-deduction service, uncredited military time, part-time schedules, sick leave conversion, or administrative adjustments. Always confirm official eligibility, Service Computation Dates (SCD), and benefit estimates directly with your agency Human Resources office or the Office of Personnel Management (OPM).
       </div>
     </div>
 
@@ -757,13 +803,14 @@
     const customGroup = document.getElementById('custom-date-group');
     const inputCustom = document.getElementById('custom-date');
     const inputLeave = document.getElementById('annual-leave-balance');
+    const inputHigh3 = document.getElementById('high-3');
 
     selectTarget.addEventListener('change', () => {
       customGroup.style.display = selectTarget.value === 'custom' ? 'flex' : 'none';
       recalculate();
     });
 
-    [inputBirthdate, inputSCD, inputCustom, inputLeave].forEach(el => {
+    [inputBirthdate, inputSCD, inputCustom, inputLeave, inputHigh3].forEach(el => {
       el.addEventListener('input', recalculate);
     });
 
@@ -771,7 +818,6 @@
     function getFederalHolidays(year) {
       const holidays = [];
 
-      // Helper for Nth weekday in month
       function nthWeekday(n, weekday, month) {
         const d = new Date(year, month, 1);
         let count = 0;
@@ -784,7 +830,6 @@
         }
       }
 
-      // Helper for last weekday in month
       function lastWeekday(weekday, month) {
         const d = new Date(year, month + 1, 0);
         while (d.getDay() !== weekday) {
@@ -793,25 +838,24 @@
         return d;
       }
 
-      // Helper for fixed holidays with observed weekend rules
       function fixedHoliday(month, day) {
         const d = new Date(year, month, day);
-        if (d.getDay() === 6) return new Date(year, month, day - 1); // Sat -> Fri
-        if (d.getDay() === 0) return new Date(year, month, day + 1); // Sun -> Mon
+        if (d.getDay() === 6) return new Date(year, month, day - 1);
+        if (d.getDay() === 0) return new Date(year, month, day + 1);
         return d;
       }
 
-      holidays.push(fixedHoliday(0, 1));   // New Year's Day (Jan 1)
-      holidays.push(nthWeekday(3, 1, 0));  // MLK Jr. Day (3rd Mon Jan)
-      holidays.push(nthWeekday(3, 1, 1));  // Washington's Birthday (3rd Mon Feb)
-      holidays.push(lastWeekday(1, 4));    // Memorial Day (Last Mon May)
-      holidays.push(fixedHoliday(5, 19));  // Juneteenth (June 19)
-      holidays.push(fixedHoliday(6, 4));   // Independence Day (July 4)
-      holidays.push(nthWeekday(1, 1, 8));  // Labor Day (1st Mon Sept)
-      holidays.push(nthWeekday(2, 1, 9));  // Columbus Day (2nd Mon Oct)
-      holidays.push(fixedHoliday(10, 11)); // Veterans Day (Nov 11)
-      holidays.push(nthWeekday(4, 4, 10)); // Thanksgiving (4th Thu Nov)
-      holidays.push(fixedHoliday(11, 25)); // Christmas Day (Dec 25)
+      holidays.push(fixedHoliday(0, 1));   
+      holidays.push(nthWeekday(3, 1, 0));  
+      holidays.push(nthWeekday(3, 1, 1));  
+      holidays.push(lastWeekday(1, 4));    
+      holidays.push(fixedHoliday(5, 19));  
+      holidays.push(fixedHoliday(6, 4));   
+      holidays.push(nthWeekday(1, 1, 8));  
+      holidays.push(nthWeekday(2, 1, 9));  
+      holidays.push(fixedHoliday(10, 11)); 
+      holidays.push(nthWeekday(4, 4, 10)); 
+      holidays.push(fixedHoliday(11, 25)); 
 
       return holidays;
     }
@@ -848,13 +892,11 @@
       const age62Date = new Date(birthDate);
       age62Date.setFullYear(age62Date.getFullYear() + 62);
 
-      // Format milestone labels
       const fmt = { year: 'numeric', month: 'short', day: 'numeric' };
       document.getElementById('date-mra').textContent = mraDate.toLocaleDateString(undefined, fmt);
       document.getElementById('date-age60').textContent = age60Date.toLocaleDateString(undefined, fmt);
       document.getElementById('date-age62').textContent = age62Date.toLocaleDateString(undefined, fmt);
 
-      // Determine Target Date
       let targetDate = new Date();
       const choice = selectTarget.value;
 
@@ -866,10 +908,32 @@
         if (cVal) targetDate = new Date(cVal + 'T00:00:00');
       }
 
-      // Check active milestone highlight
       document.getElementById('row-mra').classList.toggle('active-target', choice === 'mra');
       document.getElementById('row-age60').classList.toggle('active-target', choice === 'age60');
       document.getElementById('row-age62').classList.toggle('active-target', choice === 'age62');
+
+      // --- Pension Estimator Math ---
+      const high3Val = parseFloat(inputHigh3.value) || 0;
+      const totalCreditableYears = Math.max(0, (targetDate - scdDate) / (1000 * 60 * 60 * 24 * 365.25));
+      const ageAtTarget = (targetDate - birthDate) / (1000 * 60 * 60 * 24 * 365.25);
+      
+      let multiplier = 0.01;
+      let multText = "1%";
+      
+      if (ageAtTarget >= 62 && totalCreditableYears >= 20) {
+        multiplier = 0.011;
+        multText = "1.1% (Age 62+ with 20+ yrs)";
+      }
+
+      if (totalCreditableYears > 0 && high3Val > 0) {
+        const annualPension = high3Val * totalCreditableYears * multiplier;
+        document.getElementById('pension-est-output').textContent = `$${Math.round(annualPension).toLocaleString()}`;
+        document.getElementById('pension-multiplier-note').textContent = `Based on ${totalCreditableYears.toFixed(2)} yrs @ ${multText}`;
+      } else {
+        document.getElementById('pension-est-output').textContent = `$0`;
+        document.getElementById('pension-multiplier-note').textContent = `Pending valid service dates`;
+      }
+      // ------------------------------
 
       if (targetDate <= today) {
         document.getElementById('net-working-days').textContent = '0';
@@ -881,7 +945,6 @@
         return;
       }
 
-      // Count Days, Weeks, Holidays, Business Days
       let calendarDays = 0;
       let businessDays = 0;
       let holidayCount = 0;
@@ -903,10 +966,7 @@
         current.setDate(current.getDate() + 1);
       }
 
-      // Pay Periods Remaining (Approx 14 days per pay period)
       const payPeriodsRemaining = Math.floor(calendarDays / 14);
-
-      // Accrual Rate based on service length (at 15+ years = 8 hrs / PP = 1 day off per PP)
       const serviceYearsNow = (today - scdDate) / (1000 * 60 * 60 * 24 * 365.25);
       let hoursPerPP = 4;
       if (serviceYearsNow >= 15) {
@@ -919,11 +979,9 @@
       const futureLeaveHours = payPeriodsRemaining * hoursPerPP;
       const totalLeaveDays = Math.floor((currentLeaveHours + futureLeaveHours) / 8);
 
-      // Net In-Office / Duty Days Remaining
       const netWorkingDays = Math.max(0, businessDays - totalLeaveDays);
       const workingWeeks = (calendarDays / 7).toFixed(1);
 
-      // Update View
       document.getElementById('net-working-days').textContent = netWorkingDays.toLocaleString();
       document.getElementById('hero-summary-text').textContent = 
         `Across ${calendarDays.toLocaleString()} calendar days until ${targetDate.toLocaleDateString(undefined, fmt)}, factoring in holidays and planned leave offload.`;
@@ -958,36 +1016,20 @@
     let deferredPrompt;
     const installButton = document.getElementById('install-button');
 
-    // Listen for the browser's native install prompt event
     window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent Chrome from showing its own mini-infobar
       e.preventDefault();
-      // Stash the event so we can trigger it from our button later
       deferredPrompt = e;
-      // Reveal our custom install button
       installButton.style.display = 'inline-flex';
     });
 
-    // Handle the button click
     installButton.addEventListener('click', async () => {
       if (!deferredPrompt) return;
-      
-      // Trigger the native browser install prompt
       deferredPrompt.prompt();
-      
-      // Wait for the user's choice
       const { outcome } = await deferredPrompt.userChoice;
-      
-      if (outcome === 'accepted') {
-        console.log('User installed the PWA');
-      }
-      
-      // The prompt can only be used once, so discard it
       deferredPrompt = null;
       installButton.style.display = 'none';
     });
 
-    // Hide the button permanently once the app is installed
     window.addEventListener('appinstalled', () => {
       installButton.style.display = 'none';
       deferredPrompt = null;
