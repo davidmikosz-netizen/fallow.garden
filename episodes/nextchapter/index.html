@@ -22,6 +22,7 @@
                             50: '#f7f6f2',
                             100: '#edeae1',
                             200: '#d9d2c2',
+                            300: '#b8ae98',
                             600: '#736b58',
                             700: '#5a5343',
                             800: '#423d30',
@@ -52,8 +53,13 @@
                 <span class="text-fallow-300">/</span>
                 <span class="text-sm font-medium text-fallow-600">Next Chapter</span>
             </div>
-            <div id="step-indicator" class="text-xs font-medium text-fallow-600 bg-fallow-100 px-3 py-1 rounded-full">
-                Intro & Overview
+            <div class="flex items-center space-x-3">
+                <div id="step-indicator" class="text-xs font-medium text-fallow-600 bg-fallow-100 px-3 py-1 rounded-full">
+                    Intro & Overview
+                </div>
+                <button id="reset-nav-btn" onclick="resetApp()" class="hidden text-xs text-fallow-600 hover:text-fallow-900 border border-fallow-200 px-2.5 py-1 rounded-lg transition">
+                    Reset
+                </button>
             </div>
         </div>
     </header>
@@ -81,8 +87,11 @@
                     </p>
                 </div>
 
-                <div class="pt-4 border-t border-fallow-100 flex justify-end">
-                    <button onclick="goToStep(1)" class="w-full sm:w-auto px-6 py-3 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition shadow-sm flex items-center justify-center space-x-2">
+                <div class="pt-4 border-t border-fallow-100 flex justify-between items-center">
+                    <button id="resume-btn" onclick="resumeDashboard()" class="hidden text-xs font-medium text-fallow-600 hover:text-fallow-900 underline">
+                        Resume previous session
+                    </button>
+                    <button onclick="goToStep(1)" class="w-full sm:w-auto ml-auto px-6 py-3 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition shadow-sm flex items-center justify-center space-x-2">
                         <span>Begin Onboarding</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
@@ -107,7 +116,7 @@
                             <input type="radio" name="vibe" value="Action Plan" class="mt-1 text-fallow-900 focus:ring-fallow-600" checked>
                             <div>
                                 <span class="font-semibold text-fallow-900 block text-sm">Just the Action Plan</span>
-                                <span class="text-xs text-fallow-600 block mt-0.5">Focus purely on schedules, routines, hobbies, and tangible projects. Skip the heavy introspection.</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">Focus purely on schedules, routines, habit replacement, and tangible projects. Skip heavy introspection.</span>
                             </div>
                         </div>
                     </label>
@@ -117,7 +126,7 @@
                             <input type="radio" name="vibe" value="The Middle Path" class="mt-1 text-fallow-900 focus:ring-fallow-600">
                             <div>
                                 <span class="font-semibold text-fallow-900 block text-sm">The Middle Path</span>
-                                <span class="text-xs text-fallow-600 block mt-0.5">A balanced blend of practical time-auditing and gentle reflection on what brings fulfillment.</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">A balanced blend of curiosity audits, mindset reframing, and time-vs-energy tracking.</span>
                             </div>
                         </div>
                     </label>
@@ -127,7 +136,7 @@
                             <input type="radio" name="vibe" value="Deep Dive" class="mt-1 text-fallow-900 focus:ring-fallow-600">
                             <div>
                                 <span class="font-semibold text-fallow-900 block text-sm">Deep Dive</span>
-                                <span class="text-xs text-fallow-600 block mt-0.5">Full exploration of identity, personal philosophy, legacy, and purpose.</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">Full exploration of identity transition, logotherapy reflection prompts, and legacy values alignment.</span>
                             </div>
                         </div>
                     </label>
@@ -279,23 +288,28 @@
                 </div>
             </div>
 
-            <!-- ================= PERSONALIZED DASHBOARD (FINAL STATE) ================= -->
+            <!-- ================= PERSONALIZED DASHBOARD (DYNAMIC PATHWAYS) ================= -->
             <div id="view-dashboard" class="fade-in space-y-6 hidden">
-                <div class="flex items-center justify-between border-b border-fallow-100 pb-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-fallow-100 pb-4 gap-2">
                     <div>
-                        <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600 bg-fallow-100 px-2.5 py-1 rounded-md">
-                            Your Personalized Plan
+                        <span id="dash-badge" class="text-xs font-semibold uppercase tracking-wider text-fallow-600 bg-fallow-100 px-2.5 py-1 rounded-md">
+                            Pathway: Action Plan
                         </span>
                         <h2 class="text-2xl font-bold tracking-tight text-fallow-900 mt-2">
                             Next Chapter Dashboard
                         </h2>
                     </div>
-                    <button onclick="resetApp()" class="text-xs font-medium text-fallow-600 hover:text-fallow-900 border border-fallow-200 px-3 py-1.5 rounded-lg transition">
-                        Restart Setup
-                    </button>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="editOnboarding()" class="text-xs font-medium text-fallow-600 hover:text-fallow-900 border border-fallow-200 px-3 py-1.5 rounded-lg transition">
+                            Edit Settings
+                        </button>
+                        <button onclick="resetApp()" class="text-xs font-medium text-red-600 hover:text-red-800 border border-red-200 px-3 py-1.5 rounded-lg transition">
+                            Reset All
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Summary Cards -->
+                <!-- Summary Meta -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div class="bg-fallow-50 p-4 rounded-xl border border-fallow-100">
                         <span class="text-xs text-fallow-600 block font-medium">Depth Level</span>
@@ -306,28 +320,20 @@
                         <span id="dash-anchor" class="font-semibold text-fallow-900 text-sm mt-0.5 block">—</span>
                     </div>
                     <div class="bg-fallow-50 p-4 rounded-xl border border-fallow-100">
-                        <span class="text-xs text-fallow-600 block font-medium">Pace & Horizon</span>
+                        <span class="text-xs text-fallow-600 block font-medium">Timeline & Pace</span>
                         <span id="dash-pace" class="font-semibold text-fallow-900 text-sm mt-0.5 block">—</span>
                     </div>
                 </div>
 
-                <!-- Active Focus Module -->
-                <div class="border border-fallow-200 rounded-xl p-5 space-y-3">
-                    <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Current Focus Experiment</span>
-                    <h3 id="dash-focus-title" class="text-base font-semibold text-fallow-900">Structuring empty hours & daily routines</h3>
-                    <p class="text-sm text-fallow-700">
-                        To ease the friction of an open calendar, start by anchoring your mornings with a non-work ritual. Test one micro-experiment this week:
-                    </p>
-                    <div class="bg-fallow-50 p-3.5 rounded-lg border border-fallow-200/60 text-xs sm:text-sm text-fallow-800 space-y-1">
-                        <div class="font-semibold text-fallow-900">Suggested Action:</div>
-                        <div>Design a mock "commute walk" or deliberate 30-minute morning anchor before checking news or emails.</div>
-                    </div>
+                <!-- DYNAMIC PATHWAY CONTAINER -->
+                <div id="pathway-content-container" class="space-y-6">
+                    <!-- Injected dynamically via JS depending on pathway -->
                 </div>
 
                 <!-- Footer note -->
-                <div class="text-center pt-2">
+                <div class="text-center pt-4 border-t border-fallow-100">
                     <p class="text-xs text-fallow-600">
-                        Part of the <span class="font-medium text-fallow-800">fallow.garden</span> suite. Your settings are saved locally.
+                        Part of the <span class="font-medium text-fallow-800">fallow.garden</span> suite. Your progress is saved automatically.
                     </p>
                 </div>
             </div>
@@ -340,14 +346,46 @@
     </footer>
 
     <script>
-        // State management object
-        const userState = {
+        // State management object with localStorage persistence
+        const STORAGE_KEY = 'fallow_next_chapter_state_v1';
+        
+        let userState = {
+            onboardingComplete: false,
             vibe: 'Action Plan',
             anchor: 'Secular / Pragmatic',
             horizon: '6-18 months out',
             focus: 'Structuring empty hours & routines',
-            pace: '2-minute daily micro-reflection'
+            pace: '2-minute daily micro-reflection',
+            // Pathway specific data
+            actionChecklist: {
+                morningAnchor: false,
+                commuteWalk: false,
+                projectSlot: false,
+                socialTouchpoint: false
+            },
+            curiosityLog: [
+                { text: 'Woodworking / Joinery basics', done: false },
+                { text: 'Local community garden volunteering', done: true }
+            ],
+            newHobbyInput: '',
+            reflectionJournal: 'Today I noticed that losing the morning stand-up meeting leaves a noticeable gap in my schedule. I will test replacing it with a 20-minute reading block.'
         };
+
+        function loadState() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    userState = { ...userState, ...parsed };
+                } catch(e) {
+                    console.error('Failed to parse saved state', e);
+                }
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
+        }
 
         const stepsNames = [
             "Intro & Overview",
@@ -358,8 +396,14 @@
             "Your Dashboard"
         ];
 
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            if (userState.onboardingComplete) {
+                document.getElementById('resume-btn').classList.remove('hidden');
+            }
+        });
+
         function goToStep(stepIndex) {
-            // Hide all views
             document.getElementById('view-intro').classList.add('hidden');
             document.getElementById('view-step1').classList.add('hidden');
             document.getElementById('view-step2').classList.add('hidden');
@@ -367,33 +411,226 @@
             document.getElementById('view-step4').classList.add('hidden');
             document.getElementById('view-dashboard').classList.add('hidden');
 
-            // Show target view
-            if (stepIndex === 0) document.getElementById('view-intro').classList.remove('hidden');
+            if (stepIndex === 0) document.getElementById('view-intro').classList.add('hidden'); // handled separately or via resume
             if (stepIndex === 1) document.getElementById('view-step1').classList.remove('hidden');
             if (stepIndex === 2) document.getElementById('view-step2').classList.remove('hidden');
             if (stepIndex === 3) document.getElementById('view-step3').classList.remove('hidden');
             if (stepIndex === 4) document.getElementById('view-step4').classList.remove('hidden');
             if (stepIndex === 5) {
                 document.getElementById('view-dashboard').classList.remove('hidden');
+                document.getElementById('reset-nav-btn').classList.remove('hidden');
                 populateDashboard();
+            } else {
+                document.getElementById('reset-nav-btn').classList.add('hidden');
             }
 
-            // Update step indicator
-            document.getElementById('step-indicator').innerText = stepsNames[stepIndex];
+            if (stepIndex > 0) {
+                document.getElementById('step-indicator').innerText = stepsNames[stepIndex];
+            } else {
+                document.getElementById('step-indicator').innerText = "Intro & Overview";
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resumeDashboard() {
+            goToStep(5);
         }
 
         function saveStep1() {
             const selected = document.querySelector('input[name="vibe"]:checked');
             if (selected) userState.vibe = selected.value;
+            saveState();
         }
 
         function saveStep2() {
             const selected = document.querySelector('input[name="anchor"]:checked');
             if (selected) userState.anchor = selected.value;
+            saveState();
         }
 
         function saveStep3() {
             userState.horizon = document.getElementById('audit-horizon').value;
             userState.focus = document.getElementById('audit-focus').value;
+            saveState();
         }
+
+        function saveStep4() {
+            const selected = document.querySelector('input[name="pace"]:checked');
+            if (selected) userState.pace = selected.value;
+            saveState();
+        }
+
+        function completeOnboarding() {
+            saveStep4();
+            userState.onboardingComplete = true;
+            saveState();
+            goToStep(5);
+        }
+
+        function editOnboarding() {
+            // Pre-fill inputs based on userState
+            document.getElementById('audit-horizon').value = userState.horizon;
+            document.getElementById('audit-focus').value = userState.focus;
+            goToStep(1);
+        }
+
+        function resetApp() {
+            localStorage.removeItem(STORAGE_KEY);
+            userState.onboardingComplete = false;
+            document.getElementById('resume-btn').classList.add('hidden');
+            document.getElementById('reset-nav-btn').classList.add('hidden');
+            goToStep(0);
+        }
+
+        // ================= DASHBOARD RENDERER =================
+        function populateDashboard() {
+            document.getElementById('dash-badge').innerText = "Pathway: " + userState.vibe;
+            document.getElementById('dash-vibe').innerText = userState.vibe;
+            document.getElementById('dash-anchor').innerText = userState.anchor;
+            document.getElementById('dash-pace').innerText = userState.horizon + " • " + userState.pace;
+
+            const container = document.getElementById('pathway-content-container');
+            container.innerHTML = '';
+
+            if (userState.vibe === 'Action Plan') {
+                container.innerHTML = renderActionPlanHTML();
+            } else if (userState.vibe === 'The Middle Path') {
+                container.innerHTML = renderMiddlePathHTML();
+            } else {
+                container.innerHTML = renderDeepDiveHTML();
+            }
+        }
+
+        // --- PATHWAY 1: ACTION PLAN ---
+        function renderActionPlanHTML() {
+            const c = userState.actionChecklist;
+            return `
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Operational Routine Builder</span>
+                            <h3 class="text-base font-semibold text-fallow-900 mt-0.5">Practical Habit Replacement Checklist</h3>
+                        </div>
+                        <span class="text-xs bg-fallow-100 text-fallow-800 px-2.5 py-1 rounded-md font-medium">Actionable</span>
+                    </div>
+                    <p class="text-sm text-fallow-700">
+                        Replacing professional structure requires conscious anchors. Check off your daily routine experiments as you build your post-career rhythm:
+                    </p>
+                    <div class="space-y-2 pt-2">
+                        <label class="flex items-center space-x-3 p-3 bg-fallow-50 rounded-lg border border-fallow-200/60 cursor-pointer hover:bg-fallow-100/50 transition">
+                            <input type="checkbox" onchange="toggleAction('morningAnchor', this.checked)" ${c.morningAnchor ? 'checked' : ''} class="w-4 h-4 text-fallow-900 rounded focus:ring-fallow-600">
+                            <span class="text-sm font-medium text-fallow-900">Set a non-negotiable morning anchor (e.g. coffee & reading at 7:30 AM)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 bg-fallow-50 rounded-lg border border-fallow-200/60 cursor-pointer hover:bg-fallow-100/50 transition">
+                            <input type="checkbox" onchange="toggleAction('commuteWalk', this.checked)" ${c.commuteWalk ? 'checked' : ''} class="w-4 h-4 text-fallow-900 rounded focus:ring-fallow-600">
+                            <span class="text-sm font-medium text-fallow-900">Schedule a 30-minute "fake commute" morning walk</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 bg-fallow-50 rounded-lg border border-fallow-200/60 cursor-pointer hover:bg-fallow-100/50 transition">
+                            <input type="checkbox" onchange="toggleAction('projectSlot', this.checked)" ${c.projectSlot ? 'checked' : ''} class="w-4 h-4 text-fallow-900 rounded focus:ring-fallow-600">
+                            <span class="text-sm font-medium text-fallow-900">Designate a dedicated 2-hour afternoon maker/project slot</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 bg-fallow-50 rounded-lg border border-fallow-200/60 cursor-pointer hover:bg-fallow-100/50 transition">
+                            <input type="checkbox" onchange="toggleAction('socialTouchpoint', this.checked)" ${c.socialTouchpoint ? 'checked' : ''} class="w-4 h-4 text-fallow-900 rounded focus:ring-fallow-600">
+                            <span class="text-sm font-medium text-fallow-900">Initiate one informal social touchpoint per week (coffee or call)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-3 bg-fallow-50/40">
+                    <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Current Focus Project</span>
+                    <h4 class="font-semibold text-fallow-900 text-sm">${userState.focus}</h4>
+                    <p class="text-xs text-fallow-700">
+                        Based on your horizon (${userState.horizon}), focus on establishing small, repeatable daily habits rather than massive lifestyle overhauls.
+                    </p>
+                </div>
+            `;
+        }
+
+        function toggleAction(key, val) {
+            userState.actionChecklist[key] = val;
+            saveState();
+        }
+
+        // --- PATHWAY 2: THE MIDDLE PATH ---
+        function renderMiddlePathHTML() {
+            let itemsHtml = userState.curiosityLog.map((item, idx) => `
+                <div class="flex items-center justify-between p-3 bg-fallow-50 rounded-lg border border-fallow-200/60">
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" onchange="toggleCuriosity(${idx}, this.checked)" ${item.done ? 'checked' : ''} class="w-4 h-4 text-fallow-900 rounded focus:ring-fallow-600">
+                        <span class="text-sm ${item.done ? 'line-through text-fallow-600' : 'text-fallow-900 font-medium'}">${item.text}</span>
+                    </label>
+                    <button onclick="removeCuriosity(${idx})" class="text-xs text-fallow-600 hover:text-red-700">Remove</button>
+                </div>
+            `).join('');
+
+            return `
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Curiosity Log & Hobby Audit</span>
+                            <h3 class="text-base font-semibold text-fallow-900 mt-0.5">Exploring Interests Without Pressure</h3>
+                        </div>
+                        <span class="text-xs bg-fallow-100 text-fallow-800 px-2.5 py-1 rounded-md font-medium">Pragmatic Focus</span>
+                    </div>
+                    <p class="text-sm text-fallow-700">
+                        Capture low-stakes hobbies, crafts, or intellectual pursuits you want to test out during your transition.
+                    </p>
+                    <div class="space-y-2">
+                        ${itemsHtml}
+                    </div>
+                    <div class="flex space-x-2 pt-2">
+                        <input type="text" id="new-hobby-input" placeholder="Add a new curiosity (e.g. pottery, bird watching)..." class="flex-grow bg-fallow-50 border border-fallow-200 rounded-xl px-3 py-2 text-sm text-fallow-900 focus:outline-none focus:border-fallow-600">
+                        <button onclick="addCuriosity()" class="px-4 py-2 bg-fallow-900 text-white rounded-xl text-sm font-medium hover:bg-fallow-800 transition">Add</button>
+                    </div>
+                </div>
+
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-3 bg-fallow-50/40">
+                    <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Weekly Mindset Reframing Prompt</span>
+                    <h4 class="font-semibold text-fallow-900 text-sm">"What is an accomplishment or title from my career that I am ready to gently set down?"</h4>
+                    <p class="text-xs text-fallow-700 leading-relaxed">
+                        ${userState.anchor === 'Philosophical Traditions' ? 'As Marcus Aurelius noted, changing circumstances require shifting our internal definitions of utility and virtue beyond corporate status.' : 'Pragmatic reframing helps separate your intrinsic worth from external professional output.'}
+                    </p>
+                </div>
+            `;
+        }
+
+        function addCuriosity() {
+            const input = document.getElementById('new-hobby-input');
+            const val = input.value.trim();
+            if (val) {
+                userState.curiosityLog.push({ text: val, done: false });
+                input.value = '';
+                saveState();
+                populateDashboard();
+            }
+        }
+
+        function toggleCuriosity(idx, checked) {
+            userState.curiosityLog[idx].done = checked;
+            saveState();
+        }
+
+        function removeCuriosity(idx) {
+            userState.curiosityLog.splice(idx, 1);
+            saveState();
+            populateDashboard();
+        }
+
+        // --- PATHWAY 3: DEEP DIVE ---
+        function renderDeepDiveHTML() {
+            return `
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Identity Transition & Logotherapy</span>
+                            <h3 class="text-base font-semibold text-fallow-900 mt-0.5">Meaning-Making Reflection Prompt</h3>
+                        </div>
+                        <span class="text-xs bg-fallow-100 text-fallow-800 px-2.5 py-1 rounded-md font-medium">Deep Dive</span>
+                    </div>
+                    <p class="text-sm text-fallow-700">
+                        Rooted in Viktor Frankl’s framework of finding meaning through creation, experience, and attitude, use this space for open reflection on your transition narrative.
+                    </p>
+                    <div class="space-y-2">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-fallow-700">Weekly Reflection Journal</label>
+                        <textarea id="reflection-textarea" rows="4" oninput="updateReflection(this.value)" class="w-full bg-fallow-50 border border-fallow-200 rounded-xl p-3 text-sm text-fallow-900 focus:outline-none focus:border-fallow-600 leading-relaxed">${userState.reflectionJournal}</textarea>
+                    </div>
