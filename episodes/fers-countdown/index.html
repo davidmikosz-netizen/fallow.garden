@@ -7,11 +7,13 @@
   <meta name="description" content="Calculate working days, weeks, leave accrual, holidays, and MRA milestones toward FERS retirement." />
 
   <!-- Mobile & PWA Configuration -->
+  <link rel="manifest" href="/fers-countdown/manifest.json">
+  <meta name="theme-color" content="#214e38">
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Fallow Horizon" />
-  <meta name="theme-color" content="#214e38" />
+  <link rel="apple-touch-icon" href="/fers/icon-192x192.png">
 
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -901,6 +903,21 @@
     }
 
     recalculate();
+  </script>
+
+  <!-- PWA Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/fers-countdown/sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registered with scope:', registration.scope);
+          })
+          .catch(err => {
+            console.log('ServiceWorker registration failed:', err);
+          });
+      });
+    }
   </script>
 </body>
 </html>
