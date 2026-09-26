@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Chapter: Practical steps for your post-career pivot</title>
+    <!-- Tailwind CSS for modern, responsive utility-first styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        fallow: {
+                            50: '#f7f6f2',
+                            100: '#edeae1',
+                            200: '#d9d2c2',
+                            600: '#736b58',
+                            700: '#5a5343',
+                            800: '#423d30',
+                            900: '#2b271f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="h-full bg-fallow-50 text-fallow-900 font-sans antialiased flex flex-col justify-between selection:bg-fallow-200">
+
+    <header class="w-full border-b border-fallow-200 bg-white/60 backdrop-blur-sm sticky top-0 z-50">
+        <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="w-3 h-3 rounded-full bg-fallow-600 inline-block"></span>
+                <span class="font-semibold tracking-tight text-fallow-800">fallow.garden</span>
+                <span class="text-fallow-300">/</span>
+                <span class="text-sm font-medium text-fallow-600">Next Chapter</span>
+            </div>
+            <div id="step-indicator" class="text-xs font-medium text-fallow-600 bg-fallow-100 px-3 py-1 rounded-full">
+                Intro & Overview
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center px-4 py-8 sm:py-12">
+        <div class="w-full max-w-2xl bg-white rounded-2xl border border-fallow-200 shadow-sm p-6 sm:p-10 transition-all duration-300">
+
+            <!-- ================= INTRO VIEW ================= -->
+            <div id="view-intro" class="fade-in space-y-6">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600 bg-fallow-100 px-2.5 py-1 rounded-md">
+                        Transition Toolkit
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-fallow-900 mt-3">
+                        Next Chapter
+                    </h1>
+                    <p class="text-lg text-fallow-700 font-medium mt-1">
+                        Practical steps for your post-career pivot
+                    </p>
+                </div>
+
+                <div class="space-y-4 text-fallow-700 leading-relaxed text-sm sm:text-base">
+                    <p>
+                        Stepping away from a career is often treated purely as a financial milestone, but the sudden loss of routine and professional identity can trigger unexpected friction. <strong>Next Chapter</strong> helps you bridge the gap between the 9-to-5 and what comes next—without the existential weight. Whether you just want a practical checklist of new routines or a deeper look at purpose, you set the pace.
+                    </p>
+                </div>
+
+                <div class="pt-4 border-t border-fallow-100 flex justify-end">
+                    <button onclick="goToStep(1)" class="w-full sm:w-auto px-6 py-3 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition shadow-sm flex items-center justify-center space-x-2">
+                        <span>Begin Onboarding</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= SCREEN 1: VIBE CHECK ================= -->
+            <div id="view-step1" class="fade-in space-y-6 hidden">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 1 of 4</span>
+                    <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-fallow-900 mt-1">
+                        Choose your depth level
+                    </h2>
+                    <p class="text-sm text-fallow-600 mt-1">
+                        How deep or practical do you want your transition exploration to be right now?
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    <label class="block border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50">
+                        <div class="flex items-start space-x-3">
+                            <input type="radio" name="vibe" value="Action Plan" class="mt-1 text-fallow-900 focus:ring-fallow-600" checked>
+                            <div>
+                                <span class="font-semibold text-fallow-900 block text-sm">Just the Action Plan</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">Focus purely on schedules, routines, hobbies, and tangible projects. Skip the heavy introspection.</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="block border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50">
+                        <div class="flex items-start space-x-3">
+                            <input type="radio" name="vibe" value="The Middle Path" class="mt-1 text-fallow-900 focus:ring-fallow-600">
+                            <div>
+                                <span class="font-semibold text-fallow-900 block text-sm">The Middle Path</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">A balanced blend of practical time-auditing and gentle reflection on what brings fulfillment.</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="block border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50">
+                        <div class="flex items-start space-x-3">
+                            <input type="radio" name="vibe" value="Deep Dive" class="mt-1 text-fallow-900 focus:ring-fallow-600">
+                            <div>
+                                <span class="font-semibold text-fallow-900 block text-sm">Deep Dive</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">Full exploration of identity, personal philosophy, legacy, and purpose.</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="pt-4 border-t border-fallow-100 flex justify-between items-center">
+                    <button onclick="goToStep(0)" class="text-sm text-fallow-600 hover:text-fallow-900 font-medium">Back</button>
+                    <button onclick="saveStep1(); goToStep(2)" class="px-6 py-2.5 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition">
+                        Continue
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= SCREEN 2: ANCHOR SELECTION ================= -->
+            <div id="view-step2" class="fade-in space-y-6 hidden">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 2 of 4</span>
+                    <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-fallow-900 mt-1">
+                        Select a worldview anchor (Optional)
+                    </h2>
+                    <p class="text-sm text-fallow-600 mt-1">
+                        Choose an optional lens to ground your transition prompts, or keep it neutral.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label class="border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50 flex items-start space-x-3">
+                        <input type="radio" name="anchor" value="Secular / Pragmatic" class="mt-1 text-fallow-900 focus:ring-fallow-600" checked>
+                        <div>
+                            <span class="font-semibold text-fallow-900 block text-sm">Secular / Pragmatic</span>
+                            <span class="text-xs text-fallow-600 block mt-0.5">Curiosity, habit design, and utility.</span>
+                        </div>
+                    </label>
+
+                    <label class="border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50 flex items-start space-x-3">
+                        <input type="radio" name="anchor" value="Philosophical Traditions" class="mt-1 text-fallow-900 focus:ring-fallow-600">
+                        <div>
+                            <span class="font-semibold text-fallow-900 block text-sm">Philosophical Traditions</span>
+                            <span class="text-xs text-fallow-600 block mt-0.5">Stoic resilience, Aristotelian flourishing.</span>
+                        </div>
+                    </label>
+
+                    <label class="border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50 flex items-start space-x-3">
+                        <input type="radio" name="anchor" value="Traditional / Spiritual" class="mt-1 text-fallow-900 focus:ring-fallow-600">
+                        <div>
+                            <span class="font-semibold text-fallow-900 block text-sm">Traditional / Spiritual</span>
+                            <span class="text-xs text-fallow-600 block mt-0.5">Faith-based or contemplative frameworks.</span>
+                        </div>
+                    </label>
+
+                    <label class="border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50 flex items-start space-x-3">
+                        <input type="radio" name="anchor" value="Keep it Simple / Skip" class="mt-1 text-fallow-900 focus:ring-fallow-600">
+                        <div>
+                            <span class="font-semibold text-fallow-900 block text-sm">Keep it Simple</span>
+                            <span class="text-xs text-fallow-600 block mt-0.5">No specific lens needed.</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="pt-4 border-t border-fallow-100 flex justify-between items-center">
+                    <button onclick="goToStep(1)" class="text-sm text-fallow-600 hover:text-fallow-900 font-medium">Back</button>
+                    <button onclick="saveStep2(); goToStep(3)" class="px-6 py-2.5 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition">
+                        Continue
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= SCREEN 3: CURRENT REALITY AUDIT ================= -->
+            <div id="view-step3" class="fade-in space-y-6 hidden">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 3 of 4</span>
+                    <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-fallow-900 mt-1">
+                        Your current reality
+                    </h2>
+                    <p class="text-sm text-fallow-600 mt-1">
+                        Let's understand your timeline and current daily rhythm.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-fallow-700 mb-1">Time Horizon to Transition</label>
+                        <select id="audit-horizon" class="w-full bg-fallow-50 border border-fallow-200 rounded-xl p-3 text-sm text-fallow-900 focus:outline-none focus:border-fallow-600">
+                            <option value="0-6 months out">0–6 months out (Imminent pivot)</option>
+                            <option value="6-18 months out" selected>6–18 months out (Planning phase)</option>
+                            <option value="1-3 years out">1–3 years out (Early horizon)</option>
+                            <option value="Already transitioned">Already transitioned / Semi-retired</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-fallow-700 mb-1">Primary Focus Area to Tackle First</label>
+                        <select id="audit-focus" class="w-full bg-fallow-50 border border-fallow-200 rounded-xl p-3 text-sm text-fallow-900 focus:outline-none focus:border-fallow-600">
+                            <option value="Structuring empty hours & routines">Structuring empty hours & daily routines</option>
+                            <option value="Rediscovering old hobbies & creative outlets">Rediscovering old hobbies & creative outlets</option>
+                            <option value="Finding new community & social networks">Finding new community & social networks</option>
+                            <option value="Logistics, volunteering & micro-projects">Logistics, volunteering & micro-projects</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-fallow-100 flex justify-between items-center">
+                    <button onclick="goToStep(2)" class="text-sm text-fallow-600 hover:text-fallow-900 font-medium">Back</button>
+                    <button onclick="saveStep3(); goToStep(4)" class="px-6 py-2.5 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition">
+                        Continue
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= SCREEN 4: SETTING THE PACE ================= -->
+            <div id="view-step4" class="fade-in space-y-6 hidden">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 4 of 4</span>
+                    <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-fallow-900 mt-1">
+                        Set your weekly pace
+                    </h2>
+                    <p class="text-sm text-fallow-600 mt-1">
+                        Prevent overwhelm by committing to a low-friction cadence.
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    <label class="block border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50">
+                        <div class="flex items-start space-x-3">
+                            <input type="radio" name="pace" value="2-minute daily micro-reflection" class="mt-1 text-fallow-900 focus:ring-fallow-600" checked>
+                            <div>
+                                <span class="font-semibold text-fallow-900 block text-sm">Micro-Dose (2 minutes daily)</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">Quick daily prompts to keep momentum without feeling like a chore.</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="block border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50">
+                        <div class="flex items-start space-x-3">
+                            <input type="radio" name="pace" value="Weekly 15-minute review" class="mt-1 text-fallow-900 focus:ring-fallow-600">
+                            <div>
+                                <span class="font-semibold text-fallow-900 block text-sm">Weekly Review (15 minutes weekly)</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">A deeper block once a week to audit experiments and set intentions.</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="pt-4 border-t border-fallow-100 flex justify-between items-center">
+                    <button onclick="goToStep(3)" class="text-sm text-fallow-600 hover:text-fallow-900 font-medium">Back</button>
+                    <button onclick="completeOnboarding()" class="px-6 py-2.5 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition">
+                        Complete & View Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= PERSONALIZED DASHBOARD (FINAL STATE) ================= -->
+            <div id="view-dashboard" class="fade-in space-y-6 hidden">
+                <div class="flex items-center justify-between border-b border-fallow-100 pb-4">
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600 bg-fallow-100 px-2.5 py-1 rounded-md">
+                            Your Personalized Plan
+                        </span>
+                        <h2 class="text-2xl font-bold tracking-tight text-fallow-900 mt-2">
+                            Next Chapter Dashboard
+                        </h2>
+                    </div>
+                    <button onclick="resetApp()" class="text-xs font-medium text-fallow-600 hover:text-fallow-900 border border-fallow-200 px-3 py-1.5 rounded-lg transition">
+                        Restart Setup
+                    </button>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="bg-fallow-50 p-4 rounded-xl border border-fallow-100">
+                        <span class="text-xs text-fallow-600 block font-medium">Depth Level</span>
+                        <span id="dash-vibe" class="font-semibold text-fallow-900 text-sm mt-0.5 block">—</span>
+                    </div>
+                    <div class="bg-fallow-50 p-4 rounded-xl border border-fallow-100">
+                        <span class="text-xs text-fallow-600 block font-medium">Worldview Anchor</span>
+                        <span id="dash-anchor" class="font-semibold text-fallow-900 text-sm mt-0.5 block">—</span>
+                    </div>
+                    <div class="bg-fallow-50 p-4 rounded-xl border border-fallow-100">
+                        <span class="text-xs text-fallow-600 block font-medium">Pace & Horizon</span>
+                        <span id="dash-pace" class="font-semibold text-fallow-900 text-sm mt-0.5 block">—</span>
+                    </div>
+                </div>
+
+                <!-- Active Focus Module -->
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-3">
+                    <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Current Focus Experiment</span>
+                    <h3 id="dash-focus-title" class="text-base font-semibold text-fallow-900">Structuring empty hours & daily routines</h3>
+                    <p class="text-sm text-fallow-700">
+                        To ease the friction of an open calendar, start by anchoring your mornings with a non-work ritual. Test one micro-experiment this week:
+                    </p>
+                    <div class="bg-fallow-50 p-3.5 rounded-lg border border-fallow-200/60 text-xs sm:text-sm text-fallow-800 space-y-1">
+                        <div class="font-semibold text-fallow-900">Suggested Action:</div>
+                        <div>Design a mock "commute walk" or deliberate 30-minute morning anchor before checking news or emails.</div>
+                    </div>
+                </div>
+
+                <!-- Footer note -->
+                <div class="text-center pt-2">
+                    <p class="text-xs text-fallow-600">
+                        Part of the <span class="font-medium text-fallow-800">fallow.garden</span> suite. Your settings are saved locally.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="w-full border-t border-fallow-200 bg-white/40 py-4 text-center text-xs text-fallow-600">
+        Next Chapter • Practical steps for your post-career pivot
+    </footer>
+
+    <script>
+        // State management object
+        const userState = {
+            vibe: 'Action Plan',
+            anchor: 'Secular / Pragmatic',
+            horizon: '6-18 months out',
+            focus: 'Structuring empty hours & routines',
+            pace: '2-minute daily micro-reflection'
+        };
+
+        const stepsNames = [
+            "Intro & Overview",
+            "Step 1: Depth Level",
+            "Step 2: Worldview Anchor",
+            "Step 3: Current Reality",
+            "Step 4: Weekly Pace",
+            "Your Dashboard"
+        ];
+
+        function goToStep(stepIndex) {
+            // Hide all views
+            document.getElementById('view-intro').classList.add('hidden');
+            document.getElementById('view-step1').classList.add('hidden');
+            document.getElementById('view-step2').classList.add('hidden');
+            document.getElementById('view-step3').classList.add('hidden');
+            document.getElementById('view-step4').classList.add('hidden');
+            document.getElementById('view-dashboard').classList.add('hidden');
+
+            // Show target view
+            if (stepIndex === 0) document.getElementById('view-intro').classList.remove('hidden');
+            if (stepIndex === 1) document.getElementById('view-step1').classList.remove('hidden');
+            if (stepIndex === 2) document.getElementById('view-step2').classList.remove('hidden');
+            if (stepIndex === 3) document.getElementById('view-step3').classList.remove('hidden');
+            if (stepIndex === 4) document.getElementById('view-step4').classList.remove('hidden');
+            if (stepIndex === 5) {
+                document.getElementById('view-dashboard').classList.remove('hidden');
+                populateDashboard();
+            }
+
+            // Update step indicator
+            document.getElementById('step-indicator').innerText = stepsNames[stepIndex];
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function saveStep1() {
+            const selected = document.querySelector('input[name="vibe"]:checked');
+            if (selected) userState.vibe = selected.value;
+        }
+
+        function saveStep2() {
+            const selected = document.querySelector('input[name="anchor"]:checked');
+            if (selected) userState.anchor = selected.value;
+        }
+
+        function saveStep3() {
+            userState.horizon = document.getElementById('audit-horizon').value;
+            userState.focus = document.getElementById('audit-focus').value;
+        }
