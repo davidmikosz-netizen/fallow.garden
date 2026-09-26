@@ -13,7 +13,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Fallow Horizon" />
-  <link rel="apple-touch-icon" href="/fers/icon-192x192.png">
+  <link rel="apple-touch-icon" href="/episodes/fers-countdown/icon-192x192.png">
+  
+  <!-- Clear Favicon 404 Error -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
 
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -135,6 +138,25 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+    }
+    
+    .install-btn {
+      background: var(--sprout);
+      color: #ffffff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      cursor: pointer;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s ease;
+    }
+
+    .install-btn:hover {
+      background: var(--moss);
     }
 
     /* Cards */
@@ -499,11 +521,22 @@
         <p class="brand-subtitle">Federal Retirement &amp; Working Day Horizon</p>
       </div>
 
-      <div class="privacy-badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-        </svg>
-        Zero Telemetry • Runs 100% In-Browser
+      <div class="header-actions" style="display: flex; gap: 10px; align-items: center;">
+        <button id="install-button" class="install-btn" style="display: none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Install App
+        </button>
+        
+        <div class="privacy-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          Zero Telemetry • Runs 100% In-Browser
+        </div>
       </div>
     </header>
 
@@ -918,6 +951,47 @@
           });
       });
     }
+  </script>
+
+  <!-- Custom Install Button Logic -->
+  <script>
+    let deferredPrompt;
+    const installButton = document.getElementById('install-button');
+
+    // Listen for the browser's native install prompt event
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent Chrome from showing its own mini-infobar
+      e.preventDefault();
+      // Stash the event so we can trigger it from our button later
+      deferredPrompt = e;
+      // Reveal our custom install button
+      installButton.style.display = 'inline-flex';
+    });
+
+    // Handle the button click
+    installButton.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      
+      // Trigger the native browser install prompt
+      deferredPrompt.prompt();
+      
+      // Wait for the user's choice
+      const { outcome } = await deferredPrompt.userChoice;
+      
+      if (outcome === 'accepted') {
+        console.log('User installed the PWA');
+      }
+      
+      // The prompt can only be used once, so discard it
+      deferredPrompt = null;
+      installButton.style.display = 'none';
+    });
+
+    // Hide the button permanently once the app is installed
+    window.addEventListener('appinstalled', () => {
+      installButton.style.display = 'none';
+      deferredPrompt = null;
+    });
   </script>
 </body>
 </html>
