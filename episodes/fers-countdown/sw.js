@@ -2,11 +2,11 @@ const CACHE_NAME = 'fers-cache-v1';
 
 // Use absolute paths starting with your subfolder name
 const urlsToCache = [
-  '/fers/',
-  '/fers/index.html',
-  '/fers/style.css',
-  '/fers/script.js',
-  '/fers/manifest.json'
+  '/fers-countdown/',
+  '/fers-countdown/index.html',
+  '/fers-coundown/style.css',
+  '/fers-countdown/script.js',
+  '/fers-countdown/manifest.json'
 ];
 
 self.addEventListener('install', event => {
