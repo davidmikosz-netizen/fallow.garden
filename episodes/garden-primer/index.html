@@ -1,0 +1,232 @@
+<!-- Top Navigation / Header -->
+<header class="border-b border-fallow-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <span class="w-3 h-3 rounded-full bg-fallow-600 inline-block"></span>
+            <span class="font-mono text-sm tracking-wide text-fallow-700 uppercase font-semibold">fallow.garden / Corridor III</span>
+        </div>
+        <nav class="flex items-center space-x-6 text-sm text-fallow-600">
+            <a href="#overview" class="hover:text-fallow-900 transition-colors">Overview</a>
+            <a href="#primer" class="hover:text-fallow-900 transition-colors">Primer</a>
+            <a href="#references" class="hover:text-fallow-900 transition-colors">References</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Main Container -->
+<main class="flex-grow max-w-4xl w-full mx-auto px-6 py-12 space-y-16">
+
+    <!-- Title & Introduction Section -->
+    <section id="overview" class="space-y-6">
+        <div class="inline-block px-3 py-1 rounded-full bg-fallow-200 text-fallow-800 text-xs font-mono font-medium tracking-wide">
+            Interactive Primer
+        </div>
+        <h1 class="font-serif text-4xl sm:text-5xl font-normal text-fallow-950 leading-tight">
+            Landscape & Living Ecology
+        </h1>
+        <p class="text-lg text-fallow-700 leading-relaxed font-light">
+            Welcome to Corridor III. This primer is designed to change how we understand the botanical world—moving away from thinking of it as passive, green backdrop furniture and towards active, chemical, communicative participants. Use the global lens switcher below to toggle your preferred reading depth across all sections.
+        </p>
+
+        <!-- Global Mode Switcher Bar -->
+        <div class="bg-white p-2 rounded-xl shadow-sm border border-fallow-200 flex flex-wrap gap-2 items-center justify-between">
+            <span class="text-xs font-mono text-fallow-500 uppercase px-3">Global View Mode:</span>
+            <div class="flex space-x-1 sm:space-x-2">
+                <button onclick="switchGlobalMode('vibes')" id="btn-vibes" class="mode-btn px-4 py-2 rounded-lg text-xs font-medium transition-all bg-fallow-900 text-white shadow-sm">
+                    🌲 Just the Vibes
+                </button>
+                <button onclick="switchGlobalMode('bigwords')" id="btn-bigwords" class="mode-btn px-4 py-2 rounded-lg text-xs font-medium transition-all text-fallow-700 hover:bg-fallow-100">
+                    🧠 I Know Big Words
+                </button>
+                <button onclick="switchGlobalMode('nerd')" id="btn-nerd" class="mode-btn px-4 py-2 rounded-lg text-xs font-medium transition-all text-fallow-700 hover:bg-fallow-100">
+                    🧬 Maximum Nerd Mode
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Index Navigation Card -->
+    <section class="bg-white rounded-2xl border border-fallow-200 p-8 shadow-sm space-y-4">
+        <h2 class="font-mono text-xs uppercase tracking-widest text-fallow-500">Table of Contents / Index</h2>
+        <ul class="grid sm:grid-cols-3 gap-4 text-sm font-medium">
+            <li>
+                <a href="#section-1" class="block p-4 rounded-xl bg-fallow-50 hover:bg-fallow-100 transition-colors border border-fallow-200 text-fallow-900">
+                    <span class="block font-mono text-xs text-fallow-500 mb-1">Part 01</span>
+                    Plants Are Alive
+                </a>
+            </li>
+            <li>
+                <a href="#section-2" class="block p-4 rounded-xl bg-fallow-50 hover:bg-fallow-100 transition-colors border border-fallow-200 text-fallow-900">
+                    <span class="block font-mono text-xs text-fallow-500 mb-1">Part 02</span>
+                    Wood You Look at the Trees?
+                </a>
+            </li>
+            <li>
+                <a href="#section-3" class="block p-4 rounded-xl bg-fallow-50 hover:bg-fallow-100 transition-colors border border-fallow-200 text-fallow-900">
+                    <span class="block font-mono text-xs text-fallow-500 mb-1">Part 03</span>
+                    Becoming a Local
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Primer Content Sections -->
+    <div id="primer" class="space-y-16">
+
+        <!-- SECTION 1 -->
+        <section id="section-1" class="bg-white rounded-2xl border border-fallow-200 p-8 sm:p-10 shadow-sm space-y-6">
+            <div class="flex items-center justify-between border-b border-fallow-100 pb-4">
+                <span class="font-mono text-xs font-semibold text-fallow-500 uppercase">Part 01</span>
+                <span class="font-mono text-xs text-fallow-400">Agency & Evolutionary Baseline</span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl text-fallow-950 font-normal">Plants Are Alive (And What That Demands of Us)</h2>
+
+            <!-- Vibes Content -->
+            <div class="mode-pane pane-vibes tab-content active space-y-4 text-fallow-800 leading-relaxed font-light text-lg">
+                <p>We think of plants like green furniture—silent backdrop decorations we get and usually put in a corner until it dries out. But when we walk into a forest or even a patch of wild weeds, we are stepping into a pulsing, incredibly responsive and interactive community.</p>
+                <p>Plants aren't passive objects; they are intensely alive, constantly making choices, competing, cooperating, and feeling their way through the world. When we slow down and actually notice them, we can recognize that we aren't staring at scenery—we are surrounded by life that is closer to us than we think.</p>
+            </div>
+
+            <!-- Big Words Content -->
+            <div class="mode-pane pane-bigwords tab-content space-y-4 text-fallow-800 leading-relaxed font-light text-lg">
+                <p>For centuries, human biology drew a hard line: animals move, think, and feel; plants sit there and photosynthesize. Modern botany and science writing are shattering that illusion. Writers like Zoe Schlanger (<em>The Light Eaters</em>) and Ed Yong have helped reframe our understanding of non-human life, showing that intelligence and agency don’t require a centralized brain or a nervous system.</p>
+                <p>Plants "behave" across timescales we aren’t tuned to notice. They hunt for light, remember where injuries occurred, track down nutrients in the soil, and warn their neighbors when predators are near. Realizing plants are active agents rather than inanimate things changes our relationship to the broader living world. It shifts our wellbeing from a vague aesthetic appreciation to a recognition of shared existence and alters our very sense of well-being.</p>
+            </div>
+
+            <!-- Nerd Mode Content -->
+            <div class="mode-pane pane-nerd tab-content space-y-4 text-fallow-800 leading-relaxed text-base">
+                <p class="font-medium text-fallow-900">To truly understand plant life, we have to discard the Cartesian view of the organism as an isolated individual. Drawing on evolutionary frameworks, a plant is better understood as a massive, distributed collective.</p>
+                <ul class="list-disc pl-5 space-y-2 text-fallow-700">
+                    <li><strong>Distributed Processing:</strong> Lacking a central nervous system, plants use decentralized chemical signaling networks (akin to neurochemicals like glutamate and calcium wave propagation) across roots, vascular systems, and leaves to process environmental data.</li>
+                    <li><strong>Behavioral Adaptations:</strong> As Schlanger documents, plants exhibit complex foraging strategies, root-tip sensory navigation (the root-brain hypothesis), and sophisticated phenotypic plasticity. They alter their form, chemical defenses, and growth trajectories based on historical stress and current competition.</li>
+                    <li><strong>The Interwoven Self:</strong> Plants are structurally incomplete without their subterranean partners—mycorrhizal networks and rhizosphere bacteria—meaning their "aliveness" is an emergent property of multi-species collaboration. Recognizing this alters human somatic baseline metrics, tuning our autonomic nervous system away from modern hyper-vigilance and back toward ancestral, co-evolved ecologies.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section id="section-2" class="bg-white rounded-2xl border border-fallow-200 p-8 sm:p-10 shadow-sm space-y-6">
+            <div class="flex items-center justify-between border-b border-fallow-100 pb-4">
+                <span class="font-mono text-xs font-semibold text-fallow-500 uppercase">Part 02</span>
+                <span class="font-mono text-xs text-fallow-400">Atmospheric Chemistry & Forest Bathing</span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl text-fallow-950 font-normal">Wood You Look at the Trees? (The Invisible Air)</h2>
+
+            <!-- Vibes Content -->
+            <div class="mode-pane pane-vibes tab-content active space-y-4 text-fallow-800 leading-relaxed font-light text-lg">
+                <p>Walk into a pine forest, and you instantly feel it—that crisp, sharp, clearing-of-the-head sensation that makes you take a deep, involuntary breath. Step under an oak canopy, and the atmosphere changes entirely.</p>
+                <p>This is not just the oxygen they are putting out, "fresh air" or a nice smell, but we are actually walking through an invisible, active chemical soup. Trees are constantly exhaling vast quantities of complex compounds into the air. These chemicals fight bugs, help create rain, and can even cause changes in the air (think of the blueness of the Blue Ridge Mountains—that is not a fog from the sky, but a cloud coming from the trees below).</p>
+                <p>When we walk in a forest, we are swimming in their breath, and our bodies know it long before our conscious minds catch up.</p>
+            </div>
+
+            <!-- Big Words Content -->
+            <div class="mode-pane pane-bigwords tab-content space-y-4 text-fallow-800 leading-relaxed font-light text-lg">
+                <p>Our sensory blinders make us treat the forest as a static backdrop, and we miss that trees are constantly broadcasting messages into the atmosphere. Writers like Peter Wohlleben (<em>The Hidden Life of Trees</em>) and Merlin Sheldrake (<em>Entangled Life</em>) have opened our awareness, showing that forests are hyper-connected communicative networks spanning both the soil and the sky.</p>
+                <p>When you stand under different trees, you are experiencing distinct chemical realities. Conifers like pines pump out heavy terpenes—compounds that act as natural defense signals and seed cloud formation—while deciduous oaks heavily emit isoprene to handle heat stress.</p>
+                <p>When we go "forest bathing" (<em>Shinrin-yoku</em>), we aren't just enjoying a quiet walk; our nervous systems are directly interacting with these Biogenic Volatile Organic Compounds (BVOCs). Inhaling them measurably lowers cortisol, dampens human stress responses, and boosts immune function. It turns out our biology is hardwired to plug straight into the chemical chatter of the woods.</p>
+            </div>
+
+            <!-- Nerd Mode Content -->
+            <div class="mode-pane pane-nerd tab-content space-y-4 text-fallow-800 leading-relaxed text-base">
+                <p class="font-medium text-fallow-900">At the molecular level, forest air is a dynamic reaction chamber driven by plant metabolism.</p>
+                <ul class="list-disc pl-5 space-y-2 text-fallow-700">
+                    <li><strong>The BVOC Profile:</strong> Biogenic Volatile Organic Compounds represent a massive flux of carbon and energy. Monoterpenes ($\text{C}_{10}\text{H}_{16}$) and sesquiterpenes emitted by conifers possess high chemical reactivity with atmospheric oxidants (ozone, hydroxyl radicals), generating secondary organic aerosols (SOAs) that shape regional microclimates and cloud albedo. Isoprene ($\text{C}_{5}\text{H}_{8}$), conversely, acts as an antioxidant shield for foliage under thermal stress.</li>
+                    <li><strong>Physiological Interface:</strong> When human subjects inhale forest BVOCs, these lipophilic molecules cross the blood-brain barrier and bind to olfactory and autonomic receptors. Clinical studies demonstrate that exposure to phytoncides (wood essential oils rich in terpenes like $\alpha$-pinene) suppresses sympathetic nervous system activity, reduces blood pressure, and upregulates human natural killer (NK) cell activity via immunomodulatory pathways.</li>
+                    <li><strong>The Extended Phenotype:</strong> Extending Richard Dawkins' concept, the "organism" does not end at the bark. The chemical atmosphere a tree generates is an extended phenotypic reach—modifying local weather, microbial dynamics, and mammalian neurobiology alike.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section id="section-3" class="bg-white rounded-2xl border border-fallow-200 p-8 sm:p-10 shadow-sm space-y-6">
+            <div class="flex items-center justify-between border-b border-fallow-100 pb-4">
+                <span class="font-mono text-xs font-semibold text-fallow-500 uppercase">Part 03</span>
+                <span class="font-mono text-xs text-fallow-400">Niche Construction & Stewardship</span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl text-fallow-950 font-normal">Becoming a Local (Part of the Ecosystem)</h2>
+
+            <!-- Vibes Content -->
+            <div class="mode-pane pane-vibes tab-content active space-y-4 text-fallow-800 leading-relaxed font-light text-lg">
+                <p>Humans are, by nature, immigrants. We wander, we migrate, and in doing so, we have changed most of the world. We don't just move ourselves; we bring our baggage—and our favorite plants and animals—with us everywhere we go, fundamentally reshaping our environments. It’s wild to remember that earthworms aren't even native to the Americas, and coconuts originated in East Asia. We are world-shapers by default.</p>
+                <p>The question isn't how to magically pretend we never showed up or try to rewild a potted bonsai tree out in the yard. It's about recognizing that we are already part of the machinery. Once we stop seeing our yards and neighborhoods as sterile outdoor carpet and start seeing them as living corridors, we can actually use our knack for intervention to make things better.</p>
+                <p>Planting native species, supporting local insects, and giving the landscape a little breathing room isn't about romanticizing some pristine past—it's about being a better, less destructive neighbor to the ground we stand on.</p>
+            </div>
+
+            <!-- Big Words Content -->
+            <div class="mode-pane pane-bigwords tab-content space-y-4 text-fallow-800 leading-relaxed font-light text-lg">
+                <p>Ecological restoration often suffers from an all-or-nothing myth: that humans are a cancer on the landscape and the only way to heal nature is to completely step away. But anthropology and modern conservation science tell a different story. Humans have acted as keystone species and disturbance engines for millennia, actively managing habitats through fire, seed dispersal, and cultivation.</p>
+                <p>The concept of the "novel ecosystem"—mixed environments where native and introduced species coexist—forces us to drop purist fantasies. We aren't going to roll back global migration patterns or un-invent earthworms. Instead, "becoming local" means shifting our ecological impact from accidental degradation to intentional stewardship.</p>
+                <p>By deliberately reintroducing native flora—like milkweed, mountain mint, and goldenrod—we plug back into broken local food webs. We give native pollinators, birds, and soil biomes the specific tools they evolved alongside, turning our immediate surroundings from biological dead zones into functioning ecological stepping stones.</p>
+            </div>
+
+            <!-- Nerd Mode Content -->
+            <div class="mode-pane pane-nerd tab-content space-y-4 text-fallow-800 leading-relaxed text-base">
+                <p class="font-medium text-fallow-900">From a macro-ecological and biogeographical perspective, anthropogenic species translocation has created homogenized, pan-global "Pangaean" biomes. However, localized conservation biology demonstrates that functional recovery is scale-dependent.</p>
+                <ul class="list-disc pl-5 space-y-2 text-fallow-700">
+                    <li><strong>Trophic Patch Dynamics:</strong> Urban and suburban landscapes function as fragmented matrices. Introducing native keystone plant species repairs severed trophic links, specifically restoring specialist insect-plant interactions (e.g., <em>Lepidoptera</em> larvae dependency on native host plants).</li>
+                    <li><strong>Anthropogenic Niche Construction:</strong> Humans act as niche constructors. Rather than attempting impossible baseline reversions to pre-colonial ecologies, effective restoration leverages intentional anthropogenic intervention—such as managing turf smothering, supporting mycorrhizal inoculation, and curating native plant guilds—to accelerate ecological succession and resilience.</li>
+                    <li><strong>Biotic Feedback Loops:</strong> Re-establishing native floral diversity triggers positive feedback loops: enhanced root exudates stimulate rhizosphere microbial biomass, improving soil hydrological capacity, carbon sequestration, and local microclimate moderation.</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- References Section -->
+    <section id="references" class="bg-fallow-100/60 rounded-2xl border border-fallow-200 p-8 space-y-6">
+        <h2 class="font-mono text-xs uppercase tracking-widest text-fallow-600 font-semibold">Further Reading & References</h2>
+        <div class="grid sm:grid-cols-2 gap-6 text-sm">
+            <div class="space-y-2 bg-white p-5 rounded-xl border border-fallow-200">
+                <h3 class="font-semibold text-fallow-900">Zoe Schlanger, <em>The Light Eaters</em></h3>
+                <p class="text-fallow-600 text-xs leading-relaxed">An exceptional deep dive into botanical behavior, agency, and the ways plants perceive and manipulate their environment.</p>
+            </div>
+            <div class="space-y-2 bg-white p-5 rounded-xl border border-fallow-200">
+                <h3 class="font-semibold text-fallow-900">Ed Yong, <em>An Immense World</em></h3>
+                <p class="text-fallow-600 text-xs leading-relaxed">Provides the essential philosophical lens for understanding non-human sentience, sensory bubbles, and ecological entanglement.</p>
+            </div>
+            <div class="space-y-2 bg-white p-5 rounded-xl border border-fallow-200">
+                <h3 class="font-semibold text-fallow-900">Peter Wohlleben & Merlin Sheldrake</h3>
+                <p class="text-fallow-600 text-xs leading-relaxed"><em>The Hidden Life of Trees</em> and <em>Entangled Life</em> map out the subterranean and atmospheric networks binding forests together.</p>
+            </div>
+            <div class="space-y-2 bg-white p-5 rounded-xl border border-fallow-200">
+                <h3 class="font-semibold text-fallow-900">Doug Tallamy, <em>Bringing Nature Home</em></h3>
+                <p class="text-fallow-600 text-xs leading-relaxed">The definitive practical guide on how individual yards can serve as vital ecological corridors for native wildlife.</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-fallow-200 bg-white py-8 text-center text-xs text-fallow-500 font-mono">
+    <div class="max-w-4xl mx-auto px-6 space-y-2">
+        <p>fallow.garden suite &bull; Corridor III: Landscape & Living Ecology</p>
+        <p class="text-fallow-400">Designed for immersive ecological exploration.</p>
+    </div>
+</footer>
+
+<!-- Script to Handle Global Mode Toggling -->
+<script>
+    function switchGlobalMode(mode) {
+        // Update button styles
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+            btn.classList.remove('bg-fallow-900', 'text-white', 'shadow-sm');
+            btn.classList.add('text-fallow-700', 'hover:bg-fallow-100');
+        });
+
+        const activeBtn = document.getElementById('btn-' + mode);
+        if (activeBtn) {
+            activeBtn.classList.remove('text-fallow-700', 'hover:bg-fallow-100');
+            activeBtn.classList.add('bg-fallow-900', 'text-white', 'shadow-sm');
+        }
+
+        // Update content panes across all sections
+        document.querySelectorAll('.mode-pane').forEach(pane => {
+            pane.classList.remove('active');
+        });
+
+        document.querySelectorAll('.pane-' + mode).forEach(pane => {
+            pane.classList.add('active');
+        });
+    }
+</script>
