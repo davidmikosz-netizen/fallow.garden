@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fallow.garden: Attention Restore: a tool to help restore your focus</title>
-  <meta name="description" content="Rebuild deep focus through circadian pacing, Attention Restoration Theory, and zero-input micro-breaks." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>fallow.garden: Attention Restore — Cognitive Pacing &amp; Soft Fascination</title>
+  <meta name="description" content="Rebuild deep focus through Attention Restoration Theory, circadian pacing, and zero-input micro-breaks." />
 
   <!-- Mobile & PWA Configuration -->
   <meta name="mobile-web-app-capable" content="yes" />
@@ -15,11 +15,11 @@
 
   <!-- Inline Web App Manifest -->
   <link rel="manifest" href="data:application/manifest+json;utf-8,%7B%22name%22%3A%22fallow.garden%3A%20Attention%20Restore%22%2C%22short_name%22%3A%22AttentionRestore%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23eef3ee%22%2C%22theme_color%22%3A%22%23214e38%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20512%20512%27%3E%3Crect%20width%3D%27512%27%20height%3D%27512%27%20rx%3D%27100%27%20fill%3D%27%23214e38%27%2F%3E%3Cpath%20d%3D%27M256%20420V240M200%20180a60%2060%200%200%201%20112%200c0%2060-60%2090-60%2090M340%20310c30%200%2050-20%2050-50%200-45-60-75-134-75M172%20310c-30%200-50-20-50-50%200-45%2060-75%20134-75%27%20fill%3D%27none%27%20stroke%3D%27%23f6f9f5%27%20stroke-width%3D%2728%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D" />
-  
+
   <!-- Typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Vercel Web Analytics -->
   <script>
@@ -36,19 +36,19 @@
       --bg-surface-elevated: #ffffff;
       --bg-subtle: #dbe7dc;
       --bg-deck: #f6f9f5;
-      
+
       /* Typography */
       --text: #162b20;
       --text-muted: #4a6353;
       --text-light: #6e8576;
-      
+
       /* Primary Greens */
       --accent: #214e38;
       --accent-light: #356b4f;
       --accent-soft: #cee3d3;
       --accent-tint: #eaf3ed;
-      
-      /* Warm Calming Accents (Clay, Terracotta, Sunlight) */
+
+      /* Warm Calming Accents (Clay, Terracotta, Amber) */
       --clay: #c16e49;
       --clay-light: #db8b67;
       --clay-soft: #f8ebe4;
@@ -56,20 +56,20 @@
       --amber-soft: #fbf2e3;
       --sky: #4f7285;
       --sky-soft: #e7eff3;
-      
+
       /* Structural Elements */
       --border: #c9d8cc;
       --border-soft: #dae5dc;
       --border-focus: #214e38;
-      
+
       /* Shadows & Radii */
       --shadow-sm: 0 4px 14px rgba(22, 43, 32, 0.05);
       --shadow-md: 0 12px 32px rgba(22, 43, 32, 0.08);
-      --shadow-glow: 0 0 28px rgba(53, 107, 79, 0.2);
+      --shadow-glow: 0 0 28px rgba(53, 107, 79, 0.18);
       --radius-sm: 10px;
       --radius-md: 18px;
       --radius-lg: 24px;
-      
+
       /* Fonts */
       --font-serif: 'Instrument Serif', Georgia, serif;
       --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -106,7 +106,7 @@
       justify-content: space-between;
       align-items: flex-end;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 40px;
+      margin-bottom: 36px;
       flex-wrap: wrap;
       gap: 20px;
     }
@@ -146,7 +146,7 @@
       color: var(--accent);
       padding: 3px 10px;
       border-radius: 6px;
-      font-weight: 500;
+      font-weight: 600;
       border: 1px solid rgba(33, 78, 56, 0.15);
     }
 
@@ -192,53 +192,467 @@
 
     .section-desc {
       color: var(--text-muted);
-      font-size: 1.05rem;
-      margin-bottom: 28px;
-      max-width: 760px;
+      font-size: 1.02rem;
+      margin-bottom: 24px;
+      max-width: 800px;
+      line-height: 1.6;
     }
 
-    .section-desc.paper-notice {
-      background: var(--bg-surface);
-      border-left: 3px solid var(--clay);
-      padding: 14px 18px;
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      margin-top: 12px;
-      color: var(--text);
-    }
-
-    /* Presentation Viewport */
-    .deck-container {
+    /* SECTION 1: ATTENTION RESIDUE & COGNITIVE LOAD CALCULATOR */
+    .calc-container {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-md);
+      padding: 32px;
+      margin-bottom: 56px;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 860px) {
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .calc-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .control-row {
+      background: var(--bg-deck);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+
+    .control-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .control-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .control-val {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--clay);
+    }
+
+    .control-hint {
+      font-size: 0.76rem;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .range-slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border);
+      outline: none;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* Diagnostic Readout Card */
+    .diagnostic-panel {
+      background: linear-gradient(180deg, #f4f8f4 0%, #ebf2ec 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .gauge-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .gauge-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .gauge-label-wrap {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .gauge-bar-bg {
+      height: 10px;
+      background: rgba(22, 43, 32, 0.08);
+      border-radius: 999px;
       overflow: hidden;
+      border: 1px solid rgba(22, 43, 32, 0.06);
+    }
+
+    .gauge-bar-fill {
+      height: 100%;
+      width: 50%;
+      border-radius: 999px;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+    }
+
+    .gauge-desc {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .prescription-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+
+    .prescription-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--clay);
+      font-weight: 700;
+    }
+
+    .prescription-heading {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin: 2px 0 4px;
+    }
+
+    .prescription-body {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Research Accordion / Drawer */
+    .research-drawer {
+      margin-top: 24px;
+      border-top: 1px dashed var(--border);
+      padding-top: 16px;
+    }
+
+    details.research-toggle {
+      cursor: pointer;
+    }
+
+    details.research-toggle summary {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      outline: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+    }
+
+    details.research-toggle summary:hover {
+      color: var(--clay);
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .research-card {
+      background: var(--bg-deck);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .research-card strong {
+      color: var(--accent);
+      display: block;
+      font-size: 0.88rem;
+      margin-bottom: 2px;
+    }
+
+    /* THE ANALOG AIR GAP / PAPER RULE CALLOUT */
+    .analog-airgap-banner {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--clay);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 56px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .airgap-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .airgap-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .airgap-text {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .airgap-text strong {
+      color: var(--text);
+    }
+
+    /* SECTION 2: WHEN TO DEPLOY */
+    .deploy-section {
+      margin-bottom: 56px;
+    }
+
+    .deploy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .deploy-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .deploy-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-light);
+    }
+
+    .deploy-trigger {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--clay);
+    }
+
+    .deploy-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--accent);
+      line-height: 1.25;
+    }
+
+    .deploy-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* SECTION 3: RECOVERY PROTOCOLS */
+    .protocols-section {
       margin-bottom: 64px;
     }
 
-    .deck-toolbar {
-      padding: 16px 28px;
-      background: linear-gradient(90deg, #f2f7f3 0%, #edf4ef 100%);
-      border-bottom: 1px solid var(--border);
+    .protocol-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-top: 24px;
+    }
+
+    .protocol-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-sm);
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .slide-indicator {
+    .protocol-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-sage {
+      background: linear-gradient(180deg, #f9fcf9 0%, #f1f7f2 100%);
+      border-top: 5px solid var(--accent-light);
+    }
+
+    .card-clay {
+      background: linear-gradient(180deg, #fdfbfa 0%, #fbf4f0 100%);
+      border-top: 5px solid var(--clay);
+    }
+
+    .card-sky {
+      background: linear-gradient(180deg, #f9fbfe 0%, #f0f5f8 100%);
+      border-top: 5px solid var(--sky);
+    }
+
+    .protocol-badge {
+      position: absolute;
+      top: 24px;
+      right: 24px;
       font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--accent);
+      font-size: 0.78rem;
+      padding: 4px 12px;
+      border-radius: 20px;
       font-weight: 600;
-      letter-spacing: 0.04em;
     }
 
-    .deck-controls {
+    .badge-sage {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(33, 78, 56, 0.15);
+    }
+
+    .badge-clay {
+      background: var(--clay-soft);
+      color: var(--clay);
+      border: 1px solid rgba(193, 110, 73, 0.2);
+    }
+
+    .badge-sky {
+      background: var(--sky-soft);
+      color: var(--sky);
+      border: 1px solid rgba(79, 114, 133, 0.2);
+    }
+
+    .protocol-title {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .protocol-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+      min-height: 44px;
+      line-height: 1.5;
+    }
+
+    /* DAPPLED CANOPY CANVAS (Tool 1) */
+    .canopy-viewport {
+      width: 100%;
+      height: 140px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #e2ede3;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    #canopy-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .timer-display {
+      font-family: var(--font-mono);
+      font-size: 3.2rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-align: center;
+      margin: 12px 0;
+      letter-spacing: -0.02em;
+    }
+
+    .timer-clay { color: var(--clay); }
+    .timer-sky { color: var(--sky); }
+
+    .prompt-box {
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 18px;
+      min-height: 60px;
       display: flex;
       align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      line-height: 1.45;
+    }
+
+    .tool-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    /* Audio Toggle */
+    .sound-toggle {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 8px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      background: var(--clay-soft);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(193, 110, 73, 0.15);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .sound-toggle input {
+      accent-color: var(--clay);
+      cursor: pointer;
     }
 
     /* Buttons */
@@ -302,277 +716,7 @@
       border-color: var(--clay-light);
     }
 
-    .deck-slide {
-      min-height: 460px;
-      padding: 48px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: var(--bg-deck);
-    }
-
-    .slide-meta {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--clay);
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .slide-heading {
-      font-family: var(--font-serif);
-      font-size: 2.5rem;
-      line-height: 1.15;
-      color: var(--accent);
-      margin-bottom: 20px;
-      max-width: 840px;
-    }
-
-    .slide-content {
-      font-size: 1.15rem;
-      line-height: 1.75;
-      color: var(--text-muted);
-      max-width: 860px;
-    }
-
-    .slide-content strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .slide-footer-note {
-      margin-top: 32px;
-      padding-top: 16px;
-      border-top: 1px dashed var(--border);
-      font-size: 0.85rem;
-      font-family: var(--font-mono);
-      color: var(--text-light);
-    }
-
-    /* SECTION: WHEN TO DEPLOY A PROTOCOL */
-    .deploy-section {
-      margin-bottom: 64px;
-    }
-
-    .deploy-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 24px;
-    }
-
-    .deploy-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-md);
-      padding: 24px 26px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .deploy-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent-light);
-    }
-
-    .deploy-trigger {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--clay);
-    }
-
-    .deploy-title {
-      font-family: var(--font-serif);
-      font-size: 1.4rem;
-      color: var(--accent);
-      line-height: 1.25;
-    }
-
-    .deploy-desc {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-
-    /* SECTION: PROTOCOLS */
-    .protocols-section {
-      margin-bottom: 64px;
-    }
-
-    .protocol-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 28px;
-      margin-top: 24px;
-    }
-
-    .protocol-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 34px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .protocol-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .card-sage {
-      background: linear-gradient(180deg, #f9fcf9 0%, #f1f7f2 100%);
-      border-top: 5px solid var(--accent-light);
-    }
-
-    .card-clay {
-      background: linear-gradient(180deg, #fdfbfa 0%, #fbf4f0 100%);
-      border-top: 5px solid var(--clay);
-    }
-
-    .card-sky {
-      background: linear-gradient(180deg, #f9fbfe 0%, #f0f5f8 100%);
-      border-top: 5px solid var(--sky);
-    }
-
-    .protocol-badge {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-weight: 600;
-    }
-
-    .badge-sage {
-      background: var(--accent-soft);
-      color: var(--accent);
-      border: 1px solid rgba(33, 78, 56, 0.15);
-    }
-
-    .badge-clay {
-      background: var(--clay-soft);
-      color: var(--clay);
-      border: 1px solid rgba(193, 110, 73, 0.2);
-    }
-
-    .badge-sky {
-      background: var(--sky-soft);
-      color: var(--sky);
-      border: 1px solid rgba(79, 114, 133, 0.2);
-    }
-
-    .protocol-title {
-      font-family: var(--font-serif);
-      font-size: 1.85rem;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .protocol-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 24px;
-      min-height: 48px;
-    }
-
-    .timer-display {
-      font-family: var(--font-mono);
-      font-size: 3.2rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-align: center;
-      margin: 16px 0;
-      letter-spacing: -0.02em;
-    }
-
-    .timer-clay { color: var(--clay); }
-    .timer-sky { color: var(--sky); }
-
-    .pulse-container {
-      height: 140px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .pulse-orb {
-      width: 74px;
-      height: 74px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(203, 137, 52, 0.4) 0%, rgba(53, 107, 79, 0.3) 50%, rgba(33, 78, 56, 0.1) 85%);
-      border: 2px solid var(--accent-light);
-      box-shadow: var(--shadow-glow);
-      transition: transform 4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .pulse-orb.expanding {
-      transform: scale(1.75);
-      box-shadow: 0 0 40px rgba(203, 137, 52, 0.35);
-    }
-
-    .pulse-orb.contracting {
-      transform: scale(0.9);
-      box-shadow: 0 0 16px rgba(53, 107, 79, 0.2);
-    }
-
-    .prompt-box {
-      background: #ffffff;
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-sm);
-      padding: 14px 18px;
-      font-size: 0.92rem;
-      color: var(--text);
-      margin-bottom: 20px;
-      min-height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .tool-actions {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    .sound-toggle {
-      margin-top: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      background: var(--clay-soft);
-      padding: 8px 12px;
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(193, 110, 73, 0.15);
-    }
-
-    .sound-toggle input {
-      accent-color: var(--clay);
-      cursor: pointer;
-    }
-
-    /* SECTION: ABOUT & SUPPORT */
+    /* SECTION 4: ABOUT & SUPPORT */
     .support-cards-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -585,7 +729,7 @@
       background: #fdfaf0;
       border: 1px solid #f6e6b4;
       border-radius: var(--radius-md);
-      padding: 30px;
+      padding: 28px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -596,7 +740,7 @@
       background: #f0f7fd;
       border: 1px solid #cbe3fa;
       border-radius: var(--radius-md);
-      padding: 30px;
+      padding: 28px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -607,7 +751,7 @@
       display: flex;
       align-items: flex-start;
       gap: 14px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .support-icon {
@@ -630,7 +774,6 @@
       line-height: 1.5;
     }
 
-    /* Venmo Button */
     .btn-venmo {
       background: #0074de;
       color: #ffffff;
@@ -639,7 +782,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 13px 20px;
+      padding: 12px 20px;
       border-radius: var(--radius-sm);
       font-weight: 700;
       font-size: 0.95rem;
@@ -654,7 +797,6 @@
       transform: translateY(-1px);
     }
 
-    /* Email Copy Container */
     .email-copy-box {
       background: #ffffff;
       border: 1px solid #bfdbfe;
@@ -667,7 +809,7 @@
     }
 
     .email-address {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: #0284c7;
       user-select: all;
@@ -678,8 +820,8 @@
       color: #0369a1;
       border: 1px solid #bae6fd;
       border-radius: 6px;
-      padding: 7px 16px;
-      font-size: 0.85rem;
+      padding: 6px 14px;
+      font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -701,20 +843,13 @@
       border-top: 1px solid var(--border);
       text-align: center;
       color: var(--text-muted);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
 
     @media (max-width: 820px) {
       header {
         flex-direction: column;
         align-items: flex-start;
-      }
-      .deck-slide {
-        padding: 26px;
-        min-height: 440px;
-      }
-      .slide-heading {
-        font-size: 1.9rem;
       }
       .support-cards-grid {
         grid-template-columns: 1fr;
@@ -731,7 +866,7 @@
           <h1 class="brand-title">fallow.garden</h1>
           <span class="brand-tag">Episode 01</span>
         </a>
-        <p class="brand-subtitle">fallow.garden: Attention Restore: a tool to help restore your focus</p>
+        <p class="brand-subtitle">Attention Restore: Cognitive Pacing &amp; Soft Fascination</p>
       </div>
 
       <div class="header-actions">
@@ -745,32 +880,148 @@
         </button>
 
         <nav class="nav-links">
-          <a href="#deck-section" class="nav-link">The Science</a>
+          <a href="#calc-section" class="nav-link">Diagnostic</a>
           <a href="#deploy-section" class="nav-link">When to Deploy</a>
-          <a href="#protocols-section" class="nav-link">Recovery Protocols</a>
-          <a href="#support-section" class="nav-link">About &amp; Support</a>
+          <a href="#protocols-section" class="nav-link">Protocols</a>
+          <a href="#support-section" class="nav-link">Support</a>
         </nav>
       </div>
     </header>
 
-    <!-- SECTION 1: THE PRESENTATION DECK -->
-    <section id="deck-section">
-      <div class="deck-container">
-        <div class="deck-toolbar">
-          <div class="slide-indicator" id="slide-counter">The research behind this app</div>
-          <div class="deck-controls">
-            <button class="btn" id="btn-prev">← Previous</button>
-            <button class="btn" id="btn-next">Next →</button>
-            <button class="btn" id="btn-shuffle" title="Shuffle intro deck sequence">⟳ Randomize Insight</button>
+    <!-- SECTION 1: ATTENTION RESIDUE & COGNITIVE LOAD CALCULATOR -->
+    <section id="calc-section">
+      <div class="calc-container">
+        <h2 class="section-title">Cognitive Load &amp; Attention Residue Diagnostic</h2>
+        <p class="section-desc">
+          Attention doesn't switch like a light bulb—it leaves an energetic residue. Adjust the inputs below to diagnose your current prefrontal fatigue and determine your ideal restorative window.
+        </p>
+
+        <div class="calc-grid">
+          <!-- Interactive Sliders -->
+          <div class="calc-controls">
+            <!-- Slider 1: Open Tabs -->
+            <div class="control-row">
+              <div class="control-header">
+                <span class="control-title">Active Contexts &amp; Open Tabs</span>
+                <span class="control-val" id="valTabs">8 tabs</span>
+              </div>
+              <div class="control-hint">Simultaneous open inquiries competing for working memory</div>
+              <input type="range" class="range-slider" id="sliderTabs" min="1" max="30" value="8" />
+            </div>
+
+            <!-- Slider 2: Time Without Break -->
+            <div class="control-row">
+              <div class="control-header">
+                <span class="control-title">Continuous Screen Time</span>
+                <span class="control-val" id="valHours">90 min</span>
+              </div>
+              <div class="control-hint">Minutes spent under uninterrupted directed cognitive focus</div>
+              <input type="range" class="range-slider" id="sliderHours" min="15" max="240" step="15" value="90" />
+            </div>
+
+            <!-- Slider 3: Switching Frequency -->
+            <div class="control-row">
+              <div class="control-header">
+                <span class="control-title">Context-Switching Rhythm</span>
+                <span class="control-val" id="valSwitch">Moderate</span>
+              </div>
+              <div class="control-hint">How often you alternate between email, drafts, and chats</div>
+              <input type="range" class="range-slider" id="sliderSwitch" min="1" max="4" value="2" />
+            </div>
+
+            <!-- Slider 4: Time of Day Phase -->
+            <div class="control-row">
+              <div class="control-header">
+                <span class="control-title">Circadian Energy Phase</span>
+                <span class="control-val" id="valCircadian">Midday Dip</span>
+              </div>
+              <div class="control-hint">Natural biological fluctuations in prefrontal glucose &amp; alertness</div>
+              <input type="range" class="range-slider" id="sliderCircadian" min="1" max="4" value="2" />
+            </div>
+          </div>
+
+          <!-- Live Diagnostic Readout -->
+          <div class="diagnostic-panel">
+            <div class="gauge-group">
+              <!-- Gauge 1: Attention Residue -->
+              <div class="gauge-item">
+                <div class="gauge-label-wrap">
+                  <span style="color: var(--text);">Attention Residue Index</span>
+                  <span id="scoreResidue" style="font-family: var(--font-mono); color: var(--clay);">54%</span>
+                </div>
+                <div class="gauge-bar-bg">
+                  <div class="gauge-bar-fill" id="barResidue" style="width: 54%; background: var(--clay);"></div>
+                </div>
+                <p class="gauge-desc" id="descResidue">Fragmented working memory stuck processing previous incomplete tasks.</p>
+              </div>
+
+              <!-- Gauge 2: Prefrontal Fuel -->
+              <div class="gauge-item">
+                <div class="gauge-label-wrap">
+                  <span style="color: var(--text);">Prefrontal Fuel Level</span>
+                  <span id="scoreFuel" style="font-family: var(--font-mono); color: var(--accent);">46%</span>
+                </div>
+                <div class="gauge-bar-bg">
+                  <div class="gauge-bar-fill" id="barFuel" style="width: 46%; background: var(--accent);"></div>
+                </div>
+                <p class="gauge-desc" id="descFuel">Available directed inhibitory control before impulse-checking dominates.</p>
+              </div>
+            </div>
+
+            <!-- Prescribed Protocol Card -->
+            <div class="prescription-card">
+              <span class="prescription-tag">Prescribed Protocol</span>
+              <h3 class="prescription-heading" id="rxHeading">5-Min Zero-Input Rest</h3>
+              <p class="prescription-body" id="rxBody">
+                Your brain is thrashing across context boundaries. Disengage active sensory processing to allow the Default Mode Network to clear cognitive residue.
+              </p>
+            </div>
           </div>
         </div>
-        <div class="deck-slide" id="slide-viewport">
-          <!-- Populated by JavaScript -->
+
+        <!-- Research Evidence Drawer -->
+        <div class="research-drawer">
+          <details class="research-toggle">
+            <summary>
+              <span>🔬</span>
+              <span>View the Underlying Cognitive Science &amp; Citations</span>
+            </summary>
+            <div class="research-grid">
+              <div class="research-card">
+                <strong>Dr. Sophie Leroy (2009)</strong>
+                <em>Attention Residue:</em> When task-switching, cognitive bandwidth doesn't follow cleanly. Portions of your working memory remain anchored to incomplete loops.
+              </div>
+              <div class="research-card">
+                <strong>Dr. Gloria Mark (UC Irvine)</strong>
+                <em>The 47-Second Collapse:</em> In 2004, workplace screen focus averaged 2.5 minutes. Today, workers switch visual attention every 47 seconds, shattering synthesis.
+              </div>
+              <div class="research-card">
+                <strong>Stephen &amp; Rachel Kaplan</strong>
+                <em>Attention Restoration Theory (ART):</em> Directed Attention is energy-limited. It can only recharge via <em>Soft Fascination</em>—effortless observation of organic motion.
+              </div>
+              <div class="research-card">
+                <strong>Dr. Maryanne Wolf</strong>
+                <em>Skimming Circuits:</em> Digital reading cultivates F-shaped scanning networks, degrading the neural pathways needed for deep analogical deduction and empathy.
+              </div>
+            </div>
+          </details>
         </div>
+
       </div>
     </section>
 
-    <!-- SECTION 2: WHEN TO DEPLOY A PROTOCOL -->
+    <!-- THE ANALOG AIR GAP CALLOUT BANNER -->
+    <div class="analog-airgap-banner">
+      <div class="airgap-icon">📝</div>
+      <div>
+        <h3 class="airgap-title">The Analog Air Gap (The Paper Rule)</h3>
+        <p class="airgap-text">
+          Never let an impulse break your focus or turn a restorative micro-break back into keyboard work. Keep a physical index card or notepad beside your workspace. When random stray thoughts, phantom tasks, or panic-replies strike, <strong>scribble them on paper</strong>. The tactile motor action physically quenches working-memory anxiety while keeping your eyes off the screen.
+        </p>
+      </div>
+    </div>
+
+    <!-- SECTION 2: WHEN TO DEPLOY -->
     <section id="deploy-section" class="deploy-section">
       <h2 class="section-title">When to Deploy a Protocol</h2>
       <p class="section-desc">
@@ -781,69 +1032,67 @@
         <div class="deploy-card">
           <div class="deploy-trigger">Symptom 01 / Optical</div>
           <h3 class="deploy-title">The Glaze &amp; Loop</h3>
-          <p class="deploy-desc">You catch yourself reading the exact same paragraph or email three times without retaining a single concept.</p>
+          <p class="deploy-desc">Reading the exact same paragraph or email three times without retaining a single concept.</p>
         </div>
 
         <div class="deploy-card">
           <div class="deploy-trigger">Symptom 02 / Habitual</div>
           <h3 class="deploy-title">The Phantom Check</h3>
-          <p class="deploy-desc">Your hand reaches for your phone or opens a social/news tab without any conscious decision or intent.</p>
+          <p class="deploy-desc">Your hand automatically reaches for a phone or new browser tab without any conscious decision.</p>
         </div>
 
         <div class="deploy-card">
           <div class="deploy-trigger">Symptom 03 / Latency</div>
           <h3 class="deploy-title">The Micro-Tab Spree</h3>
-          <p class="deploy-desc">You open two or three secondary tabs simply because a primary page takes more than two seconds to load.</p>
+          <p class="deploy-desc">Opening secondary tabs simply because a primary page takes more than two seconds to load.</p>
         </div>
 
         <div class="deploy-card">
           <div class="deploy-trigger">Symptom 04 / Cognitive</div>
           <h3 class="deploy-title">Friction Avoidance</h3>
-          <p class="deploy-desc">A complex task becomes momentarily difficult or ambiguous, and you immediately flee into shallow administrative inbox checks.</p>
+          <p class="deploy-desc">A complex task becomes momentarily ambiguous, and you immediately flee into shallow administrative inbox checks.</p>
         </div>
 
         <div class="deploy-card">
           <div class="deploy-trigger">Symptom 05 / Bandwidth</div>
           <h3 class="deploy-title">Attention Thrashing</h3>
-          <p class="deploy-desc">Bouncing between chat, email, spreadsheets, and drafts while completing zero meaningful, coherent units of work.</p>
+          <p class="deploy-desc">Bouncing between chat, email, and documents while completing zero meaningful, coherent units of work.</p>
         </div>
 
         <div class="deploy-card">
           <div class="deploy-trigger">Symptom 06 / Circadian</div>
-          <h3 class="deploy-title">The Midday Energy Dip</h3>
-          <p class="deploy-desc">Your natural post-lunch circadian trough hits, leaving your directed attention depleted and reactive.</p>
+          <h3 class="deploy-title">The Midday Dip</h3>
+          <p class="deploy-desc">Your natural post-lunch biological trough hits, leaving your directed attention depleted and reactive.</p>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 3: INTERACTIVE RECOVERY PROTOCOLS -->
+    <!-- SECTION 3: RECOVERY PROTOCOLS -->
     <section id="protocols-section" class="protocols-section">
       <h2 class="section-title">Recovery Protocols</h2>
       <p class="section-desc">
         Active tools designed to disengage Directed Attention and induce Soft Fascination without digital friction.
       </p>
-      <p class="section-desc paper-notice">
-        <strong>The Paper Rule:</strong> Never let an impulse break your deep focus. If you have random or stray thoughts, offload them to a pad of paper. This clears them from your working memory. You can review them after your fallow rest.
-      </p>
 
       <div class="protocol-grid">
         
-        <!-- TOOL 1: 3-Min Optical Reset -->
+        <!-- TOOL 1: 3-Min Optical Reset with Dappled Canopy -->
         <div class="protocol-card card-sage">
           <span class="protocol-badge badge-sage">3 Minutes</span>
           <div>
             <h3 class="protocol-title">Optical Soft Reset</h3>
-            <p class="protocol-desc">Relax ciliary eye muscles and engage panoramic vision with the expanding rhythm.</p>
+            <p class="protocol-desc">Relax ciliary eye muscles with procedural, fractal dappled canopy light.</p>
           </div>
 
-          <div class="pulse-container">
-            <div class="pulse-orb" id="optical-orb"></div>
+          <!-- HTML5 Generative Dappled Canopy Viewport -->
+          <div class="canopy-viewport">
+            <canvas id="canopy-canvas"></canvas>
           </div>
 
           <div class="timer-display" id="timer-3min">03:00</div>
           
           <div class="prompt-box" id="optical-prompt">
-            Gaze past your display. Follow the gentle pulse and let your peripheral vision soften and expand.
+            Gaze gently through the canopy. Soften your visual focus and allow your peripheral awareness to expand.
           </div>
 
           <div class="tool-actions">
@@ -852,23 +1101,23 @@
           </div>
         </div>
 
-        <!-- TOOL 2: 5-Min Zero Input -->
+        <!-- TOOL 2: 5-Min Zero Input with Swelling Wind Synth -->
         <div class="protocol-card card-clay">
           <span class="protocol-badge badge-clay">5 Minutes</span>
           <div>
             <h3 class="protocol-title">Zero-Input Rest</h3>
-            <p class="protocol-desc">Activate the Default Mode Network (DMN). No reading, scrolling, or incoming stimuli.</p>
+            <p class="protocol-desc">Activate the Default Mode Network (DMN). True zero-stimulus cognitive rest.</p>
           </div>
 
-          <div class="timer-display timer-clay" id="timer-5min" style="margin: 32px 0;">05:00</div>
+          <div class="timer-display timer-clay" id="timer-5min" style="margin: 28px 0;">05:00</div>
           
           <div class="prompt-box" id="zero-prompt">
-            Step back or close your eyes. Allow fleeting thoughts to drift through like clouds without catching them.
+            Lean back or close your eyes. Allow thoughts to drift without catching them. You are lying fallow.
           </div>
 
           <div class="sound-toggle">
             <input type="checkbox" id="ambient-sound-toggle" />
-            <label for="ambient-sound-toggle">Synthesize Soft Wind (Brown Noise)</label>
+            <label for="ambient-sound-toggle" style="cursor: pointer;">Synthesize Canopy Wind (Modulated Noise + Sub-Drone)</label>
           </div>
 
           <div class="tool-actions" style="margin-top: 16px;">
@@ -877,7 +1126,7 @@
           </div>
         </div>
 
-        <!-- TOOL 3: 15-Min Nature Step -->
+        <!-- TOOL 3: 15-Min Nature Step & ART -->
         <div class="protocol-card card-sky">
           <span class="protocol-badge badge-sky">15 Minutes</span>
           <div>
@@ -885,7 +1134,7 @@
             <p class="protocol-desc">Attention Restoration via effortless observation of natural movement and depth.</p>
           </div>
 
-          <div class="timer-display timer-sky" id="timer-15min" style="margin: 20px 0;">15:00</div>
+          <div class="timer-display timer-sky" id="timer-15min" style="margin: 28px 0;">15:00</div>
           
           <div class="prompt-box" id="nature-prompt">
             "Observe the motion of tree branches or clouds against the sky."
@@ -914,8 +1163,8 @@
           <div class="support-card-header">
             <span class="support-icon">☕</span>
             <div>
-              <h3 class="support-card-title">Support Attention Restoration Projects</h3>
-              <p class="support-card-text">If this tool helped you restore your focus and build better digital habits, consider sending a small tip to support future updates!</p>
+              <h3 class="support-card-title">Support Attention Restoration</h3>
+              <p class="support-card-text">If this tool helped you protect your focus and build better working rituals, consider sending a small tip to support future episodes!</p>
             </div>
           </div>
           <a href="https://account.venmo.com/u/forgoodkarma" target="_blank" rel="noopener noreferrer" class="btn-venmo">
@@ -946,7 +1195,9 @@
   </div>
 
   <script>
-    /* 1. MOBILE PWA INSTALL ENGINE */
+    /* ==========================================================================
+       1. MOBILE PWA INSTALL ENGINE
+       ========================================================================== */
     let deferredPrompt;
     const installBtn = document.getElementById('btn-install-app');
 
@@ -965,115 +1216,153 @@
         }
         deferredPrompt = null;
       } else {
-        alert('To add this app to your phone:\n\n• iOS Safari: Tap the Share button (square with up arrow) and select "Add to Home Screen".\n• Android Chrome: Tap the three dots (⋮) and choose "Install app" or "Add to Home screen".');
+        alert('To add this app to your phone:\n\n• iOS Safari: Tap Share (square with up arrow) -> "Add to Home Screen".\n• Android Chrome: Tap the three dots (⋮) -> "Install app" or "Add to Home screen".');
       }
     });
 
-    /* 2. SLIDE DATA & ENGINE */
-    const slidesData = [
-      {
-        meta: "01 / The Premise",
-        heading: "Your attention span isn't broken. Your environment is over-engineered.",
-        content: `Popular headlines claim focus has dropped below that of a goldfish. But cognitive neuroscience proves your biological hardware is intact. What has changed is our constant immersion in <strong>engineered novelty, frictionless task-switching, and continuous partial attention</strong>.`
-      },
-      {
-        meta: "02 / The Reality",
-        heading: "The 47-Second Attention Collapse",
-        content: `In 2004, Dr. Gloria Mark (UC Irvine) tracked average workplace focus on any single screen at <strong>2.5 minutes</strong>. By 2012, it had dropped to 75 seconds. Today, the average person switches focus every <strong>47 seconds</strong>.<br><br>We are no longer sustaining thought long enough to construct complex mental models.`
-      },
-      {
-        meta: "03 / The Mechanism",
-        heading: "Variable Rewards: The Slot Machine in Your Pocket",
-        content: `Every notification, refresh, and infinite scroll operates on a <strong>variable ratio schedule</strong> of dopamine reinforcement. When the brain anticipates unpredictable novelty, it resets its boredom threshold, making quiet, low-stimulation analytical work feel physically unbearable.`
-      },
-      {
-        meta: "04 / Frictionless Escapes",
-        heading: "The Vanishing Tolerance for Discomfort",
-        content: `Deep problem-solving naturally produces cognitive friction—a momentary feeling of stuckness or boredom. In the past, you worked through it. Today, relief is one pixel away. The moment friction appears, we escape into a new tab, aborting the deep cognitive cycle before breakthrough occurs.`
-      },
-      {
-        meta: "05 / The Cognitive Tax",
-        heading: "Attention Residue: Why Multitasking is an Illusion",
-        content: `Dr. Sophie Leroy coined the term <strong>Attention Residue</strong>: when you switch from Task A to Task B, your attention does not cleanly follow. A portion of your prefrontal bandwidth remains stuck processing Task A.<br><br>Rapidly bouncing across 5 tabs leaves you with virtually zero working memory for complex reasoning.`
-      },
-      {
-        meta: "06 / Reading Circuits",
-        heading: "Skimming Networks vs. Deep Inferential Reading",
-        content: `Cognitive neuroscientist Dr. Maryanne Wolf demonstrates that screens encourage <strong>F-shaped visual scanning</strong> for rapid keyword extraction. When overused, this skimming circuit actively degrades our capacity for critical analysis, analogical reasoning, and empathy.`
-      },
-      {
-        meta: "07 / Biological Strain",
-        heading: "Directed Attention Fatigue",
-        content: `Your prefrontal cortex relies on <strong>Directed Attention</strong> to suppress distractions, analyze data, and resist impulses. Because it is energy-intensive, directed attention drains rapidly under uninterrupted input, leaving you feeling mentally frazzled, reactive, and irritable by early afternoon.`
-      },
-      {
-        meta: "08 / The Solution",
-        heading: "Attention Restoration Theory (ART)",
-        content: `Developed by psychologists Stephen and Rachel Kaplan, ART proves that directed attention can only regenerate when we engage in <strong>Soft Fascination</strong>—effortless observation of non-demanding natural stimuli like moving clouds, swaying trees, or rustling leaves. Nature lets the prefrontal cortex go offline.`
-      },
-      {
-        meta: "09 / The Neurological Reset",
-        heading: "Activating the Default Mode Network (DMN)",
-        content: `When you give the brain true <em>zero-input downtime</em>, the Default Mode Network takes over. The DMN synthesizes disparate memories, connects creative insights, and processes emotional states. Scrolling during a break disables the DMN and prolongs mental fatigue.`
-      },
-      {
-        meta: "10 / Further Resources",
-        heading: "Essential Reading & References",
-        content: `
-        <ul style="margin-left: 20px; font-size: 0.95rem; line-height: 1.8;">
-          <li><strong>Dr. Gloria Mark</strong> — <em>Attention Span: A Groundbreaking Way to Restore Balance, Happiness and Productivity</em> (2023).</li>
-          <li><strong>Dr. Sophie Leroy</strong> — <em>Why Is It So Hard to Do My Work? The Challenge of Attention Residue</em> (2009).</li>
-          <li><strong>Dr. Maryanne Wolf</strong> — <em>Reader, Come Home: The Reading Brain in a Digital World</em> (2018).</li>
-          <li><strong>Stephen & Rachel Kaplan</strong> — <em>The Experience of Nature: A Psychological Perspective</em> (Attention Restoration Theory).</li>
-          <li><strong>Matthew B. Crawford</strong> — <em>The World Beyond Your Head: On Becoming an Individual in an Age of Distraction</em> (2015).</li>
-        </ul>
-        <div class="slide-footer-note">All protocols modeled on empirical cognitive restoration benchmarks.</div>`
+    /* ==========================================================================
+       2. COGNITIVE LOAD & ATTENTION RESIDUE DIAGNOSTIC ENGINE
+       ========================================================================== */
+    const sliderTabs = document.getElementById('sliderTabs');
+    const sliderHours = document.getElementById('sliderHours');
+    const sliderSwitch = document.getElementById('sliderSwitch');
+    const sliderCircadian = document.getElementById('sliderCircadian');
+
+    const switchLabels = ["Deep Single-Task", "Moderate Switching", "Frequent Thrashing", "Continuous Scatter"];
+    const circadianLabels = ["Morning Apex", "Midday Dip", "Afternoon Focus", "Evening Slump"];
+
+    function updateDiagnostic() {
+      const tabs = parseInt(sliderTabs.value, 10);
+      const hours = parseInt(sliderHours.value, 10);
+      const switchLvl = parseInt(sliderSwitch.value, 10);
+      const circLvl = parseInt(sliderCircadian.value, 10);
+
+      document.getElementById('valTabs').textContent = `${tabs} active tab${tabs === 1 ? '' : 's'}`;
+      document.getElementById('valHours').textContent = `${hours} min`;
+      document.getElementById('valSwitch').textContent = switchLabels[switchLvl - 1];
+      document.getElementById('valCircadian').textContent = circadianLabels[circLvl - 1];
+
+      // Residue Index calculation (0 - 100%)
+      let residue = (tabs * 2.2) + (hours * 0.18) + (switchLvl * 12) + (circLvl === 2 ? 14 : 4);
+      residue = Math.min(Math.max(Math.round(residue), 12), 98);
+
+      // Prefrontal Fuel Level (inversely related to hours and thrashing)
+      let fuel = 100 - (hours * 0.28) - (switchLvl * 11) - (tabs * 0.8) - (circLvl === 2 ? 18 : 6);
+      fuel = Math.min(Math.max(Math.round(fuel), 6), 96);
+
+      document.getElementById('scoreResidue').textContent = `${residue}%`;
+      document.getElementById('barResidue').style.width = `${residue}%`;
+      document.getElementById('barResidue').style.backgroundColor = residue > 65 ? 'var(--clay)' : 'var(--amber)';
+
+      document.getElementById('scoreFuel').textContent = `${fuel}%`;
+      document.getElementById('barFuel').style.width = `${fuel}%`;
+      document.getElementById('barFuel').style.backgroundColor = fuel < 40 ? 'var(--clay)' : 'var(--accent)';
+
+      // Dynamic Prescriptions
+      const rxHeading = document.getElementById('rxHeading');
+      const rxBody = document.getElementById('rxBody');
+
+      if (hours >= 120 || (fuel < 35 && residue > 70)) {
+        rxHeading.textContent = "15-Min Nature Walk & ART";
+        rxBody.textContent = "Directed attention is severely depleted. Screens cannot restore prefrontal bandwidth now; you need true 3D visual depth and non-demanding physical movement.";
+      } else if (residue >= 55 || switchLvl >= 3) {
+        rxHeading.textContent = "5-Min Zero-Input Rest";
+        rxBody.textContent = "Attention residue is fragmenting your working memory. Disengage all sensory inputs to let the Default Mode Network clear the cognitive cache.";
+      } else {
+        rxHeading.textContent = "3-Min Optical Soft Reset";
+        rxBody.textContent = "Ciliary eye muscles are tense from focal fixation. Soften your gaze and gaze past the screen to reset peripheral vision and autonomic tone.";
       }
-    ];
-
-    let currentSlideIdx = 0;
-    const slideViewport = document.getElementById('slide-viewport');
-    const btnPrev = document.getElementById('btn-prev');
-    const btnNext = document.getElementById('btn-next');
-    const btnShuffle = document.getElementById('btn-shuffle');
-
-    function renderSlide(index) {
-      const slide = slidesData[index];
-      slideViewport.innerHTML = `
-        <div>
-          <div class="slide-meta">${slide.meta}</div>
-          <h2 class="slide-heading">${slide.heading}</h2>
-          <div class="slide-content">${slide.content}</div>
-        </div>
-      `;
-      btnPrev.disabled = index === 0;
-      btnNext.disabled = index === slidesData.length - 1;
     }
 
-    btnPrev.addEventListener('click', () => {
-      if (currentSlideIdx > 0) {
-        currentSlideIdx--;
-        renderSlide(currentSlideIdx);
+    [sliderTabs, sliderHours, sliderSwitch, sliderCircadian].forEach(slider => {
+      slider.addEventListener('input', updateDiagnostic);
+    });
+
+    updateDiagnostic();
+
+    /* ==========================================================================
+       3. GENERATIVE DAPPLED CANOPY CANVAS (Optical Reset)
+       ========================================================================== */
+    const canvas = document.getElementById('canopy-canvas');
+    const ctx = canvas.getContext('2d');
+    let animationFrameId = null;
+    let canopyActive = false;
+    let canopyTime = 0;
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * window.devicePixelRatio;
+      canvas.height = rect.height * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Procedural dappled sunlight spots
+    const dappledNodes = [
+      { x: 0.25, y: 0.35, r: 45, speed: 0.0018, phase: 0 },
+      { x: 0.45, y: 0.60, r: 60, speed: 0.0012, phase: 1.4 },
+      { x: 0.70, y: 0.40, r: 52, speed: 0.0015, phase: 2.7 },
+      { x: 0.30, y: 0.75, r: 40, speed: 0.0022, phase: 3.9 },
+      { x: 0.85, y: 0.65, r: 55, speed: 0.0016, phase: 4.8 },
+      { x: 0.55, y: 0.25, r: 35, speed: 0.0020, phase: 0.8 }
+    ];
+
+    function drawCanopy() {
+      const w = canvas.width / window.devicePixelRatio;
+      const h = canvas.height / window.devicePixelRatio;
+
+      // Base meadow wash
+      ctx.fillStyle = "#e2ede3";
+      ctx.fillRect(0, 0, w, h);
+
+      canopyTime += canopyActive ? 1.0 : 0.25;
+
+      // Draw subtle shifting foliage shadows
+      ctx.save();
+      for (let i = 0; i < 4; i++) {
+        const sway = Math.sin((canopyTime * 0.012) + i) * 16;
+        ctx.fillStyle = `rgba(44, 78, 56, ${0.08 + i * 0.02})`;
+        ctx.beginPath();
+        ctx.arc((w * 0.25 * i) + sway + 40, (h * 0.4) + Math.cos(canopyTime * 0.01 + i) * 8, 70 + (i * 12), 0, Math.PI * 2);
+        ctx.fill();
       }
-    });
+      ctx.restore();
 
-    btnNext.addEventListener('click', () => {
-      if (currentSlideIdx < slidesData.length - 1) {
-        currentSlideIdx++;
-        renderSlide(currentSlideIdx);
-      }
-    });
+      // Draw soft dappled light pools (radial gradients)
+      dappledNodes.forEach(node => {
+        const currentX = (node.x * w) + Math.sin(canopyTime * node.speed + node.phase) * 22;
+        const currentY = (node.y * h) + Math.cos(canopyTime * node.speed + node.phase) * 14;
+        const radius = node.r + Math.sin(canopyTime * 0.02 + node.phase) * 6;
 
-    btnShuffle.addEventListener('click', () => {
-      const randomIdx = Math.floor(Math.random() * (slidesData.length - 1)) + 1;
-      currentSlideIdx = randomIdx;
-      renderSlide(currentSlideIdx);
-    });
+        const grad = ctx.createRadialGradient(currentX, currentY, 0, currentX, currentY, radius);
+        grad.addColorStop(0, "rgba(255, 253, 235, 0.7)");
+        grad.addColorStop(0.5, "rgba(255, 250, 220, 0.35)");
+        grad.addColorStop(1, "rgba(226, 237, 227, 0)");
 
-    renderSlide(0);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(currentX, currentY, radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
 
-    /* 3. AUDIO SYNTHESIS */
+      animationFrameId = requestAnimationFrame(drawCanopy);
+    }
+
+    drawCanopy();
+
+    /* ==========================================================================
+       4. GENERATIVE CANOPY WIND & SUB-DRONE AUDIO SYNTHESIZER
+       ========================================================================== */
     let audioCtx = null;
+    let windNoiseSource = null;
+    let windFilter = null;
+    let windGain = null;
+    let lfoOsc = null;
+    let lfoGain = null;
+    let droneOsc = null;
+    let droneGain = null;
 
     function getAudioContext() {
       if (!audioCtx) {
@@ -1092,9 +1381,9 @@
 
       osc.type = 'sine';
       osc.frequency.setValueAtTime(432, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(216, ctx.currentTime + 3.0);
+      osc.frequency.exponentialRampToValueAtTime(216, ctx.currentTime + 3.2);
 
-      gain.gain.setValueAtTime(0.35, ctx.currentTime);
+      gain.gain.setValueAtTime(0.32, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3.5);
 
       osc.connect(gain);
@@ -1104,58 +1393,98 @@
       osc.stop(ctx.currentTime + 3.5);
     }
 
-    let noiseNode = null;
-    function startBrownNoise() {
+    function startCanopyWind() {
       const ctx = getAudioContext();
-      const bufferSize = ctx.sampleRate * 2;
+      const bufferSize = ctx.sampleRate * 3;
       const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
       const output = noiseBuffer.getChannelData(0);
       let lastOut = 0.0;
 
+      // 1. Brown noise base
       for (let i = 0; i < bufferSize; i++) {
         const white = Math.random() * 2 - 1;
         output[i] = (lastOut + (0.02 * white)) / 1.02;
         lastOut = output[i];
-        output[i] *= 3.5;
+        output[i] *= 3.8;
       }
 
-      noiseNode = ctx.createBufferSource();
-      noiseNode.buffer = noiseBuffer;
-      noiseNode.loop = true;
+      windNoiseSource = ctx.createBufferSource();
+      windNoiseSource.buffer = noiseBuffer;
+      windNoiseSource.loop = true;
 
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(380, ctx.currentTime);
+      // 2. Modulated Lowpass Filter (Simulates wind gusting through tree leaves)
+      windFilter = ctx.createBiquadFilter();
+      windFilter.type = 'lowpass';
+      windFilter.frequency.setValueAtTime(280, ctx.currentTime);
 
-      const gain = ctx.createGain();
-      gain.gain.setValueAtTime(0.18, ctx.currentTime);
+      // 3. LFO to gently sweep the filter cutoff (gentle gust swell)
+      lfoOsc = ctx.createOscillator();
+      lfoGain = ctx.createGain();
+      lfoOsc.type = 'sine';
+      lfoOsc.frequency.setValueAtTime(0.12, ctx.currentTime); // 1 swell every ~8 seconds
+      lfoGain.gain.setValueAtTime(160, ctx.currentTime);
 
-      noiseNode.connect(filter);
-      filter.connect(gain);
-      gain.connect(ctx.destination);
+      lfoOsc.connect(windFilter.frequency);
 
-      noiseNode.start();
+      windGain = ctx.createGain();
+      windGain.gain.setValueAtTime(0.01, ctx.currentTime);
+      windGain.gain.exponentialRampToValueAtTime(0.22, ctx.currentTime + 2.5);
+
+      windNoiseSource.connect(windFilter);
+      windFilter.connect(windGain);
+      windGain.connect(ctx.destination);
+
+      // 4. Subtle Warm Sub-Harmonic Drone (108 Hz) for cognitive settling
+      droneOsc = ctx.createOscillator();
+      droneGain = ctx.createGain();
+      droneOsc.type = 'sine';
+      droneOsc.frequency.setValueAtTime(108, ctx.currentTime);
+
+      droneGain.gain.setValueAtTime(0.001, ctx.currentTime);
+      droneGain.gain.exponentialRampToValueAtTime(0.04, ctx.currentTime + 3.0);
+
+      droneOsc.connect(droneGain);
+      droneGain.connect(ctx.destination);
+
+      windNoiseSource.start();
+      lfoOsc.start();
+      droneOsc.start();
     }
 
-    function stopBrownNoise() {
-      if (noiseNode) {
+    function stopCanopyWind() {
+      if (windGain && audioCtx) {
         try {
-          noiseNode.stop();
-          noiseNode.disconnect();
+          windGain.gain.setValueAtTime(windGain.gain.value, audioCtx.currentTime);
+          windGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+
+          if (droneGain) {
+            droneGain.gain.setValueAtTime(droneGain.gain.value, audioCtx.currentTime);
+            droneGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+          }
+
+          setTimeout(() => {
+            if (windNoiseSource) { windNoiseSource.stop(); windNoiseSource.disconnect(); }
+            if (lfoOsc) { lfoOsc.stop(); lfoOsc.disconnect(); }
+            if (droneOsc) { droneOsc.stop(); droneOsc.disconnect(); }
+            windNoiseSource = null;
+            lfoOsc = null;
+            droneOsc = null;
+          }, 1300);
         } catch (e) {}
-        noiseNode = null;
       }
     }
 
     document.getElementById('ambient-sound-toggle').addEventListener('change', (e) => {
       if (e.target.checked) {
-        startBrownNoise();
+        startCanopyWind();
       } else {
-        stopBrownNoise();
+        stopCanopyWind();
       }
     });
 
-    /* 4. PROTOCOL TIMERS */
+    /* ==========================================================================
+       5. PROTOCOL TIMERS
+       ========================================================================== */
     function formatTime(seconds) {
       const m = Math.floor(seconds / 60).toString().padStart(2, '0');
       const s = (seconds % 60).toString().padStart(2, '0');
@@ -1165,38 +1494,16 @@
     // 3-Minute Optical Timer
     let timer3 = null;
     let time3Sec = 180;
-    const orb = document.getElementById('optical-orb');
-    let orbInterval = null;
-
-    function startOrbAnimation() {
-      let expand = true;
-      orb.classList.add('expanding');
-      orbInterval = setInterval(() => {
-        expand = !expand;
-        if (expand) {
-          orb.classList.remove('contracting');
-          orb.classList.add('expanding');
-        } else {
-          orb.classList.remove('expanding');
-          orb.classList.add('contracting');
-        }
-      }, 4000);
-    }
-
-    function stopOrbAnimation() {
-      clearInterval(orbInterval);
-      orb.classList.remove('expanding', 'contracting');
-    }
 
     document.getElementById('btn-start-3').addEventListener('click', function() {
       if (timer3) {
         clearInterval(timer3);
-        stopOrbAnimation();
         timer3 = null;
+        canopyActive = false;
         this.textContent = 'Resume';
       } else {
         getAudioContext();
-        startOrbAnimation();
+        canopyActive = true;
         this.textContent = 'Pause';
         timer3 = setInterval(() => {
           if (time3Sec > 0) {
@@ -1204,9 +1511,9 @@
             document.getElementById('timer-3min').textContent = formatTime(time3Sec);
           } else {
             clearInterval(timer3);
-            stopOrbAnimation();
+            canopyActive = false;
             playChime();
-            alert('3-Minute Optical Reset Complete. Your ciliary muscles are relaxed.');
+            alert('3-Minute Optical Soft Reset complete. Your ciliary muscles are relaxed.');
             time3Sec = 180;
             document.getElementById('timer-3min').textContent = '03:00';
             document.getElementById('btn-start-3').textContent = 'Start Reset';
@@ -1217,8 +1524,8 @@
 
     document.getElementById('btn-reset-3').addEventListener('click', () => {
       clearInterval(timer3);
-      stopOrbAnimation();
       timer3 = null;
+      canopyActive = false;
       time3Sec = 180;
       document.getElementById('timer-3min').textContent = '03:00';
       document.getElementById('btn-start-3').textContent = 'Start Reset';
@@ -1243,9 +1550,9 @@
           } else {
             clearInterval(timer5);
             playChime();
-            stopBrownNoise();
+            stopCanopyWind();
             document.getElementById('ambient-sound-toggle').checked = false;
-            alert('5-Minute Zero-Input Rest Complete. Default Mode Network restored.');
+            alert('5-Minute Zero-Input Rest complete. Default Mode Network restored.');
             time5Sec = 300;
             document.getElementById('timer-5min').textContent = '05:00';
             document.getElementById('btn-start-5').textContent = 'Begin Rest';
@@ -1260,11 +1567,11 @@
       time5Sec = 300;
       document.getElementById('timer-5min').textContent = '05:00';
       document.getElementById('btn-start-5').textContent = 'Begin Rest';
-      stopBrownNoise();
+      stopCanopyWind();
       document.getElementById('ambient-sound-toggle').checked = false;
     });
 
-    // 15-Minute Nature Walk
+    // 15-Minute Nature Walk Prompts & Timer
     const naturePrompts = [
       "Find 3 distinct shades of green in nearby foliage or outdoor vegetation.",
       "Observe the gentle motion of tree branches or clouds against the open sky.",
@@ -1296,7 +1603,7 @@
           } else {
             clearInterval(timer15);
             playChime();
-            alert('15-Minute Nature Reset Complete. Directed Attention fully restored.');
+            alert('15-Minute Nature Step complete. Directed attention fully recharged.');
             time15Sec = 900;
             document.getElementById('timer-15min').textContent = '15:00';
             document.getElementById('btn-start-15').textContent = 'Start 15m Walk';
@@ -1313,7 +1620,9 @@
       document.getElementById('btn-start-15').textContent = 'Start 15m Walk';
     });
 
-    /* 5. EMAIL COPY CLIPBOARD FUNCTION */
+    /* ==========================================================================
+       6. EMAIL COPY HELPER
+       ========================================================================== */
     function copyEmail() {
       const email = document.getElementById('contact-email').textContent;
       const btn = document.getElementById('btn-copy-email');
