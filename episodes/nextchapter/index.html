@@ -107,7 +107,7 @@
             <!-- ================= SCREEN 1: VIBE CHECK ================= -->
             <div id="view-step1" class="fade-in space-y-6 hidden">
                 <div>
-                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 1 of 4</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 1 of 3</span>
                     <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-fallow-900 mt-1">
                         Choose your depth level
                     </h2>
@@ -162,7 +162,7 @@
             <!-- ================= SCREEN 2: ANCHOR SELECTION ================= -->
             <div id="view-step2" class="fade-in space-y-6 hidden">
                 <div>
-                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 2 of 4</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 2 of 3</span>
                     <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-fallow-900 mt-1">
                         Select a worldview anchor (Optional)
                     </h2>
@@ -216,7 +216,7 @@
             <!-- ================= SCREEN 3: CURRENT REALITY AUDIT ================= -->
             <div id="view-step3" class="fade-in space-y-6 hidden">
                 <div>
-                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 3 of 4</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 3 of 3</span>
                     <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-fallow-900 mt-1">
                         Your current reality
                     </h2>
@@ -249,48 +249,6 @@
 
                 <div class="pt-4 border-t border-fallow-100 flex justify-between items-center">
                     <button onclick="goToStep(2)" class="text-sm text-fallow-600 hover:text-fallow-900 font-medium">Back</button>
-                    <button onclick="saveStep3(); goToStep(4)" class="px-6 py-2.5 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition">
-                        Continue
-                    </button>
-                </div>
-            </div>
-
-            <!-- ================= SCREEN 4: SETTING THE PACE ================= -->
-            <div id="view-step4" class="fade-in space-y-6 hidden">
-                <div>
-                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 4 of 4</span>
-                    <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-fallow-900 mt-1">
-                        Set your weekly pace
-                    </h2>
-                    <p class="text-sm text-fallow-600 mt-1">
-                        Prevent overwhelm by committing to a low-friction cadence.
-                    </p>
-                </div>
-
-                <div class="space-y-3">
-                    <label class="block border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50">
-                        <div class="flex items-start space-x-3">
-                            <input type="radio" name="pace" value="2-minute daily micro-reflection" class="mt-1 text-fallow-900 focus:ring-fallow-600" checked>
-                            <div>
-                                <span class="font-semibold text-fallow-900 block text-sm">Micro-Dose (2 minutes daily)</span>
-                                <span class="text-xs text-fallow-600 block mt-0.5">Quick daily prompts to keep momentum without feeling like a chore.</span>
-                            </div>
-                        </div>
-                    </label>
-
-                    <label class="block border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50">
-                        <div class="flex items-start space-x-3">
-                            <input type="radio" name="pace" value="Weekly 15-minute review" class="mt-1 text-fallow-900 focus:ring-fallow-600">
-                            <div>
-                                <span class="font-semibold text-fallow-900 block text-sm">Weekly Review (15 minutes weekly)</span>
-                                <span class="text-xs text-fallow-600 block mt-0.5">A deeper block once a week to audit experiments and set intentions.</span>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-
-                <div class="pt-4 border-t border-fallow-100 flex justify-between items-center">
-                    <button onclick="goToStep(3)" class="text-sm text-fallow-600 hover:text-fallow-900 font-medium">Back</button>
                     <button onclick="completeOnboarding()" class="px-6 py-2.5 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition">
                         Complete & View Dashboard
                     </button>
@@ -329,8 +287,8 @@
                         <span id="dash-anchor" class="font-semibold text-fallow-900 text-sm mt-0.5 block">—</span>
                     </div>
                     <div class="bg-fallow-50 p-4 rounded-xl border border-fallow-100">
-                        <span class="text-xs text-fallow-600 block font-medium">Timeline & Pace</span>
-                        <span id="dash-pace" class="font-semibold text-fallow-900 text-sm mt-0.5 block">—</span>
+                        <span class="text-xs text-fallow-600 block font-medium">Timeline</span>
+                        <span id="dash-timeline" class="font-semibold text-fallow-900 text-sm mt-0.5 block">—</span>
                     </div>
                 </div>
 
@@ -364,7 +322,6 @@
             anchor: 'Secular / Pragmatic',
             horizon: '6-18 months out',
             focus: 'Structuring empty hours & routines',
-            pace: '2-minute daily micro-reflection',
             // Pathway specific data
             actionChecklist: {
                 morningAnchor: false,
@@ -401,7 +358,6 @@
             "Step 1: Depth Level",
             "Step 2: Worldview Anchor",
             "Step 3: Current Reality",
-            "Step 4: Weekly Pace",
             "Your Dashboard"
         ];
 
@@ -417,15 +373,13 @@
             document.getElementById('view-step1').classList.add('hidden');
             document.getElementById('view-step2').classList.add('hidden');
             document.getElementById('view-step3').classList.add('hidden');
-            document.getElementById('view-step4').classList.add('hidden');
             document.getElementById('view-dashboard').classList.add('hidden');
 
             if (stepIndex === 0) document.getElementById('view-intro').classList.remove('hidden');
             if (stepIndex === 1) document.getElementById('view-step1').classList.remove('hidden');
             if (stepIndex === 2) document.getElementById('view-step2').classList.remove('hidden');
             if (stepIndex === 3) document.getElementById('view-step3').classList.remove('hidden');
-            if (stepIndex === 4) document.getElementById('view-step4').classList.remove('hidden');
-            if (stepIndex === 5) {
+            if (stepIndex === 4) {
                 document.getElementById('view-dashboard').classList.remove('hidden');
                 document.getElementById('reset-nav-btn').classList.remove('hidden');
                 populateDashboard();
@@ -442,7 +396,7 @@
         }
 
         function resumeDashboard() {
-            goToStep(5);
+            goToStep(4);
         }
 
         function saveStep1() {
@@ -463,17 +417,11 @@
             saveState();
         }
 
-        function saveStep4() {
-            const selected = document.querySelector('input[name="pace"]:checked');
-            if (selected) userState.pace = selected.value;
-            saveState();
-        }
-
         function completeOnboarding() {
-            saveStep4();
+            saveStep3();
             userState.onboardingComplete = true;
             saveState();
-            goToStep(5);
+            goToStep(4);
         }
 
         function editOnboarding() {
@@ -495,7 +443,7 @@
             document.getElementById('dash-badge').innerText = "Pathway: " + userState.vibe;
             document.getElementById('dash-vibe').innerText = userState.vibe;
             document.getElementById('dash-anchor').innerText = userState.anchor;
-            document.getElementById('dash-pace').innerText = userState.horizon + " • " + userState.pace;
+            document.getElementById('dash-timeline').innerText = userState.horizon;
 
             const container = document.getElementById('pathway-content-container');
             container.innerHTML = '';
