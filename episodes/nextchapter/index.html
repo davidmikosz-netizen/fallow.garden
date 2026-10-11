@@ -218,8 +218,8 @@
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-fallow-700 mb-1">Time Horizon to Transition</label>
                         <select id="audit-horizon" class="w-full bg-fallow-50 border border-fallow-200 rounded-xl p-3 text-sm text-fallow-900 focus:outline-none focus:border-fallow-600">
-                            <option value="1-3 years out">1–3 years out (Early horizon)</option>
-                            <option value="6-18 months out" selected>6–18 months out (Planning phase)</option>
+                            <option value="1-3 years out" selected>1–3 years out (Early horizon)</option>
+                            <option value="6-18 months out">6–18 months out (Planning phase)</option>
                             <option value="0-6 months out">0–6 months out (Imminent pivot)</option>
                             <option value="Already transitioned">Already transitioned / Semi-retired</option>
                         </select>
@@ -302,13 +302,13 @@
     </footer>
 
     <script>
-        const STORAGE_KEY = 'fallow_next_chapter_state_v2';
+        const STORAGE_KEY = 'fallow_next_chapter_state_v3';
         
         let userState = {
             onboardingComplete: false,
             vibe: 'Action Plan',
             anchor: 'Secular / Pragmatic',
-            horizon: '6-18 months out',
+            horizon: '1-3 years out',
             focus: 'Providing structure and routines outside of a job',
             // Action Checklist state for all possible dynamic tasks
             actionChecklist: {},
@@ -446,23 +446,26 @@
             
             let tasksHTML = '';
             let introText = '';
+            let titleText = 'Practical Habit Replacement Checklist';
 
             if (focus === 'Providing structure and routines outside of a job') {
-                introText = "You are leaving a structured day that naturally provided you with conscious anchors. Here are some ways to provide supportive structure to your day outside of a formal job:";
-                
                 if (horizon === '1-3 years out') {
+                    titleText = "What habits inform your day";
+                    introText = "You will be leaving a structured day that provided you with a set of things you had to do. This is an opportunity to both map out where you are now and to start planning for the future.";
                     tasksHTML = generateChecklist([
-                        { id: 'auditWeek', text: "Track one normal work week to highlight every hour dictated by your employer. Calculating this gives you a realistic view of exactly how many hours you will need to fill." },
-                        { id: 'disconnectedHabit', text: "Establish one morning or evening habit (e.g., reading 10 pages, making stovetop espresso) that is completely disconnected from your work identity." },
-                        { id: 'weekendTest', text: "Audit how you spend your weekends. Are you using them purely to recover from work exhaustion, or are you doing things you'd want to do 7 days a week?" }
+                        { id: 'auditWeek', text: "Start tracking how your normal work weeks are structured. How many hours a day are you currently spending doing particular things? Doing this can give you a sense of how you might want to spend your time in retirement." },
+                        { id: 'disconnectedHabit', text: "Now would be a good time to start establishing a morning or evening habit (like reading 10 pages or making a stovetop espresso) that is completely disconnected from your work 'identity'—starting now helps set an important pattern." },
+                        { id: 'weekendTest', text: "Start taking a look at how you spend your weekends—almost like a gentle 'time audit'. Are you just recovering from work, or are you doing things you'd like to do more of? This is a good time to start thinking about that." }
                     ]);
                 } else if (horizon === '6-18 months out') {
+                    introText = "You are leaving a structured day that naturally provided you with conscious anchors. Here are some ways to provide supportive structure to your day outside of a formal job:";
                     tasksHTML = generateChecklist([
                         { id: 'projectSlotPrep', text: "Start time-blocking a 2-hour 'project slot' on your weekend. Treat this with the same respect as a mandatory work meeting to practice protecting your time." },
                         { id: 'decoupleSleep', text: "Begin decoupling your sleep schedule from your commute. Try waking up to go for a walk or read before you engage with work, rather than just waking to beat traffic." },
                         { id: 'decoupleIdentity', text: "Practice introducing yourself by your interests rather than your job title or agency. Removing your title from personal profiles can help start this mental shift." }
                     ]);
                 } else if (horizon === '0-6 months out') {
+                    introText = "You are leaving a structured day that naturally provided you with conscious anchors. Here are some ways to provide supportive structure to your day outside of a formal job:";
                     tasksHTML = generateChecklist([
                         { id: 'mondayPlan', text: "Draft a rigid, hour-by-hour schedule for your first Monday post-career. Having a firm plan prevents the shock of an unexpectedly empty calendar." },
                         { id: 'fakeCommute', text: "Because you are used to a daily commute, schedule a 30-minute morning walk to give your day a starting boundary that isn't tied to an employer." },
@@ -470,6 +473,7 @@
                         { id: 'socialTouchpoint', text: "Work naturally provides informal social interactions. Consciously try to initiate one informal social touchpoint per week (a coffee, meal, or just a call)." }
                     ]);
                 } else if (horizon === 'Already transitioned') {
+                    introText = "You are leaving a structured day that naturally provided you with conscious anchors. Here are some ways to provide supportive structure to your day outside of a formal job:";
                     tasksHTML = generateChecklist([
                         { id: 'boundaryHours', text: "Establish clear 'on' and 'off' hours to prevent Endless Weekend Syndrome. Designate specific days for deep projects versus pure leisure." },
                         { id: 'frictionTest', text: "Audit your friction: Are you feeling bored, or anxious? If anxious, add more structure (a daily checklist). If bored, break your routine (explore a new neighborhood)." },
@@ -487,7 +491,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Operational Routine Builder</span>
-                            <h3 class="text-base font-semibold text-fallow-900 mt-0.5">Practical Habit Replacement Checklist</h3>
+                            <h3 class="text-base font-semibold text-fallow-900 mt-0.5">${titleText}</h3>
                         </div>
                         <span class="text-xs bg-fallow-100 text-fallow-800 px-2.5 py-1 rounded-md font-medium">Actionable</span>
                     </div>
