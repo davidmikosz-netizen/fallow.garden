@@ -1,714 +1,730 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fallow.garden — Restorative Micro-Utilities</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
-  <!-- Vercel Web Analytics -->
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/insights/script.js"></script>
-  
-  <style>
-    :root {
-      --parchment: #faf6ee;
-      --parchment-warm: #f4ecdf;
-      --parchment-card: #fffdfa;
-      --loam-dark: #2c221a;
-      --loam-mid: #4d3d30;
-      --loam-light: #7c6857;
-      --terracotta: #ba5536;
-      --terracotta-soft: #d96f4e;
-      --terracotta-pale: #faede6;
-      --honey-ochre: #c9732b;
-      --ochre-pale: #fbf2e3;
-      --moss-deep: #3b4e34;
-      --moss-mid: #556e4c;
-      --moss-light: #7a9470;
-      --moss-pale: #e3ebe0;
-      --glacier-deep: #174d4b;
-      --glacier-mid: #2b7a78;
-      --glacier-pale: #e8f3f1;
-      --sand-border: #ded3c1;
-      --border-soft: #ebe3d5;
-      --shadow-sm: 0 2px 10px rgba(44, 34, 26, 0.04);
-      --shadow-md: 0 6px 24px rgba(44, 34, 26, 0.07);
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --font-serif: "Lora", "Iowan Old Style", Georgia, serif;
-      --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--parchment);
-      color: var(--loam-dark);
-      font-family: var(--font-sans);
-      line-height: 1.6;
-      padding: 2.5rem 1.25rem 5rem;
-      display: flex;
-      justify-content: center;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 860px;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    /* Header */
-    header {
-      text-align: left;
-      border-bottom: 1px solid var(--sand-border);
-      padding-bottom: 1.75rem;
-    }
-
-    .brand-badge {
-      display: inline-block;
-      font-family: var(--font-sans);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--moss-deep);
-      background: var(--moss-pale);
-      padding: 0.28rem 0.75rem;
-      border-radius: 999px;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-
-    h1 {
-      font-family: var(--font-serif);
-      font-size: 2.35rem;
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      color: var(--loam-dark);
-      line-height: 1.2;
-      margin-bottom: 0.6rem;
-    }
-
-    .tagline {
-      color: var(--loam-mid);
-      font-size: 1rem;
-      max-width: 680px;
-      line-height: 1.65;
-    }
-
-    .tagline-list {
-      margin-top: 0.5rem;
-      padding-left: 1.25rem;
-      color: var(--loam-mid);
-      font-size: 0.95rem;
-      max-width: 680px;
-      line-height: 1.65;
-    }
-
-    .header-audio-callout {
-      margin-top: 1.25rem;
-      background: var(--parchment-warm);
-      border: 1px solid var(--sand-border);
-      border-left: 3px solid var(--moss-mid);
-      border-radius: var(--radius-sm);
-      padding: 0.9rem 1.15rem;
-      font-size: 0.92rem;
-      color: var(--loam-mid);
-      line-height: 1.65;
-      max-width: 680px;
-    }
-
-    .header-audio-callout a {
-      color: var(--moss-deep);
-      font-weight: 600;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      transition: color 0.15s ease;
-    }
-
-    .header-audio-callout a:hover {
-      color: var(--terracotta);
-    }
-
-    /* Corridor Dividers */
-    .section-label {
-      font-family: var(--font-serif);
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: var(--moss-deep);
-      margin: 1.5rem 0 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .section-label::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--sand-border);
-    }
-
-    /* Grid Layout */
-    .app-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 1.25rem;
-    }
-
-    /* Interactive Cards */
-    .card {
-      background: var(--parchment-card);
-      border: 1px solid var(--sand-border);
-      border-radius: var(--radius-md);
-      padding: 1.5rem;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: var(--shadow-sm);
-      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card:hover {
-      border-color: var(--moss-mid);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .card.highlight-terracotta {
-      border-left: 4px solid var(--terracotta);
-    }
-
-    .card.highlight-ochre {
-      border-left: 4px solid var(--honey-ochre);
-    }
-
-    .card.highlight-moss {
-      border-left: 4px solid var(--moss-mid);
-    }
-
-    .card.highlight-glacier {
-      border-left: 4px solid var(--glacier-mid);
-    }
-
-    .card-top {
-      margin-bottom: 1.25rem;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
-
-    .card-type {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--terracotta);
-      font-weight: 700;
-    }
-
-    .card-type.ochre {
-      color: var(--honey-ochre);
-    }
-
-    .card-type.moss {
-      color: var(--moss-deep);
-    }
-
-    .card-type.glacier {
-      color: var(--glacier-deep);
-    }
-
-    .card-badge {
-      font-size: 0.65rem;
-      padding: 0.2rem 0.5rem;
-      background: var(--parchment-warm);
-      color: var(--loam-light);
-      border-radius: 4px;
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-    }
-
-    .card-title {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      font-weight: 500;
-      color: var(--loam-dark);
-      margin-bottom: 0.45rem;
-      line-height: 1.3;
-    }
-
-    .card-desc {
-      font-size: 0.88rem;
-      color: var(--loam-mid);
-      line-height: 1.6;
-    }
-
-    .card-meta {
-      border-top: 1px dashed var(--border-soft);
-      padding-top: 0.75rem;
-      font-size: 0.78rem;
-      color: var(--loam-light);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .card-link-text {
-      color: var(--moss-deep);
-      font-weight: 600;
-      transition: color 0.15s ease;
-    }
-
-    .card:hover .card-link-text {
-      color: var(--terracotta);
-    }
-
-    /* About & Support Section */
-    .about-card {
-      background: var(--parchment-card);
-      border: 1px solid var(--sand-border);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      margin-top: 1rem;
-    }
-
-    .about-head {
-      border-bottom: 1px solid var(--sand-border);
-      padding-bottom: 0.75rem;
-    }
-
-    .about-head h2 {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      color: var(--loam-dark);
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .about-content {
-      font-size: 0.92rem;
-      color: var(--loam-mid);
-      line-height: 1.65;
-    }
-
-    .about-content p + p {
-      margin-top: 0.65rem;
-    }
-
-    .support-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 0.85rem;
-      margin-top: 0.5rem;
-    }
-
-    .support-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1rem;
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      font-family: var(--font-sans);
-      font-size: 0.85rem;
-      font-weight: 600;
-      transition: transform 0.15s ease, opacity 0.15s ease;
-      border: 1px solid transparent;
-    }
-
-    .support-btn:hover {
-      opacity: 0.92;
-      transform: translateY(-1px);
-    }
-
-    .btn-bmac {
-      background: #ffdd00;
-      color: #000000;
-    }
-
-    .btn-venmo {
-      background: #008cff;
-      color: #ffffff;
-    }
-
-    .btn-email {
-      background: var(--parchment-warm);
-      color: var(--loam-dark);
-      border-color: var(--sand-border);
-    }
-    .btn-email:hover {
-      background: var(--sand-border);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--sand-border);
-      padding-top: 1.75rem;
-      text-align: center;
-      font-size: 0.82rem;
-      color: var(--loam-light);
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
-    @media (max-width: 600px) {
-      body {
-        padding: 1.5rem 1rem 3.5rem;
-      }
-      .app-grid {
-        grid-template-columns: 1fr;
-      }
-      h1 {
-        font-size: 1.95rem;
-      }
-      .support-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Chapter: Practical steps for your post-career pivot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        fallow: {
+                            50: '#f7f6f2', 100: '#edeae1', 200: '#d9d2c2',
+                            300: '#b8ae98', 600: '#736b58', 700: '#5a5343',
+                            800: '#423d30', 900: '#2b271f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in { animation: fadeIn 0.4s ease-in-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-<body>
+<body class="h-full bg-fallow-50 text-fallow-900 font-sans antialiased flex flex-col justify-between selection:bg-fallow-200">
 
-  <div class="container">
-    
-    <!-- Header -->
-    <header>
-      <div class="brand-badge">fallow.garden</div>
-      <h1>The Restorative Anthology of Mindfulness Tools</h1>
-      <p class="tagline">
-        These apps recognize that to lie fallow is not to be idle. Fallow.Garden contains a curated collection of unhurried, zero-tracking digital micro-utilities for:
-      </p>
-      <ul class="tagline-list">
-        <li>Mindfulness and cognitive rest</li>
-        <li>Helping and understanding your internal gut biome biology</li>
-        <li>Providing advice on landscape stewardship</li>
-        <li>Practical apps on more worldly concerns</li>
-      </ul>
-
-      <div class="header-audio-callout">
-        🎙️ <strong>New Audio Series:</strong> Be sure and check out some quick, curious audio stories about the wild, living world inside you. What happens when we stop treating our bodies like stubborn machines to fix, and start treating them like bustling internal gardens? <a href="https://youaremorethanyou.com" target="_blank" rel="noopener">Listen to <em>You Are More Than You</em> ↗</a>
-      </div>
+    <header class="w-full border-b border-fallow-200 bg-white/60 backdrop-blur-sm sticky top-0 z-50">
+        <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="w-3 h-3 rounded-full bg-fallow-600 inline-block"></span>
+                <a href="https://fallow.garden" class="font-semibold tracking-tight text-fallow-800 hover:text-fallow-600 transition">fallow.garden</a>
+                <span class="text-fallow-300">/</span>
+                <span class="text-sm font-medium text-fallow-600">Next Chapter</span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button id="header-back-btn" onclick="goBack()" class="hidden flex items-center space-x-1 text-xs font-medium text-fallow-600 hover:text-fallow-900 transition mr-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    <span>Back</span>
+                </button>
+                <div id="step-indicator" class="text-xs font-medium text-fallow-600 bg-fallow-100 px-3 py-1 rounded-full">
+                    Intro & Overview
+                </div>
+                <button id="reset-nav-btn" onclick="resetApp()" class="hidden text-xs text-fallow-600 hover:text-fallow-900 border border-fallow-200 px-2.5 py-1 rounded-lg transition">
+                    Reset
+                </button>
+            </div>
+        </div>
     </header>
 
-    <!-- Corridor I: Mindfulness & Impermanence -->
-    <div class="section-label">Corridor I: Mind &amp; Impermanence</div>
-    <div class="app-grid">
-      
-      <a href="/episodes/garden/index.html" class="card highlight-moss">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type moss">Cognitive Pacing</span>
-            <span class="card-badge">Episode 01</span>
-          </div>
-          <h2 class="card-title">Attention Restore</h2>
-          <p class="card-desc">
-            Rebuild your deep focus through Attention Restoration Theory, and zero-input micro-breaks.
-          </p>
-        </div>
-        <div class="card-meta">
-          <span>ART • Soft Fascination</span>
-          <span class="card-link-text">Restore Focus &rarr;</span>
-        </div>
-      </a>
+    <main class="flex-grow flex items-center justify-center px-4 py-8 sm:py-12">
+        <div class="w-full max-w-2xl bg-white rounded-2xl border border-fallow-200 shadow-sm p-6 sm:p-10 transition-all duration-300">
 
-      <a href="/episodes/gardenoffinitedays/index.html" class="card highlight-terracotta">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type">Actuarial Mindfulness</span>
-            <span class="card-badge">Episode</span>
-          </div>
-          <h2 class="card-title">The Garden of Finite Days</h2>
-          <p class="card-desc">
-            Estimate your remaining lifespan. Uses current US data with input on your life choices to visualize your finite remaining springs, weekends, and high-vitality days.
-          </p>
-        </div>
-        <div class="card-meta">
-          <span>Memento Mori • SSA Cohorts</span>
-          <span class="card-link-text">Enter Garden &rarr;</span>
-        </div>
-      </a>
+            <!-- ================= INTRO VIEW ================= -->
+            <div id="view-intro" class="fade-in space-y-6">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600 bg-fallow-100 px-2.5 py-1 rounded-md">
+                        Transition Toolkit
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-fallow-900 mt-3">
+                        Next Chapter
+                    </h1>
+                    <p class="text-lg text-fallow-700 font-medium mt-1">
+                        Practical steps for your post-career pivot
+                    </p>
+                </div>
 
-      <a href="/episodes/nextchapter/index.html" class="card highlight-ochre">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type ochre">Post-Career Transition</span>
-            <span class="card-badge">Episode</span>
-          </div>
-          <h2 class="card-title">Next Chapter - IN DEVELOPMENT</h2>
-          <p class="card-desc">
-            Practical steps for your post-career pivot. Gentle navigation, curated pathways, and actionable daily experiments to step away from the 9-to-5 without existential dread.
-          </p>
-        </div>
-        <div class="card-meta">
-          <span>Retirement Pivot • Three Depth Levels</span>
-          <span class="card-link-text">Turn Page &rarr;</span>
-        </div>
-      </a>
+                <div class="space-y-4 text-fallow-700 leading-relaxed text-sm sm:text-base">
+                    <p>
+                        Stepping away from a career is often treated purely as a financial milestone or a matter of figuring out what to do with your free time. But stepping out of a long-held role often triggers unexpected friction.
+                    </p>
+                    <p>
+                        As transition experts note: <strong>change is situational, but a transition is psychological.</strong> A change is just a rearrangement of your schedule, but a transition is bigger. It is the internal process of letting go of an old reality and identity so that a new one can take root.
+                    </p>
+                    <p>
+                        <strong>Next Chapter</strong> helps you navigate the psychological space between the 9-to-5 and what comes next.
+                    </p>
+                </div>
 
-    </div>
+                <div class="pt-4 border-t border-fallow-100 flex justify-between items-center">
+                    <button id="resume-btn" onclick="resumeDashboard()" class="hidden text-xs font-medium text-fallow-600 hover:text-fallow-900 underline">
+                        Resume previous session
+                    </button>
+                    <button onclick="goToStep(1)" class="w-full sm:w-auto ml-auto px-6 py-3 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition shadow-sm flex items-center justify-center space-x-2">
+                        <span>Begin Onboarding</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
 
-    <!-- Corridor II: Human Biology & Gut Biome Ecology -->
-    <div class="section-label">Corridor II: Human Biology &amp; Gut Biome Ecology</div>
-    <div class="app-grid">
+            <!-- ================= SCREEN 1: VIBE CHECK ================= -->
+            <div id="view-step1" class="fade-in space-y-6 hidden">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 1 of 3</span>
+                    <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-fallow-900 mt-1">
+                        Choose your depth level
+                    </h2>
+                    <p class="text-sm text-fallow-700 mt-2 leading-relaxed">
+                        Transitions are often difficult because we are holding onto who we used to be—which can trick us into feeling like the change itself was a bad idea. 
+                    </p>
+                    <p class="text-sm text-fallow-700 mt-2 leading-relaxed">
+                        Because everyone arrives at this realization in a different place, this app offers three distinct pathways. How deep or practical do you want your exploration to be right now?
+                    </p>
+                </div>
 
-      <!-- The Multitudes Within (New Primer & Simulator) -->
-      <a href="/episodes/multitudes/index.html" class="card highlight-moss">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type moss">Gut Biome Guide</span>
-            <span class="card-badge">Anchor Primer</span>
-          </div>
-          <h2 class="card-title">The Multitudes Within</h2>
-          <p class="card-desc">
-            A guide to understanding your gut microbiome. Choose your preferred depth—from simple everyday metaphors to detailed physiological science—and test out how your choices affect your body with an interactive simulator.
-          </p>
-        </div>
-        <div class="card-meta">
-          <span>Whitman &amp; Yong • Gut Biome Simulator</span>
-          <span class="card-link-text">Explore Guide &rarr;</span>
-        </div>
-      </a>
+                <div class="space-y-3">
+                    <label class="block border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50">
+                        <div class="flex items-start space-x-3">
+                            <input type="radio" name="vibe" value="Action Plan" class="mt-1 text-fallow-900 focus:ring-fallow-600" checked>
+                            <div>
+                                <span class="font-semibold text-fallow-900 block text-sm">Just the Action Plan</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">Focus purely on schedules, routines, habit replacement, and tangible projects. Skip heavy introspection.</span>
+                            </div>
+                        </div>
+                    </label>
 
-      <!-- Fasting & Gut Biome Window Tracker -->
-      <a href="/episodes/fastcounter/index.html" class="card highlight-moss">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type moss">Metabolic Motility</span>
-            <span class="card-badge">Episode</span>
-          </div>
-          <h2 class="card-title">Metabolic &amp; Gut Biome Counter</h2>
-          <p class="card-desc">
-            This apps tracks your last meal with a timestamp and explains what is happening with your body at different fasting levels. Also provides gentle fast-breaking protocols.
-          </p>
-        </div>
-        <div class="card-meta">
-          <span>Circadian Fasting • Digestive system Housekeeping</span>
-          <span class="card-link-text">Track Window &rarr;</span>
-        </div>
-      </a>
+                    <label class="block border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50">
+                        <div class="flex items-start space-x-3">
+                            <input type="radio" name="vibe" value="The Middle Path" class="mt-1 text-fallow-900 focus:ring-fallow-600">
+                            <div>
+                                <span class="font-semibold text-fallow-900 block text-sm">The Middle Path</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">A balanced blend of curiosity audits, mindset reframing, and time-vs-energy tracking.</span>
+                            </div>
+                        </div>
+                    </label>
 
-      <!-- The Inner Meadow -->
-      <a href="/episodes/inner-meadow/index.html" class="card highlight-moss">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type moss">Biome Stewardship</span>
-            <span class="card-badge">Episode</span>
-          </div>
-          <h2 class="card-title">The Inner Meadow</h2>
-          <p class="card-desc">
-            A diverse range of plants helps your native gut flora. This app helps track weekly botanical diversity across 100+ foods (aiming for 30+ unique species) and living ferments.
-          </p>
-        </div>
-        <div class="card-meta">
-          <span>Daily Microbial Cultivation</span>
-          <span class="card-link-text">Enrich Biome &rarr;</span>
-        </div>
-      </a>
+                    <label class="block border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50">
+                        <div class="flex items-start space-x-3">
+                            <input type="radio" name="vibe" value="Deep Dive" class="mt-1 text-fallow-900 focus:ring-fallow-600">
+                            <div>
+                                <span class="font-semibold text-fallow-900 block text-sm">Deep Dive</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">Full exploration of identity transition, logotherapy reflection prompts, and legacy values alignment.</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
 
-      <!-- getrepoopulate.com Sister Hub -->
-      <a href="https://getrepoopulate.com" class="card" target="_blank" rel="noopener">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type">Acute Gut Rewilding</span>
-            <span class="card-badge">Sister Hub</span>
-          </div>
-          <h2 class="card-title">getrepoopulate.com</h2>
-          <p class="card-desc">
-            Practical advice for microbiome rebuilding after major ecological shocks —a colonoscopy, antibiotic courses, or stomach bugs - with clear descriptions of what to eat for recolonization protocols.
-          </p>
-        </div>
-        <div class="card-meta">
-          <span>Post-Shock Protocol</span>
-          <span class="card-link-text">Visit Portal ↗</span>
-        </div>
-      </a>
+                <div class="pt-4 border-t border-fallow-100 flex justify-end items-center">
+                    <button onclick="saveStep1(); goToStep(2)" class="px-6 py-2.5 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition">
+                        Continue
+                    </button>
+                </div>
+            </div>
 
-    </div>
+            <!-- ================= SCREEN 2: ANCHOR SELECTION ================= -->
+            <div id="view-step2" class="fade-in space-y-6 hidden">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 2 of 3</span>
+                    <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-fallow-900 mt-1">
+                        Select a worldview anchor (Optional)
+                    </h2>
+                    <p class="text-sm text-fallow-600 mt-1">
+                        Choose an optional lens to ground your transition prompts, or keep it neutral.
+                    </p>
+                </div>
 
-    <!-- Corridor III: Landscape Ecology -->
-    <div class="section-label">Corridor III: Landscape &amp; Living Ecology</div>
-    <div class="app-grid">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label class="border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50 flex items-start space-x-3">
+                        <input type="radio" name="anchor" value="Secular / Pragmatic" class="mt-1 text-fallow-900 focus:ring-fallow-600" checked>
+                        <div>
+                            <span class="font-semibold text-fallow-900 block text-sm">Secular / Pragmatic</span>
+                            <span class="text-xs text-fallow-600 block mt-0.5">Curiosity, habit design, and utility.</span>
+                        </div>
+                    </label>
 
-      <!-- Corridor III Primer -->
-      <a href="/episodes/garden-primer/index.html" class="card highlight-moss">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type moss">Botanical Primer</span>
-            <span class="card-badge">New Primer</span>
-          </div>
-          <h2 class="card-title">Landscape &amp; Living Ecology</h2>
-          <p class="card-desc">
-            A multi-tiered primer rethinking plants as active biological agents, exploring atmospheric forest chemistry, tree breath, and how we become local participants in our ecosystems.
-          </p>
+                    <label class="border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50 flex items-start space-x-3">
+                        <input type="radio" name="anchor" value="Philosophical Traditions" class="mt-1 text-fallow-900 focus:ring-fallow-600">
+                        <div>
+                            <span class="font-semibold text-fallow-900 block text-sm">Philosophical Traditions</span>
+                            <span class="text-xs text-fallow-600 block mt-0.5">Stoic resilience, Aristotelian flourishing.</span>
+                        </div>
+                    </label>
+
+                    <label class="border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50 flex items-start space-x-3">
+                        <input type="radio" name="anchor" value="Traditional / Spiritual" class="mt-1 text-fallow-900 focus:ring-fallow-600">
+                        <div>
+                            <span class="font-semibold text-fallow-900 block text-sm">Traditional / Spiritual</span>
+                            <span class="text-xs text-fallow-600 block mt-0.5">Faith-based or contemplative frameworks.</span>
+                        </div>
+                    </label>
+
+                    <label class="border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50 flex items-start space-x-3">
+                        <input type="radio" name="anchor" value="Keep it Simple / Skip" class="mt-1 text-fallow-900 focus:ring-fallow-600">
+                        <div>
+                            <span class="font-semibold text-fallow-900 block text-sm">Keep it Simple</span>
+                            <span class="text-xs text-fallow-600 block mt-0.5">No specific lens needed.</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="pt-4 border-t border-fallow-100 flex justify-end items-center">
+                    <button onclick="saveStep2(); goToStep(3)" class="px-6 py-2.5 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition">
+                        Continue
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= SCREEN 3: CURRENT REALITY AUDIT ================= -->
+            <div id="view-step3" class="fade-in space-y-6 hidden">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600">Step 3 of 3</span>
+                    <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-fallow-900 mt-1">
+                        Your current reality
+                    </h2>
+                    <p class="text-sm text-fallow-600 mt-1">
+                        Let's understand your timeline and current daily rhythm.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-fallow-700 mb-1">Time Horizon to Transition</label>
+                        <select id="audit-horizon" class="w-full bg-fallow-50 border border-fallow-200 rounded-xl p-3 text-sm text-fallow-900 focus:outline-none focus:border-fallow-600">
+                            <option value="1-3 years out" selected>1–3 years out (Early horizon)</option>
+                            <option value="6-18 months out">6–18 months out (Planning phase)</option>
+                            <option value="0-6 months out">0–6 months out (Imminent pivot)</option>
+                            <option value="Already transitioned">Already transitioned / Semi-retired</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-fallow-700 mb-1">Primary Focus Area to Tackle First</label>
+                        <select id="audit-focus" class="w-full bg-fallow-50 border border-fallow-200 rounded-xl p-3 text-sm text-fallow-900 focus:outline-none focus:border-fallow-600">
+                            <option value="Providing structure and routines outside of a job">Providing structure and routines outside of a job</option>
+                            <option value="Rediscovering old hobbies & creative outlets">Rediscovering old hobbies & creative outlets</option>
+                            <option value="Finding new community & social networks">Finding new community & social networks</option>
+                            <option value="Logistics, volunteering & micro-projects">Logistics, volunteering & micro-projects</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-fallow-100 flex justify-end items-center">
+                    <button onclick="completeOnboarding()" class="px-6 py-2.5 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition">
+                        Complete & View Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= PERSONALIZED DASHBOARD (DYNAMIC PATHWAYS) ================= -->
+            <div id="view-dashboard" class="fade-in space-y-6 hidden">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-fallow-100 pb-4 gap-4">
+                    <div>
+                        <span id="dash-badge" class="text-xs font-semibold uppercase tracking-wider text-fallow-600 bg-fallow-100 px-2.5 py-1 rounded-md">
+                            Pathway: Action Plan
+                        </span>
+                        <h2 class="text-2xl font-bold tracking-tight text-fallow-900 mt-2">
+                            Next Chapter Dashboard
+                        </h2>
+                    </div>
+                    <div class="flex flex-col items-end space-y-1">
+                        <div class="flex items-center space-x-2">
+                            <button onclick="editOnboarding()" class="text-xs font-medium text-fallow-600 hover:text-fallow-900 border border-fallow-200 px-3 py-1.5 rounded-lg transition">
+                                Edit Settings
+                            </button>
+                            <button onclick="exportPlan()" class="text-xs font-medium text-fallow-900 bg-fallow-200 hover:bg-fallow-300 border border-fallow-300 px-3 py-1.5 rounded-lg transition shadow-sm">
+                                Export My Plan
+                            </button>
+                            <button onclick="resetApp()" class="text-xs font-medium text-red-600 hover:text-red-800 border border-red-200 px-3 py-1.5 rounded-lg transition">
+                                Reset All
+                            </button>
+                        </div>
+                        <span class="text-[10px] text-fallow-500">(Downloads a .txt file directly to your device)</span>
+                    </div>
+                </div>
+
+                <!-- Summary Meta -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="bg-fallow-50 p-4 rounded-xl border border-fallow-100">
+                        <span class="text-xs text-fallow-600 block font-medium">Depth Level</span>
+                        <span id="dash-vibe" class="font-semibold text-fallow-900 text-sm mt-0.5 block">—</span>
+                    </div>
+                    <div class="bg-fallow-50 p-4 rounded-xl border border-fallow-100">
+                        <span class="text-xs text-fallow-600 block font-medium">Worldview Anchor</span>
+                        <span id="dash-anchor" class="font-semibold text-fallow-900 text-sm mt-0.5 block">—</span>
+                    </div>
+                    <div class="bg-fallow-50 p-4 rounded-xl border border-fallow-100">
+                        <span class="text-xs text-fallow-600 block font-medium">Timeline</span>
+                        <span id="dash-timeline" class="font-semibold text-fallow-900 text-sm mt-0.5 block">—</span>
+                    </div>
+                </div>
+
+                <!-- DYNAMIC PATHWAY CONTAINER -->
+                <div id="pathway-content-container" class="space-y-6">
+                    <!-- Injected dynamically via JS depending on pathway -->
+                </div>
+
+                <!-- Footer note -->
+                <div class="text-center pt-4 border-t border-fallow-100 space-y-1">
+                    <p class="text-xs text-fallow-600">
+                        Part of the <span class="font-medium text-fallow-800">fallow.garden</span> suite. 
+                    </p>
+                    <p class="text-xs text-fallow-500 font-medium italic">
+                        Your progress is saved locally to your device (no servers, no tracking).
+                    </p>
+                </div>
+            </div>
+
         </div>
-        <div class="card-meta">
-          <span>Schlanger &amp; Wohlleben • Atmospheric Chemistry</span>
-          <span class="card-link-text">Read Primer &rarr;</span>
-        </div>
-      </a>
+    </main>
 
-      <!-- betterfly.garden Sister Hub -->
-      <a href="https://betterfly.garden" class="card highlight-moss" target="_blank" rel="noopener">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type moss">Ecological Corridor</span>
-            <span class="card-badge">Sister Hub</span>
-          </div>
-          <h2 class="card-title">betterfly.garden</h2>
-          <p class="card-desc">
-            Native habitat and pollinator planner for Maryland and the Mid-Atlantic. Match local soil profiles, bloom sequences, and deer-resistant companion guilds to cultivate biodiversity.
-          </p>
-        </div>
-        <div class="card-meta">
-          <span>Native Botany &amp; Soil Profiles</span>
-          <span class="card-link-text">Plan Habitat ↗</span>
-        </div>
-      </a>
-
-    </div>
-
-    <!-- Corridor IV: Worldly Passages & Cosmic Play -->
-    <div class="section-label">Corridor IV: Worldly Passages &amp; Cosmic Play</div>
-    <div class="app-grid">
-
-      <!-- Your Penguin Pal -->
-      <a href="/episodes/penguin-pal/index.html" class="card highlight-glacier">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type glacier">Domestic Cryogenics</span>
-            <span class="card-badge">Episode</span>
-          </div>
-          <h2 class="card-title">Your Penguin Pal</h2>
-          <p class="card-desc">
-            The quiet custodian of your household ice shelf. A zero-friction freezer ledger to track cold storage provisions, adjust portions with a single tap, and surface deep glacial reserves.
-          </p>
-        </div>
-        <div class="card-meta">
-          <span>Permafrost Ledger • Cold Storage</span>
-          <span class="card-link-text">Inspect Ice Shelf &rarr;</span>
-        </div>
-      </a>
-
-      <a href="/episodes/fers-countdown/index.html" class="card highlight-ochre">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type ochre">Vocational Horizon</span>
-            <span class="card-badge">Episode</span>
-          </div>
-          <h2 class="card-title">FERS Retirement Countdown</h2>
-          <p class="card-desc">
-            A calm horizon planner for federal civil service. Track remaining working days, annuity benchmarks, and the gradual transition toward self-directed, sovereign time.
-          </p>
-        </div>
-        <div class="card-meta">
-          <span>Federal Service • Milestones</span>
-          <span class="card-link-text">Track Horizon &rarr;</span>
-        </div>
-      </a>
-
-      <a href="/episodes/past-lives/index.html" class="card">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type ochre">Existential Play</span>
-            <span class="card-badge">Episode</span>
-          </div>
-          <h2 class="card-title">Past Life Oracle</h2>
-          <p class="card-desc">
-            A playful karmic simulator exploring ancient trades, distant epochs, and historical wanderers to lightly dislodge the solemn weight of modern self-importance.
-          </p>
-        </div>
-        <div class="card-meta">
-          <span>Karmic Whimsy • Zen Play</span>
-          <span class="card-link-text">Spin the Wheel &rarr;</span>
-        </div>
-      </a>
-
-    </div>
-
-    <!-- The Compost Pile: Experimental / Not Quite Ready -->
-    <div class="section-label" style="color: var(--loam-light);">The Compost Pile (Experimental Ideas)</div>
-    <div class="app-grid">
-      
-      <a href="/episodes/composter/index.html" class="card" style="border-style: dashed; opacity: 0.85;">
-        <div class="card-top">
-          <div class="card-header">
-            <span class="card-type" style="color: var(--loam-light);">Experimental Sandbox</span>
-            <span class="card-badge">Needs Feedback</span>
-          </div>
-          <h2 class="card-title">Digital Thought Composter</h2>
-          <p class="card-desc">
-            Our rough draft experiment converting ruminative thoughts into meadow soil. Not quite ready for prime-time. We strongly want your candid feedback and suggestions on this one!
-          </p>
-        </div>
-        <div class="card-meta">
-          <span>Early Prototype • Send Thoughts</span>
-          <span class="card-link-text" style="color: var(--loam-light);">Test & Critique &rarr;</span>
-        </div>
-      </a>
-
-    </div>
-
-    <!-- About & Support Section -->
-    <section class="about-card">
-      <div class="about-head">
-        <h2><span>🌿</span> About fallow.garden &amp; Feedback</h2>
-      </div>
-      
-      <div class="about-content">
-        <p>
-          <strong>fallow.garden</strong> is an independent anthology of single-purpose micro-utilities created to counter cognitive fatigue, algorithmic noise, and relentless optimization culture. Each tool runs entirely on your device with zero tracking or account friction.
-        </p>
-        <p>
-          Have ideas for new restorative modules, suggestions for current tools, or questions about the underlying research? Feedback and contributions are always deeply appreciated.
-        </p>
-      </div>
-
-      <div class="support-grid">
-        <a href="https://buymeacoffee.com/davidmikosz" target="_blank" rel="noopener noreferrer" class="support-btn btn-bmac">
-          <span>☕</span>
-          <span>Buy Me a Coffee</span>
+    <footer class="w-full border-t border-fallow-200 bg-white/40 py-6 text-center text-xs text-fallow-600 flex flex-col items-center space-y-4">
+        <p>Next Chapter • Practical steps for your post-career pivot</p>
+        <a href="mailto:david.mikosz@gmail.com?subject=fallow.garden%20Feedback" class="inline-flex items-center space-x-2 text-fallow-700 hover:text-fallow-900 border border-fallow-200 px-3 py-1.5 rounded-lg transition bg-white/60 shadow-sm">
+            <span>✉️</span>
+            <span>Send Feedback</span>
         </a>
-
-        <a href="mailto:david.mikosz@gmail.com?subject=fallow.garden%20Feedback" class="support-btn btn-email">
-          <span>✉️</span>
-          <span>Send Feedback</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-      <div>fallow.garden — Restorative micro-utilities for mind, soil, and human vitality. Check out <a href="/Fallowstate/index.html" style="color: inherit; text-decoration: underline; text-decoration-style: dotted;">FallowState</a> for agent guardrails.</div>
-      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.25rem;">100% client-side. Zero telemetry. Hosted on independent static web infrastructure.</div>
     </footer>
-  </div>
 
+    <script>
+        const STORAGE_KEY = 'fallow_next_chapter_state_v5';
+        
+        let userState = {
+            onboardingComplete: false,
+            vibe: 'Action Plan',
+            anchor: 'Secular / Pragmatic',
+            horizon: '1-3 years out',
+            focus: 'Providing structure and routines outside of a job',
+            actionChecklist: {},
+            curiosityLog: [
+                { text: 'Woodworking / Joinery basics', done: false },
+                { text: 'Local community garden volunteering', done: true }
+            ],
+            newHobbyInput: '',
+            reflectionJournal: 'Today I noticed that losing the morning stand-up meeting leaves a noticeable gap in my schedule. I will test replacing it with a 20-minute reading block.'
+        };
+
+        let currentStepIndex = 0;
+
+        function loadState() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    userState = { ...userState, ...parsed };
+                } catch(e) {
+                    console.error('Failed to parse saved state', e);
+                }
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
+        }
+
+        const stepsNames = [
+            "Intro & Overview",
+            "Step 1: Depth Level",
+            "Step 2: Worldview Anchor",
+            "Step 3: Current Reality",
+            "Your Dashboard"
+        ];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            if (userState.onboardingComplete) {
+                document.getElementById('resume-btn').classList.remove('hidden');
+            }
+        });
+
+        function goToStep(stepIndex) {
+            currentStepIndex = stepIndex;
+            document.getElementById('view-intro').classList.add('hidden');
+            document.getElementById('view-step1').classList.add('hidden');
+            document.getElementById('view-step2').classList.add('hidden');
+            document.getElementById('view-step3').classList.add('hidden');
+            document.getElementById('view-dashboard').classList.add('hidden');
+
+            if (stepIndex === 0) document.getElementById('view-intro').classList.remove('hidden');
+            if (stepIndex === 1) document.getElementById('view-step1').classList.remove('hidden');
+            if (stepIndex === 2) document.getElementById('view-step2').classList.remove('hidden');
+            if (stepIndex === 3) document.getElementById('view-step3').classList.remove('hidden');
+            if (stepIndex === 4) {
+                document.getElementById('view-dashboard').classList.remove('hidden');
+                document.getElementById('reset-nav-btn').classList.remove('hidden');
+                populateDashboard();
+            } else {
+                document.getElementById('reset-nav-btn').classList.add('hidden');
+            }
+
+            // Handle Back Button visibility (Show on steps 1, 2, 3 only)
+            if (stepIndex > 0 && stepIndex < 4) {
+                document.getElementById('header-back-btn').classList.remove('hidden');
+            } else {
+                document.getElementById('header-back-btn').classList.add('hidden');
+            }
+
+            if (stepIndex > 0) {
+                document.getElementById('step-indicator').innerText = stepsNames[stepIndex];
+            } else {
+                document.getElementById('step-indicator').innerText = "Intro & Overview";
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goBack() {
+            if (currentStepIndex > 0 && currentStepIndex < 4) {
+                goToStep(currentStepIndex - 1);
+            }
+        }
+
+        function resumeDashboard() { goToStep(4); }
+
+        function saveStep1() {
+            const selected = document.querySelector('input[name="vibe"]:checked');
+            if (selected) userState.vibe = selected.value;
+            saveState();
+        }
+
+        function saveStep2() {
+            const selected = document.querySelector('input[name="anchor"]:checked');
+            if (selected) userState.anchor = selected.value;
+            saveState();
+        }
+
+        function saveStep3() {
+            userState.horizon = document.getElementById('audit-horizon').value;
+            userState.focus = document.getElementById('audit-focus').value;
+            saveState();
+        }
+
+        function completeOnboarding() {
+            saveStep3();
+            userState.onboardingComplete = true;
+            saveState();
+            goToStep(4);
+        }
+
+        function editOnboarding() {
+            document.getElementById('audit-horizon').value = userState.horizon;
+            document.getElementById('audit-focus').value = userState.focus;
+            goToStep(1);
+        }
+
+        function resetApp() {
+            localStorage.removeItem(STORAGE_KEY);
+            userState.onboardingComplete = false;
+            userState.actionChecklist = {};
+            document.getElementById('resume-btn').classList.add('hidden');
+            document.getElementById('reset-nav-btn').classList.add('hidden');
+            goToStep(0);
+        }
+
+        function exportPlan() {
+            let content = "==========================================\n";
+            content += "    NEXT CHAPTER: MY TRANSITION PLAN\n";
+            content += "==========================================\n\n";
+            content += "Focus Area: " + userState.focus + "\n";
+            content += "Timeline: " + userState.horizon + "\n";
+            content += "Depth Level: " + userState.vibe + "\n";
+            content += "Worldview Anchor: " + userState.anchor + "\n\n";
+            content += "------------------------------------------\n\n";
+
+            if (userState.vibe === 'Action Plan') {
+                content += "ACTION CHECKLIST:\n\n";
+                const labels = document.querySelectorAll('#pathway-content-container label');
+                if (labels.length > 0) {
+                    labels.forEach(label => {
+                        const isChecked = label.querySelector('input').checked;
+                        const text = label.querySelector('span').innerText;
+                        content += (isChecked ? "[ X ] " : "[   ] ") + text + "\n\n";
+                    });
+                } else {
+                     content += "Checklist is currently under construction.\n";
+                }
+            } else if (userState.vibe === 'The Middle Path') {
+                content += "CURIOSITY LOG & HOBBY AUDIT:\n\n";
+                userState.curiosityLog.forEach(item => {
+                    content += (item.done ? "[ X ] " : "[   ] ") + item.text + "\n";
+                });
+            } else if (userState.vibe === 'Deep Dive') {
+                content += "REFLECTION JOURNAL:\n\n";
+                content += userState.reflectionJournal + "\n";
+            }
+
+            const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "Next_Chapter_Plan.txt";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // ================= DASHBOARD RENDERER =================
+        function populateDashboard() {
+            document.getElementById('dash-badge').innerText = "Pathway: " + userState.vibe;
+            document.getElementById('dash-vibe').innerText = userState.vibe;
+            document.getElementById('dash-anchor').innerText = userState.anchor;
+            document.getElementById('dash-timeline').innerText = userState.horizon;
+
+            const container = document.getElementById('pathway-content-container');
+            container.innerHTML = '';
+
+            if (userState.vibe === 'Action Plan') {
+                container.innerHTML = renderActionPlanHTML();
+            } else if (userState.vibe === 'The Middle Path') {
+                container.innerHTML = renderMiddlePathHTML();
+            } else {
+                container.innerHTML = renderDeepDiveHTML();
+            }
+        }
+
+        // --- PATHWAY 1: ACTION PLAN (DYNAMIC BY HORIZON) ---
+        function renderActionPlanHTML() {
+            const focus = userState.focus;
+            const horizon = userState.horizon;
+            
+            let tasksHTML = '';
+            let introText = '';
+            let titleText = 'Practical Habit Replacement Checklist';
+
+            if (focus === 'Providing structure and routines outside of a job') {
+                if (horizon === '1-3 years out') {
+                    titleText = "What habits inform your day";
+                    introText = "You will be leaving a structured day that provided you with a set of things you had to do. This is an opportunity to both map out where you are now and to start planning for the future.";
+                    tasksHTML = generateChecklist([
+                        { id: 'auditWeek', text: "Start tracking how your normal work weeks are structured. How many hours a day are you currently spending doing particular things? Doing this can give you a sense of how you might want to spend your time in retirement." },
+                        { id: 'disconnectedHabit', text: "Now would be a good time to start establishing a morning or evening habit (like reading 10 pages or making a stovetop espresso) that is completely disconnected from your work 'identity'—starting now helps set an important pattern." },
+                        { id: 'weekendTest', text: "Start taking a look at how you spend your weekends—almost like a gentle 'time audit'. Are you just recovering from work, or are you doing things you'd like to do more of? This is a good time to start thinking about that." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    introText = "You are leaving a structured day that naturally provided you with conscious anchors. Here are some ways to provide supportive structure to your day outside of a formal job:";
+                    tasksHTML = generateChecklist([
+                        { id: 'projectSlotPrep', text: "Start time-blocking a 2-hour 'project slot' on your weekend. Treat this with the same respect as a mandatory work meeting to practice protecting your time." },
+                        { id: 'decoupleSleep', text: "Begin decoupling your sleep schedule from your commute. Try waking up to go for a walk or read before you engage with work, rather than just waking to beat traffic." },
+                        { id: 'decoupleIdentity', text: "Practice introducing yourself by your interests rather than your job title or agency. Removing your title from personal profiles can help start this mental shift." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    introText = "You are leaving a structured day that naturally provided you with conscious anchors. Here are some ways to provide supportive structure to your day outside of a formal job:";
+                    tasksHTML = generateChecklist([
+                        { id: 'mondayPlan', text: "Make a first draft of a schedule for your first Monday post-career. The shock of a completely empty calendar hides the fact that you are starting a new life." },
+                        { id: 'fakeCommute', text: "Because you are used to a daily commute, schedule a 30-minute morning walk to give your day a starting boundary that isn't tied to an employer." },
+                        { id: 'projectSlot', text: "Designate a dedicated block of time for a project or hobby. This isn't meant to create a strict obligation, but rather to protect your time the same way you did at work." },
+                        { id: 'socialTouchpoint', text: "Work naturally provides informal social interactions. Consciously try to initiate one informal social touchpoint per week (a coffee, meal, or just a call)." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    introText = "You are leaving a structured day that naturally provided you with conscious anchors. Here are some ways to provide supportive structure to your day outside of a formal job:";
+                    tasksHTML = generateChecklist([
+                        { id: 'boundaryHours', text: "When every day is Saturday, time can start to blur together into an 'endless weekend.' Try setting gentle 'on' and 'off' hours for yourself, so your downtime actually feels like a break rather than just a lack of things to do." },
+                        { id: 'frictionTest', text: "Pay attention to the kind of friction you might be feeling lately. If you are feeling a bit anxious, it usually means you crave a little more daily structure. But if you are feeling bored, it might be a sign to intentionally break your routine." },
+                        { id: 'microCommitment', text: "Sometimes we miss the natural rhythm of simply having somewhere to be. It can be surprisingly helpful to take on a low-stakes commitment—like a short weekly shift at a local garden or library—just to reintroduce a light, healthy deadline into your week." }
+                    ]);
+                }
+            } else if (focus === 'Rediscovering old hobbies & creative outlets') {
+                if (horizon === '1-3 years out') {
+                    titleText = "Reconnecting with Curiosities";
+                    introText = "Studies have shown that many people deep in their careers find it hard to imagine having the energy for new activities or pursuits. This is a great time to start giving yourself permission to be curious without feeling too obligated just yet.";
+                    tasksHTML = generateChecklist([
+                        { id: 'childhoodAudit', text: "Think back to what you wanted to do more of around the ages of 10 or 12, before grades or resumes mattered. Remembering what those early interests were can be a great clue about what to explore now." },
+                        { id: 'beginnerPermission', text: "Don't worry about being good at something immediately—this is the time to explore. High achievers sometimes abandon new hobbies, or splurge on expensive gear to try and speed up the learning curve. It is okay to be 'bad' at something simply because the process is fun and takes time." },
+                        { id: 'passiveSwap', text: "Try swapping out one hour of passive unwinding (like watching TV or scrolling) with active exploring—maybe reading a book on a random niche, sketching, or wandering a hardware store." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    titleText = "Low-Stakes Micro-Experiments";
+                    introText = "As the transition gets closer, it’s a great time to run some low-stakes 'micro-experiments' to see what actually sticks, without feeling any pressure to commit to a new identity.";
+                    tasksHTML = generateChecklist([
+                        { id: 'starterTool', text: "Take a single, short class or buy a basic starter tool. Resist the urge to buy the expensive 'master kit' until you know if the reality of the hobby matches the fantasy." },
+                        { id: 'physicalSpace', text: "Curate a tiny physical space in your home dedicated entirely to a non-work interest, even if it's just one shelf or a corner of a desk." },
+                        { id: 'realityCheck', text: "Chat with someone who already does the thing you're curious about. Ask them what common frustrations or challenges you might face, which helps paint a realistic picture of what the hobby actually entails." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    titleText = "Protecting Creative Time";
+                    introText = "With your calendar about to open up, the goal is to make sure your creative outlets become a natural, protected part of your new weekly rhythm, rather than something you just do 'if you have time.'";
+                    tasksHTML = generateChecklist([
+                        { id: 'dedicatedBlock', text: "Try treating a 90-minute block for your hobby with the same respect you gave to a work meeting. Protect that time from being swallowed by random errands." },
+                        { id: 'processOverProduct', text: "Focus entirely on the enjoyment of the process rather than judging the final result. If you're gardening, try to enjoy prepping the soil, not just anticipating the harvest." },
+                        { id: 'publicDeclaration', text: "Mention your new project or interest to a friend. Sharing it out loud makes it feel more real and gently helps shift your social identity." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    titleText = "The No-Hustle Zone";
+                    introText = "Now that you have the time, the biggest trap is accidentally turning a fun hobby into a stressful job. Remember, you don't have to be productive anymore.";
+                    tasksHTML = generateChecklist([
+                        { id: 'noHustle', text: "Resist the urge to monetize or 'optimize' your creative outlets. Let your hobby remain a hobby without demanding that it be useful or profitable." },
+                        { id: 'dropIt', text: "If you find yourself getting frustrated by a chosen hobby, feel free to just drop it. You aren't bound by professional sunk costs anymore—it’s perfectly fine to just try something else." },
+                        { id: 'communityBridge', text: "Look into a local group or online forum related to your interest. Shared hobbies are one of the most organic ways to build a post-career community." }
+                    ]);
+                }
+            } else {
+                // Placeholder for Pivot 3 and 4
+                introText = "We are currently mapping out the specific behavioral experiments for this focus area based on transition psychology.";
+                tasksHTML = `<div class="p-4 bg-fallow-100 rounded-lg text-sm text-fallow-700 italic border border-fallow-200">Tasks for "${focus}" at the "${horizon}" horizon are under construction in the compost pile.</div>`;
+            }
+
+            return `
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Operational Routine Builder</span>
+                            <h3 class="text-base font-semibold text-fallow-900 mt-0.5">${titleText}</h3>
+                        </div>
+                        <span class="text-xs bg-fallow-100 text-fallow-800 px-2.5 py-1 rounded-md font-medium">Actionable</span>
+                    </div>
+                    <p class="text-sm text-fallow-700">${introText}</p>
+                    <div class="space-y-2 pt-2">
+                        ${tasksHTML}
+                    </div>
+                </div>
+
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-3 bg-fallow-50/40">
+                    <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Current Focus Project</span>
+                    <h4 class="font-semibold text-fallow-900 text-sm">${userState.focus}</h4>
+                    <p class="text-xs text-fallow-700">
+                        Based on your horizon (${userState.horizon}), focus on establishing small, repeatable daily habits rather than massive lifestyle overhauls.
+                    </p>
+                </div>
+            `;
+        }
+
+        function generateChecklist(tasks) {
+            return tasks.map(t => {
+                const isChecked = userState.actionChecklist[t.id] ? 'checked' : '';
+                return `
+                    <label class="flex items-start space-x-3 p-3 bg-fallow-50 rounded-lg border border-fallow-200/60 cursor-pointer hover:bg-fallow-100/50 transition">
+                        <input type="checkbox" onchange="toggleAction('${t.id}', this.checked)" ${isChecked} class="mt-0.5 w-4 h-4 text-fallow-900 rounded focus:ring-fallow-600">
+                        <span class="text-sm font-medium text-fallow-900 leading-snug">${t.text}</span>
+                    </label>
+                `;
+            }).join('');
+        }
+
+        function toggleAction(key, val) {
+            userState.actionChecklist[key] = val;
+            saveState();
+        }
+
+        // --- PATHWAY 2: THE MIDDLE PATH ---
+        function renderMiddlePathHTML() {
+            let itemsHtml = userState.curiosityLog.map((item, idx) => `
+                <div class="flex items-center justify-between p-3 bg-fallow-50 rounded-lg border border-fallow-200/60">
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" onchange="toggleCuriosity(${idx}, this.checked)" ${item.done ? 'checked' : ''} class="w-4 h-4 text-fallow-900 rounded focus:ring-fallow-600">
+                        <span class="text-sm ${item.done ? 'line-through text-fallow-600' : 'text-fallow-900 font-medium'}">${item.text}</span>
+                    </label>
+                    <button onclick="removeCuriosity(${idx})" class="text-xs text-fallow-600 hover:text-red-700">Remove</button>
+                </div>
+            `).join('');
+
+            return `
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Curiosity Log & Hobby Audit</span>
+                            <h3 class="text-base font-semibold text-fallow-900 mt-0.5">Exploring Interests Without Pressure</h3>
+                        </div>
+                        <span class="text-xs bg-fallow-100 text-fallow-800 px-2.5 py-1 rounded-md font-medium">Pragmatic Focus</span>
+                    </div>
+                    <p class="text-sm text-fallow-700">
+                        Capture low-stakes hobbies, crafts, or intellectual pursuits you want to test out during your transition.
+                    </p>
+                    <div class="space-y-2">
+                        ${itemsHtml}
+                    </div>
+                    <div class="flex space-x-2 pt-2">
+                        <input type="text" id="new-hobby-input" placeholder="Add a new curiosity (e.g. pottery, bird watching)..." class="flex-grow bg-fallow-50 border border-fallow-200 rounded-xl px-3 py-2 text-sm text-fallow-900 focus:outline-none focus:border-fallow-600">
+                        <button onclick="addCuriosity()" class="px-4 py-2 bg-fallow-900 text-white rounded-xl text-sm font-medium hover:bg-fallow-800 transition">Add</button>
+                    </div>
+                </div>
+
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-3 bg-fallow-50/40">
+                    <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Weekly Mindset Reframing Prompt</span>
+                    <h4 class="font-semibold text-fallow-900 text-sm">"What is an accomplishment or title from my career that I am ready to gently set down?"</h4>
+                    <p class="text-xs text-fallow-700 leading-relaxed">
+                        ${userState.anchor === 'Philosophical Traditions' ? 'As Marcus Aurelius noted, changing circumstances require shifting our internal definitions of utility and virtue beyond corporate status.' : 'Pragmatic reframing helps separate your intrinsic worth from external professional output.'}
+                    </p>
+                </div>
+            `;
+        }
+
+        function addCuriosity() {
+            const input = document.getElementById('new-hobby-input');
+            const val = input.value.trim();
+            if (val) {
+                userState.curiosityLog.push({ text: val, done: false });
+                input.value = '';
+                saveState();
+                populateDashboard();
+            }
+        }
+
+        function toggleCuriosity(idx, checked) {
+            userState.curiosityLog[idx].done = checked;
+            saveState();
+        }
+
+        function removeCuriosity(idx) {
+            userState.curiosityLog.splice(idx, 1);
+            saveState();
+            populateDashboard();
+        }
+
+        // --- PATHWAY 3: DEEP DIVE ---
+        function renderDeepDiveHTML() {
+            return `
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Identity Transition & Logotherapy</span>
+                            <h3 class="text-base font-semibold text-fallow-900 mt-0.5">Meaning-Making Reflection Prompt</h3>
+                        </div>
+                        <span class="text-xs bg-fallow-100 text-fallow-800 px-2.5 py-1 rounded-md font-medium">Deep Dive</span>
+                    </div>
+                    <p class="text-sm text-fallow-700">
+                        Rooted in Viktor Frankl’s framework of finding meaning through creation, experience, and attitude, use this space for open reflection on your transition narrative.
+                    </p>
+                    <div class="space-y-2">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-fallow-700">Weekly Reflection Journal</label>
+                        <textarea id="reflection-textarea" rows="4" oninput="updateReflection(this.value)" class="w-full bg-fallow-50 border border-fallow-200 rounded-xl p-3 text-sm text-fallow-900 focus:outline-none focus:border-fallow-600 leading-relaxed">${userState.reflectionJournal}</textarea>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateReflection(val) {
+            userState.reflectionJournal = val;
+            saveState();
+        }
+    </script>
 </body>
 </html>
