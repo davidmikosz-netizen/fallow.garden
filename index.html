@@ -316,7 +316,7 @@
     </footer>
 
     <script>
-        const STORAGE_KEY = 'fallow_next_chapter_state_v6';
+        const STORAGE_KEY = 'fallow_next_chapter_state_v7';
         
         let userState = {
             onboardingComplete: false,
@@ -650,10 +650,50 @@
                         { id: 'generativity', text: "If you feel the itch to pass on your knowledge, find a local organization where your specific expertise is valued, but keep the commitment strictly on your own terms." }
                     ]);
                 }
-            } else {
-                // Placeholder for Pivot 4
-                introText = "We are currently mapping out the specific behavioral experiments for this focus area based on transition psychology.";
-                tasksHTML = `<div class="p-4 bg-fallow-100 rounded-lg text-sm text-fallow-700 italic border border-fallow-200">Tasks for "${focus}" at the "${horizon}" horizon are under construction in the compost pile.</div>`;
+            } else if (focus === 'Logistics, volunteering & micro-projects') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Encore: Finding Work that Matters in the Second Half of Life</span> by Marc Freedman <span class="text-fallow-600 italic">(Redefining how we give back)</span></li>
+                        <li><span class="font-semibold">Four Thousand Weeks: Time Management for Mortals</span> by Oliver Burkeman <span class="text-fallow-600 italic">(Escaping the trap of endless productivity)</span></li>
+                        <li><span class="font-semibold">The Life Cycle Completed</span> by Erik Erikson <span class="text-fallow-600 italic">(Understanding the psychological drive for generativity)</span></li>
+                    </ul>
+                </div>`;
+
+                if (horizon === '1-3 years out') {
+                    titleText = "Rethinking 'Productivity'";
+                    introText = "While you are still working, your sense of accomplishment is usually tied to your professional output. This phase is about gently redefining what it means to have a 'useful' day, and preparing for the loss of your employer's hidden infrastructure.";
+                    tasksHTML = generateChecklist([
+                        { id: 'infraAudit', text: "Notice how much invisible support your job provides (IT, software, printing, structured email). Start thinking about what personal infrastructure you will actually need when you no longer have an office." },
+                        { id: 'redefineWeekend', text: "Catch yourself the next time you feel guilty for 'wasting' a Saturday. High achievers often struggle to just be. Practice doing one thing this weekend that produces absolutely no tangible result." },
+                        { id: 'microVolTest', text: "Instead of joining a committee or a board, look for a one-off, bounded volunteer event (like a two-hour park cleanup or a single food drive). Notice how it feels to contribute without a long-term obligation." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    titleText = "Building Your Personal Infrastructure";
+                    introText = "As your transition approaches, it is time to start separating your personal logistics from your professional ones, and planning how you'll satisfy your drive to 'get things done' on your own terms.";
+                    tasksHTML = generateChecklist([
+                        { id: 'greatDecoupling', text: "Stop using your work laptop or work email for personal logistics. Set up your own digital 'HQ' now, so you aren't scrambling to untangle your life during your final weeks on the job." },
+                        { id: 'noCommittee', text: "If you are exploring volunteer opportunities for your post-career life, try to stick strictly to direct-action roles (e.g., planting trees, tutoring). Avoid boards or planning committees for now to protect yourself from corporate-style bureaucracy." },
+                        { id: 'brainstormMicro', text: "Think of a bounded, 30-day project you've always wanted to do (e.g., scanning old photos, organizing the garage, building a raised garden bed). Having a self-directed project ready gives you a soft landing pad for your energy." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    titleText = "Protecting Your Bandwidth";
+                    introText = "The urge to immediately fill your newly opened calendar with obligations is incredibly strong. Right now, the goal is to protect your time so you can actually experience the transition, rather than just rushing into unpaid work.";
+                    tasksHTML = generateChecklist([
+                        { id: 'sixMonthBuffer', text: "Make a promise to yourself: you will not take on any long-term volunteer commitments, board seats, or major projects for the first six months. Give yourself time to decompress first." },
+                        { id: 'launchMicro', text: "Pick one small, bounded project (under 30 days) to focus on. This gives you the psychological satisfaction of a 'win' and clear forward motion without the pressure of a boss." },
+                        { id: 'clearDeck', text: "Tackle one legacy logistical task you've been putting off for years (like updating a will or organizing passwords). Clearing this out frees up massive amounts of mental bandwidth for your new life." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    titleText = "Logistics on Your Terms";
+                    introText = "You no longer need to cram your entire personal life into a two-day weekend. This phase is about enjoying the luxury of 'slow logistics' and ensuring that your desire to give back isn't secretly draining you.";
+                    tasksHTML = generateChecklist([
+                        { id: 'slowLogistics', text: "Stop doing your grocery shopping or running errands on crowded Saturday mornings. Practice doing mundane tasks on a Tuesday at 10:00 AM, actively enjoying the fact that you own your time." },
+                        { id: 'volunteerAudit', text: "Are your current volunteer or community commitments making you feel joyful, or do they feel like a stressful, unpaid job? If they drain you, transition expert Marc Freedman suggests it’s perfectly okay to step back." },
+                        { id: 'boundedMentorship', text: "If you want to share your professional expertise, do it in discrete, highly bounded ways—like a one-off coffee chat or a single guest lecture—rather than getting sucked into open-ended, unpaid consulting." }
+                    ]);
+                }
             }
 
             return `
