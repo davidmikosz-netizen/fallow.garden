@@ -232,7 +232,7 @@
                         <select id="audit-focus" class="w-full bg-fallow-50 border border-fallow-200 rounded-xl p-3 text-sm text-fallow-900 focus:outline-none focus:border-fallow-600">
                             <option value="Providing structure and routines outside of a job">Providing structure and routines outside of a job</option>
                             <option value="Rediscovering old hobbies & creative outlets">Rediscovering old hobbies & creative outlets</option>
-                            <option value="Finding new community & social networks">Finding new community & social networks</option>
+                            <option value="Reanchoring your social life">Reanchoring your social life</option>
                             <option value="Logistics, volunteering & micro-projects">Logistics, volunteering & micro-projects</option>
                         </select>
                     </div>
@@ -316,7 +316,7 @@
     </footer>
 
     <script>
-        const STORAGE_KEY = 'fallow_next_chapter_state_v5';
+        const STORAGE_KEY = 'fallow_next_chapter_state_v6';
         
         let userState = {
             onboardingComplete: false,
@@ -386,7 +386,6 @@
                 document.getElementById('reset-nav-btn').classList.add('hidden');
             }
 
-            // Handle Back Button visibility (Show on steps 1, 2, 3 only)
             if (stepIndex > 0 && stepIndex < 4) {
                 document.getElementById('header-back-btn').classList.remove('hidden');
             } else {
@@ -519,13 +518,24 @@
             let tasksHTML = '';
             let introText = '';
             let titleText = 'Practical Habit Replacement Checklist';
+            let booksHTML = '';
 
             if (focus === 'Providing structure and routines outside of a job') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Transitions: Making Sense of Life's Changes</span> by William Bridges <span class="text-fallow-600 italic">(Understanding the psychological 'Neutral Zone')</span></li>
+                        <li><span class="font-semibold">Continuity and Adaptation in Aging</span> by Robert C. Atchley <span class="text-fallow-600 italic">(Why keeping existing structures matters)</span></li>
+                        <li><span class="font-semibold">Atomic Habits</span> by James Clear <span class="text-fallow-600 italic">(Practical cues for building new routines)</span></li>
+                    </ul>
+                </div>`;
+
                 if (horizon === '1-3 years out') {
                     titleText = "What habits inform your day";
                     introText = "You will be leaving a structured day that provided you with a set of things you had to do. This is an opportunity to both map out where you are now and to start planning for the future.";
                     tasksHTML = generateChecklist([
-                        { id: 'auditWeek', text: "Start tracking how your normal work weeks are structured. How many hours a day are you currently spending doing particular things? Doing this can give you a sense of how you might want to spend your time in retirement." },
+                        { id: 'auditWeek', text: "Start tracking how your normal work weeks are structured. How many hours a day are you currently spending doing particular things? Doing this can give you a sense of how you might want to spend your time (a nod to sociologist Robert Atchley's Continuity Theory, which suggests we fare best when we redirect rather than completely reinvent our schedules)." },
                         { id: 'disconnectedHabit', text: "Now would be a good time to start establishing a morning or evening habit (like reading 10 pages or making a stovetop espresso) that is completely disconnected from your work 'identity'—starting now helps set an important pattern." },
                         { id: 'weekendTest', text: "Start taking a look at how you spend your weekends—almost like a gentle 'time audit'. Are you just recovering from work, or are you doing things you'd like to do more of? This is a good time to start thinking about that." }
                     ]);
@@ -539,7 +549,7 @@
                 } else if (horizon === '0-6 months out') {
                     introText = "You are leaving a structured day that naturally provided you with conscious anchors. Here are some ways to provide supportive structure to your day outside of a formal job:";
                     tasksHTML = generateChecklist([
-                        { id: 'mondayPlan', text: "Make a first draft of a schedule for your first Monday post-career. The shock of a completely empty calendar hides the fact that you are starting a new life." },
+                        { id: 'mondayPlan', text: "Make a first draft of a schedule for your first Monday post-career. The shock of a completely empty calendar hides the fact that you are starting a new life—what William Bridges calls the chaotic but fertile 'Neutral Zone' of transition." },
                         { id: 'fakeCommute', text: "Because you are used to a daily commute, schedule a 30-minute morning walk to give your day a starting boundary that isn't tied to an employer." },
                         { id: 'projectSlot', text: "Designate a dedicated block of time for a project or hobby. This isn't meant to create a strict obligation, but rather to protect your time the same way you did at work." },
                         { id: 'socialTouchpoint', text: "Work naturally provides informal social interactions. Consciously try to initiate one informal social touchpoint per week (a coffee, meal, or just a call)." }
@@ -553,11 +563,21 @@
                     ]);
                 }
             } else if (focus === 'Rediscovering old hobbies & creative outlets') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Working Identity</span> by Herminia Ibarra <span class="text-fallow-600 italic">(The psychology of testing out 'provisional selves')</span></li>
+                        <li><span class="font-semibold">Play: How it Shapes the Brain</span> by Stuart Brown <span class="text-fallow-600 italic">(Why adults need purposeless play)</span></li>
+                        <li><span class="font-semibold">Flow</span> by Mihaly Csikszentmihalyi <span class="text-fallow-600 italic">(Finding joy in the process itself)</span></li>
+                    </ul>
+                </div>`;
+
                 if (horizon === '1-3 years out') {
                     titleText = "Reconnecting with Curiosities";
                     introText = "Studies have shown that many people deep in their careers find it hard to imagine having the energy for new activities or pursuits. This is a great time to start giving yourself permission to be curious without feeling too obligated just yet.";
                     tasksHTML = generateChecklist([
-                        { id: 'childhoodAudit', text: "Think back to what you wanted to do more of around the ages of 10 or 12, before grades or resumes mattered. Remembering what those early interests were can be a great clue about what to explore now." },
+                        { id: 'childhoodAudit', text: "Think back to what you wanted to do more of around the ages of 10 or 12, before grades or resumes mattered. Dr. Stuart Brown’s research on 'play histories' suggests these early interests can be a great clue about what to explore now." },
                         { id: 'beginnerPermission', text: "Don't worry about being good at something immediately—this is the time to explore. High achievers sometimes abandon new hobbies, or splurge on expensive gear to try and speed up the learning curve. It is okay to be 'bad' at something simply because the process is fun and takes time." },
                         { id: 'passiveSwap', text: "Try swapping out one hour of passive unwinding (like watching TV or scrolling) with active exploring—maybe reading a book on a random niche, sketching, or wandering a hardware store." }
                     ]);
@@ -565,7 +585,7 @@
                     titleText = "Low-Stakes Micro-Experiments";
                     introText = "As the transition gets closer, it’s a great time to run some low-stakes 'micro-experiments' to see what actually sticks, without feeling any pressure to commit to a new identity.";
                     tasksHTML = generateChecklist([
-                        { id: 'starterTool', text: "Take a single, short class or buy a basic starter tool. Resist the urge to buy the expensive 'master kit' until you know if the reality of the hobby matches the fantasy." },
+                        { id: 'starterTool', text: "Take a single, short class or buy a basic starter tool. This is what transition expert Herminia Ibarra calls running a 'micro-experiment'—testing reality before buying the expensive 'master kit'." },
                         { id: 'physicalSpace', text: "Curate a tiny physical space in your home dedicated entirely to a non-work interest, even if it's just one shelf or a corner of a desk." },
                         { id: 'realityCheck', text: "Chat with someone who already does the thing you're curious about. Ask them what common frustrations or challenges you might face, which helps paint a realistic picture of what the hobby actually entails." }
                     ]);
@@ -586,8 +606,52 @@
                         { id: 'communityBridge', text: "Look into a local group or online forum related to your interest. Shared hobbies are one of the most organic ways to build a post-career community." }
                     ]);
                 }
+            } else if (focus === 'Reanchoring your social life') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Bowling Alone</span> by Robert D. Putnam <span class="text-fallow-600 italic">(The collapse and revival of American community)</span></li>
+                        <li><span class="font-semibold">A Long Bright Future</span> by Laura L. Carstensen <span class="text-fallow-600 italic">(Why our social priorities shift as we age)</span></li>
+                        <li><span class="font-semibold">How to Live Forever</span> by Marc Freedman <span class="text-fallow-600 italic">(The psychological need for intergenerational connection)</span></li>
+                    </ul>
+                </div>`;
+
+                if (horizon === '1-3 years out') {
+                    titleText = "Mapping Your Social Gravity";
+                    introText = "While you are still working, it is easy to let your job dictate your social life. This phase isn't about making new friends; it's about taking a gentle inventory of where your social energy is currently going.";
+                    tasksHTML = generateChecklist([
+                        { id: 'sourceAudit', text: "Take a quick mental inventory of your social interactions this week. How many of them were strictly tied to your employer, industry, or commute? Recognizing this baseline is a great first step." },
+                        { id: 'proximityTest', text: "Pick one small, repeatable neighborhood routine—like walking the dog at the exact same time every morning, or getting Saturday coffee at a local spot. Proximity breeds familiarity, even for introverts." },
+                        { id: 'deepeningTies', text: "Robert Putnam’s research on social capital shows we thrive on deep connections, not just wide networks. Pick one non-work friend or family member and initiate a low-stakes check-in (a text or a call) just to say hello." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    titleText = "Shifting the Center of Gravity";
+                    introText = "As your transition gets closer, you can start intentionally building the social structures that will replace the effortless 'watercooler' interactions of the office.";
+                    tasksHTML = generateChecklist([
+                        { id: 'becomeRegular', text: "Find a local spot—a diner, a library, a park bench—and start going there at a predictable time. Becoming a 'regular' relies on what sociologists call 'structural proximity'—the easiest way to build community without forced networking." },
+                        { id: 'rehearsingBoundaries', text: "Practice gently declining a strictly work-related after-hours event. Use that saved energy to do something in your own neighborhood or with your partner." },
+                        { id: 'lowStakesMentoring', text: "If you are curious about connecting with younger generations, look for a small, casual way to offer perspective (like a 15-minute chat with a junior colleague). You don't need to relate to their pop culture; they just value your stability." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    titleText = "Anchoring Your New Routine";
+                    introText = "With your career ending, the daily, built-in social friction of the workplace is about to vanish. This is the time to lock in intentional social anchors so you don't drift into isolation.";
+                    tasksHTML = generateChecklist([
+                        { id: 'standingAppt', text: "Set up one recurring, non-negotiable social touchpoint—like a Tuesday morning breakfast or a Thursday afternoon phone call. Lock it into the calendar." },
+                        { id: 'becomeInitiator', text: "At work, people constantly came to your desk. Now, you have to flip the script. Try to be the one who initiates contact or plans a get-together at least once a week." },
+                        { id: 'weakTies', text: "Sociologist Mark Granovetter noted the power of 'weak ties'—brief chats with the mail carrier, the barista, or a fellow dog-walker provide crucial psychological boosts. Don't underestimate the value of these casual neighborhood interactions." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    titleText = "Cultivating Your Social Garden";
+                    introText = "You are no longer forced to spend time with people out of professional obligation. You now have the luxury of curating a social life based purely on genuine connection and shared interests.";
+                    tasksHTML = generateChecklist([
+                        { id: 'qualityAudit', text: "Give yourself permission to let draining, work-based relationships gently fade. Stanford's Laura Carstensen found that as we shift life stages, it's natural and healthy to prefer deepening existing, emotionally meaningful relationships over forced networking." },
+                        { id: 'sharedInterest', text: "The easiest way to form organic connections isn't by 'networking,' but by doing something you enjoy alongside others. Consider a local group focused on a hobby, like a native plant society or a history group." },
+                        { id: 'generativity', text: "If you feel the itch to pass on your knowledge, find a local organization where your specific expertise is valued, but keep the commitment strictly on your own terms." }
+                    ]);
+                }
             } else {
-                // Placeholder for Pivot 3 and 4
+                // Placeholder for Pivot 4
                 introText = "We are currently mapping out the specific behavioral experiments for this focus area based on transition psychology.";
                 tasksHTML = `<div class="p-4 bg-fallow-100 rounded-lg text-sm text-fallow-700 italic border border-fallow-200">Tasks for "${focus}" at the "${horizon}" horizon are under construction in the compost pile.</div>`;
             }
@@ -605,9 +669,10 @@
                     <div class="space-y-2 pt-2">
                         ${tasksHTML}
                     </div>
+                    ${booksHTML}
                 </div>
 
-                <div class="border border-fallow-200 rounded-xl p-5 space-y-3 bg-fallow-50/40">
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-3 bg-fallow-50/40 mt-6">
                     <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Current Focus Project</span>
                     <h4 class="font-semibold text-fallow-900 text-sm">${userState.focus}</h4>
                     <p class="text-xs text-fallow-700">
