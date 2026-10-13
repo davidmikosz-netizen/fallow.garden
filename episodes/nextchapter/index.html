@@ -38,11 +38,15 @@
         <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-2">
                 <span class="w-3 h-3 rounded-full bg-fallow-600 inline-block"></span>
-                <span class="font-semibold tracking-tight text-fallow-800">fallow.garden</span>
+                <a href="https://fallow.garden" class="font-semibold tracking-tight text-fallow-800 hover:text-fallow-600 transition">fallow.garden</a>
                 <span class="text-fallow-300">/</span>
                 <span class="text-sm font-medium text-fallow-600">Next Chapter</span>
             </div>
             <div class="flex items-center space-x-3">
+                <button id="header-back-btn" onclick="goBack()" class="hidden flex items-center space-x-1 text-xs font-medium text-fallow-600 hover:text-fallow-900 transition mr-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    <span>Back</span>
+                </button>
                 <div id="step-indicator" class="text-xs font-medium text-fallow-600 bg-fallow-100 px-3 py-1 rounded-full">
                     Intro & Overview
                 </div>
@@ -124,7 +128,7 @@
                             <input type="radio" name="vibe" value="The Middle Path" class="mt-1 text-fallow-900 focus:ring-fallow-600">
                             <div>
                                 <span class="font-semibold text-fallow-900 block text-sm">The Middle Path</span>
-                                <span class="text-xs text-fallow-600 block mt-0.5">A balanced blend of curiosity audits, mindset reframing, and time-vs-energy tracking.</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">Includes the Action Plan, plus a balanced blend of curiosity audits and mindset reframing.</span>
                             </div>
                         </div>
                     </label>
@@ -134,14 +138,13 @@
                             <input type="radio" name="vibe" value="Deep Dive" class="mt-1 text-fallow-900 focus:ring-fallow-600">
                             <div>
                                 <span class="font-semibold text-fallow-900 block text-sm">Deep Dive</span>
-                                <span class="text-xs text-fallow-600 block mt-0.5">Full exploration of identity transition, logotherapy reflection prompts, and legacy values alignment.</span>
+                                <span class="text-xs text-fallow-600 block mt-0.5">The full experience: Action Plan, Curiosity Log, and deeper logotherapy reflection prompts.</span>
                             </div>
                         </div>
                     </label>
                 </div>
 
-                <div class="pt-4 border-t border-fallow-100 flex justify-between items-center">
-                    <button onclick="goToStep(0)" class="text-sm text-fallow-600 hover:text-fallow-900 font-medium">Back</button>
+                <div class="pt-4 border-t border-fallow-100 flex justify-end items-center">
                     <button onclick="saveStep1(); goToStep(2)" class="px-6 py-2.5 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition">
                         Continue
                     </button>
@@ -194,8 +197,7 @@
                     </label>
                 </div>
 
-                <div class="pt-4 border-t border-fallow-100 flex justify-between items-center">
-                    <button onclick="goToStep(1)" class="text-sm text-fallow-600 hover:text-fallow-900 font-medium">Back</button>
+                <div class="pt-4 border-t border-fallow-100 flex justify-end items-center">
                     <button onclick="saveStep2(); goToStep(3)" class="px-6 py-2.5 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition">
                         Continue
                     </button>
@@ -230,14 +232,13 @@
                         <select id="audit-focus" class="w-full bg-fallow-50 border border-fallow-200 rounded-xl p-3 text-sm text-fallow-900 focus:outline-none focus:border-fallow-600">
                             <option value="Providing structure and routines outside of a job">Providing structure and routines outside of a job</option>
                             <option value="Rediscovering old hobbies & creative outlets">Rediscovering old hobbies & creative outlets</option>
-                            <option value="Finding new community & social networks">Finding new community & social networks</option>
+                            <option value="Reanchoring your social life">Reanchoring your social life</option>
                             <option value="Logistics, volunteering & micro-projects">Logistics, volunteering & micro-projects</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="pt-4 border-t border-fallow-100 flex justify-between items-center">
-                    <button onclick="goToStep(2)" class="text-sm text-fallow-600 hover:text-fallow-900 font-medium">Back</button>
+                <div class="pt-4 border-t border-fallow-100 flex justify-end items-center">
                     <button onclick="completeOnboarding()" class="px-6 py-2.5 bg-fallow-900 text-white rounded-xl font-medium text-sm hover:bg-fallow-800 transition">
                         Complete & View Dashboard
                     </button>
@@ -246,7 +247,7 @@
 
             <!-- ================= PERSONALIZED DASHBOARD (DYNAMIC PATHWAYS) ================= -->
             <div id="view-dashboard" class="fade-in space-y-6 hidden">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-fallow-100 pb-4 gap-2">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-fallow-100 pb-4 gap-4">
                     <div>
                         <span id="dash-badge" class="text-xs font-semibold uppercase tracking-wider text-fallow-600 bg-fallow-100 px-2.5 py-1 rounded-md">
                             Pathway: Action Plan
@@ -255,13 +256,19 @@
                             Next Chapter Dashboard
                         </h2>
                     </div>
-                    <div class="flex items-center space-x-2">
-                        <button onclick="editOnboarding()" class="text-xs font-medium text-fallow-600 hover:text-fallow-900 border border-fallow-200 px-3 py-1.5 rounded-lg transition">
-                            Edit Settings
-                        </button>
-                        <button onclick="resetApp()" class="text-xs font-medium text-red-600 hover:text-red-800 border border-red-200 px-3 py-1.5 rounded-lg transition">
-                            Reset All
-                        </button>
+                    <div class="flex flex-col items-end space-y-1">
+                        <div class="flex items-center space-x-2">
+                            <button onclick="editOnboarding()" class="text-xs font-medium text-fallow-600 hover:text-fallow-900 border border-fallow-200 px-3 py-1.5 rounded-lg transition">
+                                Edit Settings
+                            </button>
+                            <button onclick="exportPlan()" class="text-xs font-medium text-fallow-900 bg-fallow-200 hover:bg-fallow-300 border border-fallow-300 px-3 py-1.5 rounded-lg transition shadow-sm">
+                                Export My Plan
+                            </button>
+                            <button onclick="resetApp()" class="text-xs font-medium text-red-600 hover:text-red-800 border border-red-200 px-3 py-1.5 rounded-lg transition">
+                                Reset All
+                            </button>
+                        </div>
+                        <span class="text-[10px] text-fallow-500">(Downloads a .txt file directly to your device)</span>
                     </div>
                 </div>
 
@@ -287,9 +294,12 @@
                 </div>
 
                 <!-- Footer note -->
-                <div class="text-center pt-4 border-t border-fallow-100">
+                <div class="text-center pt-4 border-t border-fallow-100 space-y-1">
                     <p class="text-xs text-fallow-600">
-                        Part of the <span class="font-medium text-fallow-800">fallow.garden</span> suite. Your progress is saved automatically.
+                        Part of the <span class="font-medium text-fallow-800">fallow.garden</span> suite. 
+                    </p>
+                    <p class="text-xs text-fallow-500 font-medium italic">
+                        Your progress is saved locally to your device (no servers, no tracking).
                     </p>
                 </div>
             </div>
@@ -297,12 +307,16 @@
         </div>
     </main>
 
-    <footer class="w-full border-t border-fallow-200 bg-white/40 py-4 text-center text-xs text-fallow-600">
-        Next Chapter • Practical steps for your post-career pivot
+    <footer class="w-full border-t border-fallow-200 bg-white/40 py-6 text-center text-xs text-fallow-600 flex flex-col items-center space-y-4">
+        <p>Next Chapter • Practical steps for your post-career pivot</p>
+        <a href="mailto:david.mikosz@gmail.com?subject=fallow.garden%20Feedback" class="inline-flex items-center space-x-2 text-fallow-700 hover:text-fallow-900 border border-fallow-200 px-3 py-1.5 rounded-lg transition bg-white/60 shadow-sm">
+            <span>✉️</span>
+            <span>Send Feedback</span>
+        </a>
     </footer>
 
     <script>
-        const STORAGE_KEY = 'fallow_next_chapter_state_v4';
+        const STORAGE_KEY = 'fallow_next_chapter_state_v8';
         
         let userState = {
             onboardingComplete: false,
@@ -310,7 +324,6 @@
             anchor: 'Secular / Pragmatic',
             horizon: '1-3 years out',
             focus: 'Providing structure and routines outside of a job',
-            // Action Checklist state for all possible dynamic tasks
             actionChecklist: {},
             curiosityLog: [
                 { text: 'Woodworking / Joinery basics', done: false },
@@ -319,6 +332,8 @@
             newHobbyInput: '',
             reflectionJournal: 'Today I noticed that losing the morning stand-up meeting leaves a noticeable gap in my schedule. I will test replacing it with a 20-minute reading block.'
         };
+
+        let currentStepIndex = 0;
 
         function loadState() {
             const saved = localStorage.getItem(STORAGE_KEY);
@@ -352,6 +367,7 @@
         });
 
         function goToStep(stepIndex) {
+            currentStepIndex = stepIndex;
             document.getElementById('view-intro').classList.add('hidden');
             document.getElementById('view-step1').classList.add('hidden');
             document.getElementById('view-step2').classList.add('hidden');
@@ -370,12 +386,24 @@
                 document.getElementById('reset-nav-btn').classList.add('hidden');
             }
 
+            if (stepIndex > 0 && stepIndex < 4) {
+                document.getElementById('header-back-btn').classList.remove('hidden');
+            } else {
+                document.getElementById('header-back-btn').classList.add('hidden');
+            }
+
             if (stepIndex > 0) {
                 document.getElementById('step-indicator').innerText = stepsNames[stepIndex];
             } else {
                 document.getElementById('step-indicator').innerText = "Intro & Overview";
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goBack() {
+            if (currentStepIndex > 0 && currentStepIndex < 4) {
+                goToStep(currentStepIndex - 1);
+            }
         }
 
         function resumeDashboard() { goToStep(4); }
@@ -420,6 +448,59 @@
             goToStep(0);
         }
 
+        function exportPlan() {
+            let content = "==========================================\n";
+            content += "    NEXT CHAPTER: MY TRANSITION PLAN\n";
+            content += "==========================================\n\n";
+            content += "Focus Area: " + userState.focus + "\n";
+            content += "Timeline: " + userState.horizon + "\n";
+            content += "Depth Level: " + userState.vibe + "\n";
+            content += "Worldview Anchor: " + userState.anchor + "\n\n";
+            content += "------------------------------------------\n\n";
+
+            // Action plan is always included in all depth levels
+            content += "ACTION CHECKLIST:\n\n";
+            const labels = document.querySelectorAll('#pathway-content-container label');
+            // Filter labels that are part of the checklist (first div usually)
+            // A simple approach is just looping all checkboxes but we have curiosity log checkboxes too
+            // Let's rely on the DOM for Action Checklist
+            const actionLabels = document.querySelectorAll('.action-checklist-item');
+            if (actionLabels.length > 0) {
+                actionLabels.forEach(label => {
+                    const isChecked = label.querySelector('input').checked;
+                    const text = label.querySelector('span').innerText;
+                    content += (isChecked ? "[ X ] " : "[   ] ") + text + "\n\n";
+                });
+            } else {
+                content += "Checklist is currently under construction.\n\n";
+            }
+
+            if (userState.vibe === 'The Middle Path' || userState.vibe === 'Deep Dive') {
+                content += "------------------------------------------\n\n";
+                content += "CURIOSITY LOG & HOBBY AUDIT:\n\n";
+                userState.curiosityLog.forEach(item => {
+                    content += (item.done ? "[ X ] " : "[   ] ") + item.text + "\n";
+                });
+                content += "\n";
+            } 
+            
+            if (userState.vibe === 'Deep Dive') {
+                content += "------------------------------------------\n\n";
+                content += "REFLECTION JOURNAL:\n\n";
+                content += userState.reflectionJournal + "\n";
+            }
+
+            const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "Next_Chapter_Plan.txt";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
         // ================= DASHBOARD RENDERER =================
         function populateDashboard() {
             document.getElementById('dash-badge').innerText = "Pathway: " + userState.vibe;
@@ -430,13 +511,17 @@
             const container = document.getElementById('pathway-content-container');
             container.innerHTML = '';
 
-            if (userState.vibe === 'Action Plan') {
-                container.innerHTML = renderActionPlanHTML();
-            } else if (userState.vibe === 'The Middle Path') {
-                container.innerHTML = renderMiddlePathHTML();
-            } else {
-                container.innerHTML = renderDeepDiveHTML();
+            // Additive Rendering based on selected Vibe
+            let combinedHTML = renderActionPlanHTML(); // Always render Action Plan
+
+            if (userState.vibe === 'The Middle Path') {
+                combinedHTML += renderMiddlePathHTML();
+            } else if (userState.vibe === 'Deep Dive') {
+                combinedHTML += renderMiddlePathHTML();
+                combinedHTML += renderDeepDiveHTML();
             }
+
+            container.innerHTML = combinedHTML;
         }
 
         // --- PATHWAY 1: ACTION PLAN (DYNAMIC BY HORIZON) ---
@@ -447,13 +532,24 @@
             let tasksHTML = '';
             let introText = '';
             let titleText = 'Practical Habit Replacement Checklist';
+            let booksHTML = '';
 
             if (focus === 'Providing structure and routines outside of a job') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Transitions: Making Sense of Life's Changes</span> by William Bridges <span class="text-fallow-600 italic">(Understanding the psychological 'Neutral Zone')</span></li>
+                        <li><span class="font-semibold">Continuity and Adaptation in Aging</span> by Robert C. Atchley <span class="text-fallow-600 italic">(Why keeping existing structures matters)</span></li>
+                        <li><span class="font-semibold">Atomic Habits</span> by James Clear <span class="text-fallow-600 italic">(Practical cues for building new routines)</span></li>
+                    </ul>
+                </div>`;
+
                 if (horizon === '1-3 years out') {
                     titleText = "What habits inform your day";
                     introText = "You will be leaving a structured day that provided you with a set of things you had to do. This is an opportunity to both map out where you are now and to start planning for the future.";
                     tasksHTML = generateChecklist([
-                        { id: 'auditWeek', text: "Start tracking how your normal work weeks are structured. How many hours a day are you currently spending doing particular things? Doing this can give you a sense of how you might want to spend your time in retirement." },
+                        { id: 'auditWeek', text: "Start tracking how your normal work weeks are structured. How many hours a day are you currently spending doing particular things? Doing this can give you a sense of how you might want to spend your time (a nod to sociologist Robert Atchley's Continuity Theory, which suggests we fare best when we redirect rather than completely reinvent our schedules)." },
                         { id: 'disconnectedHabit', text: "Now would be a good time to start establishing a morning or evening habit (like reading 10 pages or making a stovetop espresso) that is completely disconnected from your work 'identity'—starting now helps set an important pattern." },
                         { id: 'weekendTest', text: "Start taking a look at how you spend your weekends—almost like a gentle 'time audit'. Are you just recovering from work, or are you doing things you'd like to do more of? This is a good time to start thinking about that." }
                     ]);
@@ -467,7 +563,7 @@
                 } else if (horizon === '0-6 months out') {
                     introText = "You are leaving a structured day that naturally provided you with conscious anchors. Here are some ways to provide supportive structure to your day outside of a formal job:";
                     tasksHTML = generateChecklist([
-                        { id: 'mondayPlan', text: "Make a first draft of a schedule for your first Monday post-career. The shock of a completely empty calendar hides the fact that you are starting a new life." },
+                        { id: 'mondayPlan', text: "Make a first draft of a schedule for your first Monday post-career. The shock of a completely empty calendar hides the fact that you are starting a new life—what William Bridges calls the chaotic but fertile 'Neutral Zone' of transition." },
                         { id: 'fakeCommute', text: "Because you are used to a daily commute, schedule a 30-minute morning walk to give your day a starting boundary that isn't tied to an employer." },
                         { id: 'projectSlot', text: "Designate a dedicated block of time for a project or hobby. This isn't meant to create a strict obligation, but rather to protect your time the same way you did at work." },
                         { id: 'socialTouchpoint', text: "Work naturally provides informal social interactions. Consciously try to initiate one informal social touchpoint per week (a coffee, meal, or just a call)." }
@@ -481,11 +577,21 @@
                     ]);
                 }
             } else if (focus === 'Rediscovering old hobbies & creative outlets') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Working Identity</span> by Herminia Ibarra <span class="text-fallow-600 italic">(The psychology of testing out 'provisional selves')</span></li>
+                        <li><span class="font-semibold">Play: How it Shapes the Brain</span> by Stuart Brown <span class="text-fallow-600 italic">(Why adults need purposeless play)</span></li>
+                        <li><span class="font-semibold">Flow</span> by Mihaly Csikszentmihalyi <span class="text-fallow-600 italic">(Finding joy in the process itself)</span></li>
+                    </ul>
+                </div>`;
+
                 if (horizon === '1-3 years out') {
                     titleText = "Reconnecting with Curiosities";
                     introText = "Studies have shown that many people deep in their careers find it hard to imagine having the energy for new activities or pursuits. This is a great time to start giving yourself permission to be curious without feeling too obligated just yet.";
                     tasksHTML = generateChecklist([
-                        { id: 'childhoodAudit', text: "Think back to what you wanted to do more of around the ages of 10 or 12, before grades or resumes mattered. Remembering what those early interests were can be a great clue about what to explore now." },
+                        { id: 'childhoodAudit', text: "Think back to what you wanted to do more of around the ages of 10 or 12, before grades or resumes mattered. Dr. Stuart Brown’s research on 'play histories' suggests these early interests can be a great clue about what to explore now." },
                         { id: 'beginnerPermission', text: "Don't worry about being good at something immediately—this is the time to explore. High achievers sometimes abandon new hobbies, or splurge on expensive gear to try and speed up the learning curve. It is okay to be 'bad' at something simply because the process is fun and takes time." },
                         { id: 'passiveSwap', text: "Try swapping out one hour of passive unwinding (like watching TV or scrolling) with active exploring—maybe reading a book on a random niche, sketching, or wandering a hardware store." }
                     ]);
@@ -493,7 +599,7 @@
                     titleText = "Low-Stakes Micro-Experiments";
                     introText = "As the transition gets closer, it’s a great time to run some low-stakes 'micro-experiments' to see what actually sticks, without feeling any pressure to commit to a new identity.";
                     tasksHTML = generateChecklist([
-                        { id: 'starterTool', text: "Take a single, short class or buy a basic starter tool. Resist the urge to buy the expensive 'master kit' until you know if the reality of the hobby matches the fantasy." },
+                        { id: 'starterTool', text: "Take a single, short class or buy a basic starter tool. This is what transition expert Herminia Ibarra calls running a 'micro-experiment'—testing reality before buying the expensive 'master kit'." },
                         { id: 'physicalSpace', text: "Curate a tiny physical space in your home dedicated entirely to a non-work interest, even if it's just one shelf or a corner of a desk." },
                         { id: 'realityCheck', text: "Chat with someone who already does the thing you're curious about. Ask them what common frustrations or challenges you might face, which helps paint a realistic picture of what the hobby actually entails." }
                     ]);
@@ -514,10 +620,94 @@
                         { id: 'communityBridge', text: "Look into a local group or online forum related to your interest. Shared hobbies are one of the most organic ways to build a post-career community." }
                     ]);
                 }
-            } else {
-                // Placeholder for Pivot 3 and 4 until we build them
-                introText = "We are currently mapping out the specific behavioral experiments for this focus area based on transition psychology.";
-                tasksHTML = `<div class="p-4 bg-fallow-100 rounded-lg text-sm text-fallow-700 italic border border-fallow-200">Tasks for "${focus}" at the "${horizon}" horizon are under construction in the compost pile.</div>`;
+            } else if (focus === 'Reanchoring your social life') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Bowling Alone</span> by Robert D. Putnam <span class="text-fallow-600 italic">(The collapse and revival of American community)</span></li>
+                        <li><span class="font-semibold">A Long Bright Future</span> by Laura L. Carstensen <span class="text-fallow-600 italic">(Why our social priorities shift as we age)</span></li>
+                        <li><span class="font-semibold">How to Live Forever</span> by Marc Freedman <span class="text-fallow-600 italic">(The psychological need for intergenerational connection)</span></li>
+                    </ul>
+                </div>`;
+
+                if (horizon === '1-3 years out') {
+                    titleText = "Mapping Your Social Gravity";
+                    introText = "While you are still working, it is easy to let your job dictate your social life. This phase isn't about making new friends; it's about taking a gentle inventory of where your social energy is currently going.";
+                    tasksHTML = generateChecklist([
+                        { id: 'sourceAudit', text: "Take a quick mental inventory of your social interactions this week. How many of them were strictly tied to your employer, industry, or commute? Recognizing this baseline is a great first step." },
+                        { id: 'proximityTest', text: "Pick one small, repeatable neighborhood routine—like walking the dog at the exact same time every morning, or getting Saturday coffee at a local spot. Proximity breeds familiarity, even for introverts." },
+                        { id: 'deepeningTies', text: "Robert Putnam’s research on social capital shows we thrive on deep connections, not just wide networks. Pick one non-work friend or family member and initiate a low-stakes check-in (a text or a call) just to say hello." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    titleText = "Shifting the Center of Gravity";
+                    introText = "As your transition gets closer, you can start intentionally building the social structures that will replace the effortless 'watercooler' interactions of the office.";
+                    tasksHTML = generateChecklist([
+                        { id: 'becomeRegular', text: "Find a local spot—a diner, a library, a park bench—and start going there at a predictable time. Becoming a 'regular' relies on what sociologists call 'structural proximity'—the easiest way to build community without forced networking." },
+                        { id: 'rehearsingBoundaries', text: "Practice gently declining a strictly work-related after-hours event. Use that saved energy to do something in your own neighborhood or with your partner." },
+                        { id: 'lowStakesMentoring', text: "If you are curious about connecting with younger generations, look for a small, casual way to offer perspective (like a 15-minute chat with a junior colleague). You don't need to relate to their pop culture; they just value your stability." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    titleText = "Anchoring Your New Routine";
+                    introText = "With your career ending, the daily, built-in social friction of the workplace is about to vanish. This is the time to lock in intentional social anchors so you don't drift into isolation.";
+                    tasksHTML = generateChecklist([
+                        { id: 'standingAppt', text: "Set up one recurring, non-negotiable social touchpoint—like a Tuesday morning breakfast or a Thursday afternoon phone call. Lock it into the calendar." },
+                        { id: 'becomeInitiator', text: "At work, people constantly came to your desk. Now, you have to flip the script. Try to be the one who initiates contact or plans a get-together at least once a week." },
+                        { id: 'weakTies', text: "Sociologist Mark Granovetter noted the power of 'weak ties'—brief chats with the mail carrier, the barista, or a fellow dog-walker provide crucial psychological boosts. Don't underestimate the value of these casual neighborhood interactions." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    titleText = "Cultivating Your Social Garden";
+                    introText = "You are no longer forced to spend time with people out of professional obligation. You now have the luxury of curating a social life based purely on genuine connection and shared interests.";
+                    tasksHTML = generateChecklist([
+                        { id: 'qualityAudit', text: "Give yourself permission to let draining, work-based relationships gently fade. Stanford's Laura Carstensen found that as we shift life stages, it's natural and healthy to prefer deepening existing, emotionally meaningful relationships over forced networking." },
+                        { id: 'sharedInterest', text: "The easiest way to form organic connections isn't by 'networking,' but by doing something you enjoy alongside others. Consider a local group focused on a hobby, like a native plant society or a history group." },
+                        { id: 'generativity', text: "If you feel the itch to pass on your knowledge, find a local organization where your specific expertise is valued, but keep the commitment strictly on your own terms." }
+                    ]);
+                }
+            } else if (focus === 'Logistics, volunteering & micro-projects') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Encore: Finding Work that Matters in the Second Half of Life</span> by Marc Freedman <span class="text-fallow-600 italic">(Redefining how we give back)</span></li>
+                        <li><span class="font-semibold">Four Thousand Weeks: Time Management for Mortals</span> by Oliver Burkeman <span class="text-fallow-600 italic">(Escaping the trap of endless productivity)</span></li>
+                        <li><span class="font-semibold">The Life Cycle Completed</span> by Erik Erikson <span class="text-fallow-600 italic">(Understanding the psychological drive for generativity)</span></li>
+                    </ul>
+                </div>`;
+
+                if (horizon === '1-3 years out') {
+                    titleText = "Rethinking 'Productivity'";
+                    introText = "While you are still working, your sense of accomplishment is usually tied to your professional output. This phase is about gently redefining what it means to have a 'useful' day, and preparing for the loss of your employer's hidden infrastructure.";
+                    tasksHTML = generateChecklist([
+                        { id: 'infraAudit', text: "Notice how much invisible support your job provides (IT, software, printing, structured email). Start thinking about what personal infrastructure you will actually need when you no longer have an office." },
+                        { id: 'redefineWeekend', text: "Catch yourself the next time you feel guilty for 'wasting' a Saturday. High achievers often struggle to just be. Practice doing one thing this weekend that produces absolutely no tangible result." },
+                        { id: 'microVolTest', text: "Instead of joining a committee or a board, look for a one-off, bounded volunteer event (like a two-hour park cleanup or a single food drive). Notice how it feels to contribute without a long-term obligation." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    titleText = "Building Your Personal Infrastructure";
+                    introText = "As your transition approaches, it is time to start separating your personal logistics from your professional ones, and planning how you'll satisfy your drive to 'get things done' on your own terms.";
+                    tasksHTML = generateChecklist([
+                        { id: 'greatDecoupling', text: "Stop using your work laptop or work email for personal logistics. Set up your own digital 'HQ' now, so you aren't scrambling to untangle your life during your final weeks on the job." },
+                        { id: 'noCommittee', text: "If you are exploring volunteer opportunities for your post-career life, try to stick strictly to direct-action roles (e.g., planting trees, tutoring). Avoid boards or planning committees for now to protect yourself from corporate-style bureaucracy." },
+                        { id: 'brainstormMicro', text: "Think of a bounded, 30-day project you've always wanted to do (e.g., scanning old photos, organizing the garage, building a raised garden bed). Having a self-directed project ready gives you a soft landing pad for your energy." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    titleText = "Protecting Your Bandwidth";
+                    introText = "The urge to immediately fill your newly opened calendar with obligations is incredibly strong. Right now, the goal is to protect your time so you can actually experience the transition, rather than just rushing into unpaid work.";
+                    tasksHTML = generateChecklist([
+                        { id: 'sixMonthBuffer', text: "Make a promise to yourself: you will not take on any long-term volunteer commitments, board seats, or major projects for the first six months. Give yourself time to decompress first." },
+                        { id: 'launchMicro', text: "Pick one small, bounded project (under 30 days) to focus on. This gives you the psychological satisfaction of a 'win' and clear forward motion without the pressure of a boss." },
+                        { id: 'clearDeck', text: "Tackle one legacy logistical task you've been putting off for years (like updating a will or organizing passwords). Clearing this out frees up massive amounts of mental bandwidth for your new life." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    titleText = "Logistics on Your Terms";
+                    introText = "You no longer need to cram your entire personal life into a two-day weekend. This phase is about enjoying the luxury of 'slow logistics' and ensuring that your desire to give back isn't secretly draining you.";
+                    tasksHTML = generateChecklist([
+                        { id: 'slowLogistics', text: "Stop doing your grocery shopping or running errands on crowded Saturday mornings. Practice doing mundane tasks on a Tuesday at 10:00 AM, actively enjoying the fact that you own your time." },
+                        { id: 'volunteerAudit', text: "Are your current volunteer or community commitments making you feel joyful, or do they feel like a stressful, unpaid job? If they drain you, transition expert Marc Freedman suggests it’s perfectly okay to step back." },
+                        { id: 'boundedMentorship', text: "If you want to share your professional expertise, do it in discrete, highly bounded ways—like a one-off coffee chat or a single guest lecture—rather than getting sucked into open-ended, unpaid consulting." }
+                    ]);
+                }
             }
 
             return `
@@ -533,9 +723,10 @@
                     <div class="space-y-2 pt-2">
                         ${tasksHTML}
                     </div>
+                    ${booksHTML}
                 </div>
 
-                <div class="border border-fallow-200 rounded-xl p-5 space-y-3 bg-fallow-50/40">
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-3 bg-fallow-50/40 mt-6">
                     <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Current Focus Project</span>
                     <h4 class="font-semibold text-fallow-900 text-sm">${userState.focus}</h4>
                     <p class="text-xs text-fallow-700">
@@ -545,12 +736,11 @@
             `;
         }
 
-        // Helper to generate checkboxes from a task list
         function generateChecklist(tasks) {
             return tasks.map(t => {
                 const isChecked = userState.actionChecklist[t.id] ? 'checked' : '';
                 return `
-                    <label class="flex items-start space-x-3 p-3 bg-fallow-50 rounded-lg border border-fallow-200/60 cursor-pointer hover:bg-fallow-100/50 transition">
+                    <label class="action-checklist-item flex items-start space-x-3 p-3 bg-fallow-50 rounded-lg border border-fallow-200/60 cursor-pointer hover:bg-fallow-100/50 transition">
                         <input type="checkbox" onchange="toggleAction('${t.id}', this.checked)" ${isChecked} class="mt-0.5 w-4 h-4 text-fallow-900 rounded focus:ring-fallow-600">
                         <span class="text-sm font-medium text-fallow-900 leading-snug">${t.text}</span>
                     </label>
@@ -576,7 +766,7 @@
             `).join('');
 
             return `
-                <div class="border border-fallow-200 rounded-xl p-5 space-y-4">
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-4 mt-6">
                     <div class="flex items-center justify-between">
                         <div>
                             <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Curiosity Log & Hobby Audit</span>
@@ -596,7 +786,7 @@
                     </div>
                 </div>
 
-                <div class="border border-fallow-200 rounded-xl p-5 space-y-3 bg-fallow-50/40">
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-3 bg-fallow-50/40 mt-6">
                     <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Weekly Mindset Reframing Prompt</span>
                     <h4 class="font-semibold text-fallow-900 text-sm">"What is an accomplishment or title from my career that I am ready to gently set down?"</h4>
                     <p class="text-xs text-fallow-700 leading-relaxed">
@@ -631,7 +821,7 @@
         // --- PATHWAY 3: DEEP DIVE ---
         function renderDeepDiveHTML() {
             return `
-                <div class="border border-fallow-200 rounded-xl p-5 space-y-4">
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-4 mt-6">
                     <div class="flex items-center justify-between">
                         <div>
                             <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Identity Transition & Logotherapy</span>
