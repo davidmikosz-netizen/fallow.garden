@@ -316,7 +316,7 @@
     </footer>
 
     <script>
-        const STORAGE_KEY = 'fallow_next_chapter_state_v8';
+        const STORAGE_KEY = 'fallow_next_chapter_state_v9';
         
         let userState = {
             onboardingComplete: false,
@@ -325,12 +325,9 @@
             horizon: '1-3 years out',
             focus: 'Providing structure and routines outside of a job',
             actionChecklist: {},
-            curiosityLog: [
-                { text: 'Woodworking / Joinery basics', done: false },
-                { text: 'Local community garden volunteering', done: true }
-            ],
+            curiosityLog: [],
             newHobbyInput: '',
-            reflectionJournal: 'Today I noticed that losing the morning stand-up meeting leaves a noticeable gap in my schedule. I will test replacing it with a 20-minute reading block.'
+            reflectionJournal: ''
         };
 
         let currentStepIndex = 0;
@@ -458,12 +455,7 @@
             content += "Worldview Anchor: " + userState.anchor + "\n\n";
             content += "------------------------------------------\n\n";
 
-            // Action plan is always included in all depth levels
             content += "ACTION CHECKLIST:\n\n";
-            const labels = document.querySelectorAll('#pathway-content-container label');
-            // Filter labels that are part of the checklist (first div usually)
-            // A simple approach is just looping all checkboxes but we have curiosity log checkboxes too
-            // Let's rely on the DOM for Action Checklist
             const actionLabels = document.querySelectorAll('.action-checklist-item');
             if (actionLabels.length > 0) {
                 actionLabels.forEach(label => {
@@ -511,8 +503,13 @@
             const container = document.getElementById('pathway-content-container');
             container.innerHTML = '';
 
-            // Additive Rendering based on selected Vibe
-            let combinedHTML = renderActionPlanHTML(); // Always render Action Plan
+            // Routing logic based on Worldview Anchor
+            let combinedHTML = '';
+            if (userState.anchor === 'Philosophical Traditions') {
+                combinedHTML = renderPhilosophicalPlanHTML();
+            } else {
+                combinedHTML = renderActionPlanHTML();
+            }
 
             if (userState.vibe === 'The Middle Path') {
                 combinedHTML += renderMiddlePathHTML();
@@ -524,7 +521,7 @@
             container.innerHTML = combinedHTML;
         }
 
-        // --- PATHWAY 1: ACTION PLAN (DYNAMIC BY HORIZON) ---
+        // --- PATHWAY 1: SECULAR / PRAGMATIC ACTION PLAN ---
         function renderActionPlanHTML() {
             const focus = userState.focus;
             const horizon = userState.horizon;
@@ -539,9 +536,9 @@
                 <div class="mt-8 border-t border-fallow-200 pt-5">
                     <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
                     <ul class="space-y-2 text-sm text-fallow-800">
-                        <li><span class="font-semibold">Transitions: Making Sense of Life's Changes</span> by William Bridges <span class="text-fallow-600 italic">(Understanding the psychological 'Neutral Zone')</span></li>
-                        <li><span class="font-semibold">Continuity and Adaptation in Aging</span> by Robert C. Atchley <span class="text-fallow-600 italic">(Why keeping existing structures matters)</span></li>
-                        <li><span class="font-semibold">Atomic Habits</span> by James Clear <span class="text-fallow-600 italic">(Practical cues for building new routines)</span></li>
+                        <li><span class="font-semibold">Transitions: Making Sense of Life's Changes</span> by William Bridges</li>
+                        <li><span class="font-semibold">Continuity and Adaptation in Aging</span> by Robert C. Atchley</li>
+                        <li><span class="font-semibold">Atomic Habits</span> by James Clear</li>
                     </ul>
                 </div>`;
 
@@ -549,31 +546,31 @@
                     titleText = "What habits inform your day";
                     introText = "You will be leaving a structured day that provided you with a set of things you had to do. This is an opportunity to both map out where you are now and to start planning for the future.";
                     tasksHTML = generateChecklist([
-                        { id: 'auditWeek', text: "Start tracking how your normal work weeks are structured. How many hours a day are you currently spending doing particular things? Doing this can give you a sense of how you might want to spend your time (a nod to sociologist Robert Atchley's Continuity Theory, which suggests we fare best when we redirect rather than completely reinvent our schedules)." },
-                        { id: 'disconnectedHabit', text: "Now would be a good time to start establishing a morning or evening habit (like reading 10 pages or making a stovetop espresso) that is completely disconnected from your work 'identity'—starting now helps set an important pattern." },
-                        { id: 'weekendTest', text: "Start taking a look at how you spend your weekends—almost like a gentle 'time audit'. Are you just recovering from work, or are you doing things you'd like to do more of? This is a good time to start thinking about that." }
+                        { id: 'sec_struct_1a', text: "Start tracking how your normal work weeks are structured. How many hours a day are you currently spending doing particular things? Doing this can give you a sense of how you might want to spend your time (a nod to sociologist Robert Atchley's Continuity Theory, which suggests we fare best when we redirect rather than completely reinvent our schedules)." },
+                        { id: 'sec_struct_1b', text: "Now would be a good time to start establishing a morning or evening habit (like reading 10 pages or making a stovetop espresso) that is completely disconnected from your work 'identity'—starting now helps set an important pattern." },
+                        { id: 'sec_struct_1c', text: "Start taking a look at how you spend your weekends—almost like a gentle 'time audit'. Are you just recovering from work, or are you doing things you'd like to do more of? This is a good time to start thinking about that." }
                     ]);
                 } else if (horizon === '6-18 months out') {
                     introText = "You are leaving a structured day that naturally provided you with conscious anchors. Here are some ways to provide supportive structure to your day outside of a formal job:";
                     tasksHTML = generateChecklist([
-                        { id: 'projectSlotPrep', text: "Start time-blocking a 2-hour 'project slot' on your weekend. Treat this with the same respect as a mandatory work meeting to practice protecting your time." },
-                        { id: 'decoupleSleep', text: "Begin decoupling your sleep schedule from your commute. Try waking up to go for a walk or read before you engage with work, rather than just waking to beat traffic." },
-                        { id: 'decoupleIdentity', text: "Practice introducing yourself by your interests rather than your job title or agency. Removing your title from personal profiles can help start this mental shift." }
+                        { id: 'sec_struct_2a', text: "Start time-blocking a 2-hour 'project slot' on your weekend. Treat this with the same respect as a mandatory work meeting to practice protecting your time." },
+                        { id: 'sec_struct_2b', text: "Begin decoupling your sleep schedule from your commute. Try waking up to go for a walk or read before you engage with work, rather than just waking to beat traffic." },
+                        { id: 'sec_struct_2c', text: "Practice introducing yourself by your interests rather than your job title or agency. Removing your title from personal profiles can help start this mental shift." }
                     ]);
                 } else if (horizon === '0-6 months out') {
                     introText = "You are leaving a structured day that naturally provided you with conscious anchors. Here are some ways to provide supportive structure to your day outside of a formal job:";
                     tasksHTML = generateChecklist([
-                        { id: 'mondayPlan', text: "Make a first draft of a schedule for your first Monday post-career. The shock of a completely empty calendar hides the fact that you are starting a new life—what William Bridges calls the chaotic but fertile 'Neutral Zone' of transition." },
-                        { id: 'fakeCommute', text: "Because you are used to a daily commute, schedule a 30-minute morning walk to give your day a starting boundary that isn't tied to an employer." },
-                        { id: 'projectSlot', text: "Designate a dedicated block of time for a project or hobby. This isn't meant to create a strict obligation, but rather to protect your time the same way you did at work." },
-                        { id: 'socialTouchpoint', text: "Work naturally provides informal social interactions. Consciously try to initiate one informal social touchpoint per week (a coffee, meal, or just a call)." }
+                        { id: 'sec_struct_3a', text: "Make a first draft of a schedule for your first Monday post-career. The shock of a completely empty calendar hides the fact that you are starting a new life—what William Bridges calls the chaotic but fertile 'Neutral Zone' of transition." },
+                        { id: 'sec_struct_3b', text: "Because you are used to a daily commute, schedule a 30-minute morning walk to give your day a starting boundary that isn't tied to an employer." },
+                        { id: 'sec_struct_3c', text: "Designate a dedicated block of time for a project or hobby. This isn't meant to create a strict obligation, but rather to protect your time the same way you did at work." },
+                        { id: 'sec_struct_3d', text: "Work naturally provides informal social interactions. Consciously try to initiate one informal social touchpoint per week (a coffee, meal, or just a call)." }
                     ]);
                 } else if (horizon === 'Already transitioned') {
                     introText = "You are leaving a structured day that naturally provided you with conscious anchors. Here are some ways to provide supportive structure to your day outside of a formal job:";
                     tasksHTML = generateChecklist([
-                        { id: 'boundaryHours', text: "When every day is Saturday, time can start to blur together into an 'endless weekend.' Try setting gentle 'on' and 'off' hours for yourself, so your downtime actually feels like a break rather than just a lack of things to do." },
-                        { id: 'frictionTest', text: "Pay attention to the kind of friction you might be feeling lately. If you are feeling a bit anxious, it usually means you crave a little more daily structure. But if you are feeling bored, it might be a sign to intentionally break your routine." },
-                        { id: 'microCommitment', text: "Sometimes we miss the natural rhythm of simply having somewhere to be. It can be surprisingly helpful to take on a low-stakes commitment—like a short weekly shift at a local garden or library—just to reintroduce a light, healthy deadline into your week." }
+                        { id: 'sec_struct_4a', text: "When every day is Saturday, time can start to blur together into an 'endless weekend.' Try setting gentle 'on' and 'off' hours for yourself, so your downtime actually feels like a break rather than just a lack of things to do." },
+                        { id: 'sec_struct_4b', text: "Pay attention to the kind of friction you might be feeling lately. If you are feeling a bit anxious, it usually means you crave a little more daily structure. But if you are feeling bored, it might be a sign to intentionally break your routine." },
+                        { id: 'sec_struct_4c', text: "Sometimes we miss the natural rhythm of simply having somewhere to be. It can be surprisingly helpful to take on a low-stakes commitment—like a short weekly shift at a local garden or library—just to reintroduce a light, healthy deadline into your week." }
                     ]);
                 }
             } else if (focus === 'Rediscovering old hobbies & creative outlets') {
@@ -581,9 +578,9 @@
                 <div class="mt-8 border-t border-fallow-200 pt-5">
                     <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
                     <ul class="space-y-2 text-sm text-fallow-800">
-                        <li><span class="font-semibold">Working Identity</span> by Herminia Ibarra <span class="text-fallow-600 italic">(The psychology of testing out 'provisional selves')</span></li>
-                        <li><span class="font-semibold">Play: How it Shapes the Brain</span> by Stuart Brown <span class="text-fallow-600 italic">(Why adults need purposeless play)</span></li>
-                        <li><span class="font-semibold">Flow</span> by Mihaly Csikszentmihalyi <span class="text-fallow-600 italic">(Finding joy in the process itself)</span></li>
+                        <li><span class="font-semibold">Working Identity</span> by Herminia Ibarra</li>
+                        <li><span class="font-semibold">Play: How it Shapes the Brain</span> by Stuart Brown</li>
+                        <li><span class="font-semibold">Flow</span> by Mihaly Csikszentmihalyi</li>
                     </ul>
                 </div>`;
 
@@ -591,33 +588,33 @@
                     titleText = "Reconnecting with Curiosities";
                     introText = "Studies have shown that many people deep in their careers find it hard to imagine having the energy for new activities or pursuits. This is a great time to start giving yourself permission to be curious without feeling too obligated just yet.";
                     tasksHTML = generateChecklist([
-                        { id: 'childhoodAudit', text: "Think back to what you wanted to do more of around the ages of 10 or 12, before grades or resumes mattered. Dr. Stuart Brown’s research on 'play histories' suggests these early interests can be a great clue about what to explore now." },
-                        { id: 'beginnerPermission', text: "Don't worry about being good at something immediately—this is the time to explore. High achievers sometimes abandon new hobbies, or splurge on expensive gear to try and speed up the learning curve. It is okay to be 'bad' at something simply because the process is fun and takes time." },
-                        { id: 'passiveSwap', text: "Try swapping out one hour of passive unwinding (like watching TV or scrolling) with active exploring—maybe reading a book on a random niche, sketching, or wandering a hardware store." }
+                        { id: 'sec_hobby_1a', text: "Think back to what you wanted to do more of around the ages of 10 or 12, before grades or resumes mattered. Dr. Stuart Brown’s research on 'play histories' suggests these early interests can be a great clue about what to explore now." },
+                        { id: 'sec_hobby_1b', text: "Don't worry about being good at something immediately—this is the time to explore. High achievers sometimes abandon new hobbies, or splurge on expensive gear to try and speed up the learning curve. It is okay to be 'bad' at something simply because the process is fun and takes time." },
+                        { id: 'sec_hobby_1c', text: "Try swapping out one hour of passive unwinding (like watching TV or scrolling) with active exploring—maybe reading a book on a random niche, sketching, or wandering a hardware store." }
                     ]);
                 } else if (horizon === '6-18 months out') {
                     titleText = "Low-Stakes Micro-Experiments";
                     introText = "As the transition gets closer, it’s a great time to run some low-stakes 'micro-experiments' to see what actually sticks, without feeling any pressure to commit to a new identity.";
                     tasksHTML = generateChecklist([
-                        { id: 'starterTool', text: "Take a single, short class or buy a basic starter tool. This is what transition expert Herminia Ibarra calls running a 'micro-experiment'—testing reality before buying the expensive 'master kit'." },
-                        { id: 'physicalSpace', text: "Curate a tiny physical space in your home dedicated entirely to a non-work interest, even if it's just one shelf or a corner of a desk." },
-                        { id: 'realityCheck', text: "Chat with someone who already does the thing you're curious about. Ask them what common frustrations or challenges you might face, which helps paint a realistic picture of what the hobby actually entails." }
+                        { id: 'sec_hobby_2a', text: "Take a single, short class or buy a basic starter tool. This is what transition expert Herminia Ibarra calls running a 'micro-experiment'—testing reality before buying the expensive 'master kit'." },
+                        { id: 'sec_hobby_2b', text: "Curate a tiny physical space in your home dedicated entirely to a non-work interest, even if it's just one shelf or a corner of a desk." },
+                        { id: 'sec_hobby_2c', text: "Chat with someone who already does the thing you're curious about. Ask them what common frustrations or challenges you might face, which helps paint a realistic picture of what the hobby actually entails." }
                     ]);
                 } else if (horizon === '0-6 months out') {
                     titleText = "Protecting Creative Time";
                     introText = "With your calendar about to open up, the goal is to make sure your creative outlets become a natural, protected part of your new weekly rhythm, rather than something you just do 'if you have time.'";
                     tasksHTML = generateChecklist([
-                        { id: 'dedicatedBlock', text: "Try treating a 90-minute block for your hobby with the same respect you gave to a work meeting. Protect that time from being swallowed by random errands." },
-                        { id: 'processOverProduct', text: "Focus entirely on the enjoyment of the process rather than judging the final result. If you're gardening, try to enjoy prepping the soil, not just anticipating the harvest." },
-                        { id: 'publicDeclaration', text: "Mention your new project or interest to a friend. Sharing it out loud makes it feel more real and gently helps shift your social identity." }
+                        { id: 'sec_hobby_3a', text: "Try treating a 90-minute block for your hobby with the same respect you gave to a work meeting. Protect that time from being swallowed by random errands." },
+                        { id: 'sec_hobby_3b', text: "Focus entirely on the enjoyment of the process rather than judging the final result. If you're gardening, try to enjoy prepping the soil, not just anticipating the harvest." },
+                        { id: 'sec_hobby_3c', text: "Mention your new project or interest to a friend. Sharing it out loud makes it feel more real and gently helps shift your social identity." }
                     ]);
                 } else if (horizon === 'Already transitioned') {
                     titleText = "The No-Hustle Zone";
                     introText = "Now that you have the time, the biggest trap is accidentally turning a fun hobby into a stressful job. Remember, you don't have to be productive anymore.";
                     tasksHTML = generateChecklist([
-                        { id: 'noHustle', text: "Resist the urge to monetize or 'optimize' your creative outlets. Let your hobby remain a hobby without demanding that it be useful or profitable." },
-                        { id: 'dropIt', text: "If you find yourself getting frustrated by a chosen hobby, feel free to just drop it. You aren't bound by professional sunk costs anymore—it’s perfectly fine to just try something else." },
-                        { id: 'communityBridge', text: "Look into a local group or online forum related to your interest. Shared hobbies are one of the most organic ways to build a post-career community." }
+                        { id: 'sec_hobby_4a', text: "Resist the urge to monetize or 'optimize' your creative outlets. Let your hobby remain a hobby without demanding that it be useful or profitable." },
+                        { id: 'sec_hobby_4b', text: "If you find yourself getting frustrated by a chosen hobby, feel free to just drop it. You aren't bound by professional sunk costs anymore—it’s perfectly fine to just try something else." },
+                        { id: 'sec_hobby_4c', text: "Look into a local group or online forum related to your interest. Shared hobbies are one of the most organic ways to build a post-career community." }
                     ]);
                 }
             } else if (focus === 'Reanchoring your social life') {
@@ -625,9 +622,9 @@
                 <div class="mt-8 border-t border-fallow-200 pt-5">
                     <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
                     <ul class="space-y-2 text-sm text-fallow-800">
-                        <li><span class="font-semibold">Bowling Alone</span> by Robert D. Putnam <span class="text-fallow-600 italic">(The collapse and revival of American community)</span></li>
-                        <li><span class="font-semibold">A Long Bright Future</span> by Laura L. Carstensen <span class="text-fallow-600 italic">(Why our social priorities shift as we age)</span></li>
-                        <li><span class="font-semibold">How to Live Forever</span> by Marc Freedman <span class="text-fallow-600 italic">(The psychological need for intergenerational connection)</span></li>
+                        <li><span class="font-semibold">Bowling Alone</span> by Robert D. Putnam</li>
+                        <li><span class="font-semibold">A Long Bright Future</span> by Laura L. Carstensen</li>
+                        <li><span class="font-semibold">How to Live Forever</span> by Marc Freedman</li>
                     </ul>
                 </div>`;
 
@@ -635,33 +632,33 @@
                     titleText = "Mapping Your Social Gravity";
                     introText = "While you are still working, it is easy to let your job dictate your social life. This phase isn't about making new friends; it's about taking a gentle inventory of where your social energy is currently going.";
                     tasksHTML = generateChecklist([
-                        { id: 'sourceAudit', text: "Take a quick mental inventory of your social interactions this week. How many of them were strictly tied to your employer, industry, or commute? Recognizing this baseline is a great first step." },
-                        { id: 'proximityTest', text: "Pick one small, repeatable neighborhood routine—like walking the dog at the exact same time every morning, or getting Saturday coffee at a local spot. Proximity breeds familiarity, even for introverts." },
-                        { id: 'deepeningTies', text: "Robert Putnam’s research on social capital shows we thrive on deep connections, not just wide networks. Pick one non-work friend or family member and initiate a low-stakes check-in (a text or a call) just to say hello." }
+                        { id: 'sec_social_1a', text: "Take a quick mental inventory of your social interactions this week. How many of them were strictly tied to your employer, industry, or commute? Recognizing this baseline is a great first step." },
+                        { id: 'sec_social_1b', text: "Pick one small, repeatable neighborhood routine—like walking the dog at the exact same time every morning, or getting Saturday coffee at a local spot. Proximity breeds familiarity, even for introverts." },
+                        { id: 'sec_social_1c', text: "Robert Putnam’s research on social capital shows we thrive on deep connections, not just wide networks. Pick one non-work friend or family member and initiate a low-stakes check-in (a text or a call) just to say hello." }
                     ]);
                 } else if (horizon === '6-18 months out') {
                     titleText = "Shifting the Center of Gravity";
                     introText = "As your transition gets closer, you can start intentionally building the social structures that will replace the effortless 'watercooler' interactions of the office.";
                     tasksHTML = generateChecklist([
-                        { id: 'becomeRegular', text: "Find a local spot—a diner, a library, a park bench—and start going there at a predictable time. Becoming a 'regular' relies on what sociologists call 'structural proximity'—the easiest way to build community without forced networking." },
-                        { id: 'rehearsingBoundaries', text: "Practice gently declining a strictly work-related after-hours event. Use that saved energy to do something in your own neighborhood or with your partner." },
-                        { id: 'lowStakesMentoring', text: "If you are curious about connecting with younger generations, look for a small, casual way to offer perspective (like a 15-minute chat with a junior colleague). You don't need to relate to their pop culture; they just value your stability." }
+                        { id: 'sec_social_2a', text: "Find a local spot—a diner, a library, a park bench—and start going there at a predictable time. Becoming a 'regular' relies on what sociologists call 'structural proximity'—the easiest way to build community without forced networking." },
+                        { id: 'sec_social_2b', text: "Practice gently declining a strictly work-related after-hours event. Use that saved energy to do something in your own neighborhood or with your partner." },
+                        { id: 'sec_social_2c', text: "If you are curious about connecting with younger generations, look for a small, casual way to offer perspective (like a 15-minute chat with a junior colleague). You don't need to relate to their pop culture; they just value your stability." }
                     ]);
                 } else if (horizon === '0-6 months out') {
                     titleText = "Anchoring Your New Routine";
                     introText = "With your career ending, the daily, built-in social friction of the workplace is about to vanish. This is the time to lock in intentional social anchors so you don't drift into isolation.";
                     tasksHTML = generateChecklist([
-                        { id: 'standingAppt', text: "Set up one recurring, non-negotiable social touchpoint—like a Tuesday morning breakfast or a Thursday afternoon phone call. Lock it into the calendar." },
-                        { id: 'becomeInitiator', text: "At work, people constantly came to your desk. Now, you have to flip the script. Try to be the one who initiates contact or plans a get-together at least once a week." },
-                        { id: 'weakTies', text: "Sociologist Mark Granovetter noted the power of 'weak ties'—brief chats with the mail carrier, the barista, or a fellow dog-walker provide crucial psychological boosts. Don't underestimate the value of these casual neighborhood interactions." }
+                        { id: 'sec_social_3a', text: "Set up one recurring, non-negotiable social touchpoint—like a Tuesday morning breakfast or a Thursday afternoon phone call. Lock it into the calendar." },
+                        { id: 'sec_social_3b', text: "At work, people constantly came to your desk. Now, you have to flip the script. Try to be the one who initiates contact or plans a get-together at least once a week." },
+                        { id: 'sec_social_3c', text: "Sociologist Mark Granovetter noted the power of 'weak ties'—brief chats with the mail carrier, the barista, or a fellow dog-walker provide crucial psychological boosts. Don't underestimate the value of these casual neighborhood interactions." }
                     ]);
                 } else if (horizon === 'Already transitioned') {
                     titleText = "Cultivating Your Social Garden";
                     introText = "You are no longer forced to spend time with people out of professional obligation. You now have the luxury of curating a social life based purely on genuine connection and shared interests.";
                     tasksHTML = generateChecklist([
-                        { id: 'qualityAudit', text: "Give yourself permission to let draining, work-based relationships gently fade. Stanford's Laura Carstensen found that as we shift life stages, it's natural and healthy to prefer deepening existing, emotionally meaningful relationships over forced networking." },
-                        { id: 'sharedInterest', text: "The easiest way to form organic connections isn't by 'networking,' but by doing something you enjoy alongside others. Consider a local group focused on a hobby, like a native plant society or a history group." },
-                        { id: 'generativity', text: "If you feel the itch to pass on your knowledge, find a local organization where your specific expertise is valued, but keep the commitment strictly on your own terms." }
+                        { id: 'sec_social_4a', text: "Give yourself permission to let draining, work-based relationships gently fade. Stanford's Laura Carstensen found that as we shift life stages, it's natural and healthy to prefer deepening existing, emotionally meaningful relationships over forced networking." },
+                        { id: 'sec_social_4b', text: "The easiest way to form organic connections isn't by 'networking,' but by doing something you enjoy alongside others. Consider a local group focused on a hobby, like a native plant society or a history group." },
+                        { id: 'sec_social_4c', text: "If you feel the itch to pass on your knowledge, find a local organization where your specific expertise is valued, but keep the commitment strictly on your own terms." }
                     ]);
                 }
             } else if (focus === 'Logistics, volunteering & micro-projects') {
@@ -669,9 +666,9 @@
                 <div class="mt-8 border-t border-fallow-200 pt-5">
                     <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
                     <ul class="space-y-2 text-sm text-fallow-800">
-                        <li><span class="font-semibold">Encore: Finding Work that Matters in the Second Half of Life</span> by Marc Freedman <span class="text-fallow-600 italic">(Redefining how we give back)</span></li>
-                        <li><span class="font-semibold">Four Thousand Weeks: Time Management for Mortals</span> by Oliver Burkeman <span class="text-fallow-600 italic">(Escaping the trap of endless productivity)</span></li>
-                        <li><span class="font-semibold">The Life Cycle Completed</span> by Erik Erikson <span class="text-fallow-600 italic">(Understanding the psychological drive for generativity)</span></li>
+                        <li><span class="font-semibold">Encore: Finding Work that Matters in the Second Half of Life</span> by Marc Freedman</li>
+                        <li><span class="font-semibold">Four Thousand Weeks: Time Management for Mortals</span> by Oliver Burkeman</li>
+                        <li><span class="font-semibold">The Life Cycle Completed</span> by Erik Erikson</li>
                     </ul>
                 </div>`;
 
@@ -679,33 +676,33 @@
                     titleText = "Rethinking 'Productivity'";
                     introText = "While you are still working, your sense of accomplishment is usually tied to your professional output. This phase is about gently redefining what it means to have a 'useful' day, and preparing for the loss of your employer's hidden infrastructure.";
                     tasksHTML = generateChecklist([
-                        { id: 'infraAudit', text: "Notice how much invisible support your job provides (IT, software, printing, structured email). Start thinking about what personal infrastructure you will actually need when you no longer have an office." },
-                        { id: 'redefineWeekend', text: "Catch yourself the next time you feel guilty for 'wasting' a Saturday. High achievers often struggle to just be. Practice doing one thing this weekend that produces absolutely no tangible result." },
-                        { id: 'microVolTest', text: "Instead of joining a committee or a board, look for a one-off, bounded volunteer event (like a two-hour park cleanup or a single food drive). Notice how it feels to contribute without a long-term obligation." }
+                        { id: 'sec_logistics_1a', text: "Notice how much invisible support your job provides (IT, software, printing, structured email). Start thinking about what personal infrastructure you will actually need when you no longer have an office." },
+                        { id: 'sec_logistics_1b', text: "Catch yourself the next time you feel guilty for 'wasting' a Saturday. High achievers often struggle to just be. Practice doing one thing this weekend that produces absolutely no tangible result." },
+                        { id: 'sec_logistics_1c', text: "Instead of joining a committee or a board, look for a one-off, bounded volunteer event (like a two-hour park cleanup or a single food drive). Notice how it feels to contribute without a long-term obligation." }
                     ]);
                 } else if (horizon === '6-18 months out') {
                     titleText = "Building Your Personal Infrastructure";
                     introText = "As your transition approaches, it is time to start separating your personal logistics from your professional ones, and planning how you'll satisfy your drive to 'get things done' on your own terms.";
                     tasksHTML = generateChecklist([
-                        { id: 'greatDecoupling', text: "Stop using your work laptop or work email for personal logistics. Set up your own digital 'HQ' now, so you aren't scrambling to untangle your life during your final weeks on the job." },
-                        { id: 'noCommittee', text: "If you are exploring volunteer opportunities for your post-career life, try to stick strictly to direct-action roles (e.g., planting trees, tutoring). Avoid boards or planning committees for now to protect yourself from corporate-style bureaucracy." },
-                        { id: 'brainstormMicro', text: "Think of a bounded, 30-day project you've always wanted to do (e.g., scanning old photos, organizing the garage, building a raised garden bed). Having a self-directed project ready gives you a soft landing pad for your energy." }
+                        { id: 'sec_logistics_2a', text: "Stop using your work laptop or work email for personal logistics. Set up your own digital 'HQ' now, so you aren't scrambling to untangle your life during your final weeks on the job." },
+                        { id: 'sec_logistics_2b', text: "If you are exploring volunteer opportunities for your post-career life, try to stick strictly to direct-action roles (e.g., planting trees, tutoring). Avoid boards or planning committees for now to protect yourself from corporate-style bureaucracy." },
+                        { id: 'sec_logistics_2c', text: "Think of a bounded, 30-day project you've always wanted to do (e.g., scanning old photos, organizing the garage, building a raised garden bed). Having a self-directed project ready gives you a soft landing pad for your energy." }
                     ]);
                 } else if (horizon === '0-6 months out') {
                     titleText = "Protecting Your Bandwidth";
                     introText = "The urge to immediately fill your newly opened calendar with obligations is incredibly strong. Right now, the goal is to protect your time so you can actually experience the transition, rather than just rushing into unpaid work.";
                     tasksHTML = generateChecklist([
-                        { id: 'sixMonthBuffer', text: "Make a promise to yourself: you will not take on any long-term volunteer commitments, board seats, or major projects for the first six months. Give yourself time to decompress first." },
-                        { id: 'launchMicro', text: "Pick one small, bounded project (under 30 days) to focus on. This gives you the psychological satisfaction of a 'win' and clear forward motion without the pressure of a boss." },
-                        { id: 'clearDeck', text: "Tackle one legacy logistical task you've been putting off for years (like updating a will or organizing passwords). Clearing this out frees up massive amounts of mental bandwidth for your new life." }
+                        { id: 'sec_logistics_3a', text: "Make a promise to yourself: you will not take on any long-term volunteer commitments, board seats, or major projects for the first six months. Give yourself time to decompress first." },
+                        { id: 'sec_logistics_3b', text: "Pick one small, bounded project (under 30 days) to focus on. This gives you the psychological satisfaction of a 'win' and clear forward motion without the pressure of a boss." },
+                        { id: 'sec_logistics_3c', text: "Tackle one legacy logistical task you've been putting off for years (like updating a will or organizing passwords). Clearing this out frees up massive amounts of mental bandwidth for your new life." }
                     ]);
                 } else if (horizon === 'Already transitioned') {
                     titleText = "Logistics on Your Terms";
                     introText = "You no longer need to cram your entire personal life into a two-day weekend. This phase is about enjoying the luxury of 'slow logistics' and ensuring that your desire to give back isn't secretly draining you.";
                     tasksHTML = generateChecklist([
-                        { id: 'slowLogistics', text: "Stop doing your grocery shopping or running errands on crowded Saturday mornings. Practice doing mundane tasks on a Tuesday at 10:00 AM, actively enjoying the fact that you own your time." },
-                        { id: 'volunteerAudit', text: "Are your current volunteer or community commitments making you feel joyful, or do they feel like a stressful, unpaid job? If they drain you, transition expert Marc Freedman suggests it’s perfectly okay to step back." },
-                        { id: 'boundedMentorship', text: "If you want to share your professional expertise, do it in discrete, highly bounded ways—like a one-off coffee chat or a single guest lecture—rather than getting sucked into open-ended, unpaid consulting." }
+                        { id: 'sec_logistics_4a', text: "Stop doing your grocery shopping or running errands on crowded Saturday mornings. Practice doing mundane tasks on a Tuesday at 10:00 AM, actively enjoying the fact that you own your time." },
+                        { id: 'sec_logistics_4b', text: "Are your current volunteer or community commitments making you feel joyful, or do they feel like a stressful, unpaid job? If they drain you, transition expert Marc Freedman suggests it’s perfectly okay to step back." },
+                        { id: 'sec_logistics_4c', text: "If you want to share your professional expertise, do it in discrete, highly bounded ways—like a one-off coffee chat or a single guest lecture—rather than getting sucked into open-ended, unpaid consulting." }
                     ]);
                 }
             }
@@ -725,33 +722,209 @@
                     </div>
                     ${booksHTML}
                 </div>
+            `;
+        }
 
-                <div class="border border-fallow-200 rounded-xl p-5 space-y-3 bg-fallow-50/40 mt-6">
-                    <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Current Focus Project</span>
-                    <h4 class="font-semibold text-fallow-900 text-sm">${userState.focus}</h4>
-                    <p class="text-xs text-fallow-700">
-                        Based on your horizon (${userState.horizon}), focus on establishing small, repeatable daily habits rather than massive lifestyle overhauls.
-                    </p>
+        // --- PATHWAY 1 ALT: PHILOSOPHICAL TRADITIONS ACTION PLAN ---
+        function renderPhilosophicalPlanHTML() {
+            const focus = userState.focus;
+            const horizon = userState.horizon;
+            
+            let tasksHTML = '';
+            let introText = '';
+            let titleText = 'The Philosophical Checklist';
+            let booksHTML = '';
+
+            if (focus === 'Providing structure and routines outside of a job') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Letters from a Stoic</span> by Seneca <span class="text-fallow-600 italic">(On reclaiming your time from external masters)</span></li>
+                        <li><span class="font-semibold">Meditations</span> by Marcus Aurelius <span class="text-fallow-600 italic">(On accepting the impermanence of your past identity)</span></li>
+                        <li><span class="font-semibold">Discourses</span> by Epictetus <span class="text-fallow-600 italic">(Understanding the Dichotomy of Control)</span></li>
+                    </ul>
+                </div>`;
+
+                if (horizon === '1-3 years out') {
+                    titleText = "Reclaiming Your Time";
+                    introText = "Seneca viewed the end of public duty not as a loss, but as the return of your own time. This phase is about applying Epictetus’s 'Dichotomy of Control'—letting go of the schedule you don't control, and preparing the one you do.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_struct_1a', text: "Apply the Dichotomy of Control to your current week: track which hours are dictated by others (external) versus the hours you truly own. Understanding this balance prepares you for the sudden influx of owned time." },
+                        { id: 'phil_struct_1b', text: "Establish an 'inner citadel' routine—a 15-minute morning or evening habit (like brewing tea or journaling) that is completely disconnected from your professional identity and completely under your control." },
+                        { id: 'phil_struct_1c', text: "Seneca warned against living entirely for the future. Start treating your weekends not just as recovery from work, but as a deliberate practice of owning your own time in the present." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    introText = "As your career concludes, you must consciously choose your new constraints, rather than having them dictated to you by an employer.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_struct_2a', text: "Time-block a 2-hour 'project slot' on your weekend. Treat this block with the same respect you gave to mandatory work meetings, asserting authority over your own schedule." },
+                        { id: 'phil_struct_2b', text: "Begin decoupling your sleep schedule from your commute. Try waking up to go for a walk or read before you engage with work, breaking the habit of waking merely to serve an external master." },
+                        { id: 'phil_struct_2c', text: "Marcus Aurelius practiced reflecting on the impermanence of all titles. Practice introducing yourself by your interests rather than your job title, gently peeling away the ego of your soon-to-be past role." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    introText = "You are leaving a structured day that naturally provided you with conscious anchors. It is time to assert your own rational structure.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_struct_3a', text: "Draft a schedule for your first Monday post-career. Marcus Aurelius believed we must impose order on our own minds; leaving your calendar completely blank invites anxiety." },
+                        { id: 'phil_struct_3b', text: "Schedule a 30-minute morning walk to replace your commute. This acts as a physical and mental boundary, signaling the start of a day you now direct." },
+                        { id: 'phil_struct_3c', text: "Designate a dedicated block of time for a project. You are not striving for productivity here, but rather practicing the discipline of self-directed focus." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    introText = "With total freedom comes the responsibility of self-governance. Stoicism teaches that true freedom requires self-imposed structure.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_struct_4a', text: "Set gentle 'on' and 'off' hours for your day. Without boundaries, time blurs into an endless weekend, robbing leisure of its sweetness." },
+                        { id: 'phil_struct_4b', text: "Audit your friction: if you feel restless, it is a sign you need to impose more structure. If you feel bored, it is a sign you are trapped in a stagnant routine." },
+                        { id: 'phil_struct_4c', text: "Take on a low-stakes commitment (like a local library shift). We are social creatures built for the 'cosmopolis'—a light, healthy obligation connects us to the whole." }
+                    ]);
+                }
+            } else if (focus === 'Rediscovering old hobbies & creative outlets') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Nicomachean Ethics</span> by Aristotle <span class="text-fallow-600 italic">(Understanding 'Theoria' and doing things for their own sake)</span></li>
+                        <li><span class="font-semibold">The Socrates Express</span> by Eric Weiner <span class="text-fallow-600 italic">(Practical, modern applications of classical philosophy)</span></li>
+                    </ul>
+                </div>`;
+
+                if (horizon === '1-3 years out') {
+                    titleText = "Graduating from Praxis to Theoria";
+                    introText = "Aristotle divided human action into 'Praxis' (doing things for a productive, external end) and 'Theoria' (engaging in an activity purely for the joy of it). This phase is about giving yourself permission to move toward Theoria.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_hobby_1a', text: "Audit your past: what did you do around age 10 or 12 simply because it was enjoyable? These early interests are clues to what brings you intrinsic joy, free from the desire for status or profit." },
+                        { id: 'phil_hobby_1b', text: "Grant yourself the 'permission to be foolish.' Stoics remind us not to tie our self-worth to immediate mastery. It is okay to be bad at a new hobby; the goal is the experience, not the result." },
+                        { id: 'phil_hobby_1c', text: "Swap one hour of passive consumption (like scrolling or TV) with an hour of active exploration—wandering a hardware store or reading about a random niche." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    titleText = "Low-Stakes Micro-Experiments";
+                    introText = "As the transition approaches, test your curiosities in reality rather than in your imagination.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_hobby_2a', text: "Take a single class or buy a basic starter tool. A core tenet of classical philosophy is testing reality directly—avoid buying the expensive 'master kit' until the habit is proven." },
+                        { id: 'phil_hobby_2b', text: "Curate a tiny physical space in your home dedicated entirely to an activity done purely for its own sake (Theoria), even if it's just one shelf or a desk corner." },
+                        { id: 'phil_hobby_2c', text: "Talk to someone who already practices the hobby. Ask them about the frustrations involved. Stoics call this 'Premeditatio Malorum'—preparing for the friction so you aren't discouraged by it." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    titleText = "Protecting the Process";
+                    introText = "With your calendar opening up, you must protect your activities from the lingering corporate urge to 'optimize' them.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_hobby_3a', text: "Block 90 minutes for your interest and treat it as sacred. Protect this time with the same fierce boundary you once gave to a boss or a client." },
+                        { id: 'phil_hobby_3b', text: "Focus entirely on the process, not the product. If gardening, draw satisfaction from the physical act of turning the soil, completely detaching from whether the harvest is successful." },
+                        { id: 'phil_hobby_3c', text: "Mention your pursuit to a friend. Voicing it aloud begins the process of shifting your identity away from your former title." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    titleText = "The No-Hustle Zone";
+                    introText = "You have arrived at the space for Aristotelian flourishing. Do not accidentally turn your leisure back into a stressful job.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_hobby_4a', text: "Resist the urge to monetize or 'optimize' your creative outlets. Let your hobby remain a pure expression of Theoria, without demanding that it be useful." },
+                        { id: 'phil_hobby_4b', text: "If a hobby causes persistent frustration, drop it. You are no longer bound by the sunk-cost fallacies of a career. You are free to change your mind." },
+                        { id: 'phil_hobby_4c', text: "Seek out a local group sharing your interest. Classical philosophy views shared pursuits of truth and beauty as the highest form of community." }
+                    ]);
+                }
+            } else if (focus === 'Reanchoring your social life') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Nicomachean Ethics (Book VIII)</span> by Aristotle <span class="text-fallow-600 italic">(The shift from friendships of utility to friendships of virtue)</span></li>
+                        <li><span class="font-semibold">How to Be a Friend</span> by Cicero <span class="text-fallow-600 italic">(Classical wisdom on building deep connections)</span></li>
+                    </ul>
+                </div>`;
+
+                if (horizon === '1-3 years out') {
+                    titleText = "From Utility to Virtue";
+                    introText = "Aristotle noted that most workplace relationships are 'friendships of utility'—based on mutual benefit. This phase is about taking inventory of your social life to prepare for the loss of that utility-based network.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_social_1a', text: "Audit your social circle: recognize how much of your daily interaction is strictly tied to your employer. Accepting this baseline is necessary for the transition ahead." },
+                        { id: 'phil_social_1b', text: "Pick one small, repeatable neighborhood routine—like walking the dog or a Saturday coffee run. This builds structural proximity, which is the soil where new connections grow." },
+                        { id: 'phil_social_1c', text: "Initiate a low-stakes check-in with a non-work friend. Begin investing energy into relationships based on character and shared history, rather than shared professional goals." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    titleText = "Building the Cosmopolis";
+                    introText = "The Stoics believed we are all citizens of the 'Cosmopolis'—the broader human community. It is time to start looking past your corporate silo.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_social_2a', text: "Find a local spot (a park, diner, or library) and visit at a predictable time. Becoming a 'regular' grounds you in your immediate physical community." },
+                        { id: 'phil_social_2b', text: "Practice declining a strictly work-related after-hours event. Redirect that saved energy toward your family or your local neighborhood." },
+                        { id: 'phil_social_2c', text: "Look for a casual way to offer perspective to a younger person (like a brief chat with a junior colleague). This honors the Stoic duty to guide the next generation without demanding anything in return." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    titleText = "Anchoring Your New Routine";
+                    introText = "The effortless 'utility' interactions of the office are ending. You must now take deliberate action to weave yourself into your community.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_social_3a', text: "Set one recurring, non-negotiable social anchor—like a Tuesday breakfast or a Thursday phone call. Make it a fixture of your new reality." },
+                        { id: 'phil_social_3b', text: "Flip the script: at work, people came to you. Now, take on the responsibility of being the initiator of contact at least once a week." },
+                        { id: 'phil_social_3c', text: "Embrace brief chats with the mail carrier, the barista, or neighbors. These casual interactions bind the fabric of the local community together." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    titleText = "Cultivating Friendships of Virtue";
+                    introText = "You are finally free from the obligation to network. You can now curate a social life based entirely on genuine connection and shared character.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_social_4a', text: "Let draining, work-based 'utility friendships' gently fade. You now have the time to invest deeply in the few relationships that truly nourish your soul." },
+                        { id: 'phil_social_4b', text: "Join a local group focused on a shared hobby or pursuit. Aristotle believed the highest form of friendship is born when people pursue the good or the beautiful side-by-side." },
+                        { id: 'phil_social_4c', text: "If you wish to share your expertise, do it in a bounded way where your knowledge is valued, honoring your duty to the community on your own terms." }
+                    ]);
+                }
+            } else if (focus === 'Logistics, volunteering & micro-projects') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">On the Shortness of Life</span> by Seneca <span class="text-fallow-600 italic">(On not giving your time away to trivial obligations)</span></li>
+                        <li><span class="font-semibold">The Daily Stoic</span> by Ryan Holiday <span class="text-fallow-600 italic">(Daily meditations on focusing only on what matters)</span></li>
+                    </ul>
+                </div>`;
+
+                if (horizon === '1-3 years out') {
+                    titleText = "Rethinking 'Productivity'";
+                    introText = "Seneca observed that successful people often work themselves to exhaustion, only to realize they never truly lived. This phase is about decoupling your self-worth from your logistical output.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_logistics_1a', text: "Audit the invisible infrastructure your job provides (IT, software). Recognize that you will soon need to build your own, much simpler, personal infrastructure." },
+                        { id: 'phil_logistics_1b', text: "Catch yourself feeling guilty for 'wasting' a Saturday. Practice doing one thing this weekend that produces absolutely no tangible result, breaking the addiction to productivity." },
+                        { id: 'phil_logistics_1c', text: "Instead of joining a board, try a one-off, bounded volunteer event. Notice how it feels to fulfill your duty to the community without taking on a permanent, bureaucratic burden." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    titleText = "Building Your Personal Infrastructure";
+                    introText = "Start separating your personal logistics from your professional ones, reclaiming sovereignty over your own affairs.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_logistics_2a', text: "Stop using your work laptop or email for personal logistics. Set up your own digital 'HQ' now to avoid a tangled, stressful separation later." },
+                        { id: 'phil_logistics_2b', text: "If exploring volunteering, stick strictly to direct-action roles (planting trees, tutoring). Avoid committees to protect yourself from taking on a new, unpaid corporate hierarchy." },
+                        { id: 'phil_logistics_2c', text: "Brainstorm a bounded, 30-day micro-project (e.g., building a raised garden bed). This provides a healthy, self-directed outlet for your drive to 'get things done'." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    titleText = "Protecting Your Bandwidth";
+                    introText = "Seneca warned that we are incredibly stingy with our money, but give our time away to anyone who asks. Protect your calendar fiercely during this vulnerable window.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_logistics_3a', text: "Make a promise to yourself: take on no long-term volunteer commitments or board seats for the first six months. Give the dust of the transition time to settle." },
+                        { id: 'phil_logistics_3b', text: "Launch one small, bounded project (under 30 days). This provides the psychological satisfaction of forward motion without the heavy yoke of an ongoing obligation." },
+                        { id: 'phil_logistics_3c', text: "Tackle one legacy logistical task (like updating a will). Clearing this mental clutter frees up massive bandwidth for your new life." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    titleText = "Logistics on Your Terms";
+                    introText = "You no longer need to cram your life into a two-day weekend. Enjoy the luxury of slow logistics, and ensure your desire to give back isn't secretly draining you.";
+                    tasksHTML = generateChecklist([
+                        { id: 'phil_logistics_4a', text: "Embrace 'slow logistics.' Run errands on a Tuesday morning instead of a crowded Saturday, actively enjoying the fact that you have reclaimed ownership of your time." },
+                        { id: 'phil_logistics_4b', text: "Audit your volunteer commitments. If they feel like a stressful, unpaid job, you have the right to step back. Duty to the community should not come at the cost of your peace." },
+                        { id: 'phil_logistics_4c', text: "If you share your expertise, do it in discrete, highly bounded ways—like a single guest lecture—refusing to be sucked into open-ended, unpaid consulting." }
+                    ]);
+                }
+            }
+
+            return `
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Classical Framework</span>
+                            <h3 class="text-base font-semibold text-fallow-900 mt-0.5">${titleText}</h3>
+                        </div>
+                        <span class="text-xs bg-fallow-100 text-fallow-800 px-2.5 py-1 rounded-md font-medium">Actionable</span>
+                    </div>
+                    <p class="text-sm text-fallow-700">${introText}</p>
+                    <div class="space-y-2 pt-2">
+                        ${tasksHTML}
+                    </div>
+                    ${booksHTML}
                 </div>
             `;
         }
 
-        function generateChecklist(tasks) {
-            return tasks.map(t => {
-                const isChecked = userState.actionChecklist[t.id] ? 'checked' : '';
-                return `
-                    <label class="action-checklist-item flex items-start space-x-3 p-3 bg-fallow-50 rounded-lg border border-fallow-200/60 cursor-pointer hover:bg-fallow-100/50 transition">
-                        <input type="checkbox" onchange="toggleAction('${t.id}', this.checked)" ${isChecked} class="mt-0.5 w-4 h-4 text-fallow-900 rounded focus:ring-fallow-600">
-                        <span class="text-sm font-medium text-fallow-900 leading-snug">${t.text}</span>
-                    </label>
-                `;
-            }).join('');
-        }
-
-        function toggleAction(key, val) {
-            userState.actionChecklist[key] = val;
-            saveState();
-        }
 
         // --- PATHWAY 2: THE MIDDLE PATH ---
         function renderMiddlePathHTML() {
@@ -772,7 +945,7 @@
                             <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Curiosity Log & Hobby Audit</span>
                             <h3 class="text-base font-semibold text-fallow-900 mt-0.5">Exploring Interests Without Pressure</h3>
                         </div>
-                        <span class="text-xs bg-fallow-100 text-fallow-800 px-2.5 py-1 rounded-md font-medium">Pragmatic Focus</span>
+                        <span class="text-xs bg-fallow-100 text-fallow-800 px-2.5 py-1 rounded-md font-medium">Exploration</span>
                     </div>
                     <p class="text-sm text-fallow-700">
                         Capture low-stakes hobbies, crafts, or intellectual pursuits you want to test out during your transition.
@@ -790,7 +963,7 @@
                     <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Weekly Mindset Reframing Prompt</span>
                     <h4 class="font-semibold text-fallow-900 text-sm">"What is an accomplishment or title from my career that I am ready to gently set down?"</h4>
                     <p class="text-xs text-fallow-700 leading-relaxed">
-                        ${userState.anchor === 'Philosophical Traditions' ? 'As Marcus Aurelius noted, changing circumstances require shifting our internal definitions of utility and virtue beyond corporate status.' : 'Pragmatic reframing helps separate your intrinsic worth from external professional output.'}
+                        ${userState.anchor === 'Philosophical Traditions' ? 'As Marcus Aurelius noted, changing circumstances require shifting our internal definitions of utility and virtue beyond corporate status. You are practicing the art of setting down the ego of your past role.' : 'Pragmatic reframing helps separate your intrinsic worth from your external professional output.'}
                     </p>
                 </div>
             `;
@@ -820,17 +993,21 @@
 
         // --- PATHWAY 3: DEEP DIVE ---
         function renderDeepDiveHTML() {
+            let promptSourceText = userState.anchor === 'Philosophical Traditions' 
+                ? "Rooted in classical philosophy, use this space to reflect on the difference between the things you control and the things you must let go of in this transition."
+                : "Rooted in Viktor Frankl’s framework of finding meaning through creation, experience, and attitude, use this space for open reflection on your transition narrative.";
+
             return `
                 <div class="border border-fallow-200 rounded-xl p-5 space-y-4 mt-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Identity Transition & Logotherapy</span>
+                            <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Identity Transition</span>
                             <h3 class="text-base font-semibold text-fallow-900 mt-0.5">Meaning-Making Reflection Prompt</h3>
                         </div>
                         <span class="text-xs bg-fallow-100 text-fallow-800 px-2.5 py-1 rounded-md font-medium">Deep Dive</span>
                     </div>
                     <p class="text-sm text-fallow-700">
-                        Rooted in Viktor Frankl’s framework of finding meaning through creation, experience, and attitude, use this space for open reflection on your transition narrative.
+                        ${promptSourceText}
                     </p>
                     <div class="space-y-2">
                         <label class="block text-xs font-semibold uppercase tracking-wider text-fallow-700">Weekly Reflection Journal</label>
