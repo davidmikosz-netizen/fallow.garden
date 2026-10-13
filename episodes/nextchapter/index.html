@@ -316,7 +316,7 @@
     </footer>
 
     <script>
-        const STORAGE_KEY = 'fallow_next_chapter_state_v9';
+        const STORAGE_KEY = 'fallow_next_chapter_state_v10';
         
         let userState = {
             onboardingComplete: false,
@@ -491,6 +491,24 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+        }
+
+        // --- THE MISSING CHECKLIST GENERATOR FUNCTIONS ---
+        function generateChecklist(tasks) {
+            return tasks.map(t => {
+                const isChecked = userState.actionChecklist[t.id] ? 'checked' : '';
+                return `
+                    <label class="action-checklist-item flex items-start space-x-3 p-3 bg-fallow-50 rounded-lg border border-fallow-200/60 cursor-pointer hover:bg-fallow-100/50 transition">
+                        <input type="checkbox" onchange="toggleAction('${t.id}', this.checked)" ${isChecked} class="mt-0.5 w-4 h-4 text-fallow-900 rounded focus:ring-fallow-600">
+                        <span class="text-sm font-medium text-fallow-900 leading-snug">${t.text}</span>
+                    </label>
+                `;
+            }).join('');
+        }
+
+        function toggleAction(key, val) {
+            userState.actionChecklist[key] = val;
+            saveState();
         }
 
         // ================= DASHBOARD RENDERER =================
