@@ -623,7 +623,14 @@
                 <span style="font-size: 0.85rem; font-weight: 600;">Est. Gross Annual Pension:</span>
                 <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: var(--forest);" id="pension-est-output">$0</span>
               </div>
-              <div style="font-size: 0.75rem; color: var(--text-light); text-align: right; margin-top: 0.25rem;" id="pension-multiplier-note">
+
+              <!-- NEW PORTFOLIO EQUIVALENT ROW -->
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed var(--border-subtle);">
+                <span style="font-size: 0.8rem; font-weight: 600; color: var(--moss);">Portfolio Equivalent (4% Rule):</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 600; color: var(--moss);" id="portfolio-est-output">$0</span>
+              </div>
+
+              <div style="font-size: 0.75rem; color: var(--text-light); text-align: right; margin-top: 0.5rem;" id="pension-multiplier-note">
                 Based on parameters below
               </div>
             </div>
@@ -928,10 +935,14 @@
 
       if (totalCreditableYears > 0 && high3Val > 0) {
         const annualPension = high3Val * totalCreditableYears * multiplier;
+        const portfolioEquivalent = annualPension * 25; // 4% Rule Equivalent
+        
         document.getElementById('pension-est-output').textContent = `$${Math.round(annualPension).toLocaleString()}`;
+        document.getElementById('portfolio-est-output').textContent = `$${Math.round(portfolioEquivalent).toLocaleString()}`;
         document.getElementById('pension-multiplier-note').textContent = `Based on ${totalCreditableYears.toFixed(2)} yrs @ ${multText}`;
       } else {
         document.getElementById('pension-est-output').textContent = `$0`;
+        document.getElementById('portfolio-est-output').textContent = `$0`;
         document.getElementById('pension-multiplier-note').textContent = `Pending valid service dates`;
       }
       // ------------------------------
