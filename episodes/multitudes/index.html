@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>The Multitudes Within — Human Microbiome Primer &amp; Soil Simulator</title>
+  <title>The Multitudes Within — Human Microbiome Primer & Soil Simulator</title>
 
   <!-- PWA & Mobile Meta Tags -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -193,7 +193,7 @@
 
     .toc-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 0.65rem;
     }
 
@@ -804,6 +804,20 @@
       flex-direction: column;
       gap: 0.35rem;
     }
+
+    /* Chapter 2 - Deep Zoom Image styling */
+    .deep-zoom-placeholder {
+      background: #fdfaf6;
+      border: 1px dashed var(--moss-light);
+      border-radius: 8px;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--loam-mid);
+      font-family: var(--font-sans);
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -821,7 +835,7 @@
       <div class="brand-badge">Natural History of your Gut Biome</div>
       <h1>The Multitudes Within</h1>
       <p class="header-intro">
-        Your body contains more beneficial bacteria than human cells. You are the caretaker of an entire ecosystem—and your gut is your body's most underrated, highly-sensitive organ. This app explores the mechanics of your digestive tract, provides a simulator to see how your daily choices affect your internal environment, and offers a field guide to your keystone microbial players.
+        In the biological equivalent of the Copernican shift, science now recognizes that humans are not solitary individuals, but highly complex "supraorganisms." Your body contains more microbial cells than human ones. This app explores how these invisible inhabitants hijack your reward systems, manipulate your cravings, and manage your inflammation—and provides a simulator to see how your daily choices affect who is actually in control.
       </p>
     </header>
 
@@ -835,14 +849,18 @@
         </button>
         <button class="toc-btn" id="tocBtn2" onclick="scrollToSection('chapter2', 1)">
           <span class="toc-btn-number">Chapter 2</span>
-          <span class="toc-btn-label">How choices affect your biome</span>
+          <span class="toc-btn-label">The Mind-Gut Connection</span>
         </button>
         <button class="toc-btn" id="tocBtn3" onclick="scrollToSection('chapter3', 2)">
           <span class="toc-btn-number">Chapter 3</span>
-          <span class="toc-btn-label">A field guide to your gut</span>
+          <span class="toc-btn-label">How choices affect your biome</span>
         </button>
         <button class="toc-btn" id="tocBtn4" onclick="scrollToSection('chapter4', 3)">
           <span class="toc-btn-number">Chapter 4</span>
+          <span class="toc-btn-label">A field guide to your gut</span>
+        </button>
+        <button class="toc-btn" id="tocBtn5" onclick="scrollToSection('chapter5', 4)">
+          <span class="toc-btn-number">Chapter 5</span>
           <span class="toc-btn-label">Other Active Utilities</span>
         </button>
       </div>
@@ -890,13 +908,58 @@
 
     </div>
 
-    <!-- CHAPTER 2 VIEW: How your dietary choices affect your gut biome -->
+    <!-- CHAPTER 2 VIEW: The Mind-Gut Connection -->
     <div class="app-view" id="chapter2">
+      <section class="card">
+        <div class="section-head">
+          <h2>2. The Mind-Gut Connection</h2>
+          <span class="section-tag">Neurological Pathways</span>
+        </div>
+        
+        <p class="lens-intro-text">
+          We often view our digestion as a mechanical process, but the GI tract is actually an incredibly sensitive sensory organ that actively monitors what we consume and communicates directly with our brains. 
+        </p>
+
+        <div style="display: grid; gap: 1.5rem; margin-top: 1.5rem;">
+          <div style="background: var(--parchment-warm); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--sand-border);">
+            <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--terracotta); margin-bottom: 0.5rem;">The Real-Time Surveillance System</h3>
+            <p style="font-size: 0.9rem; color: var(--loam-mid); line-height: 1.6;">
+              Taste does not stop in the mouth. The gastrointestinal tract is lined with the same bitter and sweet receptors found on the tongue. As foods like fermented sauerkraut or buckwheat travel through the digestive system, the gut "tastes" and analyzes their chemical composition, sending satiety and metabolic signals to the brain long before digestion is complete.
+            </p>
+          </div>
+
+          <div style="background: var(--parchment-warm); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--sand-border);">
+            <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--terracotta); margin-bottom: 0.5rem;">The Hijacked Reward System</h3>
+            <p style="font-size: 0.9rem; color: var(--loam-mid); line-height: 1.6;">
+              Through the vagus nerve, bacterial populations can effectively manipulate our cravings. When we feed opportunistic bacteria the fast-digesting carbohydrates they thrive on, they stimulate the release of dopamine in the brain. This hijacking trains our reward system to crave more of the same foods, driving overconsumption.
+            </p>
+          </div>
+          
+          <div style="background: var(--parchment-warm); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--sand-border);">
+            <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--terracotta); margin-bottom: 0.5rem;">The Metabolite Bridge</h3>
+            <p style="font-size: 0.9rem; color: var(--loam-mid); line-height: 1.6;">
+              A massive percentage of the metabolites circulating in our blood are actually bacterial waste products. These chemicals cross from the large intestine into the bloodstream, explaining how poor gut health can directly cause systemic inflammation, joint pain, or brain fog.
+            </p>
+          </div>
+        </div>
+
+        <div class="deep-zoom-placeholder">
+          <div style="text-align: center; color: var(--moss-deep);">
+            <span style="font-size: 2.5rem;">🧠 ↔️ 🦠</span><br>
+            <strong>Interactive Vagus Nerve Map Placeholder</strong><br>
+            <span style="font-size: 0.85rem; color: var(--loam-mid);">(Ready for future visual integration)</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CHAPTER 3 VIEW: How your dietary choices affect your gut biome -->
+    <div class="app-view" id="chapter3">
       
       <!-- MODULE 2: Ecosystem Sandbox -->
       <section class="card">
         <div class="section-head">
-          <h2>2. The Living Soil Sandbox</h2>
+          <h2>3. The Living Soil Sandbox</h2>
           <span class="section-tag">Biophysical Simulation</span>
         </div>
 
@@ -1055,13 +1118,13 @@
 
     </div>
  
-    <!-- CHAPTER 3 VIEW: A field guide to really get to know your gut -->
-    <div class="app-view" id="chapter3">
+    <!-- CHAPTER 4 VIEW: A field guide to really get to know your gut -->
+    <div class="app-view" id="chapter4">
       
       <!-- MODULE 3: Keystone Species & Metabolites -->
       <section class="card">
         <div class="section-head">
-          <h2>3. Keystone Inhabitants &amp; Pathways</h2>
+          <h2>4. Keystone Inhabitants &amp; Pathways</h2>
           <span class="section-tag">Field Directory</span>
         </div>
 
@@ -1080,11 +1143,11 @@
 
     </div>
 
-    <!-- CHAPTER 4 VIEW: Companion Protocols -->
-    <div class="app-view" id="chapter4">
+    <!-- CHAPTER 5 VIEW: Companion Protocols -->
+    <div class="app-view" id="chapter5">
       <section class="card" style="background: var(--parchment-warm); border-color: var(--sand-border);">
         <div class="section-head">
-          <h2>Chapter 4: Other Active Utilities on Fallow.Garden</h2>
+          <h2>5. Other Active Utilities on Fallow.Garden</h2>
           <span class="section-tag">Biological Tools</span>
         </div>
         <p style="font-size: 0.85rem; color: var(--loam-mid);">
@@ -1135,7 +1198,7 @@
         
         <div class="reference-box">
           <h3>Recommended Reading</h3>
-          <p style="margin: 0; color: var(--loam-mid);">The concepts in this primer are deeply indebted to Giulia Enders' <em>Gut: The Inside Story of Our Body's Most Underrated Organ</em> and Ed Yong's <em>I Contain Multitudes: The Microbes Within Us and a Grander View of Life</em>.</p>
+          <p style="margin: 0; color: var(--loam-mid);">The concepts in this primer are deeply indebted to Emeran Mayer's <em>The Mind-Gut Connection</em>, Giulia Enders' <em>Gut: The Inside Story of Our Body's Most Underrated Organ</em>, and Ed Yong's <em>I Contain Multitudes: The Microbes Within Us and a Grander View of Life</em>.</p>
         </div>
 
         <p>
