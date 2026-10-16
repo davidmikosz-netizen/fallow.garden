@@ -919,12 +919,18 @@
       document.getElementById('row-age60').classList.toggle('active-target', choice === 'age60');
       document.getElementById('row-age62').classList.toggle('active-target', choice === 'age62');
 
-      // --- Pension Estimator Math ---
+   // --- Pension Estimator Math ---
       const high3Val = parseFloat(inputHigh3.value) || 0;
       
       const totalCreditableYears = Number((Math.max(0, (targetDate - scdDate) / (1000 * 60 * 60 * 24 * 365.25))).toFixed(2));
-      const ageAtTarget = Number(((targetDate - birthDate) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(2));
       
+      // Foolproof Calendar Age Calculation (immune to millisecond/DST drift)
+      let ageAtTarget = targetDate.getFullYear() - birthDate.getFullYear();
+      if (targetDate.getMonth() < birthDate.getMonth() || 
+         (targetDate.getMonth() === birthDate.getMonth() && targetDate.getDate() < birthDate.getDate())) {
+        ageAtTarget--;
+      }
+          
       let multiplier = 0.01;
       let multText = "1%";
       
