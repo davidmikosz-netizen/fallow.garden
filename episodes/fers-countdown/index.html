@@ -914,8 +914,9 @@
 
       // --- Pension Estimator Math ---
       const high3Val = parseFloat(inputHigh3.value) || 0;
-      const totalCreditableYears = Math.max(0, (targetDate - scdDate) / (1000 * 60 * 60 * 24 * 365.25));
-      const ageAtTarget = (targetDate - birthDate) / (1000 * 60 * 60 * 24 * 365.25);
+      
+      const totalCreditableYears = Number((Math.max(0, (targetDate - scdDate) / (1000 * 60 * 60 * 24 * 365.25))).toFixed(2));
+      const ageAtTarget = Number(((targetDate - birthDate) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(2));
       
       let multiplier = 0.01;
       let multText = "1%";
