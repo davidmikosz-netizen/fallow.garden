@@ -2,6 +2,7 @@
   "name": "multitudes-biome",
   "version": "1.0.0",
   "dependencies": {
-    "@google/generative-ai": "latest"
+    "@google/generative-ai": "latest",
+    "@vercel/speed-insights": "^2.0.0"
   }
 }
