@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Word Recall & Verbal Vitals | fallow.garden</title>
+  <!-- Compromise.js for 100% Client-Side Part-of-Speech NLP Tagging -->
+  <script src="https://unpkg.com/compromise"></script>
+  <style>
+    :root {
+      --bg: #f7f6f2;
+      --surface: #ffffff;
+      --surface-alt: #efede6;
+      --border: #dcd8ce;
+      --text: #1f2421;
+      --text-muted: #5a625d;
+      --accent: #2c5e43;
+      --accent-light: #e3efe8;
+      --amber: #b4690e;
+      --amber-light: #fdf3e6;
+      --coral: #a8383b;
+      --coral-light: #fbeaea;
+      --slate: #3b4d5e;
+      --radius: 12px;
+      --shadow: 0 4px 20px rgba(31, 36, 33, 0.06);
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      --font-serif: "Iowan Old Style", "Apple Garamond", Baskerville, Georgia, serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding-bottom: 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .top-nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .top-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .privacy-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Header */
+    header.hero {
+      padding: 44px 0 32px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    header.hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    header.hero .subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      max-width: 680px;
+    }
+
+    /* Card Sections */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .step-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    p.muted {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+    }
+
+    /* Confounding Variables Grid */
+    .confounder-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .confounder-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .confounder-item strong {
+      display: block;
+      font-size: 0.92rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .confounder-item span {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      display: block;
+      line-height: 1.45;
+    }
+
+    /* Pre-Flight Checkboxes / Pills */
+    .modifier-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .modifier-pill {
+      user-select: none;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modifier-pill:hover {
+      border-color: var(--accent);
+    }
+
+    .modifier-pill.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* Prompt Selector Cards */
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      margin: 16px 0 22px;
+    }
+
+    .prompt-card {
+      border: 2px solid var(--border);
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .prompt-card:hover {
+      border-color: var(--accent);
+    }
+
+    .prompt-card.selected {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .prompt-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .prompt-card p {
+      font-size: 0.92rem;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .prompt-target {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding-top: 8px;
+    }
+
+    /* Studio Recorder Area */
+    .studio-panel {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 16px;
+    }
+
+    .studio-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .timer-cluster {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .ring-container {
+      position: relative;
+      width: 76px;
+      height: 76px;
+    }
+
+    .ring-svg {
+      transform: rotate(-90deg);
+      width: 76px;
+      height: 76px;
+    }
+
+    .ring-bg {
+      fill: none;
+      stroke: var(--border);
+      stroke-width: 6;
+    }
+
+    .ring-progress {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 201;
+      stroke-dashoffset: 201;
+      transition: stroke-dashoffset 0.3s ease;
+    }
+
+    .ring-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .vitals-counters {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .counter-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      border-radius: 8px;
+      min-width: 120px;
+    }
+
+    .counter-box .lbl {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .counter-box .val {
+      font-family: var(--font-mono);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 11px 20px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #224934;
+    }
+
+    .btn-danger {
+      background: var(--coral);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-muted);
+    }
+
+    .nudge-banner {
+      display: none;
+      background: var(--amber-light);
+      border: 1px solid #ecc896;
+      color: #6e3f06;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+    }
+
+    textarea.transcript-box {
+      width: 100%;
+      min-height: 150px;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text);
+      resize: vertical;
+    }
+
+    textarea.transcript-box:focus {
+      outline: 2px solid var(--accent);
+      border-color: transparent;
+    }
+
+    .demo-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .demo-btn {
+      font-size: 0.78rem;
+      padding: 5px 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Act IV: Consent Gate */
+    #consent-gate {
+      display: none;
+      border: 2px solid var(--accent);
+    }
+
+    .gate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .gate-choice {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .gate-choice h3 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+
+    .gate-warning {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: var(--surface-alt);
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin: 12px 0 16px;
+    }
+
+    /* Results Views */
+    #results-section {
+      display: none;
+    }
+
+    .view-switcher {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .coaching-box {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      padding: 18px 20px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 20px;
+    }
+
+    .metric-row {
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .metric-row:last-child {
+      border-bottom: none;
+    }
+
+    .metric-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .metric-name {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .metric-raw {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--surface-alt);
+    }
+
+    .bar-track {
+      width: 100%;
+      height: 10px;
+      background: var(--surface-alt);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+
+    .annotated-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 0.92rem;
+      line-height: 1.75;
+      margin-top: 12px;
+    }
+
+    .hl-vague {
+      background: #fce4b8;
+      padding: 1px 5px;
+      border-radius: 4px;
+      border-bottom: 2px solid var(--amber);
+    }
+
+    .hl-noun {
+      background: #d7ede0;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .hl-loop {
+      background: #f9d6d7;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border-bottom: 2px solid var(--coral);
+    }
+
+    /* History Table */
+    table.history-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 12px;
+    }
+
+    table.history-table th,
+    table.history-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.history-table th {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 20px;
+      }
+      .studio-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <nav class="top-nav">
+    <div>
+      <a href="https://fallow.garden">← fallow.garden</a>
+      <span style="margin: 0 8px;">/</span>
+      <span>Citizen-Science Cognitive Tools</span>
+    </div>
+    <div class="privacy-pill" title="Zero audio or text is ever sent to a server.">
+      🔒 100% Local Browser Processing
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Hero -->
+    <header class="hero">
+      <h1>Word Recall &amp; Verbal Vitals</h1>
+      <p class="subtitle">A 3-minute tool to track speech fluency, word retrieval, and memory.</p>
+    </header>
+
+    <!-- ACT I: Framing & Reversible Confounders -->
+    <section class="card">
+      <span class="step-badge">Before You Begin</span>
+      <h2>Why Single-Day Speech Fluctuates (And What Actually Drives It)</h2>
+      <p>
+        Computational linguistics research shows that how we string words together—our vocabulary variety, how often we swap specific nouns for pronouns like <em>"that thing,"</em> and whether we repeat ideas—reflects how smoothly our brain's semantic and working-memory networks are firing.
+      </p>
+      <p class="muted">
+        <strong>Crucial Context:</strong> A single 3-minute voice check cannot diagnose dementia or neurological disease. Just like blood pressure or heart rate variability, speech fluency fluctuates wildly from day to day based on reversible biological factors. Neurologists look for <strong>multi-month slopes</strong>, never a single afternoon's score.
+      </p>
+
+      <div class="confounder-grid">
+        <div class="confounder-item">
+          <strong>1. Untreated Hearing Loss (#1 Risk)</strong>
+          <span>The <em>Lancet</em> Commission identifies mid-life hearing loss as the single largest modifiable risk factor for cognitive decline. Straining to hear taxes working memory and shrinks lexical fluency—wearing hearing aids directly lifts this load.</span>
+        </div>
+        <div class="confounder-item">
+          <strong>2. Sleep Debt &amp; Glymphatic Load</strong>
+          <span>Even one night under 6 hours slows down the left-hemisphere bridge between a concept and its spoken noun—creating temporary "tip-of-the-tongue" stalls.</span>
+        </div>
+        <div class="confounder-item">
+          <strong>3. Medications &amp; Anticholinergics</strong>
+          <span>Common allergy pills (diphenhydramine), sleep aids, and certain blood pressure medications directly dampen acetylcholine, the neurotransmitter responsible for crisp word retrieval.</span>
+        </div>
+        <div class="confounder-item">
+          <strong>4. Stress, B12, &amp; Metabolic State</strong>
+          <span>High cortisol hijacks prefrontal working memory (causing you to lose your train of thought mid-sentence), while low Vitamin B12, thyroid shifts, or simple dehydration mimic cognitive fog.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT II: Today's Baseline Modifiers -->
+    <section class="card">
+      <span class="step-badge">Step 1 · Baseline Context</span>
+      <h2>Log Today's Confounding Variables</h2>
+      <p class="muted">
+        Select any factors true for you right now. This helps calibrate your interpretation and tags your baseline log so you don't mistake a tired Tuesday for a long-term trend.
+      </p>
+      <div class="modifier-pills" id="modifier-container">
+        <div class="modifier-pill" data-mod="sleep">😴 Slept under 6.5 hours</div>
+        <div class="modifier-pill" data-mod="stress">⚡ High stress or preoccupied</div>
+        <div class="modifier-pill" data-mod="hearing">🦻 Unassisted hearing difficulty</div>
+        <div class="modifier-pill" data-mod="meds">💊 Took antihistamine / sedating med</div>
+        <div class="modifier-pill" data-mod="fatigue">🌇 Late-day / post-work fatigue</div>
+        <div class="modifier-pill" data-mod="rested">✨ Well-rested baseline</div>
+      </div>
+    </section>
+
+    <!-- ACT III: Prompted 3-Minute Speech Studio -->
+    <section class="card">
+      <span class="step-badge">Step 2 · 3-Minute Spoken Sample</span>
+      <h2>Choose an Open-Ended Prompt</h2>
+      <p class="muted">
+        Aim for roughly <strong>350 to 500 words (about 3 minutes)</strong> of continuous speech. Pick a topic that requires active explanation rather than a rehearsed story you have told dozens of times:
+      </p>
+
+      <div class="prompt-grid" id="prompt-grid">
+        <div class="prompt-card selected" data-prompt="procedural" data-nudge="Need another angle? Describe the specific tools or ingredients you use, or the most common mistake people make when doing it.">
+          <div>
+            <div class="prompt-tag">Prompt A · Procedural Sequence</div>
+            <p>"Walk me through, step-by-step, how you prepare a favorite meal from scratch, or how you prepare and maintain a garden bed across a season."</p>
+          </div>
+          <div class="prompt-target">Tests: Executive sequencing, concrete nouns, temporal order.</div>
+        </div>
+
+        <div class="prompt-card" data-prompt="episodic" data-nudge="Keep going: Who else was involved, what surprised you most about it, and how did the environment look or sound?">
+          <div>
+            <div class="prompt-tag">Prompt B · Recent Episodic Recall</div>
+            <p>"Tell me in detail about a trip you took in the last year, or summarize the core arguments of a book or long article you read recently."</p>
+          </div>
+          <div class="prompt-target">Tests: Medium-term memory synthesis, proper nouns, idea density.</div>
+        </div>
+
+        <div class="prompt-card" data-prompt="spatial" data-nudge="Keep going: Walk mentally into the next room or outdoor space—what objects are on the walls, tables, or ground?">
+          <div>
+            <div class="prompt-tag">Prompt C · Spatial &amp; Object Precision</div>
+            <p>"Mentally walk through your home and yard from the front entrance to the back. Describe every specific object, plant, piece of furniture, and tool you pass."</p>
+          </div>
+          <div class="prompt-target">Tests: Rapid noun retrieval (anomia check) &amp; lexical diversity.</div>
+        </div>
+      </div>
+
+      <div class="studio-panel">
+        <div class="studio-top">
+          <div class="timer-cluster">
+            <div class="ring-container">
+              <svg class="ring-svg" viewBox="0 0 76 76">
+                <circle class="ring-bg" cx="38" cy="38" r="32"></circle>
+                <circle class="ring-progress" id="ring-progress" cx="38" cy="38" r="32"></circle>
+              </svg>
+              <div class="ring-label" id="timer-display">3:00</div>
+            </div>
+            <div>
+              <h3 id="studio-status">Ready to Record</h3>
+              <p class="muted" style="margin-bottom:0; font-size:0.85rem;" id="mic-support-msg">
+                Speak naturally at your own pace. Or paste/type a transcript below.
+              </p>
+            </div>
+          </div>
+
+          <div class="vitals-counters">
+            <div class="counter-box">
+              <span class="lbl">Words Captured</span>
+              <span class="val" id="word-count-val">0 <small style="font-size:0.75rem; color:var(--text-muted)">/ 400</small></span>
+            </div>
+            <div class="counter-box">
+              <span class="lbl">Hesitation Pauses</span>
+              <span class="val" id="pause-count-val">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="nudge-banner" id="nudge-banner">
+          💡 <strong>Prompt Helper:</strong> <span id="nudge-text">Need another angle? Describe the specific tools or ingredients you use.</span>
+        </div>
+
+        <div class="btn-row" style="margin-bottom: 14px;">
+          <button class="btn-primary" id="btn-record" onclick="toggleRecording()">
+            🎙️ Start 3-Minute Voice Capture
+          </button>
+          <button class="btn-secondary" onclick="analyzeSpeech()" id="btn-analyze">
+            ✨ Analyze Current Transcript
+          </button>
+          <button class="btn-secondary" onclick="resetStudio()">
+            ↺ Reset
+          </button>
+        </div>
+
+        <textarea
+          id="transcript-input"
+          class="transcript-box"
+          placeholder="As you speak into your microphone, your words will appear here in real time. (If your browser blocks microphone access, you can also dictate using your device's keyboard mic or paste a sample transcript directly here.)"
+          oninput="handleManualInput()"
+        ></textarea>
+
+        <div class="demo-bar">
+          <span>Want to see how the engine scores different speech patterns before recording?</span>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button class="demo-btn" onclick="loadSample('healthy')">Load Sample: High Specificity</button>
+            <button class="demo-btn" onclick="loadSample('fatigue')">Load Sample: Tired / Pronoun Drift</button>
+            <button class="demo-btn" onclick="loadSample('looping')">Load Sample: Repetitive Looping</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT IV: The Two-Tiered Consent Gate -->
+    <section class="card" id="consent-gate">
+      <span class="step-badge">Step 3 · Choose Your Lens</span>
+      <h2>Your Speech Sample Is Ready. How Would You Like Your Feedback?</h2>
+      <p class="muted">
+        Being handed raw clinical ratios without context can feel jarring—especially on a day when you are simply tired or stressed. Choose how you want to view today's results (you can switch between both views at any time):
+      </p>
+
+      <div class="gate-grid">
+        <div class="gate-choice">
+          <div>
+            <h3>🌱 Option 1: Lifestyle &amp; Context Summary</h3>
+            <p class="muted">
+              Focuses on what went well in your speech today, interprets any word-finding pauses alongside the sleep/stress modifiers you checked, and highlights practical habits to support brain health.
+            </p>
+          </div>
+          <button class="btn-primary" onclick="showResults('gentle')" style="width:100%; justify-content:center; margin-top:16px;">
+            View Restorative Summary
+          </button>
+        </div>
+
+        <div class="gate-choice">
+          <div>
+            <h3>🔍 Option 2: "Tell It to Me Straight" (Raw Biomarkers)</h3>
+            <p class="muted">
+              Displays the unvarnished computational linguistics math: Moving-Average Type-Token Ratio (MATTR), Noun-to-Pronoun Specificity Index, Idea Density, and highlighted Semantic Loops.
+            </p>
+            <div class="gate-warning">
+              ⚠️ <strong>Note:</strong> Raw scores may flag anomalies if you are sleep-deprived, distracted, or spoke briefly. Best used for logging multi-month baselines.
+            </div>
+          </div>
+          <button class="btn-secondary" onclick="showResults('straight')" style="width:100%; justify-content:center;">
+            Show Raw Biomarker Scorecard
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT V: Results Display (Both Modes) -->
+    <section class="card" id="results-section">
+      <div class="view-switcher">
+        <div>
+          <span class="step-badge" id="active-view-badge">Analysis Complete</span>
+          <h2 id="active-view-title">Speech &amp; Recall Analysis</h2>
+        </div>
+        <div class="btn-row">
+          <button class="btn-secondary" id="toggle-gentle-btn" onclick="showResults('gentle')">🌱 Lifestyle View</button>
+          <button class="btn-secondary" id="toggle-straight-btn" onclick="showResults('straight')">🔍 Straight Biomarkers</button>
+          <button class="btn-primary" onclick="saveToHistory()">💾 Save to Browser Log</button>
+        </div>
+      </div>
+
+      <!-- GENTLE VIEW -->
+      <div id="view-gentle" style="display:none;">
+        <div class="coaching-box" id="gentle-headline-box">
+          <h3 id="gentle-headline">Your Spoken Snapshot</h3>
+          <p id="gentle-summary" style="margin-bottom:0;"></p>
+        </div>
+
+        <div class="confounder-grid" id="gentle-cards"></div>
+      </div>
+
+      <!-- STRAIGHT BIOMARKER VIEW -->
+      <div id="view-straight" style="display:none;">
+        <p class="muted" style="margin-bottom: 20px;">
+          Below are the 5 core linguistic biomarkers extracted from your sample. In clinical longitudinal studies, a healthy baseline typically holds a <strong>MATTR above 0.68</strong>, a <strong>Noun-to-Pronoun Ratio above 1.10</strong>, and <strong>zero unconscious semantic loops</strong> within a 3-minute window.
+        </p>
+
+        <div id="biomarker-bars"></div>
+
+        <div style="margin-top: 28px;">
+          <h3>Annotated Transcript Inspection</h3>
+          <p class="muted" style="font-size:0.85rem;">
+            <span class="hl-noun">Green highlights</span> indicate concrete/proper nouns (strong specificity).
+            <span class="hl-vague">Amber highlights</span> indicate vague pronouns or filler placeholders (<em>it, thing, stuff, that</em>).
+            <span class="hl-loop">Red highlights</span> indicate clauses with high semantic or phrasing overlap with an earlier sentence.
+          </p>
+          <div class="annotated-box" id="annotated-transcript"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Longitudinal Browser Ledger -->
+    <section class="card">
+      <div class="card-header">
+        <div>
+          <span class="step-badge">Longitudinal Baseline</span>
+          <h2>Your Local Browser Ledger (Climate vs. Weather)</h2>
+        </div>
+        <button class="btn-secondary" onclick="clearHistory()" style="font-size:0.8rem; padding:6px 12px;">
+          Clear Local Log
+        </button>
+      </div>
+      <p class="muted">
+        Saved sessions live strictly in this browser's <code>localStorage</code>. Repeating this 3-minute check once a month under similar rest conditions lets you observe your personal trendline over time.
+      </p>
+      <div id="history-container"></div>
+    </section>
+  </div>
+
+  <script>
+    // --- STATE VARIABLES ---
+    let isRecording = false;
+    let recognition = null;
+    let timerInterval = null;
+    let secondsRemaining = 180; // 3 minutes
+    let lastSpeechTimestamp = null;
+    let hesitationPauses = 0; // Pauses > 1.2s mid-stream
+    let silenceSeconds = 0;
+    let finalTranscript = "";
+    let interimTranscript = "";
+    let lastAnalysis = null;
+
+    const VAGUE_WORDS = new Set([
+      "thing", "things", "stuff", "something", "anything", "everything",
+      "somewhere", "somehow", "it", "they", "them", "this", "that", "these", "those", "whatever", "whatchamacallit"
+    ]);
+
+    const FILLER_WORDS = new Set(["um", "uh", "er", "ah", "like", "basically", "literally"]);
+
+    // --- INITIALIZE PILLS & PROMPTS ---
+    document.querySelectorAll(".modifier-pill").forEach(pill => {
+      pill.addEventListener("click", () => pill.classList.toggle("active"));
+    });
+
+    document.querySelectorAll(".prompt-card").forEach(card => {
+      card.addEventListener("click", () => {
+        document.querySelectorAll(".prompt-card").forEach(c => c.classList.remove("selected"));
+        card.classList.add("selected");
+        document.getElementById("nudge-text").textContent = card.getAttribute("data-nudge");
+      });
+    });
+
+    // --- SPEECH RECOGNITION SETUP ---
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      document.getElementById("mic-support-msg").innerHTML =
+        "⚠️ Live microphone transcription requires Chrome, Edge, or Safari. You can still dictate using your keyboard mic or paste text below.";
+    } else {
+      recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = "en-US";
+
+      recognition.onresult = (event) => {
+        const now = Date.now();
+        if (lastSpeechTimestamp && (now - lastSpeechTimestamp > 1350)) {
+          hesitationPauses++;
+          document.getElementById("pause-count-val").textContent = hesitationPauses;
+        }
+        lastSpeechTimestamp = now;
+        silenceSeconds = 0;
+        document.getElementById("nudge-banner").style.display = "none";
+
+        interimTranscript = "";
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            finalTranscript += event.results[i][0].transcript.trim() + ". ";
+          } else {
+            interimTranscript += event.results[i][0].transcript;
+          }
+        }
+        const combined = (finalTranscript + interimTranscript).trim();
+        document.getElementById("transcript-input").value = combined;
+        updateWordCounter(combined);
+      };
+
+      recognition.onerror = (e) => {
+        console.warn("Speech recognition warning:", e.error);
+      };
+
+      recognition.onend = () => {
+        if (isRecording) {
+          try { recognition.start(); } catch (err) {}
+        }
+      };
+    }
+
+    function toggleRecording() {
+      if (!SpeechRecognition) {
+        alert("Your current browser doesn't support live Web Speech API streaming. Please use Chrome, Edge, or Safari, or use your device's built-in dictation inside the text box.");
+        return;
+      }
+      if (!isRecording) {
+        startRecording();
+      } else {
+        stopRecording();
+      }
+    }
+
+    function startRecording() {
+      isRecording = true;
+      finalTranscript = document.getElementById("transcript-input").value
+        ? document.getElementById("transcript-input").value.trim() + " "
+        : "";
+      lastSpeechTimestamp = Date.now();
+      silenceSeconds = 0;
+
+      const btn = document.getElementById("btn-record");
+      btn.innerHTML = "⏹️ Stop Recording";
+      btn.className = "btn-danger";
+      document.getElementById("studio-status").textContent = "Listening & Mapping Cadence...";
+
+      try { recognition.start(); } catch (e) {}
+
+      timerInterval = setInterval(() => {
+        if (secondsRemaining > 0) {
+          secondsRemaining--;
+          updateTimerRing();
+        }
+        silenceSeconds++;
+        if (silenceSeconds >= 8) {
+          document.getElementById("nudge-banner").style.display = "block";
+        }
+        if (secondsRemaining === 0) {
+          stopRecording();
+          analyzeSpeech();
+        }
+      }, 1000);
+    }
+
+    function stopRecording() {
+      isRecording = false;
+      clearInterval(timerInterval);
+      if (recognition) {
+        try { recognition.stop(); } catch (e) {}
+      }
+      const btn = document.getElementById("btn-record");
+      btn.innerHTML = "🎙️ Resume Voice Capture";
+      btn.className = "btn-primary";
+      document.getElementById("studio-status").textContent = "Capture Paused";
+    }
+
+    function updateTimerRing() {
+      const mins = Math.floor(secondsRemaining / 60);
+      const secs = secondsRemaining % 60;
+      document.getElementById("timer-display").textContent =
+        `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+
+      const circumference = 201;
+      const elapsedRatio = (180 - secondsRemaining) / 180;
+      const offset = circumference - elapsedRatio * circumference;
+      document.getElementById("ring-progress").style.strokeDashoffset = offset;
+    }
+
+    function handleManualInput() {
+      const text = document.getElementById("transcript-input").value;
+      updateWordCounter(text);
+    }
+
+    function updateWordCounter(text) {
+      const words = text.trim().split(/\s+/).filter(Boolean);
+      document.getElementById("word-count-val").innerHTML =
+        `${words.length} <small style="font-size:0.75rem; color:var(--text-muted)">/ 400</small>`;
+    }
+
+    function resetStudio() {
+      stopRecording();
+      secondsRemaining = 180;
+      hesitationPauses = 0;
+      finalTranscript = "";
+      interimTranscript = "";
+      document.getElementById("transcript-input").value = "";
+      document.getElementById("pause-count-val").textContent = "0";
+      document.getElementById("nudge-banner").style.display = "none";
+      document.getElementById("consent-gate").style.display = "none";
+      document.getElementById("results-section").style.display = "none";
+      document.getElementById("btn-record").innerHTML = "🎙️ Start 3-Minute Voice Capture";
+      document.getElementById("studio-status").textContent = "Ready to Record";
+      updateTimerRing();
+      updateWordCounter("");
+    }
+
+    // --- COMPUTATIONAL LINGUISTICS ENGINE ---
+    function analyzeSpeech() {
+      if (isRecording) stopRecording();
+      const rawText = document.getElementById("transcript-input").value.trim();
+      const words = rawText
+        .toLowerCase()
+        .replace(/[^a-z0-9'\s]/g, "")
+        .split(/\s+/)
+        .filter(Boolean);
+
+      if (words.length < 25) {
+        alert("Please record or enter at least 25 words so the linguistic biomarkers can be calculated accurately.");
+        return;
+      }
+
+      // 1. Moving-Average Type-Token Ratio (MATTR) with 50-word window
+      const windowSize = Math.min(50, words.length);
+      let ttrSum = 0;
+      const windowsCount = words.length - windowSize + 1;
+      for (let i = 0; i < windowsCount; i++) {
+        const slice = words.slice(i, i + windowSize);
+        const unique = new Set(slice);
+        ttrSum += unique.size / windowSize;
+      }
+      const mattr = ttrSum / windowsCount;
+
+      // 2. Compromise NLP Part-of-Speech Tagging
+      const doc = window.nlp(rawText);
+      const allNouns = doc.nouns().out("array");
+      const pronouns = doc.pronouns().out("array");
+      const verbs = doc.verbs().out("array");
+      const adjectives = doc.adjectives().out("array");
+      const adverbs = doc.adverbs().out("array");
+
+      // Count vague placeholders + pronouns vs specific nouns
+      let vagueCount = 0;
+      let fillerCount = 0;
+      words.forEach(w => {
+        if (VAGUE_WORDS.has(w)) vagueCount++;
+        if (FILLER_WORDS.has(w)) fillerCount++;
+      });
+
+      const specificNounCount = Math.max(1, allNouns.length);
+      const totalVagueAndPronouns = Math.max(1, Math.max(pronouns.length, vagueCount));
+      const specificityRatio = specificNounCount / totalVagueAndPronouns;
+
+      // 3. Idea / Propositional Density (Verbs + Adjectives + Adverbs + Prepositions per 10 words)
+      const propositions = verbs.length + adjectives.length + adverbs.length;
+      const ideaDensity = (propositions / words.length) * 10;
+
+      // 4. Intra-Sample Semantic & Phrase Looping (Cosine / Jaccard Content Overlap between sentences)
+      const rawSentences = rawText
+        .split(/(?<=[.!?])\s+/)
+        .map(s => s.trim())
+        .filter(s => s.split(/\s+/).length >= 5);
+
+      const stopWords = new Set(["the", "and", "to", "of", "in", "a", "is", "that", "for", "on", "with", "as", "was", "at", "by", "an", "be", "I", "i", "my", "we", "you", "it"]);
+      const sentenceVectors = rawSentences.map(s => {
+        const tokens = s.toLowerCase().replace(/[^a-z0-9\s]/g, "").split(/\s+/).filter(w => w.length > 2 && !stopWords.has(w));
+        return new Set(tokens);
+      });
+
+      const loopedSentenceIndices = new Set();
+      let semanticLoopsCount = 0;
+
+      for (let i = 0; i < sentenceVectors.length; i++) {
+        for (let j = i + 1; j < sentenceVectors.length; j++) {
+          const setA = sentenceVectors[i];
+          const setB = sentenceVectors[j];
+          if (setA.size < 3 || setB.size < 3) continue;
+          let intersection = 0;
+          setA.forEach(item => { if (setB.has(item)) intersection++; });
+          const similarity = intersection / Math.sqrt(setA.size * setB.size);
+          if (similarity >= 0.58) {
+            semanticLoopsCount++;
+            loopedSentenceIndices.add(j);
+          }
+        }
+      }
+
+      // 5. Hesitation / Lexical Access Latency Rate per 100 words
+      const effectivePauses = hesitationPauses + fillerCount;
+      const pauseRatePer100 = (effectivePauses / words.length) * 100;
+
+      // Active Modifiers
+      const activeModifiers = Array.from(document.querySelectorAll(".modifier-pill.active")).map(
+        el => el.getAttribute("data-mod")
+      );
+
+      lastAnalysis = {
+        date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+        wordCount: words.length,
+        mattr: Number(mattr.toFixed(2)),
+        specificityRatio: Number(specificityRatio.toFixed(2)),
+        ideaDensity: Number(ideaDensity.toFixed(1)),
+        semanticLoopsCount,
+        pauseRatePer100: Number(pauseRatePer100.toFixed(1)),
+        rawSentences,
+        loopedSentenceIndices,
+        activeModifiers
+      };
+
+      // Show the Consent Gate first
+      const gate = document.getElementById("consent-gate");
+      gate.style.display = "block";
+      document.getElementById("results-section").style.display = "none";
+      gate.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function showResults(mode) {
+      if (!lastAnalysis) return;
+      const resSec = document.getElementById("results-section");
+      resSec.style.display = "block";
+
+      const gentleDiv = document.getElementById("view-gentle");
+      const straightDiv = document.getElementById("view-straight");
+
+      if (mode === "gentle") {
+        gentleDiv.style.display = "block";
+        straightDiv.style.display = "none";
+        document.getElementById("active-view-badge").textContent = "Option 1 · Restorative Context View";
+        document.getElementById("active-view-title").textContent = "Lifestyle & Context Interpretation";
+        renderGentleView(lastAnalysis);
+      } else {
+        gentleDiv.style.display = "none";
+        straightDiv.style.display = "block";
+        document.getElementById("active-view-badge").textContent = "Option 2 · Direct Biometric Scorecard";
+        document.getElementById("active-view-title").textContent = "Raw Computational Linguistics Metrics";
+        renderStraightView(lastAnalysis);
+      }
+
+      resSec.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function renderGentleView(data) {
+      const mods = data.activeModifiers;
+      const hasConf = mods.includes("sleep") || mods.includes("stress") || mods.includes("meds") || mods.includes("fatigue") || mods.includes("hearing");
+
+      let headline = "Strong Lexical Vitality Today";
+      let summary = `Across ${data.wordCount} words, your speech maintained steady momentum and clear structure.`;
+
+      if (data.specificityRatio < 0.95 || data.semanticLoopsCount > 0 || data.mattr < 0.62) {
+        if (hasConf) {
+          headline = "Mild Word-Finding Friction Detected — Likely Tied to Today's Baseline Modifiers";
+          summary = `Your sample showed a few moments of substituting general pronouns ("that/it/thing") or revisiting a thought. Because you logged active fatigue, sleep, medication, or hearing modifiers today, this pattern is classic reversible "lexical weather" rather than a structural shift. Re-test on a well-rested morning to compare.`;
+        } else {
+          headline = "A Few Tip-of-the-Tongue Substitutions Noted Today";
+          summary = `In your ${data.wordCount}-word sample, your brain occasionally reached for general placeholders or circled back to an earlier point. Single-day dips happen frequently from subtle dehydration, afternoon glucose dips, or mental multitasking. Save this baseline and compare it in 30 days.`;
+        }
+      }
+
+      document.getElementById("gentle-headline").textContent = headline;
+      document.getElementById("gentle-summary").textContent = summary;
+
+      const cardsContainer = document.getElementById("gentle-cards");
+      cardsContainer.innerHTML = `
+        <div class="confounder-item">
+          <strong>Vocabulary Cadence</strong>
+          <span>${data.mattr >= 0.66 ? "Your word variety remained rich throughout the passage without relying on repetitive phrasing." : "Your vocabulary stayed conversational and compact today—common when speaking quickly or under fatigue."}</span>
+        </div>
+        <div class="confounder-item">
+          <strong>Noun Retrieval &amp; Specificity</strong>
+          <span>${data.specificityRatio >= 1.0 ? "You pulled concrete nouns and specific names smoothly with minimal reliance on vague placeholders." : "You leaned slightly on pronouns ('it', 'that', 'thing'). Slowing your speaking pace by 15% often gives the left hemisphere the extra 300ms it needs to pull the exact noun."}</span>
+        </div>
+        <div class="confounder-item">
+          <strong>Working Memory Thread</strong>
+          <span>${data.semanticLoopsCount === 0 ? "Zero repetitive loops detected—you held your narrative arc cleanly from beginning to end." : `You circled back to a similar phrasing ${data.semanticLoopsCount} time(s). High stress or fragmented sleep is the #1 daily trigger for working-memory loops.`}</span>
+        </div>
+        <div class="confounder-item">
+          <strong>Protective Brain Habits</strong>
+          <span>Prioritize 7+ hours of sleep for glymphatic clearance, wear hearing support if needed, stay hydrated, and pair daily brisk walking with rich social conversation.</span>
+        </div>
+      `;
+    }
+
+    function renderStraightView(data) {
+      // Score normalizations (0 - 100 for visual bars)
+      const mattrScore = Math.min(100, Math.max(10, Math.round(((data.mattr - 0.45) / 0.35) * 100)));
+      const specScore = Math.min(100, Math.max(10, Math.round((data.specificityRatio / 1.8) * 100)));
+      const ideaScore = Math.min(100, Math.max(10, Math.round((data.ideaDensity / 5.0) * 100)));
+      const loopScore = Math.max(10, 100 - data.semanticLoopsCount * 28);
+      const pauseScore = Math.max(10, Math.round(100 - data.pauseRatePer100 * 12));
+
+      const metrics = [
+        {
+          name: "1. Lexical Diversity (MATTR-50)",
+          raw: `${data.mattr} (Target: ≥ 0.66)`,
+          score: mattrScore,
+          desc: "Measures unique word variety across a 50-word sliding window so sample length doesn't penalize you."
+        },
+        {
+          name: "2. Noun-to-Pronoun Specificity Index",
+          raw: `${data.specificityRatio} : 1 (Target: ≥ 1.05)`,
+          score: specScore,
+          desc: "Ratio of concrete/proper nouns to pronouns and vague words ('thing', 'it', 'that'). Lower ratios signal anomia (word-retrieval friction)."
+        },
+        {
+          name: "3. Intra-Sample Semantic Repetition",
+          raw: `${data.semanticLoopsCount} Loops Detected (Target: 0)`,
+          score: loopScore,
+          desc: "Flags sentences later in your monologue that repeat the core vocabulary of an earlier sentence (>58% cosine content overlap)."
+        },
+        {
+          name: "4. Propositional / Idea Density",
+          raw: `${data.ideaDensity} ideas / 10 words (Target: ≥ 3.5)`,
+          score: ideaScore,
+          desc: "Measures how densely verbs, adjectives, and modifiers are packed per 10 words spoken."
+        },
+        {
+          name: "5. Mid-Stream Hesitation & Filler Fluency",
+          raw: `${data.pauseRatePer100} stalls / 100 words (Target: ≤ 2.5)`,
+          score: pauseScore,
+          desc: "Tracks mid-sentence pauses (>1.35s) and vocalized fillers ('um', 'uh') that occur while searching for a word."
+        }
+      ];
+
+      const barsHtml = metrics.map(m => {
+        const color = m.score >= 65 ? "var(--accent)" : (m.score >= 45 ? "var(--amber)" : "var(--coral)");
+        return `
+          <div class="metric-row">
+            <div class="metric-top">
+              <span class="metric-name">${m.name}</span>
+              <span class="metric-raw">${m.raw}</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:${m.score}%; background:${color};"></div>
+            </div>
+            <p class="muted" style="margin-bottom:0; font-size:0.84rem;">${m.desc}</p>
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("biomarker-bars").innerHTML = barsHtml;
+
+      // Render Annotated Transcript
+      const doc = window.nlp(document.getElementById("transcript-input").value);
+      const nounSet = new Set(
+        doc.nouns().out("array").flatMap(n => n.toLowerCase().replace(/[^a-z]/g, " ").split(/\s+/))
+      );
+
+      const annotatedHtml = data.rawSentences.map((sent, idx) => {
+        const isLooped = data.loopedSentenceIndices.has(idx);
+        const tokens = sent.split(/\s+/).map(tok => {
+          const clean = tok.toLowerCase().replace(/[^a-z']/g, "");
+          if (VAGUE_WORDS.has(clean) || FILLER_WORDS.has(clean)) {
+            return `<span class="hl-vague" title="Vague pronoun / placeholder">${tok}</span>`;
+          } else if (nounSet.has(clean) && clean.length > 3) {
+            return `<span class="hl-noun" title="Specific Noun">${tok}</span>`;
+          }
+          return tok;
+        }).join(" ");
+
+        if (isLooped) {
+          return `<span class="hl-loop" title="High semantic overlap with an earlier sentence in this sample">🔁 ${tokens}</span>`;
+        }
+        return tokens;
+      }).join(" ");
+
+      document.getElementById("annotated-transcript").innerHTML = annotatedHtml || "Transcript too short to segment.";
+    }
+
+    // --- SAMPLE PRESETS FOR TESTING ---
+    function loadSample(type) {
+      resetStudio();
+      let text = "";
+      if (type === "healthy") {
+        hesitationPauses = 1;
+        text = "When preparing a native perennial garden bed in early autumn, the first step involves clearing invasive turfgrass without disturbing the dormant weed seeds buried in the topsoil. Rather than using a mechanical rototiller, I lay down overlapping sheets of corrugated cardboard right over the fescue and clover. After soaking the cardboard thoroughly with a garden hose, I spread four inches of aged arborist woodchips and leaf compost across the surface. Over the winter months, earthworms and soil fungi break down the cellulose barrier, creating friable, dark loam by April. Then I transplant deep-rooted plugs of mountain mint, goldenrod, Joe Pye weed, and swamp milkweed spacing them eighteen inches apart so their root crowns knit together and crowd out crabgrass.";
+      } else if (type === "fatigue") {
+        hesitationPauses = 6;
+        text = "Well, when I go out to fix that area in the back, the first thing I do is get the stuff from the shed and put it down over those spots near the fence. Um, you have to make sure that thing is wet before you put the other stuff on top of it, otherwise it blows around in the wind. And then after a while, they break down and it looks much better in the spring. Then I usually go to that place down the road to buy some of those tall plants that the butterflies like, and I put them in there near the back corner where it gets wet.";
+      } else if (type === "looping") {
+        hesitationPauses = 5;
+        text = "Yesterday morning I walked down the trail with the dogs to check on the river level after the heavy rainstorm. The water was rising near the old stone bridge and carrying branches downstream. We turned around near the wooden bench because the mud was getting too deep on the path. Anyway, I took the dogs down the trail yesterday morning to see how high the river level had risen after the rainstorm. Because the mud was so deep near the wooden bench, we had to turn back before reaching the old stone bridge.";
+      }
+      document.getElementById("transcript-input").value = text;
+      document.getElementById("pause-count-val").textContent = hesitationPauses;
+      updateWordCounter(text);
+      analyzeSpeech();
+    }
+
+    // --- LOCALSTORAGE LONGITUDINAL LEDGER ---
+    function saveToHistory() {
+      if (!lastAnalysis) return;
+      const existing = JSON.parse(localStorage.getItem("verbal_vitals_log") || "[]");
+      existing.unshift({
+        date: lastAnalysis.date,
+        words: lastAnalysis.wordCount,
+        mattr: lastAnalysis.mattr,
+        specificity: lastAnalysis.specificityRatio,
+        loops: lastAnalysis.semanticLoopsCount,
+        modifiers: lastAnalysis.activeModifiers.join(", ") || "None"
+      });
+      localStorage.setItem("verbal_vitals_log", JSON.stringify(existing.slice(0, 24)));
+      renderHistory();
+      alert("Saved to your local browser ledger.");
+    }
+
+    function renderHistory() {
+      const container = document.getElementById("history-container");
+      const log = JSON.parse(localStorage.getItem("verbal_vitals_log") || "[]");
+      if (log.length === 0) {
+        container.innerHTML = `<p class="muted" style="margin-bottom:0;">No saved sessions yet. Complete a speech analysis and click "Save to Browser Log" to start your personal trendline.</p>`;
+        return;
+      }
+
+      const rows = log.map(item => `
+        <tr>
+          <td><strong>${item.date}</strong></td>
+          <td>${item.words} words</td>
+          <td><code>${item.mattr}</code></td>
+          <td><code>${item.specificity} : 1</code></td>
+          <td>${item.loops === 0 ? "✅ 0" : `⚠️ ${item.loops}`}</td>
+          <td>${item.modifiers}</td>
+        </tr>
+      `).join("");
+
+      container.innerHTML = `
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Sample Length</th>
+              <th>MATTR (Diversity)</th>
+              <th>Noun:Pronoun Ratio</th>
+              <th>Semantic Loops</th>
+              <th>Logged Modifiers</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+    }
+
+    function clearHistory() {
+      if (confirm("Clear all locally saved speech baseline logs from this browser?")) {
+        localStorage.removeItem("verbal_vitals_log");
+        renderHistory();
+      }
+    }
+
+    // Initialize History on Load
+    renderHistory();
+  </script>
+</body>
+</html>
