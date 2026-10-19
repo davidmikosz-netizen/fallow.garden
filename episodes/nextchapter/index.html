@@ -60,7 +60,7 @@
     <main class="flex-grow flex items-center justify-center px-4 py-8 sm:py-12">
         <div class="w-full max-w-2xl bg-white rounded-2xl border border-fallow-200 shadow-sm p-6 sm:p-10 transition-all duration-300">
 
-<!-- ================= INTRO VIEW ================= -->
+            <!-- ================= INTRO VIEW ================= -->
             <div id="view-intro" class="fade-in space-y-6">
                 <div>
                     <span class="text-xs font-semibold uppercase tracking-wider text-fallow-600 bg-fallow-100 px-2.5 py-1 rounded-md">
@@ -194,10 +194,10 @@
                     </label>
 
                     <label class="border border-fallow-200 rounded-xl p-4 cursor-pointer hover:border-fallow-600 transition has-[:checked]:border-fallow-900 has-[:checked]:bg-fallow-50/50 flex items-start space-x-3">
-                        <input type="radio" name="anchor" value="Traditional / Spiritual" class="mt-1 text-fallow-900 focus:ring-fallow-600">
+                        <input type="radio" name="anchor" value="Contemplative / Spiritual" class="mt-1 text-fallow-900 focus:ring-fallow-600">
                         <div>
-                            <span class="font-semibold text-fallow-900 block text-sm">Traditional / Spiritual</span>
-                            <span class="text-xs text-fallow-600 block mt-0.5">Faith-based or contemplative frameworks.</span>
+                            <span class="font-semibold text-fallow-900 block text-sm">Contemplative / Spiritual</span>
+                            <span class="text-xs text-fallow-600 block mt-0.5">Mindfulness, meaning-making, and Ikigai.</span>
                         </div>
                     </label>
 
@@ -329,7 +329,7 @@
     </footer>
 
     <script>
-        const STORAGE_KEY = 'fallow_next_chapter_state_v11';
+        const STORAGE_KEY = 'fallow_next_chapter_state_v13';
         
         let userState = {
             onboardingComplete: false,
@@ -506,7 +506,6 @@
             URL.revokeObjectURL(url);
         }
 
-        // --- THE MISSING CHECKLIST GENERATOR FUNCTIONS ---
         function generateChecklist(tasks) {
             return tasks.map(t => {
                 const isChecked = userState.actionChecklist[t.id] ? 'checked' : '';
@@ -524,7 +523,6 @@
             saveState();
         }
 
-        // ================= DASHBOARD RENDERER =================
         function populateDashboard() {
             document.getElementById('dash-badge').innerText = "Pathway: " + userState.vibe;
             document.getElementById('dash-vibe').innerText = userState.vibe;
@@ -534,10 +532,11 @@
             const container = document.getElementById('pathway-content-container');
             container.innerHTML = '';
 
-            // Routing logic based on Worldview Anchor
             let combinedHTML = '';
             if (userState.anchor === 'Philosophical Traditions') {
                 combinedHTML = renderPhilosophicalPlanHTML();
+            } else if (userState.anchor === 'Contemplative / Spiritual') {
+                combinedHTML = renderContemplativePlanHTML();
             } else {
                 combinedHTML = renderActionPlanHTML();
             }
@@ -552,11 +551,9 @@
             container.innerHTML = combinedHTML;
         }
 
-        // --- PATHWAY 1: SECULAR / PRAGMATIC ACTION PLAN ---
         function renderActionPlanHTML() {
             const focus = userState.focus;
             const horizon = userState.horizon;
-            
             let tasksHTML = '';
             let introText = '';
             let titleText = 'Practical Habit Replacement Checklist';
@@ -756,7 +753,6 @@
             `;
         }
 
-        // --- PATHWAY 1 ALT: PHILOSOPHICAL TRADITIONS ACTION PLAN ---
         function renderPhilosophicalPlanHTML() {
             const focus = userState.focus;
             const horizon = userState.horizon;
@@ -764,19 +760,20 @@
             let tasksHTML = '';
             let introText = '';
             let titleText = 'The Philosophical Checklist';
-            let booksHTML = '';
+            
+            let booksHTML = `
+            <div class="mt-8 border-t border-fallow-200 pt-5">
+                <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">Suggested Reading for this Pathway:</h4>
+                <ul class="space-y-3 text-sm text-fallow-800">
+                    <li><span class="font-semibold">Letters from a Stoic</span> by Seneca <br><span class="text-xs text-fallow-600 block mt-0.5">On reclaiming your time from external masters and not giving your retirement away to new obligations.</span></li>
+                    <li><span class="font-semibold">Meditations</span> by Marcus Aurelius <br><span class="text-xs text-fallow-600 block mt-0.5">The ultimate guide to accepting the impermanence of your past identity and focusing on the present.</span></li>
+                    <li><span class="font-semibold">Discourses</span> by Epictetus <br><span class="text-xs text-fallow-600 block mt-0.5">Understanding the Dichotomy of Control to stop stressing over the routines you've lost.</span></li>
+                    <li><span class="font-semibold">Four Thousand Weeks</span> by Oliver Burkeman <br><span class="text-xs text-fallow-600 block mt-0.5">A modern, philosophical antidote to the corporate obsession with productivity.</span></li>
+                    <li><span class="font-semibold">How to Be a Friend</span> by Cicero <br><span class="text-xs text-fallow-600 block mt-0.5">A practical guide to transitioning from professional networking to genuine friendships of character.</span></li>
+                </ul>
+            </div>`;
 
             if (focus === 'Providing structure and routines outside of a job') {
-                booksHTML = `
-                <div class="mt-8 border-t border-fallow-200 pt-5">
-                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
-                    <ul class="space-y-2 text-sm text-fallow-800">
-                        <li><span class="font-semibold">Letters from a Stoic</span> by Seneca <span class="text-fallow-600 italic">(On reclaiming your time from external masters)</span></li>
-                        <li><span class="font-semibold">Meditations</span> by Marcus Aurelius <span class="text-fallow-600 italic">(On accepting the impermanence of your past identity)</span></li>
-                        <li><span class="font-semibold">Discourses</span> by Epictetus <span class="text-fallow-600 italic">(Understanding the Dichotomy of Control)</span></li>
-                    </ul>
-                </div>`;
-
                 if (horizon === '1-3 years out') {
                     titleText = "Reclaiming Your Time";
                     introText = "Seneca viewed the end of public duty not as a loss, but as the return of your own time. This phase is about applying Epictetus’s 'Dichotomy of Control'—letting go of the schedule you don't control, and preparing the one you do.";
@@ -808,15 +805,6 @@
                     ]);
                 }
             } else if (focus === 'Rediscovering old hobbies & creative outlets') {
-                booksHTML = `
-                <div class="mt-8 border-t border-fallow-200 pt-5">
-                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
-                    <ul class="space-y-2 text-sm text-fallow-800">
-                        <li><span class="font-semibold">Nicomachean Ethics</span> by Aristotle <span class="text-fallow-600 italic">(Understanding 'Theoria' and doing things for their own sake)</span></li>
-                        <li><span class="font-semibold">The Socrates Express</span> by Eric Weiner <span class="text-fallow-600 italic">(Practical, modern applications of classical philosophy)</span></li>
-                    </ul>
-                </div>`;
-
                 if (horizon === '1-3 years out') {
                     titleText = "Graduating from Praxis to Theoria";
                     introText = "Aristotle divided human action into 'Praxis' (doing things for a productive, external end) and 'Theoria' (engaging in an activity purely for the joy of it). This phase is about giving yourself permission to move toward Theoria.";
@@ -851,15 +839,6 @@
                     ]);
                 }
             } else if (focus === 'Reanchoring your social life') {
-                booksHTML = `
-                <div class="mt-8 border-t border-fallow-200 pt-5">
-                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
-                    <ul class="space-y-2 text-sm text-fallow-800">
-                        <li><span class="font-semibold">Nicomachean Ethics (Book VIII)</span> by Aristotle <span class="text-fallow-600 italic">(The shift from friendships of utility to friendships of virtue)</span></li>
-                        <li><span class="font-semibold">How to Be a Friend</span> by Cicero <span class="text-fallow-600 italic">(Classical wisdom on building deep connections)</span></li>
-                    </ul>
-                </div>`;
-
                 if (horizon === '1-3 years out') {
                     titleText = "From Utility to Virtue";
                     introText = "Aristotle noted that most workplace relationships are 'friendships of utility'—based on mutual benefit. This phase is about taking inventory of your social life to prepare for the loss of that utility-based network.";
@@ -894,15 +873,6 @@
                     ]);
                 }
             } else if (focus === 'Logistics, volunteering & micro-projects') {
-                booksHTML = `
-                <div class="mt-8 border-t border-fallow-200 pt-5">
-                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">For more on these ideas, consider reading:</h4>
-                    <ul class="space-y-2 text-sm text-fallow-800">
-                        <li><span class="font-semibold">On the Shortness of Life</span> by Seneca <span class="text-fallow-600 italic">(On not giving your time away to trivial obligations)</span></li>
-                        <li><span class="font-semibold">The Daily Stoic</span> by Ryan Holiday <span class="text-fallow-600 italic">(Daily meditations on focusing only on what matters)</span></li>
-                    </ul>
-                </div>`;
-
                 if (horizon === '1-3 years out') {
                     titleText = "Rethinking 'Productivity'";
                     introText = "Seneca observed that successful people often work themselves to exhaustion, only to realize they never truly lived. This phase is about decoupling your self-worth from your logistical output.";
@@ -956,9 +926,221 @@
             `;
         }
 
+        function renderContemplativePlanHTML() {
+            const focus = userState.focus;
+            const horizon = userState.horizon;
+            
+            let tasksHTML = '';
+            let introText = '';
+            let titleText = 'The Contemplative Checklist';
+            let booksHTML = '';
 
-        // --- PATHWAY 2: THE MIDDLE PATH ---
+            if (focus === 'Providing structure and routines outside of a job') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">Suggested Reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Wherever You Go, There You Are</span> by Jon Kabat-Zinn</li>
+                        <li><span class="font-semibold">Radical Acceptance</span> by Tara Brach</li>
+                        <li><span class="font-semibold">Ikigai: The Japanese Secret...</span> by Héctor García & Francesc Miralles</li>
+                    </ul>
+                </div>`;
+
+                if (horizon === '1-3 years out') {
+                    titleText = "Shifting from 'Doing' to 'Being'";
+                    introText = "In a career, your days are governed by what mindfulness teacher Jon Kabat-Zinn calls the 'Doing Mode'—constantly solving problems, clearing queues, and moving toward the next metric. This early phase is about gently practicing the 'Being Mode' inside your current week.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_struct_1a', text: "Establish a small morning 'threshold ritual'—like brewing a cup of tea or stepping outside for five minutes—where you do not check your phone or plan your day. In the Japanese tradition of Ikigai, a meaningful day starts with care for small, present-moment rituals." },
+                        { id: 'cont_struct_1b', text: "Practice what Tara Brach calls the 'Sacred Pause.' Once a day, between work meetings or tasks, stop for sixty seconds, take three breaths, and notice how your body feels without trying to fix or optimize anything." },
+                        { id: 'cont_struct_1c', text: "Notice your relationship with stillness on the weekend. When an unscheduled hour opens up, observe the reflex to immediately fill it with an errand or screen time, and practice just letting the quiet space exist." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    titleText = "Creating Space for the New Season";
+                    introText = "As your transition approaches, contemplative traditions invite us to honor the changing of our internal seasons. Before a new rhythm can take root, you must begin loosening your grip on the clock-driven habits of your career.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_struct_2a', text: "Reclaim the first 30 minutes of your morning from your employer. Dedicate this window to a quiet, grounding practice—like a walk without headphones, gentle stretching, or sitting with coffee watching the light change." },
+                        { id: 'cont_struct_2b', text: "Practice detaching from your professional labels. When you notice yourself mentally rehearsing work problems in the evening, gently name it ('planning' or 'striving') and bring your attention back to your immediate physical surroundings." },
+                        { id: 'cont_struct_2c', text: "Spend a Saturday morning moving at half-speed. Do your normal household tasks—making breakfast, folding laundry, walking the dog—with deliberate, unhurried attention, treating the rhythm itself as the goal." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    titleText = "Honoring the Threshold";
+                    introText = "Stepping away from a long career is a major life threshold. Rather than rushing to replace your work calendar with a new set of rigid obligations, this window is about building a gentle, supportive rhythm that allows your nervous system to decompress.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_struct_3a', text: "Design a personal 'closing ritual' for your final week of work—whether it is writing a letter of gratitude to your past self, taking a long walk in a favorite park, or consciously clearing out your desk—to formally acknowledge the end of this season." },
+                        { id: 'cont_struct_3b', text: "Anchor your new mornings with a simple, sensory reason to get out of bed (Ikigai). Let your morning walk, tending to plants, or preparing a nourishng breakfast become the steady heartbeat of your day." },
+                        { id: 'cont_struct_3c', text: "When the anxiety of an empty calendar surfaces, practice 'Radical Acceptance.' Remind yourself that feeling unmoored is a natural part of the fallow period, not a problem you need to solve with busyness." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    titleText = "Living in Seasonal Rhythm";
+                    introText = "A field left fallow is not broken or unproductive; it is quietly restoring its subterranean nutrients. Now that you have stepped out of the 9-to-5, your daily structure can align with your natural energy rather than an artificial clock.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_struct_4a', text: "Align your day with natural light and energy rather than former office hours. Give yourself permission to rest or read in the middle of a Tuesday afternoon without the lingering ghost of 'workday guilt.'" },
+                        { id: 'cont_struct_4b', text: "Cultivate two simple daily anchors: one that grounds your morning (like a quiet walk or tea ritual) and one that gently closes your evening, giving your days a soft shape without making them rigid." },
+                        { id: 'cont_struct_4c', text: "Practice noticing when the 'Doing Mode' sneaks back in. If you find yourself turning your daily checklist into a high-pressure performance review, pause, take a breath, and let go of the need to optimize your leisure." }
+                    ]);
+                }
+            } else if (focus === 'Rediscovering old hobbies & creative outlets') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">Suggested Reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Man’s Search for Meaning</span> by Viktor Frankl</li>
+                        <li><span class="font-semibold">Ikigai: The Japanese Secret...</span> by Héctor García & Francesc Miralles</li>
+                        <li><span class="font-semibold">Zen Mind, Beginner's Mind</span> by Shunryu Suzuki</li>
+                    </ul>
+                </div>`;
+
+                if (horizon === '1-3 years out') {
+                    titleText = "Experiencing Without Striving";
+                    introText = "Psychiatrist Viktor Frankl noted that while we often find meaning through what we create (our work), we equally find meaning through what we experience—nature, art, wonder, and presence. This phase is about reawakening your capacity to experience things without needing to master them.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_hobby_1a', text: "Practice 'Beginner’s Mind' (Shoshin). In the Zen tradition, the beginner’s mind is open and free of the expert's ego. Pick up an interest where you have zero expertise and allow yourself to be clumsy at it." },
+                        { id: 'cont_hobby_1b', text: "Spend one hour this week in 'unplugged observation'—walking in the woods, watching birds in the yard, or looking at art—without taking photos, tracking steps, or trying to learn a fact. Simply take it in." },
+                        { id: 'cont_hobby_1c', text: "Reflect on what activities make you lose track of time. In Ikigai, these small moments of effortless absorption are the truest compass for how to spend your next chapter." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    titleText = "Tending to Dormant Seeds";
+                    introText = "Before a garden blooms in spring, seeds spend months germinating in the dark. As your transition nears, begin creating quiet pockets of time for creative or restorative pursuits, free from any expectation of 'output.'";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_hobby_2a', text: "Choose one hands-on, tactile activity—like working with soil, baking bread, sketching, or woodworking—that moves your energy out of your analytical head and into your hands." },
+                        { id: 'cont_hobby_2b', text: "Create a small, inviting sanctuary in your home for this interest. Treat this corner not as a 'workstation,' but as a contemplative space where you go to play and unwind." },
+                        { id: 'cont_hobby_2c', text: "Notice the voice of the inner critic. When you catch yourself judging whether your hobby is 'good enough' or 'useful,' gently remind yourself that you are practicing presence, not building a resume." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    titleText = "The Practice of Non-Striving";
+                    introText = "As your schedule opens up, your creative outlets can become a daily refuge. The key is protecting them from the lingering habit of corporate goal-setting.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_hobby_3a', text: "Dedicate an unhurried morning or afternoon block to your chosen pursuit, approaching it as a moving meditation. Focus on the texture, sound, and rhythm of the activity rather than the finished product." },
+                        { id: 'cont_hobby_3b', text: "Balance your weeks between 'active creation' (making, tending, building) and 'receptive presence' (reading, walking, listening to music), honoring Frankl’s insight that receiving beauty is just as meaningful as producing work." },
+                        { id: 'cont_hobby_3c', text: "Share what you are enjoying with a close friend or partner, focusing on how the activity makes you feel rather than what you have accomplished." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    titleText = "Micro-Purpose and Flow";
+                    introText = "You are now free to embody the heart of Ikigai: engaging in activities with care and devotion simply because they bring life to your day.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_hobby_4a', text: "Let go of timelines. Whether you are cultivating a garden, learning an instrument, or writing, allow the project to take as long as it takes, savoring the absence of artificial deadlines." },
+                        { id: 'cont_hobby_4b', text: "If an activity begins to feel heavy, obligatory, or ego-driven, give yourself grace to set it down. Your curiosities are meant to nourish your spirit, not become a second job." },
+                        { id: 'cont_hobby_4c', text: "Look for ways your hobby connects you to the larger web of life—whether it’s planting native species for pollinators, cooking nourishing food for family, or appreciating a centuries-old craft." }
+                    ]);
+                }
+            } else if (focus === 'Reanchoring your social life') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">Suggested Reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Ikigai: The Japanese Secret...</span> by Héctor García & Francesc Miralles</li>
+                        <li><span class="font-semibold">Let Your Life Speak</span> by Parker J. Palmer</li>
+                        <li><span class="font-semibold">The Art of Communicating</span> by Thich Nhat Hanh</li>
+                    </ul>
+                </div>`;
+
+                if (horizon === '1-3 years out') {
+                    titleText = "Beyond Transactional Roles";
+                    introText = "Workplace relationships are often built around shared tasks and professional roles. As you look toward your transition, contemplative traditions invite us to shift from transactional networking to relational presence.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_social_1a', text: "Practice 'deep listening' (what Buddhist teacher Thich Nhat Hanh calls compassionate listening) with your partner, a family member, or a close friend this week. Listen without checking the time, formulating advice, or steering the conversation." },
+                        { id: 'cont_social_1b', text: "Reflect on who makes up your personal Moai—the Okinawan term for an informal circle of people who show up for each other through life’s seasons. Reach out to one person in that circle just to check in." },
+                        { id: 'cont_social_1c', text: "Notice how often you lead with your job title or busyness when people ask, 'How are you?' Practice answering with something genuine about your life outside of work." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    titleText = "Cultivating Sangha (Community)";
+                    introText = "As the built-in social structure of the workplace begins to recede, you can intentionally nurture connections rooted in shared values, locality, and mutual care.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_social_2a', text: "Invest time in a third place or community where your professional rank is irrelevant—a neighborhood gardening group, a faith or meditation community, a walking club, or a local volunteer crew." },
+                        { id: 'cont_social_2b', text: "Practice the gift of unhurried time. Offer to help a family member, neighbor, or friend with something that requires patience and presence rather than technical problem-solving." },
+                        { id: 'cont_social_2c', text: "Begin gently releasing social obligations that are driven purely by professional status or politics, saving your relational energy for the people who truly matter to you." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    titleText = "The Gift of Accompaniment";
+                    introText = "Stepping out of the career rush gives you one of the rarest gifts in the modern world: the ability to be fully present for the people you love without one eye on the clock.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_social_3a', text: "Establish a weekly or bi-weekly unhurried ritual with a friend, partner, or small group (your Moai)—like a regular morning walk, tea, or shared meal—that anchors your week in warmth and connection." },
+                        { id: 'cont_social_3b', text: "Practice initiating connection from a place of openness. Without the office bringing people to your door, reach out to schedule a walk or a phone call with someone you care about." },
+                        { id: 'cont_social_3c', text: "Offer your presence to someone going through a difficult season—an aging parent, a stressed colleague, or a neighbor. Sometimes the deepest meaning in a transition comes from simply accompanying others." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    titleText = "True Belonging";
+                    introText = "You no longer need to wear a professional mask to belong. This season of life is an invitation to experience relationships with greater vulnerability, gratitude, and ease.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_social_4a', text: "Allow purely transactional, work-based acquaintances to fade with gratitude for the season they served, freeing your heart to tend to your closest relationships." },
+                        { id: 'cont_social_4b', text: "Seek out fellowship around shared wonder or stewardship—groups that gather to care for the local environment, explore ideas, or practice mindfulness together." },
+                        { id: 'cont_social_4c', text: "Practice everyday warmth with the people in your immediate orbit—neighbors, dog walkers, local shopkeepers—recognizing that small moments of human recognition weave the fabric of a joyful life." }
+                    ]);
+                }
+            } else if (focus === 'Logistics, volunteering & micro-projects') {
+                booksHTML = `
+                <div class="mt-8 border-t border-fallow-200 pt-5">
+                    <h4 class="text-xs font-semibold text-fallow-600 uppercase tracking-wider mb-3">Suggested Reading:</h4>
+                    <ul class="space-y-2 text-sm text-fallow-800">
+                        <li><span class="font-semibold">Let Your Life Speak</span> by Parker J. Palmer</li>
+                        <li><span class="font-semibold">Man’s Search for Meaning</span> by Viktor Frankl</li>
+                        <li><span class="font-semibold">Wherever You Go, There You Are</span> by Jon Kabat-Zinn</li>
+                    </ul>
+                </div>`;
+
+                if (horizon === '1-3 years out') {
+                    titleText = "From Ambition to Vocation";
+                    introText = "Writer Parker Palmer notes that in the first half of life, we often impose our will on the world; in the second half, we learn to listen to what life is asking of us. This phase is about separating your logistical competence from your ego.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_logistics_1a', text: "Notice where your sense of worth is tied to 'fixing' things or being indispensable at work. Practice stepping back in one small area and letting others carry the ball." },
+                        { id: 'cont_logistics_1b', text: "Try a small act of quiet, anonymous service (Seva)—like picking up litter on your walking route or helping a neighbor—where nobody gives you credit or a title." },
+                        { id: 'cont_logistics_1c', text: "Begin simplifying your personal environment. Clear out one drawer, closet, or digital folder of old career accumulations to start creating physical breathing room for your next chapter." }
+                    ]);
+                } else if (horizon === '6-18 months out') {
+                    titleText = "Clearing the Sanctuary";
+                    introText = "Preparing for a transition is both an internal and external housecleaning. By untangling your personal life from your workplace systems now, you create a peaceful landing pad for your fallow time.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_logistics_2a', text: "Separate your personal digital life (contacts, photos, accounts) from your work devices, treating it as a mindful ritual of reclaiming your independence." },
+                        { id: 'cont_logistics_2b', text: "When considering future volunteer work, ask Parker Palmer’s question: 'Is this something my life is asking of me, or am I just trying to prove I’m still important?' Favor hands-on stewardship over high-stress committees." },
+                        { id: 'cont_logistics_2c', text: "Identify one meaningful, restorative project for your home or family (like planning a native garden bed, organizing family history, or repairing something by hand) that you can look forward to tending." }
+                    ]);
+                } else if (horizon === '0-6 months out') {
+                    titleText = "Protecting the Fallow Ground";
+                    introText = "When a field is left fallow, you must put up a fence so people don't drive their tractors across it. As you step away from work, your most important logistical task is protecting your open space from premature commitments.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_logistics_3a', text: "Practice a gracious 'No.' Commit to taking a six-month sabbatical from joining any boards, long-term committees, or heavy obligations so your inner life has room to settle." },
+                        { id: 'cont_logistics_3b', text: "Choose one small, grounding project with a clear beginning and end—something that brings order or beauty to your immediate surroundings without creating ongoing stress." },
+                        { id: 'cont_logistics_3c', text: "Tend to one foundational life-care task (like updating estate documents or organizing health records) not as a chore, but as an act of care and peace of mind for yourself and your family." }
+                    ]);
+                } else if (horizon === 'Already transitioned') {
+                    titleText = "Mindful Stewardship";
+                    introText = "In contemplative traditions, there is no divide between the sacred and the mundane—'chop wood, carry water.' Your daily logistics and community contributions can now be practiced at a humane, sustainable pace.";
+                    tasksHTML = generateChecklist([
+                        { id: 'cont_logistics_4a', text: "Practice 'slow logistics.' Run your errands or tend to household repairs on a quiet weekday morning, bringing full, unhurried attention to the task rather than rushing to get it over with." },
+                        { id: 'cont_logistics_4b', text: "Check in with your current commitments and ways of helping others. True service should leave you feeling connected and quietly fulfilled; if a role feels like ego-driven burnout, give yourself permission to step away." },
+                        { id: 'cont_logistics_4c', text: "Embrace Viktor Frankl’s third pathway to meaning: when faced with unavoidable logistical friction or family care responsibilities, view your patience, steadiness, and kindness as your highest contribution." }
+                    ]);
+                }
+            }
+
+            return `
+                <div class="border border-fallow-200 rounded-xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Contemplative Framework</span>
+                            <h3 class="text-base font-semibold text-fallow-900 mt-0.5">${titleText}</h3>
+                        </div>
+                        <span class="text-xs bg-fallow-100 text-fallow-800 px-2.5 py-1 rounded-md font-medium">Actionable</span>
+                    </div>
+                    <p class="text-sm text-fallow-700">${introText}</p>
+                    <div class="space-y-2 pt-2">
+                        ${tasksHTML}
+                    </div>
+                    ${booksHTML}
+                </div>
+            `;
+        }
+
         function renderMiddlePathHTML() {
+            let promptSourceText = '';
+            if (userState.anchor === 'Philosophical Traditions') {
+                promptSourceText = 'As Marcus Aurelius noted, changing circumstances require shifting our internal definitions of utility and virtue beyond corporate status. You are practicing the art of setting down the ego of your past role.';
+            } else if (userState.anchor === 'Contemplative / Spiritual') {
+                promptSourceText = 'As contemplative traditions remind us, a field must be left fallow between harvests to restore its vitality. Stepping out of the \'Doing Mode\' allows you to discover who you are beneath your professional usefulness.';
+            } else {
+                promptSourceText = 'Pragmatic reframing helps separate your intrinsic worth from your external professional output.';
+            }
+
             let itemsHtml = userState.curiosityLog.map((item, idx) => `
                 <div class="flex items-center justify-between p-3 bg-fallow-50 rounded-lg border border-fallow-200/60">
                     <label class="flex items-center space-x-3 cursor-pointer">
@@ -994,7 +1176,7 @@
                     <span class="text-xs font-semibold text-fallow-600 uppercase tracking-wider">Weekly Mindset Reframing Prompt</span>
                     <h4 class="font-semibold text-fallow-900 text-sm">"What is an accomplishment or title from my career that I am ready to gently set down?"</h4>
                     <p class="text-xs text-fallow-700 leading-relaxed">
-                        ${userState.anchor === 'Philosophical Traditions' ? 'As Marcus Aurelius noted, changing circumstances require shifting our internal definitions of utility and virtue beyond corporate status. You are practicing the art of setting down the ego of your past role.' : 'Pragmatic reframing helps separate your intrinsic worth from your external professional output.'}
+                        ${promptSourceText}
                     </p>
                 </div>
             `;
@@ -1022,11 +1204,15 @@
             populateDashboard();
         }
 
-        // --- PATHWAY 3: DEEP DIVE ---
         function renderDeepDiveHTML() {
-            let promptSourceText = userState.anchor === 'Philosophical Traditions' 
-                ? "Rooted in classical philosophy, use this space to reflect on the difference between the things you control and the things you must let go of in this transition."
-                : "Rooted in Viktor Frankl’s framework of finding meaning through creation, experience, and attitude, use this space for open reflection on your transition narrative.";
+            let promptSourceText = '';
+            if (userState.anchor === 'Philosophical Traditions') {
+                promptSourceText = "Rooted in classical philosophy, use this space to reflect on the difference between the things you control and the things you must let go of in this transition.";
+            } else if (userState.anchor === 'Contemplative / Spiritual') {
+                promptSourceText = "Rooted in Viktor Frankl’s insight that meaning is found not just in what we produce, but in how we experience the world and show up for others, use this space to reflect on what this quiet season is asking of you.";
+            } else {
+                promptSourceText = "Rooted in practical transition psychology, use this space for open reflection on your transition narrative.";
+            }
 
             return `
                 <div class="border border-fallow-200 rounded-xl p-5 space-y-4 mt-6">
