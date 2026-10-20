@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Fallow Mind | Attention Ecology & The Default Mode Network</title>
+  <style>
+    :root {
+      --bg-parchment: #F6F4EE;
+      --bg-card: #EFECE4;
+      --bg-elevated: #FFFFFF;
+      --ink-primary: #262927;
+      --ink-secondary: #525753;
+      --ink-muted: #7B807C;
+      --accent-sage: #4A5D4E;
+      --accent-sage-light: #DCE3DD;
+      --accent-terracotta: #A85A42;
+      --accent-terracotta-light: #EFE0DB;
+      --accent-ochre: #B5893E;
+      --border-subtle: #D8D3C8;
+      --font-serif: 'Georgia', 'Times New Roman', serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-parchment);
+      color: var(--ink-primary);
+      font-family: var(--font-serif);
+      line-height: 1.7;
+      padding-bottom: 5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Corridor Navigation */
+    .top-nav {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .top-nav a {
+      color: var(--ink-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .top-nav a:hover {
+      color: var(--accent-sage);
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .corridor-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-sage);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: var(--ink-primary);
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--ink-secondary);
+      max-width: 740px;
+    }
+
+    /* Sticky Global Lens Toggle */
+    .lens-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(246, 244, 238, 0.95);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.9rem 0;
+      margin-bottom: 2.5rem;
+    }
+
+    .lens-bar-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .lens-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-secondary);
+    }
+
+    .lens-toggle-group {
+      display: inline-flex;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 3px;
+    }
+
+    .lens-btn {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.45rem 1rem;
+      border: none;
+      background: transparent;
+      color: var(--ink-secondary);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .lens-btn.active {
+      background: var(--accent-sage);
+      color: #FFF;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .lens-btn.active.adhd-active {
+      background: var(--accent-terracotta);
+    }
+
+    /* Table of Contents */
+    .toc-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .toc-title {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.5rem 1.5rem;
+      list-style: none;
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+    }
+
+    .toc-grid a {
+      color: var(--ink-primary);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--ink-muted);
+    }
+
+    .toc-grid a:hover {
+      color: var(--accent-sage);
+      border-bottom-color: var(--accent-sage);
+    }
+
+    /* Simulator Section */
+    .simulator-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 3.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .sim-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 1rem;
+    }
+
+    .sim-header h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+
+    .sim-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      background: var(--accent-sage-light);
+      color: var(--accent-sage);
+    }
+
+    .sim-badge.adhd-mode {
+      background: var(--accent-terracotta-light);
+      color: var(--accent-terracotta);
+    }
+
+    .sim-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.25rem;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .sim-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Sliders */
+    .slider-group {
+      margin-bottom: 1.35rem;
+    }
+
+    .slider-top {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .slider-val {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--accent-sage);
+      font-weight: 400;
+    }
+
+    .slider-desc {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      margin-bottom: 0.45rem;
+      line-height: 1.4;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-sage);
+      cursor: pointer;
+      border: 2px solid #FFF;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    }
+
+    /* Zen Sketch Visualizer */
+    .visual-panel {
+      background: var(--bg-parchment);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    #biome-svg {
+      width: 100%;
+      height: 210px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 1rem;
+    }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      text-align: center;
+      font-family: var(--font-mono);
+    }
+
+    .metric-box {
+      background: var(--bg-elevated);
+      padding: 0.6rem 0.4rem;
+      border-radius: 5px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .metric-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      display: block;
+    }
+
+    .metric-score {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink-primary);
+    }
+
+    /* Dynamic Synthesis Readout */
+    .synthesis-box {
+      margin-top: 1.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .synthesis-title {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .synthesis-content {
+      font-size: 0.98rem;
+      color: var(--ink-primary);
+      background: var(--bg-parchment);
+      padding: 1.25rem 1.5rem;
+      border-left: 3px solid var(--accent-sage);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .synthesis-content p + p {
+      margin-top: 0.85rem;
+    }
+
+    /* Primer Chapters */
+    .chapter {
+      margin-bottom: 3.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .chapter-num {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-sage);
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .chapter h2 {
+      font-size: 1.75rem;
+      font-weight: 400;
+      margin-bottom: 1.2rem;
+    }
+
+    .chapter p {
+      margin-bottom: 1.15rem;
+      font-size: 1.05rem;
+      color: var(--ink-primary);
+    }
+
+    /* Dynamic Lens Callout Card inside Chapters */
+    .lens-callout {
+      background: var(--bg-card);
+      border-left: 4px solid var(--accent-sage);
+      padding: 1.35rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .lens-callout.adhd-style {
+      background: var(--accent-terracotta-light);
+      border-left-color: var(--accent-terracotta);
+    }
+
+    .lens-callout-header {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--accent-sage);
+    }
+
+    .lens-callout.adhd-style .lens-callout-header {
+      color: var(--accent-terracotta);
+    }
+
+    .lens-callout p {
+      font-size: 0.96rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .lens-callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Comparison Table */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 0.9rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+    }
+
+    .comparison-table th {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--bg-card);
+      color: var(--ink-secondary);
+    }
+
+    /* Reading List Cards */
+    .reading-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .book-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+
+    .book-pillar {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-sage);
+      margin-bottom: 0.35rem;
+      display: block;
+    }
+
+    .book-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .book-author {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .book-desc {
+      font-size: 0.9rem;
+      color: var(--ink-secondary);
+      line-height: 1.55;
+    }
+
+    /* Companion Links Footer */
+    .corridor-links {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1.75rem;
+      margin-top: 3rem;
+    }
+
+    .corridor-links h3 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .utility-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      font-family: var(--font-sans);
+    }
+
+    .utility-item {
+      background: var(--bg-elevated);
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      text-decoration: none;
+      color: var(--ink-primary);
+      transition: border-color 0.2s;
+    }
+
+    .utility-item:hover {
+      border-color: var(--accent-sage);
+    }
+
+    .utility-item strong {
+      display: block;
+      font-size: 0.92rem;
+      margin-bottom: 0.25rem;
+      color: var(--accent-sage);
+    }
+
+    .utility-item span {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      line-height: 1.4;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <div><a href="https://fallow.garden">← FALLOW.GARDEN ANTHOLOGY</a></div>
+    <div>CORRIDOR I: MIND & IMPERMANENCE</div>
+  </nav>
+
+  <div class="container">
+    <header>
+      <span class="corridor-tag">Interactive Clinical Primer & Simulator</span>
+      <h1>The Fallow Mind</h1>
+      <p class="subtitle">
+        How algorithmic foraging depletes our neural soil, why boredom is the ignition switch for the Default Mode Network, and how to restore baseline dopamine without fighting your cognitive wiring.
+      </p>
+    </header>
+  </div>
+
+  <!-- Sticky Cognitive Lens Bar -->
+  <div class="lens-bar">
+    <div class="container lens-bar-inner">
+      <span class="lens-label">Select Cognitive Architecture Lens:</span>
+      <div class="lens-toggle-group" role="group" aria-label="Cognitive Lens Selection">
+        <button id="btn-nt" class="lens-btn active" onclick="setCognitiveLens('nt')">
+          Standard / Neurotypical Lens
+        </button>
+        <button id="btn-adhd" class="lens-btn" onclick="setCognitiveLens('adhd')">
+          ADHD / Novelty-Seeking Lens
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Table of Contents -->
+    <div class="toc-box">
+      <div class="toc-title">Primer Architecture</div>
+      <ul class="toc-grid">
+        <li><a href="#simulator">00. Interactive Neural Soil Simulator</a></li>
+        <li><a href="#ch1">01. The Hijacked Forager (Dopamine & Gut-Brain Parallels)</a></li>
+        <li><a href="#ch2">02. The Neurological Seesaw (TPN vs. Default Mode Network)</a></li>
+        <li><a href="#ch3">03. Surviving the 90-Second Airlock & Soft Fascination</a></li>
+        <li><a href="#ch4">04. Dopamine Resensitization Protocols</a></li>
+        <li><a href="#reading">05. Curated Clinical Reading & Companion Utilities</a></li>
+      </ul>
+    </div>
+
+    <!-- INTERACTIVE SIMULATOR -->
+    <section id="simulator" class="simulator-card">
+      <div class="sim-header">
+        <h2>Neural Soil & Attention Simulator</h2>
+        <span id="sim-mode-badge" class="sim-badge">Lens: Standard Neurotypical</span>
+      </div>
+
+      <div class="sim-layout">
+        <!-- Sliders Column -->
+        <div class="sliders-col">
+          <div class="slider-group">
+            <div class="slider-top">
+              <label for="s-algo">1. Algorithmic / Rapid-Cut Input</label>
+              <span id="val-algo" class="slider-val">2.5 hrs/day</span>
+            </div>
+            <p class="slider-desc">Infinite feeds, rapid-cut video, high-dopamine gaming, and variable-ratio reward loops.</p>
+            <input type="range" id="s-algo" min="0" max="6" step="0.5" value="2.5" oninput="updateSimulator()" />
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-top">
+              <label for="s-fallow">2. Uninterrupted Fallow Windows</label>
+              <span id="val-fallow" class="slider-val">15 min blocks</span>
+            </div>
+            <p class="slider-desc">Longest daytime stretches without checking a screen or feeding external task-positive prompts.</p>
+            <input type="range" id="s-fallow" min="0" max="60" step="5" value="15" oninput="updateSimulator()" />
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-top">
+              <label for="s-soft">3. Soft Fascination / Fractal Exposure</label>
+              <span id="val-soft" class="slider-val">30 min/day</span>
+            </div>
+            <p class="slider-desc">Observing living ecosystems (native plants, insects, clouds) or stochastic audio (brown noise, rain).</p>
+            <input type="range" id="s-soft" min="0" max="90" step="10" value="30" oninput="updateSimulator()" />
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-top">
+              <label for="s-kinetic">4. Proprioceptive / Kinetic Grounding</label>
+              <span id="val-kinetic" class="slider-val">30 min/day</span>
+            </div>
+            <p class="slider-desc">Rhythmic physical cadence—walking (especially with a weighted load), gardening, or tactile craft.</p>
+            <input type="range" id="s-kinetic" min="0" max="90" step="10" value="30" oninput="updateSimulator()" />
+          </div>
+        </div>
+
+        <!-- Visual & Metrics Column -->
+        <div class="visual-panel">
+          <svg id="biome-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Sky / Executive Chatter Layer -->
+            <g id="svg-static-noise"></g>
+            <!-- Ground Horizon Line -->
+            <line x1="20" y1="130" x2="380" y2="130" stroke="#7B807C" stroke-width="1.5" stroke-dasharray="4 2" />
+            <!-- Above-Ground Botanical Stems (Soft Fascination) -->
+            <g id="svg-stems"></g>
+            <!-- Underground Root & Mycelial Network (DMN Synaptic Composting) -->
+            <g id="svg-roots"></g>
+          </svg>
+
+          <div class="metrics-row">
+            <div class="metric-box">
+              <span class="metric-label">Tonic Dopamine</span>
+              <span id="m-dopamine" class="metric-score">68%</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">DMN Composting</span>
+              <span id="m-dmn" class="metric-score">62%</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Neural Residue</span>
+              <span id="m-residue" class="metric-score">Moderate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Narrative Output -->
+      <div class="synthesis-box">
+        <div class="synthesis-title">Live Clinical Ecosystem Readout</div>
+        <div id="synthesis-output" class="synthesis-content">
+          <!-- Populated dynamically by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 1 -->
+    <article id="ch1" class="chapter">
+      <span class="chapter-num">Chapter 01</span>
+      <h2>The Hijacked Forager: Dopamine & Algorithmic Parasitism</h2>
+      <p>
+        In popular culture, dopamine is routinely misunderstood as the molecule of pleasure. In clinical neuroscience, dopamine is the molecule of <strong>foraging, anticipation, and salience</strong>. Evolutionarily, its purpose was to propel an organism across a landscape in search of scarce resources—water, berries, shelter. When you found a patch of berries, dopamine spiked to encode the path, then returned to a steady baseline (<strong>tonic dopamine</strong>).
+      </p>
+      <p>
+        Modern engagement algorithms, social feeds, and high-stimulation video games exploit this ancient foraging circuit using <strong>Variable Ratio Reinforcement</strong>—the exact mathematical schedule that governs slot machines. Because your brain never knows whether the next swipe or refresh will yield something mundane or a high-salience hit of outrage, validation, or novelty, it fires continuous bursts of <strong>phasic dopamine</strong> without requiring physical movement or waiting.
+      </p>
+      <p>
+        <strong>The Gut-Microbiome Parallel:</strong> If you have explored our companion primer <em>Multitudes Within</em>, you know that pathogenic, sugar-thriving gut microbes are not passive passengers; they release chemical signaling molecules via the vagus nerve to induce intense host cravings for refined carbohydrates, while starving out slow-growing beneficial species like <em>Akkermansia muciniphila</em>. Digital algorithms function as <strong>externalized neural parasites</strong>. They flood your reward pathways with "refined digital sugar," forcing your brain to protect itself through <strong>homeostatic receptor down-regulation</strong>—literally retracting D2 dopamine receptors and dropping your tonic baseline into a deficit.
+      </p>
+
+      <div id="callout-ch1" class="lens-callout">
+        <!-- Populated by Lens JS -->
+      </div>
+    </article>
+
+    <!-- CHAPTER 2 -->
+    <article id="ch2" class="chapter">
+      <span class="chapter-num">Chapter 02</span>
+      <h2>The Neurological Seesaw: Executive Attention vs. The Default Mode Network</h2>
+      <p>
+        Your brain relies on two large-scale cortical networks that operate like opposite ends of a seesaw:
+      </p>
+      <p>
+        <strong>1. The Task-Positive / Executive Attention Network (The Plow):</strong> Anchored in the dorsolateral prefrontal cortex and posterior parietal cortex, this network locks onto external stimuli, evaluates metrics, reads text, and filters out distractions. Every time you look at a phone screen—even for 15 seconds while waiting for a crosswalk—you slam the seesaw down on the Task-Positive side.
+      </p>
+      <p>
+        <strong>2. The Default Mode Network / DMN (The Fallow Field):</strong> Spanning the medial prefrontal cortex (mPFC), posterior cingulate cortex (PCC), angular gyrus, and hippocampus, the DMN is meant to surge to life the moment external task demands cease. Just as a fallow agricultural field is teeming with subterranean microbial decomposition and nitrogen fixation, the DMN performs <strong>synaptic composting</strong>: consolidating fragmented daily experiences into autobiographical memory, simulating future scenarios, and cross-pollinating distant concepts into sudden creative insights.
+      </p>
+      <p>
+        When we eliminate every 30-second gap of boredom from our day with micro-doses of smartphone input, we keep the Executive Network permanently engaged and systematically starve the DMN. We harvest the soil continuously and wonder why our creative vitality and emotional resilience feel stripped bare.
+      </p>
+
+      <div id="callout-ch2" class="lens-callout">
+        <!-- Populated by Lens JS -->
+      </div>
+    </article>
+
+    <!-- CHAPTER 3 -->
+    <article id="ch3" class="chapter">
+      <span class="chapter-num">Chapter 03</span>
+      <h2>Surviving the 90-Second Airlock & The Science of "Soft Fascination"</h2>
+      <p>
+        What we casually call "boredom" is rarely true emptiness; it is the <strong>acute friction of the brain shifting gears</strong> from external consumption to internal synthesis. When you close a laptop or set down a phone, there is an uncomfortable 90-to-180-second "airlock" where phasic dopamine drops and the Executive Network frantically searches for its next prompt.
+      </p>
+      <p>
+        However, how we cross that airlock depends heavily on the type of rest we choose. Environmental psychologists Rachel and Stephen Kaplan, founders of <strong>Attention Restoration Theory (ART)</strong>, demonstrated that human attention is not restored most effectively by sensory deprivation (staring at a blank white wall in silence), but by <strong>Soft Fascination</strong>.
+      </p>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Stimulation Mode</th>
+            <th>Neural Mechanism</th>
+            <th>Cognitive & Dopamine Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hard Fascination</strong><br><em>(Algorithmic feeds, action games, breaking news)</em></td>
+            <td>Monopolizes Executive Attention via rapid novelty and variable rewards; suppresses DMN.</td>
+            <td>Spikes phasic dopamine, followed by receptor down-regulation and "attention residue."</td>
+          </tr>
+          <tr>
+            <td><strong>Hard Zero-Input</strong><br><em>(Windowless waiting room, forced blank stillness)</em></td>
+            <td>Sudden cessation of external input without sensory anchoring.</td>
+            <td>Calming for well-rested neurotypical brains, but triggers a tonic dopamine crash and restless rumination in novelty-seeking/ADHD brains.</td>
+          </tr>
+          <tr>
+            <td><strong>Soft Fascination</strong><br><em>(Observing native plants, clouds, brown noise, weighted walking)</em></td>
+            <td>Provides effortless, medium-complexity fractal patterns (stochastic resonance) requiring zero executive decisions.</td>
+            <td>Supplies a gentle "10% sensory tether" that stabilizes baseline dopamine while freeing 90% of the DMN for deep synaptic composting.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div id="callout-ch3" class="lens-callout">
+        <!-- Populated by Lens JS -->
+      </div>
+    </article>
+
+    <!-- CHAPTER 4 -->
+    <article id="ch4" class="chapter">
+      <span class="chapter-num">Chapter 04</span>
+      <h2>Re-Wilding Attention: Dopamine Resensitization Protocols</h2>
+      <p>
+        In gut physiology, spacing out meals allows the Migrating Motor Complex (MMC) to sweep the digestive tract clean and gives goblet cells time to rebuild the protective mucosal barrier. Your neural reward circuitry requires an identical cadence of <strong>cognitive fasting</strong> to up-regulate retracted dopamine receptors:
+      </p>
+      <p>
+        <strong>1. Protect the Micro-Gaps (No-Phone Transitions):</strong> Treat waiting in line, brewing morning coffee or moka pot espresso, and walking between rooms as sacred 2-minute airlocks. Leaving the phone in your pocket during these micro-transitions allows the DMN seesaw to tip naturally dozens of times a day.
+      </p>
+      <p>
+        <strong>2. Trade "Hard" for "Soft" Fascination First:</strong> When stepping down from high-stimulation screen work, do not demand immediate blank stillness from your brain. Use an intermediary airlock: a 3-minute optical reset looking at distant trees, 5 minutes of brown noise, or 15 minutes of rhythmic walking.
+      </p>
+      <p>
+        <strong>3. Practice "Open Monitoring" Observation:</strong> Sit outside for 20 to 30 minutes with no podcast and no notebook. Allow your eyes to track whatever moves—wind in dried stems, insects foraging, cloud geometry. Let your curiosity observe without trying to capture, photograph, or optimize what you see.
+      </p>
+
+      <div id="callout-ch4" class="lens-callout">
+        <!-- Populated by Lens JS -->
+      </div>
+    </article>
+
+    <!-- CHAPTER 5: READING LIST -->
+    <section id="reading" class="chapter" style="border-bottom: none;">
+      <span class="chapter-num">Chapter 05</span>
+      <h2>Foundational Clinical & Philosophical Reading List</h2>
+      <p>
+        For those wishing to explore the primary neuroscience, environmental psychology, and philosophy behind attention restoration and the Default Mode Network:
+      </p>
+
+      <div class="reading-grid">
+        <div class="book-card">
+          <span class="book-pillar">Dopamine Homeostasis</span>
+          <div class="book-title">Dopamine Nation</div>
+          <div class="book-author">Dr. Anna Lembke (2021)</div>
+          <p class="book-desc">Explores the neuroscience of the pleasure-pain seesaw, explaining how high-dopamine digital behaviors cause homeostatic receptor down-regulation and how deliberate abstinence restores baseline tone.</p>
+        </div>
+
+        <div class="book-card">
+          <span class="book-pillar">Cognitive Neuroscience of Boredom</span>
+          <div class="book-title">Out of My Skull: The Psychology of Boredom</div>
+          <div class="book-author">James Danckert & John D. Eastwood (2020)</div>
+          <p class="book-desc">Reframes boredom not as a moral failing, but as a crucial evolutionary signal that our current attentional engagement lacks meaning, prompting the transition to internal exploration.</p>
+        </div>
+
+        <div class="book-card">
+          <span class="book-pillar">Soft Fascination & ART</span>
+          <div class="book-title">The Experience of Nature</div>
+          <div class="book-author">Rachel Kaplan & Stephen Kaplan (1989)</div>
+          <p class="book-desc">The landmark work introducing Attention Restoration Theory (ART)—demonstrating why natural fractals and "Soft Fascination" replenish directed executive fatigue far better than blank rest.</p>
+        </div>
+
+        <div class="book-card">
+          <span class="book-pillar">ADHD & The Default Mode Glitch</span>
+          <div class="book-title">ADHD 2.0</div>
+          <div class="book-author">Dr. Edward Hallowell & Dr. John Ratey (2021)</div>
+          <p class="book-desc">Provides a crystal-clear clinical breakdown of how the Default Mode Network behaves differently in novelty-seeking brains, and how kinetic or sensory anchors prevent DMN rumination.</p>
+        </div>
+
+        <div class="book-card">
+          <span class="book-pillar">Deep Reading & Neural Plasticity</span>
+          <div class="book-title">Reader, Come Home</div>
+          <div class="book-author">Maryanne Wolf (2018)</div>
+          <p class="book-desc">Examines how rapid digital skimming alters the reading brain, starving the slower, contemplative neural circuits connected to empathy, critical synthesis, and the DMN.</p>
+        </div>
+
+        <div class="book-card">
+          <span class="book-pillar">Attention Residue & Switching Costs</span>
+          <div class="book-title">Attention Span</div>
+          <div class="book-author">Dr. Gloria Mark (2023)</div>
+          <p class="book-desc">Documents decades of empirical workplace tracking showing our average screen focus has dropped to 47 seconds, detailing the cortisol load of rapid context-switching.</p>
+        </div>
+      </div>
+
+      <!-- Companion Fallow.Garden Utilities -->
+      <div class="corridor-links">
+        <h3>Other Active Utilities on Fallow.Garden</h3>
+        <div class="utility-grid">
+          <a href="/attention-restore" class="utility-item">
+            <strong>Attention Restore →</strong>
+            <span>Deploy 3m optical resets, 5m brown-noise zero-input breaks, and 15m nature walks with an Open Loop Catcher.</span>
+          </a>
+          <a href="/composter" class="utility-item">
+            <strong>Digital Thought Composter →</strong>
+            <span>Turn cognitive friction and intrusive loops into botanical humus over a 5-day slow cycle.</span>
+          </a>
+          <a href="/multitudes" class="utility-item">
+            <strong>Multitudes Within →</strong>
+            <span>Explore the biological twin to neural soil: how dietary diversity and fasting windows shape your gut biome.</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    let currentLens = 'nt'; // 'nt' or 'adhd'
+
+    const lensCallouts = {
+      nt: {
+        ch1: {
+          title: "Standard Lens: Homeostatic Down-Regulation",
+          p1: "In a neurotypical reward system, baseline (tonic) dopamine sits at a comfortable equilibrium. However, prolonged exposure to rapid-cut feeds or gaming pushes phasic dopamine so high that the brain adds 'gremlins' to the pain side of the balance—retracting receptors so that normal, unhurried activities (reading a chapter, sitting on a porch) temporarily feel flat and unrewarding until a 72-hour resensitization window occurs."
+        },
+        ch2: {
+          title: "Standard Lens: The Clean Anti-Correlation",
+          p1: "In standard neurobiology, the Task-Positive Network and Default Mode Network are cleanly anti-correlated. The moment you remove external prompts and survive a brief moment of restlessness, the Executive Network powers down and the DMN smoothly comes online, drifting into autobiographical reflection and creative problem-solving."
+        },
+        ch3: {
+          title: "Standard Lens: Crossing the 90-Second Threshold",
+          p1: "When a neurotypical brain sits in stillness, the initial 90 seconds of boredom acts as a simple decompression chamber. Either pure silence or gentle nature observation works effectively to tip the seesaw into restorative daydreaming."
+        },
+        ch4: {
+          title: "Standard Lens: Reclaiming Stillness",
+          p1: "Focus on removing artificial micro-inputs during daily transitions. Allowing yourself 10 to 15 minutes of unstructured boredom each afternoon reliably restores executive stamina and consolidates daily memory."
+        }
+      },
+      adhd: {
+        ch1: {
+          title: "ADHD / Novelty-Seeking Lens: The Tonic Deficit & Self-Medication",
+          p1: "An ADHD or novelty-seeking brain begins with lower baseline tonic dopamine and higher transporter density (which clears dopamine from the synaptic cleft too quickly). Consequently, high-stimulation screens and games aren't merely 'bad habits'—they act as intuitive, fast-acting self-medication to bring an under-aroused prefrontal cortex up to functional baseline.",
+          p2: "Because of this, ripping away screens into total sensory deprivation causes tonic dopamine to plummet into an acute trough, which the insular cortex can register as physical agitation or distress."
+        },
+        ch2: {
+          title: "ADHD / Novelty-Seeking Lens: The 'Glitchy Hinge' & DMN Intrusion",
+          p1: "In ADHD neurology, the hinge between the Executive Network and the Default Mode Network is porous. During mundane tasks, the DMN refuses to stay quiet, intruding with tangents. Conversely, when external stimulation drops to zero, the dopamine-starved DMN doesn't peacefully compost—it spins its wheels frantically to manufacture internal stimulation, often latching onto anxious loops or conflict simply because worry reliably spikes norepinephrine."
+        },
+        ch3: {
+          title: "ADHD / Novelty-Seeking Lens: Case Study in 'Open Monitoring' (The 10% Tether)",
+          p1: "Why can someone with ADHD traits sit peacefully for 30 minutes observing a native plant garden, yet feel unbearable agitation after 3 minutes in a blank waiting room? Because a living garden—solitary bees landing on mountain mint, grass skippers darting between goldenrod stalks, wind shifting seed heads—is a masterclass in Kaplan's Soft Fascination.",
+          p2: "In contemplative neuroscience, this is called Open Monitoring. By giving your visual curiosity a 10% 'stochastic tether' of continuous, zero-demand micro-novelty, you keep baseline dopamine from crashing. The restless watchman at the prefrontal gate stays happily occupied observing the bees, which frees the other 90% of your Default Mode Network to lie fallow and compost thoughts in peace."
+        },
+        ch4: {
+          title: "ADHD / Novelty-Seeking Lens: Anchor, Don't Deprive",
+          p1: "Never force an active, novelty-seeking brain into a sensory vacuum. Pair your fallow windows with a low-friction sensory or proprioceptive anchor: listen to brown noise (stochastic resonance), walk with a 7-pound weighted vest to feed the motor cortex steady dopamine, or sit in front of a living ecological system where your eyes can actively observe without executive demand."
+        }
+      }
+    };
+
+    function setCognitiveLens(lens) {
+      currentLens = lens;
+      const btnNt = document.getElementById('btn-nt');
+      const btnAdhd = document.getElementById('btn-adhd');
+      const badge = document.getElementById('sim-mode-badge');
+
+      if (lens === 'nt') {
+        btnNt.classList.add('active');
+        btnAdhd.classList.remove('active', 'adhd-active');
+        badge.textContent = "Lens: Standard Neurotypical";
+        badge.classList.remove('adhd-mode');
+      } else {
+        btnNt.classList.remove('active');
+        btnAdhd.classList.add('active', 'adhd-active');
+        badge.textContent = "Lens: ADHD / Novelty-Seeking";
+        badge.classList.add('adhd-mode');
+      }
+
+      // Update Chapter Callouts
+      ['ch1', 'ch2', 'ch3', 'ch4'].forEach(ch => {
+        const el = document.getElementById('callout-' + ch);
+        const data = lensCallouts[lens][ch];
+        if (lens === 'adhd') {
+          el.classList.add('adhd-style');
+        } else {
+          el.classList.remove('adhd-style');
+        }
+        el.innerHTML = `
+          <div class="lens-callout-header">${data.title}</div>
+          <p>${data.p1}</p>
+          ${data.p2 ? `<p>${data.p2}</p>` : ''}
+        `;
+      });
+
+      updateSimulator();
+    }
+
+    function updateSimulator() {
+      const algo = parseFloat(document.getElementById('s-algo').value);
+      const fallow = parseFloat(document.getElementById('s-fallow').value);
+      const soft = parseFloat(document.getElementById('s-soft').value);
+      const kinetic = parseFloat(document.getElementById('s-kinetic').value);
+
+      // Update Slider Labels
+      document.getElementById('val-algo').textContent = algo + " hrs/day";
+      document.getElementById('val-fallow').textContent = fallow === 0 ? "0 min (Constant Check)" : fallow + " min blocks";
+      document.getElementById('val-soft').textContent = soft + " min/day";
+      document.getElementById('val-kinetic').textContent = kinetic + " min/day";
+
+      // Calculate Metrics based on Lens
+      let tonicDopamine = 75;
+      let dmnComposting = 50;
+      let anchorStrength = (soft * 0.6) + (kinetic * 0.6); // 0 to 108
+
+      if (currentLens === 'nt') {
+        tonicDopamine = Math.round(80 - (algo * 9) + (soft * 0.15) + (kinetic * 0.15));
+        dmnComposting = Math.round((fallow * 1.1) + (soft * 0.35) - (algo * 6));
+      } else {
+        // ADHD Lens: Lower starting tonic baseline; crashes if both algo AND anchors are near zero!
+        tonicDopamine = Math.round(58 - (algo * 7.5) + (soft * 0.35) + (kinetic * 0.4));
+        if (algo <= 1 && anchorStrength < 20) {
+          // Sensory deprivation trough in ADHD
+          tonicDopamine -= 18;
+          dmnComposting = Math.round((fallow * 0.4) - 10);
+        } else {
+          // When tethered by Soft Fascination + Kinetic movement, ADHD DMN thrives
+          dmnComposting = Math.round((fallow * 0.9) + (soft * 0.5) + (kinetic * 0.3) - (algo * 6.5));
+        }
+      }
+
+      tonicDopamine = Math.max(12, Math.min(98, tonicDopamine));
+      dmnComposting = Math.max(8, Math.min(98, dmnComposting));
+
+      let residueLabel = "Low";
+      if (algo >= 4 || fallow <= 5) residueLabel = "Severe";
+      else if (algo >= 2.5 || fallow <= 15) residueLabel = "Moderate";
+
+      document.getElementById('m-dopamine').textContent = tonicDopamine + "%";
+      document.getElementById('m-dmn').textContent = dmnComposting + "%";
+      document.getElementById('m-residue').textContent = residueLabel;
+
+      renderBiomeSVG(algo, fallow, soft, kinetic, dmnComposting);
+      renderSynthesisText(algo, fallow, soft, kinetic, tonicDopamine, dmnComposting);
+    }
+
+    function renderBiomeSVG(algo, fallow, soft, kinetic, dmnComposting) {
+      const noiseGroup = document.getElementById('svg-static-noise');
+      const stemsGroup = document.getElementById('svg-stems');
+      const rootsGroup = document.getElementById('svg-roots');
+
+      noiseGroup.innerHTML = '';
+      stemsGroup.innerHTML = '';
+      rootsGroup.innerHTML = '';
+
+      // 1. Sky Static Lines (Algorithmic Chatter)
+      const noiseCount = Math.round(algo * 12);
+      for (let i = 0; i < noiseCount; i++) {
+        const x1 = 30 + ((i * 47) % 340);
+        const y1 = 15 + ((i * 23) % 45);
+        const x2 = x1 + 12 + (i % 15);
+        noiseGroup.innerHTML += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y1}" stroke="#A85A42" stroke-width="1.2" opacity="0.45" />`;
+      }
+
+      // 2. Botanical Stems Above Horizon (Soft Fascination & Kinetic Grounding)
+      const stemCount = Math.max(2, Math.round((soft + kinetic) / 14));
+      for (let i = 0; i < stemCount; i++) {
+        const x = 65 + (i * (270 / Math.max(1, stemCount - 1)));
+        const h = 25 + ((soft + kinetic) * 0.35) + ((i % 3) * 8);
+        const yTop = Math.max(25, 130 - h);
+        stemsGroup.innerHTML += `
+          <path d="M ${x} 130 Q ${x - 6} ${(130 + yTop)/2} ${x} ${yTop}" stroke="#4A5D4E" stroke-width="2" fill="none" />
+          <circle cx="${x}" cy="${yTop}" r="3.5" fill="#4A5D4E" />
+        `;
+      }
+
+      // 3. Subterranean Root Network (DMN Synaptic Composting)
+      const rootBranches = Math.max(2, Math.round(dmnComposting / 10));
+      for (let i = 0; i < rootBranches; i++) {
+        const startX = 80 + ((i * 31) % 240);
+        const endX = startX + ((i % 2 === 0 ? 1 : -1) * (20 + (i * 4)));
+        const endY = Math.min(192, 135 + (dmnComposting * 0.55));
+        rootsGroup.innerHTML += `
+          <path d="M ${startX} 130 Q ${startX} ${(130 + endY)/2} ${endX} ${endY}" stroke="#525753" stroke-width="1.4" fill="none" opacity="0.75" />
+        `;
+      }
+    }
+
+    function renderSynthesisText(algo, fallow, soft, kinetic, tonic, dmn) {
+      const out = document.getElementById('synthesis-output');
+      let p1 = "";
+      let p2 = "";
+
+      if (algo >= 4) {
+        p1 = `<strong>Receptor Down-Regulation Alert:</strong> With <strong>${algo} hours/day</strong> of rapid-cut algorithmic input, your reward pathways are flooded with artificial phasic dopamine. Like a gut biome overwhelmed by refined sugar, your prefrontal cortex is retracting dopamine receptors to maintain homeostasis—leaving your baseline tonic level depressed at <strong>${tonic}%</strong> and making unhurried life feel flat.`;
+      } else if (algo <= 1.5) {
+        p1 = `<strong>Low Algorithmic Parasitism:</strong> By keeping rapid-cut digital foraging to <strong>${algo} hours/day</strong>, you are protecting your dopamine receptors from homeostatic down-regulation. Your attentional soil is free from heavy "attention residue."`;
+      } else {
+        p1 = `<strong>Moderate Digital Load:</strong> At <strong>${algo} hours/day</strong> of algorithmic input, your Executive Attention Network experiences periodic receptor fatigue, requiring intentional restorative buffers to keep tonic dopamine (<strong>${tonic}%</strong>) resilient.`;
+      }
+
+      if (currentLens === 'adhd') {
+        if (soft + kinetic < 30 && fallow >= 20 && algo <= 1.5) {
+          p2 = `<strong>ADHD Lens — The Zero-Input Trap:</strong> You have carved out <strong>${fallow}-minute</strong> fallow blocks with low screen time, <em>but</em> your Soft Fascination (<strong>${soft}m</strong>) and Kinetic Grounding (<strong>${kinetic}m</strong>) are critically low. In a novelty-seeking/ADHD brain, dropping into a blank vacuum causes tonic dopamine to crash, triggering a restless, ruminating Default Mode Network. <em>Prescription:</em> Add a 10% sensory tether—sit and observe a living garden (Open Monitoring), turn on brown noise, or walk with a weighted vest.`;
+        } else if (soft + kinetic >= 50 && fallow >= 15) {
+          p2 = `<strong>ADHD Lens — Optimal "Soft Fascination" Tether:</strong> By combining <strong>${soft} min</strong> of fractal observation with <strong>${kinetic} min</strong> of proprioceptive movement, you are feeding your prefrontal "watchman" the exact 10% stochastic tether it craves. Instead of crashing into agitation during your <strong>${fallow}-minute</strong> fallow windows, your Default Mode Network is safely unlocked for deep synaptic composting (<strong>${dmn}% efficiency</strong>).`;
+        } else {
+          p2 = `<strong>ADHD Lens — Balancing the Seesaw:</strong> To help your Default Mode Network shift out of frantic internal foraging (currently at <strong>${dmn}% composting efficiency</strong>), increase uninterrupted fallow windows past the 15-minute mark while pairing them with active observation (tracking insects/wind in native plants) or weighted movement.`;
+        }
+      } else {
+        if (fallow < 15) {
+          p2 = `<strong>Starved Default Mode Network:</strong> Because your longest uninterrupted break is only <strong>${fallow} minutes</strong>, your brain rarely clears the 90-second boredom airlock. The Task-Positive Network remains locked in the downward position, limiting subterranean synaptic composting to <strong>${dmn}%</strong>.`;
+        } else {
+          p2 = `<strong>Active Synaptic Composting:</strong> Your <strong>${fallow}-minute</strong> fallow windows—supported by <strong>${soft} minutes</strong> of Soft Fascination and <strong>${kinetic} minutes</strong> of kinetic grounding—allow the neurological seesaw to tip smoothly into the Default Mode Network (<strong>${dmn}% efficiency</strong>), weaving fragmented daily thoughts into long-term memory and insight.`;
+        }
+      }
+
+      out.innerHTML = `<p>${p1}</p><p>${p2}</p>`;
+    }
+
+    // Initialize on load
+    window.onload = () => {
+      setCognitiveLens('nt');
+    };
+  </script>
+</body>
+</html>
