@@ -1,5 +1,0 @@
-# robots.txt for fallow.garden
-User-agent: *
-Allow: /
-
-Sitemap: https://fallow.garden/sitemap.xml
