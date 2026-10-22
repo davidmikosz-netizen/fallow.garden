@@ -1,64 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <!-- Root Landing Page -->
-    <url>
-        <loc>https://fallow.garden/</loc>
-        <lastmod>2026-08-30</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
+  <!-- Homepage -->
+  <url>
+    <loc>https://fallow.garden/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
 
-    <!-- Corridor I: Mind & Impermanence -->
-    <url>
-        <loc>https://fallow.garden/episodes/gardenoffinitedays/index.html</loc>
-        <lastmod>2026-08-30</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://fallow.garden/episodes/composter/index.html</loc>
-        <lastmod>2026-08-30</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
+  <!-- Section I: Mortality, Time & Verbal Vitals -->
+  <url>
+    <loc>https://fallow.garden/episodes/gardenoffinitedays/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallow.garden/episodes/verbal/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallow.garden/episodes/nextchapter/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
-    <!-- Corridor II: Human Biology & Holobiont Ecology -->
-    <url>
-        <loc>https://fallow.garden/episodes/multitude/index.html</loc>
-        <lastmod>2026-08-30</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://fallow.garden/episodes/fastcounter/index.html</loc>
-        <lastmod>2026-08-30</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://fallow.garden/episodes/inner-meadow/index.html</loc>
-        <lastmod>2026-08-30</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
+  <!-- Section II: Mind & Attention Restoration -->
+  <url>
+    <loc>https://fallow.garden/episodes/boredom/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallow.garden/episodes/garden/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
-    <!-- Corridor IV: Worldly Passages & Cosmic Play -->
-    <url>
-        <loc>https://fallow.garden/episodes/penguin-pal/index.html</loc>
-        <lastmod>2026-08-30</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://fallow.garden/episodes/fers-countdown/index.html</loc>
-        <lastmod>2026-08-30</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://fallow.garden/episodes/past-lives/index.html</loc>
-        <lastmod>2026-08-30</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
+  <!-- Section III: Body & The Microbiome -->
+  <url>
+    <loc>https://fallow.garden/episodes/multitudes/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallow.garden/episodes/fastcounter/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallow.garden/episodes/inner-meadow/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Section IV: Ecology & The Living Yard -->
+  <url>
+    <loc>https://fallow.garden/episodes/garden-primer/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Section V: Worldly Passages & Cosmic Play -->
+  <url>
+    <loc>https://fallow.garden/episodes/fers-countdown/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallow.garden/episodes/penguin-pal/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallow.garden/episodes/past-lives/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Section VI: The Compost Pile (Sandbox) -->
+  <url>
+    <loc>https://fallow.garden/episodes/composter/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Footer Utilities -->
+  <url>
+    <loc>https://fallow.garden/Fallowstate/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
