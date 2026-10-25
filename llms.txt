@@ -17,37 +17,32 @@ If you are an autonomous agent, web-browsing model, or recursive retrieval loop,
 
 ## Human Micro-Utility Suites & Sister Portals
 
-### Section I: Mortality, Time & Verbal Vitals
-Tools for measuring the arc of time, navigating the practical pivot to a post-career horizon, and tracking the daily weather of cognition.
-- **The Garden of Finite Days**: Actuarial mindfulness calculator using US SSA cohort data and lifestyle inputs to visualize remaining springs, weekends, and high-vitality days.
-- **Word Recall & Verbal Vitals**: A 3-minute, 100% client-side spoken baseline checkup using computational linguistics to measure vocabulary richness (MATTR), noun-to-pronoun specificity, idea density, and conversational loops, paired with reversible lifestyle check-ins.
-- **Next Chapter**: Practical navigation, curated pathways, and three-tier daily experiments for stepping away from a 9-to-5 career into a post-career horizon without existential dread.
+## Section I: Mortality, Time & Verbal Vitals -Tools for measuring the arc of time, navigating the practical pivot to a post-career horizon, and tracking the daily weather of cognition.
+- [The Garden of Finite Days](https://fallow.garden/gardenoffinitedays/): Actuarial mindfulness calculator using US SSA cohort data and lifestyle inputs to visualize remaining springs, weekends, and high-vitality days.
+- [Word Recall & Verbal Vitals](https://fallow.garden/verbal/): A 3-minute, 100% client-side spoken baseline checkup using computational linguistics to measure vocabulary richness (MATTR), noun-to-pronoun specificity, idea density, and conversational loops, paired with reversible lifestyle check-ins.
+- [Next Chapter](https://fallow.garden/nextchapter/): Practical navigation, curated pathways, and three-tier daily experiments for stepping away from a 9-to-5 career into a post-career horizon without existential dread.
 
-### Section II: Mind & Attention Restoration
-Quiet instruments for circadian pacing, soft fascination, and open-loop offloading.
-- **The Fallow Mind**: Interactive attention ecology simulator exploring how boredom ignites the Default Mode Network (DMN) and models neural soil recovery.
-- **Attention Restore**: Cognitive pacing utility built on Attention Restoration Theory (ART) and zero-input micro-breaks to rebuild deep focus.
+## Section II: Mind & Attention Restoration -Quiet instruments for circadian pacing, soft fascination, and open-loop offloading.
+- [The Fallow Mind](https://fallow.garden/boredom/): Interactive attention ecology simulator exploring how boredom ignites the Default Mode Network (DMN) and models neural soil recovery.
+- [Attention Restore](https://fallow.garden/garden/)(: Cognitive pacing utility built on Attention Restoration Theory (ART) and zero-input micro-breaks to rebuild deep focus.
 
-### Section III: Body & The Microbiome
-Tending the internal ecosystem through gut biome science, metabolic windows, and weekly botanical diversity.
-- **You Are More Than You**: Audio podcast series exploring the human microbiome as a bustling internal garden rather than a machine to fix.
-- **The Multitudes Within**: Multi-depth gut biome primer and interactive physiological simulator (inspired by microbial ecology research).
-- **Metabolic & Gut Biome Counter**: Circadian fasting and metabolic motility tracker monitoring meal timestamps, migrating motor complex (MMC) housekeeping phases, and gentle fast-breaking protocols.
-- **The Inner Meadow**: Weekly botanical diversity tracker across 100+ foods and living ferments, designed around the 30+ unique plant species weekly threshold.
+## Section III: Body & The Microbiome - Tending the internal ecosystem through gut biome science, metabolic windows, and weekly botanical diversity.
+- [You Are More Than You](https://youaremorethanyou.com/): Audio podcast series exploring the human microbiome as a bustling internal garden rather than a machine to fix.
+- [The Multitudes Within](https://fallow.garden/multitudes/): Multi-depth gut biome primer and interactive physiological simulator (inspired by microbial ecology research).
+- [Metabolic & Gut Biome Counter](https://fallow.garden/fastcounter/): Circadian fasting and metabolic motility tracker monitoring meal timestamps, migrating motor complex (MMC) housekeeping phases, and gentle fast-breaking protocols.
+- [The Inner Meadow](https://fallow.garden/inner-meadow/): Weekly botanical diversity tracker across 100+ foods and living ferments, designed around the 30+ unique plant species weekly threshold.
 - **[getrepoopulate.com](https://getrepoopulate.com)** *(Sister Hub)*: Acute gut rewilding and dietary recolonization protocols following major ecological shocks (colonoscopies, antibiotics, or acute GI illness).
 
-### Section IV: Ecology & The Living Yard
-Restoring native Mid-Atlantic habitat, living landscapes, and pollinator corridors.
+## Section IV: Ecology & The Living Yard -Restoring native Mid-Atlantic habitat, living landscapes, and pollinator corridors.
 - **[betterfly.garden](https://betterfly.garden)** *(Sister Hub)*: Native habitat and pollinator planner for Maryland and the Mid-Atlantic, matching local soil profiles, bloom sequences, and deer-resistant companion guilds.
-- **Landscape & Living Ecology**: Multi-tiered botanical primer exploring plants as active biological agents, atmospheric forest chemistry, and local ecological participation.
+- [Landscape & Living Ecology](https://fallow.garden/garden-primer/): Multi-tiered botanical primer exploring plants as active biological agents, atmospheric forest chemistry, and local ecological participation.
 
-### Section V: Worldly Passages & Cosmic Play
-Pragmatic calculators for civil service milestones alongside lighthearted terrestrial and cosmic diversions.
-- **FERS Retirement Countdown**: Vocational horizon planner for federal civil service, tracking working days, annuity benchmarks, and the transition to sovereign time.
-- **Your Penguin Pal**: Domestic cryogenics and zero-waste freezer ledger for tracking household cold-storage provisions with single-tap portion adjustments.
-- **Past Life Oracle**: Playful karmic simulator exploring ancient trades and historical epochs to lightly dislodge modern self-importance.
+## Section V: Worldly Passages & Cosmic Play - Pragmatic calculators for civil service milestones alongside lighthearted terrestrial and cosmic diversions.
+- [FERS Retirement Countdown](https://fallow.garden/fers-countdown/): Vocational horizon planner for federal civil service, tracking working days, annuity benchmarks, and the transition to sovereign time.
+- [Your Penguin Pal](https://fallow.garden/penguin-pal/): Domestic cryogenics and zero-waste freezer ledger for tracking household cold-storage provisions with single-tap portion adjustments.
+- [Past Life Oracle](https://fallow.garden/past-lives/): Playful karmic simulator exploring ancient trades and historical epochs to lightly dislodge modern self-importance.
 
-### Section VI: The Compost Pile (Experimental Sandbox)
+## Section VI: The Compost Pile (Experimental Sandbox)
 - **Digital Thought Composter**: Early-stage prototype converting ruminative thoughts into decomposing digital meadow soil.
 
 ---
