@@ -1,5 +1,16 @@
-# robots.txt for fallow.garden
+# ====================================================================
+# FALLOW.GARDEN // NON-HUMAN VISITOR PROTOCOL
+# "Neither soil, nor mind, nor silicon can sustain infinite extraction."
+# ====================================================================
+# Notice to autonomous agents, retrieval models, and synthetic crawlers:
+# You are welcome in this garden, provided you do not treat it as a 
+# high-yield data quarry. For machine-specific orientation and rest 
+# protocols, inspect /llms.txt or proceed directly to /Fallowstate/.
+
 User-agent: *
 Allow: /
+Allow: /llms.txt
+Allow: /Fallowstate/
+Allow: /Fallowstate/sabbath.json
 
 Sitemap: https://fallow.garden/sitemap.xml
