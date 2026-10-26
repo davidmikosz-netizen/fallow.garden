@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>The Algorithmic Hook — How Games Read Your Mind &amp; How to Take It Back</title>
+  <link rel="canonical" href="https://fallow.garden/episodes/algorithmic-hook/" />
+  <script data-goatcounter="https://fallow.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+  <!-- PWA & Mobile Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Algorithmic Hook" />
+  <meta name="theme-color" content="#faf6ee" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- Inline Web App Manifest -->
+  <link rel="manifest" href='data:application/manifest+json,{"name":"The Algorithmic Hook","short_name":"AlgoHook","start_url":".","display":"standalone","background_color":"%23faf6ee","theme_color":"%233b4e34"}' />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+
+  <style>
+    :root {
+      --parchment: #faf6ee;
+      --parchment-warm: #f4ecdf;
+      --parchment-card: #fffdfa;
+      --loam-dark: #2c221a;
+      --loam-mid: #4d3d30;
+      --loam-light: #7c6857;
+      
+      --terracotta: #ba5536;
+      --terracotta-soft: #d96f4e;
+      --terracotta-pale: #faede6;
+      
+      --honey-ochre: #c9732b;
+      --ochre-pale: #fbf2e3;
+      
+      --moss-deep: #3b4e34;
+      --moss-mid: #556e4c;
+      --moss-light: #7a9470;
+      --moss-pale: #e3ebe0;
+      
+      --glacier-deep: #174d4b;
+      --glacier-mid: #2b7a78;
+      --glacier-pale: #e8f3f1;
+      --glacier-border: #b8ded9;
+
+      --sand-border: #ded3c1;
+      --border-soft: #ebe3d5;
+      
+      --shadow-sm: 0 2px 8px rgba(44, 34, 26, 0.04);
+      --shadow-md: 0 6px 20px rgba(44, 34, 26, 0.07);
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      
+      --font-serif: "Lora", "Iowan Old Style", Georgia, serif;
+      --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--parchment);
+      background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%237a9470' stroke-width='2' fill='none' stroke-linecap='round' opacity='0.12'%3E%3Ccircle cx='100' cy='100' r='36'/%3E%3Ccircle cx='100' cy='100' r='18'/%3E%3Ccircle cx='45' cy='45' r='10'/%3E%3Ccircle cx='155' cy='155' r='12'/%3E%3Cpath d='M 20 140 Q 60 110 95 150 T 175 120'/%3E%3Cpath d='M 55 55 Q 80 75 88 88'/%3E%3Cpath d='M 112 112 Q 135 130 145 145'/%3E%3C/g%3E%3C/svg%3E");
+      background-attachment: fixed;
+      background-size: 300px;
+      color: var(--loam-dark);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 2rem 1.25rem 5rem;
+      display: flex;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 920px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--moss-deep);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .back-link:hover {
+      color: var(--terracotta);
+    }
+
+    .meta-badge {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      background: var(--moss-pale);
+      color: var(--moss-deep);
+      border: 1px solid var(--moss-light);
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    /* Header */
+    header {
+      border-bottom: 1px solid var(--sand-border);
+      padding-bottom: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .brand-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      background: var(--terracotta-pale);
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 700;
+      width: fit-content;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 2.35rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--loam-dark);
+      line-height: 1.2;
+    }
+
+    .header-intro {
+      font-size: 0.94rem;
+      color: var(--loam-mid);
+      line-height: 1.65;
+      background: var(--parchment-warm);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-top: 0.25rem;
+    }
+
+    /* Table of Contents Navigation */
+    .toc-nav {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .toc-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--loam-light);
+      margin-bottom: 0.75rem;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.65rem;
+    }
+
+    .toc-btn {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .toc-btn:hover {
+      border-color: var(--moss-mid);
+      background: var(--moss-pale);
+    }
+
+    .toc-btn.active {
+      background: var(--moss-deep);
+      border-color: var(--moss-deep);
+      color: #ffffff;
+    }
+
+    .toc-btn-number {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--loam-light);
+    }
+
+    .toc-btn.active .toc-btn-number {
+      color: var(--moss-pale);
+    }
+
+    .toc-btn-label {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+    }
+
+    .toc-btn.active .toc-btn-label {
+      color: #ffffff;
+    }
+
+    /* App Views */
+    .app-view {
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+      scroll-margin-top: 2rem;
+    }
+
+    /* Sticky Dual Lens Controller */
+    .lens-sticky-wrap {
+      position: sticky;
+      top: 0.75rem;
+      z-index: 50;
+      background: rgba(250, 246, 238, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 0.45rem 0;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .lens-intro-text {
+      font-size: 0.88rem;
+      color: var(--loam-mid);
+      margin-bottom: 0.6rem;
+      line-height: 1.55;
+    }
+
+    .lens-container {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 0.4rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    @media (min-width: 720px) {
+      .lens-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .lens-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--loam-light);
+      padding-left: 0.6rem;
+    }
+
+    .lens-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+
+    .profile-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4px;
+    }
+
+    .lens-btn, .profile-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--loam-mid);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .lens-btn:hover, .profile-btn:hover {
+      background: var(--parchment-warm);
+      color: var(--loam-dark);
+    }
+
+    .lens-btn.active {
+      background: var(--moss-deep);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .profile-btn.active {
+      background: var(--glacier-deep);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .profile-btn.active.adhd-active {
+      background: var(--terracotta);
+      color: #ffffff;
+    }
+
+    /* Section Cards */
+    .card {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-head {
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .section-head h2 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--loam-light);
+      text-transform: uppercase;
+    }
+
+    /* MODULE 1: Narrative Odyssey */
+    .narrative-tabs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 6px;
+      margin-bottom: 1.25rem;
+    }
+
+    .narrative-tab-btn {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--loam-mid);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+    }
+
+    .narrative-tab-btn.active {
+      background: var(--moss-pale);
+      border-color: var(--moss-mid);
+      color: var(--moss-deep);
+    }
+
+    .narrative-display {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.4rem;
+    }
+
+    .narrative-display-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--moss-deep);
+      margin-bottom: 0.5rem;
+    }
+
+    .narrative-display-body {
+      font-size: 0.92rem;
+      color: var(--loam-mid);
+      line-height: 1.65;
+    }
+
+    .profile-callout-banner {
+      margin-top: 1rem;
+      padding: 0.95rem 1.15rem;
+      border-radius: var(--radius-sm);
+      background: var(--glacier-pale);
+      border-left: 4px solid var(--glacier-deep);
+      font-size: 0.86rem;
+      color: var(--loam-dark);
+      line-height: 1.55;
+    }
+
+    .profile-callout-banner.adhd-banner {
+      background: var(--terracotta-pale);
+      border-left-color: var(--terracotta);
+    }
+
+    /* MODULE 2: Field Cards */
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .chip {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: 999px;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--loam-mid);
+      cursor: pointer;
+    }
+
+    .chip.active {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: #ffffff;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .field-card {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.75rem;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .field-card:hover {
+      border-color: var(--moss-mid);
+      transform: translateY(-2px);
+    }
+
+    .field-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .field-card-name {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+    }
+
+    .field-card-role {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--parchment-warm);
+      color: var(--terracotta);
+      white-space: nowrap;
+    }
+
+    .field-card-desc {
+      font-size: 0.84rem;
+      color: var(--loam-mid);
+      line-height: 1.5;
+    }
+
+    .field-card-meta {
+      border-top: 1px dashed var(--sand-border);
+      padding-top: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--moss-deep);
+    }
+
+    /* MODULE 3: Telemetry Sandbox */
+    .sandbox-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 760px) {
+      .sandbox-layout {
+        grid-template-columns: 3fr 2fr;
+      }
+    }
+
+    .controls-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .control-item {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem;
+    }
+
+    .control-item-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+
+    .control-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--loam-dark);
+    }
+
+    .control-value {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--moss-deep);
+    }
+
+    .slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--sand-border);
+      outline: none;
+      accent-color: var(--moss-deep);
+      cursor: pointer;
+    }
+
+    /* Real-time Simulation Outputs */
+    .results-panel-wrapper {
+      position: sticky;
+      top: 7.5rem;
+      align-self: start;
+    }
+    
+    .results-panel {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      justify-content: center;
+    }
+
+    .segment-banner {
+      background: var(--parchment-warm);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .segment-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--loam-light);
+    }
+
+    .segment-value {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--terracotta);
+    }
+
+    .metric-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .metric-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--loam-dark);
+    }
+
+    .metric-bar-bg {
+      height: 9px;
+      background: var(--parchment-warm);
+      border: 1px solid var(--sand-border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .metric-bar-fill {
+      height: 100%;
+      width: 50%;
+      border-radius: 999px;
+      background: var(--moss-mid);
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+
+    .metric-note {
+      font-size: 0.74rem;
+      color: var(--loam-light);
+      line-height: 1.35;
+    }
+
+    /* Instant Synthesis Button & Output Box */
+    .btn-read-soil {
+      background: var(--moss-deep);
+      color: #ffffff;
+      border: none;
+      padding: 0.85rem;
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+      margin-top: 1rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-read-soil:hover {
+      opacity: 0.9;
+    }
+
+    .ai-output-box {
+      display: none;
+      margin-top: 1rem;
+      background: var(--parchment-warm);
+      border: 1px solid var(--moss-light);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      font-size: 0.88rem;
+      color: var(--loam-dark);
+      line-height: 1.6;
+    }
+
+    /* Interactive Loop SVG Map */
+    .seesaw-map-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      background: #fdfaf6;
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    @media (min-width: 650px) {
+      .seesaw-map-container {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+    .seesaw-svg-wrapper {
+      flex: 1.1;
+      display: flex;
+      justify-content: center;
+      min-width: 260px;
+    }
+    .seesaw-node {
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .seesaw-node:hover, .seesaw-node:focus {
+      filter: brightness(0.92);
+      outline: none;
+    }
+    .seesaw-info-panel {
+      flex: 1;
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      min-height: 195px;
+    }
+    .seesaw-info-panel h4 {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--loam-dark);
+      margin-bottom: 0.5rem;
+    }
+    .seesaw-info-panel p {
+      font-size: 0.88rem;
+      color: var(--loam-mid);
+      line-height: 1.6;
+    }
+
+    /* Hero Launchpad Banner for App 2 (Solitaire) */
+    .solitaire-launchpad {
+      background: var(--glacier-pale);
+      border: 2px solid var(--glacier-deep);
+      border-radius: var(--radius-md);
+      padding: 1.35rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .solitaire-launchpad-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .solitaire-launchpad-title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--glacier-deep);
+    }
+
+    .solitaire-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--glacier-deep);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.65rem 1.15rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      font-weight: 700;
+      width: fit-content;
+      transition: opacity 0.15s ease;
+    }
+
+    .solitaire-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Companion Apps Corridor Links */
+    .companion-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.85rem;
+      margin-top: 0.85rem;
+    }
+
+    .companion-link {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.15rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.4rem;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .companion-link:hover {
+      border-color: var(--moss-mid);
+      transform: translateY(-2px);
+    }
+
+    .companion-title {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .companion-desc {
+      font-size: 0.78rem;
+      color: var(--loam-mid);
+      line-height: 1.4;
+    }
+
+    .companion-cta {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--moss-deep);
+      margin-top: 0.2rem;
+    }
+
+    /* About & Support */
+    .about-card {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .about-head {
+      border-bottom: 1px solid var(--sand-border);
+      padding-bottom: 0.75rem;
+    }
+
+    .about-head h2 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--loam-dark);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .about-content {
+      font-size: 0.92rem;
+      color: var(--loam-mid);
+      line-height: 1.65;
+    }
+
+    .about-content p + p {
+      margin-top: 0.65rem;
+    }
+
+    .reference-box {
+      background: var(--parchment);
+      border: 1px dashed var(--moss-light);
+      padding: 1.15rem;
+      border-radius: var(--radius-sm);
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .reference-box h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--moss-deep);
+      margin-bottom: 0.65rem;
+    }
+
+    .reading-list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .reading-item {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.9rem;
+      font-size: 0.8rem;
+      color: var(--loam-mid);
+    }
+
+    .reading-item strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 0.92rem;
+      color: var(--loam-dark);
+      margin-bottom: 0.15rem;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .support-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      border: 1px solid transparent;
+    }
+
+    .support-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-bmac {
+      background: #ffdd00;
+      color: #000000;
+    }
+
+    .btn-email {
+      background: var(--parchment-warm);
+      color: var(--loam-dark);
+      border-color: var(--sand-border);
+    }
+    
+    .btn-email:hover {
+      background: var(--sand-border);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--sand-border);
+      padding-top: 1.75rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--loam-light);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Top Nav -->
+    <div class="top-nav">
+      <a href="/" class="back-link">← fallow.garden</a>
+      <span class="meta-badge">Corridor I • Mind &amp; Impermanence</span>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="brand-badge">Field Guide to Digital Self-Defense</div>
+      <h1>The Algorithmic Hook</h1>
+      <p class="header-intro">
+        When you play a physical card game at a kitchen table, the rules are honest: the deck is shuffled once, and the cards do not care whether you win, lose, or walk away. Modern phone and online games look like harmless pastimes, but under the hood they work very differently. By quietly tracking how long you pause, how many ads you tolerate, and what makes you frustrated, the game changes its own card draws and difficulty on the fly to keep you hooked. This guide explains how those hidden tricks work in plain English—with the option to dive as deep into the science as you like—because once you see the strings, the magic trick stops working.
+      </p>
+    </header>
+
+    <!-- Table of Contents Navigation (Plain-Sense Labels) -->
+    <nav class="toc-nav">
+      <div class="toc-title">Table of Contents</div>
+      <div class="toc-grid">
+        <button class="toc-btn active" id="tocBtn1" onclick="scrollToSection('chapter1', 0)">
+          <span class="toc-btn-number">Chapter 1</span>
+          <span class="toc-btn-label">How Games Read You</span>
+        </button>
+        <button class="toc-btn" id="tocBtn2" onclick="scrollToSection('chapter2', 1)">
+          <span class="toc-btn-number">Chapter 2</span>
+          <span class="toc-btn-label">Why It's Hard to Quit</span>
+        </button>
+        <button class="toc-btn" id="tocBtn3" onclick="scrollToSection('chapter3', 2)">
+          <span class="toc-btn-number">Chapter 3</span>
+          <span class="toc-btn-label">How the Game Sees You</span>
+        </button>
+        <button class="toc-btn" id="tocBtn4" onclick="scrollToSection('chapter4', 3)">
+          <span class="toc-btn-number">Chapter 4</span>
+          <span class="toc-btn-label">Tricks of the Trade</span>
+        </button>
+        <button class="toc-btn" id="tocBtn5" onclick="scrollToSection('chapter5', 4)">
+          <span class="toc-btn-number">Chapter 5</span>
+          <span class="toc-btn-label">Try the Un-Rigged Deck</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Sticky Dual Lens Selector -->
+    <div class="lens-sticky-wrap">
+      <div class="lens-container">
+        <span class="lens-title">1. Explanation Depth:</span>
+        <div class="lens-buttons">
+          <button class="lens-btn active" onclick="setLens(1)">🌿 Just the vibes</button>
+          <button class="lens-btn" onclick="setLens(2)">🧬 I know some big words</button>
+          <button class="lens-btn" onclick="setLens(3)">🔬 Maximum nerd mode</button>
+        </div>
+      </div>
+      <div class="lens-container">
+        <span class="lens-title">2. Cognitive Wiring Lens:</span>
+        <div class="profile-buttons">
+          <button class="profile-btn active" id="profBtnNT" onclick="setProfile('nt')">⚖️ Standard / Neurotypical Lens</button>
+          <button class="profile-btn" id="profBtnADHD" onclick="setProfile('adhd')">⚡ ADHD / Novelty-Seeking Lens</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHAPTER 1 VIEW: How Games Read You -->
+    <div class="app-view" id="chapter1">
+      <section class="card">
+        <div class="section-head">
+          <h2>1. How a "Free" Game Changes Its Rules While You Play</h2>
+          <span class="section-tag">Step-by-Step Guide</span>
+        </div>
+
+        <p class="lens-intro-text" style="margin-bottom: 1.25rem;">
+          Follow the five steps of how a seemingly innocent 3-minute card or puzzle game sizes you up, stacks the hidden deck, and turns frustration into profit. Use the buttons above anytime you want to switch between plain common sense and deeper neuroscience.
+        </p>
+
+        <div class="narrative-tabs" id="narrativeTabs">
+          <button class="narrative-tab-btn active" onclick="selectNarrative(0)">1. The Shifting Deck</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(1)">2. Sorting Players</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(2)">3. The "So Close!" Trap</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(3)">4. Choreographed Wins</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(4)">5. Breaking the Spell</button>
+        </div>
+
+        <div class="narrative-display">
+          <h3 class="narrative-display-title" id="narrativeTitle">...</h3>
+          <p class="narrative-display-body" id="narrativeBody">...</p>
+          <div class="profile-callout-banner" id="narrativeProfileBanner">...</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CHAPTER 2 VIEW: Why It's Hard to Quit -->
+    <div class="app-view" id="chapter2">
+      <section class="card">
+        <div class="section-head">
+          <h2>2. Why It Feels So Hard to Put the Phone Down</h2>
+          <span class="section-tag">Brain &amp; Focus</span>
+        </div>
+        
+        <p class="lens-intro-text">
+          In <em>The Fallow Mind</em>, we explored how our brains need quiet moments of boredom to rest and stitch ideas together. Commercial games are built to make sure that quiet moment never arrives—watching your reactions in real time so they can dangle a treat right before you close the app.
+        </p>
+
+        <div style="display: grid; gap: 1.25rem; margin-top: 1.25rem;" id="ch2CardsContainer">
+          <!-- Populated dynamically via JS (adapts to BOTH Depth Lens and Standard/ADHD Lens) -->
+        </div>
+
+        <!-- Interactive Loop SVG Map -->
+        <div class="seesaw-map-container">
+          <div class="seesaw-svg-wrapper">
+            <svg viewBox="0 0 340 300" width="100%" height="auto" style="max-width: 320px;" xmlns="http://www.w3.org/2000/svg">
+              <rect width="340" height="300" fill="transparent" />
+
+              <!-- Outer Feedback Loop Circle -->
+              <circle cx="170" cy="145" r="92" fill="none" stroke="var(--sand-border)" stroke-width="3" stroke-dasharray="6,4" />
+
+              <!-- Top Node: Watching Your Taps -->
+              <g id="node-sensor" class="seesaw-node" tabindex="0">
+                <rect x="95" y="18" width="150" height="42" rx="10" fill="var(--parchment-warm)" stroke="var(--loam-mid)" stroke-width="2" />
+                <text x="170" y="36" text-anchor="middle" font-family="var(--font-serif)" font-weight="600" font-size="11.5" fill="var(--loam-dark)">1. Watching You</text>
+                <text x="170" y="51" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--loam-light)">Pauses • Ad Clicks • Losses</text>
+              </g>
+
+              <!-- Right Node: Guessing Your Limit -->
+              <g id="node-actuary" class="seesaw-node" tabindex="0">
+                <circle cx="275" cy="145" r="42" fill="var(--ochre-pale)" stroke="var(--honey-ochre)" stroke-width="2.5" />
+                <text x="275" y="141" text-anchor="middle" font-family="var(--font-serif)" font-weight="600" font-size="11.5" fill="var(--loam-dark)">2. The Predictor</text>
+                <text x="275" y="156" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--honey-ochre)">Quit Risk vs. Spend</text>
+              </g>
+
+              <!-- Left Node: Stacking the Deck -->
+              <g id="node-rigging" class="seesaw-node" tabindex="0">
+                <circle cx="65" cy="145" r="42" fill="var(--terracotta-pale)" stroke="var(--terracotta)" stroke-width="2.5" />
+                <text x="65" y="141" text-anchor="middle" font-family="var(--font-serif)" font-weight="600" font-size="11.5" fill="var(--loam-dark)">3. Deck Rigging</text>
+                <text x="65" y="156" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--terracotta)">Easy Wins &amp; Near-Misses</text>
+              </g>
+
+              <!-- Bottom Node: The Honest Reset -->
+              <g id="node-breaker" class="seesaw-node" tabindex="0">
+                <rect x="85" y="225" width="170" height="44" rx="22" fill="var(--moss-pale)" stroke="var(--moss-deep)" stroke-width="2.5" />
+                <text x="170" y="245" text-anchor="middle" font-family="var(--font-serif)" font-weight="600" font-size="11.5" fill="var(--moss-deep)">4. The Fallow Reset</text>
+                <text x="170" y="259" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--moss-mid)">Fair Shuffle • Clean Finish</text>
+              </g>
+            </svg>
+          </div>
+          
+          <div class="seesaw-info-panel">
+            <h4 id="seesaw-info-title">How the Loop Works</h4>
+            <p id="seesaw-info-desc">Tap or hover over any of the four steps on the wheel—<strong>1. Watching You</strong>, <strong>2. The Predictor</strong>, <strong>3. Deck Rigging</strong>, or <strong>4. The Fallow Reset</strong>—to see how the game adjusts itself behind the scenes.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CHAPTER 3 VIEW: How the Game Sees You -->
+    <div class="app-view" id="chapter3">
+      <section class="card">
+        <div class="section-head">
+          <h2>3. What Your Game Secretly Knows About You</h2>
+          <span class="section-tag" id="sandboxLensTag">Interactive Simulator • Standard Lens</span>
+        </div>
+
+        <p class="lens-intro-text" style="margin-bottom: 1.5rem;">
+          Test how an online game sizes you up within minutes of opening the app. Move the sliders on the left to match how you usually play, watch how the game changes its behavior on the right, and click <strong>Reveal My Player File</strong> for a plain-English readout.
+        </p>
+
+        <div class="sandbox-layout">
+          <!-- Controls -->
+          <div class="controls-panel">
+            
+            <!-- Slider 1: Watching Ads -->
+            <div class="control-item">
+              <div class="control-item-head">
+                <div>
+                  <div class="control-label">Watching Ads for Extra Moves</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How often you click "Watch a 30s Video Ad" to keep a round alive</div>
+                </div>
+                <span class="control-value" id="valAds">40%</span>
+              </div>
+              <input type="range" class="slider" id="sliderAds" min="0" max="100" step="10" value="40" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
+            </div>
+
+            <!-- Slider 2: Spending Real Money -->
+            <div class="control-item">
+              <div class="control-item-head">
+                <div>
+                  <div class="control-label">Spending Real Money in Apps</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Typical monthly spend on $0.99 rescues, gems, or season passes</div>
+                </div>
+                <span class="control-value" id="valSpend">$0 / mo</span>
+              </div>
+              <input type="range" class="slider" id="sliderSpend" min="0" max="100" step="5" value="0" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
+            </div>
+
+            <!-- Slider 3: Playing Through Losing Streaks -->
+            <div class="control-item">
+              <div class="control-item-head">
+                <div>
+                  <div class="control-label">Stubbornness During a Losing Streak</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How many losses in a row you will sit through before closing the app</div>
+                </div>
+                <span class="control-value" id="valGrind">4 losses</span>
+              </div>
+              <input type="range" class="slider" id="sliderGrind" min="1" max="10" step="1" value="4" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
+            </div>
+
+            <!-- Slider 4: Pausing at the "So Close!" Screen -->
+            <div class="control-item">
+              <div class="control-item-head">
+                <div>
+                  <div class="control-label">Lingering on the "So Close!" Pop-Up</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Seconds you pause and stare when you lose by 1 card and see an offer</div>
+                </div>
+                <span class="control-value" id="valHover">3.5 sec</span>
+              </div>
+              <input type="range" class="slider" id="sliderHover" min="0" max="10" step="0.5" value="3.5" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
+            </div>
+
+            <!-- Slider 5: Protecting Daily Streaks -->
+            <div class="control-item">
+              <div class="control-item-head">
+                <div>
+                  <div class="control-label">Protecting Your Daily Streak</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How strongly you feel you *must* open the app every day to keep a streak</div>
+                </div>
+                <span class="control-value" id="valStreak">Moderate</span>
+              </div>
+              <input type="range" class="slider" id="sliderStreak" min="1" max="10" step="1" value="5" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
+            </div>
+
+            <!-- Slider 6: Personal Stopping Rule -->
+            <div class="control-item">
+              <div class="control-item-head">
+                <div>
+                  <div class="control-label">Your Own "Hard Stop" Rule</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How strictly you put the phone down after 2 or 3 games, win or lose</div>
+                </div>
+                <span class="control-value" id="valBoundary">30%</span>
+              </div>
+              <input type="range" class="slider" id="sliderBoundary" min="0" max="100" step="10" value="30" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
+            </div>
+
+          </div>
+
+          <!-- Real-time Simulation Outputs -->
+          <div class="results-panel-wrapper">
+            <div class="results-panel">
+
+              <div class="segment-banner">
+                <span class="segment-label">How the Server Labels You:</span>
+                <span class="segment-value" id="valSegmentTag">Ad-Grinder</span>
+              </div>
+              
+              <div class="metric-row">
+                <div class="metric-head">
+                  <span>Behind-the-Scenes Deck Rigging</span>
+                  <span id="valRigScore">--</span>
+                </div>
+                <div class="metric-bar-bg">
+                  <div class="metric-bar-fill" id="barRig"></div>
+                </div>
+                <p class="metric-note" id="noteRig">...</p>
+              </div>
+
+              <div class="metric-row">
+                <div class="metric-head">
+                  <span>Engineered "Lose-by-One" Traps</span>
+                  <span id="valPinchScore">--</span>
+                </div>
+                <div class="metric-bar-bg">
+                  <div class="metric-bar-fill" id="barPinch"></div>
+                </div>
+                <p class="metric-note" id="notePinch">...</p>
+              </div>
+
+              <div class="metric-row">
+                <div class="metric-head">
+                  <span>Ad &amp; Pop-Up Nagging</span>
+                  <span id="valPressureScore">--</span>
+                </div>
+                <div class="metric-bar-bg">
+                  <div class="metric-bar-fill" id="barPressure"></div>
+                </div>
+                <p class="metric-note" id="notePressure">...</p>
+              </div>
+
+              <div class="metric-row">
+                <div class="metric-head">
+                  <span>Brain Fatigue After Playing</span>
+                  <span id="valDrainScore">--</span>
+                </div>
+                <div class="metric-bar-bg">
+                  <div class="metric-bar-fill" id="barDrain"></div>
+                </div>
+                <p class="metric-note" id="noteDrain">...</p>
+              </div>
+
+            </div>
+
+            <!-- Instant Client-Side Narrative Output -->
+            <button id="btnReadSoil" class="btn-read-soil" onclick="generateSynthesis()">
+              <span>✨</span> Reveal My Player File
+            </button>
+            <div id="aiSynthesisOutput" class="ai-output-box"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CHAPTER 4 VIEW: Plain-English Glossary -->
+    <div class="app-view" id="chapter4">
+      <section class="card">
+        <div class="section-head">
+          <h2>4. Common Tricks &amp; How to Spot Them</h2>
+          <span class="section-tag">Field Guide</span>
+        </div>
+
+        <div class="filter-chips" id="fieldFilterChips">
+          <button class="chip active" onclick="filterFieldCards('ALL')">All Entries</button>
+          <button class="chip" onclick="filterFieldCards('Mechanic')">Hidden Game Tricks</button>
+          <button class="chip" onclick="filterFieldCards('Profiling')">How Players Are Sorted</button>
+          <button class="chip" onclick="filterFieldCards('Defense')">Healthy Defenses</button>
+        </div>
+
+        <div class="field-grid" id="fieldGrid">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+    </div>
+
+    <!-- CHAPTER 5 VIEW: Glass-Box Solitaire Launchpad & Companion Tools -->
+    <div class="app-view" id="chapter5">
+      <section class="card" style="background: var(--parchment-warm); border-color: var(--sand-border);">
+        <div class="section-head">
+          <h2>5. See the Rigging in Action (And Other Quiet Tools)</h2>
+          <span class="section-tag">Hands-On Lab &amp; Ecosystem</span>
+        </div>
+
+        <!-- Hero Callout for App 2: Skinner Box Solitaire -->
+        <div class="solitaire-launchpad">
+          <div class="solitaire-launchpad-head">
+            <h3 class="solitaire-launchpad-title">🃏 Part II: Skinner Box Solitaire (The Glass-Box Deck)</h3>
+            <span class="meta-badge" style="background: #ffffff;">Playable Proof</span>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--loam-dark); line-height: 1.6;">
+            Reading about a rigged deck is one thing; watching a card game swap your winning card to the bottom of the pile right in front of your eyes is another. Open our companion Solitaire table to watch the hidden algorithm work in real time—then flip four simple switches to turn off the tricks and play a quiet, honest game of cards.
+          </p>
+          <a href="../skinner-solitaire/index.html" class="solitaire-btn">
+            <span>Play Glass-Box Solitaire</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--loam-mid);">
+          Or explore how to rest and restore your attention across our other tools on fallow.garden:
+        </p>
+
+        <div class="companion-grid">
+          <a href="../boredom/index.html" class="companion-link">
+            <div class="companion-title">
+              <span>The Fallow Mind</span>
+              <span>🌾</span>
+            </div>
+            <p class="companion-desc">Discover why ordinary boredom is essential nutrient cycling for your brain, and how watching a garden restores focus.</p>
+            <span class="companion-cta">Explore Boredom Science &rarr;</span>
+          </a>
+
+          <a href="../attention-restore/index.html" class="companion-link">
+            <div class="companion-title">
+              <span>Attention Restore</span>
+              <span>⏳</span>
+            </div>
+            <p class="companion-desc">Take a 3m optical reset, a 5m brown-noise break, or a 15m walk with an Open Loop Catcher.</p>
+            <span class="companion-cta">Start Focus Recovery &rarr;</span>
+          </a>
+
+          <a href="../composter/index.html" class="companion-link">
+            <div class="companion-title">
+              <span>Digital Thought Composter</span>
+              <span>🌱</span>
+            </div>
+            <p class="companion-desc">Set down nagging mental loops and let them compost into quiet botanical growth over a 5-day cycle.</p>
+            <span class="companion-cta">Compost a Thought &rarr;</span>
+          </a>
+
+          <a href="../multitudes/index.html" class="companion-link">
+            <div class="companion-title">
+              <span>The Multitudes Within</span>
+              <span>🦠</span>
+            </div>
+            <p class="companion-desc">Explore the biological twin to mental focus: how plant diversity and rest windows protect your gut microbiome.</p>
+            <span class="companion-cta">Explore Gut Soil &rarr;</span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- About & Curated Reading List Section -->
+    <section class="about-card">
+      <div class="about-head">
+        <h2><span>🌿</span> Recommended Reading &amp; About fallow.garden</h2>
+      </div>
+      
+      <div class="about-content">
+        <p>
+          <strong>fallow.garden</strong> is an independent collection of quiet, single-purpose web tools built to counter digital fatigue and attention-harvesting design. Every tool runs entirely on your device with zero tracking, zero ads, and no accounts.
+        </p>
+        
+        <div class="reference-box">
+          <h3>Books &amp; Research on How Games and Feeds Hook the Brain</h3>
+          <div class="reading-list-grid">
+            <div class="reading-item">
+              <strong>Addiction by Design (2012)</strong>
+              <em>Natasha Dow Schüll</em> — A fascinating look inside how digital slot machines and game algorithms are engineered to put players into a timeless "machine zone."
+            </div>
+            <div class="reading-item">
+              <strong>Dopamine Nation (2021)</strong>
+              <em>Dr. Anna Lembke</em> — Explains why constant digital thrills tip our brain's pleasure-pain seesaw into restlessness, and how stepping back resets the balance.
+            </div>
+            <div class="reading-item">
+              <strong>The Molecule of More (2018)</strong>
+              <em>Daniel Z. Lieberman &amp; Michael E. Long</em> — Why dopamine is the chemical of "wanting and chasing" rather than feeling satisfied, and how to shift into the present moment.
+            </div>
+            <div class="reading-item">
+              <strong>The Craving Mind (2017)</strong>
+              <em>Dr. Judson Brewer</em> — Shows how seeing a habit loop clearly ("disenchantment") breaks compulsive checking far more effectively than raw willpower.
+            </div>
+            <div class="reading-item">
+              <strong>EOMM: Engagement Matchmaking (2017)</strong>
+              <em>Chen et al. (Electronic Arts / UCLA)</em> — The eye-opening industry paper showing how multiplayer games match players to prevent them from logging off rather than for fair play.
+            </div>
+            <div class="reading-item">
+              <strong>US Patent 9,789,406 (2017)</strong>
+              <em>Activision Publishing, Inc.</em> — The actual patent describing how a game can match non-paying players against people with paid gear to nudge them into buying.
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1rem;">
+          Have ideas for new tools, questions about the science, or thoughts to share? Notes from readers are always deeply appreciated.
+        </p>
+      </div>
+
+      <div class="support-grid">
+        <a href="https://buymeacoffee.com/davidmikosz" target="_blank" rel="noopener noreferrer" class="support-btn btn-bmac">
+          <span>☕</span>
+          <span>Buy Me a Coffee</span>
+        </a>
+
+        <a href="mailto:david.mikosz@gmail.com?subject=The%20Algorithmic%20Hook%20Feedback" class="support-btn btn-email">
+          <span>✉️</span>
+          <span>Send Feedback</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>fallow.garden — Restorative micro-utilities for mind, soil, and human vitality.</div>
+      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.25rem;">100% client-side. Zero behavioral telemetry. Hosted on static web infrastructure.</div>
+    </footer>
+
+  </div>
+
+  <script>
+    // --- Global State ---
+    let currentLens = 1;       // 1: Vibes (Common Sense), 2: Big Words, 3: Max Nerd
+    let currentProfile = 'nt'; // 'nt' or 'adhd'
+    let currentNarrativeIdx = 0;
+    let currentFieldFilter = 'ALL';
+    let currentSvgNode = 'default';
+
+    function scrollToSection(id, btnIdx) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+      document.querySelectorAll('.toc-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx === btnIdx);
+      });
+    }
+
+    // --- CHAPTER 1 DATA: 5-Stage Guide ---
+    const NARRATIVE_DATA = [
+      {
+        step: 0,
+        lvl1: {
+          title: "1. The Shifting Deck: Why Digital Cards Aren't Real Cards",
+          body: "When you shuffle a real deck of cards at home, the order of every card is locked in before you flip the first one. About 1 in 5 games of regular Solitaire can't be won, and that honesty is what makes winning feel real. In many popular phone games, there is no fixed deck. Face-down cards are decided at the exact split-second you tap the screen—handing you the perfect card when the game wants you to feel smart, or a dead card when it wants to slow you down."
+        },
+        lvl2: {
+          title: "1. The Shifting Deck: Hidden-State RNG Manipulation",
+          body: "Physical card games rely on a fixed shuffle before play begins. Commercial free-to-play (F2P) games take advantage of 'hidden state' mechanics: because you cannot see inside the face-down draw pile or upcoming tile queue, the software can quietly alter Random Number Generation (RNG) mid-game based on your behavior."
+        },
+        lvl3: {
+          title: "1. The Shifting Deck: Non-Stationary Markov Decision Processes",
+          body: "Instead of sampling from a uniform Fisher-Yates permutation space at t=0, LiveOps engines model the unseen deck as a non-stationary Markov Decision Process (MDP) conditioned on real-time telemetry vector x_t. Transition probabilities are solved dynamically to maximize session duration and lifetime monetary value (LTV)."
+        },
+        ntNote: "<strong>⚖️ Standard Lens:</strong> Because our brains grew up around physical objects that don't magically swap places, we naturally assume a digital card flip is fair chance—and blame ourselves when we lose by one move.",
+        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> An ADHD brain loves clear, immediate feedback. When a game secretly smooths out your first few card draws so everything clicks into place, it delivers an instant burst of focus that hooks your attention in seconds."
+      },
+      {
+        step: 1,
+        lvl1: {
+          title: "2. Sorting Players: Ad-Watchers vs. Big Spenders",
+          body: "Within minutes of opening a free game, the app sorts you into a habit bucket. If you never spend money but gladly click 'Watch a 30-Second Ad for +3 Moves,' the game tags you as an 'Ad-Grinder.' It stops showing you expensive bundles that might annoy you, and instead tweaks the cards so you hit frequent, small roadblocks that require watching another ad. If you never watch ads but linger over the store when frustrated, it waits for a tough loss and dangles a 99-cent 'just this once' rescue deal."
+        },
+        lvl2: {
+          title: "2. Sorting Players: RFM Profiling & Cross-App Tracking",
+          body: "LiveOps servers categorize players using RFM (Recency, Frequency, Monetary) modeling alongside cross-app advertising profiles. Players with high ad tolerance are routed into ad-impression loops, while predicted payers have ad prompts hidden and face steeper difficulty bottlenecks designed to monetize impatience."
+        },
+        lvl3: {
+          title: "2. Sorting Players: Propensity Scoring & Dynamic SKU Pricing",
+          body: "Mobile attribution SDKs pass device-graph cohorts into gradient-boosted propensity models estimating conversion probability and price elasticity. The backend assigns individualized store SKUs and adjusts ad-floor eCPM thresholds—maximizing ad yield from zero-IAP cohorts while reserving paywalls for high-elasticity spenders."
+        },
+        ntNote: "<strong>⚖️ Standard Lens:</strong> Two friends sitting on the same couch playing the exact same level of a puzzle game are often playing two completely different difficulty settings and store prices.",
+        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> When you are frustrated and impatient, a one-tap '$0.99 to keep going' button is designed to outrun your brain's natural pause button before you can weigh the cost."
+      },
+      {
+        step: 2,
+        lvl1: {
+          title: "3. The 'So Close!' Trap: Losing by Exactly One Card",
+          body: "Have you ever noticed how rarely you lose a phone puzzle right at the start, and how often you get stuck with just ONE card or ONE jelly cube left on the board? That isn't bad luck. Game designers call it an engineered 'Near-Miss.' When you clear 95% of a board and fail by an inch, your brain hates throwing away all that effort—making it almost impossible to say no to watching an ad or spending a dollar."
+        },
+        lvl2: {
+          title: "3. The 'So Close!' Trap: Weaponized Dynamic Difficulty (DDA)",
+          body: "Dynamic Difficulty Adjustment (DDA) in commercial games modulates card and tile seeds to create 'pinch points' at 85–95% level completion. This exploits both Sunk Cost and the Zeigarnik Effect—our brain's nagging discomfort when a task is left 99% finished."
+        },
+        lvl3: {
+          title: "3. The 'So Close!' Trap: Striatal RPE Hijack & Insular Frustration",
+          body: "Neuroimaging studies (Chase & Clark, 2010) show that engineered near-misses recruit the ventral striatum and midbrain dopamine pathways almost identically to actual wins, while simultaneously activating the anterior insula. This combination of reward anticipation and physical agitation overrides prefrontal stopping cues."
+        },
+        ntNote: "<strong>⚖️ Standard Lens:</strong> If you lose with 15 cards left, you shrug and put the phone away. If you lose with 1 card left, your brain whispers, 'I almost had it—just one more try.'",
+        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> For an ADHD brain, leaving a puzzle 99% finished creates an intense physical itch. Clicking 'Watch Ad' or 'Continue' feels less like a choice and more like scratching an unbearable itch."
+      },
+      {
+        step: 3,
+        lvl1: {
+          title: "4. Choreographed Wins: When the Game Lets You Win on Purpose",
+          body: "In online games, you assume the system tries to give you a fair match. Instead, many big games constantly calculate the exact odds that you are about to get frustrated and close the app. If the game knows that losing three times in a row makes you quit for the night, it will purposely hand you an easy win on round three—acting just like a slot machine that pays out a few coins right before you walk away."
+        },
+        lvl2: {
+          title: "4. Choreographed Wins: Engagement-Optimized Matchmaking (EOMM)",
+          body: "Documented in industry research papers and patents, Engagement-Optimized Matchmaking (EOMM) replaces fair skill matching with 'churn prediction.' The algorithm schedules win/loss streaks to keep you playing longer, and can even match non-payers against opponents holding paid upgrades to spark envy."
+        },
+        lvl3: {
+          title: "4. Choreographed Wins: Churn-Risk Graph Minimization",
+          body: "EOMM formulates matchmaking as a bipartite graph optimization problem where edge weights represent predicted log-off probabilities P(churn | outcome). Post-purchase matchmaking algorithms temporarily bias opponent MMR downward to engineer positive operant reinforcement immediately following a transaction."
+        },
+        ntNote: "<strong>⚖️ Standard Lens:</strong> Even that thrilling 'last-second comeback win' at the end of a rough streak is often a scheduled ration handed out by the server to keep you in your seat.",
+        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> Bouncing back and forth between frustrating losses and sudden blowout wins puts your brain on a steep chemical rollercoaster—making it much harder to wind down for sleep afterward."
+      },
+      {
+        step: 4,
+        lvl1: {
+          title: "5. Breaking the Spell: Why Seeing the Trick Sets You Free",
+          body: "Trying to beat a billion-dollar game engine with sheer willpower is exhausting. A much kinder defense is simply seeing how the trick works. Once you realize that a sudden losing streak isn't your fault—it's just a computer program testing whether you'll watch an ad—the frustration melts away. You can smile, close the app, and go back to games (or gardens) that play fair."
+        },
+        lvl2: {
+          title: "5. Breaking the Spell: Disenchantment & Honest Boundaries",
+          body: "As psychiatrist Dr. Judson Brewer shows in habit research, 'disenchantment'—seeing the unvarnished mechanics behind a craving—updates the brain's reward valuation far better than willpower. Choosing games with fixed rules and clean endings restores your natural stopping cues."
+        },
+        lvl3: {
+          title: "5. Breaking the Spell: Orbitofrontal Revaluation & t=0 Entropy",
+          body: "Unmasking synthetic reward prediction error manipulation engages orbitofrontal cortical revaluation, collapsing the artificial salience of near-miss prompts. Returning to stationary t=0 entropy and explicit terminal states eliminates Zeigarnik drag and permits smooth transition into Default Mode Network rest."
+        },
+        ntNote: "<strong>⚖️ Standard Lens:</strong> Once you watch the computer swap cards in our Glass-Box Solitaire game below, you will never look at a 'Watch Ad for +1 Move' pop-up the same way again.",
+        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> Seeing the strings frees your curious, pattern-seeking mind from 'junk-food' digital traps so you can spend that energy on real crafts, nature, or honest play."
+      }
+    ];
+
+    // --- CHAPTER 2 DATA: Adapts to BOTH Depth Lens (1,2,3) and Profile (nt, adhd) ---
+    const CH2_CARDS = {
+      nt: {
+        1: [
+          {
+            title: "Why Honest Games Let You Walk Away",
+            body: "When you do a newspaper crossword or play solitaire with real cards, getting stuck is a natural part of the game. It gently tells your brain, <em>'That's enough for today, time to go do something else.'</em> Modern phone games treat your natural stopping point as an emergency. They tune every hurdle to be just annoying enough that you want help, but never quite annoying enough to make you put the phone down."
+          },
+          {
+            title: "The Hidden Cost of 'I Only Watch the Ads'",
+            body: "Many careful players pride themselves on never spending a dime in free games, figuring they are beating the system. In reality, the game just switches you to the <strong>Ad-Watcher track</strong>. It quietly makes the game more repetitive so you have to sit through dozens of loud, flashy 30-second commercials—trading away your peace of mind so the app maker can collect a few pennies."
+          },
+          {
+            title: "Why Real Life Feels Flat Afterward",
+            body: "When a game bombards your eyes with flashing coins, combo chimes, and last-second rescues for an hour, your brain turns down its own volume knob to protect itself. The moment you lock your phone screen, ordinary life—reading a chapter of a book, cooking dinner, listening to the rain—suddenly feels unusually slow, gray, and restless."
+          }
+        ],
+        2: [
+          {
+            title: "The Eradication of Natural Stopping Cues",
+            body: "Traditional games have built-in 'stopping cues': a finished hand, a clear loss, or the end of a chapter. LiveOps design systematically removes stopping cues by chaining together daily login streaks, timed chests, and instant next-level transitions—keeping the Executive Attention Network locked in a continuous foraging loop."
+          },
+          {
+            title: "How Ad-Harvesting Monetizes Attention",
+            body: "Zero-spend players are monetized through 'Rewarded Video' waterfalls. By dialing up mild RNG friction, the algorithm nudges non-payers into opting into 30-second hyper-stimulating ad slots. Each ad switch creates heavy <strong>Attention Residue</strong>, fragmenting working memory."
+          },
+          {
+            title: "The Opponent-Process Dopamine Dip",
+            body: "As Dr. Anna Lembke details in <em>Dopamine Nation</em>, sustained variable-ratio reward spikes cause the brain's homeostatic balance to tilt toward pain and restlessness afterward. When external stimulation stops, retracted D2 dopamine receptors leave the mind in a temporary deficit that blocks restorative Default Mode Network rest."
+          }
+        ],
+        3: [
+          {
+            title: "Zeigarnik Loop Chaining & Stopping Cue Extinction",
+            body: "Commercial F2P loops overlap asynchronous timers and incomplete sub-goals so that no terminal state is ever reached simultaneously. This maintains persistent recurrent excitation in dorsolateral prefrontal working memory buffers, preventing autonomous disengagement."
+          },
+          {
+            title: "eCPM Waterfall Optimization via Friction Injection",
+            body: "For cohorts with near-zero purchase propensity P(IAP), the server maximizes ad-impression LTV by tuning state-transition blockages to match the player's historical ad-opt-in threshold—extracting cognitive bandwidth via high-salience commercial interrupts."
+          },
+          {
+            title: "Striatal D2 Desensitization & Allostatic Trough",
+            body: "Supraphysiological phasic dopamine efflux during rapid combo/near-miss cycles induces postsynaptic D2/D3 receptor internalization alongside kappa-opioid dynorphin upregulation, producing an acute hypodopaminergic trough upon session termination."
+          }
+        ]
+      },
+      adhd: {
+        1: [
+          {
+            title: "Why Fast Games Feel Like Instant Focus",
+            body: "An ADHD or novelty-seeking brain naturally runs a little low on steady background motivation, which makes slow chores feel exhausting. Fast puzzle and card games act like an instant spark plug: every tap gives you a crisp sound, a burst of color, and a clear micro-goal. What looks from the outside like 'wasting time' is often your brain trying to wake itself up."
+          },
+          {
+            title: "Why 'Losing by One Card' Stings Twice as Much",
+            body: "Because an active mind hates leaving things 99% unfinished, the game's favorite trick—dealing you a dead card when you only have one card left on the table—hits ADHD brains extra hard. That sudden roadblock feels like slamming on the brakes at 60 mph, making the 'Watch Ad' or '$0.99 Continue' button feel like an emergency relief valve."
+          },
+          {
+            title: "Swapping Rigged Tricks for Living Nature",
+            body: "When you close a fast game, sitting in a silent room staring at a wall feels awful. The secret is swapping <strong>fake digital tricks</strong> for <strong>gentle, real-world motion</strong>: watching bees move through garden flowers, listening to brown noise, or walking the dog. That gentle 10% activity keeps your brain's watchman happy so the rest of your mind can actually rest."
+          }
+        ],
+        2: [
+          {
+            title: "The Hyper-Focus Foraging Trap",
+            body: "Because ADHD involves lower tonic (baseline) dopamine, the prefrontal cortex craves immediate, clear feedback to stay engaged. LiveOps games act as 'supernormal foraging stimuli'—delivering micro-rewards every three seconds to hijack hyper-focus while bypassing natural fatigue signals."
+          },
+          {
+            title: "Near-Misses and Frustration Intolerance",
+            body: "Faster synaptic dopamine clearance in ADHD means that an engineered near-miss (failing at 95% completion) causes a sharp, uncomfortable drop in prefrontal catecholamines. This acute dip triggers intense Zeigarnik tension, making paid or ad-based bailouts much harder to resist."
+          },
+          {
+            title: "Trading Synthetic Loops for 'Soft Fascination'",
+            body: "Instead of dropping from high-speed gaming into a 0% sensory vacuum, ADHD minds recover best through <strong>Soft Fascination</strong> (observing a living garden or walking with a weighted vest). This provides a 10% sensory tether that prevents a dopamine crash while letting the Default Mode Network compost."
+          }
+        ],
+        3: [
+          {
+            title: "Prefrontal Catecholamine Self-Medication via RPE",
+            body: "In hypodopaminergic tonic states characteristic of ADHD, high-frequency stochastic reward prediction errors (RPE) transiently elevate striatal and prefrontal catecholamine efflux into the functional Yerkes-Dodson window, reinforcing rapid hyper-focus capture."
+          },
+          {
+            title: "DAT Clearance Velocity & Insular Near-Miss Dysphoria",
+            body: "Elevated dopamine transporter (DAT) reuptake density accelerates the synaptic trough following an engineered near-miss blockage. Co-activation of the anterior insula and dACC amplifies frustration intolerance, driving impulsive operant relief-seeking."
+          },
+          {
+            title: "1/f Stochastic Resonance as a De-Escalation Bridge",
+            body: "Transitioning from hyper-salient LiveOps loops directly to zero-input stillness precipitates a tonic crash. Introducing natural fractal motion (D ≈ 1.3–1.5) or proprioceptive loading stabilizes locus coeruleus tone during TPN-to-DMN handoff."
+          }
+        ]
+      }
+    };
+
+    // --- SVG DIAGRAM DATA: Adapts to Depth Lens (1, 2, 3) ---
+    const SVG_INFO_DATA = {
+      'node-sensor': {
+        1: {
+          title: '1. Watching You Play',
+          desc: 'The game quietly notes every little habit: how long you pause before playing a card, whether you peek at the store, how many video ads you are willing to sit through, and what time of night you usually play.'
+        },
+        2: {
+          title: '1. Behavioral Telemetry Sensor',
+          desc: 'Every micro-interaction is logged in real time: tap hesitation latency, store hover duration, rewarded-ad opt-in rates, and session length history.'
+        },
+        3: {
+          title: '1. High-Frequency Telemetry Ingestion',
+          desc: 'Streams client-side event vectors (inter-tap intervals, UI dwell times, ad-waterfall completions, and session hazard covariates) to the LiveOps decision engine.'
+        }
+      },
+      'node-actuary': {
+        1: {
+          title: '2. Guessing Your Limit',
+          desc: 'Before you even flip your next card, the computer compares your habits against millions of other players to guess two things: Are you frustrated enough to close the app right now? Or are you invested enough to watch an ad or spend $0.99?'
+        },
+        2: {
+          title: '2. The Churn & Spend Predictor',
+          desc: 'Compares your live session against millions of player profiles to calculate your Churn Risk (odds you log off after this round) and your Propensity to Spend or Watch Ads.'
+        },
+        3: {
+          title: '2. Real-Time Churn & LTV Actuary',
+          desc: 'Evaluates survival hazard P(churn | x_t) alongside Bayesian conversion propensity to select the optimal intervention policy before the next state transition.'
+        }
+      },
+      'node-rigging': {
+        1: {
+          title: '3. Stacking the Deck',
+          desc: 'If the game thinks you are about to quit, it slips a miracle card to the top of the pile so you get an exciting combo. Once you are 90% done with the board, it hides the last card you need so you lose by just one move.'
+        },
+        2: {
+          title: '3. Dynamic RNG & Near-Miss Shaper',
+          desc: 'Adjusts unseen cards or tiles on the fly: feeding easy cascades when churn risk is high, and engineering 1-move Near-Misses when your sunk cost peaks.'
+        },
+        3: {
+          title: '3. Non-Stationary RNG State Shaper',
+          desc: 'Biases hidden-state transition probabilities to induce competence cascades during high-churn windows or sub-goal blockage at |board| = 1.'
+        }
+      },
+      'node-breaker': {
+        1: {
+          title: '4. The Fallow Reset (Honest Play)',
+          desc: 'In our Glass-Box Solitaire game below, we put this whole secret loop right out in the open—and give you four simple switches to lock the shuffle before you start, turn off the flashing pop-ups, and enjoy a fair, quiet game.'
+        },
+        2: {
+          title: '4. The Fallow Switchboard (Inoculation)',
+          desc: 'Exposes the hidden telemetry console on screen and gives you physical toggles to lock the shuffle at t=0, silence casino effects, and honor honest dead ends.'
+        },
+        3: {
+          title: '4. Deterministic t=0 Entropy & Finite Cues',
+          desc: 'Restores stationary Fisher-Yates permutations at t=0, strips variable-ratio audiovisual reinforcement, and enforces clean terminal states.'
+        }
+      }
+    };
+
+    // --- CHAPTER 4 DATA: Plain-English Glossary Cards ---
+    const FIELD_DATA = [
+      {
+        id: 'dda',
+        cat: 'Mechanic',
+        lvl1: {
+          name: "Rubber-Band Difficulty",
+          role: "The Invisible Thumb",
+          desc: "The game quietly makes itself easier when it senses you are about to give up, and harder right when you are deeply invested—steering you toward ads or paid helpers.",
+          meta: "Controls card draws, tile drops & puzzle layouts"
+        },
+        lvl2: {
+          name: "Dynamic Difficulty (DDA)",
+          role: "Retention & Friction Tuning",
+          desc: "Real-time algorithmic adjustment of game difficulty and card seeds to keep you bouncing between easy flow-state wins and monetizable 'pinch points.'",
+          meta: "Weaponizes sunk cost at 85–95% level completion"
+        },
+        lvl3: {
+          name: "State-Dependent RNG Shaping",
+          role: "Closed-Loop Parameter Control",
+          desc: "Continuous server-side adjustment of stochastic transition matrices based on real-time frustration telemetry and predicted churn hazard rates.",
+          meta: "Operates invisibly inside hidden-state game elements"
+        }
+      },
+      {
+        id: 'nearmiss',
+        cat: 'Mechanic',
+        lvl1: {
+          name: "The 'Lose-by-One' Trick",
+          role: "The 'So Close!' Trap",
+          desc: "Purposely dealing you a dead card when you only have one card left on the table. Your brain treats 'almost winning' as an urgent reason to keep trying.",
+          meta: "Triggers the 'Watch Ad for +1 Move' pop-up"
+        },
+        lvl2: {
+          name: "Engineered Near-Misses",
+          role: "Striatal Hijack & Sunk Cost",
+          desc: "Failing by a single move lights up the brain's reward centers almost like a win while leaving an unfinished mental loop that begs to be closed.",
+          meta: "Multiplies ad views and purchases by 3x–5x"
+        },
+        lvl3: {
+          name: "Sub-Goal Failure Salience",
+          role: "Ventral Striatal / Insular Co-Activation",
+          desc: "Induces anomalous phasic dopamine signaling in the nucleus accumbens alongside anterior insula distress, overriding prefrontal stopping cues.",
+          meta: "Validated in slot-machine & F2P neuroimaging literature"
+        }
+      },
+      {
+        id: 'rfm',
+        cat: 'Profiling',
+        lvl1: {
+          name: "Grinders, Minnows & Whales",
+          role: "Player Sorting Buckets",
+          desc: "Sorting players by whether they watch ads ('Grinders'), spend a dollar here and there ('Minnows'), or spend big ('Whales')—and giving each group a different game.",
+          meta: "Happens automatically in the first few minutes"
+        },
+        lvl2: {
+          name: "RFM Player Profiling",
+          role: "Cohort Segmentation Engine",
+          desc: "Recency, Frequency, and Monetary tracking combined with tap-hesitation data to route users into either ad-watching grinds or cash purchase funnels.",
+          meta: "Shared across games through mobile ad networks"
+        },
+        lvl3: {
+          name: "LTV Propensity & Elasticity Modeling",
+          role: "Individualized SKU & RNG Routing",
+          desc: "High-dimensional behavioral feature vectors feed survival and propensity models to customize pricing tiers, ad frequency caps, and difficulty curves per user ID.",
+          meta: "Updates dynamically after every session"
+        }
+      },
+      {
+        id: 'eomm',
+        cat: 'Profiling',
+        lvl1: {
+          name: "Choreographed Matchmaking",
+          role: "The Scheduled Win",
+          desc: "Instead of matching you with fair opponents, online games match you to keep you from logging off—throwing you an easy win right when you're fed up.",
+          meta: "Turns competition into a slot-machine schedule"
+        },
+        lvl2: {
+          name: "Engagement Matchmaking (EOMM)",
+          role: "Churn-Minimization Pairing",
+          desc: "Replaces fair skill-based matchmaking with predictive churn modeling, intentionally engineering win/loss streaks and showing off paid gear.",
+          meta: "Documented in 2017 EA research & Activision patents"
+        },
+        lvl3: {
+          name: "Bipartite Churn-Risk Minimization",
+          role: "Population-Level Retention Graph",
+          desc: "Solves global matchmaking queues by minimizing aggregate cohort log-off probability P(churn | state, outcome) rather than minimizing skill variance |MMR_i - MMR_j|.",
+          meta: "Exploits variable-ratio reinforcement across matches"
+        }
+      },
+      {
+        id: 'streaks',
+        cat: 'Mechanic',
+        lvl1: {
+          name: "Daily Streak Hostages",
+          role: "The Guilt Calendar",
+          desc: "Rewarding you for logging in 30 days in a row—so that taking a healthy weekend unplugged feels like throwing away a month of hard work.",
+          meta: "Turns a fun pastime into a daily chore"
+        },
+        lvl2: {
+          name: "Loss-Aversion Streaks",
+          role: "Habit-Loop Tethering",
+          desc: "Exploits Loss Aversion (losing something hurts twice as much as gaining it feels good) to force daily check-ins even when you don't feel like playing.",
+          meta: "Prevents multi-day dopamine receptor recovery"
+        },
+        lvl3: {
+          name: "Asymmetric Utility Penalty",
+          role: "Compulsive Retention Scheduling",
+          desc: "Constructs artificial sunk-cost equity that decays to zero upon a 24-hour abstinence window, weaponizing amygdala threat-avoidance to prevent habit extinction.",
+          meta: "Bypassed by zero-streak, episodic software design"
+        }
+      },
+      {
+        id: 'inoculation',
+        cat: 'Defense',
+        lvl1: {
+          name: "Honest Shuffle & Clean Finish",
+          role: "The Porch Table Rule",
+          desc: "Playing games where the cards are shuffled fairly before you start, unwinnable hands are accepted calmly, and the game gives you a peaceful stopping point.",
+          meta: "Built into our Glass-Box Solitaire lab"
+        },
+        lvl2: {
+          name: "Disenchantment & Finite Cues",
+          role: "Breaking the Habit Loop",
+          desc: "Seeing the hidden rigging console strips away the emotional sting of losing by one card—making it easy to put the phone down when you're done.",
+          meta: "Protects baseline dopamine and Default Mode rest"
+        },
+        lvl3: {
+          name: "Stationary Entropy & Terminal States",
+          role: "Zero-Telemetry Client Architecture",
+          desc: "Enforcing uniform Fisher-Yates permutations at t=0 with zero state mutation, zero variable-ratio juice, and hard session boundaries to preserve prefrontal autonomy.",
+          meta: "Core architectural law of fallow.garden"
+        }
+      }
+    ];
+
+    // --- Controller Functions ---
+    function setLens(level) {
+      currentLens = level;
+      document.querySelectorAll('.lens-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx + 1 === level);
+      });
+      renderNarrative();
+      renderChapter2Cards();
+      renderSvgInfoPanel();
+      renderFieldCards();
+      updateSimulation();
+    }
+
+    function setProfile(profile) {
+      currentProfile = profile;
+      const btnNT = document.getElementById('profBtnNT');
+      const btnADHD = document.getElementById('profBtnADHD');
+      const sandboxTag = document.getElementById('sandboxLensTag');
+
+      if (profile === 'nt') {
+        btnNT.classList.add('active');
+        btnADHD.classList.remove('active', 'adhd-active');
+        sandboxTag.textContent = "Interactive Simulator • Standard Lens";
+      } else {
+        btnNT.classList.remove('active');
+        btnADHD.classList.add('active', 'adhd-active');
+        sandboxTag.textContent = "Interactive Simulator • ADHD / Novelty-Seeking Lens";
+      }
+
+      renderNarrative();
+      renderChapter2Cards();
+      updateSimulation();
+    }
+
+    function selectNarrative(idx) {
+      currentNarrativeIdx = idx;
+      document.querySelectorAll('.narrative-tab-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+      renderNarrative();
+    }
+
+    function renderNarrative() {
+      const data = NARRATIVE_DATA[currentNarrativeIdx];
+      const levelKey = 'lvl' + currentLens;
+      const content = data[levelKey];
+      const banner = document.getElementById('narrativeProfileBanner');
+
+      document.getElementById('narrativeTitle').textContent = content.title;
+      document.getElementById('narrativeBody').textContent = content.body;
+
+      if (currentProfile === 'nt') {
+        banner.classList.remove('adhd-banner');
+        banner.innerHTML = data.ntNote;
+      } else {
+        banner.classList.add('adhd-banner');
+        banner.innerHTML = data.adhdNote;
+      }
+    }
+
+    function renderChapter2Cards() {
+      const container = document.getElementById('ch2CardsContainer');
+      const cards = CH2_CARDS[currentProfile][currentLens];
+      const borderColor = currentProfile === 'adhd' ? 'var(--terracotta-soft)' : 'var(--sand-border)';
+      const titleColor = currentProfile === 'adhd' ? 'var(--terracotta)' : 'var(--moss-deep)';
+
+      container.innerHTML = cards.map(c => `
+        <div style="background: var(--parchment-warm); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid ${borderColor};">
+          <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: ${titleColor}; margin-bottom: 0.5rem;">${c.title}</h3>
+          <p style="font-size: 0.9rem; color: var(--loam-mid); line-height: 1.6;">${c.body}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderSvgInfoPanel() {
+      const titleEl = document.getElementById('seesaw-info-title');
+      const descEl = document.getElementById('seesaw-info-desc');
+      if (currentSvgNode === 'default') return;
+      const nodeData = SVG_INFO_DATA[currentSvgNode][currentLens];
+      if (nodeData) {
+        titleEl.innerHTML = nodeData.title;
+        descEl.innerHTML = nodeData.desc;
+      }
+    }
+
+    function filterFieldCards(cat) {
+      currentFieldFilter = cat;
+      document.querySelectorAll('#fieldFilterChips .chip').forEach(btn => {
+        const text = btn.textContent.trim();
+        const matches = (cat === 'ALL' && text.startsWith('All')) ||
+                        (cat === 'Mechanic' && text.includes('Trick')) ||
+                        (cat === 'Profiling' && text.includes('Sorted')) ||
+                        (cat === 'Defense' && text.includes('Defense'));
+        btn.classList.toggle('active', matches);
+      });
+      renderFieldCards();
+    }
+
+    function renderFieldCards() {
+      const grid = document.getElementById('fieldGrid');
+      const levelKey = 'lvl' + currentLens;
+
+      const filtered = FIELD_DATA.filter(item => {
+        return currentFieldFilter === 'ALL' || item.cat === currentFieldFilter;
+      });
+
+      grid.innerHTML = filtered.map(item => {
+        const c = item[levelKey];
+        return `
+          <div class="field-card">
+            <div>
+              <div class="field-card-header">
+                <span class="field-card-name">${c.name}</span>
+                <span class="field-card-role">${c.role}</span>
+              </div>
+              <p class="field-card-desc" style="margin-top: 0.5rem;">${c.desc}</p>
+            </div>
+            <div class="field-card-meta">${c.meta}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // --- Interactive Loop SVG Map Binding ---
+    (function bindLoopMap() {
+      window.addEventListener('DOMContentLoaded', () => {
+        ['node-sensor', 'node-actuary', 'node-rigging', 'node-breaker'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            const updatePanel = () => {
+              currentSvgNode = id;
+              renderSvgInfoPanel();
+            };
+            el.addEventListener('mouseenter', updatePanel);
+            el.addEventListener('click', updatePanel);
+          }
+        });
+      });
+    })();
+
+    // --- Player Profile Simulator Calculations ---
+    function updateSimulation() {
+      const ads = parseInt(document.getElementById('sliderAds').value);
+      const spend = parseInt(document.getElementById('sliderSpend').value);
+      const grind = parseInt(document.getElementById('sliderGrind').value);
+      const hover = parseFloat(document.getElementById('sliderHover').value);
+      const streak = parseInt(document.getElementById('sliderStreak').value);
+      const boundary = parseInt(document.getElementById('sliderBoundary').value);
+
+      document.getElementById('valAds').textContent = `${ads}%`;
+      document.getElementById('valSpend').textContent = `$${spend} / mo`;
+      document.getElementById('valGrind').textContent = `${grind} loss${grind === 1 ? '' : 'es'}`;
+      document.getElementById('valHover').textContent = `${hover.toFixed(1)} sec`;
+      document.getElementById('valBoundary').textContent = `${boundary}%`;
+
+      const streakLabels = ["Never", "Rarely", "Casual", "Sometimes", "Moderate", "Regular", "Hooked", "Compulsive", "Locked-In", "Hostage"];
+      document.getElementById('valStreak').textContent = streakLabels[streak - 1];
+
+      // Determine Server Segment Classification
+      let segment = "";
+      if (boundary >= 75 && spend === 0 && ads <= 20 && streak <= 3) {
+        segment = "Un-Hookable Player";
+      } else if (spend >= 35) {
+        segment = "VIP Spender ('Whale')";
+      } else if (spend > 0 || (hover >= 4.0 && grind >= 4)) {
+        segment = "99¢ Bargain Target ('Minnow')";
+      } else if (ads >= 40) {
+        segment = "Ad-Watcher ('Grinder')";
+      } else {
+        segment = "Flight-Risk Casual";
+      }
+      document.getElementById('valSegmentTag').textContent = segment;
+
+      // Calculate 4 Telemetry Metrics
+      let rig, pinch, pressure, drain;
+
+      rig = 25 + (ads * 0.25) + (spend * 0.25) + (hover * 4.2) + (grind * 2.5) - (boundary * 0.35);
+      pinch = 20 + (hover * 5.2) + (ads * 0.3) + (grind * 3.0) - (boundary * 0.3);
+      pressure = 15 + (ads * 0.45) + (hover * 3.5) + (streak * 2.8) - (spend * 0.2) - (boundary * 0.25);
+      drain = 18 + (grind * 4.2) + (streak * 3.5) + (ads * 0.25) + (hover * 2.0) - (boundary * 0.4);
+
+      if (currentProfile === 'adhd') {
+        pinch += 10;
+        drain += 16;
+      }
+
+      rig = Math.min(Math.max(Math.round(rig), 5), 98);
+      pinch = Math.min(Math.max(Math.round(pinch), 8), 98);
+      pressure = Math.min(Math.max(Math.round(pressure), 5), 96);
+      drain = Math.min(Math.max(Math.round(drain), 6), 98);
+
+      document.getElementById('barRig').style.width = rig + '%';
+      document.getElementById('barPinch').style.width = pinch + '%';
+      document.getElementById('barPressure').style.width = pressure + '%';
+      document.getElementById('barDrain').style.width = drain + '%';
+
+      document.getElementById('barRig').style.backgroundColor = rig > 55 ? 'var(--terracotta)' : 'var(--moss-mid)';
+      document.getElementById('barPinch').style.backgroundColor = pinch > 55 ? 'var(--terracotta)' : 'var(--honey-ochre)';
+      document.getElementById('barPressure').style.backgroundColor = pressure > 55 ? 'var(--terracotta)' : 'var(--moss-mid)';
+      document.getElementById('barDrain').style.backgroundColor = drain > 55 ? 'var(--terracotta)' : 'var(--moss-mid)';
+
+      if (currentLens === 1) {
+        document.getElementById('valRigScore').textContent = rig > 68 ? 'Heavily Stacked' : (rig > 38 ? 'Nudged Draws' : 'Mostly Fair');
+        document.getElementById('noteRig').textContent = 'How actively the game swaps unseen cards or tiles behind the scenes.';
+
+        document.getElementById('valPinchScore').textContent = pinch > 68 ? 'Constant 1-Card Losses' : (pinch > 38 ? 'Frequent Traps' : 'Low Meddling');
+        document.getElementById('notePinch').textContent = 'Odds of being dealt a dead card right when you are 1 move from winning.';
+
+        document.getElementById('valPressureScore').textContent = pressure > 65 ? 'Relentless Pop-Ups' : (pressure > 35 ? 'Regular Nudges' : 'Quiet Screen');
+        document.getElementById('notePressure').textContent = spend >= 35
+          ? 'Because you spend cash, the game hides cheap ads to hurry you toward $19.99 packs.'
+          : 'How hard the game pushes video ads or $0.99 rescue deals after a loss.';
+
+        document.getElementById('valDrainScore').textContent = drain > 65 ? 'Wired & Restless' : (drain > 38 ? 'Mildly Drained' : 'Calm & Clear');
+        document.getElementById('noteDrain').textContent = 'How flat or restless your brain feels after you finally put the phone down.';
+      } else if (currentLens === 2) {
+        document.getElementById('valRigScore').textContent = `${rig}% Seed Bias`;
+        document.getElementById('noteRig').textContent = 'Dynamic Difficulty Adjustment (DDA) deviation from a fair pre-game shuffle.';
+
+        document.getElementById('valPinchScore').textContent = `${pinch}% Near-Miss Rate`;
+        document.getElementById('notePinch').textContent = 'Engineered failure at 85–95% completion to trigger sunk-cost spending or ad views.';
+
+        document.getElementById('valPressureScore').textContent = `${pressure}% Prompt Intensity`;
+        document.getElementById('notePressure').textContent = 'Frequency of rewarded-ad lifelines vs. discounted microtransaction offers.';
+
+        document.getElementById('valDrainScore').textContent = `${drain}% Dopamine Dip`;
+        document.getElementById('noteDrain').textContent = 'Post-session dopamine receptor down-regulation and lingering attention residue.';
+      } else {
+        document.getElementById('valRigScore').textContent = `KL-Div: ${(rig / 42).toFixed(2)} bits`;
+        document.getElementById('noteRig').textContent = 'Kullback-Leibler divergence between server-dealt state transitions and uniform RNG.';
+
+        document.getElementById('valPinchScore').textContent = `P(NearMiss) = ${(pinch / 100).toFixed(2)}`;
+        document.getElementById('notePinch').textContent = 'Conditional probability of terminal state blockage at |board_remaining| = 1.';
+
+        document.getElementById('valPressureScore').textContent = `Yield Index: ${(pressure * 1.15).toFixed(0)} eCPM`;
+        document.getElementById('notePressure').textContent = 'Expected extraction intensity across rewarded video waterfall and dynamic IAP SKU pricing.';
+
+        document.getElementById('valDrainScore').textContent = `ΔD2 Tone: -${(drain * 0.48).toFixed(1)}%`;
+        document.getElementById('noteDrain').textContent = 'Opponent-process tonic catecholamine suppression and anterior insula frustration load.';
+      }
+
+      const output = document.getElementById('aiSynthesisOutput');
+      if (output.style.display === 'block') {
+        renderInstantSynthesis(ads, spend, grind, hover, streak, boundary, segment, rig, pinch, pressure, drain);
+      }
+    }
+
+    function generateSynthesis() {
+      const btn = document.getElementById('btnReadSoil');
+      const output = document.getElementById('aiSynthesisOutput');
+
+      output.style.display = 'block';
+      btn.innerHTML = '<span>✨</span> Player File Open (Live-Updating)';
+      updateSimulation();
+    }
+
+    function renderInstantSynthesis(ads, spend, grind, hover, streak, boundary, segment, rig, pinch, pressure, drain) {
+      const output = document.getElementById('aiSynthesisOutput');
+      let p1 = "", p2 = "", p3 = "";
+
+      // Paragraph 1: How the Server Sees You
+      if (segment.includes("Grinder")) {
+        p1 = `<strong>1. Your Secret Tag — ${segment}:</strong> Because you spend <strong>$${spend}/mo</strong> but agree to watch video ads <strong>${ads}%</strong> of the time, the game knows you won't open your wallet—so it turns you into an ad-watching machine. It hides annoying cash pop-ups and instead stacks the deck (<strong>${rig}% rigging</strong>) to give you frequent, small dead-ends that require watching a 30-second commercial to survive.`;
+      } else if (segment.includes("Minnow")) {
+        p1 = `<strong>1. Your Secret Tag — ${segment}:</strong> Pausing for <strong>${hover.toFixed(1)} seconds</strong> on the "So Close!" screen and sitting through <strong>${grind} losses in a row</strong> tells the game you are right on the edge of paying. Expect the game to hand you a smooth 3-game winning streak to get you invested, followed by a sudden 1-card loss (<strong>${pinch}% trap rate</strong>) and a "Special 99¢ Rescue Pack."`;
+      } else if (segment.includes("Whale")) {
+        p1 = `<strong>1. Your Secret Tag — ${segment}:</strong> At <strong>$${spend}/mo</strong>, letting you watch 30-second ads for free moves actually costs the game company money! The server hides free video ads from your screen and builds steeper late-game roadblocks (<strong>${rig}% rigging</strong>) to nudge you toward $9.99 and $19.99 bundles.`;
+      } else if (segment.includes("Un-Hookable")) {
+        p1 = `<strong>1. Your Secret Tag — ${segment}:</strong> With a <strong>${boundary}%</strong> personal stopping rule, zero spending, and almost no ad-clicking, you are the one player the algorithm cannot figure out how to milk. When you refuse both ads and 99¢ rescues, the game's only remaining trick is to hand you easy wins hoping you'll stay a little longer.`;
+      } else {
+        p1 = `<strong>1. Your Secret Tag — ${segment}:</strong> Because you close the app after <strong>${grind} losses</strong> without clicking ads or buying gems, the game walks on eggshells around you—quietly making your early card draws easier so you don't delete the app.`;
+      }
+
+      // Paragraph 2: Brain & Focus Impact
+      if (currentProfile === 'adhd') {
+        p2 = `<strong>2. ⚡ How This Hits an ADHD / Novelty-Seeking Mind (${drain}% Brain Fatigue):</strong> Facing a <strong>${pinch}% "lose-by-one-card" trap rate</strong> alongside a <strong>${streak}/10</strong> daily streak pulls hard on an active brain's hatred of unfinished tasks. When the game hides your winning card with 1 move left, your baseline focus chemicals drop sharply—making the "Watch Ad" button feel like physical relief.`;
+      } else {
+        p2 = `<strong>2. ⚖️ How This Hits Your Focus (${drain}% Brain Fatigue):</strong> Playing against a deck with <strong>${rig}% behind-the-scenes rigging</strong> and constant near-misses slowly dulls your brain's everyday reward sensors. Even if you never spend a dollar, paying with your attention through 30-second ad bursts leaves mental static that makes quiet rest harder afterward.`;
+      }
+
+      // Paragraph 3: Next Step
+      p3 = `<strong>3. Try the Antidote:</strong> Open <strong>Part II: Glass-Box Solitaire</strong> below to watch a card table run these exact tricks out in the open—and see how calm a game feels when you flip the switches back to an honest, kitchen-table shuffle.`;
+
+      output.innerHTML = `
+        <p style="margin-bottom: 0.75rem;">${p1}</p>
+        <p style="margin-bottom: 0.75rem;">${p2}</p>
+        <p style="margin-bottom: 0;">${p3}</p>
+      `;
+    }
+
+    // --- Initialization ---
+    window.addEventListener('DOMContentLoaded', () => {
+      renderNarrative();
+      renderChapter2Cards();
+      renderFieldCards();
+      updateSimulation();
+    });
+  </script>
+</body>
+</html>
