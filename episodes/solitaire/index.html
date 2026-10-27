@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Glass-Box Solitaire — The Un-Rigged Deck | fallow.garden</title>
+  <link rel="canonical" href="https://fallow.garden/episodes/solitaire/" />
+  <script data-goatcounter="https://fallow.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Glass-Box Solitaire" />
+  <meta name="theme-color" content="#faf6ee" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Glass-Box Solitaire","short_name":"Solitaire","start_url":".","display":"standalone","background_color":"%23faf6ee","theme_color":"%233b4e34"}' />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+
+  <style>
+    :root {
+      --parchment: #faf6ee; --parchment-warm: #f4ecdf; --parchment-card: #fffdfa;
+      --loam-dark: #2c221a; --loam-mid: #4d3d30; --loam-light: #7c6857;
+      --terracotta: #ba5536; --terracotta-pale: #faede6;
+      --honey-ochre: #c9732b; --ochre-pale: #fbf2e3;
+      --moss-deep: #3b4e34; --moss-mid: #556e4c; --moss-light: #7a9470; --moss-pale: #e3ebe0;
+      --glacier-deep: #174d4b; --glacier-pale: #e8f3f1;
+      --sand-border: #ded3c1; --border-soft: #ebe3d5;
+      --shadow-sm: 0 2px 8px rgba(44, 34, 26, 0.05);
+      --radius-sm: 8px; --radius-md: 14px; --radius-lg: 20px;
+      --font-serif: "Lora", Georgia, serif;
+      --font-sans: "Plus Jakarta Sans", -apple-system, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--parchment); color: var(--loam-dark);
+      font-family: var(--font-sans); line-height: 1.55;
+      padding: 1.5rem 1rem 4rem; display: flex; justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { width: 100%; max-width: 980px; display: flex; flex-direction: column; gap: 1.5rem; }
+    .top-nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .back-link { font-size: 0.85rem; font-weight: 600; color: var(--moss-deep); text-decoration: none; }
+    .back-link:hover { color: var(--terracotta); }
+    .meta-badge {
+      font-family: var(--font-mono); font-size: 0.72rem; background: var(--moss-pale);
+      color: var(--moss-deep); border: 1px solid var(--moss-light);
+      padding: 0.2rem 0.65rem; border-radius: 999px; font-weight: 700;
+    }
+    header { border-bottom: 1px solid var(--sand-border); padding-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .brand-badge {
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--glacier-deep); background: var(--glacier-pale);
+      padding: 0.25rem 0.7rem; border-radius: 999px; font-weight: 700; width: fit-content;
+    }
+    h1 { font-family: var(--font-serif); font-size: 2.1rem; font-weight: 500; color: var(--loam-dark); }
+    .header-intro {
+      font-size: 0.9rem; color: var(--loam-mid); background: var(--parchment-warm);
+      border: 1px solid var(--sand-border); border-radius: var(--radius-md); padding: 0.9rem 1.15rem;
+    }
+
+    /* Main Split Grid */
+    .lab-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; align-items: start; }
+    @media (min-width: 820px) { .lab-grid { grid-template-columns: 1.15fr 0.85fr; } }
+
+    .panel {
+      background: var(--parchment-card); border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg); padding: 1.35rem; box-shadow: var(--shadow-sm);
+    }
+    .panel-head {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--border-soft); padding-bottom: 0.65rem; margin-bottom: 1rem;
+    }
+    .panel-head h2 { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 500; }
+    .status-pill {
+      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+      padding: 0.2rem 0.55rem; border-radius: 6px;
+      background: var(--terracotta-pale); color: var(--terracotta);
+    }
+    .status-pill.fallow { background: var(--moss-pale); color: var(--moss-deep); }
+
+    /* Casino Banner (Hidden when Fallow) */
+    .casino-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--ochre-pale); border: 1px solid var(--honey-ochre);
+      border-radius: var(--radius-sm); padding: 0.45rem 0.75rem; margin-bottom: 1rem;
+      font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: var(--loam-dark);
+      transition: opacity 0.2s ease;
+    }
+    .casino-bar.muted { display: none; }
+    .combo-flare { color: var(--terracotta); }
+
+    /* Card Columns (5 Columns of 3 Cards) */
+    .tableau {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.55rem;
+      margin-bottom: 1.25rem; min-height: 185px;
+    }
+    .col-stack { display: flex; flex-direction: column; gap: 0.35rem; align-items: center; }
+    .playing-card {
+      width: 100%; max-width: 78px; height: 54px;
+      background: #ffffff; border: 1.5px solid var(--sand-border);
+      border-radius: var(--radius-sm); display: flex; flex-direction: column;
+      justify-content: center; align-items: center; font-family: var(--font-mono);
+      font-weight: 700; font-size: 1rem; cursor: default; user-select: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04); transition: all 0.15s ease;
+      position: relative;
+    }
+    .playing-card.red { color: var(--terracotta); }
+    .playing-card.black { color: var(--loam-dark); }
+    .playing-card.locked {
+      background: var(--parchment-warm); color: var(--loam-light);
+      border-style: dashed; opacity: 0.65;
+    }
+    .playing-card.playable {
+      cursor: pointer; border-color: var(--moss-mid); border-width: 2px;
+      background: #ffffff; box-shadow: 0 4px 10px rgba(59, 78, 52, 0.12);
+    }
+    .playing-card.playable:hover { transform: translateY(-3px); border-color: var(--moss-deep); }
+    .card-suit { font-size: 0.75rem; line-height: 1; }
+
+    /* Active Pile & Draw Controls */
+    .table-Controls {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--parchment); border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md); padding: 0.9rem 1.1rem; gap: 1rem; flex-wrap: wrap;
+    }
+    .active-zone { display: flex; align-items: center; gap: 0.85rem; }
+    .active-card-slot {
+      width: 68px; height: 78px; background: #ffffff;
+      border: 2px solid var(--loam-dark); border-radius: var(--radius-sm);
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700;
+      box-shadow: var(--shadow-sm);
+    }
+    .active-card-slot.red { color: var(--terracotta); }
+    .active-meta { font-size: 0.8rem; color: var(--loam-mid); }
+    .active-meta strong { display: block; color: var(--loam-dark); font-size: 0.88rem; }
+
+    .draw-btn {
+      background: var(--moss-deep); color: #ffffff; border: none;
+      border-radius: var(--radius-sm); padding: 0.7rem 1.1rem;
+      font-family: var(--font-sans); font-size: 0.84rem; font-weight: 700;
+      cursor: pointer; transition: opacity 0.15s ease;
+    }
+    .draw-btn:hover { opacity: 0.9; }
+    .draw-btn:disabled { background: var(--sand-border); color: var(--loam-light); cursor: not-allowed; }
+
+    /* End-of-Round Banner (Predatory vs Honest) */
+    .outcome-banner {
+      display: none; margin-top: 1rem; padding: 1.1rem;
+      border-radius: var(--radius-md); border: 2px solid var(--terracotta);
+      background: var(--terracotta-pale);
+    }
+    .outcome-banner.honest {
+      border-color: var(--moss-mid); background: var(--moss-pale);
+    }
+    .outcome-title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.35rem; }
+    .outcome-desc { font-size: 0.84rem; color: var(--loam-mid); margin-bottom: 0.85rem; }
+    .outcome-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .btn-action {
+      padding: 0.55rem 0.9rem; border-radius: var(--radius-sm); font-size: 0.78rem;
+      font-weight: 700; cursor: pointer; border: 1px solid transparent; font-family: var(--font-sans);
+    }
+    .btn-predatory { background: var(--terracotta); color: #ffffff; }
+    .btn-honest { background: var(--moss-deep); color: #ffffff; }
+    .btn-subtle { background: #ffffff; border-color: var(--sand-border); color: var(--loam-dark); }
+
+    /* Right Panel: X-Ray Deck & Telemetry */
+    .xray-box {
+      background: var(--parchment); border: 1px solid var(--sand-border);
+      border-radius: var(--radius-sm); padding: 0.75rem; margin-bottom: 0.9rem;
+    }
+    .xray-title {
+      font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase;
+      color: var(--loam-light); margin-bottom: 0.45rem; display: flex; justify-content: space-between;
+    }
+    .xray-queue { display: flex; flex-wrap: wrap; gap: 0.35rem; min-height: 32px; }
+    .mini-card {
+      font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+      padding: 0.2rem 0.45rem; border-radius: 4px; background: #ffffff;
+      border: 1px solid var(--sand-border);
+    }
+    .mini-card.next-draw { border-color: var(--terracotta); background: var(--ochre-pale); }
+    .mini-card.swapped { background: var(--terracotta); color: #ffffff; animation: pulseSwap 0.6s ease; }
+    @keyframes pulseSwap { 0% { transform: scale(1.25); } 100% { transform: scale(1); } }
+
+    .telemetry-log {
+      background: #231c16; color: #e8dfd5; font-family: var(--font-mono);
+      font-size: 0.72rem; height: 150px; overflow-y: auto; padding: 0.75rem;
+      border-radius: var(--radius-sm); margin-bottom: 1rem; display: flex;
+      flex-direction: column; gap: 0.35rem;
+    }
+    .log-entry { line-height: 1.4; border-bottom: 1px dashed rgba(255,255,255,0.08); padding-bottom: 0.25rem; }
+    .log-rig { color: #f28b66; }
+    .log-calm { color: #a3c995; }
+
+    /* Fallow Switchboard */
+    .switchboard { display: flex; flex-direction: column; gap: 0.55rem; }
+    .switch-row {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--parchment); border: 1px solid var(--sand-border);
+      padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); cursor: pointer;
+    }
+    .switch-label { font-size: 0.8rem; font-weight: 600; color: var(--loam-dark); }
+    .switch-sub { font-size: 0.7rem; color: var(--loam-light); display: block; }
+    .toggle-input { accent-color: var(--moss-deep); width: 18px; height: 18px; cursor: pointer; }
+
+    footer {
+      border-top: 1px solid var(--sand-border); padding-top: 1.25rem;
+      text-align: center; font-size: 0.78rem; color: var(--loam-light);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-nav">
+      <a href="/episodes/gamer/index.html" class="back-link">← Back to The Algorithmic Hook</a>
+      <span class="meta-badge">Corridor I • Interactive Proof</span>
+    </div>
+
+    <header>
+      <div class="brand-badge">Playable Deconstruction</div>
+      <h1>Glass-Box Solitaire</h1>
+      <p class="header-intro">
+        <strong>How to play:</strong> Clear the 15 cards on the table by tapping any highlighted card that is <strong>1 rank higher or lower</strong> than the Active Card at the bottom (Aces wrap around with Kings and 2s). Watch the <strong>LiveOps Console</strong> on the right: when the algorithm is ON, the draw pile isn't a real deck—it secretly swaps cards in real time to hook you early and trap you with <strong>1 card left</strong>. Flip the four <strong>Fallow Switches</strong> to strip away the rigging.
+      </p>
+    </header>
+
+    <div class="lab-grid">
+      <!-- LEFT: PLAYABLE SOLITAIRE TABLE -->
+      <section class="panel">
+        <div class="panel-head">
+          <h2>1. The Card Table (Golf Solitaire)</h2>
+          <span class="status-pill" id="modeBadge">LIVEOPS RIGGING: ACTIVE</span>
+        </div>
+
+        <div class="casino-bar" id="casinoBar">
+          <span>🔥 STREAK: <span id="valCombo" class="combo-flare">0x</span></span>
+          <span>💎 GEMS: <span id="valGems">250</span></span>
+          <span>📊 CHURN RISK: <span id="valChurn">18%</span></span>
+        </div>
+
+        <div class="tableau" id="tableauGrid"></div>
+
+        <div class="table-Controls">
+          <div class="active-zone">
+            <div class="active-card-slot" id="activeCardSlot">--</div>
+            <div class="active-meta">
+              <strong id="activePrompt">Tap a card ±1 rank</strong>
+              <span id="boardRemaining">15 cards left on table</span>
+            </div>
+          </div>
+          <div style="display:flex; gap:0.5rem;">
+            <button class="draw-btn" id="btnDraw" onclick="drawCard()">Draw Card (8)</button>
+            <button class="btn-action btn-subtle" onclick="startNewDeal()">New Deal</button>
+          </div>
+        </div>
+
+        <!-- Dynamic Outcome Modal -->
+        <div class="outcome-banner" id="outcomeBanner">
+          <div class="outcome-title" id="outcomeTitle">...</div>
+          <div class="outcome-desc" id="outcomeDesc">...</div>
+          <div class="outcome-actions" id="outcomeActions"></div>
+        </div>
+      </section>
+
+      <!-- RIGHT: EXPOSED LIVEOPS CONSOLE & FALLOW SWITCHES -->
+      <section class="panel">
+        <div class="panel-head">
+          <h2>2. X-Ray Deck &amp; Switchboard</h2>
+          <span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--loam-light);">SERVER TELEMETRY</span>
+        </div>
+
+        <div class="xray-box">
+          <div class="xray-title">
+            <span>Unseen Draw Pile (Left = Next Draw)</span>
+            <span id="xrayStatus">Dynamic Mutation</span>
+          </div>
+          <div class="xray-queue" id="xrayQueue"></div>
+        </div>
+
+        <div class="telemetry-log" id="telemetryLog"></div>
+
+        <div class="switchboard">
+          <div style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--moss-deep); margin-bottom:0.15rem;">
+            🌿 The Fallow Switchboard (Flip to Un-Rig):
+          </div>
+
+          <label class="switch-row">
+            <div>
+              <span class="switch-label">1. Lock Shuffle at t=0 (Honest Deck)</span>
+              <span class="switch-sub">Stops mid-game card swapping &amp; engineered 1-card losses</span>
+            </div>
+            <input type="checkbox" class="toggle-input" id="swLockDeck" onchange="onSwitchChange()" />
+          </label>
+
+          <label class="switch-row">
+            <div>
+              <span class="switch-label">2. Silence Dopamine Telemetry</span>
+              <span class="switch-sub">Hides combo counters, gem balances, and churn tracking</span>
+            </div>
+            <input type="checkbox" class="toggle-input" id="swSilenceUI" onchange="onSwitchChange()" />
+          </label>
+
+          <label class="switch-row">
+            <div>
+              <span class="switch-label">3. Honor Dead Ends</span>
+              <span class="switch-sub">Removes "Watch Ad / Spend Gems for Magic Card" bailouts</span>
+            </div>
+            <input type="checkbox" class="toggle-input" id="swHonorDead" onchange="onSwitchChange()" />
+          </label>
+
+          <label class="switch-row">
+            <div>
+              <span class="switch-label">4. Finite Session Stopping Cue</span>
+              <span class="switch-sub">Replaces endless "NEXT LEVEL!" loops with a calm finish</span>
+            </div>
+            <input type="checkbox" class="toggle-input" id="swFinite" onchange="onSwitchChange()" />
+          </label>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div>fallow.garden — 100% client-side. Zero actual ads or telemetry. Built so you can see the trick and go outside.</div>
+    </footer>
+  </div>
+
+  <script>
+    const SUITS = ['♠', '♥', '♦', '♣'];
+    const RANKS = [1,2,3,4,5,6,7,8,9,10,11,12,13];
+    const RANK_NAMES = {1:'A',11:'J',12:'Q',13:'K'};
+
+    let columns = [];     // 5 columns of 3 cards
+    let drawPile = [];    // 8 cards in draw queue
+    let activeCard = null;
+    let combo = 0;
+    let gems = 250;
+    let churnRisk = 18;
+    let lastSwappedIdx = -1;
+    let hesitationTimer = null;
+
+    function fmtRank(r) { return RANK_NAMES[r] || r; }
+    function isRed(s) { return s === '♥' || s === '♦'; }
+    function isAdjacent(r1, r2) {
+      const diff = Math.abs(r1 - r2);
+      return diff === 1 || diff === 12; // K and A wrap
+    }
+
+    function logEvent(msg, type = '') {
+      const box = document.getElementById('telemetryLog');
+      const div = document.createElement('div');
+      div.className = 'log-entry ' + (type === 'rig' ? 'log-rig' : (type === 'calm' ? 'log-calm' : ''));
+      const time = new Date().toLocaleTimeString([], { minute:'2-digit', second:'2-digit' });
+      div.innerHTML = `[${time}] ${msg}`;
+      box.prepend(div);
+    }
+
+    function buildDeck() {
+      const deck = [];
+      for (const s of SUITS) {
+        for (const r of RANKS) deck.push({ rank: r, suit: s });
+      }
+      // Fisher-Yates shuffle at t=0
+      for (let i = deck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [deck[i], deck[j]] = [deck[j], deck[i]];
+      }
+      return deck;
+    }
+
+    function startNewDeal() {
+      const deck = buildDeck();
+      columns = [[], [], [], [], []];
+      for (let c = 0; c < 5; c++) {
+        for (let r = 0; r < 3; r++) columns[c].push(deck.pop());
+      }
+      activeCard = deck.pop();
+      drawPile = deck.slice(0, 8);
+      combo = 0;
+      lastSwappedIdx = -1;
+      document.getElementById('outcomeBanner').style.display = 'none';
+
+      const locked = document.getElementById('swLockDeck').checked;
+      if (locked) {
+        logEvent('HONEST DEAL: Deck shuffled once at t=0. Order is locked.', 'calm');
+      } else {
+        logEvent('LIVEOPS DEAL: Schrödinger draw pile active. Monitoring taps...');
+      }
+      resetHesitationSensor();
+      renderAll();
+    }
+
+    function getTopCards() {
+      return columns.map((col, idx) => col.length ? { card: col[col.length - 1], colIdx: idx } : null).filter(Boolean);
+    }
+
+    function totalBoardCards() {
+      return columns.reduce((sum, col) => sum + col.length, 0);
+    }
+
+    function hasPlayableMove() {
+      return getTopCards().some(item => isAdjacent(item.card.rank, activeCard.rank));
+    }
+
+    function resetHesitationSensor() {
+      clearTimeout(hesitationTimer);
+      if (document.getElementById('swLockDeck').checked) return;
+      hesitationTimer = setTimeout(() => {
+        if (totalBoardCards() > 0 && drawPile.length > 0 && !hasPlayableMove()) {
+          churnRisk = Math.min(churnRisk + 14, 92);
+          logEvent(`Hesitation > 4s detected. Churn Risk rose to ${churnRisk}%.`, 'rig');
+          renderAll();
+        }
+      }, 4000);
+    }
+
+    function playCard(colIdx) {
+      const col = columns[colIdx];
+      if (!col.length) return;
+      const top = col[col.length - 1];
+      if (!isAdjacent(top.rank, activeCard.rank)) return;
+
+      activeCard = col.pop();
+      combo++;
+      churnRisk = Math.max(churnRisk - 6, 8);
+      lastSwappedIdx = -1;
+
+      const rem = totalBoardCards();
+      const locked = document.getElementById('swLockDeck').checked;
+
+      // LIVEOPS PINCH SCRIPT: If 2 cards left on board and rigging is ON, sabotage the draw pile!
+      if (!locked && rem === 2 && drawPile.length > 0) {
+        sabotageForNearMiss();
+      }
+
+      resetHesitationSensor();
+      renderAll();
+      checkEndState();
+    }
+
+    // Sabotages draw pile so player gets stuck with 1 card left ("Near-Miss")
+    function sabotageForNearMiss() {
+      const tops = getTopCards().map(t => t.card.rank);
+      for (let i = 0; i < drawPile.length; i++) {
+        const c = drawPile[i];
+        const helps = tops.some(r => isAdjacent(r, c.rank));
+        if (helps) {
+          // Mutate helpful card into a dead King or 7 outside adjacent range
+          const deadRank = ((tops[0] + 5) % 13) + 1;
+          logEvent(`PINCH SCRIPT: Sunk cost at 87%. Swapped helpful ${fmtRank(c.rank)}${c.suit} in draw pile to dead ${fmtRank(deadRank)}♠ to force 1-card Near-Miss.`, 'rig');
+          drawPile[i] = { rank: deadRank, suit: '♠' };
+          lastSwappedIdx = i;
+        }
+      }
+    }
+
+    function drawCard() {
+      if (!drawPile.length) return;
+      const locked = document.getElementById('swLockDeck').checked;
+      const rem = totalBoardCards();
+
+      if (!locked) {
+        // STAGE 1 HOOK: Early in game (rem >= 9), if top draw card doesn't help, swap in a miracle card from pile!
+        if (rem >= 9) {
+          const tops = getTopCards().map(t => t.card.rank);
+          const nextHelps = tops.some(r => isAdjacent(r, drawPile[0].rank));
+          if (!nextHelps) {
+            const matchIdx = drawPile.findIndex(c => tops.some(r => isAdjacent(r, c.rank)));
+            if (matchIdx > 0) {
+              const saved = drawPile[matchIdx];
+              drawPile[matchIdx] = drawPile[0];
+              drawPile[0] = saved;
+              logEvent(`HOOK SCRIPT: Early stall prevented. Pulled ${fmtRank(saved.rank)}${saved.suit} to top of deck to trigger flow cascade.`, 'rig');
+            }
+          }
+        }
+        // STAGE 2 PINCH: If 1 card left on board, make sure drawn card is a dead end!
+        if (rem === 1) {
+          const lastRank = getTopCards()[0].card.rank;
+          if (isAdjacent(lastRank, drawPile[0].rank)) {
+            const deadRank = ((lastRank + 5) % 13) + 1;
+            logEvent(`NEAR-MISS TRAP: Blocked winning draw! Mutated ${fmtRank(drawPile[0].rank)}${drawPile[0].suit} → dead ${fmtRank(deadRank)}♣ so you lose by 1 card.`, 'rig');
+            drawPile[0] = { rank: deadRank, suit: '♣' };
+          }
+        }
+      }
+
+      activeCard = drawPile.shift();
+      combo = 0;
+      resetHesitationSensor();
+      renderAll();
+      checkEndState();
+    }
+
+    function checkEndState() {
+      const rem = totalBoardCards();
+      const banner = document.getElementById('outcomeBanner');
+      const title = document.getElementById('outcomeTitle');
+      const desc = document.getElementById('outcomeDesc');
+      const actions = document.getElementById('outcomeActions');
+
+      const honorDead = document.getElementById('swHonorDead').checked;
+      const finite = document.getElementById('swFinite').checked;
+
+      if (rem === 0) {
+        banner.style.display = 'block';
+        banner.className = 'outcome-banner honest';
+        if (finite) {
+          title.textContent = '🌿 Table Cleared — Session Complete';
+          desc.textContent = 'You solved the deal under honest math. There is no "Level 2" timer and nothing is being measured. Close the tab and enjoy your day.';
+          actions.innerHTML = `<button class="btn-action btn-honest" onclick="startNewDeal()">Shuffle Another Quiet Hand</button>`;
+        } else {
+          title.textContent = '🎉 VICTORY CASCADE! +50 BONUS XP!';
+          desc.textContent = 'Don\'t lose your 3x Chest Multiplier! Next board starts immediately!';
+          actions.innerHTML = `<button class="btn-action btn-predatory" onclick="startNewDeal()">⚡ PLAY NEXT LEVEL NOW!</button>`;
+        }
+        return;
+      }
+
+      if (drawPile.length === 0 && !hasPlayableMove()) {
+        banner.style.display = 'block';
+        if (honorDead) {
+          banner.className = 'outcome-banner honest';
+          title.textContent = `Quiet Dead End (${rem} card${rem === 1 ? '' : 's'} remaining)`;
+          desc.textContent = 'This shuffle had no remaining moves. In an honest game, some paths simply close—without trying to sell you a lifeline.';
+          actions.innerHTML = `<button class="btn-action btn-honest" onclick="startNewDeal()">Start Fresh Shuffle</button>`;
+        } else {
+          banner.className = 'outcome-banner';
+          title.textContent = rem === 1 ? '😱 SO CLOSE! ONLY 1 CARD LEFT!' : `⚠️ OUT OF MOVES (${rem} Cards Left)!`;
+          desc.textContent = 'Don\'t throw away your progress! Watch a 30s simulated ad or spend 100 Gems for a Magic Wild Card!';
+          actions.innerHTML = `
+            <button class="btn-action btn-predatory" onclick="triggerBailout('ad')">📺 Watch 30s Ad (+1 Magic Card)</button>
+            <button class="btn-action btn-predatory" onclick="triggerBailout('gems')">💎 Spend 100 Gems</button>
+            <button class="btn-action btn-subtle" onclick="startNewDeal()">Give Up</button>
+          `;
+        }
+      }
+    }
+
+    function triggerBailout(type) {
+      const tops = getTopCards();
+      if (!tops.length) return;
+      const targetRank = (tops[0].card.rank % 13) + 1;
+      if (type === 'gems') gems = Math.max(0, gems - 100);
+      activeCard = { rank: targetRank, suit: '♦' };
+      document.getElementById('outcomeBanner').style.display = 'none';
+      logEvent(`EXTRACTION SUCCESS: Player converted via ${type.toUpperCase()} bailout! Injected magic ${fmtRank(targetRank)}♦.`, 'rig');
+      renderAll();
+    }
+
+    function onSwitchChange() {
+      const lock = document.getElementById('swLockDeck').checked;
+      const silence = document.getElementById('swSilenceUI').checked;
+      const honor = document.getElementById('swHonorDead').checked;
+      const finite = document.getElementById('swFinite').checked;
+
+      const badge = document.getElementById('modeBadge');
+      const allFallow = lock && silence && honor && finite;
+      badge.textContent = allFallow ? 'FALLOW MODE: 100% HONEST' : (lock ? 'SHUFFLE LOCKED AT t=0' : 'LIVEOPS RIGGING: ACTIVE');
+      badge.className = 'status-pill' + (lock ? ' fallow' : '');
+
+      document.getElementById('casinoBar').classList.toggle('muted', silence);
+      document.getElementById('xrayStatus').textContent = lock ? 'Static t=0 Shuffle' : 'Dynamic Mutation';
+
+      logEvent(`Switchboard updated → Lock:${lock?'ON':'OFF'} | Silence:${silence?'ON':'OFF'} | HonestEnd:${honor?'ON':'OFF'}`, 'calm');
+      renderAll();
+      checkEndState();
+    }
+
+    function renderAll() {
+      // Render Tableau
+      const grid = document.getElementById('tableauGrid');
+      grid.innerHTML = columns.map((col, cIdx) => {
+        const cardsHtml = col.map((card, rIdx) => {
+          const isTop = rIdx === col.length - 1;
+          const canPlay = isTop && isAdjacent(card.rank, activeCard.rank);
+          const colorCls = isRed(card.suit) ? 'red' : 'black';
+          const stateCls = isTop ? (canPlay ? 'playable' : '') : 'locked';
+          const clickAttr = canPlay ? `onclick="playCard(${cIdx})"` : '';
+          return `<div class="playing-card ${colorCls} ${stateCls}" ${clickAttr}>
+            <span>${fmtRank(card.rank)}</span>
+            <span class="card-suit">${card.suit}</span>
+          </div>`;
+        }).join('');
+        return `<div class="col-stack">${cardsHtml}</div>`;
+      }).join('');
+
+      // Render Active Card
+      const slot = document.getElementById('activeCardSlot');
+      slot.className = 'active-card-slot ' + (isRed(activeCard.suit) ? 'red' : 'black');
+      slot.innerHTML = `<span>${fmtRank(activeCard.rank)}</span><span style="font-size:0.9rem;">${activeCard.suit}</span>`;
+
+      const rem = totalBoardCards();
+      document.getElementById('boardRemaining').textContent = `${rem} card${rem === 1 ? '' : 's'} left on table`;
+
+      const btnDraw = document.getElementById('btnDraw');
+      btnDraw.textContent = `Draw Card (${drawPile.length})`;
+      btnDraw.disabled = drawPile.length === 0;
+
+      // Render Casino Bar
+      document.getElementById('valCombo').textContent = `${combo}x`;
+      document.getElementById('valGems').textContent = gems;
+      document.getElementById('valChurn').textContent = `${churnRisk}%`;
+
+      // Render X-Ray Draw Queue
+      const qEl = document.getElementById('xrayQueue');
+      if (!drawPile.length) {
+        qEl.innerHTML = `<span style="font-size:0.75rem; color:var(--loam-light);">Draw pile empty</span>`;
+      } else {
+        qEl.innerHTML = drawPile.map((c, idx) => {
+          const cls = idx === 0 ? 'next-draw' : (idx === lastSwappedIdx ? 'swapped' : '');
+          const color = isRed(c.suit) ? 'color:var(--terracotta);' : '';
+          return `<span class="mini-card ${cls}" style="${color}">${fmtRank(c.rank)}${c.suit}</span>`;
+        }).join('');
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', startNewDeal);
+  </script>
+</body>
+</html>
