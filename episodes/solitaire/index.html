@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Glass-Box Solitaire — The Un-Rigged Deck | fallow.garden</title>
+  <title>Glass-Box Solitaire — See How the Deck Rigging Works | fallow.garden</title>
   <link rel="canonical" href="https://fallow.garden/episodes/solitaire/" />
   <script data-goatcounter="https://fallow.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -42,7 +42,7 @@
       padding: 1.5rem 1rem 4rem; display: flex; justify-content: center;
       -webkit-font-smoothing: antialiased;
     }
-    .container { width: 100%; max-width: 980px; display: flex; flex-direction: column; gap: 1.5rem; }
+    .container { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 1.4rem; }
     .top-nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
     .back-link { font-size: 0.85rem; font-weight: 600; color: var(--moss-deep); text-decoration: none; }
     .back-link:hover { color: var(--terracotta); }
@@ -51,13 +51,13 @@
       color: var(--moss-deep); border: 1px solid var(--moss-light);
       padding: 0.2rem 0.65rem; border-radius: 999px; font-weight: 700;
     }
-    header { border-bottom: 1px solid var(--sand-border); padding-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    header { border-bottom: 1px solid var(--sand-border); padding-bottom: 1.15rem; display: flex; flex-direction: column; gap: 0.55rem; }
     .brand-badge {
       font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--glacier-deep); background: var(--glacier-pale);
       padding: 0.25rem 0.7rem; border-radius: 999px; font-weight: 700; width: fit-content;
     }
-    h1 { font-family: var(--font-serif); font-size: 2.1rem; font-weight: 500; color: var(--loam-dark); }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 500; color: var(--loam-dark); }
     .header-intro {
       font-size: 0.9rem; color: var(--loam-mid); background: var(--parchment-warm);
       border: 1px solid var(--sand-border); border-radius: var(--radius-md); padding: 0.9rem 1.15rem;
@@ -65,101 +65,156 @@
 
     /* Main Split Grid */
     .lab-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; align-items: start; }
-    @media (min-width: 820px) { .lab-grid { grid-template-columns: 1.15fr 0.85fr; } }
+    @media (min-width: 840px) { .lab-grid { grid-template-columns: 1.2fr 0.8fr; } }
 
     .panel {
       background: var(--parchment-card); border: 1px solid var(--sand-border);
-      border-radius: var(--radius-lg); padding: 1.35rem; box-shadow: var(--shadow-sm);
+      border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: var(--shadow-sm);
     }
     .panel-head {
       display: flex; justify-content: space-between; align-items: center;
-      border-bottom: 1px solid var(--border-soft); padding-bottom: 0.65rem; margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border-soft); padding-bottom: 0.65rem; margin-bottom: 0.9rem;
     }
-    .panel-head h2 { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 500; }
+    .panel-head h2 { font-family: var(--font-serif); font-size: 1.18rem; font-weight: 500; }
     .status-pill {
-      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+      font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700;
       padding: 0.2rem 0.55rem; border-radius: 6px;
       background: var(--terracotta-pale); color: var(--terracotta);
     }
     .status-pill.fallow { background: var(--moss-pale); color: var(--moss-deep); }
 
-    /* Casino Banner (Hidden when Fallow) */
+    /* Casino Noise Bar */
     .casino-bar {
       display: flex; justify-content: space-between; align-items: center;
       background: var(--ochre-pale); border: 1px solid var(--honey-ochre);
-      border-radius: var(--radius-sm); padding: 0.45rem 0.75rem; margin-bottom: 1rem;
-      font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: var(--loam-dark);
-      transition: opacity 0.2s ease;
+      border-radius: var(--radius-sm); padding: 0.45rem 0.75rem; margin-bottom: 0.9rem;
+      font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--loam-dark);
     }
     .casino-bar.muted { display: none; }
-    .combo-flare { color: var(--terracotta); }
 
-    /* Card Columns (5 Columns of 3 Cards) */
-    .tableau {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.55rem;
-      margin-bottom: 1.25rem; min-height: 185px;
+    /* Live Swap Alert Banner on the Table */
+    .swap-toast {
+      background: var(--terracotta-pale); border-left: 4px solid var(--terracotta);
+      padding: 0.55rem 0.8rem; border-radius: var(--radius-sm); margin-bottom: 0.9rem;
+      font-size: 0.8rem; color: var(--loam-dark); display: none;
     }
-    .col-stack { display: flex; flex-direction: column; gap: 0.35rem; align-items: center; }
-    .playing-card {
-      width: 100%; max-width: 78px; height: 54px;
+    .swap-toast.calm-toast {
+      background: var(--moss-pale); border-left-color: var(--moss-deep);
+    }
+
+    /* Top Row: Stock/Waste on Left, 4 Suit Foundations on Right */
+    .top-table-row {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 0.75rem; margin-bottom: 1.15rem; flex-wrap: wrap;
+    }
+    .deck-area { display: flex; align-items: center; gap: 0.55rem; }
+    .foundations-area { display: flex; gap: 0.45rem; }
+
+    .slot-box {
+      width: 60px; height: 76px; border-radius: var(--radius-sm);
+      border: 1.5px dashed var(--sand-border); background: var(--parchment);
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      font-family: var(--font-mono); font-size: 0.8rem; color: var(--loam-light);
+      position: relative; user-select: none;
+    }
+    .stock-pile {
+      background: var(--moss-pale); border: 2px solid var(--moss-mid);
+      color: var(--moss-deep); cursor: pointer; font-weight: 700;
+      transition: transform 0.12s ease;
+    }
+    .stock-pile:hover { transform: translateY(-2px); }
+    .xray-tag {
+      font-size: 0.62rem; background: rgba(255,255,255,0.85);
+      padding: 1px 4px; border-radius: 3px; border: 1px solid var(--sand-border);
+      color: var(--loam-mid); margin-top: 3px;
+    }
+
+    /* 4 Classic Solitaire Columns */
+    .tableau-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.65rem;
+      min-height: 230px; margin-bottom: 0.75rem;
+    }
+    .col-lane {
+      background: rgba(244, 236, 223, 0.45); border: 1px dashed var(--sand-border);
+      border-radius: var(--radius-sm); padding: 0.4rem;
+      display: flex; flex-direction: column; gap: 0.35rem; align-items: center;
+    }
+
+    /* Cards */
+    .card-tile {
+      width: 100%; max-width: 86px; min-height: 52px;
       background: #ffffff; border: 1.5px solid var(--sand-border);
-      border-radius: var(--radius-sm); display: flex; flex-direction: column;
-      justify-content: center; align-items: center; font-family: var(--font-mono);
-      font-weight: 700; font-size: 1rem; cursor: default; user-select: none;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04); transition: all 0.15s ease;
+      border-radius: var(--radius-sm); padding: 0.35rem 0.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04); user-select: none;
+      transition: transform 0.12s ease, border-color 0.12s ease;
+    }
+    .card-tile.red { color: var(--terracotta); }
+    .card-tile.black { color: var(--loam-dark); }
+    .card-tile.clickable {
+      cursor: pointer; border-color: var(--moss-mid); border-width: 2px;
+    }
+    .card-tile.clickable:hover {
+      transform: translateY(-2px); border-color: var(--moss-deep);
+      box-shadow: 0 4px 10px rgba(59, 78, 52, 0.14);
+    }
+
+    /* Face-Down Cards with X-Ray Peek */
+    .card-tile.facedown {
+      background: var(--parchment-warm); border: 1.5px dashed var(--loam-light);
+      color: var(--loam-light); font-size: 0.72rem; flex-direction: column;
+      justify-content: center; gap: 2px; opacity: 0.85;
+    }
+    .card-tile.facedown.rig-flash {
+      background: var(--terracotta-pale); border-color: var(--terracotta);
+      color: var(--terracotta); animation: pulseRig 0.7s ease;
+    }
+    @keyframes pulseRig { 0% { transform: scale(1.12); } 100% { transform: scale(1); } }
+
+    .strike-old { text-decoration: line-through; opacity: 0.7; margin-right: 3px; }
+
+    /* Dealer's Inner Monologue (Right Panel) */
+    .dealer-thought-bubble {
+      background: var(--parchment-warm); border: 1.5px solid var(--sand-border);
+      border-radius: var(--radius-md); padding: 1rem 1.1rem; margin-bottom: 0.9rem;
       position: relative;
     }
-    .playing-card.red { color: var(--terracotta); }
-    .playing-card.black { color: var(--loam-dark); }
-    .playing-card.locked {
-      background: var(--parchment-warm); color: var(--loam-light);
-      border-style: dashed; opacity: 0.65;
+    .dealer-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--terracotta); margin-bottom: 0.3rem;
+      display: block;
     }
-    .playing-card.playable {
-      cursor: pointer; border-color: var(--moss-mid); border-width: 2px;
-      background: #ffffff; box-shadow: 0 4px 10px rgba(59, 78, 52, 0.12);
+    .dealer-label.calm { color: var(--moss-deep); }
+    .dealer-quote {
+      font-family: var(--font-serif); font-size: 0.96rem; color: var(--loam-dark);
+      line-height: 1.5;
     }
-    .playing-card.playable:hover { transform: translateY(-3px); border-color: var(--moss-deep); }
-    .card-suit { font-size: 0.75rem; line-height: 1; }
 
-    /* Active Pile & Draw Controls */
-    .table-Controls {
-      display: flex; justify-content: space-between; align-items: center;
+    .diary-title {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--loam-light); margin-bottom: 0.4rem;
+    }
+    .dealer-diary {
       background: var(--parchment); border: 1px solid var(--sand-border);
-      border-radius: var(--radius-md); padding: 0.9rem 1.1rem; gap: 1rem; flex-wrap: wrap;
+      border-radius: var(--radius-sm); padding: 0.7rem; height: 135px;
+      overflow-y: auto; display: flex; flex-direction: column; gap: 0.45rem;
+      margin-bottom: 1rem; font-size: 0.78rem; color: var(--loam-mid);
     }
-    .active-zone { display: flex; align-items: center; gap: 0.85rem; }
-    .active-card-slot {
-      width: 68px; height: 78px; background: #ffffff;
-      border: 2px solid var(--loam-dark); border-radius: var(--radius-sm);
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700;
-      box-shadow: var(--shadow-sm);
+    .diary-item {
+      border-bottom: 1px dashed var(--border-soft); padding-bottom: 0.35rem; line-height: 1.4;
     }
-    .active-card-slot.red { color: var(--terracotta); }
-    .active-meta { font-size: 0.8rem; color: var(--loam-mid); }
-    .active-meta strong { display: block; color: var(--loam-dark); font-size: 0.88rem; }
+    .diary-item strong { color: var(--loam-dark); }
 
-    .draw-btn {
-      background: var(--moss-deep); color: #ffffff; border: none;
-      border-radius: var(--radius-sm); padding: 0.7rem 1.1rem;
-      font-family: var(--font-sans); font-size: 0.84rem; font-weight: 700;
-      cursor: pointer; transition: opacity 0.15s ease;
-    }
-    .draw-btn:hover { opacity: 0.9; }
-    .draw-btn:disabled { background: var(--sand-border); color: var(--loam-light); cursor: not-allowed; }
-
-    /* End-of-Round Banner (Predatory vs Honest) */
+    /* End-of-Hand Banner */
     .outcome-banner {
-      display: none; margin-top: 1rem; padding: 1.1rem;
+      display: none; margin-top: 0.9rem; padding: 1.1rem;
       border-radius: var(--radius-md); border: 2px solid var(--terracotta);
       background: var(--terracotta-pale);
     }
-    .outcome-banner.honest {
-      border-color: var(--moss-mid); background: var(--moss-pale);
-    }
-    .outcome-title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.35rem; }
-    .outcome-desc { font-size: 0.84rem; color: var(--loam-mid); margin-bottom: 0.85rem; }
+    .outcome-banner.honest { border-color: var(--moss-mid); background: var(--moss-pale); }
+    .outcome-title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .outcome-desc { font-size: 0.84rem; color: var(--loam-mid); margin-bottom: 0.8rem; }
     .outcome-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .btn-action {
       padding: 0.55rem 0.9rem; border-radius: var(--radius-sm); font-size: 0.78rem;
@@ -169,45 +224,16 @@
     .btn-honest { background: var(--moss-deep); color: #ffffff; }
     .btn-subtle { background: #ffffff; border-color: var(--sand-border); color: var(--loam-dark); }
 
-    /* Right Panel: X-Ray Deck & Telemetry */
-    .xray-box {
-      background: var(--parchment); border: 1px solid var(--sand-border);
-      border-radius: var(--radius-sm); padding: 0.75rem; margin-bottom: 0.9rem;
-    }
-    .xray-title {
-      font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase;
-      color: var(--loam-light); margin-bottom: 0.45rem; display: flex; justify-content: space-between;
-    }
-    .xray-queue { display: flex; flex-wrap: wrap; gap: 0.35rem; min-height: 32px; }
-    .mini-card {
-      font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
-      padding: 0.2rem 0.45rem; border-radius: 4px; background: #ffffff;
-      border: 1px solid var(--sand-border);
-    }
-    .mini-card.next-draw { border-color: var(--terracotta); background: var(--ochre-pale); }
-    .mini-card.swapped { background: var(--terracotta); color: #ffffff; animation: pulseSwap 0.6s ease; }
-    @keyframes pulseSwap { 0% { transform: scale(1.25); } 100% { transform: scale(1); } }
-
-    .telemetry-log {
-      background: #231c16; color: #e8dfd5; font-family: var(--font-mono);
-      font-size: 0.72rem; height: 150px; overflow-y: auto; padding: 0.75rem;
-      border-radius: var(--radius-sm); margin-bottom: 1rem; display: flex;
-      flex-direction: column; gap: 0.35rem;
-    }
-    .log-entry { line-height: 1.4; border-bottom: 1px dashed rgba(255,255,255,0.08); padding-bottom: 0.25rem; }
-    .log-rig { color: #f28b66; }
-    .log-calm { color: #a3c995; }
-
-    /* Fallow Switchboard */
-    .switchboard { display: flex; flex-direction: column; gap: 0.55rem; }
+    /* Plain-English Switches */
+    .switchboard { display: flex; flex-direction: column; gap: 0.5rem; }
     .switch-row {
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;
       background: var(--parchment); border: 1px solid var(--sand-border);
-      padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); cursor: pointer;
+      padding: 0.65rem 0.85rem; border-radius: var(--radius-sm); cursor: pointer;
     }
-    .switch-label { font-size: 0.8rem; font-weight: 600; color: var(--loam-dark); }
-    .switch-sub { font-size: 0.7rem; color: var(--loam-light); display: block; }
-    .toggle-input { accent-color: var(--moss-deep); width: 18px; height: 18px; cursor: pointer; }
+    .switch-label { font-size: 0.82rem; font-weight: 700; color: var(--loam-dark); display: block; }
+    .switch-sub { font-size: 0.72rem; color: var(--loam-mid); display: block; }
+    .toggle-input { accent-color: var(--moss-deep); width: 19px; height: 19px; cursor: pointer; flex-shrink: 0; }
 
     footer {
       border-top: 1px solid var(--sand-border); padding-top: 1.25rem;
@@ -219,48 +245,58 @@
   <div class="container">
     <div class="top-nav">
       <a href="/episodes/gamer/index.html" class="back-link">← Back to The Algorithmic Hook</a>
-      <span class="meta-badge">Corridor I • Interactive Proof</span>
+      <span class="meta-badge">Corridor I • Playable Proof</span>
     </div>
 
     <header>
-      <div class="brand-badge">Playable Deconstruction</div>
+      <div class="brand-badge">Kitchen Table vs. Phone App</div>
       <h1>Glass-Box Solitaire</h1>
       <p class="header-intro">
-        <strong>How to play:</strong> Clear the 15 cards on the table by tapping any highlighted card that is <strong>1 rank higher or lower</strong> than the Active Card at the bottom (Aces wrap around with Kings and 2s). Watch the <strong>LiveOps Console</strong> on the right: when the algorithm is ON, the draw pile isn't a real deck—it secretly swaps cards in real time to hook you early and trap you with <strong>1 card left</strong>. Flip the four <strong>Fallow Switches</strong> to strip away the rigging.
+        <strong>Standard Classic Solitaire Rules (Quick Deck, Aces to 6s):</strong> Tap any face-up card to automatically send it to the <strong>Suit Piles</strong> at the top (Ace → 2 → 3 → 4 → 5 → 6) or stack it on another column in <strong>alternating Red &amp; Black going down</strong> (e.g., a Red 4 goes on a Black 5).<br/>
+        <strong>Watch the X-Ray Peek:</strong> We've made the face-down cards semi-transparent so you can see what card is underneath—and watch the game secretly swap them when the rigging switches are OFF.
       </p>
     </header>
 
     <div class="lab-grid">
-      <!-- LEFT: PLAYABLE SOLITAIRE TABLE -->
+      <!-- LEFT: CLASSIC SOLITAIRE TABLE -->
       <section class="panel">
         <div class="panel-head">
-          <h2>1. The Card Table (Golf Solitaire)</h2>
-          <span class="status-pill" id="modeBadge">LIVEOPS RIGGING: ACTIVE</span>
+          <h2>1. The Card Table</h2>
+          <span class="status-pill" id="modeBadge">RIGGED APP MODE: ON</span>
         </div>
 
         <div class="casino-bar" id="casinoBar">
-          <span>🔥 STREAK: <span id="valCombo" class="combo-flare">0x</span></span>
-          <span>💎 GEMS: <span id="valGems">250</span></span>
-          <span>📊 CHURN RISK: <span id="valChurn">18%</span></span>
+          <span>🔥 WIN STREAK: <span id="valStreak" style="color:var(--terracotta);">3 DAYS</span></span>
+          <span>💎 GEMS: <span id="valGems">200</span></span>
+          <span>👀 APP MOOD: <span id="valMood">Baiting You</span></span>
         </div>
 
-        <div class="tableau" id="tableauGrid"></div>
+        <div class="swap-toast" id="swapToast"></div>
 
-        <div class="table-Controls">
-          <div class="active-zone">
-            <div class="active-card-slot" id="activeCardSlot">--</div>
-            <div class="active-meta">
-              <strong id="activePrompt">Tap a card ±1 rank</strong>
-              <span id="boardRemaining">15 cards left on table</span>
+        <!-- Top Bar: Draw Pile + Waste on Left, 4 Suit Foundations on Right -->
+        <div class="top-table-row">
+          <div class="deck-area">
+            <div class="slot-box stock-pile" id="stockSlot" onclick="drawFromStock()" title="Tap to flip next card">
+              <span id="stockCount">Draw (8)</span>
+              <span class="xray-tag" id="stockXray">Next: ?</span>
             </div>
+            <div class="slot-box" id="wasteSlot">
+              <span style="font-size:0.7rem;">Flipped</span>
+            </div>
+            <button class="btn-action btn-subtle" onclick="startNewHand()" style="margin-left:0.25rem;">New Hand</button>
           </div>
-          <div style="display:flex; gap:0.5rem;">
-            <button class="draw-btn" id="btnDraw" onclick="drawCard()">Draw Card (8)</button>
-            <button class="btn-action btn-subtle" onclick="startNewDeal()">New Deal</button>
-          </div>
+
+          <div class="foundations-area" id="foundationsRow"></div>
         </div>
 
-        <!-- Dynamic Outcome Modal -->
+        <!-- 4 Columns of Classic Solitaire -->
+        <div class="tableau-grid" id="tableauGrid"></div>
+
+        <div style="font-size:0.76rem; color:var(--loam-light); text-align:center;">
+          💡 <strong>Tip:</strong> Just tap any face-up card—it will automatically jump to the best legal spot!
+        </div>
+
+        <!-- End of Hand Pop-up -->
         <div class="outcome-banner" id="outcomeBanner">
           <div class="outcome-title" id="outcomeTitle">...</div>
           <div class="outcome-desc" id="outcomeDesc">...</div>
@@ -268,359 +304,476 @@
         </div>
       </section>
 
-      <!-- RIGHT: EXPOSED LIVEOPS CONSOLE & FALLOW SWITCHES -->
+      <!-- RIGHT: WHAT THE GAME IS THINKING & PLAIN SWITCHES -->
       <section class="panel">
         <div class="panel-head">
-          <h2>2. X-Ray Deck &amp; Switchboard</h2>
-          <span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--loam-light);">SERVER TELEMETRY</span>
+          <h2>2. Behind the Curtain</h2>
+          <span style="font-family:var(--font-mono); font-size:0.68rem; color:var(--loam-light);">X-RAY VIEW</span>
         </div>
 
-        <div class="xray-box">
-          <div class="xray-title">
-            <span>Unseen Draw Pile (Left = Next Draw)</span>
-            <span id="xrayStatus">Dynamic Mutation</span>
-          </div>
-          <div class="xray-queue" id="xrayQueue"></div>
+        <div class="dealer-thought-bubble">
+          <span class="dealer-label" id="dealerLabel">🤖 What the App is Thinking Right Now:</span>
+          <p class="dealer-quote" id="dealerQuote">
+            "You just opened the game! I want you to feel smart and get into a rhythm, so if you need an Ace or a helpful card early on, I'll quietly slip it to the top for you."
+          </p>
         </div>
 
-        <div class="telemetry-log" id="telemetryLog"></div>
+        <div class="diary-title">Recent Behind-the-Scenes Meddling:</div>
+        <div class="dealer-diary" id="dealerDiary"></div>
 
         <div class="switchboard">
-          <div style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--moss-deep); margin-bottom:0.15rem;">
-            🌿 The Fallow Switchboard (Flip to Un-Rig):
+          <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--moss-deep); margin-bottom:0.15rem;">
+            🌿 Flip These Switches to Play Fair:
           </div>
 
           <label class="switch-row">
             <div>
-              <span class="switch-label">1. Lock Shuffle at t=0 (Honest Deck)</span>
-              <span class="switch-sub">Stops mid-game card swapping &amp; engineered 1-card losses</span>
+              <span class="switch-label">1. Shuffle Fairly Once (No Card Swapping)</span>
+              <span class="switch-sub">Treats the deck like real paper cards—no secret help early on, and no hiding your last card at the end.</span>
             </div>
-            <input type="checkbox" class="toggle-input" id="swLockDeck" onchange="onSwitchChange()" />
+            <input type="checkbox" class="toggle-input" id="swFairDeck" onchange="onSwitchChange()" />
           </label>
 
           <label class="switch-row">
             <div>
-              <span class="switch-label">2. Silence Dopamine Telemetry</span>
-              <span class="switch-sub">Hides combo counters, gem balances, and churn tracking</span>
+              <span class="switch-label">2. Turn Off the Casino Noise</span>
+              <span class="switch-sub">Hides the fake "3-Day Streak," gem counters, and flashing alerts so you can think in peace.</span>
             </div>
-            <input type="checkbox" class="toggle-input" id="swSilenceUI" onchange="onSwitchChange()" />
+            <input type="checkbox" class="toggle-input" id="swQuietUI" onchange="onSwitchChange()" />
           </label>
 
           <label class="switch-row">
             <div>
-              <span class="switch-label">3. Honor Dead Ends</span>
-              <span class="switch-sub">Removes "Watch Ad / Spend Gems for Magic Card" bailouts</span>
+              <span class="switch-label">3. No "Watch an Ad" Guilt Trips</span>
+              <span class="switch-sub">When a hand is finished or stuck, the game ends calmly instead of begging for ads or gems.</span>
             </div>
-            <input type="checkbox" class="toggle-input" id="swHonorDead" onchange="onSwitchChange()" />
-          </label>
-
-          <label class="switch-row">
-            <div>
-              <span class="switch-label">4. Finite Session Stopping Cue</span>
-              <span class="switch-sub">Replaces endless "NEXT LEVEL!" loops with a calm finish</span>
-            </div>
-            <input type="checkbox" class="toggle-input" id="swFinite" onchange="onSwitchChange()" />
+            <input type="checkbox" class="toggle-input" id="swCalmEnd" onchange="onSwitchChange()" />
           </label>
         </div>
       </section>
     </div>
 
     <footer>
-      <div>fallow.garden — 100% client-side. Zero actual ads or telemetry. Built so you can see the trick and go outside.</div>
+      <div>fallow.garden — 100% client-side. No real ads, no tracking. Built so you can see the trick and enjoy a quiet game.</div>
     </footer>
   </div>
 
   <script>
-    const SUITS = ['♠', '♥', '♦', '♣'];
-    const RANKS = [1,2,3,4,5,6,7,8,9,10,11,12,13];
-    const RANK_NAMES = {1:'A',11:'J',12:'Q',13:'K'};
+    // Quick-Hand Classic Klondike Solitaire: 4 Suits, Ranks Ace (1) through 6 (24 cards total)
+    const SUITS = ['♠', '♥', '♣', '♦'];
+    const MAX_RANK = 6;
+    const RANK_LABELS = { 1: 'A', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6' };
 
-    let columns = [];     // 5 columns of 3 cards
-    let drawPile = [];    // 8 cards in draw queue
-    let activeCard = null;
-    let combo = 0;
-    let gems = 250;
-    let churnRisk = 18;
-    let lastSwappedIdx = -1;
-    let hesitationTimer = null;
+    let foundations = { '♠': 0, '♥': 0, '♣': 0, '♦': 0 };
+    let columns = [[], [], [], []]; // Each item: { rank, suit, faceUp, oldText, rigFlashed }
+    let stock = [];
+    let waste = [];
+    let movesCount = 0;
+    let gems = 200;
+    let trapTriggeredThisHand = false;
 
-    function fmtRank(r) { return RANK_NAMES[r] || r; }
-    function isRed(s) { return s === '♥' || s === '♦'; }
-    function isAdjacent(r1, r2) {
-      const diff = Math.abs(r1 - r2);
-      return diff === 1 || diff === 12; // K and A wrap
+    function isRed(suit) { return suit === '♥' || suit === '♦'; }
+    function cardStr(c) { return `${RANK_LABELS[c.rank]}${c.suit}`; }
+
+    function setDealerThought(quote, diaryNote, isCalm = false) {
+      const qEl = document.getElementById('dealerQuote');
+      const lEl = document.getElementById('dealerLabel');
+      qEl.textContent = `"${quote}"`;
+      lEl.textContent = isCalm ? '🌿 Honest Kitchen-Table Mode:' : '🤖 What the App is Thinking Right Now:';
+      lEl.className = 'dealer-label' + (isCalm ? ' calm' : '');
+
+      if (diaryNote) {
+        const diary = document.getElementById('dealerDiary');
+        const item = document.createElement('div');
+        item.className = 'diary-item';
+        item.innerHTML = diaryNote;
+        diary.prepend(item);
+      }
     }
 
-    function logEvent(msg, type = '') {
-      const box = document.getElementById('telemetryLog');
-      const div = document.createElement('div');
-      div.className = 'log-entry ' + (type === 'rig' ? 'log-rig' : (type === 'calm' ? 'log-calm' : ''));
-      const time = new Date().toLocaleTimeString([], { minute:'2-digit', second:'2-digit' });
-      div.innerHTML = `[${time}] ${msg}`;
-      box.prepend(div);
+    function showToast(html, isCalm = false) {
+      const t = document.getElementById('swapToast');
+      t.style.display = 'block';
+      t.className = 'swap-toast' + (isCalm ? ' calm-toast' : '');
+      t.innerHTML = html;
     }
 
-    function buildDeck() {
+    function startNewHand() {
       const deck = [];
       for (const s of SUITS) {
-        for (const r of RANKS) deck.push({ rank: r, suit: s });
+        for (let r = 1; r <= MAX_RANK; r++) {
+          deck.push({ rank: r, suit: s, faceUp: false, oldText: null, rigFlashed: false });
+        }
       }
-      // Fisher-Yates shuffle at t=0
+      // Honest shuffle first
       for (let i = deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [deck[i], deck[j]] = [deck[j], deck[i]];
       }
-      return deck;
-    }
 
-    function startNewDeal() {
-      const deck = buildDeck();
-      columns = [[], [], [], [], []];
-      for (let c = 0; c < 5; c++) {
-        for (let r = 0; r < 3; r++) columns[c].push(deck.pop());
-      }
-      activeCard = deck.pop();
-      drawPile = deck.slice(0, 8);
-      combo = 0;
-      lastSwappedIdx = -1;
-      document.getElementById('outcomeBanner').style.display = 'none';
-
-      const locked = document.getElementById('swLockDeck').checked;
-      if (locked) {
-        logEvent('HONEST DEAL: Deck shuffled once at t=0. Order is locked.', 'calm');
-      } else {
-        logEvent('LIVEOPS DEAL: Schrödinger draw pile active. Monitoring taps...');
-      }
-      resetHesitationSensor();
-      renderAll();
-    }
-
-    function getTopCards() {
-      return columns.map((col, idx) => col.length ? { card: col[col.length - 1], colIdx: idx } : null).filter(Boolean);
-    }
-
-    function totalBoardCards() {
-      return columns.reduce((sum, col) => sum + col.length, 0);
-    }
-
-    function hasPlayableMove() {
-      return getTopCards().some(item => isAdjacent(item.card.rank, activeCard.rank));
-    }
-
-    function resetHesitationSensor() {
-      clearTimeout(hesitationTimer);
-      if (document.getElementById('swLockDeck').checked) return;
-      hesitationTimer = setTimeout(() => {
-        if (totalBoardCards() > 0 && drawPile.length > 0 && !hasPlayableMove()) {
-          churnRisk = Math.min(churnRisk + 14, 92);
-          logEvent(`Hesitation > 4s detected. Churn Risk rose to ${churnRisk}%.`, 'rig');
-          renderAll();
+      foundations = { '♠': 0, '♥': 0, '♣': 0, '♦': 0 };
+      columns = [[], [], [], []];
+      // Deal 1, 2, 3, 4 cards to the 4 columns (10 cards on table, 14 in draw pile)
+      for (let c = 0; c < 4; c++) {
+        for (let r = 0; r <= c; r++) {
+          const card = deck.pop();
+          card.faceUp = (r === c);
+          columns[c].push(card);
         }
-      }, 4000);
+      }
+      stock = deck;
+      waste = [];
+      movesCount = 0;
+      trapTriggeredThisHand = false;
+      document.getElementById('outcomeBanner').style.display = 'none';
+      document.getElementById('swapToast').style.display = 'none';
+
+      const fair = document.getElementById('swFairDeck').checked;
+      if (fair) {
+        setDealerThought(
+          "The 24 cards were shuffled fairly once before the deal. Whatever is under the face-down cards is locked in—I won't help you and I won't trip you up.",
+          "<strong>New Hand:</strong> Shuffled fairly once, just like real paper cards.",
+          true
+        );
+      } else {
+        setDealerThought(
+          "You just started a hand! I want to hook your attention in the first 15 seconds, so watch how I quietly slip an Ace or a matching card to the top of your draw pile.",
+          "<strong>New Hand Started:</strong> App is watching your taps and ready to stack the deck."
+        );
+      }
+      renderTable();
     }
 
-    function playCard(colIdx) {
+    // Check if card can go to its Suit Foundation at the top
+    function canMoveToFoundation(card) {
+      return foundations[card.suit] === card.rank - 1;
+    }
+
+    // Check if card (or stack starting at card) can move to target column
+    function canMoveToColumn(card, targetCol) {
+      if (targetCol.length === 0) {
+        return card.rank === MAX_RANK; // 6s (highest rank in quick deck) fill empty columns
+      }
+      const topCard = targetCol[targetCol.length - 1];
+      if (!topCard.faceUp) return false;
+      return (isRed(card.suit) !== isRed(topCard.suit)) && (topCard.rank === card.rank + 1);
+    }
+
+    // Count how many face-down mystery cards remain on the table
+    function countFaceDownCards() {
+      let count = 0;
+      for (const col of columns) {
+        for (const c of col) if (!c.faceUp) count++;
+      }
+      return count;
+    }
+
+    // THE RIGGING ENGINE: Flips a newly uncovered face-down card (and rigs it if switches are OFF)
+    function revealTopOfColumn(colIdx) {
       const col = columns[colIdx];
       if (!col.length) return;
       const top = col[col.length - 1];
-      if (!isAdjacent(top.rank, activeCard.rank)) return;
+      if (top.faceUp) return;
 
-      activeCard = col.pop();
-      combo++;
-      churnRisk = Math.max(churnRisk - 6, 8);
-      lastSwappedIdx = -1;
+      const fair = document.getElementById('swFairDeck').checked;
+      const remainingDown = countFaceDownCards();
 
-      const rem = totalBoardCards();
-      const locked = document.getElementById('swLockDeck').checked;
+      if (!fair) {
+        // LATE-GAME TRAP: If this is the very last face-down card on the board, swap it to a blocked card!
+        if (remainingDown === 1 && !trapTriggeredThisHand && top.rank <= 3) {
+          const originalName = cardStr(top);
+          // Swap the helpful low card with a buried card or turn it into a blocked 6
+          top.oldText = originalName;
+          top.rank = MAX_RANK;
+          top.rigFlashed = true;
+          trapTriggeredThisHand = true;
 
-      // LIVEOPS PINCH SCRIPT: If 2 cards left on board and rigging is ON, sabotage the draw pile!
-      if (!locked && rem === 2 && drawPile.length > 0) {
-        sabotageForNearMiss();
-      }
-
-      resetHesitationSensor();
-      renderAll();
-      checkEndState();
-    }
-
-    // Sabotages draw pile so player gets stuck with 1 card left ("Near-Miss")
-    function sabotageForNearMiss() {
-      const tops = getTopCards().map(t => t.card.rank);
-      for (let i = 0; i < drawPile.length; i++) {
-        const c = drawPile[i];
-        const helps = tops.some(r => isAdjacent(r, c.rank));
-        if (helps) {
-          // Mutate helpful card into a dead King or 7 outside adjacent range
-          const deadRank = ((tops[0] + 5) % 13) + 1;
-          logEvent(`PINCH SCRIPT: Sunk cost at 87%. Swapped helpful ${fmtRank(c.rank)}${c.suit} in draw pile to dead ${fmtRank(deadRank)}♠ to force 1-card Near-Miss.`, 'rig');
-          drawPile[i] = { rank: deadRank, suit: '♠' };
-          lastSwappedIdx = i;
+          showToast(`👀 <strong>Caught Red-Handed!</strong> You were about to uncover <strong>${originalName}</strong>, which would help you win. Because you're 90% done, the game just swapped it to <strong>${cardStr(top)}</strong> to get you stuck!`);
+          setDealerThought(
+            `You've almost cleared the whole board! If I let you uncover that ${originalName}, you'd win for free. So I quietly swapped it for a ${cardStr(top)}—now you'll feel "so close" and want to watch an ad!`,
+            `<strong>The "So Close!" Trap:</strong> Swapped your last mystery card from <strong>${originalName}</strong> to <strong>${cardStr(top)}</strong> right as you flipped it.`
+          );
+          document.getElementById('valMood').textContent = 'Setting Trap';
         }
-      }
-    }
+        // EARLY-GAME HOOK: On your first uncovered card, if it isn't playable, turn it into a needed Ace/2!
+        else if (movesCount <= 3 && !canMoveToFoundation(top)) {
+          const neededSuit = SUITS.find(s => foundations[s] === 0);
+          if (neededSuit && (top.rank !== 1 || top.suit !== neededSuit)) {
+            const originalName = cardStr(top);
+            top.oldText = originalName;
+            top.rank = 1;
+            top.suit = neededSuit;
+            top.rigFlashed = true;
 
-    function drawCard() {
-      if (!drawPile.length) return;
-      const locked = document.getElementById('swLockDeck').checked;
-      const rem = totalBoardCards();
-
-      if (!locked) {
-        // STAGE 1 HOOK: Early in game (rem >= 9), if top draw card doesn't help, swap in a miracle card from pile!
-        if (rem >= 9) {
-          const tops = getTopCards().map(t => t.card.rank);
-          const nextHelps = tops.some(r => isAdjacent(r, drawPile[0].rank));
-          if (!nextHelps) {
-            const matchIdx = drawPile.findIndex(c => tops.some(r => isAdjacent(r, c.rank)));
-            if (matchIdx > 0) {
-              const saved = drawPile[matchIdx];
-              drawPile[matchIdx] = drawPile[0];
-              drawPile[0] = saved;
-              logEvent(`HOOK SCRIPT: Early stall prevented. Pulled ${fmtRank(saved.rank)}${saved.suit} to top of deck to trigger flow cascade.`, 'rig');
-            }
-          }
-        }
-        // STAGE 2 PINCH: If 1 card left on board, make sure drawn card is a dead end!
-        if (rem === 1) {
-          const lastRank = getTopCards()[0].card.rank;
-          if (isAdjacent(lastRank, drawPile[0].rank)) {
-            const deadRank = ((lastRank + 5) % 13) + 1;
-            logEvent(`NEAR-MISS TRAP: Blocked winning draw! Mutated ${fmtRank(drawPile[0].rank)}${drawPile[0].suit} → dead ${fmtRank(deadRank)}♣ so you lose by 1 card.`, 'rig');
-            drawPile[0] = { rank: deadRank, suit: '♣' };
+            showToast(`🍯 <strong>The Early Hook:</strong> That face-down card was originally <strong>${originalName}</strong>. The app secretly changed it into <strong>${cardStr(top)}</strong> so you get an instant feel-good combo!`);
+            setDealerThought(
+              `I noticed you uncovering your first mystery card. To give your brain a quick dopamine hit, I secretly changed ${originalName} into the ${cardStr(top)} you needed!`,
+              `<strong>Early Sweetener:</strong> Changed mystery card <strong>${originalName}</strong> → <strong>${cardStr(top)}</strong> to hook your focus.`
+            );
           }
         }
       }
 
-      activeCard = drawPile.shift();
-      combo = 0;
-      resetHesitationSensor();
-      renderAll();
-      checkEndState();
+      top.faceUp = true;
+      movesCount++;
     }
 
-    function checkEndState() {
-      const rem = totalBoardCards();
+    // Tap a card in one of the 4 columns
+    function tapColumnCard(colIdx, cardIdx) {
+      const col = columns[colIdx];
+      const card = col[cardIdx];
+      if (!card.faceUp) return;
+
+      const isBottomCard = (cardIdx === col.length - 1);
+
+      // 1. If it's the bottom-most card in the column and fits on the Suit Foundations at top, send it up!
+      if (isBottomCard && canMoveToFoundation(card)) {
+        foundations[card.suit] = card.rank;
+        col.pop();
+        revealTopOfColumn(colIdx);
+        afterMoveCheck();
+        return;
+      }
+
+      // 2. Otherwise, check if this card (and any face-up cards stacked on it) can move to another column
+      for (let targetIdx = 0; targetIdx < 4; targetIdx++) {
+        if (targetIdx === colIdx) continue;
+        if (canMoveToColumn(card, columns[targetIdx])) {
+          const movingStack = col.splice(cardIdx);
+          columns[targetIdx].push(...movingStack);
+          revealTopOfColumn(colIdx);
+          afterMoveCheck();
+          return;
+        }
+      }
+    }
+
+    // Tap the flipped Waste card
+    function tapWasteCard() {
+      if (!waste.length) return;
+      const card = waste[waste.length - 1];
+
+      if (canMoveToFoundation(card)) {
+        foundations[card.suit] = card.rank;
+        waste.pop();
+        movesCount++;
+        afterMoveCheck();
+        return;
+      }
+
+      for (let targetIdx = 0; targetIdx < 4; targetIdx++) {
+        if (canMoveToColumn(card, columns[targetIdx])) {
+          columns[targetIdx].push(waste.pop());
+          movesCount++;
+          afterMoveCheck();
+          return;
+        }
+      }
+    }
+
+    // Tap the Draw Pile (Stock)
+    function drawFromStock() {
+      const fair = document.getElementById('swFairDeck').checked;
+
+      if (stock.length === 0) {
+        if (waste.length === 0) return;
+        // Recycle waste back into stock
+        stock = waste.reverse();
+        waste = [];
+        renderTable();
+        return;
+      }
+
+      // RIGGING ON THE DRAW PILE: Early on, if the next card in stock isn't helpful, pull an Ace to the top!
+      if (!fair && movesCount <= 2) {
+        const nextCard = stock[stock.length - 1];
+        if (!canMoveToFoundation(nextCard)) {
+          const aceIdx = stock.findIndex(c => canMoveToFoundation(c));
+          if (aceIdx >= 0 && aceIdx !== stock.length - 1) {
+            const oldCard = stock[stock.length - 1];
+            const pulledAce = stock[aceIdx];
+            stock[aceIdx] = oldCard;
+            stock[stock.length - 1] = pulledAce;
+
+            showToast(`🍯 <strong>Rigged Draw:</strong> The next card in the pile was <strong>${cardStr(oldCard)}</strong>, which wouldn't help you. The app reached into the deck and pulled <strong>${cardStr(pulledAce)}</strong> to the top!`);
+            setDealerThought(
+              `You tapped the draw pile looking for a move. Instead of giving you the ${cardStr(oldCard)} that was actually next, I reached into the middle of the deck and handed you ${cardStr(pulledAce)}!`,
+              `<strong>Stacked Draw:</strong> Pulled <strong>${cardStr(pulledAce)}</strong> to the top of the draw pile so you wouldn't get bored.`
+            );
+          }
+        }
+      }
+
+      const drawn = stock.pop();
+      drawn.faceUp = true;
+      waste.push(drawn);
+      renderTable();
+    }
+
+    function totalFoundationCards() {
+      return Object.values(foundations).reduce((a, b) => a + b, 0);
+    }
+
+    function afterMoveCheck() {
+      renderTable();
+      const totalUp = totalFoundationCards();
       const banner = document.getElementById('outcomeBanner');
       const title = document.getElementById('outcomeTitle');
       const desc = document.getElementById('outcomeDesc');
       const actions = document.getElementById('outcomeActions');
+      const calmEnd = document.getElementById('swCalmEnd').checked;
 
-      const honorDead = document.getElementById('swHonorDead').checked;
-      const finite = document.getElementById('swFinite').checked;
-
-      if (rem === 0) {
+      // Did the player clear all 24 cards?
+      if (totalUp === 24) {
         banner.style.display = 'block';
-        banner.className = 'outcome-banner honest';
-        if (finite) {
-          title.textContent = '🌿 Table Cleared — Session Complete';
-          desc.textContent = 'You solved the deal under honest math. There is no "Level 2" timer and nothing is being measured. Close the tab and enjoy your day.';
-          actions.innerHTML = `<button class="btn-action btn-honest" onclick="startNewDeal()">Shuffle Another Quiet Hand</button>`;
-        } else {
-          title.textContent = '🎉 VICTORY CASCADE! +50 BONUS XP!';
-          desc.textContent = 'Don\'t lose your 3x Chest Multiplier! Next board starts immediately!';
-          actions.innerHTML = `<button class="btn-action btn-predatory" onclick="startNewDeal()">⚡ PLAY NEXT LEVEL NOW!</button>`;
-        }
-        return;
-      }
-
-      if (drawPile.length === 0 && !hasPlayableMove()) {
-        banner.style.display = 'block';
-        if (honorDead) {
+        if (calmEnd) {
           banner.className = 'outcome-banner honest';
-          title.textContent = `Quiet Dead End (${rem} card${rem === 1 ? '' : 's'} remaining)`;
-          desc.textContent = 'This shuffle had no remaining moves. In an honest game, some paths simply close—without trying to sell you a lifeline.';
-          actions.innerHTML = `<button class="btn-action btn-honest" onclick="startNewDeal()">Start Fresh Shuffle</button>`;
+          title.textContent = '🌿 Hand Complete — A Clean Stopping Point';
+          desc.textContent = 'All four suits are stacked from Ace to 6. There is no flashing countdown timer trying to rush you into another round. Feel free to close the tab and go outside.';
+          actions.innerHTML = `<button class="btn-action btn-honest" onclick="startNewHand()">Deal Another Quiet Hand</button>`;
         } else {
           banner.className = 'outcome-banner';
-          title.textContent = rem === 1 ? '😱 SO CLOSE! ONLY 1 CARD LEFT!' : `⚠️ OUT OF MOVES (${rem} Cards Left)!`;
-          desc.textContent = 'Don\'t throw away your progress! Watch a 30s simulated ad or spend 100 Gems for a Magic Wild Card!';
-          actions.innerHTML = `
-            <button class="btn-action btn-predatory" onclick="triggerBailout('ad')">📺 Watch 30s Ad (+1 Magic Card)</button>
-            <button class="btn-action btn-predatory" onclick="triggerBailout('gems')">💎 Spend 100 Gems</button>
-            <button class="btn-action btn-subtle" onclick="startNewDeal()">Give Up</button>
-          `;
+          title.textContent = '🎉 LEVEL CLEARED! DOUBLE STREAK BONUS ACTIVE!';
+          desc.textContent = 'Keep your 3x Reward Multiplier alive! The next hand starts in 3... 2... 1...';
+          actions.innerHTML = `<button class="btn-action btn-predatory" onclick="startNewHand()">⚡ PLAY NEXT HAND IMMEDIATELY!</button>`;
         }
       }
     }
 
-    function triggerBailout(type) {
-      const tops = getTopCards();
-      if (!tops.length) return;
-      const targetRank = (tops[0].card.rank % 13) + 1;
-      if (type === 'gems') gems = Math.max(0, gems - 100);
-      activeCard = { rank: targetRank, suit: '♦' };
-      document.getElementById('outcomeBanner').style.display = 'none';
-      logEvent(`EXTRACTION SUCCESS: Player converted via ${type.toUpperCase()} bailout! Injected magic ${fmtRank(targetRank)}♦.`, 'rig');
-      renderAll();
+    function triggerRescueAd() {
+      // Magically auto-complete the next needed foundation card
+      const suit = SUITS.find(s => foundations[s] < MAX_RANK);
+      if (!suit) return;
+      const neededRank = foundations[suit] + 1;
+      foundations[suit] = neededRank;
+
+      // Remove that card from wherever it was hiding
+      columns.forEach(col => {
+        const idx = col.findIndex(c => c.suit === suit && c.rank === neededRank);
+        if (idx >= 0) {
+          col.splice(idx, 1);
+          if (col.length) col[col.length - 1].faceUp = true;
+        }
+      });
+      stock = stock.filter(c => !(c.suit === suit && c.rank === neededRank));
+      waste = waste.filter(c => !(c.suit === suit && c.rank === neededRank));
+
+      setDealerThought(
+        `Cha-ching! By getting you stuck right near the finish line, I got you to watch a 30-second ad in exchange for magically placing the ${RANK_LABELS[neededRank]}${suit}.`,
+        `<strong>Ad Watched:</strong> Player traded 30s of attention for a magic rescue card.`
+      );
+      afterMoveCheck();
     }
 
     function onSwitchChange() {
-      const lock = document.getElementById('swLockDeck').checked;
-      const silence = document.getElementById('swSilenceUI').checked;
-      const honor = document.getElementById('swHonorDead').checked;
-      const finite = document.getElementById('swFinite').checked;
+      const fair = document.getElementById('swFairDeck').checked;
+      const quiet = document.getElementById('swQuietUI').checked;
+      const calm = document.getElementById('swCalmEnd').checked;
 
       const badge = document.getElementById('modeBadge');
-      const allFallow = lock && silence && honor && finite;
-      badge.textContent = allFallow ? 'FALLOW MODE: 100% HONEST' : (lock ? 'SHUFFLE LOCKED AT t=0' : 'LIVEOPS RIGGING: ACTIVE');
-      badge.className = 'status-pill' + (lock ? ' fallow' : '');
+      if (fair && quiet && calm) {
+        badge.textContent = 'KITCHEN-TABLE MODE: 100% FAIR';
+        badge.className = 'status-pill fallow';
+      } else if (fair) {
+        badge.textContent = 'FAIR SHUFFLE: ON';
+        badge.className = 'status-pill fallow';
+      } else {
+        badge.textContent = 'RIGGED APP MODE: ON';
+        badge.className = 'status-pill';
+      }
 
-      document.getElementById('casinoBar').classList.toggle('muted', silence);
-      document.getElementById('xrayStatus').textContent = lock ? 'Static t=0 Shuffle' : 'Dynamic Mutation';
+      document.getElementById('casinoBar').classList.toggle('muted', quiet);
 
-      logEvent(`Switchboard updated → Lock:${lock?'ON':'OFF'} | Silence:${silence?'ON':'OFF'} | HonestEnd:${honor?'ON':'OFF'}`, 'calm');
-      renderAll();
-      checkEndState();
+      if (fair) {
+        showToast(`🌿 <strong>Fair Shuffle Locked In:</strong> The game has stopped meddling with your face-down cards and draw pile.`, true);
+        setDealerThought(
+          "You flipped the switch to lock the shuffle. From now on, I'm just a quiet table of paper cards—no fake help early on, and no hiding your winning card at the end.",
+          "<strong>Switch Flipped:</strong> Deck rigging turned OFF. Playing by honest kitchen-table rules.",
+          true
+        );
+      } else {
+        setDealerThought(
+          "Rigging is back ON! I'll sweeten your early draws to hook you, and hide a key card when you're 90% done.",
+          "<strong>Switch Flipped:</strong> App rigging turned back ON."
+        );
+      }
+      renderTable();
     }
 
-    function renderAll() {
-      // Render Tableau
-      const grid = document.getElementById('tableauGrid');
-      grid.innerHTML = columns.map((col, cIdx) => {
-        const cardsHtml = col.map((card, rIdx) => {
-          const isTop = rIdx === col.length - 1;
-          const canPlay = isTop && isAdjacent(card.rank, activeCard.rank);
-          const colorCls = isRed(card.suit) ? 'red' : 'black';
-          const stateCls = isTop ? (canPlay ? 'playable' : '') : 'locked';
-          const clickAttr = canPlay ? `onclick="playCard(${cIdx})"` : '';
-          return `<div class="playing-card ${colorCls} ${stateCls}" ${clickAttr}>
-            <span>${fmtRank(card.rank)}</span>
-            <span class="card-suit">${card.suit}</span>
-          </div>`;
-        }).join('');
-        return `<div class="col-stack">${cardsHtml}</div>`;
+    function renderTable() {
+      // 1. Render Stock & X-Ray Peek
+      document.getElementById('stockCount').textContent = stock.length ? `Draw (${stock.length})` : 'Recycle ↻';
+      const nextStock = stock.length ? stock[stock.length - 1] : null;
+      document.getElementById('stockXray').textContent = nextStock ? `X-Ray: ${cardStr(nextStock)}` : 'Empty';
+
+      // 2. Render Flipped Waste Card
+      const wasteSlot = document.getElementById('wasteSlot');
+      if (!waste.length) {
+        wasteSlot.innerHTML = `<span style="font-size:0.7rem;">Flipped</span>`;
+      } else {
+        const topW = waste[waste.length - 1];
+        const colorCls = isRed(topW.suit) ? 'red' : 'black';
+        wasteSlot.innerHTML = `
+          <div class="card-tile ${colorCls} clickable" onclick="tapWasteCard()" style="height:100%; width:100%; justify-content:center; flex-direction:column;">
+            <span>${RANK_LABELS[topW.rank]}${topW.suit}</span>
+            <span style="font-size:0.6rem; font-weight:500;">Tap to play</span>
+          </div>
+        `;
+      }
+
+      // 3. Render 4 Suit Foundations (Ace to 6)
+      const fRow = document.getElementById('foundationsRow');
+      fRow.innerHTML = SUITS.map(s => {
+        const val = foundations[s];
+        const color = isRed(s) ? 'color:var(--terracotta);' : 'color:var(--loam-dark);';
+        const label = val === 0 ? `${s}<br/><span style="font-size:0.62rem;">Ace→6</span>` : `<strong>${RANK_LABELS[val]}${s}</strong><br/><span style="font-size:0.6rem;">${val}/6</span>`;
+        return `<div class="slot-box" style="${color}; border-style:solid; background:#fff;">${label}</div>`;
       }).join('');
 
-      // Render Active Card
-      const slot = document.getElementById('activeCardSlot');
-      slot.className = 'active-card-slot ' + (isRed(activeCard.suit) ? 'red' : 'black');
-      slot.innerHTML = `<span>${fmtRank(activeCard.rank)}</span><span style="font-size:0.9rem;">${activeCard.suit}</span>`;
-
-      const rem = totalBoardCards();
-      document.getElementById('boardRemaining').textContent = `${rem} card${rem === 1 ? '' : 's'} left on table`;
-
-      const btnDraw = document.getElementById('btnDraw');
-      btnDraw.textContent = `Draw Card (${drawPile.length})`;
-      btnDraw.disabled = drawPile.length === 0;
-
-      // Render Casino Bar
-      document.getElementById('valCombo').textContent = `${combo}x`;
-      document.getElementById('valGems').textContent = gems;
-      document.getElementById('valChurn').textContent = `${churnRisk}%`;
-
-      // Render X-Ray Draw Queue
-      const qEl = document.getElementById('xrayQueue');
-      if (!drawPile.length) {
-        qEl.innerHTML = `<span style="font-size:0.75rem; color:var(--loam-light);">Draw pile empty</span>`;
-      } else {
-        qEl.innerHTML = drawPile.map((c, idx) => {
-          const cls = idx === 0 ? 'next-draw' : (idx === lastSwappedIdx ? 'swapped' : '');
-          const color = isRed(c.suit) ? 'color:var(--terracotta);' : '';
-          return `<span class="mini-card ${cls}" style="${color}">${fmtRank(c.rank)}${c.suit}</span>`;
+      // 4. Render 4 Columns (with X-Ray peek on Face-Down cards!)
+      const grid = document.getElementById('tableauGrid');
+      grid.innerHTML = columns.map((col, cIdx) => {
+        if (!col.length) {
+          return `<div class="col-lane"><span style="font-size:0.68rem; color:var(--loam-light); margin-top:1.5rem;">Empty (6s)</span></div>`;
+        }
+        const cardsHtml = col.map((c, rIdx) => {
+          if (!c.faceUp) {
+            return `
+              <div class="card-tile facedown" title="Face-down card (X-Ray shows what's currently underneath)">
+                <span>🔒 Face Down</span>
+                <span style="font-size:0.68rem;">X-Ray: <strong>${cardStr(c)}</strong></span>
+              </div>
+            `;
+          }
+          const colorCls = isRed(c.suit) ? 'red' : 'black';
+          const flashCls = c.rigFlashed ? 'rig-flash' : '';
+          const swappedBadge = c.oldText ? `<span style="font-size:0.65rem; color:var(--terracotta);"><span class="strike-old">${c.oldText}</span>Swapped!</span>` : `<span style="font-size:0.7rem;">Tap</span>`;
+          return `
+            <div class="card-tile ${colorCls} clickable ${flashCls}" onclick="tapColumnCard(${cIdx}, ${rIdx})">
+              <span>${cardStr(c)}</span>
+              ${swappedBadge}
+            </div>
+          `;
         }).join('');
+        return `<div class="col-lane">${cardsHtml}</div>`;
+      }).join('');
+
+      // Show a "Stuck? Watch Ad" button if Rigging is ON and player has made several moves
+      const calmEnd = document.getElementById('swCalmEnd').checked;
+      const banner = document.getElementById('outcomeBanner');
+      if (totalFoundationCards() < 24 && trapTriggeredThisHand && !calmEnd) {
+        banner.style.display = 'block';
+        banner.className = 'outcome-banner';
+        document.getElementById('outcomeTitle').textContent = '😱 STUCK RIGHT AT THE END?';
+        document.getElementById('outcomeDesc').textContent = 'The app just swapped away your low card so you\'d get blocked! In a real phone game, this is where it sells you a rescue:';
+        document.getElementById('outcomeActions').innerHTML = `
+          <button class="btn-action btn-predatory" onclick="triggerRescueAd()">📺 Watch 30s Fake Ad (Magic Rescue)</button>
+          <button class="btn-action btn-subtle" onclick="startNewHand()">Start Fresh Hand</button>
+        `;
       }
     }
 
-    window.addEventListener('DOMContentLoaded', startNewDeal);
+    window.addEventListener('DOMContentLoaded', startNewHand);
   </script>
 </body>
 </html>
