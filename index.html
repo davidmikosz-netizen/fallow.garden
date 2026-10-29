@@ -362,7 +362,7 @@
       color: var(--terracotta);
     }
 
-    /* About & Support Section */
+    /* About & Support Sections */
     .about-card {
       background: var(--parchment-card);
       border: 1px solid var(--sand-border);
@@ -418,18 +418,21 @@
       font-family: var(--font-sans);
       font-size: 0.85rem;
       font-weight: 600;
-      transition: transform 0.15s ease, opacity 0.15s ease;
+      transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
       border: 1px solid transparent;
     }
 
     .support-btn:hover {
-      opacity: 0.92;
       transform: translateY(-1px);
     }
 
     .btn-bmac {
       background: #ffdd00;
       color: #000000;
+    }
+    
+    .btn-bmac:hover {
+      opacity: 0.92;
     }
 
     .btn-email {
@@ -440,6 +443,18 @@
 
     .btn-email:hover {
       background: var(--sand-border);
+    }
+    
+    .btn-bookshop {
+      background: var(--terracotta-pale);
+      color: var(--terracotta);
+      border-color: var(--terracotta-pale);
+      justify-content: flex-start;
+    }
+
+    .btn-bookshop:hover {
+      background: var(--terracotta);
+      color: #ffffff;
     }
 
     /* Footer */
@@ -466,6 +481,9 @@
       }
       .support-grid {
         grid-template-columns: 1fr;
+      }
+      .btn-bookshop {
+        justify-content: center;
       }
     }
   </style>
@@ -978,6 +996,29 @@
 
       </div>
     </div>
+
+    <!-- Library & Reading List Section (NEW) -->
+    <section class="about-card" style="margin-bottom: 0;">
+      <div class="about-head">
+        <h2><span>📚</span> The Fallow Library</h2>
+      </div>
+      
+      <div class="about-content">
+        <p>
+          The tools and resources on <strong>fallow.garden</strong> are heavily influenced by a specific lineage of ecology, cognitive science, and pragmatist philosophy. If you'd like to explore the source material that shaped these apps—from gut biomes to attention mechanics—you can visit our curated reading room.
+        </p>
+        <p>
+          We've partnered with <strong>Bookshop.org</strong>, an online platform dedicated to financially supporting local, independent bookstores. Browsing these lists is a great way to dive deeper into these topics while actively keeping community bookshops alive.
+        </p>
+      </div>
+
+      <div class="support-grid">
+        <a href="https://bookshop.org/shop/fallowgarden" target="_blank" rel="noopener noreferrer" class="support-btn btn-bookshop">
+          <span>📖</span>
+          <span>Browse the Reading Lists ↗</span>
+        </a>
+      </div>
+    </section>
 
     <!-- About & Support Section -->
     <section class="about-card">
