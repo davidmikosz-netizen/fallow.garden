@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fallow.garden — Restorative Micro-Utilities</title>
+  <title>fallow.garden — Quiet, Client-Side Web Tools</title>
   <link rel="canonical" href="https://fallow.garden/" />
   <script data-goatcounter="https://fallow.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
@@ -48,7 +48,7 @@
       --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -111,13 +111,17 @@
       line-height: 1.65;
     }
 
-    .tagline-list {
-      margin-top: 0.5rem;
-      padding-left: 1.25rem;
+    .character-notes {
+      margin-top: 0.9rem;
+      padding-left: 1.1rem;
       color: var(--loam-mid);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       max-width: 680px;
-      line-height: 1.65;
+      line-height: 1.6;
+    }
+
+    .character-notes li + li {
+      margin-top: 0.25rem;
     }
 
     .header-audio-callout {
@@ -194,6 +198,14 @@
       flex: 1;
       height: 1px;
       background: var(--sand-border);
+    }
+
+    .character-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.92rem;
+      color: var(--loam-mid);
+      margin-bottom: 0.3rem;
     }
 
     .section-subtitle {
@@ -430,7 +442,7 @@
       background: #ffdd00;
       color: #000000;
     }
-    
+
     .btn-bmac:hover {
       opacity: 0.92;
     }
@@ -444,7 +456,7 @@
     .btn-email:hover {
       background: var(--sand-border);
     }
-    
+
     .btn-bookshop {
       background: var(--terracotta-pale);
       color: var(--terracotta);
@@ -495,117 +507,35 @@
     <!-- Header -->
     <header>
       <div class="brand-badge">fallow.garden</div>
-      <h1>Quiet tools for rest and mindfulness</h1>
+      <h1>Small, quiet web tools that don't watch you back.</h1>
       <p class="tagline">
-       In today's algorithmic rat race and fast food culture, we need to give space for things to go more slowly and deliberately. Hence, this site. To lie fallow isn't to be lazy; it's how things recover and grow. Fallow.Garden is a set of quiet, zero-tracking web tools designed to help you:
+        Most software is built like a slot machine—designed to harvest your clicks, ping your nervous system, and sell your attention. This is the opposite: a small collection of single-purpose tools for resting your brain, tending your gut, stewarding native plants, and planning the next chapter without the noise. Everything runs locally in your browser. No accounts, no tracking, no streak guilt.
       </p>
-      <ul class="tagline-list">
-        <li>Design the next chapter of your life, see how your choices shape your remaining days, and keep an honest eye on your cognitive baseline</li>
-        <li>Give your brain a rest and restore your attention</li>
-        <li>Understand and care for your gut biome</li>
-        <li>Steward your own patch of land with native plants and explore the role landscape plays in well-being</li>
-        <li>Navigate practical apps on more worldly concerns</li>
+      <ul class="character-notes">
+        <li><strong>Chip</strong> brought a clipboard to optimize your rest schedule. <em>(We took his pen away.)</em></li>
+        <li><strong>Fern</strong> is mostly here for the dirt, the plants, and whatever grows when you stop meddling.</li>
+        <li><strong>Odo</strong> has been staring at a single blade of grass since Tuesday and says you're doing fine.</li>
       </ul>
 
       <div class="header-audio-callout">
-        🎙️ <strong>New Companion Audio Series:</strong> Some quick, curious audio stories about the wild, living world inside you. What happens when we stop treating our bodies like stubborn machines to fix, and start treating them like bustling internal gardens? <a href="https://youaremorethanyou.com" target="_blank" rel="noopener">Listen to <em>You Are More Than You</em> ↗</a>
+        🎙️ <strong>Companion Audio Series:</strong> Short, curious stories about the living world inside you—what happens when we stop treating bodies like stubborn machines to fix and start tending them like gardens. <a href="https://youaremorethanyou.com" target="_blank" rel="noopener">Listen to <em>You Are More Than You</em> ↗</a>
       </div>
     </header>
 
     <!-- Category Quick-Jump Bar -->
     <nav class="jump-nav" aria-label="Section shortcuts">
-      <a href="#section-1" class="jump-pill">I. Mortality &amp; Vitals</a>
-      <a href="#section-2" class="jump-pill">II. Mind &amp; Attention</a>
-      <a href="#section-3" class="jump-pill">III. Body &amp; Microbiome</a>
-      <a href="#section-4" class="jump-pill">IV. Living Ecology</a>
-      <a href="#section-5" class="jump-pill">V. Passages &amp; Play</a>
-      <a href="#section-6" class="jump-pill">VI. The Compost Pile</a>
+      <a href="#zone-1" class="jump-pill">I. The Fallow Mind</a>
+      <a href="#zone-2" class="jump-pill">II. Soil &amp; Gut</a>
+      <a href="#zone-3" class="jump-pill">III. The Long View &amp; The Horizon</a>
+      <a href="#zone-4" class="jump-pill">IV. The Compost Pile</a>
     </nav>
 
-    <!-- SECTION I: Mortality, Time & Verbal Vitals -->
-    <div id="section-1" class="section-block">
-      <div class="section-label">Section I: Mortality, Time &amp; Verbal Vitals</div>
-      <p class="section-subtitle">Tools for measuring the arc of time, the practical pivot to a post-career horizon, and the daily weather of cognition.</p>
-      
-      <div class="app-grid">
-        
-        <!-- Remaining Lifetime Calculator -->
-        <a href="/episodes/gardenoffinitedays/index.html" class="card highlight-terracotta">
-          <div class="card-top">
-            <div class="card-header">
-              <span class="card-type">Actuarial Mindfulness</span>
-              <div class="badge-group">
-                <span class="card-badge">Episode</span>
-              </div>
-            </div>
-            <h2 class="card-title">The Garden of Finite Days</h2>
-            <p class="card-desc">
-              Estimate your remaining lifespan. Uses current US data with input on your life choices to visualize your finite remaining springs, weekends, and high-vitality days.
-            </p>
-          </div>
-          <div class="card-meta">
-            <div class="card-pills">
-              <span class="pill-tag">Memento Mori</span>
-              <span class="pill-tag">SSA Cohorts</span>
-            </div>
-            <span class="card-link-text">Enter Garden &rarr;</span>
-          </div>
-        </a>
+    <!-- ZONE I: The Fallow Mind (Chip) -->
+    <div id="zone-1" class="section-block">
+      <div class="section-label">I. The Fallow Mind</div>
+      <p class="character-quote">"I have color-coded forty-seven ways to stop overthinking, and frankly, it's exhausting." — Chip</p>
+      <p class="section-subtitle">Tools for stepping out of the algorithmic feed, seeing how rigged games hook your brain, and giving your Default Mode Network room to wander.</p>
 
-        <!-- Word Recall & Verbal Vitals (NEW) -->
-        <a href="./episodes/verbal/index.html" class="card highlight-moss">
-          <div class="card-top">
-            <div class="card-header">
-              <span class="card-type moss">Linguistic Biomarkers</span>
-              <div class="badge-group">
-                <span class="card-badge badge-new">New Instrument</span>
-              </div>
-            </div>
-            <h2 class="card-title">Word Recall &amp; Verbal Vitals</h2>
-            <p class="card-desc">
-              A 3-minute tool to track speech fluency, word retrieval, and memory. An open-ended spoken baseline checkup to track your memory. Uses 100% client-side computational linguistics to measure vocabulary richness (MATTR), noun-to-pronoun specificity, idea density, and conversational loops—paired with a restorative check-in on reversible factors like sleep, stress, and hearing health.
-            </p>
-          </div>
-          <div class="card-meta">
-            <div class="card-pills">
-              <span class="pill-tag">🎙️ 3-Min Voice Check</span>
-              <span class="pill-tag">🔒 100% Local Processing</span>
-            </div>
-            <span class="card-link-text">Check Vitals &rarr;</span>
-          </div>
-        </a>
-
-        <!-- Next Chapter -->
-        <a href="/episodes/nextchapter/index.html" class="card highlight-ochre">
-          <div class="card-top">
-            <div class="card-header">
-              <span class="card-type ochre">Post-Career Transition</span>
-              <div class="badge-group">
-                <span class="card-badge badge-proto">Feedback wanted</span>
-              </div>
-            </div>
-            <h2 class="card-title">Next Chapter - New</h2>
-            <p class="card-desc">
-              Practical steps for your post-career pivot. Gentle navigation, curated pathways, and actionable daily experiments to step away from the 9-to-5 without existential dread.
-            </p>
-          </div>
-          <div class="card-meta">
-            <div class="card-pills">
-              <span class="pill-tag">Retirement Pivot</span>
-              <span class="pill-tag">Three Depth Levels</span>
-            </div>
-            <span class="card-link-text">Turn Page &rarr;</span>
-          </div>
-        </a>
-
-      </div>
-    </div>
-
-    <!-- SECTION II: Mind & Attention Restoration -->
-    <div id="section-2" class="section-block">
-      <div class="section-label">Section II: Mind &amp; Attention Restoration</div>
-      <p class="section-subtitle">Quiet instruments for circadian pacing, soft fascination, and open-loop offloading.</p>
-      
       <div class="app-grid">
         <!-- The Fallow Mind -->
         <a href="/episodes/boredom/index.html" class="card highlight-moss">
@@ -618,7 +548,7 @@
             </div>
             <h2 class="card-title">The Fallow Mind</h2>
             <p class="card-desc">
-              Explore how boredom ignites the Default Mode Network, and model your neural soil with the interactive attention simulator.
+              Most of us treat boredom like an emergency and reach for a screen within three seconds. See what actually happens in your brain when you stop feeding it input, and play with a simple simulator to see how constant stimulation depletes your mental soil.
             </p>
           </div>
           <div class="card-meta">
@@ -630,19 +560,19 @@
             <span class="card-link-text">Explore Fallow Mind &rarr;</span>
           </div>
         </a>
-        
+
         <!-- Attention Restore -->
         <a href="/episodes/garden/index.html" class="card highlight-moss">
           <div class="card-top">
             <div class="card-header">
               <span class="card-type moss">Cognitive Pacing</span>
               <div class="badge-group">
-                <span class="card-badge">Episode 01</span>
+                <span class="card-badge">Micro-Breaks</span>
               </div>
             </div>
             <h2 class="card-title">Attention Restore</h2>
             <p class="card-desc">
-              Rebuild your deep focus through Attention Restoration Theory, and zero-input micro-breaks.
+              Directed focus is a finite battery, not a moral virtue. Based on Attention Restoration Theory, this short tool walks you through zero-input breaks and "soft fascination"—giving your prefrontal cortex a breather without turning rest into another productivity chore.
             </p>
           </div>
           <div class="card-meta">
@@ -650,11 +580,11 @@
               <span class="pill-tag">ART</span>
               <span class="pill-tag">Soft Fascination</span>
             </div>
-            <span class="card-link-text">Restore Focus &rarr;</span>
+            <span class="card-link-text">Take a Breather &rarr;</span>
           </div>
         </a>
-        
-<!-- The Algorithmic Hook -->
+
+        <!-- The Algorithmic Hook -->
         <a href="/episodes/gamer/index.html" class="card highlight-moss">
           <div class="card-top">
             <div class="card-header">
@@ -665,7 +595,7 @@
             </div>
             <h2 class="card-title">The Algorithmic Hook</h2>
             <p class="card-desc">
-              Uncover how free-to-play games track your pauses and ad habits to rig card draws on the fly—and test what your player file reveals.
+              Free-to-play games don't just deal random cards—they watch how long you hesitate, when you get frustrated, and when you're likely to quit, then quietly tilt the odds to keep you on the hook. Peek behind the curtain at how dynamic rigging works and test what a player profile looks like from the inside.
             </p>
           </div>
           <div class="card-meta">
@@ -689,7 +619,7 @@
             </div>
             <h2 class="card-title">Glass-Box Solitaire</h2>
             <p class="card-desc">
-              Watch an exposed algorithm rig your draw pile in real time to manufacture near-misses, then flip four switches to restore an honest shuffle.
+              A playable game of Klondike with the hood popped off. Watch a live algorithm stack your draw pile to manufacture "almost won" hands—then flip four switches to turn off the manipulation and play with an honest deck.
             </p>
           </div>
           <div class="card-meta">
@@ -704,25 +634,26 @@
       </div>
     </div>
 
-    <!-- SECTION III: Body & The Microbiome -->
-    <div id="section-3" class="section-block">
-      <div class="section-label">Section III: Body &amp; The Microbiome</div>
-      <p class="section-subtitle">Tending the internal ecosystem: gut biome podcast explorations, metabolic windows, and weekly botanical diversity.</p>
-      
+    <!-- ZONE II: Soil & Gut (Fern) -->
+    <div id="zone-2" class="section-block">
+      <div class="section-label">II. Soil &amp; Gut</div>
+      <p class="character-quote">"Turns out the yard and your stomach both do better when you stop spraying chemicals and plant more weird stuff." — Fern</p>
+      <p class="section-subtitle">Guides, trackers, and sister hubs for tending your gut biome, planning native Mid-Atlantic pollinator beds, and treating living systems like gardens instead of machines.</p>
+
       <div class="app-grid">
 
         <!-- You Are More Than You (Audio Podcast Series) -->
         <a href="https://youaremorethanyou.com" class="card highlight-moss" target="_blank" rel="noopener">
           <div class="card-top">
             <div class="card-header">
-              <span class="card-type moss">Audio Series</span>
+              <span class="card-type moss">Companion Audio Series</span>
               <div class="badge-group">
-                <span class="card-badge">Podcast</span>
+                <span class="card-badge">Gut Biome</span>
               </div>
             </div>
             <h2 class="card-title">You Are More Than You</h2>
             <p class="card-desc">
-              A podcast series exploring the wild, living world inside you. Discover what happens when we stop treating our bodies like stubborn machines to fix, and start tending them like bustling internal gardens.
+              Short audio stories about the trillions of microbes sharing space with you. Instead of treating your body like a broken machine that just needs a part swapped out, these episodes look at what happens when you think of yourself as a living ecosystem.
             </p>
           </div>
           <div class="card-meta">
@@ -740,12 +671,12 @@
             <div class="card-header">
               <span class="card-type moss">Gut Biome Guide</span>
               <div class="badge-group">
-                <span class="card-badge">Anchor Primer</span>
+                <span class="card-badge">Interactive Sim</span>
               </div>
             </div>
             <h2 class="card-title">The Multitudes Within</h2>
             <p class="card-desc">
-              A guide to understanding your gut microbiome. Choose your preferred depth—from simple everyday metaphors to detailed physiological science—and test out how your choices affect your body with an interactive simulator.
+              A plain-spoken guide to what's actually going on in your gut—no hype, no miracle cures. Pick the level of detail you want (from everyday metaphors to deeper physiology) and see how daily habits shift the balance in an interactive simulator.
             </p>
           </div>
           <div class="card-meta">
@@ -761,14 +692,14 @@
         <a href="/episodes/fastcounter/index.html" class="card highlight-moss">
           <div class="card-top">
             <div class="card-header">
-              <span class="card-type moss">Metabolic Motility</span>
+              <span class="card-type moss">Fasting Window</span>
               <div class="badge-group">
-                <span class="card-badge">Episode</span>
+                <span class="card-badge">Gentle Refeed</span>
               </div>
             </div>
             <h2 class="card-title">Metabolic &amp; Gut Biome Counter</h2>
             <p class="card-desc">
-              This apps tracks your last meal with a timestamp and explains what is happening with your body at different fasting levels. Also provides gentle fast-breaking protocols.
+              Log when you last ate and see a straightforward breakdown of what's shifting as the hours pass—along with unhurried ideas for breaking a fast gently instead of diving straight into a heavy meal.
             </p>
           </div>
           <div class="card-meta">
@@ -784,14 +715,14 @@
         <a href="/episodes/inner-meadow/index.html" class="card highlight-moss">
           <div class="card-top">
             <div class="card-header">
-              <span class="card-type moss">Biome Stewardship</span>
+              <span class="card-type moss">30+ Plant Species</span>
               <div class="badge-group">
-                <span class="card-badge">Episode</span>
+                <span class="card-badge">Ferments</span>
               </div>
             </div>
             <h2 class="card-title">The Inner Meadow</h2>
             <p class="card-desc">
-              A diverse range of plants helps your native gut flora. This app helps track weekly botanical diversity across 100+ foods (aiming for 30+ unique species) and living ferments.
+              Just like a yard thrives on variety rather than a monoculture lawn, your gut microbes like mixed company. Track your weekly tally across 100+ plant foods—aiming toward 30+ different species—alongside fermented foods that keep the neighborhood lively.
             </p>
           </div>
           <div class="card-meta">
@@ -803,18 +734,18 @@
           </div>
         </a>
 
-<!-- getrepoopulate.com Sister Hub -->
+        <!-- getrepoopulate.com Sister Hub -->
         <a href="https://getrepoopulate.com" class="card" target="_blank" rel="noopener">
           <div class="card-top">
             <div class="card-header">
-              <span class="card-type">Acute Gut Rewilding</span>
+              <span class="card-type">Post-Shock Recovery</span>
               <div class="badge-group">
                 <span class="card-badge">Sister Hub</span>
               </div>
             </div>
-            <h2 class="card-title">getrepoopulate.com</h2>
+            <h2 class="card-title">Re-Poopulate</h2>
             <p class="card-desc">
-              Practical advice for microbiome rebuilding after major ecological shocks —a colonoscopy, antibiotic courses, or stomach bugs - with clear descriptions of what to eat for recolonization protocols.
+              When antibiotics, a stomach bug, or a procedure clears out the local flora, it takes deliberate care to rebuild. Practical food guidance for the weeks after a major reset, without the internet pseudoscience.
             </p>
           </div>
           <div class="card-meta">
@@ -823,6 +754,52 @@
               <span class="pill-tag">External Portal</span>
             </div>
             <span class="card-link-text">Visit Portal ↗</span>
+          </div>
+        </a>
+
+        <!-- betterfly.garden Sister Hub -->
+        <a href="https://betterfly.garden" class="card highlight-moss" target="_blank" rel="noopener">
+          <div class="card-top">
+            <div class="card-header">
+              <span class="card-type moss">Mid-Atlantic Natives</span>
+              <div class="badge-group">
+                <span class="card-badge">Sister Hub</span>
+              </div>
+            </div>
+            <h2 class="card-title">Better-Fly Maryland</h2>
+            <p class="card-desc">
+              A practical planner for turning Maryland and Mid-Atlantic yards into real habitat for native pollinators, birds, and beneficial insects. Match soil conditions, stagger bloom times from spring through fall, and pick plants that can actually hold their own against deer.
+            </p>
+          </div>
+          <div class="card-meta">
+            <div class="card-pills">
+              <span class="pill-tag">Native Botany</span>
+              <span class="pill-tag">Soil Profiles</span>
+            </div>
+            <span class="card-link-text">Plan Habitat ↗</span>
+          </div>
+        </a>
+
+        <!-- Landscape & Living Ecology Primer -->
+        <a href="/episodes/garden-primer/index.html" class="card highlight-moss">
+          <div class="card-top">
+            <div class="card-header">
+              <span class="card-type moss">Forest Chemistry</span>
+              <div class="badge-group">
+                <span class="card-badge">Living Systems</span>
+              </div>
+            </div>
+            <h2 class="card-title">Landscape &amp; Living Ecology</h2>
+            <p class="card-desc">
+              Plants aren't quiet background scenery—they trade chemical signals, shift local microclimates, and shape the air around them. A multi-level primer on forest chemistry, plant agency, and how to act like a real participant in your own patch of land.
+            </p>
+          </div>
+          <div class="card-meta">
+            <div class="card-pills">
+              <span class="pill-tag">Schlanger &amp; Wohlleben</span>
+              <span class="pill-tag">Forest Chemistry</span>
+            </div>
+            <span class="card-link-text">Read Primer &rarr;</span>
           </div>
         </a>
 
@@ -840,10 +817,10 @@
               An animated look at rebuilding your internal ecosystem after antibiotics or disruptions.
             </p>
             <div style="border-radius: var(--radius-sm); overflow: hidden; background: #000; box-shadow: var(--shadow-sm);">
-              <video 
-                controls 
-                preload="metadata" 
-                playsinline 
+              <video
+                controls
+                preload="metadata"
+                playsinline
                 style="width: 100%; display: block; border-radius: var(--radius-sm);">
                 <source src="/getrenew2.mp4" type="video/mp4">
                 Your browser does not support the video tag.
@@ -861,82 +838,96 @@
 
       </div>
     </div>
-    
-    <!-- SECTION IV: Ecology & The Living Yard -->
-    <div id="section-4" class="section-block">
-      <div class="section-label">Section IV: Ecology &amp; The Living Yard</div>
-      <p class="section-subtitle">Restoring native Mid-Atlantic habitat, living landscapes, and pollinator corridors.</p>
-      
+
+    <!-- ZONE III: The Long View & The Horizon (Odo) -->
+    <div id="zone-3" class="section-block">
+      <div class="section-label">III. The Long View &amp; The Horizon</div>
+      <p class="character-quote">"People spend decades rushing toward a finish line and forget to notice the ground under their feet." — Odo</p>
+      <p class="section-subtitle">Quiet calculators and check-ins for finite days, spoken memory baselines, post-career pivots, and federal retirement milestones—kept local and unhurried.</p>
+
       <div class="app-grid">
 
-        <!-- betterfly.garden Sister Hub -->
-        <a href="https://betterfly.garden" class="card highlight-moss" target="_blank" rel="noopener">
+        <!-- Remaining Lifetime Calculator -->
+        <a href="/episodes/gardenoffinitedays/index.html" class="card highlight-terracotta">
           <div class="card-top">
             <div class="card-header">
-              <span class="card-type moss">Ecological Corridor</span>
+              <span class="card-type">Actuarial Mindfulness</span>
               <div class="badge-group">
-                <span class="card-badge">Sister Hub</span>
+                <span class="card-badge">SSA Cohorts</span>
               </div>
             </div>
-            <h2 class="card-title">betterfly.garden</h2>
+            <h2 class="card-title">The Garden of Finite Days</h2>
             <p class="card-desc">
-              Native habitat and pollinator planner for Maryland and the Mid-Atlantic. Match local soil profiles, bloom sequences, and deer-resistant companion guilds to cultivate biodiversity.
+              A sober, practical look at the calendar you actually have left. Built on current U.S. actuarial data and a few honest inputs about your habits, it turns abstract life expectancy into remaining springs, weekends, and high-energy seasons—not to scare you, just to clarify what deserves your time.
             </p>
           </div>
           <div class="card-meta">
             <div class="card-pills">
-              <span class="pill-tag">Native Botany</span>
-              <span class="pill-tag">Soil Profiles</span>
+              <span class="pill-tag">Memento Mori</span>
+              <span class="pill-tag">SSA Cohorts</span>
             </div>
-            <span class="card-link-text">Plan Habitat ↗</span>
+            <span class="card-link-text">Enter Garden &rarr;</span>
           </div>
         </a>
 
-        <!-- Landscape & Living Ecology Primer -->
-        <a href="/episodes/garden-primer/index.html" class="card highlight-moss">
+        <!-- Word Recall & Verbal Vitals -->
+        <a href="./episodes/verbal/index.html" class="card highlight-moss">
           <div class="card-top">
             <div class="card-header">
-              <span class="card-type moss">Botanical Primer</span>
+              <span class="card-type moss">3-Min Voice Check</span>
               <div class="badge-group">
-                <span class="card-badge">New Primer</span>
+                <span class="card-badge badge-new">100% Local</span>
               </div>
             </div>
-            <h2 class="card-title">Landscape &amp; Living Ecology</h2>
+            <h2 class="card-title">Word Recall &amp; Verbal Vitals</h2>
             <p class="card-desc">
-              A multi-tiered primer rethinking plants as active biological agents, exploring atmospheric forest chemistry, tree breath, and how we become local participants in our ecosystems.
+              Speak freely for three minutes to establish a personal baseline for word retrieval, vocabulary range, and idea density. Everything is analyzed locally in your browser—no audio ever leaves your device—and paired with a grounded check on everyday culprits like poor sleep, stress, and hearing fatigue.
             </p>
           </div>
           <div class="card-meta">
             <div class="card-pills">
-              <span class="pill-tag">Schlanger &amp; Wohlleben</span>
-              <span class="pill-tag">Forest Chemistry</span>
+              <span class="pill-tag">🎙️ 3-Min Voice Check</span>
+              <span class="pill-tag">🔒 100% Local Processing</span>
             </div>
-            <span class="card-link-text">Read Primer &rarr;</span>
+            <span class="card-link-text">Check Vitals &rarr;</span>
           </div>
         </a>
 
-      </div>
-    </div>
-
-    <!-- SECTION V: Worldly Passages & Cosmic Play -->
-    <div id="section-5" class="section-block">
-      <div class="section-label">Section V: Worldly Passages &amp; Cosmic Play</div>
-      <p class="section-subtitle">Pragmatic calculators for federal service milestones alongside lighthearted cosmic and terrestrial diversions.</p>
-      
-      <div class="app-grid">
+        <!-- Next Chapter -->
+        <a href="/episodes/nextchapter/index.html" class="card highlight-ochre">
+          <div class="card-top">
+            <div class="card-header">
+              <span class="card-type ochre">Post-Career Pivot</span>
+              <div class="badge-group">
+                <span class="card-badge badge-proto">Three Depth Levels</span>
+              </div>
+            </div>
+            <h2 class="card-title">Next Chapter</h2>
+            <p class="card-desc">
+              Stepping away from a long career involves more than a spreadsheet—it means rebuilding your days, identity, and routines from scratch. Explore three levels of depth and small, low-stakes daily experiments to test what comes after the 9-to-5 without forcing a grand five-year plan.
+            </p>
+          </div>
+          <div class="card-meta">
+            <div class="card-pills">
+              <span class="pill-tag">Retirement Pivot</span>
+              <span class="pill-tag">Three Depth Levels</span>
+            </div>
+            <span class="card-link-text">Turn Page &rarr;</span>
+          </div>
+        </a>
 
         <!-- FERS Retirement Countdown -->
         <a href="/episodes/fers-countdown/index.html" class="card highlight-ochre">
           <div class="card-top">
             <div class="card-header">
-              <span class="card-type ochre">Vocational Horizon</span>
+              <span class="card-type ochre">Federal Service</span>
               <div class="badge-group">
-                <span class="card-badge">Episode</span>
+                <span class="card-badge">Horizon Planner</span>
               </div>
             </div>
             <h2 class="card-title">FERS Retirement Countdown</h2>
             <p class="card-desc">
-              A calm horizon planner for federal civil service. Track remaining working days, annuity benchmarks, and the gradual transition toward self-directed, sovereign time.
+              A straightforward horizon planner for federal civil servants. Map out your remaining working days, check key annuity benchmarks, and watch the steady shift from institutional schedules toward your own time—all calculated privately on your machine.
             </p>
           </div>
           <div class="card-meta">
@@ -948,74 +939,29 @@
           </div>
         </a>
 
-        <!-- Your Penguin Pal -->
-        <a href="/episodes/penguin-pal/index.html" class="card highlight-glacier">
-          <div class="card-top">
-            <div class="card-header">
-              <span class="card-type glacier">Domestic Cryogenics</span>
-              <div class="badge-group">
-                <span class="card-badge">Episode</span>
-              </div>
-            </div>
-            <h2 class="card-title">Your Penguin Pal</h2>
-            <p class="card-desc">
-              The quiet custodian of your household ice shelf. A zero-friction freezer ledger to track cold storage provisions, adjust portions with a single tap, and surface deep glacial reserves.
-            </p>
-          </div>
-          <div class="card-meta">
-            <div class="card-pills">
-              <span class="pill-tag">Permafrost Ledger</span>
-              <span class="pill-tag">Zero Waste</span>
-            </div>
-            <span class="card-link-text">Inspect Ice Shelf &rarr;</span>
-          </div>
-        </a>
-
-        <!-- Past Life Oracle -->
-        <a href="/episodes/past-lives/index.html" class="card">
-          <div class="card-top">
-            <div class="card-header">
-              <span class="card-type ochre">Existential Play</span>
-              <div class="badge-group">
-                <span class="card-badge">Episode</span>
-              </div>
-            </div>
-            <h2 class="card-title">Past Life Oracle</h2>
-            <p class="card-desc">
-              A playful karmic simulator exploring ancient trades, distant epochs, and historical wanderers to lightly dislodge the solemn weight of modern self-importance.
-            </p>
-          </div>
-          <div class="card-meta">
-            <div class="card-pills">
-              <span class="pill-tag">Karmic Whimsy</span>
-              <span class="pill-tag">Zen Play</span>
-            </div>
-            <span class="card-link-text">Spin the Wheel &rarr;</span>
-          </div>
-        </a>
-
       </div>
     </div>
 
-    <!-- SECTION VI: The Compost Pile -->
-    <div id="section-6" class="section-block">
-      <div class="section-label" style="color: var(--loam-light);">Section VI: The Compost Pile (Experimental Ideas)</div>
-      <p class="section-subtitle">Unfinished experiments and half-baked ideas still breaking down in the soil.</p>
-      
+    <!-- ZONE IV: The Compost Pile (Ensemble) -->
+    <div id="zone-4" class="section-block">
+      <div class="section-label" style="color: var(--loam-light);">IV. The Compost Pile</div>
+      <p class="character-quote">"Half-finished prototypes, stray notes, and ideas still breaking down in the dark. Poke around, tell us what smells off." — Chip, Fern &amp; Odo</p>
+      <p class="section-subtitle">Odo likes the pace; Chip wants a disclaimer; Fern already rolled in it.</p>
+
       <div class="app-grid">
-        
+
         <!-- Digital Thought Composter -->
         <a href="/episodes/composter/index.html" class="card" style="border-style: dashed; opacity: 0.85;">
           <div class="card-top">
             <div class="card-header">
-              <span class="card-type" style="color: var(--loam-light);">Experimental Sandbox</span>
+              <span class="card-type" style="color: var(--loam-light);">Rough Draft</span>
               <div class="badge-group">
                 <span class="card-badge">Needs Feedback</span>
               </div>
             </div>
             <h2 class="card-title">Digital Thought Composter</h2>
             <p class="card-desc">
-              Our rough draft experiment converting ruminative thoughts into meadow soil. Not quite ready for prime-time. We strongly want your candid feedback and suggestions on this one!
+              A messy early experiment for dropping looping, ruminative thoughts into a quiet space to break down instead of turning them over in your head all afternoon. Still rough around the edges—try it out and tell me what works, what feels clunky, and what's missing.
             </p>
           </div>
           <div class="card-meta">
@@ -1030,18 +976,15 @@
       </div>
     </div>
 
-    <!-- Library & Reading List Section (NEW) -->
+    <!-- Library & Reading List Section -->
     <section class="about-card" style="margin-bottom: 0;">
       <div class="about-head">
         <h2><span>📚</span> The Fallow Library</h2>
       </div>
-      
+
       <div class="about-content">
         <p>
-          The tools and resources on <strong>fallow.garden</strong> are heavily influenced by a specific lineage of ecology, cognitive science, and pragmatist philosophy. If you'd like to explore the source material that shaped these apps—from gut biomes to attention mechanics—you can visit our curated reading room.
-        </p>
-        <p>
-          We've partnered with <strong>Bookshop.org</strong>, an online platform dedicated to financially supporting local, independent bookstores. Browsing these lists is a great way to dive deeper into these topics while actively keeping community bookshops alive.
+          These tools didn't come out of thin air—they draw on books about ecology, gut biology, attention, memory, and pragmatic philosophy that I keep coming back to. The curated lists link out to <strong>Bookshop.org</strong> so you can dig into the source material while supporting independent bookstores.
         </p>
       </div>
 
@@ -1058,13 +1001,13 @@
       <div class="about-head">
         <h2><span>🌿</span> About fallow.garden &amp; Feedback</h2>
       </div>
-      
+
       <div class="about-content">
         <p>
-          <strong>fallow.garden</strong> is an independent anthology of single-purpose micro-utilities created to counter cognitive fatigue, algorithmic noise, and relentless optimization culture. Each tool runs entirely on your device with zero tracking or account friction.
+          Small, single-purpose web tools built to push back against noisy feeds, constant tracking, and relentless self-optimization. Everything runs locally in your browser with no accounts and no analytics.
         </p>
         <p>
-          Have ideas for new restorative modules, suggestions for current tools, or questions about the underlying research? Feedback and contributions are always deeply appreciated.
+          Got an idea for a quiet tool, a bug to report, or a thought on any of these experiments? Send a note.
         </p>
       </div>
 
@@ -1083,7 +1026,7 @@
 
     <!-- Footer -->
     <footer>
-      <div>fallow.garden — Restorative micro-utilities for mind, soil, and human vitality. Check out <a href="/Fallowstate/index.html" style="color: inherit; text-decoration: underline; text-decoration-style: dotted;">FallowState</a> for agent guardrails.</div>
+      <div>fallow.garden — Quiet, client-side tools for mind, soil, and time. Check out <a href="/Fallowstate/index.html" style="color: inherit; text-decoration: underline; text-decoration-style: dotted;">FallowState</a> for agent guardrails.</div>
       <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.25rem;">100% client-side. Zero telemetry. Hosted on independent static web infrastructure.</div>
     </footer>
   </div>
