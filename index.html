@@ -111,33 +111,67 @@
       line-height: 1.65;
     }
 
-    .character-notes {
-      margin-top: 0.9rem;
-      padding-left: 1.1rem;
-      color: var(--loam-mid);
-      font-size: 0.9rem;
-      max-width: 680px;
-      line-height: 1.6;
-    }
-
-    .character-notes li + li {
-      margin-top: 0.25rem;
-    }
-
-    .header-audio-callout {
+    /* Hero Hook & Deeper-Dive Slot */
+    .hero-media {
       margin-top: 1.25rem;
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .hero-video-frame {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--sand-border);
+      background: #1c1611;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-video-frame video {
+      width: 100%;
+      display: block;
+    }
+
+    .hero-followup-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      background: var(--parchment-warm);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.95rem;
+      font-size: 0.86rem;
+      color: var(--loam-mid);
+    }
+
+    .hero-followup-link {
+      color: var(--moss-deep);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .hero-followup-link:hover {
+      color: var(--terracotta);
+    }
+
+    /* Audio Callout */
+    .audio-callout {
       background: var(--parchment-warm);
       border: 1px solid var(--sand-border);
       border-left: 3px solid var(--moss-mid);
       border-radius: var(--radius-sm);
-      padding: 0.9rem 1.15rem;
+      padding: 0.95rem 1.15rem;
       font-size: 0.92rem;
       color: var(--loam-mid);
       line-height: 1.65;
-      max-width: 680px;
+      margin-top: 1rem;
     }
 
-    .header-audio-callout a {
+    .audio-callout a {
       color: var(--moss-deep);
       font-weight: 600;
       text-decoration: underline;
@@ -145,7 +179,7 @@
       transition: color 0.15s ease;
     }
 
-    .header-audio-callout a:hover {
+    .audio-callout a:hover {
       color: var(--terracotta);
     }
 
@@ -177,7 +211,7 @@
       transform: translateY(-1px);
     }
 
-    /* Corridor Dividers */
+    /* Section Dividers */
     .section-block {
       scroll-margin-top: 1.5rem;
     }
@@ -200,19 +234,48 @@
       background: var(--sand-border);
     }
 
-    .character-quote {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 0.92rem;
-      color: var(--loam-mid);
-      margin-bottom: 0.3rem;
-    }
-
     .section-subtitle {
       font-size: 0.88rem;
       color: var(--loam-light);
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
       line-height: 1.5;
+    }
+
+    /* Section Intro Video Clip */
+    .section-clip {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1rem 1rem;
+      margin-bottom: 1.15rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-clip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+      font-size: 0.78rem;
+      color: var(--loam-light);
+    }
+
+    .section-clip-label {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--moss-deep);
+      font-size: 0.7rem;
+    }
+
+    .section-clip video {
+      width: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      display: block;
+      border-radius: var(--radius-sm);
+      background: #1c1611;
     }
 
     /* Grid Layout */
@@ -511,14 +574,27 @@
       <p class="tagline">
         Most software is built like a slot machine—designed to harvest your clicks, ping your nervous system, and sell your attention. This is the opposite: a small collection of single-purpose tools for resting your brain, tending your gut, stewarding native plants, and planning the next chapter without the noise. Everything runs locally in your browser. No accounts, no tracking, no streak guilt.
       </p>
-      <ul class="character-notes">
-        <li><strong>Chip</strong> brought a clipboard to optimize your rest schedule. <em>(We took his pen away.)</em></li>
-        <li><strong>Fern</strong> is mostly here for the dirt, the plants, and whatever grows when you stop meddling.</li>
-        <li><strong>Odo</strong> has been staring at a single blade of grass since Tuesday and says you're doing fine.</li>
-      </ul>
 
-      <div class="header-audio-callout">
-        🎙️ <strong>Companion Audio Series:</strong> Short, curious stories about the living world inside you—what happens when we stop treating bodies like stubborn machines to fix and start tending them like gardens. <a href="https://youaremorethanyou.com" target="_blank" rel="noopener">Listen to <em>You Are More Than You</em> ↗</a>
+      <div class="hero-media">
+        <div class="hero-video-frame">
+          <video
+            controls
+            preload="metadata"
+            playsinline
+            aria-label="fallow.garden introduction from noisy feed to workshop with Chip, Fern, and Odo">
+            <!-- Replace with your 37-second hook video filename -->
+            <source src="/NewFallowIntro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div class="hero-followup-bar">
+          <span>Want the longer walkthrough from Chip, Fern, and Odo?</span>
+          <!-- Replace href and link text with your deeper-dive clip filename or URL -->
+          <a href="/YOUR_DEEPER_CLIP_FILENAME_OR_URL" class="hero-followup-link">
+            [Deeper-Dive Clip Name] &rarr;
+          </a>
+        </div>
       </div>
     </header>
 
@@ -530,11 +606,22 @@
       <a href="#zone-4" class="jump-pill">IV. The Compost Pile</a>
     </nav>
 
-    <!-- ZONE I: The Fallow Mind (Chip) -->
+    <!-- ZONE I: The Fallow Mind -->
     <div id="zone-1" class="section-block">
       <div class="section-label">I. The Fallow Mind</div>
-      <p class="character-quote">"I have color-coded forty-seven ways to stop overthinking, and frankly, it's exhausting." — Chip</p>
       <p class="section-subtitle">Tools for stepping out of the algorithmic feed, seeing how rigged games hook your brain, and giving your Default Mode Network room to wander.</p>
+
+      <div class="section-clip">
+        <div class="section-clip-header">
+          <span class="section-clip-label">Section Clip</span>
+          <span>Zone I Intro</span>
+        </div>
+        <video controls preload="metadata" playsinline>
+          <!-- Replace with Zone I video filename -->
+          <source src="/ZONE_1_CLIP.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
 
       <div class="app-grid">
         <!-- The Fallow Mind -->
@@ -634,11 +721,22 @@
       </div>
     </div>
 
-    <!-- ZONE II: Soil & Gut (Fern) -->
+    <!-- ZONE II: Soil & Gut -->
     <div id="zone-2" class="section-block">
       <div class="section-label">II. Soil &amp; Gut</div>
-      <p class="character-quote">"Turns out the yard and your stomach both do better when you stop spraying chemicals and plant more weird stuff." — Fern</p>
       <p class="section-subtitle">Guides, trackers, and sister hubs for tending your gut biome, planning native Mid-Atlantic pollinator beds, and treating living systems like gardens instead of machines.</p>
+
+      <div class="section-clip">
+        <div class="section-clip-header">
+          <span class="section-clip-label">Section Clip</span>
+          <span>Zone II Intro</span>
+        </div>
+        <video controls preload="metadata" playsinline>
+          <!-- Replace with Zone II video filename -->
+          <source src="/ZONE_2_CLIP.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
 
       <div class="app-grid">
 
@@ -708,29 +806,6 @@
               <span class="pill-tag">Housekeeping</span>
             </div>
             <span class="card-link-text">Track Window &rarr;</span>
-          </div>
-        </a>
-
-        <!-- The Inner Meadow -->
-        <a href="/episodes/inner-meadow/index.html" class="card highlight-moss">
-          <div class="card-top">
-            <div class="card-header">
-              <span class="card-type moss">30+ Plant Species</span>
-              <div class="badge-group">
-                <span class="card-badge">Ferments</span>
-              </div>
-            </div>
-            <h2 class="card-title">The Inner Meadow</h2>
-            <p class="card-desc">
-              Just like a yard thrives on variety rather than a monoculture lawn, your gut microbes like mixed company. Track your weekly tally across 100+ plant foods—aiming toward 30+ different species—alongside fermented foods that keep the neighborhood lively.
-            </p>
-          </div>
-          <div class="card-meta">
-            <div class="card-pills">
-              <span class="pill-tag">30+ Species Weekly</span>
-              <span class="pill-tag">Plant Diversity</span>
-            </div>
-            <span class="card-link-text">Enrich Biome &rarr;</span>
           </div>
         </a>
 
@@ -839,11 +914,22 @@
       </div>
     </div>
 
-    <!-- ZONE III: The Long View & The Horizon (Odo) -->
+    <!-- ZONE III: The Long View & The Horizon -->
     <div id="zone-3" class="section-block">
       <div class="section-label">III. The Long View &amp; The Horizon</div>
-      <p class="character-quote">"People spend decades rushing toward a finish line and forget to notice the ground under their feet." — Odo</p>
       <p class="section-subtitle">Quiet calculators and check-ins for finite days, spoken memory baselines, post-career pivots, and federal retirement milestones—kept local and unhurried.</p>
+
+      <div class="section-clip">
+        <div class="section-clip-header">
+          <span class="section-clip-label">Section Clip</span>
+          <span>Zone III Intro</span>
+        </div>
+        <video controls preload="metadata" playsinline>
+          <!-- Replace with Zone III video filename -->
+          <source src="/ZONE_3_CLIP.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
 
       <div class="app-grid">
 
@@ -942,13 +1028,47 @@
       </div>
     </div>
 
-    <!-- ZONE IV: The Compost Pile (Ensemble) -->
+    <!-- ZONE IV: The Compost Pile -->
     <div id="zone-4" class="section-block">
       <div class="section-label" style="color: var(--loam-light);">IV. The Compost Pile</div>
-      <p class="character-quote">"Half-finished prototypes, stray notes, and ideas still breaking down in the dark. Poke around, tell us what smells off." — Chip, Fern &amp; Odo</p>
-      <p class="section-subtitle">Odo likes the pace; Chip wants a disclaimer; Fern already rolled in it.</p>
+      <p class="section-subtitle">Half-finished prototypes, stray notes, and experiments still breaking down in the dark.</p>
+
+      <div class="section-clip">
+        <div class="section-clip-header">
+          <span class="section-clip-label">Section Clip</span>
+          <span>Zone IV Intro</span>
+        </div>
+        <video controls preload="metadata" playsinline>
+          <!-- Replace with Zone IV video filename -->
+          <source src="/ZONE_4_CLIP.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
 
       <div class="app-grid">
+
+        <!-- The Inner Meadow (Moved to The Compost Pile) -->
+        <a href="/episodes/inner-meadow/index.html" class="card highlight-moss">
+          <div class="card-top">
+            <div class="card-header">
+              <span class="card-type moss">30+ Plant Species</span>
+              <div class="badge-group">
+                <span class="card-badge">Ferments</span>
+              </div>
+            </div>
+            <h2 class="card-title">The Inner Meadow</h2>
+            <p class="card-desc">
+              Just like a yard thrives on variety rather than a monoculture lawn, your gut microbes like mixed company. Track your weekly tally across 100+ plant foods—aiming toward 30+ different species—alongside fermented foods that keep the neighborhood lively.
+            </p>
+          </div>
+          <div class="card-meta">
+            <div class="card-pills">
+              <span class="pill-tag">30+ Species Weekly</span>
+              <span class="pill-tag">Plant Diversity</span>
+            </div>
+            <span class="card-link-text">Enrich Biome &rarr;</span>
+          </div>
+        </a>
 
         <!-- Digital Thought Composter -->
         <a href="/episodes/composter/index.html" class="card" style="border-style: dashed; opacity: 0.85;">
@@ -993,6 +1113,10 @@
           <span>📖</span>
           <span>Browse the Reading Lists ↗</span>
         </a>
+      </div>
+
+      <div class="audio-callout">
+        🎙️ <strong>Companion Audio Series:</strong> Short, curious stories about the living world inside you—what happens when we stop treating bodies like stubborn machines to fix and start tending them like gardens. <a href="https://youaremorethanyou.com" target="_blank" rel="noopener">Listen to <em>You Are More Than You</em> ↗</a>
       </div>
     </section>
 
