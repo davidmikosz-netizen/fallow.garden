@@ -964,7 +964,7 @@
       </div>
     </div>
 
-    <!-- Table of Contents Navigation (Moved below Lens Selector) -->
+    <!-- Table of Contents Navigation -->
     <nav class="toc-nav">
       <div class="toc-title">Table of Contents</div>
       <div class="toc-grid">
@@ -995,20 +995,20 @@
     <div class="app-view" id="chapter1">
       <section class="card">
         <div class="section-head">
-          <h2>1. From Digital Foraging to Fallow Rest</h2>
-          <span class="section-tag">Interactive Odyssey</span>
+          <h2>1. From Endless Scrolling to Fallow Rest</h2>
+          <span class="section-tag">5-Step Walkthrough</span>
         </div>
 
         <p class="lens-intro-text" style="margin-bottom: 1.25rem;">
-          Trace what happens inside your brain from the moment an algorithmic feed hooks your thumb to the moment you step through the "90-second boredom airlock" into deep creative rest. Use the two lens bars above to adjust scientific depth and switch between <strong>Standard</strong> and <strong>ADHD / Novelty-Seeking</strong> neurobiology.
+          Follow what happens inside your brain from the moment an app hooks your thumb to the moment you get past the first 90 seconds of restlessness into real creative rest. Use the two bars above to pick how technical you want the explanation to be and switch between <strong>Standard</strong> and <strong>ADHD / Novelty-Seeking</strong> brains.
         </p>
 
         <div class="narrative-tabs" id="narrativeTabs">
           <button class="narrative-tab-btn active" onclick="selectNarrative(0)">1. The Hijacked Forager</button>
-          <button class="narrative-tab-btn" onclick="selectNarrative(1)">2. Receptor Down-Regulation</button>
-          <button class="narrative-tab-btn" onclick="selectNarrative(2)">3. The 90-Second Airlock</button>
-          <button class="narrative-tab-btn" onclick="selectNarrative(3)">4. Synaptic Composting (DMN)</button>
-          <button class="narrative-tab-btn" onclick="selectNarrative(4)">5. Soft Fascination</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(1)">2. Numb to Quiet</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(2)">3. The 90-Second Itch</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(3)">4. Brain Composting</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(4)">5. Easy Nature Watching</button>
         </div>
 
         <div class="narrative-display">
@@ -1023,12 +1023,12 @@
     <div class="app-view" id="chapter2">
       <section class="card">
         <div class="section-head">
-          <h2>2. The Neural Seesaw &amp; The Open Monitoring Paradox</h2>
-          <span class="section-tag">Cortical Network Dynamics</span>
+          <h2>2. The Brain's Seesaw &amp; Why Blank Walls Fail ADHD Minds</h2>
+          <span class="section-tag">How Your Networks Trade Places</span>
         </div>
         
         <p class="lens-intro-text">
-          Just like opportunistic gut microbes hijack your brain-gut pathways to demand refined sugar, engagement algorithms hijack our ancient foraging circuits to monopolize attention seeking—preventing the brain's restorative network from ever turning on.
+          Just like sugar-craving gut microbes can nudge your appetite toward junk food, apps and feeds hijack your brain's built-in reward loop—keeping your focus locked outward so your inner resting network never gets a turn.
         </p>
 
         <div style="display: grid; gap: 1.25rem; margin-top: 1.25rem;" id="ch2CardsContainer">
@@ -1076,7 +1076,7 @@
           </div>
           
           <div class="seesaw-info-panel">
-            <h4 id="seesaw-info-title">The Cortical Seesaw</h4>
+            <h4 id="seesaw-info-title">The Brain's Seesaw</h4>
             <p id="seesaw-info-desc">Hover over or tap any part of the diagram—the <strong>Executive Network</strong>, the <strong>Default Mode Network</strong>, the <strong>Salience Switch (Fulcrum)</strong>, or the <strong>10% Soft Fascination Tether</strong>—to see how your brain shifts between active work and fallow rest.</p>
           </div>
         </div>
@@ -1088,11 +1088,11 @@
       <section class="card">
         <div class="section-head">
           <h2>3. The Neural Soil Sandbox</h2>
-          <span class="section-tag" id="sandboxLensTag">Biophysical Simulation • Standard Lens</span>
+          <span class="section-tag" id="sandboxLensTag">Daily Habit Simulator • Standard Lens</span>
         </div>
 
         <p class="lens-intro-text" style="margin-bottom: 1.5rem;">
-          Model how your daily digital and physical rhythms shape your attention or 'neural soil'. Adjust the sliders on the left and click <strong>Read My Neural Soil</strong> on the right for a tailored clinical synthesis. (Try toggling between <em>Standard</em> and <em>ADHD Lens</em> above to see how low-input stillness behaves differently!)
+          Test how your daily screen and outdoor habits shape your attention—or "neural soil." Move the sliders on the left and click <strong>Read My Neural Soil</strong> on the right for a plain-language summary of your day. (Try switching between <em>Standard</em> and <em>ADHD Lens</em> at the top to see how total stillness affects each brain type differently.)
         </p>
 
         <div class="sandbox-layout">
@@ -1103,8 +1103,8 @@
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Algorithmic / Rapid-Cut Feeds &amp; Games</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily hours of variable-ratio novelty (short video, feeds, gaming)</div>
+                  <div class="control-label">Fast Feeds, Short Videos &amp; Games</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily hours spent scrolling feeds, watching short clips, or gaming</div>
                 </div>
                 <span class="control-value" id="valAlgo">2.0 hrs</span>
               </div>
@@ -1115,7 +1115,7 @@
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Uninterrupted Fallow Windows</div>
+                  <div class="control-label">Screen-Free Gaps</div>
                   <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Typical daytime stretch without checking a phone or computer</div>
                 </div>
                 <span class="control-value" id="valFallow">25 mins</span>
@@ -1127,20 +1127,20 @@
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Soft Fascination &amp; Open Monitoring</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily minutes observing living nature (plants, bees, sky) or listening to brown noise</div>
+                  <div class="control-label">Easy Nature Watching &amp; Ambient Sound</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily minutes watching plants, birds, or clouds—or listening to rain/brown noise</div>
                 </div>
                 <span class="control-value" id="valSoft">30 mins</span>
               </div>
               <input type="range" class="slider" id="sliderSoft" min="0" max="90" step="5" value="30" oninput="updateSimulation()" style="margin-top: 0.5rem;" />
             </div>
 
-            <!-- Slider 4: Proprioceptive / Weighted Movement -->
+            <!-- Slider 4: Physical Grounding -->
             <div class="control-item">
               <div class="control-item-head">
                 <div>
                   <div class="control-label">Physical Grounding</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily rhythmic movement (walking a dog, using weighted vest, gardening, pacing)</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily steady movement (walking a dog, wearing a weighted vest, gardening, pacing)</div>
                 </div>
                 <span class="control-value" id="valKinetic">30 mins</span>
               </div>
@@ -1151,8 +1151,8 @@
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Tab &amp; Screen Context-Switching</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Frequency of dual-screening or rapid task-jumping (drives attention residue)</div>
+                  <div class="control-label">Tab &amp; Screen Jumping</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How often you bounce between tabs, apps, or dual screens</div>
                 </div>
                 <span class="control-value" id="valSwitch">Moderate</span>
               </div>
@@ -1163,8 +1163,8 @@
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Pre-Sleep Cognitive Wind-Down</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Minutes of screen-free buffer before sleep (protects glymphatic clearance)</div>
+                  <div class="control-label">Screen-Free Wind-Down Before Bed</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Minutes off screens before sleep so your brain can clear out the day</div>
                 </div>
                 <span class="control-value" id="valCurfew">45 mins</span>
               </div>
@@ -1179,7 +1179,7 @@
               
               <div class="metric-row">
                 <div class="metric-head">
-                  <span id="labelTonic">Tonic Dopamine Sensitivity</span>
+                  <span id="labelTonic">Steady Dopamine Reserve</span>
                   <span id="valTonicScore">--</span>
                 </div>
                 <div class="metric-bar-bg">
@@ -1190,7 +1190,7 @@
 
               <div class="metric-row">
                 <div class="metric-head">
-                  <span id="labelDmn">DMN Synaptic Composting</span>
+                  <span id="labelDmn">Brain Composting (DMN)</span>
                   <span id="valDmnScore">--</span>
                 </div>
                 <div class="metric-bar-bg">
@@ -1201,7 +1201,7 @@
 
               <div class="metric-row">
                 <div class="metric-head">
-                  <span id="labelAirlock">90-Second Airlock Ease</span>
+                  <span id="labelAirlock">Getting Past the 90-Sec Itch</span>
                   <span id="valAirlockScore">--</span>
                 </div>
                 <div class="metric-bar-bg">
@@ -1212,7 +1212,7 @@
 
               <div class="metric-row">
                 <div class="metric-head">
-                  <span id="labelResidue">Attention Residue &amp; Static Risk</span>
+                  <span id="labelResidue">Mental Cobwebs (Attention Residue)</span>
                   <span id="valResidueScore">--</span>
                 </div>
                 <div class="metric-bar-bg">
@@ -1308,7 +1308,7 @@
       
       <div class="about-content">
         <p>
-          <strong>fallow.garden</strong> is an independent anthology of single-purpose micro-utilities created to counter cognitive fatigue, algorithmic noise, and relentless optimization culture. Each tool runs entirely on your device with zero tracking or account friction.
+          <strong>fallow.garden</strong> is an independent collection of small, single-purpose web tools built to push back against noisy feeds, constant tracking, and relentless self-optimization. Everything runs locally in your browser with no accounts and no telemetry.
         </p>
         
         <div class="reference-box">
@@ -1328,7 +1328,7 @@
             </div>
             <div class="reading-item">
               <strong>ADHD 2.0 (2021)</strong>
-              <em>Dr. Edward Hallowell &amp; Dr. John Ratey</em> — Explains the porous DMN-TPN "glitch" in ADHD brains and how sensory/kinetic anchors prevent rumination.
+              <em>Dr. Edward Hallowell &amp; Dr. John Ratey</em> — Explains the porous DMN-TPN switch in ADHD brains and how sensory/kinetic anchors prevent rumination.
             </div>
             <div class="reading-item">
               <strong>Attention Span (2023)</strong>
@@ -1342,7 +1342,7 @@
         </div>
 
         <p style="margin-top: 1rem;">
-          Have ideas for new restorative modules, suggestions for current tools, or thoughts on the underlying research? Feedback and contributions are always deeply appreciated.
+          Have ideas for new quiet tools, a bug to report, or thoughts on the research behind this page? Send a note.
         </p>
       </div>
 
@@ -1362,7 +1362,7 @@
     <!-- Footer -->
     <footer>
       <div>fallow.garden — Quiet, client-side tools for mind, soil, and time.</div>
-      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.25rem;">100% client-side. Zero telemetry. Hosted on static web infrastructure.</div>
+      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.25rem;">100% client-side. Zero telemetry. Hosted on independent static web infrastructure.</div>
     </footer>
 
   </div>
@@ -1403,8 +1403,8 @@
       {
         step: 1,
         lvl1: {
-          title: "2. Receptor Down-Regulation: Why Normal Life Feels Gray",
-          body: "Just like opportunistic gut bacteria make you crave refined sugar, digital algorithms flood your brain with 'neural sugar.' To protect itself from being overwhelmed, your brain pulls back its dopamine antennas. Once those antennas retract, everyday life—reading a book, listening to rain, talking with a friend—suddenly feels flat, gray, and intolerably boring."
+          title: "2. Numb to Quiet: Why Normal Life Feels Gray",
+          body: "Just like sugar-craving gut microbes make you want sweet snacks, endless feeds flood your brain with 'digital sugar.' To protect itself from being overwhelmed, your brain dials down its sensitivity to everyday rewards. Once that happens, normal quiet moments—reading a book, listening to rain, talking with a friend—suddenly feel flat, gray, and intolerably boring."
         },
         lvl2: {
           title: "2. Receptor Down-Regulation: The Pleasure-Pain Balance",
@@ -1420,8 +1420,8 @@
       {
         step: 2,
         lvl1: {
-          title: "3. The 90-Second Airlock: The Itch Before the Calm",
-          body: "When you finally put your phone down or wait for a slow webpage to load, the first 90 seconds feel itchy and irritating. That uncomfortable feeling is what we call 'boredom.' It is simply the friction of your brain shifting gears from outside entertainment to inside reflection. If you don't bail out by grabbing your phone, the itch dissolves into calm curiosity."
+          title: "3. The 90-Second Itch: Getting Past the First Wave",
+          body: "When you finally put your phone down or wait for a slow page to load, the first 90 seconds feel itchy and irritating. That uncomfortable feeling is what we call 'boredom.' It is simply the friction of your brain shifting gears from outside entertainment to inside reflection. If you don't bail out by grabbing your phone, the itch dissolves into calm curiosity."
         },
         lvl2: {
           title: "3. The 90-Second Airlock: Network Switching Friction",
@@ -1431,13 +1431,13 @@
           title: "3. The 90-Second Airlock: Anterior Insula & ACC Salience Shift",
           body: "Acute boredom activates the anterior insula and dorsal anterior cingulate cortex (dACC) within the Salience Network as phasic dopamine drops. Surviving this 90-second transient arousal spike without re-engaging exogenous stimuli permits the right fronto-insular cortex to toggle cortical dominance from the dorsal attention network to the DMN."
         },
-        ntNote: "<strong>⚖️ Standard Lens:</strong> In a neurotypical brain, simply sitting quietly through this 90-second airlock is enough for the seesaw to tip smoothly into pleasant daydreaming.",
-        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> In an ADHD brain, a 0%-stimulation airlock (staring at a blank wall) causes tonic dopamine to crash. Crossing the airlock safely requires a '10% sensory tether'—like brown noise or watching wind in garden stems."
+        ntNote: "<strong>⚖️ Standard Lens:</strong> In a neurotypical brain, simply sitting quietly through this 90-second transition is enough for the seesaw to tip smoothly into pleasant daydreaming.",
+        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> In an ADHD brain, staring at a blank wall with zero input causes baseline dopamine to crash. Getting past that 90-second itch safely requires a gentle 10% anchor—like brown noise or watching wind in garden stems."
       },
       {
         step: 3,
         lvl1: {
-          title: "4. Synaptic Composting: The Default Mode Network (DMN)",
+          title: "4. Brain Composting: What Happens When You Let Your Mind Wander",
           body: "When a garden bed lies fallow over winter, it isn't dead—underground, microbes are turning fallen leaves into rich black soil. Your brain has an identical system called the Default Mode Network. The moment you let yourself be bored, this deep network lights up, stitching together half-forgotten memories, processing emotions, and handing you sudden creative breakthroughs."
         },
         lvl2: {
@@ -1454,8 +1454,8 @@
       {
         step: 4,
         lvl1: {
-          title: "5. Soft Fascination: Feeding the Watchman 10%",
-          body: "You don't need to lock yourself in a dark closet to rest your mind. In fact, sitting on a bench for 30 minutes watching solitary bees land on mountain mint or clouds drift across the sky is the ultimate brain reset. Nature gently occupies 10% of your eyes with effortless beauty, freeing the other 90% of your mind to wander and heal."
+          title: "5. Easy Nature Watching: Feeding the Watchman 10%",
+          body: "You don't need to lock yourself in a dark closet to rest your mind. In fact, sitting on a bench for 30 minutes watching solitary bees land on mountain mint or clouds drift across the sky is the ultimate brain reset. Nature gently occupies 10% of your eyes with effortless movement, freeing the other 90% of your mind to wander and heal."
         },
         lvl2: {
           title: "5. Soft Fascination: Attention Restoration Theory (ART)",
@@ -1465,8 +1465,8 @@
           title: "5. Soft Fascination: Fractal Stochastic Resonance & Open Monitoring",
           body: "Natural scenes exhibit statistical self-similarity (fractal dimension D ≈ 1.3–1.5) and 1/f pink/brown acoustic spectra. In contemplative neuroscience, 'Open Monitoring' of these stochastic inputs induces optimal stochastic resonance in catecholamine pathways—stabilizing tonic dopamine just enough to silence DMN hyper-reactivity while maximizing alpha/theta restorative synchrony."
         },
-        ntNote: "<strong>⚖️ Standard Lens:</strong> Trading 30 minutes of screen scrolling for 30 minutes of 'Soft Fascination' in a garden measurably lowers cortisol and restores executive focus accuracy.",
-        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> This explains why an ADHD mind can sit peacefully for 30 minutes 'always observing' a garden! Continuous, low-stakes micro-events (a grass skipper darting, stems swaying) keep the prefrontal watchman fed so the rest of the mind can lie fallow."
+        ntNote: "<strong>⚖️ Standard Lens:</strong> Trading 30 minutes of screen scrolling for 30 minutes of easy nature watching in a garden measurably lowers stress hormones and restores focus.",
+        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> This explains why an ADHD mind can sit peacefully for 30 minutes 'always observing' a garden! Continuous, low-stakes movement (a butterfly darting, stems swaying) keeps the front of the brain gently occupied so the rest of the mind can lie fallow."
       }
     ];
 
@@ -1680,11 +1680,11 @@
       if (profile === 'nt') {
         btnNT.classList.add('active');
         btnADHD.classList.remove('active', 'adhd-active');
-        sandboxTag.textContent = "Biophysical Simulation • Standard Lens";
+        sandboxTag.textContent = "Daily Habit Simulator • Standard Lens";
       } else {
         btnNT.classList.remove('active');
         btnADHD.classList.add('active', 'adhd-active');
-        sandboxTag.textContent = "Biophysical Simulation • ADHD / Novelty-Seeking Lens";
+        sandboxTag.textContent = "Daily Habit Simulator • ADHD / Novelty-Seeking Lens";
       }
 
       renderNarrative();
@@ -1868,43 +1868,55 @@
       document.getElementById('barResidue').style.backgroundColor = residue > 55 ? 'var(--terracotta)' : 'var(--moss-mid)';
 
       if (currentLens === 1) {
+        document.getElementById('labelTonic').textContent = 'Steady Dopamine Reserve';
         document.getElementById('valTonicScore').textContent = tonic > 70 ? 'Steady & Buoyant' : (tonic > 42 ? 'Slightly Drained' : 'Receptor Crash');
         document.getElementById('noteTonic').textContent = currentProfile === 'adhd'
-          ? 'ADHD brains need kinetic movement and soft nature observation to keep baseline dopamine steady.'
-          : 'Cutting back on rapid-cut feeds lets your dopamine antennas uncurl so simple things feel good again.';
+          ? 'ADHD brains need steady movement and easy nature watching to keep baseline dopamine steady.'
+          : 'Cutting back on fast feeds lets your brain reset so simple, quiet things feel good again.';
 
+        document.getElementById('labelDmn').textContent = 'Brain Composting (DMN)';
         document.getElementById('valDmnScore').textContent = dmn > 70 ? 'Rich Composting' : (dmn > 40 ? 'Shallow Rest' : 'Starved Soil');
         document.getElementById('noteDmn').textContent = 'Longer stretches without checking your phone allow your deeper mind to stitch memories and ideas together.';
 
+        document.getElementById('labelAirlock').textContent = 'Getting Past the 90-Sec Itch';
         document.getElementById('valAirlockScore').textContent = airlock > 68 ? 'Smooth Glide' : (airlock > 40 ? 'Mild Itch' : 'Restless Panic');
         document.getElementById('noteAirlock').textContent = 'How easily your mind survives the first 90 seconds of boredom without grabbing a screen.';
 
+        document.getElementById('labelResidue').textContent = 'Mental Cobwebs (Attention Residue)';
         document.getElementById('valResidueScore').textContent = residue < 35 ? 'Clear Horizon' : (residue < 65 ? 'Moderate Static' : 'Heavy Cobwebs');
-        document.getElementById('noteResidue').textContent = 'Rapid tab-switching leaves sticky mental residue that clouds deep thinking.';
+        document.getElementById('noteResidue').textContent = 'Rapid tab-jumping leaves sticky mental cobwebs that cloud deep thinking.';
       } else if (currentLens === 2) {
+        document.getElementById('labelTonic').textContent = 'Tonic Dopamine Sensitivity';
         document.getElementById('valTonicScore').textContent = `${tonic}% Homeostasis`;
         document.getElementById('noteTonic').textContent = 'Reflects striatal D2 receptor sensitivity vs. phasic variable-ratio down-regulation.';
 
+        document.getElementById('labelDmn').textContent = 'DMN Synaptic Composting';
         document.getElementById('valDmnScore').textContent = `${dmn}% Coupling`;
         document.getElementById('noteDmn').textContent = 'Measures mPFC-PCC default mode engagement and autobiographical memory consolidation.';
 
+        document.getElementById('labelAirlock').textContent = '90-Second Airlock Ease';
         document.getElementById('valAirlockScore').textContent = `${airlock}% Transition Ease`;
         document.getElementById('noteAirlock').textContent = currentProfile === 'adhd'
           ? 'Stochastic resonance (garden observation / weighted movement) prevents insular agitation during TPN-to-DMN switching.'
           : 'Salience network latency required to release executive inhibition and enter waking rest.';
 
+        document.getElementById('labelResidue').textContent = 'Attention Residue & Static Risk';
         document.getElementById('valResidueScore').textContent = residue < 35 ? 'Low Switching Drag' : 'Elevated Cortisol Load';
         document.getElementById('noteResidue').textContent = 'Unresolved Zeigarnik loops and 47-second context switches fragment prefrontal working memory.';
       } else {
+        document.getElementById('labelTonic').textContent = 'Tonic Dopamine Sensitivity';
         document.getElementById('valTonicScore').textContent = `D2 Tone: ${(tonic / 50).toFixed(2)} AU`;
         document.getElementById('noteTonic').textContent = 'Extrasynaptic tonic catecholamine pool relative to β-arrestin-internalized D2/D3 density.';
 
+        document.getElementById('labelDmn').textContent = 'DMN Synaptic Composting';
         document.getElementById('valDmnScore').textContent = `r = ${(dmn / 110).toFixed(2)} mPFC-PCC`;
         document.getElementById('noteDmn').textContent = 'Low-frequency BOLD coherence across midline DMN hubs and sharp-wave ripple replay index.';
 
+        document.getElementById('labelAirlock').textContent = '90-Second Airlock Ease';
         document.getElementById('valAirlockScore').textContent = `${Math.round(190 - airlock * 1.3)}s Latency`;
         document.getElementById('noteAirlock').textContent = 'Right fronto-insular salience switching latency and dACC dysphoric arousal decay curve.';
 
+        document.getElementById('labelResidue').textContent = 'Attention Residue & Static Risk';
         document.getElementById('valResidueScore').textContent = `${(residue * 0.45).toFixed(1)}% WM Drag`;
         document.getElementById('noteResidue').textContent = 'Persistent dorsolateral prefrontal recurrent excitation from unclosed attentional loops.';
       }
@@ -1939,35 +1951,35 @@
 
       // Paragraph 1: Dopamine & Algorithmic Foraging Status
       if (algo >= 4.0) {
-        p1 = `<strong>1. Dopamine Receptor Down-Regulation (${tonic}% Tonic Tone):</strong> With <strong>${algo} hrs/day</strong> of rapid-cut feeds or variable-ratio gaming, your mesolimbic foraging circuit is flooded with artificial phasic spikes. Just as opportunistic gut bacteria hijack vagal cravings, this high-amplitude novelty forces your brain to retract D2 dopamine receptors—making unhurried, everyday stillness feel artificially flat and restless.`;
+        p1 = `<strong>1. Numb to Quiet (${tonic}% Dopamine Reserve):</strong> With <strong>${algo} hrs/day</strong> of fast feeds, short videos, or games, your brain's reward system is getting constant artificial spikes. Just like sugar-craving gut microbes nudge your appetite, this constant novelty makes your brain dial down its sensitivity—so unhurried, everyday quiet feels artificially flat and restless.`;
       } else if (algo <= 1.5) {
-        p1 = `<strong>1. Protected Receptor Homeostasis (${tonic}% Tonic Tone):</strong> By keeping algorithmic foraging down to <strong>${algo} hrs/day</strong>, your dopamine receptors remain sensitive and uncurled. You aren't forcing your prefrontal cortex to compete with slot-machine reward schedules.`;
+        p1 = `<strong>1. Protected Baseline Calm (${tonic}% Dopamine Reserve):</strong> By keeping fast feeds and games down to <strong>${algo} hrs/day</strong>, your brain stays sensitive to everyday life. You aren't forcing your focus to compete with slot-machine reward loops.`;
       } else {
-        p1 = `<strong>1. Moderate Foraging Load (${tonic}% Tonic Tone):</strong> Your <strong>${algo} hrs/day</strong> of algorithmic input creates periodic phasic spikes, requiring intentional daytime buffers to prevent gradual receptor desensitization.`;
+        p1 = `<strong>1. Moderate Screen Load (${tonic}% Dopamine Reserve):</strong> Your <strong>${algo} hrs/day</strong> of fast feeds or gaming creates periodic dopamine spikes, so protecting screen-free gaps during the day helps keep your baseline steady.`;
       }
 
       // Paragraph 2: Lens-Specific DMN & Airlock Analysis
       if (currentProfile === 'adhd') {
         if (tetherTotal < 25 && fallow >= 20) {
-          p2 = `<strong>2. ⚡ ADHD Lens Alert — The "Zero-Input Trap" (${dmn}% DMN Composting):</strong> You have carved out <strong>${fallow}-minute</strong> fallow blocks, <em>but</em> your Soft Fascination (<strong>${soft}m</strong>) and Kinetic Grounding (<strong>${kinetic}m</strong>) are critically low. For a novelty-seeking or ADHD mind, sitting in a blank sensory vacuum causes tonic dopamine to crash, turning the Default Mode Network into an agitated, ruminating engine.`;
+          p2 = `<strong>2. ⚡ ADHD Lens Alert — The "Blank Wall Trap" (${dmn}% Brain Composting):</strong> You have carved out <strong>${fallow}-minute</strong> screen-free gaps, <em>but</em> your Easy Nature Watching (<strong>${soft}m</strong>) and Physical Grounding (<strong>${kinetic}m</strong>) are very low. For an ADHD or novelty-seeking mind, sitting in a blank sensory vacuum causes baseline dopamine to crash, turning the resting brain into an agitated, ruminating engine.`;
         } else if (tetherTotal >= 50 && fallow >= 20) {
-          p2 = `<strong>2. ⚡ ADHD Lens — Optimal "Open Monitoring" Tether (${dmn}% DMN Composting):</strong> This is the sweet spot for an active, observing mind. By pairing <strong>${fallow}-minute</strong> screen-free windows with <strong>${soft} mins</strong> of Soft Fascination (like watching bees and wind in native garden stems) and <strong>${kinetic} mins</strong> of proprioceptive movement, you feed your prefrontal watchman a steady 10% tether—unlocking deep, peaceful synaptic composting.`;
+          p2 = `<strong>2. ⚡ ADHD Lens — Optimal Gentle Anchor (${dmn}% Brain Composting):</strong> This is the sweet spot for an active, observing mind. By pairing <strong>${fallow}-minute</strong> screen-free windows with <strong>${soft} mins</strong> of easy nature watching (like watching bees and wind in garden plants) and <strong>${kinetic} mins</strong> of steady physical movement, you give the front of your brain a 10% sensory anchor—unlocking deep, peaceful mental composting.`;
         } else {
-          p2 = `<strong>2. ⚡ ADHD Lens — Stabilizing the Switch (${dmn}% DMN Composting):</strong> Because your longest no-screen block is <strong>${fallow} mins</strong> with <strong>${tetherTotal} total mins</strong> of sensory/kinetic anchoring, your Default Mode Network only partially settles. Increasing gentle nature observation or weighted walking will smooth out the 90-second boredom airlock.`;
+          p2 = `<strong>2. ⚡ ADHD Lens — Stabilizing the Switch (${dmn}% Brain Composting):</strong> Because your longest screen-free gap is <strong>${fallow} mins</strong> with <strong>${tetherTotal} total mins</strong> of nature watching or movement, your Default Mode Network only partially settles. Adding more gentle outdoor observation or weighted walking will smooth out the 90-second boredom itch.`;
         }
       } else {
         if (fallow < 15) {
-          p2 = `<strong>2. ⚖️ Standard Lens — Starved Default Mode Network (${dmn}% DMN Composting):</strong> Because your typical screen-free gap is only <strong>${fallow} minutes</strong>, your brain rarely clears the 90-second boredom airlock. The Executive Attention seesaw stays locked in the downward position, preventing memory consolidation.`;
+          p2 = `<strong>2. ⚖️ Standard Lens — Starved Resting Network (${dmn}% Brain Composting):</strong> Because your typical screen-free gap is only <strong>${fallow} minutes</strong>, your brain rarely gets past the first 90 seconds of restlessness. Your focus stays locked outward, preventing deep memory sorting and creative insight.`;
         } else {
-          p2 = `<strong>2. ⚖️ Standard Lens — Active Synaptic Composting (${dmn}% DMN Composting):</strong> Your <strong>${fallow}-minute</strong> fallow windows—supported by <strong>${soft} mins</strong> of Soft Fascination—give your Task-Positive Network enough margin to power down, letting the Default Mode Network weave daily fragments into creative insight.`;
+          p2 = `<strong>2. ⚖️ Standard Lens — Active Brain Composting (${dmn}% Brain Composting):</strong> Your <strong>${fallow}-minute</strong> screen-free gaps—supported by <strong>${soft} mins</strong> of easy nature watching—give your task-focused brain enough room to power down, letting your Default Mode Network weave daily fragments into fresh ideas.`;
         }
       }
 
       // Paragraph 3: Actionable Fallow.Garden Prescription
       if (residue > 55) {
-        p3 = `<strong>3. Soil Prescription:</strong> High context-switching and screen density are generating <strong>${residue}% Attention Residue</strong>. Before starting a fallow window, dump unfinished tasks into the <em>Open Loop Catcher</em> inside <strong>Attention Restore</strong>, then step outside for 15–30 minutes of unhurried <em>Open Monitoring</em>.`;
+        p3 = `<strong>3. Soil Prescription:</strong> Frequent tab-jumping and screen time are creating <strong>${residue}% Mental Cobwebs</strong>. Before taking a break, jot unfinished tasks down in the <em>Open Loop Catcher</em> inside <strong>Attention Restore</strong>, then step outside for 15–30 minutes of unhurried nature watching.`;
       } else {
-        p3 = `<strong>3. Soil Prescription:</strong> Your attention residue is well-contained (<strong>${residue}%</strong>) with a <strong>${curfew}-minute</strong> pre-sleep buffer. Keep protecting your micro-transitions—waiting for coffee, walking the dogs, or sitting in the garden—as sacred, phone-free airlocks.`;
+        p3 = `<strong>3. Soil Prescription:</strong> Your mental cobwebs are low (<strong>${residue}%</strong>) with a <strong>${curfew}-minute</strong> screen-free wind-down before sleep. Keep protecting small daily pauses—waiting for coffee, walking the dogs, or sitting in the garden—as phone-free breathing room.`;
       }
 
       output.innerHTML = `
