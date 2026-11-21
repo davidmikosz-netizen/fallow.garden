@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>The Fallow Mind — the importance of boredom &amp; the Default Mode Network</title>
-<link rel="canonical" href="https://fallow.garden/episodes/boredom/" />
+  <link rel="canonical" href="https://fallow.garden/episodes/boredom/" />
   <script data-goatcounter="https://fallow.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
   <!-- PWA & Mobile Meta Tags -->
@@ -69,7 +69,7 @@
       --font-mono: "JetBrains Mono", monospace;
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -171,87 +171,11 @@
       background: var(--parchment-warm);
       border: 1px solid var(--sand-border);
       border-radius: var(--radius-md);
-      padding: 1rem 1.25rem;
+      padding: 1.15rem 1.35rem;
       margin-top: 0.25rem;
-    }
-
-    /* Table of Contents Navigation */
-    .toc-nav {
-      background: var(--parchment-card);
-      border: 1px solid var(--sand-border);
-      border-radius: var(--radius-lg);
-      padding: 1.25rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .toc-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--loam-light);
-      margin-bottom: 0.75rem;
-    }
-
-    .toc-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 0.65rem;
-    }
-
-    .toc-btn {
-      background: var(--parchment);
-      border: 1px solid var(--sand-border);
-      border-radius: var(--radius-md);
-      padding: 0.85rem 1rem;
-      text-align: left;
-      cursor: pointer;
-      font-family: var(--font-sans);
-      transition: all 0.15s ease;
       display: flex;
       flex-direction: column;
-      gap: 0.2rem;
-    }
-
-    .toc-btn:hover {
-      border-color: var(--moss-mid);
-      background: var(--moss-pale);
-    }
-
-    .toc-btn.active {
-      background: var(--moss-deep);
-      border-color: var(--moss-deep);
-      color: #ffffff;
-    }
-
-    .toc-btn-number {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      color: var(--loam-light);
-    }
-
-    .toc-btn.active .toc-btn-number {
-      color: var(--moss-pale);
-    }
-
-    .toc-btn-label {
-      font-family: var(--font-serif);
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--loam-dark);
-    }
-
-    .toc-btn.active .toc-btn-label {
-      color: #ffffff;
-    }
-
-    /* App Views (Chapter containers) */
-    .app-view {
-      display: flex;
-      flex-direction: column;
-      gap: 2.25rem;
-      scroll-margin-top: 2rem;
+      gap: 0.75rem;
     }
 
     /* Sticky Dual Lens Controller (Complexity + Cognitive Profile) */
@@ -350,6 +274,85 @@
     .profile-btn.active.adhd-active {
       background: var(--terracotta);
       color: #ffffff;
+    }
+
+    /* Table of Contents Navigation */
+    .toc-nav {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .toc-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--loam-light);
+      margin-bottom: 0.75rem;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.65rem;
+    }
+
+    .toc-btn {
+      background: var(--parchment);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .toc-btn:hover {
+      border-color: var(--moss-mid);
+      background: var(--moss-pale);
+    }
+
+    .toc-btn.active {
+      background: var(--moss-deep);
+      border-color: var(--moss-deep);
+      color: #ffffff;
+    }
+
+    .toc-btn-number {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--loam-light);
+    }
+
+    .toc-btn.active .toc-btn-number {
+      color: var(--moss-pale);
+    }
+
+    .toc-btn-label {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+    }
+
+    .toc-btn.active .toc-btn-label {
+      color: #ffffff;
+    }
+
+    /* App Views (Chapter containers) */
+    .app-view {
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+      scroll-margin-top: 7.5rem;
     }
 
     /* Section Cards */
@@ -926,19 +929,42 @@
     <!-- Top Nav -->
     <div class="top-nav">
       <a href="/" class="back-link">← fallow.garden</a>
-      <span class="meta-badge">Corridor I • Mind &amp; Impermanence</span>
+      <span class="meta-badge">Zone I • The Fallow Mind</span>
     </div>
 
     <!-- Header -->
     <header>
       <div class="brand-badge">Natural History of Your Attention</div>
       <h1>The Fallow Mind</h1>
-      <p class="header-intro">
-        Modern screens are built to make sure we never feel bored for even ten seconds. But just as garden soil needs a fallow season to replenish its nutrients, our brains need moments of boredom to stay healthy and creative. When we stop taking in constant information, a deeper network in the brain switches on—quietly stitching together memories, untangling stress, and sparking sudden insights. This app explores the science of why boredom is so good for us, why "doing nothing" can feel especially tricky for ADHD minds, and how simple daily choices—like watching a garden or taking a walk—can restore your focus.
-      </p>
+      <div class="header-intro">
+        <p>New research is helping to reveal the ways we have been manipulated by our tech.</p>
+        <p>This tool has three levels of "explanation depth" — and an option to view through a neurotypical or ADHD lens.</p>
+        <p>Modern screens are built to make sure we never feel bored for even ten seconds. But like a garden needs a fallow season to replenish itself, our brains need some boredom to stay healthy and creative.</p>
+        <p>This tool explores what happens when we stop taking in constant information, and how a deeper network in the brain switches on—quietly stitching together memories, untangling stress, and sparking sudden insights.</p>
+        <p>So start reading to become bored. :-)</p>
+      </div>
     </header>
 
-    <!-- Table of Contents Navigation (Smooth Scrolling) -->
+    <!-- Sticky Dual Lens Selector (Complexity + Cognitive Architecture) -->
+    <div class="lens-sticky-wrap">
+      <div class="lens-container">
+        <span class="lens-title">1. Explanation Depth:</span>
+        <div class="lens-buttons">
+          <button class="lens-btn active" onclick="setLens(1)">🌿 Just the vibes</button>
+          <button class="lens-btn" onclick="setLens(2)">🧬 I know some big words</button>
+          <button class="lens-btn" onclick="setLens(3)">🔬 Maximum nerd mode</button>
+        </div>
+      </div>
+      <div class="lens-container">
+        <span class="lens-title">2. Cognitive Wiring Lens:</span>
+        <div class="profile-buttons">
+          <button class="profile-btn active" id="profBtnNT" onclick="setProfile('nt')">⚖️ Standard / Neurotypical Lens</button>
+          <button class="profile-btn" id="profBtnADHD" onclick="setProfile('adhd')">⚡ ADHD / Novelty-Seeking Lens</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table of Contents Navigation (Moved below Lens Selector) -->
     <nav class="toc-nav">
       <div class="toc-title">Table of Contents</div>
       <div class="toc-grid">
@@ -964,25 +990,6 @@
         </button>
       </div>
     </nav>
-
-    <!-- Sticky Dual Lens Selector (Complexity + Cognitive Architecture) -->
-    <div class="lens-sticky-wrap">
-      <div class="lens-container">
-        <span class="lens-title">1. Explanation Depth:</span>
-        <div class="lens-buttons">
-          <button class="lens-btn active" onclick="setLens(1)">🌿 Just the vibes</button>
-          <button class="lens-btn" onclick="setLens(2)">🧬 I know some big words</button>
-          <button class="lens-btn" onclick="setLens(3)">🔬 Maximum nerd mode</button>
-        </div>
-      </div>
-      <div class="lens-container">
-        <span class="lens-title">2. Cognitive Wiring Lens:</span>
-        <div class="profile-buttons">
-          <button class="profile-btn active" id="profBtnNT" onclick="setProfile('nt')">⚖️ Standard / Neurotypical Lens</button>
-          <button class="profile-btn" id="profBtnADHD" onclick="setProfile('adhd')">⚡ ADHD / Novelty-Seeking Lens</button>
-        </div>
-      </div>
-    </div>
 
     <!-- CHAPTER 1 VIEW: The Anatomy of Boredom -->
     <div class="app-view" id="chapter1">
@@ -1021,7 +1028,7 @@
         </div>
         
         <p class="lens-intro-text">
-          Just like opportunistic gut microbes hijack your brain-gut pathways to demand refined sugar, engagement algorithms hijack our ancient foraging circuits to monopolize attention seeking and preventing the brain's restorative network from ever turning on.
+          Just like opportunistic gut microbes hijack your brain-gut pathways to demand refined sugar, engagement algorithms hijack our ancient foraging circuits to monopolize attention seeking—preventing the brain's restorative network from ever turning on.
         </p>
 
         <div style="display: grid; gap: 1.25rem; margin-top: 1.25rem;" id="ch2CardsContainer">
@@ -1044,11 +1051,12 @@
               <!-- Seesaw Plank -->
               <line x1="55" y1="155" x2="285" y2="125" stroke="var(--loam-mid)" stroke-width="5" stroke-linecap="round" />
 
-              <!-- Fulcrum Triangle (Salience Network / Dopamine Hinge) -->
+              <!-- Fulcrum Triangle (Salience Network / Dopamine Switch) -->
               <g id="node-hinge" class="seesaw-node" tabindex="0">
-                <polygon points="170,142 142,215 198,215" fill="var(--parchment-warm)" stroke="var(--honey-ochre)" stroke-width="3" />
-                <text x="170" y="198" text-anchor="middle" font-family="var(--font-mono)" font-weight="700" font-size="9.5" fill="var(--loam-dark)">HINGE</text>
-                <text x="170" y="232" text-anchor="middle" font-family="var(--font-sans)" font-weight="600" font-size="10" fill="var(--honey-ochre)">Salience &amp; Tonic Dopamine</text>
+                <polygon points="170,142 136,215 204,215" fill="var(--parchment-warm)" stroke="var(--honey-ochre)" stroke-width="3" />
+                <text x="170" y="191" text-anchor="middle" font-family="var(--font-mono)" font-weight="700" font-size="8.5" fill="var(--loam-dark)">SALIENCE</text>
+                <text x="170" y="203" text-anchor="middle" font-family="var(--font-mono)" font-weight="700" font-size="8.5" fill="var(--loam-dark)">SWITCH</text>
+                <text x="170" y="232" text-anchor="middle" font-family="var(--font-sans)" font-weight="600" font-size="10" fill="var(--honey-ochre)">Salience Network &amp; Dopamine</text>
               </g>
 
               <!-- Left Node: Executive Attention (TPN) -->
@@ -1069,7 +1077,7 @@
           
           <div class="seesaw-info-panel">
             <h4 id="seesaw-info-title">The Cortical Seesaw</h4>
-            <p id="seesaw-info-desc">Hover over or tap the <strong>Executive Network</strong>, the <strong>Default Mode Network</strong>, the <strong>Dopamine Hinge</strong>, or the <strong>10% Soft Fascination Tether</strong> to inspect how your brain shifts into fallow rest.</p>
+            <p id="seesaw-info-desc">Hover over or tap any part of the diagram—the <strong>Executive Network</strong>, the <strong>Default Mode Network</strong>, the <strong>Salience Switch (Fulcrum)</strong>, or the <strong>10% Soft Fascination Tether</strong>—to see how your brain shifts between active work and fallow rest.</p>
           </div>
         </div>
       </section>
@@ -1229,9 +1237,13 @@
     <div class="app-view" id="chapter4">
       <section class="card">
         <div class="section-head">
-          <h2>4. Networks, Neurotransmitters &amp; Protocols</h2>
-          <span class="section-tag">Field Directory</span>
+          <h2>4. Field Guide: Networks, Neurotransmitters &amp; Protocols</h2>
+          <span class="section-tag">Plain-Language Glossary</span>
         </div>
+
+        <p class="lens-intro-text" style="margin-bottom: 1.15rem;">
+          Not sure what <em>Default Mode Network</em>, <em>tonic dopamine</em>, or <em>soft fascination</em> actually mean in practice? This field directory breaks down the core brain systems, chemicals, and daily habits mentioned throughout the app. Use the filter buttons below to browse by category—and toggle the <strong>Explanation Depth</strong> bar at the top of the page to translate every card between everyday metaphors and technical neuroscience.
+        </p>
 
         <div class="filter-chips" id="fieldFilterChips">
           <button class="chip active" onclick="filterFieldCards('ALL')">All Entries</button>
@@ -1258,22 +1270,13 @@
         </p>
 
         <div class="companion-grid">
-          <a href="../attention-restore/index.html" class="companion-link">
+          <a href="../garden/index.html" class="companion-link">
             <div class="companion-title">
               <span>Attention Restore</span>
               <span>⏳</span>
             </div>
             <p class="companion-desc">Deploy 3m optical resets, 5m brown-noise zero-input breaks, and 15m nature walks with an Open Loop Catcher.</p>
             <span class="companion-cta">Start Focus Recovery &rarr;</span>
-          </a>
-
-          <a href="../composter/index.html" class="companion-link">
-            <div class="companion-title">
-              <span>Digital Thought Composter</span>
-              <span>🌱</span>
-            </div>
-            <p class="companion-desc">Externalize intrusive DMN loops and transform mental friction into botanical growth over a 5-day cycle.</p>
-            <span class="companion-cta">Compost a Thought &rarr;</span>
           </a>
 
           <a href="../multitudes/index.html" class="companion-link">
@@ -1358,7 +1361,7 @@
 
     <!-- Footer -->
     <footer>
-      <div>fallow.garden — Restorative micro-utilities for mind, soil, and human vitality.</div>
+      <div>fallow.garden — Quiet, client-side tools for mind, soil, and time.</div>
       <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.25rem;">100% client-side. Zero telemetry. Hosted on static web infrastructure.</div>
     </footer>
 
@@ -1409,7 +1412,7 @@
         },
         lvl3: {
           title: "2. Receptor Down-Regulation: Striatal D2 Desensitization & Allostasis",
-          body: "Sustained hyper-dopaminergic signaling induces $\\beta$-arrestin-mediated internalization of striatal D2/D3 receptors alongside compensatory dynorphin upregulation on the 'anti-reward' kappa-opioid pathway. The resulting hypodopaminergic tonic trough manifests clinically as dysphoric restlessness whenever external screen inputs cease."
+          body: "Sustained hyper-dopaminergic signaling induces β-arrestin-mediated internalization of striatal D2/D3 receptors alongside compensatory dynorphin upregulation on the 'anti-reward' kappa-opioid pathway. The resulting hypodopaminergic tonic trough manifests clinically as dysphoric restlessness whenever external screen inputs cease."
         },
         ntNote: "<strong>⚖️ Standard Lens:</strong> After heavy screen or gaming binges, it typically takes 48 to 72 hours of reduced digital stimulation for retracted dopamine receptors to sensitize back to baseline comfort.",
         adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> When an already low-tonic ADHD brain experiences secondary receptor down-regulation from screens, unplugging cold-turkey into silence feels like hitting a brick wall—activating the insular cortex (which processes physical pain)."
@@ -1460,7 +1463,7 @@
         },
         lvl3: {
           title: "5. Soft Fascination: Fractal Stochastic Resonance & Open Monitoring",
-          body: "Natural scenes exhibit statistical self-similarity (fractal dimension $D \\approx 1.3–1.5$) and $1/f$ pink/brown acoustic spectra. In contemplative neuroscience, 'Open Monitoring' of these stochastic inputs induces optimal stochastic resonance in Catecholamine pathways—stabilizing tonic dopamine just enough to silence DMN hyper-reactivity while maximizing alpha/theta restorative synchrony."
+          body: "Natural scenes exhibit statistical self-similarity (fractal dimension D ≈ 1.3–1.5) and 1/f pink/brown acoustic spectra. In contemplative neuroscience, 'Open Monitoring' of these stochastic inputs induces optimal stochastic resonance in catecholamine pathways—stabilizing tonic dopamine just enough to silence DMN hyper-reactivity while maximizing alpha/theta restorative synchrony."
         },
         ntNote: "<strong>⚖️ Standard Lens:</strong> Trading 30 minutes of screen scrolling for 30 minutes of 'Soft Fascination' in a garden measurably lowers cortisol and restores executive focus accuracy.",
         adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> This explains why an ADHD mind can sit peacefully for 30 minutes 'always observing' a garden! Continuous, low-stakes micro-events (a grass skipper darting, stems swaying) keep the prefrontal watchman fed so the rest of the mind can lie fallow."
@@ -1485,8 +1488,8 @@
       ],
       adhd: [
         {
-          title: "The 'Glitchy Hinge' (DMN Intrusion & Hyper-Foraging)",
-          body: "In an ADHD or novelty-seeking brain, the hinge between the Executive Network and the Default Mode Network is porous. During mundane tasks, the DMN refuses to turn off, intruding with creative tangents. Worse, when external stimulation drops to zero (like sitting in a blank waiting room), the dopamine-starved DMN doesn't peacefully daydream—it panics and spins its wheels, often latching onto anxious loops or conflict simply because worry reliably spikes norepinephrine and dopamine."
+          title: "The 'Glitchy Switch' (DMN Intrusion & Hyper-Foraging)",
+          body: "In an ADHD or novelty-seeking brain, the Salience Network switch between the Executive Network and the Default Mode Network is porous. During mundane tasks, the DMN refuses to turn off, intruding with creative tangents. Worse, when external stimulation drops to zero (like sitting in a blank waiting room), the dopamine-starved DMN doesn't peacefully daydream—it panics and spins its wheels, often latching onto anxious loops or conflict simply because worry reliably spikes norepinephrine and dopamine."
         },
         {
           title: "Case Study: Why You Can Watch a Garden for 30 Minutes",
@@ -1546,6 +1549,28 @@
         }
       },
       {
+        id: 'salience',
+        cat: 'Network',
+        lvl1: {
+          name: "Salience Network (The Switch)",
+          role: "The Brain's Traffic Cop",
+          desc: "The pivot point in the middle of the seesaw. It decides whether you should pay attention to the outside world (Executive) or turn inward to daydream (DMN).",
+          meta: "Needs ~90 seconds of quiet to flip cleanly"
+        },
+        lvl2: {
+          name: "Salience Network (SN)",
+          role: "Cortical Network Toggle",
+          desc: "Anchored in the anterior insula and dorsal anterior cingulate cortex (dACC). Detects internal or external urgency and toggles control between the TPN and DMN.",
+          meta: "In ADHD, low tonic dopamine makes this switch sticky"
+        },
+        lvl3: {
+          name: "Salience Network (AI-dACC Hub)",
+          role: "Dynamic Network Switching",
+          desc: "Right fronto-insular cortex mediates causal switching between central executive and default mode networks; modulated by ascending noradrenergic and dopaminergic tone.",
+          meta: "Dysregulated switching drives rumination or distractibility"
+        }
+      },
+      {
         id: 'dopamine',
         cat: 'Chemistry',
         lvl1: {
@@ -1585,7 +1610,7 @@
         lvl3: {
           name: "Soft Fascination & Fractal Fluency",
           role: "Mid-Complexity Visual Processing",
-          desc: "Visual processing of natural fractals ($D \\approx 1.3–1.5$) effortlessly engages early visual cortex without recruiting frontoparietal executive control, maximizing alpha power.",
+          desc: "Visual processing of natural fractals (D ≈ 1.3–1.5) effortlessly engages early visual cortex without recruiting frontoparietal executive control, maximizing alpha power.",
           meta: "Ideal 10% tether for Open Monitoring practices"
         }
       },
@@ -1607,7 +1632,7 @@
         lvl3: {
           name: "Stochastic Resonance & Proprioception",
           role: "Sub-Threshold Catecholamine Tuning",
-          desc: "Acoustic $1/f^2$ brownian noise and deep proprioceptive loading (weighted ambulation) elevate basal locus coeruleus and nigrostriatal tone into the optimal homeostatic window.",
+          desc: "Acoustic 1/f² brownian noise and deep proprioceptive loading (weighted ambulation) elevate basal locus coeruleus and nigrostriatal tone into the optimal homeostatic window.",
           meta: "Clinically validated in ADHD sensory regulation"
         }
       },
@@ -1761,8 +1786,8 @@
             desc: 'Lights up across the medial prefrontal and posterior cingulate cortices the moment external task demands cease. Performs "synaptic composting"—turning daily fragments into autobiographical meaning and creative insight.'
           },
           'node-hinge': {
-            title: 'The Salience & Dopamine Hinge',
-            desc: 'Governs the gear-shift between external focus and internal rest. In neurotypical brains, this hinge pivots smoothly after ~90 seconds of boredom. In ADHD brains, low tonic dopamine makes this hinge sticky and reactive.'
+            title: 'The Salience Switch (The Seesaw Fulcrum)',
+            desc: 'Think of the <strong>Salience Network</strong> as the traffic cop sitting on the center fulcrum of the seesaw, powered by your baseline <strong>tonic dopamine</strong>. Its job is to notice when the outside world stops demanding your focus and flip the switch from Executive mode to Default Mode. In a neurotypical brain, it flips smoothly after ~90 seconds of boredom. In an ADHD brain, low baseline dopamine makes this switch sticky and reactive—so sudden quiet can feel restless unless it has a gentle sensory anchor.'
           },
           'node-tether': {
             title: 'The 10% Soft Fascination Tether',
@@ -1928,7 +1953,7 @@
         } else if (tetherTotal >= 50 && fallow >= 20) {
           p2 = `<strong>2. ⚡ ADHD Lens — Optimal "Open Monitoring" Tether (${dmn}% DMN Composting):</strong> This is the sweet spot for an active, observing mind. By pairing <strong>${fallow}-minute</strong> screen-free windows with <strong>${soft} mins</strong> of Soft Fascination (like watching bees and wind in native garden stems) and <strong>${kinetic} mins</strong> of proprioceptive movement, you feed your prefrontal watchman a steady 10% tether—unlocking deep, peaceful synaptic composting.`;
         } else {
-          p2 = `<strong>2. ⚡ ADHD Lens — Stabilizing the Hinge (${dmn}% DMN Composting):</strong> Because your longest no-screen block is <strong>${fallow} mins</strong> with <strong>${tetherTotal} total mins</strong> of sensory/kinetic anchoring, your Default Mode Network only partially settles. Increasing gentle nature observation or weighted walking will smooth out the 90-second boredom airlock.`;
+          p2 = `<strong>2. ⚡ ADHD Lens — Stabilizing the Switch (${dmn}% DMN Composting):</strong> Because your longest no-screen block is <strong>${fallow} mins</strong> with <strong>${tetherTotal} total mins</strong> of sensory/kinetic anchoring, your Default Mode Network only partially settles. Increasing gentle nature observation or weighted walking will smooth out the 90-second boredom airlock.`;
         }
       } else {
         if (fallow < 15) {
