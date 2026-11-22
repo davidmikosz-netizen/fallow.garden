@@ -235,8 +235,14 @@
 
     .profile-buttons {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 4px;
+    }
+
+    @media (max-width: 560px) {
+      .profile-buttons {
+        grid-template-columns: 1fr;
+      }
     }
 
     .lens-btn, .profile-btn {
@@ -273,6 +279,11 @@
 
     .profile-btn.active.adhd-active {
       background: var(--terracotta);
+      color: #ffffff;
+    }
+
+    .profile-btn.active.mindful-active {
+      background: var(--moss-mid);
       color: #ffffff;
     }
 
@@ -452,6 +463,11 @@
     .profile-callout-banner.adhd-banner {
       background: var(--terracotta-pale);
       border-left-color: var(--terracotta);
+    }
+
+    .profile-callout-banner.mindful-banner {
+      background: var(--moss-pale);
+      border-left-color: var(--moss-mid);
     }
 
     /* MODULE 2: Keystone Field Cards */
@@ -938,14 +954,14 @@
       <h1>The Fallow Mind</h1>
       <div class="header-intro">
         <p>New research is helping to reveal the ways we have been manipulated by our tech.</p>
-        <p>This tool has three levels of "explanation depth" — and an option to view through a neurotypical or ADHD lens.</p>
+        <p>This tool has three levels of "explanation depth" — and an option to view through a standard, ADHD, or mindfulness lens.</p>
         <p>Modern screens are built to make sure we never feel bored for even ten seconds. But like a garden needs a fallow season to replenish itself, our brains need some boredom to stay healthy and creative.</p>
         <p>This tool explores what happens when we stop taking in constant information, and how a deeper network in the brain switches on—quietly stitching together memories, untangling stress, and sparking sudden insights.</p>
         <p>So start reading to become bored.</p>
       </div>
     </header>
 
-    <!-- Sticky Dual Lens Selector (Complexity + Cognitive Architecture) -->
+    <!-- Sticky Dual Lens Selector (Complexity + Cognitive/Mindfulness Profile) -->
     <div class="lens-sticky-wrap">
       <div class="lens-container">
         <span class="lens-title">1. Explanation Depth:</span>
@@ -956,10 +972,11 @@
         </div>
       </div>
       <div class="lens-container">
-        <span class="lens-title">2. Cognitive Wiring Lens:</span>
+        <span class="lens-title">2. Perspective Lens:</span>
         <div class="profile-buttons">
-          <button class="profile-btn active" id="profBtnNT" onclick="setProfile('nt')">⚖️ Standard / Neurotypical Lens</button>
-          <button class="profile-btn" id="profBtnADHD" onclick="setProfile('adhd')">⚡ ADHD / Novelty-Seeking Lens</button>
+          <button class="profile-btn active" id="profBtnNT" onclick="setProfile('nt')">⚖️ Standard Lens</button>
+          <button class="profile-btn" id="profBtnADHD" onclick="setProfile('adhd')">⚡ ADHD Lens</button>
+          <button class="profile-btn" id="profBtnMindful" onclick="setProfile('mindful')">🍃 Mindfulness Lens</button>
         </div>
       </div>
     </div>
@@ -1000,7 +1017,7 @@
         </div>
 
         <p class="lens-intro-text" style="margin-bottom: 1.25rem;">
-          Follow what happens inside your brain from the moment an app hooks your thumb to the moment you get past the first 90 seconds of restlessness into real creative rest. Use the two bars above to pick how technical you want the explanation to be and switch between <strong>Standard</strong> and <strong>ADHD / Novelty-Seeking</strong> brains.
+          Follow what happens inside your brain from the moment an app hooks your thumb to the moment you get past the first 90 seconds of restlessness into real creative rest. Use the two bars above to pick how technical you want the explanation to be and switch between <strong>Standard</strong>, <strong>ADHD</strong>, and <strong>Mindfulness</strong> lenses.
         </p>
 
         <div class="narrative-tabs" id="narrativeTabs">
@@ -1032,7 +1049,7 @@
         </p>
 
         <div style="display: grid; gap: 1.25rem; margin-top: 1.25rem;" id="ch2CardsContainer">
-          <!-- Dynamically populated based on Standard vs ADHD Lens -->
+          <!-- Dynamically populated based on active Lens -->
         </div>
 
         <!-- Interactive Neural Seesaw SVG Map -->
@@ -1092,7 +1109,7 @@
         </div>
 
         <p class="lens-intro-text" style="margin-bottom: 1.5rem;">
-          Test how your daily screen and outdoor habits shape your attention—or "neural soil." Move the sliders on the left and click <strong>Read My Neural Soil</strong> on the right for a plain-language summary of your day. (Try switching between <em>Standard</em> and <em>ADHD Lens</em> at the top to see how total stillness affects each brain type differently.)
+          Test how your daily screen and outdoor habits shape your attention—or "neural soil." Move the sliders on the left and click <strong>Read My Neural Soil</strong> on the right for a plain-language summary of your day. Try switching between <strong>Standard</strong>, <strong>ADHD</strong>, and <strong>Mindfulness</strong> lenses at the top to see how each perspective frames your habits.
         </p>
 
         <div class="sandbox-layout">
@@ -1312,31 +1329,30 @@
         </p>
         
         <div class="reference-box">
-          <h3>Foundational Reading List on Boredom, Dopamine &amp; The DMN</h3>
+          <h3>Reading Shelf: Boredom, Craving, Attention &amp; Mindful Grounding</h3>
+          <p style="font-size: 0.78rem; color: var(--loam-mid); margin-bottom: 0.65rem; line-height: 1.5;">
+            A focused shelf of books behind this tool—pairing cognitive neuroscience and habit loops with a quiet, unhurried mindfulness lens rather than self-optimization hype.
+          </p>
           <div class="reading-list-grid">
             <div class="reading-item">
               <strong>Dopamine Nation (2021)</strong>
-              <em>Dr. Anna Lembke</em> — How high-dopamine digital inputs cause homeostatic receptor down-regulation, and how abstinence restores tonic balance.
+              <em>Dr. Anna Lembke</em> — How high-dopamine digital inputs cause homeostatic receptor down-regulation, and how stepping back restores baseline calm.
             </div>
             <div class="reading-item">
-              <strong>Out of My Skull (2020)</strong>
-              <em>James Danckert &amp; John D. Eastwood</em> — The cognitive neuroscience of boredom as an evolutionary regulatory signal calling for purposeful engagement.
+              <strong>The Molecule of More (2018)</strong>
+              <em>Daniel Z. Lieberman &amp; Michael E. Long</em> — Why dopamine drives endless "wanting and foraging" rather than satisfaction—and how feeds exploit it.
+            </div>
+            <div class="reading-item">
+              <strong>The Craving Mind (2017)</strong>
+              <em>Dr. Judson Brewer</em> — How digital habit loops form, why boredom feels like an itch, and how mindful curiosity softens rumination without white-knuckling.
             </div>
             <div class="reading-item">
               <strong>The Experience of Nature (1989)</strong>
-              <em>Rachel &amp; Stephen Kaplan</em> — The foundational text on Attention Restoration Theory (ART) and why "Soft Fascination" heals directed fatigue.
+              <em>Rachel &amp; Stephen Kaplan</em> — The foundational text on Attention Restoration Theory (ART) and why "Soft Fascination" restores tired focus.
             </div>
             <div class="reading-item">
               <strong>ADHD 2.0 (2021)</strong>
               <em>Dr. Edward Hallowell &amp; Dr. John Ratey</em> — Explains the porous DMN-TPN switch in ADHD brains and how sensory/kinetic anchors prevent rumination.
-            </div>
-            <div class="reading-item">
-              <strong>Attention Span (2023)</strong>
-              <em>Dr. Gloria Mark</em> — Empirical research on 47-second screen attention spans, switching costs, and the physiological toll of attention residue.
-            </div>
-            <div class="reading-item">
-              <strong>Reader, Come Home (2018)</strong>
-              <em>Maryanne Wolf</em> — How rapid digital skimming rewires neural circuitry and starves the deep, contemplative pathways of the Default Mode Network.
             </div>
           </div>
         </div>
@@ -1369,8 +1385,8 @@
 
   <script>
     // --- Global State ---
-    let currentLens = 1;       // 1: Vibes, 2: Big Words, 3: Max Nerd
-    let currentProfile = 'nt'; // 'nt' or 'adhd'
+    let currentLens = 1;           // 1: Vibes, 2: Big Words, 3: Max Nerd
+    let currentProfile = 'nt';     // 'nt', 'adhd', or 'mindful'
     let currentNarrativeIdx = 0;
     let currentFieldFilter = 'ALL';
 
@@ -1398,7 +1414,8 @@
           body: "Ventral tegmental area (VTA) dopaminergic projections to the ventral striatum encode positive Reward Prediction Error (RPE). Algorithmic feeds maximize RPE variance via stochastic high-salience stimuli, driving supraphysiological phasic dopamine efflux in the synaptic cleft while suppressing prefrontal executive inhibition."
         },
         ntNote: "<strong>⚖️ Standard Lens:</strong> Even in a neurotypical brain with steady baseline dopamine, it is easy to quickly override voluntary stopping cues, turning a 2-minute check into a 40-minute foraging trance.",
-        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> Because an ADHD brain has lower baseline (tonic) dopamine and faster synaptic reuptake, high-stimulation screens and games act as intuitive self-medication—temporarily bringing an under-aroused prefrontal cortex up to functional focus."
+        adhdNote: "<strong>⚡ ADHD Lens:</strong> Because an ADHD brain has lower baseline (tonic) dopamine and faster synaptic reuptake, high-stimulation screens and games act as intuitive self-medication—temporarily bringing an under-aroused prefrontal cortex up to functional focus.",
+        mindfulNote: "<strong>🍃 Mindfulness Lens:</strong> Notice the urge to tap before you tap. You don't have to fight your brain—just notice, <em>'Ah, seeking is firing right now,'</em> and see if you actually want to be here or were just pulled along."
       },
       {
         step: 1,
@@ -1415,7 +1432,8 @@
           body: "Sustained hyper-dopaminergic signaling induces β-arrestin-mediated internalization of striatal D2/D3 receptors alongside compensatory dynorphin upregulation on the 'anti-reward' kappa-opioid pathway. The resulting hypodopaminergic tonic trough manifests clinically as dysphoric restlessness whenever external screen inputs cease."
         },
         ntNote: "<strong>⚖️ Standard Lens:</strong> After heavy screen or gaming binges, it typically takes 48 to 72 hours of reduced digital stimulation for retracted dopamine receptors to sensitize back to baseline comfort.",
-        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> When an already low-tonic ADHD brain experiences secondary receptor down-regulation from screens, unplugging cold-turkey into silence feels like hitting a brick wall—activating the insular cortex (which processes physical pain)."
+        adhdNote: "<strong>⚡ ADHD Lens:</strong> When an already low-tonic ADHD brain experiences secondary receptor down-regulation from screens, unplugging cold-turkey into silence feels like hitting a brick wall—activating the insular cortex (which processes physical pain).",
+        mindfulNote: "<strong>🍃 Mindfulness Lens:</strong> When quiet feels dull or flat, treat that flatness as a temporary weather pattern—not a verdict on your life or a sign that something is broken."
       },
       {
         step: 2,
@@ -1432,7 +1450,8 @@
           body: "Acute boredom activates the anterior insula and dorsal anterior cingulate cortex (dACC) within the Salience Network as phasic dopamine drops. Surviving this 90-second transient arousal spike without re-engaging exogenous stimuli permits the right fronto-insular cortex to toggle cortical dominance from the dorsal attention network to the DMN."
         },
         ntNote: "<strong>⚖️ Standard Lens:</strong> In a neurotypical brain, simply sitting quietly through this 90-second transition is enough for the seesaw to tip smoothly into pleasant daydreaming.",
-        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> In an ADHD brain, staring at a blank wall with zero input causes baseline dopamine to crash. Getting past that 90-second itch safely requires a gentle 10% anchor—like brown noise or watching wind in garden stems."
+        adhdNote: "<strong>⚡ ADHD Lens:</strong> In an ADHD brain, staring at a blank wall with zero input causes baseline dopamine to crash. Getting past that 90-second itch safely requires a gentle 10% anchor—like brown noise or watching wind in garden stems.",
+        mindfulNote: "<strong>🍃 Mindfulness Lens:</strong> Instead of forcing yourself to 'be bored,' get curious about what boredom actually feels like in the body—tight shoulders, a restless jaw, or a tug toward your pocket—without judging it."
       },
       {
         step: 3,
@@ -1449,7 +1468,8 @@
           body: "Deactivation of dorsolateral prefrontal task circuits releases reciprocal inhibition on the DMN hub architecture (mPFC, PCC/precuneus, and inferior parietal lobule). Coherent low-frequency oscillations facilitate hippocampal sharp-wave ripples during waking rest, replaying and integrating distributed neocortical memory traces."
         },
         ntNote: "<strong>⚖️ Standard Lens:</strong> Every time you fill a 2-minute gap (waiting for coffee, standing in line) by checking your phone, you slam the brakes on the DMN and interrupt your brain's daily composting cycle.",
-        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> In ADHD, the DMN is hyper-creative when gently anchored, but prone to anxious rumination if left in a sterile vacuum. Pair DMN rest with walking or nature observation so it composts ideas rather than worries."
+        adhdNote: "<strong>⚡ ADHD Lens:</strong> In ADHD, the DMN is hyper-creative when gently anchored, but prone to anxious rumination if left in a sterile vacuum. Pair DMN rest with walking or nature observation so it composts ideas rather than worries.",
+        mindfulNote: "<strong>🍃 Mindfulness Lens:</strong> Let thoughts drift through like clouds or falling leaves—neither chasing every story nor scolding your mind for wandering away."
       },
       {
         step: 4,
@@ -1466,11 +1486,12 @@
           body: "Natural scenes exhibit statistical self-similarity (fractal dimension D ≈ 1.3–1.5) and 1/f pink/brown acoustic spectra. In contemplative neuroscience, 'Open Monitoring' of these stochastic inputs induces optimal stochastic resonance in catecholamine pathways—stabilizing tonic dopamine just enough to silence DMN hyper-reactivity while maximizing alpha/theta restorative synchrony."
         },
         ntNote: "<strong>⚖️ Standard Lens:</strong> Trading 30 minutes of screen scrolling for 30 minutes of easy nature watching in a garden measurably lowers stress hormones and restores focus.",
-        adhdNote: "<strong>⚡ ADHD / Novelty-Seeking Lens:</strong> This explains why an ADHD mind can sit peacefully for 30 minutes 'always observing' a garden! Continuous, low-stakes movement (a butterfly darting, stems swaying) keeps the front of the brain gently occupied so the rest of the mind can lie fallow."
+        adhdNote: "<strong>⚡ ADHD Lens:</strong> This explains why an ADHD mind can sit peacefully for 30 minutes 'always observing' a garden! Continuous, low-stakes movement (a butterfly darting, stems swaying) keeps the front of the brain gently occupied so the rest of the mind can lie fallow.",
+        mindfulNote: "<strong>🍃 Mindfulness Lens:</strong> Resting your eyes on wind in leaves, sunlight on soil, or a bird on a branch is simple presence—no cushion required, just a willingness to be where you already are."
       }
     ];
 
-    // --- CHAPTER 2 DATA: Dynamic Cards for Standard vs ADHD Lens ---
+    // --- CHAPTER 2 DATA: Dynamic Cards for Standard, ADHD & Mindfulness Lenses ---
     const CH2_CARDS = {
       nt: [
         {
@@ -1483,7 +1504,7 @@
         },
         {
           title: "The Gut-Brain Parallel: Algorithmic Parasitism",
-          body: "In <em>The Multitudes Within</em>, we saw how sugar-loving gut bacteria literally hijack our brain to satisfy their cravings. Engagement algorithms do the exact same thing from the outside in: they analyze our clicks to serve hyper-palatable novelty, down-regulating our D2 dopamine receptors until ordinary stillness feels like deprivation."
+          body: "In <em>The Multitudes Within</em>, we saw how sugar-craving gut bacteria literally hijack our brain to satisfy their cravings. Engagement algorithms do the exact same thing from the outside in: they analyze our clicks to serve hyper-palatable novelty, down-regulating our D2 dopamine receptors until ordinary stillness feels like deprivation."
         }
       ],
       adhd: [
@@ -1498,6 +1519,20 @@
         {
           title: "Open Monitoring & The 10% Stochastic Tether",
           body: "When you actively observe a garden (or walk with a weighted vest, or listen to brown noise), you are practicing <strong>Open Monitoring</strong>. Those effortless micro-movements and tactile sensations provide a <strong>10% sensory tether</strong> (stochastic resonance). That 10% drip of gentle novelty keeps your baseline tonic dopamine from crashing, occupying the restless watchman at the prefrontal gate so the other 90% of your mind can truly lie fallow."
+        }
+      ],
+      mindful: [
+        {
+          title: "Noticing Without Fighting the Current",
+          body: "Mindfulness here isn't a test of willpower or a contest to see how long you can sit still. It is simply noticing what is already happening—the urge to check a notification, the hum of restlessness, or the quiet of a yard—without immediately reacting on autopilot."
+        },
+        {
+          title: "Softening Into the Pause",
+          body: "When we treat boredom as an enemy, we tense up and reach for noise. When we meet a quiet moment with light curiosity—feeling our feet on the floor, taking one unhurried breath, or looking out at the trees—the nervous system gets permission to unclench."
+        },
+        {
+          title: "Presence Over Optimization",
+          body: "Even rest can turn into another chore if we track it like a score. A mindful approach asks a simpler question: <em>Can I be slightly more present with this moment right now, even for thirty seconds?</em>"
         }
       ]
     };
@@ -1675,16 +1710,22 @@
       currentProfile = profile;
       const btnNT = document.getElementById('profBtnNT');
       const btnADHD = document.getElementById('profBtnADHD');
+      const btnMindful = document.getElementById('profBtnMindful');
       const sandboxTag = document.getElementById('sandboxLensTag');
+
+      btnNT.classList.remove('active');
+      btnADHD.classList.remove('active', 'adhd-active');
+      btnMindful.classList.remove('active', 'mindful-active');
 
       if (profile === 'nt') {
         btnNT.classList.add('active');
-        btnADHD.classList.remove('active', 'adhd-active');
         sandboxTag.textContent = "Daily Habit Simulator • Standard Lens";
-      } else {
-        btnNT.classList.remove('active');
+      } else if (profile === 'adhd') {
         btnADHD.classList.add('active', 'adhd-active');
-        sandboxTag.textContent = "Daily Habit Simulator • ADHD / Novelty-Seeking Lens";
+        sandboxTag.textContent = "Daily Habit Simulator • ADHD Lens";
+      } else {
+        btnMindful.classList.add('active', 'mindful-active');
+        sandboxTag.textContent = "Daily Habit Simulator • Mindfulness Lens";
       }
 
       renderNarrative();
@@ -1709,19 +1750,25 @@
       document.getElementById('narrativeTitle').textContent = content.title;
       document.getElementById('narrativeBody').textContent = content.body;
 
+      banner.classList.remove('adhd-banner', 'mindful-banner');
+
       if (currentProfile === 'nt') {
-        banner.classList.remove('adhd-banner');
         banner.innerHTML = data.ntNote;
-      } else {
+      } else if (currentProfile === 'adhd') {
         banner.classList.add('adhd-banner');
         banner.innerHTML = data.adhdNote;
+      } else {
+        banner.classList.add('mindful-banner');
+        banner.innerHTML = data.mindfulNote;
       }
     }
 
     function renderChapter2Cards() {
       const container = document.getElementById('ch2CardsContainer');
       const cards = CH2_CARDS[currentProfile];
-      const borderColor = currentProfile === 'adhd' ? 'var(--terracotta-soft)' : 'var(--sand-border)';
+      const borderColor = currentProfile === 'adhd'
+        ? 'var(--terracotta-soft)'
+        : (currentProfile === 'mindful' ? 'var(--moss-light)' : 'var(--sand-border)');
       const titleColor = currentProfile === 'adhd' ? 'var(--terracotta)' : 'var(--moss-deep)';
 
       container.innerHTML = cards.map(c => `
@@ -1827,7 +1874,7 @@
       const switchLabels = ["Single-Task", "Calm", "Low", "Moderate", "Frequent", "High", "Fragmented", "Hyper-Jump", "Chaotic", "Frenetic"];
       document.getElementById('valSwitch').textContent = switchLabels[switching - 1];
 
-      // Biophysical math sensitized to Standard vs. ADHD Lens
+      // Biophysical math sensitized to Standard, ADHD, and Mindfulness Lenses
       let tonic, dmn, airlock, residue;
       const tetherTotal = soft + kinetic; // 0 to 180 mins
 
@@ -1835,7 +1882,7 @@
         tonic = 82 - (algo * 8.5) - (switching * 2.2) + (soft * 0.18) + (kinetic * 0.2) + (curfew * 0.12);
         dmn = (fallow * 0.85) + (soft * 0.35) + (curfew * 0.15) - (algo * 5.5) - (switching * 2.5);
         airlock = 78 - (algo * 7) - (switching * 3) + (soft * 0.25) + (fallow * 0.2);
-      } else {
+      } else if (currentProfile === 'adhd') {
         // ADHD / Novelty-Seeking Math: Lower starting tonic baseline; requires Soft Fascination + Kinetic tether!
         tonic = 62 - (algo * 7.5) - (switching * 2.0) + (soft * 0.38) + (kinetic * 0.45) + (curfew * 0.1);
         
@@ -1848,6 +1895,11 @@
           dmn = (fallow * 0.75) + (soft * 0.5) + (kinetic * 0.35) - (algo * 5.5) - (switching * 2.2);
           airlock = 45 + (soft * 0.45) + (kinetic * 0.35) - (algo * 6) - (switching * 2);
         }
+      } else {
+        // Mindfulness Lens: Presence, soft observation, and unhurried pacing buffer friction
+        tonic = 76 - (algo * 7.2) - (switching * 1.8) + (soft * 0.32) + (kinetic * 0.22) + (curfew * 0.16);
+        dmn = (fallow * 0.78) + (soft * 0.48) + (curfew * 0.2) - (algo * 4.8) - (switching * 1.8);
+        airlock = 64 - (algo * 5.5) - (switching * 2.0) + (soft * 0.45) + (fallow * 0.25);
       }
 
       residue = (algo * 8.5) + (switching * 5.5) - (fallow * 0.4) - (soft * 0.25) - (curfew * 0.15);
@@ -1872,7 +1924,9 @@
         document.getElementById('valTonicScore').textContent = tonic > 70 ? 'Steady & Buoyant' : (tonic > 42 ? 'Slightly Drained' : 'Receptor Crash');
         document.getElementById('noteTonic').textContent = currentProfile === 'adhd'
           ? 'ADHD brains need steady movement and easy nature watching to keep baseline dopamine steady.'
-          : 'Cutting back on fast feeds lets your brain reset so simple, quiet things feel good again.';
+          : (currentProfile === 'mindful'
+              ? 'Noticing urges without chasing every spike helps simple, quiet moments feel good again.'
+              : 'Cutting back on fast feeds lets your brain reset so simple, quiet things feel good again.');
 
         document.getElementById('labelDmn').textContent = 'Brain Composting (DMN)';
         document.getElementById('valDmnScore').textContent = dmn > 70 ? 'Rich Composting' : (dmn > 40 ? 'Shallow Rest' : 'Starved Soil');
@@ -1880,7 +1934,9 @@
 
         document.getElementById('labelAirlock').textContent = 'Getting Past the 90-Sec Itch';
         document.getElementById('valAirlockScore').textContent = airlock > 68 ? 'Smooth Glide' : (airlock > 40 ? 'Mild Itch' : 'Restless Panic');
-        document.getElementById('noteAirlock').textContent = 'How easily your mind survives the first 90 seconds of boredom without grabbing a screen.';
+        document.getElementById('noteAirlock').textContent = currentProfile === 'mindful'
+          ? 'Meeting the first 90 seconds of restlessness with quiet curiosity rather than white-knuckling.'
+          : 'How easily your mind survives the first 90 seconds of boredom without grabbing a screen.';
 
         document.getElementById('labelResidue').textContent = 'Mental Cobwebs (Attention Residue)';
         document.getElementById('valResidueScore').textContent = residue < 35 ? 'Clear Horizon' : (residue < 65 ? 'Moderate Static' : 'Heavy Cobwebs');
@@ -1898,7 +1954,9 @@
         document.getElementById('valAirlockScore').textContent = `${airlock}% Transition Ease`;
         document.getElementById('noteAirlock').textContent = currentProfile === 'adhd'
           ? 'Stochastic resonance (garden observation / weighted movement) prevents insular agitation during TPN-to-DMN switching.'
-          : 'Salience network latency required to release executive inhibition and enter waking rest.';
+          : (currentProfile === 'mindful'
+              ? 'Open-awareness observation reduces reactive urge-chasing during TPN-to-DMN transitions.'
+              : 'Salience network latency required to release executive inhibition and enter waking rest.');
 
         document.getElementById('labelResidue').textContent = 'Attention Residue & Static Risk';
         document.getElementById('valResidueScore').textContent = residue < 35 ? 'Low Switching Drag' : 'Elevated Cortisol Load';
@@ -1967,6 +2025,8 @@
         } else {
           p2 = `<strong>2. ⚡ ADHD Lens — Stabilizing the Switch (${dmn}% Brain Composting):</strong> Because your longest screen-free gap is <strong>${fallow} mins</strong> with <strong>${tetherTotal} total mins</strong> of nature watching or movement, your Default Mode Network only partially settles. Adding more gentle outdoor observation or weighted walking will smooth out the 90-second boredom itch.`;
         }
+      } else if (currentProfile === 'mindful') {
+        p2 = `<strong>2. 🍃 Mindfulness Lens — Noticing Without Chasing (${dmn}% Brain Composting):</strong> With <strong>${fallow}-minute</strong> screen-free gaps and <strong>${soft} mins</strong> of easy nature watching, your mind has room to settle without turning stillness into a performance. When restlessness shows up, try simply noticing the physical sensation for a breath or two before deciding what to do next.`;
       } else {
         if (fallow < 15) {
           p2 = `<strong>2. ⚖️ Standard Lens — Starved Resting Network (${dmn}% Brain Composting):</strong> Because your typical screen-free gap is only <strong>${fallow} minutes</strong>, your brain rarely gets past the first 90 seconds of restlessness. Your focus stays locked outward, preventing deep memory sorting and creative insight.`;
