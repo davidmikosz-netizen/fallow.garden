@@ -1650,9 +1650,7 @@
         const data = await response.json();
         
         if (data.narrative) {
-          const paragraphs = data.narrative.split('
-
-').map(p => `<p style="margin-bottom: 0.75rem;">${p}</p>`).join('');
+          const paragraphs = data.narrative.split('\n\n').map(p => `<p style="margin-bottom: 0.75rem;">${p}</p>`).join('');
           output.innerHTML = paragraphs;
         } else {
           output.innerHTML = 'Could not generate a summary right now. Please try again in a moment.';
