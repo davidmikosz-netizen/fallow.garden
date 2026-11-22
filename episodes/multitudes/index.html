@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>The Multitudes Within — Human Microbiome Primer & Soil Simulator</title>
-<link rel="canonical" href="https://fallow.garden/episodes/multitudes/" />
+  <title>The Multitudes Within — Human Microbiome Primer &amp; Soil Simulator</title>
+  <link rel="canonical" href="https://fallow.garden/episodes/multitudes/" />
   <script data-goatcounter="https://fallow.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
   <!-- PWA & Mobile Meta Tags -->
@@ -69,7 +69,7 @@
       --font-mono: "JetBrains Mono", monospace;
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -97,7 +97,7 @@
       flex-direction: column;
       gap: 2.25rem;
       position: relative;
-      z-index: 1; /* Keeps content above background */
+      z-index: 1;
     }
 
     /* Top Navigation */
@@ -171,8 +171,89 @@
       background: var(--parchment-warm);
       border: 1px solid var(--sand-border);
       border-radius: var(--radius-md);
-      padding: 1rem 1.25rem;
+      padding: 1.15rem 1.35rem;
       margin-top: 0.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    /* Sticky Complexity Lens Controller */
+    .lens-sticky-wrap {
+      position: sticky;
+      top: 0.75rem;
+      z-index: 50;
+      background: rgba(250, 246, 238, 0.94);
+      backdrop-filter: blur(8px);
+      padding: 0.45rem 0;
+      border-radius: var(--radius-md);
+    }
+
+    .lens-intro-text {
+      font-size: 0.86rem;
+      color: var(--loam-mid);
+      margin-bottom: 0.6rem;
+      line-height: 1.5;
+    }
+
+    .lens-container {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-md);
+      padding: 0.4rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    @media (min-width: 680px) {
+      .lens-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .lens-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--loam-light);
+      padding-left: 0.6rem;
+    }
+
+    .lens-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+
+    .lens-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--loam-mid);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .lens-btn:hover {
+      background: var(--parchment-warm);
+      color: var(--loam-dark);
+    }
+
+    .lens-btn.active {
+      background: var(--moss-deep);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
     }
 
     /* Table of Contents Navigation */
@@ -251,85 +332,7 @@
       display: flex;
       flex-direction: column;
       gap: 2.25rem;
-      scroll-margin-top: 2rem;
-    }
-
-    /* Sticky Complexity Lens Controller */
-    .lens-sticky-wrap {
-      position: sticky;
-      top: 1rem;
-      z-index: 50;
-      background: rgba(250, 246, 238, 0.94);
-      backdrop-filter: blur(8px);
-      padding: 0.5rem 0;
-      border-radius: var(--radius-md);
-    }
-
-    .lens-intro-text {
-      font-size: 0.86rem;
-      color: var(--loam-mid);
-      margin-bottom: 0.6rem;
-      line-height: 1.5;
-    }
-
-    .lens-container {
-      background: var(--parchment-card);
-      border: 1px solid var(--sand-border);
-      border-radius: var(--radius-md);
-      padding: 0.4rem;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
-    @media (min-width: 680px) {
-      .lens-container {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-    }
-
-    .lens-title {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--loam-light);
-      padding-left: 0.6rem;
-    }
-
-    .lens-buttons {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
-    }
-
-    .lens-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: var(--radius-sm);
-      padding: 0.45rem 0.75rem;
-      font-family: var(--font-sans);
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--loam-mid);
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.15s ease;
-      white-space: nowrap;
-    }
-
-    .lens-btn:hover {
-      background: var(--parchment-warm);
-      color: var(--loam-dark);
-    }
-
-    .lens-btn.active {
-      background: var(--moss-deep);
-      color: #ffffff;
-      box-shadow: var(--shadow-sm);
+      scroll-margin-top: 5.5rem;
     }
 
     /* Section Cards */
@@ -348,6 +351,8 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
     .section-head h2 {
@@ -465,6 +470,7 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
+      gap: 0.5rem;
     }
 
     .field-card-name {
@@ -482,6 +488,7 @@
       border-radius: 4px;
       background: var(--parchment-warm);
       color: var(--terracotta);
+      white-space: nowrap;
     }
 
     .field-card-desc {
@@ -648,6 +655,7 @@
       color: var(--loam-dark);
       line-height: 1.6;
     }
+
     /* Companion Apps Corridor Links */
     .companion-grid {
       display: grid;
@@ -698,7 +706,7 @@
       margin-top: 0.2rem;
     }
 
-    /* About & Support */
+    /* Recommended Reading & About Sections */
     .about-card {
       background: var(--parchment-card);
       border: 1px solid var(--sand-border);
@@ -735,21 +743,12 @@
       margin-top: 0.65rem;
     }
 
-    .reference-box {
+    .bookshop-widget-wrap {
       background: var(--parchment);
       border: 1px dashed var(--moss-light);
-      padding: 1rem;
+      padding: 1.15rem;
       border-radius: var(--radius-sm);
       margin-top: 0.5rem;
-      font-size: 0.85rem;
-    }
-
-    .reference-box h3 {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--moss-deep);
-      margin-bottom: 0.5rem;
     }
 
     .support-grid {
@@ -805,20 +804,6 @@
       flex-direction: column;
       gap: 0.35rem;
     }
-
-    /* Chapter 2 - Deep Zoom Image styling */
-    .deep-zoom-placeholder {
-      background: #fdfaf6;
-      border: 1px dashed var(--moss-light);
-      border-radius: 8px;
-      padding: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--loam-mid);
-      font-family: var(--font-sans);
-      margin-top: 1rem;
-    }
   </style>
 </head>
 <body>
@@ -828,18 +813,34 @@
     <!-- Top Nav -->
     <div class="top-nav">
       <a href="/" class="back-link">← fallow.garden</a>
-      <span class="meta-badge">Corridor II • Human Biology</span>
+      <span class="meta-badge">Zone II • Soil &amp; Gut</span>
     </div>
 
     <!-- Header -->
     <header>
-      <div class="brand-badge">Natural History of your Gut Biome</div>
+      <div class="brand-badge">Natural History of Your Gut Biome</div>
       <h1>The Multitudes Within</h1>
-      <p class="header-intro">
-       Understanding what it means to be human has radically changed in the last fifteen years. Similar to how we discovered the Earth was not the center of the universe, and that humans are not outside of nature's evolutionary story, we now understand that each human being is, in fact, a supraorganism. Each person contains more microbial cells than human ones. This app explores how we can take care of our interior critters and work together. When we get this wrong, our invisible inhabitants can hijack our reward systems, manipulate our cravings, and drive inflammation. When we get it right, we can lead happier, healthier, and more balanced lives. This app includes a simulator to see how your daily choices can change how we work together.
+      <div class="header-intro">
+        <p>Understanding what it means to be human has radically changed in the last fifteen years.</p>
+        <p>Similar to when we found out Earth was not the center of the universe and that we are part of nature's evolutionary story, we now understand that each human being is, in fact, a supraorganism. Every one of us contains more microbial cells than human ones.</p>
+        <p>This tool explores how we can take care of our interior critters and work together. When we get this wrong, our invisible inhabitants can hijack our reward systems, manipulate our cravings, and drive inflammation. When we get it right, we can lead happier, healthier, and more balanced lives.</p>
+        <p>This tool has three levels of "explanation depth" and it also contains a simulator to see how your daily choices can change how we work together.</p>
+      </div>
     </header>
 
-    <!-- Table of Contents Navigation (Smooth Scrolling) -->
+    <!-- Sticky Explanation Depth Lens (Moved above Table of Contents) -->
+    <div class="lens-sticky-wrap">
+      <div class="lens-container">
+        <span class="lens-title">How detailed of an explanation?</span>
+        <div class="lens-buttons">
+          <button class="lens-btn active" onclick="setLens(1)">🌿 Just the vibes</button>
+          <button class="lens-btn" onclick="setLens(2)">🧬 I know some big words</button>
+          <button class="lens-btn" onclick="setLens(3)">🔬 Maximum nerd mode</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table of Contents Navigation -->
     <nav class="toc-nav">
       <div class="toc-title">Table of Contents</div>
       <div class="toc-grid">
@@ -868,36 +869,23 @@
 
     <!-- CHAPTER 1 VIEW: Understanding your inner world -->
     <div class="app-view" id="chapter1">
-      
-      <!-- Sticky Complexity Lens Selector -->
-      <div class="lens-sticky-wrap">
-        <div class="lens-container">
-          <span class="lens-title">How detailed of an explanation?</span>
-          <div class="lens-buttons">
-            <button class="lens-btn active" onclick="setLens(1)">🌿 Just the vibes</button>
-            <button class="lens-btn" onclick="setLens(2)">🧬 I know some big words</button>
-            <button class="lens-btn" onclick="setLens(3)">🔬 Maximum nerd mode</button>
-          </div>
-        </div>
-      </div>
-
       <!-- MODULE 1: Narrative Odyssey -->
       <section class="card">
         <div class="section-head">
-          <h2>1. The Passage: From Mouth to Mucosa</h2>
-          <span class="section-tag">Interactive Odyssey</span>
+          <h2>1. The Trip: From Mouth to Gut Lining</h2>
+          <span class="section-tag">Step-by-Step Walkthrough</span>
         </div>
 
         <p class="lens-intro-text" style="margin-bottom: 1.25rem;">
-          An introduction to the science of your gut biome can sometimes feel a bit overwhelming. Use the buttons above to choose how deep you want to go into the biology.
+          Learning about gut microbes can feel like a lot of science all at once. Use the explanation depth bar at the top to pick how much detail you want.
         </p>
 
         <div class="narrative-tabs" id="narrativeTabs">
-          <button class="narrative-tab-btn active" onclick="selectNarrative(0)">1. The Ingestion Gate</button>
-          <button class="narrative-tab-btn" onclick="selectNarrative(1)">2. Upper GI &amp; Fallow Rest</button>
-          <button class="narrative-tab-btn" onclick="selectNarrative(2)">3. Colonic Fermentation</button>
-          <button class="narrative-tab-btn" onclick="selectNarrative(3)">4. The Mucosal Fortress</button>
-          <button class="narrative-tab-btn" onclick="selectNarrative(4)">5. Brain-Gut Axis</button>
+          <button class="narrative-tab-btn active" onclick="selectNarrative(0)">1. What You Don't Digest</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(1)">2. Quiet Gut Cleaning</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(2)">3. Gut Composting</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(3)">4. The Slime Shield</button>
+          <button class="narrative-tab-btn" onclick="selectNarrative(4)">5. Brain &amp; Gut Talk</button>
         </div>
 
         <div class="narrative-display">
@@ -905,7 +893,6 @@
           <p class="narrative-display-body" id="narrativeBody">...</p>
         </div>
       </section>
-
     </div>
 
     <!-- CHAPTER 2 VIEW: The Mind-Gut Connection -->
@@ -913,36 +900,37 @@
       <section class="card">
         <div class="section-head">
           <h2>2. The Mind-Gut Connection</h2>
-          <span class="section-tag">Neurological Pathways</span>
+          <span class="section-tag">How Gut &amp; Brain Talk</span>
         </div>
         
         <p class="lens-intro-text">
-          We often view our digestion as a mechanical process, but the GI tract is actually an incredibly sensitive sensory organ that actively monitors what we consume and communicates directly with our brains. 
+          Digestion isn't just a food chute—your gut lining acts like a sensitive sensor that tastes what comes through and sends constant messages up to your brain.
         </p>
 
         <div style="display: grid; gap: 1.5rem; margin-top: 1.5rem;">
           <div style="background: var(--parchment-warm); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--sand-border);">
-            <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--terracotta); margin-bottom: 0.5rem;">The Real-Time Surveillance System</h3>
+            <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--terracotta); margin-bottom: 0.5rem;">Taste Buds Down the Line</h3>
             <p style="font-size: 0.9rem; color: var(--loam-mid); line-height: 1.6;">
-              Taste does not stop in the mouth. The gastrointestinal tract is lined with the same bitter and sweet receptors found on the tongue. As foods like fermented sauerkraut or buckwheat travel through the digestive system, the gut "tastes" and analyzes their chemical composition, sending satiety and metabolic signals to the brain long before digestion is complete.
+              Your gut has chemical sensors much like taste buds. As foods like sauerkraut or buckwheat move along, your gut checks what is in them and lets your brain know about fullness and energy long before digestion finishes.
             </p>
           </div>
 
           <div style="background: var(--parchment-warm); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--sand-border);">
-            <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--terracotta); margin-bottom: 0.5rem;">The Hijacked Reward System</h3>
+            <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--terracotta); margin-bottom: 0.5rem;">How Cravings Get Nudged</h3>
             <p style="font-size: 0.9rem; color: var(--loam-mid); line-height: 1.6;">
-              Through the vagus nerve, bacterial populations can effectively manipulate our cravings. When we feed opportunistic bacteria the fast-digesting carbohydrates they thrive on, they stimulate the release of dopamine in the brain. This hijacking trains our reward system to crave more of the same foods, driving overconsumption.
+              Messages travel along a main nerve cable called the vagus nerve. When fast-digesting sugar feeds certain gut microbes, they can nudge your brain's reward system—making you want more of the same sweet foods.
             </p>
           </div>
           
           <div style="background: var(--parchment-warm); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--sand-border);">
-            <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--terracotta); margin-bottom: 0.5rem;">The Metabolite Bridge</h3>
+            <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--terracotta); margin-bottom: 0.5rem;">Chemical Messengers in Your Blood</h3>
             <p style="font-size: 0.9rem; color: var(--loam-mid); line-height: 1.6;">
-             A massive percentage of the metabolites—tiny chemical messengers—circulating in our blood are actually manufactured by our gut bacteria. These chemicals cross from the large intestine into the bloodstream and travel throughout the body. When we cultivate beneficial microbes, they pump out healing, anti-inflammatory compounds. But when opportunistic microbes take over, their chemical byproducts can trigger systemic inflammation, joint pain, or brain fog. It is a constant chemical dialogue, and our daily choices determine which messages get sent.
+              A big share of the tiny chemical messengers floating in your blood are made by gut microbes. Feed helpful microbes varied plants and fiber, and they make calming compounds. Feed mostly sugar and ultra-processed foods, and pushier microbes can stir up soreness, sluggishness, or brain fog.
+            </p>
           </div>
         </div>
 
-<!-- Interactive Vagus Nerve Map -->
+        <!-- Interactive Vagus Nerve Map -->
         <style>
           .vagus-map-container {
             display: flex;
@@ -1008,7 +996,6 @@
         <div class="vagus-map-container">
           <div class="vagus-svg-wrapper">
             <svg viewBox="0 0 300 450" width="100%" height="auto" style="max-width: 280px;" xmlns="http://www.w3.org/2000/svg">
-              <!-- Background -->
               <rect width="300" height="450" fill="transparent" />
               
               <!-- Efferent Line (Brain to Gut) -->
@@ -1035,56 +1022,52 @@
               </g>
 
               <!-- Line Labels -->
-              <text x="90" y="240" text-anchor="end" font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--moss-mid)" style="pointer-events: none;">20% Efferent</text>
-              <text x="90" y="255" text-anchor="end" font-family="var(--font-sans)" font-size="9" fill="var(--loam-light)" style="pointer-events: none;">(Signals down)</text>
+              <text x="90" y="240" text-anchor="end" font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--moss-mid)" style="pointer-events: none;">20% Downward</text>
+              <text x="90" y="255" text-anchor="end" font-family="var(--font-sans)" font-size="9" fill="var(--loam-light)" style="pointer-events: none;">(Brain to gut)</text>
               
-              <text x="210" y="240" text-anchor="start" font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--terracotta)" style="pointer-events: none;">80% Afferent</text>
-              <text x="210" y="255" text-anchor="start" font-family="var(--font-sans)" font-size="9" fill="var(--loam-light)" style="pointer-events: none;">(Signals up)</text>
+              <text x="210" y="240" text-anchor="start" font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--terracotta)" style="pointer-events: none;">80% Upward</text>
+              <text x="210" y="255" text-anchor="start" font-family="var(--font-sans)" font-size="9" fill="var(--loam-light)" style="pointer-events: none;">(Gut to brain)</text>
             </svg>
           </div>
           
           <div class="vagus-info-panel">
-            <h4 id="vagus-info-title">The Vagus Superhighway</h4>
-            <p id="vagus-info-desc">Hover over or tap the <strong>Brain</strong>, the <strong>Gut</strong>, or the <strong>nerve lines</strong> to explore how they communicate.</p>
+            <h4 id="vagus-info-title">The Vagus Nerve Highway</h4>
+            <p id="vagus-info-desc">Hover over or tap <strong>The Brain</strong>, <strong>The Gut</strong>, or either <strong>nerve line</strong> to see what goes up and down.</p>
           </div>
         </div>
 
         <script>
-          // Self-executing script to bind hover/tap interactions immediately
           (function() {
             const titleEl = document.getElementById('vagus-info-title');
             const descEl = document.getElementById('vagus-info-desc');
             
             const infoData = {
               'node-brain': {
-                title: 'The Brain (Central Nervous System)',
-                desc: 'Receives a constant stream of status updates from the gut. It processes satiety, detects inflammation, and triggers dopamine release when specific microbes are "fed." It can also restrict digestive blood flow during acute stress.'
+                title: 'The Brain',
+                desc: 'Gets a steady stream of updates from your gut. It reads fullness signals, picks up on irritation or inflammation, and can slow digestion down when you are tense or stressed.'
               },
               'node-gut': {
-                title: 'The Gut (Enteric Nervous System)',
-                desc: 'Often called the "Second Brain." It operates largely independently, containing millions of neurons. It senses the chemical composition of food and houses the microbes that manufacture neurotransmitters like serotonin.'
+                title: 'The Gut',
+                desc: 'Has its own built-in nerve network and homes trillions of microbes. It senses what kind of food arrives and hosts microbes that make calming brain chemicals.'
               },
               'path-descending': {
-                title: 'Efferent Fibers (20%)',
-                desc: 'Only about 20% of the vagus nerve carries signals FROM the brain TO the gut. These downward signals regulate stomach acid secretion, digestive muscular contractions (motility), and blood flow.'
+                title: 'Downward Signals (20%)',
+                desc: 'About a fifth of the vagus nerve carries messages from the brain down to the gut—helping set stomach acid, muscle movement, and blood flow.'
               },
               'path-ascending': {
-                title: 'Afferent Fibers (80%)',
-                desc: 'A massive 80% of the vagus nerve is dedicated to sending sensory signals FROM the gut UP to the brain. Your microbes use this thick chemical highway to report on what you ate and manipulate cravings.'
+                title: 'Upward Signals (80%)',
+                desc: 'Most of the traffic—around four-fifths—goes from the gut up to the brain. Your gut and its microbes send plenty of status reports upward about what you ate and what you crave.'
               }
             };
 
             const defaultInfo = {
-              title: 'The Vagus Superhighway',
-              desc: 'Hover over or tap the <strong>Brain</strong>, the <strong>Gut</strong>, or the <strong>nerve lines</strong> to explore how they communicate.'
+              title: 'The Vagus Nerve Highway',
+              desc: 'Hover over or tap <strong>The Brain</strong>, <strong>The Gut</strong>, or either <strong>nerve line</strong> to see what goes up and down.'
             };
 
-            const mapElements = ['node-brain', 'node-gut', 'path-descending', 'path-ascending'];
-            
-            mapElements.forEach(id => {
+            ['node-brain', 'node-gut', 'path-descending', 'path-ascending'].forEach(id => {
               const el = document.getElementById(id);
-              if(el) {
-                // Desktop Hover
+              if (el) {
                 el.addEventListener('mouseenter', () => {
                   titleEl.innerHTML = infoData[id].title;
                   descEl.innerHTML = infoData[id].desc;
@@ -1093,7 +1076,6 @@
                   titleEl.innerHTML = defaultInfo.title;
                   descEl.innerHTML = defaultInfo.desc;
                 });
-                // Mobile Tap
                 el.addEventListener('click', () => {
                   titleEl.innerHTML = infoData[id].title;
                   descEl.innerHTML = infoData[id].desc;
@@ -1102,22 +1084,19 @@
             });
           })();
         </script>
-        <!-- End Interactive Vagus Nerve Map -->
       </section>
     </div>
 
-    <!-- CHAPTER 3 VIEW: How your dietary choices affect your gut biome -->
+    <!-- CHAPTER 3 VIEW: How choices affect your biome -->
     <div class="app-view" id="chapter3">
-      
-      <!-- MODULE 2: Ecosystem Sandbox -->
       <section class="card">
         <div class="section-head">
           <h2>3. The Living Soil Sandbox</h2>
-          <span class="section-tag">Biophysical Simulation</span>
+          <span class="section-tag">Daily Habit Simulator</span>
         </div>
 
         <p class="lens-intro-text" style="margin-bottom: 1.5rem;">
-          Model how your choices affect your biome by making adjustments on the left — the results show up on the right.
+          Move the sliders on the left to see how everyday choices—food variety, breaks between meals, water, sugar, alcohol, and stress—shift your gut environment on the right.
         </p>
 
         <div class="sandbox-layout">
@@ -1128,8 +1107,8 @@
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Botanical Diversity</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How many plants, herbs and spices you eat per week</div>
+                  <div class="control-label">Plant Variety</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Different plants, herbs, and spices you eat per week</div>
                 </div>
                 <span class="control-value" id="valPlants">30 species</span>
               </div>
@@ -1140,8 +1119,8 @@
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Digestive Rest Window</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How long between meals</div>
+                  <div class="control-label">Time Between Meals</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Hours of rest from eating overnight and between meals</div>
                 </div>
                 <span class="control-value" id="valFasting">16 hours</span>
               </div>
@@ -1152,8 +1131,8 @@
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Live Fermented Foods</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily servings of live cultures (kefir, kimchi, etc.)</div>
+                  <div class="control-label">Fermented Foods</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily servings of foods with live cultures (kefir, sauerkraut, kimchi)</div>
                 </div>
                 <span class="control-value" id="valFerments">1 serving</span>
               </div>
@@ -1164,8 +1143,8 @@
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Daily Hydration</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Water powers the mucosal matrix and motility</div>
+                  <div class="control-label">Water &amp; Fluids</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily glasses of water (keeps the protective gut layer moist and moving)</div>
                 </div>
                 <span class="control-value" id="valHydration">8 glasses</span>
               </div>
@@ -1176,8 +1155,8 @@
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Refined Sugar</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily grams of added sugars (feeds opportunists)</div>
+                  <div class="control-label">Added Sugar</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Daily grams of added sugar (extra fuel for pushier microbes)</div>
                 </div>
                 <span class="control-value" id="valSugar">25 g</span>
               </div>
@@ -1188,8 +1167,8 @@
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Alcohol Intake</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Weekly drinks (solvent that irritates gut lining)</div>
+                  <div class="control-label">Alcohol</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">Weekly drinks (can irritate the gut lining)</div>
                 </div>
                 <span class="control-value" id="valAlcohol">2 drinks</span>
               </div>
@@ -1200,8 +1179,8 @@
             <div class="control-item">
               <div class="control-item-head">
                 <div>
-                  <div class="control-label">Psychological Stress</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How your stress level affects your gut</div>
+                  <div class="control-label">Everyday Stress</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How wound-up or tense things feel lately</div>
                 </div>
                 <span class="control-value" id="valStress">Low</span>
               </div>
@@ -1216,7 +1195,7 @@
               
               <div class="metric-row">
                 <div class="metric-head">
-                  <span id="labelMucus">Mucus Layer Thickness</span>
+                  <span id="labelMucus">Protective Gut Lining</span>
                   <span id="valMucusScore">--</span>
                 </div>
                 <div class="metric-bar-bg">
@@ -1227,7 +1206,7 @@
 
               <div class="metric-row">
                 <div class="metric-head">
-                  <span id="labelScfa">Short-Chain Fatty Acid Yield</span>
+                  <span id="labelScfa">Helpful Fiber Fuel</span>
                   <span id="valScfaScore">--</span>
                 </div>
                 <div class="metric-bar-bg">
@@ -1238,7 +1217,7 @@
 
               <div class="metric-row">
                 <div class="metric-head">
-                  <span id="labelDiversity">Microbial Richness Index</span>
+                  <span id="labelDiversity">Mix of Gut Helpers</span>
                   <span id="valDivScore">--</span>
                 </div>
                 <div class="metric-bar-bg">
@@ -1249,7 +1228,7 @@
 
               <div class="metric-row">
                 <div class="metric-head">
-                  <span id="labelLps">Gut Barrier Leakage Risk (LPS)</span>
+                  <span id="labelLps">Irritation &amp; Leak Risk</span>
                   <span id="valLpsScore">--</span>
                 </div>
                 <div class="metric-bar-bg">
@@ -1260,7 +1239,7 @@
 
             </div>
 
-            <!-- AI Dynamic Narrative Output -->
+            <!-- Read My Soil Button & Output Box -->
             <button id="btnReadSoil" class="btn-read-soil" onclick="generateSynthesis()">
               <span>✨</span> Read My Soil
             </button>
@@ -1268,88 +1247,97 @@
           </div>
         </div>
       </section>
-
     </div>
  
-    <!-- CHAPTER 4 VIEW: A field guide to really get to know your gut -->
+    <!-- CHAPTER 4 VIEW: A field guide to your gut -->
     <div class="app-view" id="chapter4">
-      
-      <!-- MODULE 3: Keystone Species & Metabolites -->
       <section class="card">
         <div class="section-head">
-          <h2>4. Keystone Inhabitants &amp; Pathways</h2>
-          <span class="section-tag">Field Directory</span>
+          <h2>4. A Field Guide to Your Gut</h2>
+          <span class="section-tag">Key Microbes &amp; Helpers</span>
         </div>
 
+        <p class="lens-intro-text" style="margin-bottom: 1rem;">
+          A quick cast of characters from your gut—what they do in plain English, and what they look like if you turn up the science dial at the top.
+        </p>
+
         <div class="filter-chips" id="fieldFilterChips">
-          <button class="chip active" onclick="filterFieldCards('ALL')">All Inhabitants</button>
-          <button class="chip" onclick="filterFieldCards('Sentinel')">Sentinels</button>
-          <button class="chip" onclick="filterFieldCards('Engine')">Engines</button>
-          <button class="chip" onclick="filterFieldCards('Generalist')">Generalists</button>
-          <button class="chip" onclick="filterFieldCards('Currency')">Pathways</button>
+          <button class="chip active" onclick="filterFieldCards('ALL')">All</button>
+          <button class="chip" onclick="filterFieldCards('Sentinel')">Lining Keepers</button>
+          <button class="chip" onclick="filterFieldCards('Engine')">Fuel Makers</button>
+          <button class="chip" onclick="filterFieldCards('Generalist')">Fiber Breakers</button>
+          <button class="chip" onclick="filterFieldCards('Currency')">Calming Signals</button>
         </div>
 
         <div class="field-grid" id="fieldGrid">
           <!-- Rendered via JS -->
         </div>
       </section>
-
     </div>
 
-    <!-- CHAPTER 5 VIEW: Companion Protocols -->
+    <!-- CHAPTER 5 VIEW: Other Active Utilities -->
     <div class="app-view" id="chapter5">
       <section class="card" style="background: var(--parchment-warm); border-color: var(--sand-border);">
         <div class="section-head">
           <h2>5. Other Active Utilities on Fallow.Garden</h2>
-          <span class="section-tag">Biological Tools</span>
+          <span class="section-tag">Related Tools &amp; Audio</span>
         </div>
         <p style="font-size: 0.85rem; color: var(--loam-mid);">
-          Apply the principles of this field guide across our companion micro-utilities:
+          Other quiet tools and stories around the same ideas:
         </p>
 
-<div class="companion-grid">
-          <a href="../inner-meadow/index.html" class="companion-link">
-            <div class="companion-title">
-              <span>The Inner Meadow</span>
-              <span>🌿</span>
-            </div>
-            <p class="companion-desc">Log weekly botanical intake to cultivate substrate polycultures (30+ species target).</p>
-            <span class="companion-cta">Track 30 Plants &rarr;</span>
-          </a>
-
+        <div class="companion-grid">
           <a href="../fastcounter/index.html" class="companion-link">
             <div class="companion-title">
               <span>Metabolic &amp; Gut Counter</span>
               <span>⚡</span>
             </div>
-            <p class="companion-desc">Align your fasting window with how your body cleans your digestive system.</p>
-            <span class="companion-cta">Track the best digestive window &rarr;</span>
+            <p class="companion-desc">See what happens over time between meals and plan an easy first meal when you break a fast.</p>
+            <span class="companion-cta">Open Counter &rarr;</span>
           </a>
 
           <a href="https://getrepoopulate.com" class="companion-link" target="_blank" rel="noopener">
             <div class="companion-title">
-              <span>getrepoopulate.com</span>
+              <span>Re-Poopulate</span>
               <span>↗</span>
             </div>
-            <p class="companion-desc">Clinical protocols for rewilding gut soil following antibiotic shocks and acute dysbiosis.</p>
-            <span class="companion-cta">Rewilding Portal ↗</span>
+            <p class="companion-desc">Practical food notes for rebuilding gut flora after antibiotics or a stomach bug.</p>
+            <span class="companion-cta">Visit Re-Poopulate ↗</span>
           </a>
 
-          <!-- NEW PODCAST LINK -->
           <a href="https://youaremorethanyou.com" class="companion-link" target="_blank" rel="noopener">
             <div class="companion-title">
               <span>You Are More Than You</span>
               <span>🎙️</span>
             </div>
-            <p class="companion-desc">Listen to the companion podcast exploring the philosophical and practical intersections of our microbial selves.</p>
-            <span class="companion-cta">Listen to Podcast ↗</span>
+            <p class="companion-desc">Short audio stories looking at bodies as living ecosystems rather than stubborn machines.</p>
+            <span class="companion-cta">Listen to Series ↗</span>
           </a>
         </div>
-        
       </section>
     </div>
 
-    <!-- About & Support Section -->
+    <!-- Recommended Reading Section (Bookshop.org List) -->
+    <section class="about-card">
+      <div class="about-head">
+        <h2><span>📚</span> Recommended Reading</h2>
+      </div>
+
+      <div class="about-content">
+        <p>
+          Books that helped shape how I think about bodies, microbes, and living systems—linked through <strong>Bookshop.org</strong> so you can browse or pick up copies while supporting independent bookstores.
+        </p>
+      </div>
+
+      <div class="bookshop-widget-wrap">
+        <script
+          src="https://bookshop.org/widgets.js"
+          data-type="list"
+          data-list-slug="the-body-and-microbiome"></script>
+      </div>
+    </section>
+
+    <!-- About & Feedback Section -->
     <section class="about-card">
       <div class="about-head">
         <h2><span>🌿</span> About fallow.garden &amp; Feedback</h2>
@@ -1357,16 +1345,10 @@
       
       <div class="about-content">
         <p>
-          <strong>fallow.garden</strong> is an independent anthology of single-purpose micro-utilities created to counter cognitive fatigue, algorithmic noise, and relentless optimization culture. Each tool runs entirely on your device with zero tracking or account friction.
+          <strong>fallow.garden</strong> is a small collection of quiet, single-purpose web tools built to push back against noisy feeds, constant tracking, and relentless self-optimization. Everything runs locally in your browser with no accounts and no telemetry.
         </p>
-        
-        <div class="reference-box">
-          <h3>Recommended Reading</h3>
-          <p style="margin: 0; color: var(--loam-mid);">The concepts in this primer are deeply indebted to Emeran Mayer's <em>The Mind-Gut Connection</em>, Giulia Enders' <em>Gut: The Inside Story of Our Body's Most Underrated Organ</em>, and Ed Yong's <em>I Contain Multitudes: The Microbes Within Us and a Grander View of Life</em>.</p>
-        </div>
-
         <p>
-          Have ideas for new restorative modules, suggestions for current tools, or questions about the underlying research? Feedback and contributions are always deeply appreciated.
+          Have an idea for a quiet tool, a bug to report, or thoughts on this page? Send a note.
         </p>
       </div>
 
@@ -1385,8 +1367,8 @@
 
     <!-- Footer -->
     <footer>
-      <div>fallow.garden — Restorative micro-utilities for mind, soil, and human vitality.</div>
-      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.25rem;">100% client-side. Zero telemetry. Hosted on static web infrastructure.</div>
+      <div>fallow.garden — Quiet, client-side tools for mind, soil, and time.</div>
+      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.25rem;">100% client-side. Zero telemetry. Hosted on independent static web infrastructure.</div>
     </footer>
 
   </div>
@@ -1407,10 +1389,9 @@
     const NARRATIVE_DATA = [
       {
         step: 0,
-        btn: "1. The Ingestion Gate",
         lvl1: {
-          title: "The Ingestion Gate: Food We Can't Digest",
-          body: "When you eat a crisp carrot or a bowl of oats, your own stomach and small intestine can only absorb simple sugars, fats, and proteins. Complex plant fibers pass straight through untouched. You are not eating just for yourself; you are dropping seeds and rich compost into a vast internal prairie waiting down below."
+          title: "1. What You Don't Digest: Feeding the Crew Down Below",
+          body: "When you eat a carrot or a bowl of oats, your own stomach and small intestine absorb the easy energy first, while tough plant fibers keep right on going. You aren't eating only for yourself—you are sending food down to the microbes living farther along."
         },
         lvl2: {
           title: "The Ingestion Gate: Microbiota-Accessible Carbohydrates (MACs)",
@@ -1418,15 +1399,14 @@
         },
         lvl3: {
           title: "The Ingestion Gate: Enzymatic Deficiency & Structural Glycans",
-          body: "Humans express a minimal repertoire of glycoside hydrolases in the upper GI tract. Structural non-starch polysaccharides (such as arabinoxylans and $\\beta$-glucans) transit into the cecum with glycosidic bonds intact, preserving the carbon skeleton required to fuel anaerobic fermentation without inducing rapid upper GI glucose spikes."
+          body: "Humans express a minimal repertoire of glycoside hydrolases in the upper GI tract. Structural non-starch polysaccharides (such as arabinoxylans and β-glucans) transit into the cecum with glycosidic bonds intact, preserving the carbon skeleton required to fuel anaerobic fermentation without inducing rapid upper GI glucose spikes."
         }
       },
       {
         step: 1,
-        btn: "2. Upper GI & Fallow Rest",
         lvl1: {
-          title: "Upper GI & Motility: The Self-Cleaning Oven",
-          body: "When you stop eating for several hours, your stomach and small intestine act like a self-cleaning oven. A powerful muscular wave turns on, sweeping residual food and stray bacteria down into the colon, keeping the upper canal pristine and preventing unwanted overgrowth."
+          title: "2. Quiet Gut Cleaning: Giving Digestion a Break",
+          body: "After a few hours without eating, your upper digestive tract runs a cleanup sweep—moving leftover bits along so things don't sit around and go rogue. Nibbling all day long keeps that cleanup wave from getting a clean run."
         },
         lvl2: {
           title: "Upper GI Motility: The Migrating Motor Complex (MMC)",
@@ -1439,10 +1419,9 @@
       },
       {
         step: 2,
-        btn: "3. Colonic Fermentation",
         lvl1: {
-          title: "Colonic Fermentation: The Microscopic Compost Chamber",
-          body: "In the warm, oxygen-free darkness of your large intestine, tens of trillions of organisms hold an enzymatic relay race. One bacterial guild breaks down tough fiber skins, and their neighbors convert the leftovers into Short-Chain Fatty Acids—the energetic currency that keeps your entire body calm and fueled."
+          title: "3. Gut Composting: Turning Leftover Fiber Into Fuel",
+          body: "Deep in your lower gut, billions of tiny helpers pass tough plant fibers from one group to the next, breaking them down into helpful fuel molecules. Think of it like compost turning garden scraps into rich soil that feeds everything around it."
         },
         lvl2: {
           title: "Colonic Fermentation: Anaerobic Polysaccharide Handoffs",
@@ -1455,10 +1434,9 @@
       },
       {
         step: 3,
-        btn: "4. The Mucosal Fortress",
         lvl1: {
-          title: "The Mucosal Fortress: A Single Cell Between Worlds",
-          body: "Only a single layer of living cells separates your bloodstream from trillions of bacteria. To keep peace, goblet cells produce a thick, glistening river of protective mucus. Friendly bacteria live right on the edge, grazing lightly to tell your body to produce fresh mucus, sealing the wall against leaks."
+          title: "4. The Slime Shield: Keeping the Wall Intact",
+          body: "A single thin layer of cells separates what is inside your gut from the rest of your body. A coat of protective mucus keeps that boundary cushioned. Helpful microbes graze gently along that outer edge, helping your body keep the shield healthy so unwanted stuff doesn't slip through."
         },
         lvl2: {
           title: "The Mucosal Fortress: Epithelial Tight Junctions & The Mucus Moat",
@@ -1471,10 +1449,9 @@
       },
       {
         step: 4,
-        btn: "5. Brain-Gut Axis",
         lvl1: {
-          title: "The Brain-Gut Axis: Your Second Brain",
-          body: "Your gut isn't just a digestion tube—it's a massive sensory organ with its own independent nervous system (a 'second brain'). It communicates constantly with your actual brain via the vagus nerve. When you are stressed, your brain literally shuts down digestive blood flow. When calm, your microbes send signals that lower neuroinflammation and sharpen mental clarity."
+          title: "5. Brain & Gut Talk: Two-Way Traffic",
+          body: "Your gut and brain are in constant conversation. When you feel stressed or rushed, digestion slows down. When you eat varied plants and give your system breathing room, your gut sends back calmer signals that help your whole body settle."
         },
         lvl2: {
           title: "The Brain-Gut-Fasting Axis: Vagal Tone & Satiety Signaling",
@@ -1493,9 +1470,9 @@
         cat: 'Sentinel',
         lvl1: {
           name: "Akkermansia muciniphila",
-          role: "The Mucus Pruner",
-          desc: "Lives directly in the inner protective lining. By gently grazing on mucus during fasting, it prompts your cells to build a fresh, thicker protective coat.",
-          meta: "Marker of metabolic health & calm immunity"
+          role: "Lining Keeper",
+          desc: "Lives right near the protective mucus layer of your gut. Lightly grazing there nudges your body to refresh that protective coat.",
+          meta: "Often linked to calmer immunity & steady metabolism"
         },
         lvl2: {
           name: "Akkermansia muciniphila",
@@ -1506,7 +1483,7 @@
         lvl3: {
           name: "Akkermansia muciniphila",
           role: "Verrucomicrobiota Sentinel",
-          desc: "Forages $N$-acetylglucosamine and sialic acid residues from Muc2; signals via TLR2/Amuc_1100 to upregulate tight-junction claudin-1 expression.",
+          desc: "Forages N-acetylglucosamine and sialic acid residues from Muc2; signals via TLR2/Amuc_1100 to upregulate tight-junction claudin-1 expression.",
           meta: "Enriches propionate pool; suppresses LPS leak"
         }
       },
@@ -1515,9 +1492,9 @@
         cat: 'Engine',
         lvl1: {
           name: "Faecalibacterium prausnitzii",
-          role: "The Peacekeeper",
-          desc: "One of the most abundant organisms in a healthy gut. It converts leftover plant fiber into rich fuel that feeds the cells lining your gut wall.",
-          meta: "Key anti-inflammatory powerhouse"
+          role: "Fuel Maker",
+          desc: "A major helper in a healthy gut. It turns leftover plant fiber into steady fuel that feeds the cells lining your gut wall.",
+          meta: "Helps keep gut inflammation down"
         },
         lvl2: {
           name: "Faecalibacterium prausnitzii",
@@ -1537,9 +1514,9 @@
         cat: 'Generalist',
         lvl1: {
           name: "Bacteroides thetaiotaomicron",
-          role: "The Master Lockpicker",
-          desc: "Equipped with a gigantic ring of molecular keys to unlock and chew through virtually any complex plant fiber you consume.",
-          meta: "Essential fiber-breaking workhorse"
+          role: "Fiber Breaker",
+          desc: "Acts like a versatile toolset for breaking down lots of different plant fibers you eat across the week.",
+          meta: "Handles a wide mix of plant foods"
         },
         lvl2: {
           name: "Bacteroides thetaiotaomicron",
@@ -1558,10 +1535,10 @@
         id: 'scfas',
         cat: 'Currency',
         lvl1: {
-          name: "Short-Chain Fatty Acids (SCFAs)",
-          role: "Microbial Fuel & Signals",
-          desc: "Butyrate, acetate, and propionate. Tiny energy molecules made by bacteria that nourish gut cells, signal fullness to the brain, and calm inflammation.",
-          meta: "The primary reward pathway for eating fiber"
+          name: "Short-Chain Fatty Acids",
+          role: "Calming Signal",
+          desc: "Helpful little energy molecules made when gut microbes break down fiber. They feed gut lining cells, help signal fullness, and take the edge off inflammation.",
+          meta: "Built when you eat varied fiber and plants"
         },
         lvl2: {
           name: "Short-Chain Fatty Acids (SCFAs)",
@@ -1610,7 +1587,11 @@
       currentFieldFilter = cat;
       document.querySelectorAll('#fieldFilterChips .chip').forEach(btn => {
         const text = btn.textContent.trim();
-        const matches = (cat === 'ALL' && text.startsWith('All')) || text.startsWith(cat);
+        const matches = (cat === 'ALL' && text.startsWith('All')) ||
+                        (cat === 'Sentinel' && text.includes('Lining')) ||
+                        (cat === 'Engine' && text.includes('Fuel')) ||
+                        (cat === 'Generalist' && text.includes('Fiber')) ||
+                        (cat === 'Currency' && text.includes('Calming'));
         btn.classList.toggle('active', matches);
       });
       renderFieldCards();
@@ -1654,10 +1635,10 @@
       const sugar = document.getElementById('sliderSugar').value;
       const alcohol = document.getElementById('sliderAlcohol').value;
 
-      btn.innerHTML = '<span>⏳</span> Synthesizing...';
+      btn.innerHTML = '<span>⏳</span> Reading soil...';
       btn.disabled = true;
       output.style.display = 'block';
-      output.innerHTML = '<span style="color: var(--loam-mid);">Reading ecological data...</span>';
+      output.innerHTML = '<span style="color: var(--loam-mid);">Reading your numbers...</span>';
 
       try {
         const response = await fetch('/api/read-soil', {
@@ -1669,14 +1650,15 @@
         const data = await response.json();
         
         if (data.narrative) {
-          // Replace plain text double-newlines with paragraph tags to maintain nice spacing
-          const paragraphs = data.narrative.split('\n\n').map(p => `<p style="margin-bottom: 0.75rem;">${p}</p>`).join('');
+          const paragraphs = data.narrative.split('
+
+').map(p => `<p style="margin-bottom: 0.75rem;">${p}</p>`).join('');
           output.innerHTML = paragraphs;
         } else {
-          output.innerHTML = 'Simulation failed to synthesize. Please check the connection.';
+          output.innerHTML = 'Could not generate a summary right now. Please try again in a moment.';
         }
       } catch (err) {
-        output.innerHTML = 'An error occurred while connecting to the ecosystem model.';
+        output.innerHTML = 'Could not reach the simulation endpoint.';
       }
 
       btn.innerHTML = '<span>✨</span> Read My Soil (Update)';
@@ -1700,10 +1682,10 @@
       document.getElementById('valSugar').textContent = `${sugar} g`;
       document.getElementById('valAlcohol').textContent = `${alcohol} drink${alcohol === 1 ? '' : 's'}`;
       
-      const stressLabels = ["Zen", "Low", "Mild", "Moderate", "Elevated", "High", "Very High", "Overwhelmed", "Burnout", "Crisis"];
+      const stressLabels = ["Calm", "Low", "Mild", "Moderate", "Elevated", "High", "Very High", "Wound Up", "Stretched Thin", "Overloaded"];
       document.getElementById('valStress').textContent = stressLabels[stress - 1];
 
-      // Expanded biophysical math mapping all 7 variables
+      // Biophysical math mapping all 7 variables
       let mucus = (fasting * 3.5) + (plants * 0.8) + (ferments * 4) + (hydration * 3.0) - (stress * 3.5) - (alcohol * 3);
       let scfa = (plants * 1.8) + (ferments * 6) + (fasting * 0.5) - (stress * 1.5) - (sugar * 0.3);
       let diversity = (plants * 2.0) + (ferments * 5) - (stress * 2) - (sugar * 0.4) - (alcohol * 2);
@@ -1722,39 +1704,51 @@
       document.getElementById('barLps').style.backgroundColor = lps > 50 ? 'var(--terracotta)' : 'var(--moss-mid)';
       
       if (currentLens === 1) {
-        document.getElementById('valMucusScore').textContent = mucus > 70 ? 'Thick & Glistening' : (mucus > 40 ? 'Moderate Shield' : 'Depleted');
-        document.getElementById('noteMucus').textContent = 'Hydration and fasting windows allow goblet cells to rebuild your protective inner mucus layer. Alcohol thins it.';
+        document.getElementById('labelMucus').textContent = 'Protective Gut Lining';
+        document.getElementById('valMucusScore').textContent = mucus > 70 ? 'Thick & Cushioned' : (mucus > 40 ? 'Fair Shield' : 'Thin & Stretched');
+        document.getElementById('noteMucus').textContent = 'Water and time between meals help your gut keep its protective mucus layer. Alcohol wears it down.';
 
-        document.getElementById('valScfaScore').textContent = scfa > 70 ? 'Abundant Yield' : (scfa > 40 ? 'Moderate Output' : 'Starving Prairie');
-        document.getElementById('noteScfa').textContent = 'High botanical diversity generates rich fuel to nourish and heal gut cells.';
+        document.getElementById('labelScfa').textContent = 'Helpful Fiber Fuel';
+        document.getElementById('valScfaScore').textContent = scfa > 70 ? 'Plenty of Fuel' : (scfa > 40 ? 'Getting By' : 'Running Low');
+        document.getElementById('noteScfa').textContent = 'More plant variety gives gut helpers more raw material to make calming, helpful compounds.';
 
-        document.getElementById('valDivScore').textContent = diversity > 70 ? 'Diverse Polyculture' : 'Monoculture Risk';
-        document.getElementById('noteDiversity').textContent = 'Eating 30+ plant foods creates a resilient polyculture. Refined sugars feed opportunistic weeds.';
+        document.getElementById('labelDiversity').textContent = 'Mix of Gut Helpers';
+        document.getElementById('valDivScore').textContent = diversity > 70 ? 'Good Variety' : 'Narrow Mix';
+        document.getElementById('noteDiversity').textContent = 'Eating a wider mix of plants supports a steadier crew; lots of added sugar favors pushier microbes.';
 
-        document.getElementById('valLpsScore').textContent = lps < 35 ? 'Secure Barrier' : 'Leaky Risk';
-        document.getElementById('noteLps').textContent = 'Intact mucosal fortress keeps unwanted particles from entering bloodstream.';
+        document.getElementById('labelLps').textContent = 'Irritation & Leak Risk';
+        document.getElementById('valLpsScore').textContent = lps < 35 ? 'Well Sealed' : 'Higher Irritation';
+        document.getElementById('noteLps').textContent = 'A steady gut barrier keeps unwanted bits from irritating the rest of your body.';
       } else if (currentLens === 2) {
+        document.getElementById('labelMucus').textContent = 'Mucus Layer Thickness';
         document.getElementById('valMucusScore').textContent = `${Math.round(mucus * 1.5)} μm Est.`;
         document.getElementById('noteMucus').textContent = 'Akkermansia foraging stimulates basal goblet cell renewal. Alcohol physically acts as a mucosal solvent.';
 
+        document.getElementById('labelScfa').textContent = 'Short-Chain Fatty Acid Yield';
         document.getElementById('valScfaScore').textContent = `${Math.round(scfa * 1.1)} mmol/kg`;
         document.getElementById('noteScfa').textContent = 'Butyrate and propionate activate GPR41/43 signaling, improving GLP-1 secretion.';
 
+        document.getElementById('labelDiversity').textContent = 'Microbial Richness Index';
         document.getElementById('valDivScore').textContent = `H' = ${(diversity / 25).toFixed(2)}`;
         document.getElementById('noteDiversity').textContent = 'Shannon diversity index scales with varied MAC intake. Sugar rapidly shifts upper GI bacterial composition.';
 
+        document.getElementById('labelLps').textContent = 'Gut Barrier Leakage Risk (LPS)';
         document.getElementById('valLpsScore').textContent = lps < 35 ? 'Minimal Translocation' : 'Elevated Permeability';
         document.getElementById('noteLps').textContent = 'Claudin-1 and ZO-1 tight-junction integrity prevents endotoxin leak. Ethanol relaxes tight junctions.';
       } else {
+        document.getElementById('labelMucus').textContent = 'Mucus Layer Thickness';
         document.getElementById('valMucusScore').textContent = `${Math.round(mucus * 1.6)} μm Muc2`;
         document.getElementById('noteMucus').textContent = 'Sialylated oligosaccharide cleaving upregulates enterocyte TLR2; ethanol disrupts lipid rafts in epithelial membranes.';
 
+        document.getElementById('labelScfa').textContent = 'Short-Chain Fatty Acid Yield';
         document.getElementById('valScfaScore').textContent = `${Math.round(scfa * 1.2)} mM (60:20:20)`;
         document.getElementById('noteScfa').textContent = 'Butyryl-CoA:acetate CoA-transferase flux supplies 70% of colonocyte ATP requirements.';
 
+        document.getElementById('labelDiversity').textContent = 'Microbial Richness Index';
         document.getElementById('valDivScore').textContent = `Shannon H' ${(diversity / 24).toFixed(2)}`;
         document.getElementById('noteDiversity').textContent = 'PUL diversity across Bacteroidetes prevents ecological collapse. Fructose malabsorption triggers rapid opportunistic blooms.';
 
+        document.getElementById('labelLps').textContent = 'Gut Barrier Leakage Risk (LPS)';
         document.getElementById('valLpsScore').textContent = lps < 35 ? '<0.2 EU/mL (Basal)' : '>0.6 EU/mL (Endotoxemia)';
         document.getElementById('noteLps').textContent = 'Serum LPS binding of TLR4 triggers peripheral CD14/MyD88 cascade without intact occludins.';
       }
@@ -1762,7 +1756,6 @@
  
     // --- Initialization ---
     window.addEventListener('DOMContentLoaded', () => {
-      // Create sticky behavior for results panel on desktop
       const resultsWrapper = document.querySelector('.results-panel-wrapper');
       const lensSticky = document.querySelector('.lens-sticky-wrap');
       if (resultsWrapper && lensSticky) {
