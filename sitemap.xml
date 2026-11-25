@@ -3,97 +3,93 @@
   <!-- Homepage -->
   <url>
     <loc>https://fallow.garden/</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Section I: Mortality, Time & Verbal Vitals -->
-  <url>
-    <loc>https://fallow.garden/episodes/gardenoffinitedays/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://fallow.garden/episodes/verbal/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://fallow.garden/episodes/nextchapter/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Section II: Mind & Attention Restoration -->
+  <!-- Zone I: The Fallow Mind -->
   <url>
     <loc>https://fallow.garden/episodes/boredom/</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fallow.garden/episodes/garden/</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallow.garden/episodes/gamer/</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallow.garden/episodes/solitaire/</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Section III: Body & The Microbiome -->
+  <!-- Zone II: Soil & Gut -->
   <url>
     <loc>https://fallow.garden/episodes/multitudes/</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fallow.garden/episodes/fastcounter/</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://fallow.garden/episodes/inner-meadow/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Section IV: Ecology & The Living Yard -->
   <url>
     <loc>https://fallow.garden/episodes/garden-primer/</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Section V: Worldly Passages & Cosmic Play -->
+  <!-- Zone III: The Long View & The Horizon -->
+  <url>
+    <loc>https://fallow.garden/episodes/gardenoffinitedays/</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallow.garden/episodes/verbal/</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fallow.garden/episodes/nextchapter/</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://fallow.garden/episodes/fers-countdown/</loc>
     <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://fallow.garden/episodes/penguin-pal/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://fallow.garden/episodes/past-lives/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
 
-  <!-- Section VI: The Compost Pile (Sandbox) -->
+  <!-- Zone IV: The Compost Pile -->
+  <url>
+    <loc>https://fallow.garden/episodes/inner-meadow/</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <url>
     <loc>https://fallow.garden/episodes/composter/</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
