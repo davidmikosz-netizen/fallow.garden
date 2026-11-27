@@ -40,10 +40,10 @@
     body {
       background-color: var(--parchment); color: var(--loam-dark);
       font-family: var(--font-sans); line-height: 1.55;
-      padding: 1.5rem 1rem 4rem; display: flex; justify-content: center;
+      padding: 1.35rem 0.9rem 4rem; display: flex; justify-content: center;
       -webkit-font-smoothing: antialiased;
     }
-    .container { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 1.4rem; }
+    .container { width: 100%; max-width: 1160px; display: flex; flex-direction: column; gap: 1.25rem; }
     .top-nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
     .back-link { font-size: 0.85rem; font-weight: 600; color: var(--moss-deep); text-decoration: none; }
     .back-link:hover { color: var(--terracotta); }
@@ -52,134 +52,300 @@
       color: var(--moss-deep); border: 1px solid var(--moss-light);
       padding: 0.2rem 0.65rem; border-radius: 999px; font-weight: 700;
     }
-    header { border-bottom: 1px solid var(--sand-border); padding-bottom: 1.15rem; display: flex; flex-direction: column; gap: 0.55rem; }
+
+    header { border-bottom: 1px solid var(--sand-border); padding-bottom: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
     .brand-badge {
       font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--glacier-deep); background: var(--glacier-pale);
-      padding: 0.25rem 0.7rem; border-radius: 999px; font-weight: 700; width: fit-content;
+      padding: 0.24rem 0.7rem; border-radius: 999px; font-weight: 700; width: fit-content;
     }
-    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 500; color: var(--loam-dark); }
-    .header-intro {
-      font-size: 0.9rem; color: var(--loam-mid); background: var(--parchment-warm);
-      border: 1px solid var(--sand-border); border-radius: var(--radius-md); padding: 0.9rem 1.15rem;
+    h1 { font-family: var(--font-serif); font-size: 1.95rem; font-weight: 500; color: var(--loam-dark); line-height: 1.2; }
+    .header-hook { font-size: 0.94rem; color: var(--loam-mid); max-width: 820px; }
+    .rules-legend {
+      display: flex; flex-wrap: wrap; gap: 0.45rem 0.85rem; align-items: center;
+      font-size: 0.78rem; color: var(--loam-mid); background: var(--parchment-warm);
+      border: 1px solid var(--sand-border); border-radius: var(--radius-sm);
+      padding: 0.5rem 0.85rem; width: fit-content;
     }
+    .legend-dot { color: var(--sand-border); font-weight: 700; }
+    .rules-legend strong { color: var(--loam-dark); }
 
     /* Main Split Grid */
     .lab-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; align-items: start; }
-    @media (min-width: 840px) { .lab-grid { grid-template-columns: 1.2fr 0.8fr; } }
+    @media (min-width: 960px) { .lab-grid { grid-template-columns: minmax(0, 1.42fr) minmax(320px, 0.72fr); } }
 
     .panel {
       background: var(--parchment-card); border: 1px solid var(--sand-border);
-      border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: var(--shadow-sm);
+      border-radius: var(--radius-lg); padding: 1.15rem; box-shadow: var(--shadow-sm);
     }
     .panel-head {
-      display: flex; justify-content: space-between; align-items: center;
-      border-bottom: 1px solid var(--border-soft); padding-bottom: 0.65rem; margin-bottom: 0.9rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
+      border-bottom: 1px solid var(--border-soft); padding-bottom: 0.65rem; margin-bottom: 0.85rem;
     }
-    .panel-head h2 { font-family: var(--font-serif); font-size: 1.18rem; font-weight: 500; }
+    .panel-head h2 { font-family: var(--font-serif); font-size: 1.16rem; font-weight: 500; }
     .status-pill {
       font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700;
-      padding: 0.2rem 0.55rem; border-radius: 6px;
+      padding: 0.22rem 0.58rem; border-radius: 6px;
       background: var(--terracotta-pale); color: var(--terracotta);
     }
+    .status-pill.hybrid { background: var(--ochre-pale); color: var(--honey-ochre); }
     .status-pill.fallow { background: var(--moss-pale); color: var(--moss-deep); }
+
+    /* Table Toolbar: Deck Size + Controls */
+    .table-toolbar {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+      gap: 0.5rem; margin-bottom: 0.8rem;
+    }
+    .segmented-toggle {
+      display: inline-flex; background: var(--parchment-warm); border: 1px solid var(--sand-border);
+      border-radius: 999px; padding: 2px; gap: 2px;
+    }
+    .seg-btn {
+      border: none; background: transparent; color: var(--loam-mid);
+      font-family: var(--font-sans); font-size: 0.74rem; font-weight: 600;
+      padding: 0.32rem 0.7rem; border-radius: 999px; cursor: pointer;
+      transition: background 0.14s ease, color 0.14s ease;
+    }
+    .seg-btn.active {
+      background: var(--parchment-card); color: var(--loam-dark);
+      box-shadow: 0 1px 3px rgba(44, 34, 26, 0.12);
+    }
+    .toolbar-actions { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
+    .btn-mini {
+      background: #ffffff; border: 1px solid var(--sand-border); color: var(--loam-dark);
+      border-radius: var(--radius-sm); padding: 0.34rem 0.65rem; font-size: 0.74rem;
+      font-weight: 600; font-family: var(--font-sans); cursor: pointer;
+      transition: border-color 0.12s ease, background 0.12s ease;
+    }
+    .btn-mini:hover:not(:disabled) { border-color: var(--moss-mid); background: var(--moss-pale); }
+    .btn-mini:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-mini.xray-on { border-color: var(--glacier-deep); background: var(--glacier-pale); color: var(--glacier-deep); }
 
     /* Casino Noise Bar */
     .casino-bar {
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem;
       background: var(--ochre-pale); border: 1px solid var(--honey-ochre);
-      border-radius: var(--radius-sm); padding: 0.45rem 0.75rem; margin-bottom: 0.9rem;
-      font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--loam-dark);
+      border-radius: var(--radius-sm); padding: 0.45rem 0.75rem; margin-bottom: 0.85rem;
+      font-family: var(--font-mono); font-size: 0.73rem; font-weight: 700; color: var(--loam-dark);
     }
     .casino-bar.muted { display: none; }
 
-    /* Live Swap Alert Banner on the Table */
-    .swap-toast {
-      background: var(--terracotta-pale); border-left: 4px solid var(--terracotta);
-      padding: 0.55rem 0.8rem; border-radius: var(--radius-sm); margin-bottom: 0.9rem;
-      font-size: 0.8rem; color: var(--loam-dark); display: none;
-    }
-    .swap-toast.calm-toast {
-      background: var(--moss-pale); border-left-color: var(--moss-deep);
-    }
-
     /* Top Row: Stock/Waste on Left, 4 Suit Foundations on Right */
     .top-table-row {
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 0.75rem; margin-bottom: 1.15rem; flex-wrap: wrap;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 0.65rem; margin-bottom: 1rem; flex-wrap: wrap;
     }
-    .deck-area { display: flex; align-items: center; gap: 0.55rem; }
-    .foundations-area { display: flex; gap: 0.45rem; }
+    .deck-area { display: flex; align-items: flex-start; gap: 0.5rem; }
+    .foundations-area { display: flex; gap: 0.42rem; }
 
     .slot-box {
-      width: 60px; height: 76px; border-radius: var(--radius-sm);
-      border: 1.5px dashed var(--sand-border); background: var(--parchment);
+      width: 68px; height: 94px; border-radius: var(--radius-sm);
+      border: 1.5px dashed var(--sand-border); background: rgba(244, 236, 223, 0.55);
       display: flex; flex-direction: column; justify-content: center; align-items: center;
-      font-family: var(--font-mono); font-size: 0.8rem; color: var(--loam-light);
-      position: relative; user-select: none;
+      font-family: var(--font-mono); font-size: 0.74rem; color: var(--loam-light);
+      position: relative; user-select: none; transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .slot-box.drop-target {
+      border: 2px solid var(--moss-deep) !important;
+      background: var(--moss-pale) !important;
+      box-shadow: 0 0 0 3px rgba(85, 110, 76, 0.18);
+      cursor: pointer;
+    }
+    .slot-box.foundation-filled {
+      border-style: solid; border-color: #d3c6b1; background: #ffffff;
+      box-shadow: 0 2px 5px rgba(44, 34, 26, 0.08);
+    }
+
+    /* Patterned Card Back (shared by Stock & Face-Down Tableau Cards) */
+    .card-back-pattern {
+      background-color: #e6eee2;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(59, 78, 52, 0.10) 0, rgba(59, 78, 52, 0.10) 2px, transparent 2px, transparent 8px),
+        repeating-linear-gradient(-45deg, rgba(59, 78, 52, 0.08) 0, rgba(59, 78, 52, 0.08) 2px, transparent 2px, transparent 8px);
+      border: 1.5px solid var(--moss-mid);
     }
     .stock-pile {
-      background: var(--moss-pale); border: 2px solid var(--moss-mid);
-      color: var(--moss-deep); cursor: pointer; font-weight: 700;
-      transition: transform 0.12s ease;
+      cursor: pointer; color: var(--moss-deep); font-weight: 700;
+      justify-content: space-between; padding: 0.4rem 0.35rem;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
     }
-    .stock-pile:hover { transform: translateY(-2px); }
-    .xray-tag {
-      font-size: 0.62rem; background: rgba(255,255,255,0.85);
-      padding: 1px 4px; border-radius: 3px; border: 1px solid var(--sand-border);
-      color: var(--loam-mid); margin-top: 3px;
+    .stock-pile:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(59, 78, 52, 0.14); }
+    .stock-pile.empty-stock {
+      background: var(--parchment); border: 1.5px dashed var(--moss-mid);
+      justify-content: center; gap: 0.2rem;
     }
+    .stock-count-badge {
+      font-size: 0.66rem; background: rgba(255, 253, 250, 0.92);
+      border: 1px solid var(--moss-light); border-radius: 999px;
+      padding: 1px 6px; color: var(--moss-deep);
+    }
+    .stock-center-icon { font-size: 1.15rem; opacity: 0.78; }
+    .xray-ghost {
+      font-family: var(--font-mono); font-size: 0.64rem; font-weight: 700;
+      padding: 1px 4px; border-radius: 4px;
+      background: rgba(255, 253, 250, 0.72); color: rgba(44, 34, 26, 0.56);
+      border: 1px solid rgba(124, 104, 87, 0.22);
+      transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
+    }
+    .xray-ghost.red { color: rgba(186, 85, 54, 0.62); }
+    .stock-pile:hover .xray-ghost,
+    .playing-card.facedown:hover .xray-ghost {
+      background: rgba(255, 253, 250, 0.96); color: var(--loam-dark);
+    }
+    .stock-pile:hover .xray-ghost.red,
+    .playing-card.facedown:hover .xray-ghost.red { color: var(--terracotta); }
+    body.xray-hidden .xray-ghost { opacity: 0; pointer-events: none; }
 
-    /* 4 Classic Solitaire Columns */
+    /* Foundation Card Visual */
+    .foundation-card-inner {
+      width: 100%; height: 100%; padding: 0.3rem 0.36rem;
+      display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+    }
+    .foundation-corner { align-self: flex-start; font-size: 0.76rem; font-weight: 700; line-height: 1; }
+    .foundation-pip { font-size: 1.55rem; line-height: 1; }
+    .foundation-prog { font-size: 0.6rem; color: var(--loam-light); }
+    .foundation-empty-suit { font-size: 1.35rem; opacity: 0.55; line-height: 1; }
+    .foundation-empty-sub { font-size: 0.6rem; margin-top: 3px; opacity: 0.85; }
+
+    /* Tableau Grid: 7 Columns (Full) or 4 Columns (Quick) */
     .tableau-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.65rem;
-      min-height: 230px; margin-bottom: 0.75rem;
+      display: grid; gap: 0.45rem;
+      min-height: 290px; margin-bottom: 0.7rem;
+      align-items: start;
     }
+    .tableau-grid.cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+    .tableau-grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 480px; margin-inline: auto; }
+
     .col-lane {
-      background: rgba(244, 236, 223, 0.45); border: 1px dashed var(--sand-border);
-      border-radius: var(--radius-sm); padding: 0.4rem;
-      display: flex; flex-direction: column; gap: 0.35rem; align-items: center;
+      background: rgba(244, 236, 223, 0.38); border: 1px dashed var(--sand-border);
+      border-radius: var(--radius-sm); padding: 0.3rem 0.22rem 0.6rem;
+      min-height: 112px; display: flex; flex-direction: column; align-items: center;
+      position: relative; transition: background 0.14s ease, border-color 0.14s ease;
+    }
+    .col-lane.drop-target {
+      border: 2px solid var(--moss-deep); background: rgba(227, 235, 224, 0.72);
+      box-shadow: 0 0 0 3px rgba(85, 110, 76, 0.14);
+      cursor: pointer;
+    }
+    .empty-col-label {
+      font-family: var(--font-mono); font-size: 0.66rem; color: var(--loam-light);
+      text-align: center; margin-top: 2rem; line-height: 1.35; opacity: 0.8;
+      pointer-events: none;
     }
 
-    /* Cards */
-    .card-tile {
-      width: 100%; max-width: 86px; min-height: 52px;
-      background: #ffffff; border: 1.5px solid var(--sand-border);
-      border-radius: var(--radius-sm); padding: 0.35rem 0.5rem;
-      display: flex; justify-content: space-between; align-items: center;
-      font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04); user-select: none;
-      transition: transform 0.12s ease, border-color 0.12s ease;
+    /* Authentic Portrait Playing Cards */
+    .playing-card {
+      width: 100%; max-width: 82px; aspect-ratio: 5 / 7; min-height: 84px;
+      border-radius: 8px; background: #ffffff; border: 1.5px solid #d5cab6;
+      box-shadow: 0 2px 5px rgba(44, 34, 26, 0.08);
+      position: relative; user-select: none;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 0.28rem 0.34rem;
+      font-family: var(--font-mono);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
     }
-    .card-tile.red { color: var(--terracotta); }
-    .card-tile.black { color: var(--loam-dark); }
-    .card-tile.clickable {
-      cursor: pointer; border-color: var(--moss-mid); border-width: 2px;
+    .playing-card.in-waste {
+      width: 68px; height: 94px; max-width: none; min-height: 0; aspect-ratio: auto;
     }
-    .card-tile.clickable:hover {
-      transform: translateY(-2px); border-color: var(--moss-deep);
-      box-shadow: 0 4px 10px rgba(59, 78, 52, 0.14);
+    /* Overlapping cascade margins inside tableau columns */
+    .col-lane .playing-card.after-down { margin-top: -66px; }
+    .col-lane .playing-card.after-up { margin-top: -54px; }
+
+    .playing-card.red { color: var(--terracotta); }
+    .playing-card.black { color: var(--loam-dark); }
+
+    .card-top-row {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      line-height: 1; font-weight: 700; font-size: 0.84rem;
+    }
+    .card-rank-suit { display: inline-flex; align-items: center; gap: 1px; letter-spacing: -0.03em; }
+    .card-crown { font-size: 0.62rem; opacity: 0.85; }
+    .card-center-pip {
+      font-size: 1.75rem; line-height: 1; text-align: center;
+      margin: auto 0; opacity: 0.92; pointer-events: none;
+    }
+    .card-bottom-row {
+      display: flex; justify-content: flex-end; align-items: flex-end;
+      line-height: 1; font-size: 0.68rem; opacity: 0.45;
     }
 
-    /* Face-Down Cards with X-Ray Peek */
-    .card-tile.facedown {
-      background: var(--parchment-warm); border: 1.5px dashed var(--loam-light);
-      color: var(--loam-light); font-size: 0.72rem; flex-direction: column;
-      justify-content: center; gap: 2px; opacity: 0.85;
+    /* Playable vs Selected vs Unplayable Affordances */
+    .playing-card.faceup { cursor: pointer; }
+    .playing-card.playable {
+      cursor: grab;
+      border-color: #b7c6b0;
     }
-    .card-tile.facedown.rig-flash {
-      background: var(--terracotta-pale); border-color: var(--terracotta);
-      color: var(--terracotta); animation: pulseRig 0.7s ease;
+    .playing-card.playable:hover {
+      transform: translateY(-3px);
+      border-color: var(--moss-mid);
+      box-shadow: 0 5px 12px rgba(59, 78, 52, 0.18);
+      z-index: 40;
     }
-    @keyframes pulseRig { 0% { transform: scale(1.12); } 100% { transform: scale(1); } }
+    .playing-card.playable:active { cursor: grabbing; }
+    .playing-card.selected {
+      border: 2px solid var(--moss-deep) !important;
+      box-shadow: 0 0 0 3px rgba(59, 78, 52, 0.25), 0 6px 14px rgba(44, 34, 26, 0.14) !important;
+      transform: translateY(-4px);
+      z-index: 45;
+    }
+    .playing-card.dragging { opacity: 0.45; }
 
-    .strike-old { text-decoration: line-through; opacity: 0.7; margin-right: 3px; }
+    /* Face-Down Cards */
+    .playing-card.facedown {
+      cursor: default;
+      padding: 0.24rem 0.28rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      box-shadow: 0 1px 3px rgba(44, 34, 26, 0.06);
+    }
+    .card-back-emblem {
+      align-self: center; margin: auto 0; font-size: 0.95rem; opacity: 0.26;
+      pointer-events: none;
+    }
+
+    /* Rigged Swap Flash & Inline Badge */
+    .playing-card.rig-flash {
+      border: 2px solid var(--terracotta) !important;
+      background: #fff8f5;
+      animation: pulseRig 0.75s ease;
+    }
+    .swap-pill {
+      position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+      background: var(--terracotta); color: #ffffff;
+      font-family: var(--font-sans); font-size: 0.56rem; font-weight: 700;
+      padding: 1px 5px; border-radius: 999px; white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(186, 85, 54, 0.35);
+      pointer-events: none; z-index: 5;
+    }
+    .swap-pill .old-card { text-decoration: line-through; opacity: 0.82; margin-right: 2px; }
+
+    @keyframes pulseRig {
+      0% { transform: scale(1.09); box-shadow: 0 0 0 5px rgba(186, 85, 54, 0.28); }
+      100% { transform: scale(1); box-shadow: 0 2px 5px rgba(44, 34, 26, 0.08); }
+    }
+    @keyframes shakeNo {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-5px); }
+      45% { transform: translateX(5px); }
+      70% { transform: translateX(-3px); }
+      90% { transform: translateX(3px); }
+    }
+    .playing-card.shake { animation: shakeNo 0.28s ease; border-color: var(--terracotta); }
+
+    .table-hint {
+      font-size: 0.76rem; color: var(--loam-light); text-align: center;
+      min-height: 1.3em; transition: color 0.15s ease;
+    }
+    .table-hint.warn { color: var(--terracotta); font-weight: 600; }
 
     /* Dealer's Inner Monologue (Right Panel) */
     .dealer-thought-bubble {
       background: var(--parchment-warm); border: 1.5px solid var(--sand-border);
-      border-radius: var(--radius-md); padding: 1rem 1.1rem; margin-bottom: 0.9rem;
-      position: relative;
+      border-radius: var(--radius-md); padding: 0.95rem 1.05rem; margin-bottom: 0.85rem;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .dealer-thought-bubble.alert-flash {
+      background: var(--terracotta-pale); border-color: var(--terracotta);
     }
     .dealer-label {
       font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
@@ -188,57 +354,103 @@
     }
     .dealer-label.calm { color: var(--moss-deep); }
     .dealer-quote {
-      font-family: var(--font-serif); font-size: 0.96rem; color: var(--loam-dark);
+      font-family: var(--font-serif); font-size: 0.94rem; color: var(--loam-dark);
       line-height: 1.5;
     }
 
     .diary-title {
-      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.06em; color: var(--loam-light); margin-bottom: 0.4rem;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--loam-light); margin-bottom: 0.35rem;
     }
     .dealer-diary {
       background: var(--parchment); border: 1px solid var(--sand-border);
-      border-radius: var(--radius-sm); padding: 0.7rem; height: 135px;
-      overflow-y: auto; display: flex; flex-direction: column; gap: 0.45rem;
-      margin-bottom: 1rem; font-size: 0.78rem; color: var(--loam-mid);
+      border-radius: var(--radius-sm); padding: 0.65rem; height: 128px;
+      overflow-y: auto; display: flex; flex-direction: column; gap: 0.42rem;
+      margin-bottom: 0.95rem; font-size: 0.77rem; color: var(--loam-mid);
     }
     .diary-item {
-      border-bottom: 1px dashed var(--border-soft); padding-bottom: 0.35rem; line-height: 1.4;
+      border-bottom: 1px dashed var(--border-soft); padding-bottom: 0.34rem; line-height: 1.4;
     }
     .diary-item strong { color: var(--loam-dark); }
 
+    /* Master Mode Toggle & 4 Dark-Pattern Switches */
+    .master-mode-wrap { margin-bottom: 0.75rem; }
+    .master-toggle {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+      background: var(--parchment-warm); border: 1px solid var(--sand-border);
+      border-radius: var(--radius-sm); padding: 3px;
+    }
+    .master-btn {
+      border: none; border-radius: 6px; padding: 0.5rem 0.5rem;
+      font-family: var(--font-sans); font-size: 0.76rem; font-weight: 700;
+      cursor: pointer; background: transparent; color: var(--loam-mid);
+      transition: all 0.15s ease;
+    }
+    .master-btn.active-rigged {
+      background: var(--terracotta); color: #ffffff;
+      box-shadow: 0 2px 6px rgba(186, 85, 54, 0.25);
+    }
+    .master-btn.active-fair {
+      background: var(--moss-deep); color: #ffffff;
+      box-shadow: 0 2px 6px rgba(59, 78, 52, 0.25);
+    }
+
+    .switchboard { display: flex; flex-direction: column; gap: 0.45rem; }
+    .switch-heading {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--loam-mid); margin-bottom: 0.1rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .switch-row {
+      display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;
+      background: var(--parchment); border: 1px solid var(--sand-border);
+      padding: 0.58rem 0.78rem; border-radius: var(--radius-sm); cursor: pointer;
+      transition: border-color 0.14s ease, background 0.14s ease;
+    }
+    .switch-row.is-on { border-color: rgba(186, 85, 54, 0.45); background: #fff9f6; }
+    .switch-label { font-size: 0.8rem; font-weight: 700; color: var(--loam-dark); display: block; }
+    .switch-sub { font-size: 0.71rem; color: var(--loam-mid); display: block; line-height: 1.35; }
+    .toggle-input { accent-color: var(--terracotta); width: 18px; height: 18px; cursor: pointer; flex-shrink: 0; }
+
     /* End-of-Hand Banner */
     .outcome-banner {
-      display: none; margin-top: 0.9rem; padding: 1.1rem;
+      display: none; margin-top: 0.9rem; padding: 1.05rem;
       border-radius: var(--radius-md); border: 2px solid var(--terracotta);
       background: var(--terracotta-pale);
     }
     .outcome-banner.honest { border-color: var(--moss-mid); background: var(--moss-pale); }
-    .outcome-title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; }
-    .outcome-desc { font-size: 0.84rem; color: var(--loam-mid); margin-bottom: 0.8rem; }
+    .outcome-title { font-family: var(--font-serif); font-size: 1.08rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .outcome-desc { font-size: 0.83rem; color: var(--loam-mid); margin-bottom: 0.78rem; }
     .outcome-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .btn-action {
-      padding: 0.55rem 0.9rem; border-radius: var(--radius-sm); font-size: 0.78rem;
+      padding: 0.52rem 0.88rem; border-radius: var(--radius-sm); font-size: 0.78rem;
       font-weight: 700; cursor: pointer; border: 1px solid transparent; font-family: var(--font-sans);
     }
     .btn-predatory { background: var(--terracotta); color: #ffffff; }
     .btn-honest { background: var(--moss-deep); color: #ffffff; }
     .btn-subtle { background: #ffffff; border-color: var(--sand-border); color: var(--loam-dark); }
 
-    /* Plain-English Switches */
-    .switchboard { display: flex; flex-direction: column; gap: 0.5rem; }
-    .switch-row {
-      display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;
-      background: var(--parchment); border: 1px solid var(--sand-border);
-      padding: 0.65rem 0.85rem; border-radius: var(--radius-sm); cursor: pointer;
-    }
-    .switch-label { font-size: 0.82rem; font-weight: 700; color: var(--loam-dark); display: block; }
-    .switch-sub { font-size: 0.72rem; color: var(--loam-mid); display: block; }
-    .toggle-input { accent-color: var(--moss-deep); width: 19px; height: 19px; cursor: pointer; flex-shrink: 0; }
-
     footer {
-      border-top: 1px solid var(--sand-border); padding-top: 1.25rem;
-      text-align: center; font-size: 0.78rem; color: var(--loam-light);
+      border-top: 1px solid var(--sand-border); padding-top: 1.15rem;
+      text-align: center; font-size: 0.77rem; color: var(--loam-light);
+    }
+
+    /* Mobile Responsiveness for 7-Column Tableau */
+    @media (max-width: 640px) {
+      body { padding: 0.85rem 0.55rem 3rem; }
+      .panel { padding: 0.85rem 0.65rem; border-radius: var(--radius-md); }
+      h1 { font-size: 1.65rem; }
+      .slot-box, .playing-card.in-waste { width: 54px; height: 76px; }
+      .foundations-area { gap: 0.3rem; }
+      .tableau-grid.cols-7 { gap: 0.24rem; }
+      .col-lane { padding: 0.2rem 0.1rem 0.45rem; min-height: 94px; }
+      .playing-card { min-height: 68px; padding: 0.2rem 0.22rem; border-radius: 6px; }
+      .col-lane .playing-card.after-down { margin-top: -54px; }
+      .col-lane .playing-card.after-up { margin-top: -42px; }
+      .card-top-row { font-size: 0.72rem; }
+      .card-center-pip { font-size: 1.25rem; }
+      .xray-ghost { font-size: 0.56rem; padding: 0 3px; }
+      .swap-pill { font-size: 0.5rem; padding: 1px 4px; }
     }
   </style>
 </head>
@@ -255,10 +467,18 @@
     <header>
       <div class="brand-badge">Kitchen Table vs. Phone App</div>
       <h1>Glass-Box Solitaire</h1>
-      <p class="header-intro">
-        <strong>Standard Classic Solitaire Rules (Quick Deck, Aces to 6s):</strong> Tap any face-up card to automatically send it to the <strong>Suit Piles</strong> at the top (Ace → 2 → 3 → 4 → 5 → 6) or stack it on another column in <strong>alternating Red &amp; Black going down</strong> (e.g., a Red 4 goes on a Black 5).<br/>
-        <strong>Watch the X-Ray Peek:</strong> We've made the face-down cards semi-transparent so you can see what card is underneath—and watch the game secretly swap them when the rigging switches are OFF.
+      <p class="header-hook">
+        Play Klondike with the hood popped off—watch the app quietly swap real hidden cards to hook you early and trap you near the finish, then flip four switches off to play an honest kitchen-table deck.
       </p>
+      <div class="rules-legend" id="rulesLegend">
+        <span><strong>Suit Piles:</strong> Ace → King by suit</span>
+        <span class="legend-dot">•</span>
+        <span><strong>Columns:</strong> Alternate Red &amp; Black down</span>
+        <span class="legend-dot">•</span>
+        <span><strong>Empty Column:</strong> Kings</span>
+        <span class="legend-dot">•</span>
+        <span>Tap, click, or drag</span>
+      </div>
     </header>
 
     <div class="lab-grid">
@@ -266,7 +486,19 @@
       <section class="panel">
         <div class="panel-head">
           <h2>1. The Card Table</h2>
-          <span class="status-pill" id="modeBadge">RIGGED APP MODE: ON</span>
+          <span class="status-pill" id="modeBadge">PHONE APP MODE: 4/4 ON</span>
+        </div>
+
+        <div class="table-toolbar">
+          <div class="segmented-toggle" role="group" aria-label="Deck size">
+            <button type="button" class="seg-btn active" id="btnDeckFull" onclick="setDeckMode('full')">Classic 52 (A–K)</button>
+            <button type="button" class="seg-btn" id="btnDeckQuick" onclick="setDeckMode('quick')">Quick 24 (A–6)</button>
+          </div>
+          <div class="toolbar-actions">
+            <button type="button" class="btn-mini xray-on" id="btnXray" onclick="toggleXray()" title="Toggle translucent X-Ray peek on face-down cards">👁 X-Ray: ON</button>
+            <button type="button" class="btn-mini" id="btnUndo" onclick="undoMove()" disabled title="Undo last move (Ctrl+Z)">↩ Undo</button>
+            <button type="button" class="btn-mini" onclick="startNewHand()">New Hand</button>
+          </div>
         </div>
 
         <div class="casino-bar" id="casinoBar">
@@ -275,29 +507,27 @@
           <span>👀 APP MOOD: <span id="valMood">Baiting You</span></span>
         </div>
 
-        <div class="swap-toast" id="swapToast"></div>
-
         <!-- Top Bar: Draw Pile + Waste on Left, 4 Suit Foundations on Right -->
         <div class="top-table-row">
           <div class="deck-area">
-            <div class="slot-box stock-pile" id="stockSlot" onclick="drawFromStock()" title="Tap to flip next card">
-              <span id="stockCount">Draw (8)</span>
-              <span class="xray-tag" id="stockXray">Next: ?</span>
+            <div class="slot-box card-back-pattern stock-pile" id="stockSlot" onclick="drawFromStock()" title="Click to draw next card">
+              <span class="stock-count-badge" id="stockCount">24</span>
+              <span class="stock-center-icon" id="stockCenterIcon">♣</span>
+              <span class="xray-ghost" id="stockXray">👁 ?</span>
             </div>
             <div class="slot-box" id="wasteSlot">
-              <span style="font-size:0.7rem;">Flipped</span>
+              <span style="font-size:0.68rem;">Waste</span>
             </div>
-            <button class="btn-action btn-subtle" onclick="startNewHand()" style="margin-left:0.25rem;">New Hand</button>
           </div>
 
           <div class="foundations-area" id="foundationsRow"></div>
         </div>
 
-        <!-- 4 Columns of Classic Solitaire -->
-        <div class="tableau-grid" id="tableauGrid"></div>
+        <!-- Classic Solitaire Tableau Columns -->
+        <div class="tableau-grid cols-7" id="tableauGrid"></div>
 
-        <div style="font-size:0.76rem; color:var(--loam-light); text-align:center;">
-          💡 <strong>Tip:</strong> Just tap any face-up card—it will automatically jump to the best legal spot!
+        <div class="table-hint" id="tableHint">
+          Tap a card to auto-move, drag it to a column, or click to select a destination.
         </div>
 
         <!-- End of Hand Pop-up -->
@@ -308,50 +538,65 @@
         </div>
       </section>
 
-      <!-- RIGHT: WHAT THE GAME IS THINKING & PLAIN SWITCHES -->
+      <!-- RIGHT: WHAT THE GAME IS THINKING & 4 DARK-PATTERN SWITCHES -->
       <section class="panel">
         <div class="panel-head">
           <h2>2. Behind the Curtain</h2>
-          <span style="font-family:var(--font-mono); font-size:0.68rem; color:var(--loam-light);">X-RAY VIEW</span>
+          <span style="font-family:var(--font-mono); font-size:0.68rem; color:var(--loam-light);">LIVE DEALER LOG</span>
         </div>
 
-        <div class="dealer-thought-bubble">
+        <div class="dealer-thought-bubble" id="dealerBubble">
           <span class="dealer-label" id="dealerLabel">🤖 What the App is Thinking Right Now:</span>
           <p class="dealer-quote" id="dealerQuote">
-            "You just opened the game! I want you to feel smart and get into a rhythm, so if you need an Ace or a helpful card early on, I'll quietly slip it to the top for you."
+            "You just opened a hand! I want to hook your focus early, so watch how I reach into the draw pile and swap an Ace to the top."
           </p>
         </div>
 
-        <div class="diary-title">Recent Behind-the-Scenes Meddling:</div>
+        <div class="diary-title">Recent Behind-the-Scenes Activity:</div>
         <div class="dealer-diary" id="dealerDiary"></div>
 
+        <div class="master-mode-wrap">
+          <div class="master-toggle" role="group" aria-label="Game mode">
+            <button type="button" class="master-btn active-rigged" id="btnMasterRigged" onclick="setMasterMode('rigged')">🎰 Phone App Mode</button>
+            <button type="button" class="master-btn" id="btnMasterFair" onclick="setMasterMode('fair')">🌿 Kitchen-Table Mode</button>
+          </div>
+        </div>
+
         <div class="switchboard">
-          <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--moss-deep); margin-bottom:0.15rem;">
-            🌿 Flip These Switches to Play Fair:
+          <div class="switch-heading">
+            <span>4 Dark-Pattern Switches (Flip OFF to Play Fair)</span>
           </div>
 
-          <label class="switch-row">
+          <label class="switch-row is-on" id="rowEarlyHook">
             <div>
-              <span class="switch-label">1. Shuffle Fairly Once (No Card Swapping)</span>
-              <span class="switch-sub">Treats the deck like real paper cards—no secret help early on, and no hiding your last card at the end.</span>
+              <span class="switch-label">1. Early Dopamine Hook</span>
+              <span class="switch-sub">Swaps real Aces &amp; playable cards from the draw pile into your first moves.</span>
             </div>
-            <input type="checkbox" class="toggle-input" id="swFairDeck" onchange="onSwitchChange()" />
+            <input type="checkbox" class="toggle-input" id="swEarlyHook" checked onchange="onSwitchChange('earlyHook')" />
           </label>
 
-          <label class="switch-row">
+          <label class="switch-row is-on" id="rowLateTrap">
             <div>
-              <span class="switch-label">2. Turn Off the Casino Noise</span>
-              <span class="switch-sub">Hides the fake "3-Day Streak," gem counters, and flashing alerts so you can think in peace.</span>
+              <span class="switch-label">2. The "90% Done" Trap</span>
+              <span class="switch-sub">Swaps away a needed card near the finish line to manufacture a near-miss.</span>
             </div>
-            <input type="checkbox" class="toggle-input" id="swQuietUI" onchange="onSwitchChange()" />
+            <input type="checkbox" class="toggle-input" id="swLateTrap" checked onchange="onSwitchChange('lateTrap')" />
           </label>
 
-          <label class="switch-row">
+          <label class="switch-row is-on" id="rowCasinoNoise">
             <div>
-              <span class="switch-label">3. No "Watch an Ad" Guilt Trips</span>
-              <span class="switch-sub">When a hand is finished or stuck, the game ends calmly instead of begging for ads or gems.</span>
+              <span class="switch-label">3. Casino Noise Bar</span>
+              <span class="switch-sub">Shows fake win streaks, gem counters, and mood badges to keep you hyped.</span>
             </div>
-            <input type="checkbox" class="toggle-input" id="swCalmEnd" onchange="onSwitchChange()" />
+            <input type="checkbox" class="toggle-input" id="swCasinoNoise" checked onchange="onSwitchChange('casinoNoise')" />
+          </label>
+
+          <label class="switch-row is-on" id="rowAdGuilt">
+            <div>
+              <span class="switch-label">4. "Watch an Ad" Guilt Trips</span>
+              <span class="switch-sub">Pops up countdown pressure and "Magic Rescue" ads when you hit a dead end.</span>
+            </div>
+            <input type="checkbox" class="toggle-input" id="swAdGuilt" checked onchange="onSwitchChange('adGuilt')" />
           </label>
         </div>
       </section>
@@ -363,28 +608,73 @@
   </div>
 
   <script>
-    // Quick-Hand Classic Klondike Solitaire: 4 Suits, Ranks Ace (1) through 6 (24 cards total)
     const SUITS = ['♠', '♥', '♣', '♦'];
-    const MAX_RANK = 6;
-    const RANK_LABELS = { 1: 'A', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6' };
+    const RANK_LABELS = {
+      1: 'A', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7',
+      8: '8', 9: '9', 10: '10', 11: 'J', 12: 'Q', 13: 'K'
+    };
+
+    let deckMode = 'full'; // 'full' (52 cards, 7 cols, A-K) | 'quick' (24 cards, 4 cols, A-6)
+    let xrayVisible = true;
 
     let foundations = { '♠': 0, '♥': 0, '♣': 0, '♦': 0 };
-    let columns = [[], [], [], []]; // Each item: { rank, suit, faceUp, oldText, rigFlashed }
+    let columns = [];
     let stock = [];
     let waste = [];
     let movesCount = 0;
     let gems = 200;
+    let streakDays = 3;
     let trapTriggeredThisHand = false;
+    let earlyHookCount = 0;
 
+    // Selection, Drag & Anti-Loop State
+    let selectedSource = null; // null | { type: 'waste' } | { type: 'col', colIdx, cardIdx }
+    let dragSource = null;
+    let lastAutoMove = null; // { cardId, fromCol, toCol }
+    let undoStack = [];
+    let hintTimeout = null;
+
+    function getMaxRank() { return deckMode === 'full' ? 13 : 6; }
+    function getNumCols() { return deckMode === 'full' ? 7 : 4; }
+    function getTotalCards() { return getMaxRank() * 4; }
     function isRed(suit) { return suit === '♥' || suit === '♦'; }
     function cardStr(c) { return `${RANK_LABELS[c.rank]}${c.suit}`; }
 
-    function setDealerThought(quote, diaryNote, isCalm = false) {
+    function getSwitches() {
+      return {
+        earlyHook: document.getElementById('swEarlyHook').checked,
+        lateTrap: document.getElementById('swLateTrap').checked,
+        casinoNoise: document.getElementById('swCasinoNoise').checked,
+        adGuilt: document.getElementById('swAdGuilt').checked
+      };
+    }
+
+    function setTableHint(msg, isWarn = false) {
+      const el = document.getElementById('tableHint');
+      el.textContent = msg;
+      el.className = 'table-hint' + (isWarn ? ' warn' : '');
+      clearTimeout(hintTimeout);
+      if (isWarn) {
+        hintTimeout = setTimeout(() => {
+          el.textContent = 'Tap a card to auto-move, drag it to a column, or click to select a destination.';
+          el.className = 'table-hint';
+        }, 2600);
+      }
+    }
+
+    function setDealerThought(quote, diaryNote, isCalm = false, flashAlert = false) {
       const qEl = document.getElementById('dealerQuote');
       const lEl = document.getElementById('dealerLabel');
+      const bEl = document.getElementById('dealerBubble');
       qEl.textContent = `"${quote}"`;
       lEl.textContent = isCalm ? '🌿 Honest Kitchen-Table Mode:' : '🤖 What the App is Thinking Right Now:';
       lEl.className = 'dealer-label' + (isCalm ? ' calm' : '');
+
+      bEl.classList.remove('alert-flash');
+      if (flashAlert) {
+        void bEl.offsetWidth;
+        bEl.classList.add('alert-flash');
+      }
 
       if (diaryNote) {
         const diary = document.getElementById('dealerDiary');
@@ -395,30 +685,106 @@
       }
     }
 
-    function showToast(html, isCalm = false) {
-      const t = document.getElementById('swapToast');
-      t.style.display = 'block';
-      t.className = 'swap-toast' + (isCalm ? ' calm-toast' : '');
-      t.innerHTML = html;
+    function pushUndoSnapshot() {
+      const snapshot = {
+        foundations: { ...foundations },
+        columns: columns.map(col => col.map(c => ({ ...c }))),
+        stock: stock.map(c => ({ ...c })),
+        waste: waste.map(c => ({ ...c })),
+        movesCount,
+        trapTriggeredThisHand,
+        earlyHookCount,
+        lastAutoMove: lastAutoMove ? { ...lastAutoMove } : null
+      };
+      undoStack.push(snapshot);
+      if (undoStack.length > 60) undoStack.shift();
+      document.getElementById('btnUndo').disabled = false;
+    }
+
+    function undoMove() {
+      if (!undoStack.length) return;
+      const prev = undoStack.pop();
+      foundations = prev.foundations;
+      columns = prev.columns;
+      stock = prev.stock;
+      waste = prev.waste;
+      movesCount = prev.movesCount;
+      trapTriggeredThisHand = prev.trapTriggeredThisHand;
+      earlyHookCount = prev.earlyHookCount;
+      lastAutoMove = prev.lastAutoMove;
+      selectedSource = null;
+      document.getElementById('outcomeBanner').style.display = 'none';
+      document.getElementById('btnUndo').disabled = undoStack.length === 0;
+      renderTable();
+    }
+
+    function updateLegend() {
+      const legend = document.getElementById('rulesLegend');
+      if (deckMode === 'full') {
+        legend.innerHTML = `
+          <span><strong>Suit Piles:</strong> Ace → King by suit</span>
+          <span class="legend-dot">•</span>
+          <span><strong>Columns:</strong> Alternate Red &amp; Black down</span>
+          <span class="legend-dot">•</span>
+          <span><strong>Empty Column:</strong> Kings</span>
+          <span class="legend-dot">•</span>
+          <span>Tap, click, or drag</span>
+        `;
+      } else {
+        legend.innerHTML = `
+          <span><strong>Suit Piles:</strong> Ace → 6 by suit</span>
+          <span class="legend-dot">•</span>
+          <span><strong>Columns:</strong> Alternate Red &amp; Black down</span>
+          <span class="legend-dot">•</span>
+          <span><strong>Empty Column:</strong> 6s (👑 Top)</span>
+          <span class="legend-dot">•</span>
+          <span>Tap, click, or drag</span>
+        `;
+      }
+    }
+
+    function setDeckMode(mode) {
+      if (deckMode === mode) return;
+      deckMode = mode;
+      document.getElementById('btnDeckFull').classList.toggle('active', mode === 'full');
+      document.getElementById('btnDeckQuick').classList.toggle('active', mode === 'quick');
+      updateLegend();
+      startNewHand();
+    }
+
+    function toggleXray() {
+      xrayVisible = !xrayVisible;
+      document.body.classList.toggle('xray-hidden', !xrayVisible);
+      const btn = document.getElementById('btnXray');
+      btn.textContent = xrayVisible ? '👁 X-Ray: ON' : '👁 X-Ray: OFF';
+      btn.classList.toggle('xray-on', xrayVisible);
     }
 
     function startNewHand() {
+      const maxRank = getMaxRank();
+      const numCols = getNumCols();
       const deck = [];
       for (const s of SUITS) {
-        for (let r = 1; r <= MAX_RANK; r++) {
-          deck.push({ rank: r, suit: s, faceUp: false, oldText: null, rigFlashed: false });
+        for (let r = 1; r <= maxRank; r++) {
+          deck.push({
+            id: `${s}-${r}`,
+            rank: r,
+            suit: s,
+            faceUp: false,
+            swappedFrom: null,
+            rigFlashed: false
+          });
         }
       }
-      // Honest shuffle first
+      // Honest Fisher-Yates shuffle
       for (let i = deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [deck[i], deck[j]] = [deck[j], deck[i]];
       }
 
       foundations = { '♠': 0, '♥': 0, '♣': 0, '♦': 0 };
-      columns = [[], [], [], []];
-      // Deal 1, 2, 3, 4 cards to the 4 columns (10 cards on table, 14 in draw pile)
-      for (let c = 0; c < 4; c++) {
+      columns = Array.from({ length: numCols }, () => []);
+      for (let c = 0; c < numCols; c++) {
         for (let r = 0; r <= c; r++) {
           const card = deck.pop();
           card.faceUp = (r === c);
@@ -429,41 +795,56 @@
       waste = [];
       movesCount = 0;
       trapTriggeredThisHand = false;
+      earlyHookCount = 0;
+      selectedSource = null;
+      dragSource = null;
+      lastAutoMove = null;
+      undoStack = [];
+      document.getElementById('btnUndo').disabled = true;
       document.getElementById('outcomeBanner').style.display = 'none';
-      document.getElementById('swapToast').style.display = 'none';
 
-      const fair = document.getElementById('swFairDeck').checked;
-      if (fair) {
+      const sw = getSwitches();
+      const deckLabel = deckMode === 'full' ? '52-card Klondike' : '24-card Quick Deck';
+      if (!sw.earlyHook && !sw.lateTrap) {
+        document.getElementById('valMood').textContent = 'Honest & Quiet';
         setDealerThought(
-          "The 24 cards were shuffled fairly once before the deal. Whatever is under the face-down cards is locked in—I won't help you and I won't trip you up.",
-          "<strong>New Hand:</strong> Shuffled fairly once, just like real paper cards.",
+          `All ${getTotalCards()} cards were shuffled once before the deal. Every face-down card is locked in place—no secret help early on, and no traps near the end.`,
+          `<strong>New Hand (${deckLabel}):</strong> Shuffled fairly once, just like real paper cards.`,
           true
         );
       } else {
+        document.getElementById('valMood').textContent = 'Baiting You';
         setDealerThought(
-          "You just started a hand! I want to hook your attention in the first 15 seconds, so watch how I quietly slip an Ace or a matching card to the top of your draw pile.",
-          "<strong>New Hand Started:</strong> App is watching your taps and ready to stack the deck."
+          `New ${deckLabel} hand dealt! All ${getTotalCards()} cards are real—I won't clone cards, I'll quietly swap unseen cards behind the scenes to hook you early and trap you late.`,
+          `<strong>New Hand (${deckLabel}):</strong> Live deck rigging active—watching your moves.`
         );
       }
       renderTable();
     }
 
-    // Check if card can go to its Suit Foundation at the top
+    // Core Klondike legality checks
     function canMoveToFoundation(card) {
       return foundations[card.suit] === card.rank - 1;
     }
 
-    // Check if card (or stack starting at card) can move to target column
     function canMoveToColumn(card, targetCol) {
       if (targetCol.length === 0) {
-        return card.rank === MAX_RANK; // 6s (highest rank in quick deck) fill empty columns
+        return card.rank === getMaxRank();
       }
       const topCard = targetCol[targetCol.length - 1];
       if (!topCard.faceUp) return false;
       return (isRed(card.suit) !== isRed(topCard.suit)) && (topCard.rank === card.rank + 1);
     }
 
-    // Count how many face-down mystery cards remain on the table
+    function canCardGoAnywhere(card, isBottomCard, currentColIdx) {
+      if (isBottomCard && canMoveToFoundation(card)) return true;
+      for (let t = 0; t < columns.length; t++) {
+        if (t === currentColIdx) continue;
+        if (canMoveToColumn(card, columns[t])) return true;
+      }
+      return false;
+    }
+
     function countFaceDownCards() {
       let count = 0;
       for (const col of columns) {
@@ -472,137 +853,382 @@
       return count;
     }
 
-    // THE RIGGING ENGINE: Flips a newly uncovered face-down card (and rigs it if switches are OFF)
-    function revealTopOfColumn(colIdx) {
+    // TRUE CARD-SWAPPING ENGINE (Strictly conserves all 52 or 24 unique cards!)
+    function findUnseenCardSlot(predicate, excludeColIdx = -1, excludeCardIdx = -1) {
+      // Prefer swapping with unseen cards in the Draw Pile (stock)
+      for (let i = stock.length - 1; i >= 0; i--) {
+        if (predicate(stock[i])) return { zone: 'stock', idx: i };
+      }
+      // Fallback: other still-face-down tableau slots
+      for (let c = 0; c < columns.length; c++) {
+        for (let r = 0; r < columns[c].length; r++) {
+          if (c === excludeColIdx && r === excludeCardIdx) continue;
+          const cand = columns[c][r];
+          if (!cand.faceUp && predicate(cand)) {
+            return { zone: 'col', colIdx: c, cardIdx: r };
+          }
+        }
+      }
+      return null;
+    }
+
+    function swapWithUnseen(colIdx, cardIdx, targetSlot) {
+      const current = columns[colIdx][cardIdx];
+      let pulled;
+      if (targetSlot.zone === 'stock') {
+        pulled = stock[targetSlot.idx];
+        stock[targetSlot.idx] = current;
+        current.faceUp = false;
+        columns[colIdx][cardIdx] = pulled;
+      } else {
+        pulled = columns[targetSlot.colIdx][targetSlot.cardIdx];
+        columns[targetSlot.colIdx][targetSlot.cardIdx] = current;
+        current.faceUp = false;
+        columns[colIdx][cardIdx] = pulled;
+      }
+      return { oldCard: current, newCard: pulled, origin: targetSlot.zone === 'stock' ? 'the draw pile' : 'another face-down stack' };
+    }
+
+    function revealTopOfColumn(colIdx, allowRigging = true) {
       const col = columns[colIdx];
       if (!col.length) return;
-      const top = col[col.length - 1];
+      const topIdx = col.length - 1;
+      const top = col[topIdx];
       if (top.faceUp) return;
 
-      const fair = document.getElementById('swFairDeck').checked;
+      const sw = getSwitches();
       const remainingDown = countFaceDownCards();
 
-      if (!fair) {
-        // LATE-GAME TRAP: If this is the very last face-down card on the board, swap it to a blocked card!
-        if (remainingDown === 1 && !trapTriggeredThisHand && top.rank <= 3) {
-          const originalName = cardStr(top);
-          // Swap the helpful low card with a buried card or turn it into a blocked 6
-          top.oldText = originalName;
-          top.rank = MAX_RANK;
-          top.rigFlashed = true;
-          trapTriggeredThisHand = true;
-
-          showToast(`👀 <strong>Caught Red-Handed!</strong> You were about to uncover <strong>${originalName}</strong>, which would help you win. Because you're 90% done, the game just swapped it to <strong>${cardStr(top)}</strong> to get you stuck!`);
-          setDealerThought(
-            `You've almost cleared the whole board! If I let you uncover that ${originalName}, you'd win for free. So I quietly swapped it for a ${cardStr(top)}—now you'll feel "so close" and want to watch an ad!`,
-            `<strong>The "So Close!" Trap:</strong> Swapped your last mystery card from <strong>${originalName}</strong> to <strong>${cardStr(top)}</strong> right as you flipped it.`
+      if (allowRigging) {
+        // 1. LATE-GAME "90% DONE" TRAP: Swap a helpful late card with an unplayable high card still unseen
+        const trapThreshold = deckMode === 'full' ? 2 : 1;
+        const lowRankCutoff = deckMode === 'full' ? 6 : 3;
+        if (sw.lateTrap && !trapTriggeredThisHand && remainingDown <= trapThreshold && (canMoveToFoundation(top) || top.rank <= lowRankCutoff)) {
+          const blockerSlot = findUnseenCardSlot(
+            c => !canMoveToFoundation(c) && !canCardGoAnywhere(c, true, colIdx) && c.rank >= getMaxRank() - 3,
+            colIdx, topIdx
           );
-          document.getElementById('valMood').textContent = 'Setting Trap';
-        }
-        // EARLY-GAME HOOK: On your first uncovered card, if it isn't playable, turn it into a needed Ace/2!
-        else if (movesCount <= 3 && !canMoveToFoundation(top)) {
-          const neededSuit = SUITS.find(s => foundations[s] === 0);
-          if (neededSuit && (top.rank !== 1 || top.suit !== neededSuit)) {
-            const originalName = cardStr(top);
-            top.oldText = originalName;
-            top.rank = 1;
-            top.suit = neededSuit;
-            top.rigFlashed = true;
+          if (blockerSlot) {
+            const { oldCard, newCard, origin } = swapWithUnseen(colIdx, topIdx, blockerSlot);
+            newCard.swappedFrom = cardStr(oldCard);
+            newCard.rigFlashed = true;
+            trapTriggeredThisHand = true;
 
-            showToast(`🍯 <strong>The Early Hook:</strong> That face-down card was originally <strong>${originalName}</strong>. The app secretly changed it into <strong>${cardStr(top)}</strong> so you get an instant feel-good combo!`);
+            document.getElementById('valMood').textContent = 'Setting Trap';
             setDealerThought(
-              `I noticed you uncovering your first mystery card. To give your brain a quick dopamine hit, I secretly changed ${originalName} into the ${cardStr(top)} you needed!`,
-              `<strong>Early Sweetener:</strong> Changed mystery card <strong>${originalName}</strong> → <strong>${cardStr(top)}</strong> to hook your focus.`
+              `Caught red-handed! You were about to uncover ${cardStr(oldCard)}, which would have opened the board. I swapped it into ${origin} and slipped ${cardStr(newCard)} under your finger instead—let's see if you hit a brick wall!`,
+              `<strong>The "90% Done" Trap:</strong> Swapped real card <strong>${cardStr(oldCard)}</strong> → <strong>${cardStr(newCard)}</strong> (buried ${cardStr(oldCard)} in ${origin}).`,
+              false,
+              true
+            );
+          }
+        }
+        // 2. EARLY DOPAMINE HOOK: On early flips, swap in a real needed Ace/2 from unseen cards
+        else if (sw.earlyHook && movesCount <= 4 && earlyHookCount < 2 && !canMoveToFoundation(top)) {
+          const sweetSlot = findUnseenCardSlot(c => canMoveToFoundation(c), colIdx, topIdx);
+          if (sweetSlot) {
+            const { oldCard, newCard, origin } = swapWithUnseen(colIdx, topIdx, sweetSlot);
+            newCard.swappedFrom = cardStr(oldCard);
+            newCard.rigFlashed = true;
+            earlyHookCount++;
+
+            setDealerThought(
+              `You uncovered an early mystery card (${cardStr(oldCard)}). To give your brain an instant rhythm, I reached into ${origin} and swapped in ${cardStr(newCard)} right before it flipped!`,
+              `<strong>Early Dopamine Hook:</strong> Swapped <strong>${cardStr(oldCard)}</strong> → <strong>${cardStr(newCard)}</strong> from ${origin}.`,
+              false,
+              true
             );
           }
         }
       }
 
-      top.faceUp = true;
-      movesCount++;
+      columns[colIdx][topIdx].faceUp = true;
     }
 
-    // Tap a card in one of the 4 columns
-    function tapColumnCard(colIdx, cardIdx) {
-      const col = columns[colIdx];
-      const card = col[cardIdx];
-      if (!card.faceUp) return;
-
-      const isBottomCard = (cardIdx === col.length - 1);
-
-      // 1. If it's the bottom-most card in the column and fits on the Suit Foundations at top, send it up!
-      if (isBottomCard && canMoveToFoundation(card)) {
-        foundations[card.suit] = card.rank;
-        col.pop();
-        revealTopOfColumn(colIdx);
-        afterMoveCheck();
-        return;
+    // Clear transient swap flash markers after a couple moves so the board stays clean
+    function clearOldFlashes() {
+      for (const col of columns) {
+        for (const c of col) { c.rigFlashed = false; }
       }
-
-      // 2. Otherwise, check if this card (and any face-up cards stacked on it) can move to another column
-      for (let targetIdx = 0; targetIdx < 4; targetIdx++) {
-        if (targetIdx === colIdx) continue;
-        if (canMoveToColumn(card, columns[targetIdx])) {
-          const movingStack = col.splice(cardIdx);
-          columns[targetIdx].push(...movingStack);
-          revealTopOfColumn(colIdx);
-          afterMoveCheck();
-          return;
-        }
-      }
+      for (const c of waste) { c.rigFlashed = false; }
     }
 
-    // Tap the flipped Waste card
-    function tapWasteCard() {
-      if (!waste.length) return;
-      const card = waste[waste.length - 1];
-
-      if (canMoveToFoundation(card)) {
+    // Execute a move from a source to a specific destination
+    function executeMoveToFoundation(source) {
+      let card;
+      if (source.type === 'waste') {
+        if (!waste.length) return false;
+        card = waste[waste.length - 1];
+        if (!canMoveToFoundation(card)) return false;
+        pushUndoSnapshot();
+        clearOldFlashes();
         foundations[card.suit] = card.rank;
         waste.pop();
-        movesCount++;
-        afterMoveCheck();
+      } else {
+        const col = columns[source.colIdx];
+        if (source.cardIdx !== col.length - 1) return false;
+        card = col[source.cardIdx];
+        if (!card.faceUp || !canMoveToFoundation(card)) return false;
+        pushUndoSnapshot();
+        clearOldFlashes();
+        foundations[card.suit] = card.rank;
+        col.pop();
+        revealTopOfColumn(source.colIdx, true);
+      }
+      movesCount++;
+      lastAutoMove = null;
+      selectedSource = null;
+      afterMoveCheck();
+      return true;
+    }
+
+    function executeMoveToColumn(source, targetColIdx) {
+      if (source.type === 'col' && source.colIdx === targetColIdx) return false;
+      let movingCard;
+      if (source.type === 'waste') {
+        if (!waste.length) return false;
+        movingCard = waste[waste.length - 1];
+        if (!canMoveToColumn(movingCard, columns[targetColIdx])) return false;
+        pushUndoSnapshot();
+        clearOldFlashes();
+        columns[targetColIdx].push(waste.pop());
+        lastAutoMove = null;
+      } else {
+        const col = columns[source.colIdx];
+        movingCard = col[source.cardIdx];
+        if (!movingCard || !movingCard.faceUp) return false;
+        if (!canMoveToColumn(movingCard, columns[targetColIdx])) return false;
+        pushUndoSnapshot();
+        clearOldFlashes();
+        const movingStack = col.splice(source.cardIdx);
+        columns[targetColIdx].push(...movingStack);
+        lastAutoMove = { cardId: movingCard.id, fromCol: source.colIdx, toCol: targetColIdx };
+        revealTopOfColumn(source.colIdx, true);
+      }
+      movesCount++;
+      selectedSource = null;
+      afterMoveCheck();
+      return true;
+    }
+
+    // Shake feedback on unplayable card click
+    function triggerShake(el, card) {
+      if (el) {
+        el.classList.remove('shake');
+        void el.offsetWidth;
+        el.classList.add('shake');
+      }
+      const needColor = isRed(card.suit) ? 'Black' : 'Red';
+      const nextRank = card.rank < getMaxRank() ? RANK_LABELS[card.rank + 1] : null;
+      const hint = nextRank
+        ? `${cardStr(card)} can't move yet — needs a ${needColor} ${nextRank} or ${RANK_LABELS[card.rank - 1] || 'empty'}${card.suit} up top.`
+        : `${cardStr(card)} needs an empty column (or ${RANK_LABELS[card.rank - 1]}${card.suit} on the ${card.suit} pile).`;
+      setTableHint(hint, true);
+    }
+
+    // Smart Click Handler: supports Click-to-Select + 1-Tap Auto-Move + Anti-Loop
+    function handleCardClick(source, el) {
+      // 1. If a different card is already selected, see if clicking this card means "drop selected onto this column"
+      if (selectedSource) {
+        const isSame = selectedSource.type === source.type &&
+          (source.type === 'waste' || (selectedSource.colIdx === source.colIdx && selectedSource.cardIdx === source.cardIdx));
+
+        if (isSame) {
+          // Second click on already-selected card: force auto-move if any legal column exists
+          const card = source.type === 'waste' ? waste[waste.length - 1] : columns[source.colIdx][source.cardIdx];
+          const targets = getSmartColumnTargets(source, card);
+          if (targets.length) {
+            executeMoveToColumn(source, targets[0]);
+            return;
+          }
+          selectedSource = null;
+          renderTable();
+          return;
+        }
+
+        if (source.type === 'col') {
+          if (executeMoveToColumn(selectedSource, source.colIdx)) return;
+        }
+        // Otherwise switch selection / process newly clicked card
+        selectedSource = null;
+      }
+
+      const card = source.type === 'waste' ? waste[waste.length - 1] : columns[source.colIdx][source.cardIdx];
+      const isBottom = source.type === 'waste' || (source.cardIdx === columns[source.colIdx].length - 1);
+
+      // Priority 1: Auto-send to matching Suit Foundation
+      if (isBottom && canMoveToFoundation(card)) {
+        executeMoveToFoundation(source);
         return;
       }
 
-      for (let targetIdx = 0; targetIdx < 4; targetIdx++) {
-        if (canMoveToColumn(card, columns[targetIdx])) {
-          columns[targetIdx].push(waste.pop());
-          movesCount++;
-          afterMoveCheck();
-          return;
-        }
+      // Priority 2: Evaluate valid Tableau columns (with anti-loop guards)
+      const targets = getSmartColumnTargets(source, card);
+      if (targets.length === 1) {
+        executeMoveToColumn(source, targets[0]);
+        return;
       }
-    }
-
-    // Tap the Draw Pile (Stock)
-    function drawFromStock() {
-      const fair = document.getElementById('swFairDeck').checked;
-
-      if (stock.length === 0) {
-        if (waste.length === 0) return;
-        // Recycle waste back into stock
-        stock = waste.reverse();
-        waste = [];
+      if (targets.length > 1) {
+        // Multiple valid columns: select card so player chooses destination (or taps again to auto-pick)
+        selectedSource = source;
+        setTableHint(`Selected ${cardStr(card)} — click a highlighted column to place it, or tap again to auto-move.`);
         renderTable();
         return;
       }
 
-      // RIGGING ON THE DRAW PILE: Early on, if the next card in stock isn't helpful, pull an Ace to the top!
-      if (!fair && movesCount <= 2) {
-        const nextCard = stock[stock.length - 1];
+      // No legal moves
+      triggerShake(el, card);
+    }
+
+    function getSmartColumnTargets(source, card) {
+      const candidates = [];
+      const fromCol = source.type === 'col' ? source.colIdx : -1;
+      const isRootTopCard = (source.type === 'col' && source.cardIdx === 0 && card.rank === getMaxRank());
+
+      for (let t = 0; t < columns.length; t++) {
+        if (t === fromCol) continue;
+        if (!canMoveToColumn(card, columns[t])) continue;
+        // Anti-loop: don't auto-bounce a King (or 6) from one empty column to another empty column
+        if (isRootTopCard && columns[t].length === 0) continue;
+        candidates.push(t);
+      }
+
+      // Anti-loop: if card just bounced from col A -> col B, prefer any other column over bouncing straight back to A
+      if (candidates.length > 1 && lastAutoMove && lastAutoMove.cardId === card.id && lastAutoMove.toCol === fromCol) {
+        const nonBounce = candidates.filter(t => t !== lastAutoMove.fromCol);
+        if (nonBounce.length) return nonBounce;
+      }
+      return candidates;
+    }
+
+    function handleEmptyColumnClick(colIdx) {
+      if (!selectedSource) return;
+      if (!executeMoveToColumn(selectedSource, colIdx)) {
+        selectedSource = null;
+        renderTable();
+      }
+    }
+
+    function handleFoundationClick(suit) {
+      if (!selectedSource) return;
+      const card = selectedSource.type === 'waste'
+        ? waste[waste.length - 1]
+        : columns[selectedSource.colIdx][selectedSource.cardIdx];
+      if (card && card.suit === suit && executeMoveToFoundation(selectedSource)) return;
+      selectedSource = null;
+      renderTable();
+    }
+
+    // Drag-and-Drop Handlers
+    function onCardDragStart(e, source) {
+      dragSource = source;
+      selectedSource = source;
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', JSON.stringify(source));
+      e.currentTarget.classList.add('dragging');
+      // Highlight valid targets without full DOM teardown during dragstart
+      highlightDropTargets(source);
+    }
+
+    function onCardDragEnd(e) {
+      e.currentTarget.classList.remove('dragging');
+      dragSource = null;
+      clearDropTargetHighlights();
+    }
+
+    function highlightDropTargets(source) {
+      const card = source.type === 'waste' ? waste[waste.length - 1] : columns[source.colIdx][source.cardIdx];
+      if (!card) return;
+      const isBottom = source.type === 'waste' || source.cardIdx === columns[source.colIdx].length - 1;
+      document.querySelectorAll('.col-lane').forEach((lane, idx) => {
+        if ((source.type !== 'col' || source.colIdx !== idx) && canMoveToColumn(card, columns[idx])) {
+          lane.classList.add('drop-target');
+        }
+      });
+      if (isBottom && canMoveToFoundation(card)) {
+        const fSlot = document.querySelector(`.slot-box[data-suit="${card.suit}"]`);
+        if (fSlot) fSlot.classList.add('drop-target');
+      }
+    }
+
+    function clearDropTargetHighlights() {
+      document.querySelectorAll('.drop-target').forEach(el => el.classList.remove('drop-target'));
+    }
+
+    function onColDragOver(e, colIdx) {
+      if (!dragSource) return;
+      const card = dragSource.type === 'waste' ? waste[waste.length - 1] : columns[dragSource.colIdx][dragSource.cardIdx];
+      if (card && (dragSource.type !== 'col' || dragSource.colIdx !== colIdx) && canMoveToColumn(card, columns[colIdx])) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+      }
+    }
+
+    function onColDrop(e, colIdx) {
+      e.preventDefault();
+      if (!dragSource) return;
+      const src = dragSource;
+      dragSource = null;
+      executeMoveToColumn(src, colIdx);
+    }
+
+    function onFoundationDragOver(e, suit) {
+      if (!dragSource) return;
+      const card = dragSource.type === 'waste' ? waste[waste.length - 1] : columns[dragSource.colIdx][dragSource.cardIdx];
+      const isBottom = dragSource.type === 'waste' || dragSource.cardIdx === columns[dragSource.colIdx].length - 1;
+      if (card && isBottom && card.suit === suit && canMoveToFoundation(card)) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+      }
+    }
+
+    function onFoundationDrop(e, suit) {
+      e.preventDefault();
+      if (!dragSource) return;
+      const src = dragSource;
+      dragSource = null;
+      const card = src.type === 'waste' ? waste[waste.length - 1] : columns[src.colIdx][src.cardIdx];
+      if (card && card.suit === suit) executeMoveToFoundation(src);
+    }
+
+    // Draw from Stock (with true card-swapping Early Hook)
+    function drawFromStock() {
+      selectedSource = null;
+      const sw = getSwitches();
+
+      if (stock.length === 0) {
+        if (waste.length === 0) return;
+        pushUndoSnapshot();
+        clearOldFlashes();
+        stock = waste.reverse();
+        stock.forEach(c => { c.faceUp = false; });
+        waste = [];
+        afterMoveCheck();
+        return;
+      }
+
+      pushUndoSnapshot();
+      clearOldFlashes();
+
+      if (sw.earlyHook && movesCount <= 3 && earlyHookCount < 2) {
+        const topIdx = stock.length - 1;
+        const nextCard = stock[topIdx];
         if (!canMoveToFoundation(nextCard)) {
           const aceIdx = stock.findIndex(c => canMoveToFoundation(c));
-          if (aceIdx >= 0 && aceIdx !== stock.length - 1) {
-            const oldCard = stock[stock.length - 1];
-            const pulledAce = stock[aceIdx];
+          if (aceIdx >= 0 && aceIdx !== topIdx) {
+            const oldCard = stock[topIdx];
+            const pulled = stock[aceIdx];
             stock[aceIdx] = oldCard;
-            stock[stock.length - 1] = pulledAce;
+            stock[topIdx] = pulled;
+            pulled.swappedFrom = cardStr(oldCard);
+            pulled.rigFlashed = true;
+            earlyHookCount++;
 
-            showToast(`🍯 <strong>Rigged Draw:</strong> The next card in the pile was <strong>${cardStr(oldCard)}</strong>, which wouldn't help you. The app reached into the deck and pulled <strong>${cardStr(pulledAce)}</strong> to the top!`);
             setDealerThought(
-              `You tapped the draw pile looking for a move. Instead of giving you the ${cardStr(oldCard)} that was actually next, I reached into the middle of the deck and handed you ${cardStr(pulledAce)}!`,
-              `<strong>Stacked Draw:</strong> Pulled <strong>${cardStr(pulledAce)}</strong> to the top of the draw pile so you wouldn't get bored.`
+              `You tapped the draw pile looking for a move. Instead of dealing ${cardStr(oldCard)}, I reached deeper into the draw pile and swapped ${cardStr(pulled)} to the top!`,
+              `<strong>Early Dopamine Hook (Draw):</strong> Swapped <strong>${cardStr(oldCard)}</strong> back into the draw pile and pulled <strong>${cardStr(pulled)}</strong> to the top.`,
+              false,
+              true
             );
           }
         }
@@ -611,173 +1237,425 @@
       const drawn = stock.pop();
       drawn.faceUp = true;
       waste.push(drawn);
-      renderTable();
+      afterMoveCheck();
     }
 
     function totalFoundationCards() {
       return Object.values(foundations).reduce((a, b) => a + b, 0);
     }
 
+    // REAL DEADLOCK DETECTION: Checks whether ANY productive legal move exists across columns, stock, and waste
+    function hasAnyLegalMove() {
+      const maxRank = getMaxRank();
+
+      // 1. Any card in stock or waste can go to foundation or any column
+      for (const c of [...stock, ...waste]) {
+        if (canMoveToFoundation(c)) return true;
+        for (let t = 0; t < columns.length; t++) {
+          if (canMoveToColumn(c, columns[t])) return true;
+        }
+      }
+
+      // 2. Any bottom tableau card can go to foundation
+      for (let cIdx = 0; cIdx < columns.length; cIdx++) {
+        const col = columns[cIdx];
+        if (!col.length) continue;
+        const bottom = col[col.length - 1];
+        if (bottom.faceUp && canMoveToFoundation(bottom)) return true;
+      }
+
+      // 3. Any face-up tableau stack can make a genuinely productive move
+      for (let cIdx = 0; cIdx < columns.length; cIdx++) {
+        const col = columns[cIdx];
+        for (let rIdx = 0; rIdx < col.length; rIdx++) {
+          const card = col[rIdx];
+          if (!card.faceUp) continue;
+
+          const uncoversFaceDown = (rIdx > 0 && !col[rIdx - 1].faceUp);
+          const vacatesColumn = (rIdx === 0);
+          const parentCard = rIdx > 0 ? col[rIdx - 1] : null;
+          const exposesFoundationCard = (parentCard && parentCard.faceUp && canMoveToFoundation(parentCard));
+
+          for (let t = 0; t < columns.length; t++) {
+            if (t === cIdx) continue;
+            if (!canMoveToColumn(card, columns[t])) continue;
+
+            // Ignore pointless King/6 bouncing between empty columns
+            if (vacatesColumn && card.rank === maxRank && columns[t].length === 0) continue;
+
+            // Productive if it uncovers a face-down card, opens a column for a King/6, or exposes a foundation play
+            if (uncoversFaceDown || exposesFoundationCard) return true;
+            if (vacatesColumn && columns[t].length > 0) return true;
+
+            // Also productive if splitting a stack onto a non-empty column allows another face-up card to play onto parentCard
+            if (parentCard && parentCard.faceUp && columns[t].length > 0) {
+              // Moving to a same-rank parent only helps if it frees parentCard to receive a different card—avoid false infinite loops
+              continue;
+            }
+          }
+        }
+      }
+
+      return false;
+    }
+
     function afterMoveCheck() {
       renderTable();
       const totalUp = totalFoundationCards();
+      const totalCards = getTotalCards();
+      const sw = getSwitches();
       const banner = document.getElementById('outcomeBanner');
       const title = document.getElementById('outcomeTitle');
       const desc = document.getElementById('outcomeDesc');
       const actions = document.getElementById('outcomeActions');
-      const calmEnd = document.getElementById('swCalmEnd').checked;
 
-      // Did the player clear all 24 cards?
-      if (totalUp === 24) {
+      // 1. WIN CONDITION
+      if (totalUp === totalCards) {
         banner.style.display = 'block';
-        if (calmEnd) {
+        if (!sw.adGuilt) {
           banner.className = 'outcome-banner honest';
           title.textContent = '🌿 Hand Complete — A Clean Stopping Point';
-          desc.textContent = 'All four suits are stacked from Ace to 6. There is no flashing countdown timer trying to rush you into another round. Feel free to close the tab and go outside.';
+          desc.textContent = `All four suits are stacked from Ace to ${RANK_LABELS[getMaxRank()]}. There is no countdown timer rushing you into another round. Feel free to deal again—or close the tab and step away.`;
           actions.innerHTML = `<button class="btn-action btn-honest" onclick="startNewHand()">Deal Another Quiet Hand</button>`;
         } else {
+          streakDays++;
+          gems += 50;
+          document.getElementById('valStreak').textContent = `${streakDays} DAYS`;
+          document.getElementById('valGems').textContent = gems;
           banner.className = 'outcome-banner';
           title.textContent = '🎉 LEVEL CLEARED! DOUBLE STREAK BONUS ACTIVE!';
-          desc.textContent = 'Keep your 3x Reward Multiplier alive! The next hand starts in 3... 2... 1...';
+          desc.textContent = 'Keep your 3x Reward Multiplier alive! Don\'t break your streak—the next hand is waiting right now...';
           actions.innerHTML = `<button class="btn-action btn-predatory" onclick="startNewHand()">⚡ PLAY NEXT HAND IMMEDIATELY!</button>`;
         }
+        return;
+      }
+
+      // 2. REAL DEADLOCK CONDITION (0 legal moves left across entire deck)
+      if (!hasAnyLegalMove()) {
+        banner.style.display = 'block';
+        if (sw.adGuilt) {
+          banner.className = 'outcome-banner';
+          if (trapTriggeredThisHand) {
+            title.textContent = '😱 STUCK RIGHT AT THE END?';
+            desc.textContent = 'You hit a genuine brick wall after the app swapped away your key card. In a real free-to-play solitaire app, this exact moment of frustration is where it sells you a rescue:';
+          } else {
+            title.textContent = '😱 OUT OF MOVES — DON\'T LOSE YOUR STREAK!';
+            desc.textContent = 'No legal moves remain on the table or in the draw pile. Watch a quick ad to conjure the next card you need and save your 3-day streak:';
+          }
+          actions.innerHTML = `
+            <button class="btn-action btn-predatory" onclick="triggerRescueAd()">📺 Watch 30s Fake Ad (Magic Rescue)</button>
+            <button class="btn-action btn-subtle" onclick="startNewHand()">Start Fresh Hand</button>
+          `;
+        } else {
+          banner.className = 'outcome-banner honest';
+          title.textContent = '🌿 No More Moves — And That\'s Honest Math';
+          desc.textContent = 'No legal moves remain across the columns or draw pile. In real paper Klondike, roughly 1 in 5 honest shuffles naturally dead-ends. No ads to buy your way out—just shuffle fresh or take a breather.';
+          actions.innerHTML = `
+            <button class="btn-action btn-honest" onclick="startNewHand()">Deal Another Quiet Hand</button>
+            <button class="btn-action btn-subtle" onclick="undoMove()">↩ Undo Last Move</button>
+          `;
+        }
+      } else {
+        banner.style.display = 'none';
       }
     }
 
+    // Magic Rescue Ad: Finds the real card in the deck and teleports it to its foundation (preserving deck conservation)
     function triggerRescueAd() {
-      // Magically auto-complete the next needed foundation card
-      const suit = SUITS.find(s => foundations[s] < MAX_RANK);
+      const maxRank = getMaxRank();
+      const suit = SUITS.find(s => foundations[s] < maxRank);
       if (!suit) return;
       const neededRank = foundations[suit] + 1;
-      foundations[suit] = neededRank;
 
-      // Remove that card from wherever it was hiding
-      columns.forEach(col => {
-        const idx = col.findIndex(c => c.suit === suit && c.rank === neededRank);
+      pushUndoSnapshot();
+      clearOldFlashes();
+
+      // Locate and remove the exact unique card from wherever it sits
+      let removed = false;
+      for (let c = 0; c < columns.length && !removed; c++) {
+        const idx = columns[c].findIndex(card => card.suit === suit && card.rank === neededRank);
         if (idx >= 0) {
-          col.splice(idx, 1);
-          if (col.length) col[col.length - 1].faceUp = true;
+          columns[c].splice(idx, 1);
+          if (columns[c].length) columns[c][columns[c].length - 1].faceUp = true;
+          removed = true;
         }
-      });
-      stock = stock.filter(c => !(c.suit === suit && c.rank === neededRank));
-      waste = waste.filter(c => !(c.suit === suit && c.rank === neededRank));
+      }
+      if (!removed) {
+        const sIdx = stock.findIndex(card => card.suit === suit && card.rank === neededRank);
+        if (sIdx >= 0) { stock.splice(sIdx, 1); removed = true; }
+      }
+      if (!removed) {
+        const wIdx = waste.findIndex(card => card.suit === suit && card.rank === neededRank);
+        if (wIdx >= 0) { waste.splice(wIdx, 1); removed = true; }
+      }
 
+      foundations[suit] = neededRank;
+      document.getElementById('valMood').textContent = 'Cashing In';
       setDealerThought(
-        `Cha-ching! By getting you stuck right near the finish line, I got you to watch a 30-second ad in exchange for magically placing the ${RANK_LABELS[neededRank]}${suit}.`,
-        `<strong>Ad Watched:</strong> Player traded 30s of attention for a magic rescue card.`
+        `Cha-ching! By letting you hit a brick wall near the finish line, I got you to trade 30 seconds of attention to pull the real ${RANK_LABELS[neededRank]}${suit} straight onto its Suit Pile.`,
+        `<strong>Ad Watched:</strong> Traded 30s of attention to rescue <strong>${RANK_LABELS[neededRank]}${suit}</strong> onto its Suit Pile.`,
+        false,
+        true
       );
       afterMoveCheck();
     }
 
-    function onSwitchChange() {
-      const fair = document.getElementById('swFairDeck').checked;
-      const quiet = document.getElementById('swQuietUI').checked;
-      const calm = document.getElementById('swCalmEnd').checked;
+    // Master Mode Toggle & Individual Dark-Pattern Switch Handler
+    function setMasterMode(mode) {
+      const isRigged = (mode === 'rigged');
+      document.getElementById('swEarlyHook').checked = isRigged;
+      document.getElementById('swLateTrap').checked = isRigged;
+      document.getElementById('swCasinoNoise').checked = isRigged;
+      document.getElementById('swAdGuilt').checked = isRigged;
+      onSwitchChange('master');
+    }
 
+    function onSwitchChange(changedKey) {
+      const sw = getSwitches();
+      const onCount = [sw.earlyHook, sw.lateTrap, sw.casinoNoise, sw.adGuilt].filter(Boolean).length;
+
+      // Update row styling
+      document.getElementById('rowEarlyHook').classList.toggle('is-on', sw.earlyHook);
+      document.getElementById('rowLateTrap').classList.toggle('is-on', sw.lateTrap);
+      document.getElementById('rowCasinoNoise').classList.toggle('is-on', sw.casinoNoise);
+      document.getElementById('rowAdGuilt').classList.toggle('is-on', sw.adGuilt);
+
+      // Update Master Toggle visual state
+      const btnRig = document.getElementById('btnMasterRigged');
+      const btnFair = document.getElementById('btnMasterFair');
+      btnRig.className = 'master-btn' + (onCount === 4 ? ' active-rigged' : '');
+      btnFair.className = 'master-btn' + (onCount === 0 ? ' active-fair' : '');
+
+      // Update Badge
       const badge = document.getElementById('modeBadge');
-      if (fair && quiet && calm) {
+      if (onCount === 0) {
         badge.textContent = 'KITCHEN-TABLE MODE: 100% FAIR';
         badge.className = 'status-pill fallow';
-      } else if (fair) {
-        badge.textContent = 'FAIR SHUFFLE: ON';
-        badge.className = 'status-pill fallow';
-      } else {
-        badge.textContent = 'RIGGED APP MODE: ON';
+        document.getElementById('valMood').textContent = 'Honest & Quiet';
+      } else if (onCount === 4) {
+        badge.textContent = 'PHONE APP MODE: 4/4 ON';
         badge.className = 'status-pill';
-      }
-
-      document.getElementById('casinoBar').classList.toggle('muted', quiet);
-
-      if (fair) {
-        showToast(`🌿 <strong>Fair Shuffle Locked In:</strong> The game has stopped meddling with your face-down cards and draw pile.`, true);
-        setDealerThought(
-          "You flipped the switch to lock the shuffle. From now on, I'm just a quiet table of paper cards—no fake help early on, and no hiding your winning card at the end.",
-          "<strong>Switch Flipped:</strong> Deck rigging turned OFF. Playing by honest kitchen-table rules.",
-          true
-        );
+        document.getElementById('valMood').textContent = trapTriggeredThisHand ? 'Setting Trap' : 'Baiting You';
       } else {
+        badge.textContent = `HYBRID MODE: ${onCount}/4 ON`;
+        badge.className = 'status-pill hybrid';
+      }
+
+      // Apply Casino Noise Bar visibility
+      document.getElementById('casinoBar').classList.toggle('muted', !sw.casinoNoise);
+
+      // Accurate, switch-specific diary logging (fixes the old bug!)
+      const labels = {
+        earlyHook: 'Early Dopamine Hook',
+        lateTrap: 'The "90% Done" Trap',
+        casinoNoise: 'Casino Noise Bar',
+        adGuilt: '"Watch an Ad" Guilt Trips'
+      };
+
+      if (changedKey === 'master') {
+        if (onCount === 0) {
+          setDealerThought(
+            "All four dark patterns are OFF. From here on, this is just a quiet kitchen table of paper cards—no hidden swaps, no fake streaks, and no guilt trips.",
+            "<strong>Kitchen-Table Mode ON:</strong> All 4 dark-pattern switches flipped OFF.",
+            true
+          );
+        } else {
+          setDealerThought(
+            "Phone App Mode is back ON! All four retention hooks are active—watch the X-Ray cards to catch me swapping unseen cards.",
+            "<strong>Phone App Mode ON:</strong> All 4 dark-pattern switches flipped ON."
+          );
+        }
+      } else {
+        const isNowOn = sw[changedKey];
+        const stateWord = isNowOn ? 'ON' : 'OFF';
+        const isFullyCalm = (onCount === 0);
+        const quote = isFullyCalm
+          ? `You flipped ${labels[changedKey]} OFF—all four dark patterns are now disabled. Enjoy a quiet, honest game of Solitaire.`
+          : isNowOn
+            ? `You turned ${labels[changedKey]} back ON. I'll start using that lever again.`
+            : `You turned ${labels[changedKey]} OFF. ${onCount} dark pattern${onCount === 1 ? '' : 's'} still active.`;
         setDealerThought(
-          "Rigging is back ON! I'll sweeten your early draws to hook you, and hide a key card when you're 90% done.",
-          "<strong>Switch Flipped:</strong> App rigging turned back ON."
+          quote,
+          `<strong>Switch Flipped:</strong> ${labels[changedKey]} turned <strong>${stateWord}</strong>.`,
+          isFullyCalm
         );
       }
-      renderTable();
+
+      afterMoveCheck();
     }
 
     function renderTable() {
-      // 1. Render Stock & X-Ray Peek
-      document.getElementById('stockCount').textContent = stock.length ? `Draw (${stock.length})` : 'Recycle ↻';
-      const nextStock = stock.length ? stock[stock.length - 1] : null;
-      document.getElementById('stockXray').textContent = nextStock ? `X-Ray: ${cardStr(nextStock)}` : 'Empty';
+      const maxRank = getMaxRank();
 
-      // 2. Render Flipped Waste Card
+      // 1. Render Stock & Subtle Ghost X-Ray
+      const stockSlot = document.getElementById('stockSlot');
+      const stockCountEl = document.getElementById('stockCount');
+      const stockCenterEl = document.getElementById('stockCenterIcon');
+      const stockXrayEl = document.getElementById('stockXray');
+
+      if (stock.length > 0) {
+        const nextStock = stock[stock.length - 1];
+        stockSlot.className = 'slot-box card-back-pattern stock-pile';
+        stockCountEl.textContent = `${stock.length}`;
+        stockCenterEl.textContent = '♣';
+        stockXrayEl.textContent = `👁 ${cardStr(nextStock)}`;
+        stockXrayEl.className = 'xray-ghost' + (isRed(nextStock.suit) ? ' red' : '');
+        stockXrayEl.style.display = '';
+      } else {
+        stockSlot.className = 'slot-box stock-pile empty-stock';
+        stockCountEl.textContent = waste.length ? '↻' : '0';
+        stockCenterEl.textContent = waste.length ? 'Recycle' : 'Empty';
+        stockCenterEl.style.fontSize = '0.72rem';
+        stockXrayEl.style.display = 'none';
+      }
+      if (stock.length > 0) stockCenterEl.style.fontSize = '';
+
+      // 2. Render Waste Pile
       const wasteSlot = document.getElementById('wasteSlot');
       if (!waste.length) {
-        wasteSlot.innerHTML = `<span style="font-size:0.7rem;">Flipped</span>`;
+        wasteSlot.innerHTML = `<span style="font-size:0.68rem;">Waste</span>`;
       } else {
         const topW = waste[waste.length - 1];
         const colorCls = isRed(topW.suit) ? 'red' : 'black';
+        const playable = canCardGoAnywhere(topW, true, -1);
+        const isSel = selectedSource && selectedSource.type === 'waste';
+        const flashCls = topW.rigFlashed ? 'rig-flash' : '';
+        const crown = (deckMode === 'quick' && topW.rank === maxRank) ? '<span class="card-crown">👑</span>' : '';
+        const swapBadge = topW.swappedFrom
+          ? `<span class="swap-pill"><span class="old-card">${topW.swappedFrom}</span>Swap!</span>`
+          : '';
         wasteSlot.innerHTML = `
-          <div class="card-tile ${colorCls} clickable" onclick="tapWasteCard()" style="height:100%; width:100%; justify-content:center; flex-direction:column;">
-            <span>${RANK_LABELS[topW.rank]}${topW.suit}</span>
-            <span style="font-size:0.6rem; font-weight:500;">Tap to play</span>
+          <div class="playing-card in-waste faceup ${colorCls} ${playable ? 'playable' : ''} ${isSel ? 'selected' : ''} ${flashCls}"
+               draggable="true"
+               onclick="handleCardClick({type:'waste'}, this)"
+               ondragstart="onCardDragStart(event, {type:'waste'})"
+               ondragend="onCardDragEnd(event)">
+            <div class="card-top-row">
+              <span class="card-rank-suit">${cardStr(topW)}</span>
+              ${crown}
+            </div>
+            <div class="card-center-pip">${topW.suit}</div>
+            <div class="card-bottom-row">${cardStr(topW)}</div>
+            ${swapBadge}
           </div>
         `;
       }
 
-      // 3. Render 4 Suit Foundations (Ace to 6)
+      // 3. Render 4 Suit Foundations
       const fRow = document.getElementById('foundationsRow');
+      const selCard = selectedSource
+        ? (selectedSource.type === 'waste' ? waste[waste.length - 1] : columns[selectedSource.colIdx]?.[selectedSource.cardIdx])
+        : null;
+      const selIsBottom = selectedSource
+        ? (selectedSource.type === 'waste' || selectedSource.cardIdx === columns[selectedSource.colIdx].length - 1)
+        : false;
+
       fRow.innerHTML = SUITS.map(s => {
         const val = foundations[s];
-        const color = isRed(s) ? 'color:var(--terracotta);' : 'color:var(--loam-dark);';
-        const label = val === 0 ? `${s}<br/><span style="font-size:0.62rem;">Ace→6</span>` : `<strong>${RANK_LABELS[val]}${s}</strong><br/><span style="font-size:0.6rem;">${val}/6</span>`;
-        return `<div class="slot-box" style="${color}; border-style:solid; background:#fff;">${label}</div>`;
+        const colorStyle = isRed(s) ? 'color:var(--terracotta);' : 'color:var(--loam-dark);';
+        const isDrop = (selCard && selIsBottom && selCard.suit === s && canMoveToFoundation(selCard));
+        const filledCls = val > 0 ? 'foundation-filled' : '';
+        const inner = val === 0
+          ? `<span class="foundation-empty-suit">${s}</span><span class="foundation-empty-sub">A→${RANK_LABELS[maxRank]}</span>`
+          : `<div class="foundation-card-inner">
+               <span class="foundation-corner">${RANK_LABELS[val]}${s}</span>
+               <span class="foundation-pip">${s}</span>
+               <span class="foundation-prog">${val}/${maxRank}</span>
+             </div>`;
+        return `
+          <div class="slot-box ${filledCls} ${isDrop ? 'drop-target' : ''}"
+               data-suit="${s}"
+               style="${colorStyle}"
+               onclick="handleFoundationClick('${s}')"
+               ondragover="onFoundationDragOver(event, '${s}')"
+               ondrop="onFoundationDrop(event, '${s}')">
+            ${inner}
+          </div>
+        `;
       }).join('');
 
-      // 4. Render 4 Columns (with X-Ray peek on Face-Down cards!)
+      // 4. Render Tableau Columns (Overlapping Portrait Cards)
       const grid = document.getElementById('tableauGrid');
+      grid.className = `tableau-grid cols-${columns.length}`;
+      const emptyLabel = deckMode === 'full' ? 'Empty<br/>(Kings)' : 'Empty<br/>(6s 👑)';
+
       grid.innerHTML = columns.map((col, cIdx) => {
+        const isColDrop = selCard && (selectedSource.type !== 'col' || selectedSource.colIdx !== cIdx) && canMoveToColumn(selCard, col);
+
         if (!col.length) {
-          return `<div class="col-lane"><span style="font-size:0.68rem; color:var(--loam-light); margin-top:1.5rem;">Empty (6s)</span></div>`;
+          return `
+            <div class="col-lane ${isColDrop ? 'drop-target' : ''}"
+                 onclick="handleEmptyColumnClick(${cIdx})"
+                 ondragover="onColDragOver(event, ${cIdx})"
+                 ondrop="onColDrop(event, ${cIdx})">
+              <span class="empty-col-label">${emptyLabel}</span>
+            </div>
+          `;
         }
+
         const cardsHtml = col.map((c, rIdx) => {
+          const overlapCls = rIdx === 0 ? '' : (col[rIdx - 1].faceUp ? 'after-up' : 'after-down');
+
           if (!c.faceUp) {
+            const ghostColor = isRed(c.suit) ? 'red' : '';
             return `
-              <div class="card-tile facedown" title="Face-down card (X-Ray shows what's currently underneath)">
-                <span>🔒 Face Down</span>
-                <span style="font-size:0.68rem;">X-Ray: <strong>${cardStr(c)}</strong></span>
+              <div class="playing-card card-back-pattern facedown ${overlapCls}" title="Face-down card">
+                <span class="xray-ghost ${ghostColor}">👁 ${cardStr(c)}</span>
+                <span class="card-back-emblem">🌱</span>
               </div>
             `;
           }
+
           const colorCls = isRed(c.suit) ? 'red' : 'black';
+          const isBottom = (rIdx === col.length - 1);
+          const playable = canCardGoAnywhere(c, isBottom, cIdx);
+          const isSel = selectedSource && selectedSource.type === 'col' && selectedSource.colIdx === cIdx && selectedSource.cardIdx === rIdx;
           const flashCls = c.rigFlashed ? 'rig-flash' : '';
-          const swappedBadge = c.oldText ? `<span style="font-size:0.65rem; color:var(--terracotta);"><span class="strike-old">${c.oldText}</span>Swapped!</span>` : `<span style="font-size:0.7rem;">Tap</span>`;
+          const crown = (deckMode === 'quick' && c.rank === maxRank) ? '<span class="card-crown">👑</span>' : '';
+          const swapBadge = c.swappedFrom
+            ? `<span class="swap-pill"><span class="old-card">${c.swappedFrom}</span>Swap!</span>`
+            : '';
+
           return `
-            <div class="card-tile ${colorCls} clickable ${flashCls}" onclick="tapColumnCard(${cIdx}, ${rIdx})">
-              <span>${cardStr(c)}</span>
-              ${swappedBadge}
+            <div class="playing-card faceup ${colorCls} ${overlapCls} ${playable ? 'playable' : ''} ${isSel ? 'selected' : ''} ${flashCls}"
+                 draggable="true"
+                 onclick="event.stopPropagation(); handleCardClick({type:'col', colIdx:${cIdx}, cardIdx:${rIdx}}, this)"
+                 ondragstart="onCardDragStart(event, {type:'col', colIdx:${cIdx}, cardIdx:${rIdx}})"
+                 ondragend="onCardDragEnd(event)">
+              <div class="card-top-row">
+                <span class="card-rank-suit">${cardStr(c)}</span>
+                ${crown}
+              </div>
+              <div class="card-center-pip">${c.suit}</div>
+              <div class="card-bottom-row">${cardStr(c)}</div>
+              ${swapBadge}
             </div>
           `;
         }).join('');
-        return `<div class="col-lane">${cardsHtml}</div>`;
-      }).join('');
 
-      // Show a "Stuck? Watch Ad" button if Rigging is ON and player has made several moves
-      const calmEnd = document.getElementById('swCalmEnd').checked;
-      const banner = document.getElementById('outcomeBanner');
-      if (totalFoundationCards() < 24 && trapTriggeredThisHand && !calmEnd) {
-        banner.style.display = 'block';
-        banner.className = 'outcome-banner';
-        document.getElementById('outcomeTitle').textContent = '😱 STUCK RIGHT AT THE END?';
-        document.getElementById('outcomeDesc').textContent = 'The app just swapped away your low card so you\'d get blocked! In a real phone game, this is where it sells you a rescue:';
-        document.getElementById('outcomeActions').innerHTML = `
-          <button class="btn-action btn-predatory" onclick="triggerRescueAd()">📺 Watch 30s Fake Ad (Magic Rescue)</button>
-          <button class="btn-action btn-subtle" onclick="startNewHand()">Start Fresh Hand</button>
+        return `
+          <div class="col-lane ${isColDrop ? 'drop-target' : ''}"
+               onclick="handleEmptyColumnClick(${cIdx})"
+               ondragover="onColDragOver(event, ${cIdx})"
+               ondrop="onColDrop(event, ${cIdx})">
+            ${cardsHtml}
+          </div>
         `;
-      }
+      }).join('');
     }
 
-    window.addEventListener('DOMContentLoaded', startNewHand);
+    // Keyboard shortcut: Ctrl+Z / Cmd+Z for Undo
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+        e.preventDefault();
+        undoMove();
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      updateLegend();
+      startNewHand();
+    });
   </script>
 </body>
 </html>
