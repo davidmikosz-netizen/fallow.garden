@@ -167,12 +167,73 @@
     .header-intro {
       font-size: 0.94rem;
       color: var(--loam-mid);
-      line-height: 1.65;
+      line-height: 1.7;
       background: var(--parchment-warm);
       border: 1px solid var(--sand-border);
       border-radius: var(--radius-md);
-      padding: 1rem 1.25rem;
+      padding: 1.15rem 1.35rem;
       margin-top: 0.25rem;
+    }
+
+    .intro-sentence {
+      display: inline;
+      margin-right: 0.55rem;
+    }
+
+    .intro-sentence:last-child {
+      margin-right: 0;
+    }
+
+    /* Claymation Episode Placeholder Card */
+    .video-placeholder-card {
+      background: var(--parchment-card);
+      border: 1px solid var(--sand-border);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .video-placeholder-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .video-placeholder-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--terracotta);
+    }
+
+    .video-placeholder-stage {
+      border: 1.5px dashed var(--sand-border);
+      background: var(--parchment);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .video-placeholder-title {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--loam-dark);
+    }
+
+    .video-placeholder-note {
+      font-size: 0.86rem;
+      color: var(--loam-mid);
+      line-height: 1.6;
     }
 
     /* Table of Contents Navigation */
@@ -1005,9 +1066,26 @@
       <div class="brand-badge">Field Guide to Digital Self-Defense</div>
       <h1>The Algorithmic Hook</h1>
       <p class="header-intro">
-        When you play a physical card game at a kitchen table, the rules are honest: the deck is shuffled once, and the cards do not care whether you win, lose, or walk away. Modern phone and online games look like harmless pastimes, but under the hood they work very differently. By quietly tracking how long you pause, how many ads you tolerate, and what makes you frustrated, the game changes its own card draws and difficulty on the fly to keep you hooked. This guide explains how those hidden tricks work in plain English—with the option to dive as deep into the science as you like—because once you see the strings, the magic trick stops working.
+        <span class="intro-sentence">When you play a physical card game at a kitchen table, the rules are honest: the deck is shuffled once, and the cards do not care whether you win, lose, or walk away.</span>
+        <span class="intro-sentence">Modern phone and online games look like harmless pastimes, but under the hood they work very differently.</span>
+        <span class="intro-sentence">By quietly tracking how long you pause, how many ads you tolerate, and what makes you frustrated, the game changes its own card draws and difficulty on the fly to keep you hooked.</span>
+        <span class="intro-sentence">This guide explains how those hidden tricks work in plain English—with the option to dive as deep into the science as you like—because once you see the strings, the magic trick stops working.</span>
       </p>
     </header>
+
+    <!-- Claymation Episode Placeholder -->
+    <section class="video-placeholder-card" id="episode-video-slot" aria-label="Claymation episode preview placeholder">
+      <div class="video-placeholder-top">
+        <span class="video-placeholder-kicker">🎬 Claymation Short • In Production</span>
+        <span class="meta-badge">Fox Referee &amp; Chip</span>
+      </div>
+      <div class="video-placeholder-stage">
+        <div class="video-placeholder-title">"I Cheat" — The Official Rulebook Short (Placeholder)</div>
+        <p class="video-placeholder-note">
+          Short-form stop-motion spot in progress featuring the <strong>Fox referee</strong> opening the <em>Official Rulebook</em> ("Involuntary Doomscrolling") with <strong>Chip</strong> outside the workshop. Drop your finished video player or link here once exported.
+        </p>
+      </div>
+    </section>
 
     <!-- Table of Contents Navigation (Plain-Sense Labels) -->
     <nav class="toc-nav">
@@ -1215,7 +1293,7 @@
               <div class="control-item-head">
                 <div>
                   <div class="control-label">Protecting Your Daily Streak</div>
-                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How strongly you feel you *must* open the app every day to keep a streak</div>
+                  <div style="font-size: 0.72rem; color: var(--loam-light); margin-top: 2px;">How strongly you feel you <em>must</em> open the app every day to keep a streak</div>
                 </div>
                 <span class="control-value" id="valStreak">Moderate</span>
               </div>
@@ -1451,7 +1529,7 @@
     <!-- Footer -->
     <footer>
       <div>fallow.garden — Quiet, client-side tools for mind, soil, and time.</div>
-      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.25rem;">100% client-side. Zero telemetry. Hosted on independent static web infrastructure.</div>
+      <div style="font-size: 0.74rem; color: var(--loam-light); margin-top: 0.25rem;">100% client-side. Zero long-term tracking. Hosted on independent static web infrastructure.</div>
     </footer>
 
   </div>
@@ -1466,6 +1544,10 @@
 
     function scrollToSection(id, btnIdx) {
       document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+      setActiveTocBtn(btnIdx);
+    }
+
+    function setActiveTocBtn(btnIdx) {
       document.querySelectorAll('.toc-btn').forEach((btn, idx) => {
         btn.classList.toggle('active', idx === btnIdx);
       });
@@ -1983,8 +2065,31 @@
             };
             el.addEventListener('mouseenter', updatePanel);
             el.addEventListener('click', updatePanel);
+            el.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                updatePanel();
+              }
+            });
           }
         });
+
+        const chapterIds = ['chapter1', 'chapter2', 'chapter3', 'chapter4', 'chapter5'];
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const idx = chapterIds.indexOf(entry.target.id);
+                if (idx !== -1) setActiveTocBtn(idx);
+              }
+            });
+          }, { rootMargin: '-25% 0px -55% 0px', threshold: 0.1 });
+
+          chapterIds.forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+          });
+        }
       });
     })();
 
